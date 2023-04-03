@@ -12,7 +12,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   z-index: 999;
-
+  max-width: 1800px;
   @media screen and (max-width: 768px) {
     .cta {
       display: none;

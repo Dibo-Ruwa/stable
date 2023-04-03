@@ -12,15 +12,18 @@ const navLinks = [
 
 const sidebar = {
   open: (height = 1000) => ({
+    x: "-200%",
     clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
     transition: {
       ...transition,
+      duration: .5,
       type: "spring",
       stiffness: 20,
       restDelta: 2,
     },
   }),
   closed: {
+    x: 0,
     clipPath: "circle(0px at 145px 50px)",
     transition: {
       ...transition,

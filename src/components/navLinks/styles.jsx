@@ -14,7 +14,7 @@ export const NavLinksContainer = styled(motion.ul)`
     flex-direction: column;
     position: absolute;
     top: 0;
-    right: 0;
+    right: -100%;
     width: 50%;
     height: 100vh;
    

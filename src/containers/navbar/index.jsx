@@ -15,12 +15,12 @@ export default function Navbar() {
       <Harmburger open={open} setOpen={setOpen} />
       <div className="cta">
         <Button
-        size="md"
-        color={`var(--primary)`}
-        bordered={true}
-        text="Schedule a pickup"
-        onClick={() => alert("Button clicked!")}
-      />
+          size="md"
+          color={`var(--primary)`}
+          bordered={true}
+          text="Schedule a pickup"
+          onClick={() => alert("Button clicked!")}
+        />
       </div>
     </Container>
   );
