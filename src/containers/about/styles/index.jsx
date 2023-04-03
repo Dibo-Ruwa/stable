@@ -14,7 +14,7 @@ export const Container = styled.section`
 export const Sec1 = styled.div`
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
 
     @media screen and (max-width: 900px) {
@@ -128,7 +128,7 @@ export const Header1 = styled.h5`
 export const Sec2 = styled.div`
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
 
     @media screen and (max-width: 900px) {

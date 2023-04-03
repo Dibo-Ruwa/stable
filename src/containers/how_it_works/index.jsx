@@ -26,7 +26,7 @@ const steps = [
 
 const Index = () => {
   return (
-    <Container>
+    <Container id="how_it_works">
       <Header>
         <img src={logo} alt="" />
         <small>Pickup & Deliver</small>

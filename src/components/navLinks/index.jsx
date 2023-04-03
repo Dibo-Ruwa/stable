@@ -57,7 +57,7 @@ const NavLinks = ({ open, setOpen }) => {
     >
       {navLinks.map((link) => (
         <NavItem key={link.id}>
-          <NavLink to={link.id} smooth={true} duration={500}>
+          <NavLink to={link.id} smooth={true} duration={500} onClick={() => setOpen(!open)}>
             {link.name}
           </NavLink>
         </NavItem>

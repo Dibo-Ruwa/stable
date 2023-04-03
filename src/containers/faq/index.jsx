@@ -102,7 +102,7 @@ const questions = [
 
 const FAQPage = () => {
   return (
-    <Container>
+    <Container id="faq">
       <Header>
         <small>FAQ</small>
         <h1>Frequently Asked Questions</h1>
