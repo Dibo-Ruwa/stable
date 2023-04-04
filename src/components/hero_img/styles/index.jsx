@@ -6,6 +6,9 @@ export const Container = styled.div`
         @media screen and (max-width: 900px) {
         width: 100%;
      }
+        @media screen and (min-width: 1600px) {
+        width: 30%;
+     }
         
         &::before {
           content: "";

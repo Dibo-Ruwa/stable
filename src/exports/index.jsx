@@ -3,6 +3,18 @@ import truck from "../assets/washing-machine.svg";
 
 export const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
 
+export const variants = {
+  hidden: { opacity: 0, y: "100%" },
+  visible: { opacity: 1, y: 0 },
+};
+
+export const spring = {
+  type: "spring",
+  stiffness: 500,
+  damping: 50,
+  duration: 0.7,
+};
+
 export const feedbacks = [
   {
     id: 1,

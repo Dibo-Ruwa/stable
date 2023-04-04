@@ -20,7 +20,7 @@ const Footer = () => {
       <Sections>
         <Section>
           <SectionTitle>
-            <img src={logo} alt="" /> Dibo Ruwa
+            <img src={logo} alt="" /> <span>Dibo Ruwa</span> 
           </SectionTitle>
           <p>
             Your on-demand pick up and delivery laundry service. Fast,
@@ -39,42 +39,42 @@ const Footer = () => {
           </div>
         </Section>
 
-        <Section>
+        {/* <Section>
           <SectionTitle>Explore</SectionTitle>
           <SectionList>
             <SectionItem>Products</SectionItem>
             <SectionItem>Services</SectionItem>
             <SectionItem>FAQ</SectionItem>
           </SectionList>
-        </Section>
+        </Section> */}
 
         <Section>
           <SectionTitle>Contact</SectionTitle>
-          <p>66 Point Broklyn Street, 600 Surulere, Lagos</p>
+          <p>Suite 4, Student Union Secretariat, BUK New Campus, Bayero University Kano, Nigeria</p>
           <SectionList>
             <SectionItem>
               <IconWrapper>
                 <FaEnvelope />
               </IconWrapper>
-              <p>needhelp@dibowura.com</p>
+              <p>info@diboruwa.com</p>
             </SectionItem>
             <SectionItem>
               <IconWrapper>
                 <MdPhoneInTalk />
               </IconWrapper>
-              <p>1234567890</p>
+              <p>+2348059303261</p>
             </SectionItem>
           </SectionList>
         </Section>
 
-        <Section>
+        {/* <Section>
           <SectionTitle>Newsletter</SectionTitle>
           <p>Suscribe to our newsletter for daily news and updates</p>
           <div className="input__field">
             <input type="email" placeholder="Email address" />
             <button>Send</button>
           </div>
-        </Section>
+        </Section> */}
       </Sections>
 
       <CopyRight>© 2023 My Company. All rights reserved.</CopyRight>

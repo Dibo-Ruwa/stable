@@ -8,6 +8,9 @@ export const SectionTitle = styled.h3`
   display: flex;
   align-items: center;
   gap: 5px;
+  span {
+    color: var(--primary);
+  }
   img {
     width: 30px;
     margin-top: -3px;
@@ -19,7 +22,7 @@ export const SectionTitle = styled.h3`
 export const Sections = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: 30px;
   @media screen and (max-width: 900px) {
     flex-direction: column;

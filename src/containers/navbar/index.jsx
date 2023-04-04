@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { Container } from "./styles/styles";
 import Logo from "../../components/logo";
 import NavLinks from "../../components/navLinks";
