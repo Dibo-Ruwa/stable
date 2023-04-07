@@ -76,14 +76,14 @@ const Footer = () => {
           </SectionList>
         </Section>
 
-        <Section>
+        {/* <Section>
           <SectionTitle>Newsletter</SectionTitle>
           <p>Suscribe to our newsletter for daily news and updates</p>
           <div className="input__field">
             <input type="email" placeholder="Email address" />
             <button>Send</button>
           </div>
-        </Section>
+        </Section> */}
       </Sections>
 
       <CopyRight>© 2023 My Company. All rights reserved.</CopyRight>

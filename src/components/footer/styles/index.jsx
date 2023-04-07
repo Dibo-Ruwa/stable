@@ -22,7 +22,7 @@ export const SectionTitle = styled.h3`
 export const Sections = styled.div`
   display: flex;
   width: 100%;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   gap: 30px;
   @media screen and (max-width: 900px) {
     flex-direction: column;
