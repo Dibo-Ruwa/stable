@@ -11,7 +11,7 @@ const Index = () => {
         <p>Say goodbye to laundry day hassle and hello to fresh, clean clothes delivered right to your doorstep.</p>
         <BtnGrp>
         <Button size="lg" color={`var(--primary)`}  text="Get Started" />
-        <Button size="lg" color={"#000"} bordered={true} text="Learn More"  />
+        <Button size="lg" color={"#000"} bordered={true} text="Order now"  />
         </BtnGrp>
       </Text>
       <Img/>

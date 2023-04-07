@@ -17,14 +17,12 @@ export const NavLinksContainer = styled(motion.ul)`
     right: -100%;
     width: 50%;
     height: 100vh;
-   
+
     align-items: flex-start;
     justify-content: flex-start;
     padding: 20vh 5% 0;
     box-shadow: 1px 1px 8px 9px rgba(0, 0, 0, 0.051);
-   background: #fff
-
-
+    background: #fff;
   }
 `;
 
@@ -37,4 +35,30 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   font-size: 16px;
   cursor: pointer;
+
+  @media screen and (min-width: 900px) {
+    position: relative;
+
+    transition: all .3s ease;
+
+    &:hover {
+      color: var(--primary);
+    }
+
+    &::before {
+      content: "";
+      width: 0;
+      height: 3px;
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    &:hover::before {
+      width: 100%;
+    }
+  }
 `;
