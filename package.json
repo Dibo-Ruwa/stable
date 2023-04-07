@@ -8,8 +8,11 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^14.1.1",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
     "formik": "^2.2.9",
     "framer-motion": "^10.10.0",
+    "nodemailer": "^6.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
@@ -27,6 +30,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "resolve": {
+    "fallback": {
+      "crypto": false
+    }
   },
   "eslintConfig": {
     "extends": [

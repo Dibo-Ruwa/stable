@@ -3,9 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: fixed;
   width: 100%;
-  top: 0;
+  top: ${({ isTop }) => (isTop ? "5vh" : 0)};
   left: 0;
-  backdrop-filter: blur(20px);
+  backdrop-filter:  ${({ scroll }) =>
+    scroll ? "blur(20px)" : "none"};
   padding: 0 5%;
   height: 15vh;
   display: flex;

@@ -20,7 +20,7 @@ const Footer = () => {
       <Sections>
         <Section>
           <SectionTitle>
-            <img src={logo} alt="" /> <span>Dibo Ruwa</span> 
+            <img src={logo} alt="" /> <span>Dibo Ruwa</span>
           </SectionTitle>
           <p>
             Your on-demand pick up and delivery laundry service. Fast,
@@ -28,13 +28,19 @@ const Footer = () => {
           </p>
           <div className="icon__list">
             <div className="icon">
-              <BsTwitter />
+              <a href="https://twitter.com/DiboRuwa">
+                <BsTwitter />
+              </a>
             </div>
             <div className="icon">
-              <BsFacebook />
+              <a href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/">
+                <BsFacebook />
+              </a>
             </div>
             <div className="icon">
-              <RiInstagramFill />
+              <a href="https://www.instagram.com/diboruwa/">
+                <RiInstagramFill />
+              </a>
             </div>
           </div>
         </Section>
@@ -50,7 +56,10 @@ const Footer = () => {
 
         <Section>
           <SectionTitle>Contact</SectionTitle>
-          <p>Suite 4, Student Union Secretariat, BUK New Campus, Bayero University Kano, Nigeria</p>
+          <p>
+            Suite 4, Student Union Secretariat, BUK New Campus, Bayero
+            University Kano, Nigeria
+          </p>
           <SectionList>
             <SectionItem>
               <IconWrapper>
@@ -67,14 +76,14 @@ const Footer = () => {
           </SectionList>
         </Section>
 
-        {/* <Section>
+        <Section>
           <SectionTitle>Newsletter</SectionTitle>
           <p>Suscribe to our newsletter for daily news and updates</p>
           <div className="input__field">
             <input type="email" placeholder="Email address" />
             <button>Send</button>
           </div>
-        </Section> */}
+        </Section>
       </Sections>
 
       <CopyRight>© 2023 My Company. All rights reserved.</CopyRight>

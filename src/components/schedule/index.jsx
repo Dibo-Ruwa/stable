@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { sendScheduleEmail } from "../../utils/email";
+
 
 const FormContainer = styled(motion.form)`
   display: flex;
@@ -54,11 +56,11 @@ function SchedulePickupForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const phoneNumber = "2348148918529"; // Replace with your WhatsApp account phone number
-    const messageText = `Schedule Pickup\nStart Time: ${formData.startTime}\nEnd Time: ${formData.endTime}`;
-    const encodedMessageText = encodeURIComponent(messageText);
-    const waLink = `https://api.whatsapp.com/send?phone=${phoneNumber}?text=${encodedMessageText}`;
-    window.open(waLink);
-    setFormData(initialValues);
+    const messageText = `Schedule Pickup\nStart Time: ${formData.startTime}\nEnd `
+      
+   
+    sendScheduleEmail(formData.startTime, formData.endTime, phoneNumber);
+    
   };
 
   return (

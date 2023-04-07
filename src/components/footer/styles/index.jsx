@@ -45,6 +45,9 @@ export const Section = styled.div`
   .icon__list {
     display: flex;
     gap: 20px;
+    a {
+      color: #000;
+    }
 
     .icon {
       width: 50px;

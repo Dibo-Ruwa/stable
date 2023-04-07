@@ -8,7 +8,7 @@ export const Container = styled(motion.div)`
   font-size: 20px;
   align-items: center;
   overflow: hidden;
-color: var(--primary);
+color: #2F6634;
   img {
     width: 40px;
     margin-top: -3px;
