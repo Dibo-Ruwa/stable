@@ -13,7 +13,7 @@ export const NavLinksContainer = styled(motion.ul)`
   @media screen and (max-width: 900px) {
     flex-direction: column;
     position: absolute;
-    top: 0;
+    top: -5vh;
     right: -100%;
     width: 50%;
     height: 100vh;
