@@ -24,11 +24,7 @@ const TopBar = styled.div`
     top: -50px;
   `}
 
-  .socials {
-    display: flex;
-    gap: 20px;
-
-    a {
+a {
       color: #333;
       transition: all .3s ease;
 
@@ -37,12 +33,19 @@ const TopBar = styled.div`
 
       }
     }
+
+  .socials {
+    display: flex;
+    gap: 20px;
+
+  
   }
 `;
 
 const ContactBar = ({ visible }) => (
   <TopBar visible={visible}>
-    <div> Contact Us: +2348059303261</div>
+    <div> Contact Us: <a href="tel:+2348059303261">+2348059303261</a>
+       </div>
     <div className="socials">
       <a href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/">
         <FaFacebook />
