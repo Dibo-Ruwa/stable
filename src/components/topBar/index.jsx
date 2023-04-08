@@ -47,13 +47,13 @@ const ContactBar = ({ visible }) => (
     <div> Contact Us: <a href="tel:+2348059303261">+2348059303261</a>
        </div>
     <div className="socials">
-      <a href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/">
+      <a rel="noreferrer" target="_blank" href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/">
         <FaFacebook />
       </a>
-      <a href="https://twitter.com/DiboRuwa">
+      <a rel="noreferrer" target="_blank" href="https://twitter.com/DiboRuwa">
         <FaTwitter />
       </a>
-      <a href="https://www.instagram.com/diboruwa/">
+      <a rel="noreferrer" target="_blank" href="https://www.instagram.com/diboruwa/">
         <FaInstagram />
       </a>
     </div>

@@ -28,17 +28,17 @@ const Footer = () => {
           </p>
           <div className="icon__list">
             <div className="icon">
-              <a href="https://twitter.com/DiboRuwa">
+              <a rel="noreferrer" target="_blank" href="https://twitter.com/DiboRuwa">
                 <BsTwitter />
               </a>
             </div>
             <div className="icon">
-              <a href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/">
+              <a rel="noreferrer" target="_blank" href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/">
                 <BsFacebook />
               </a>
             </div>
             <div className="icon">
-              <a href="https://www.instagram.com/diboruwa/">
+              <a rel="noreferrer" target="_blank" href="https://www.instagram.com/diboruwa/">
                 <RiInstagramFill />
               </a>
             </div>
