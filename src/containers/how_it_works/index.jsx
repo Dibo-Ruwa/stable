@@ -9,7 +9,7 @@ const steps = [
   {
     icon: pickUp, // replace with the appropriate icon class or image source
     title: "Pick up your clothes",
-    sub: "To avail of Dibo Ruwa's laundry service, you can schedule a pickup through our website. The website allows students and workers to select the most convenient date and time for pickup, as well as specify any special instructions or preferences for the cleaning of their clothes. Once the pickup is scheduled, our team will arrive at the specified time to collect the laundry.",
+    sub: "To avail of Dibo Ruwa's laundry service, you can schedule a pickup through our website. The website allows you to select the most convenient date and time for pickup, as well as specify any special instructions or preferences for the cleaning of your clothes. Once the pickup is scheduled, our team will arrive at the specified time to collect the laundry.",
   },
   {
     icon: laundry,

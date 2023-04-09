@@ -9,7 +9,7 @@ export const SectionTitle = styled.h3`
   align-items: center;
   gap: 5px;
   span {
-    color: var(--primary);
+    color: #2F6634;
   }
   img {
     width: 30px;
