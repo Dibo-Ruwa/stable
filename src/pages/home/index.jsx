@@ -8,11 +8,19 @@ import FeedbackCarousel from "../../containers/feedbacks";
 import FAQPage from "../../containers/faq";
 import Footer from "../../components/footer";
 import { feedbacks } from "../../exports";
+import styled from "styled-components";
+
+const Container = styled.div`
+   @media screen and (min-width: 1600px) {
+        padding:5% 15%;
+     }
+
+`
 
 
 const Index = () => {
   return (
-    <div>
+    <Container>
       <Navbar />
       <Hero />
       <About />
@@ -21,7 +29,7 @@ const Index = () => {
       <FeedbackCarousel feedbacks={feedbacks} />
       <FAQPage />
       <Footer />
-    </div>
+    </Container>
   );
 };
 

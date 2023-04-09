@@ -18,6 +18,9 @@ const TopBar = styled.div`
   width: 100%;
   z-index: 999;
   transition: top 0.3s;
+  @media screen and (min-width: 1600px) {
+        padding:0 15%;
+     }
   ${({ visible }) =>
     !visible &&
     `

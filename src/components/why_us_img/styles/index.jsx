@@ -9,7 +9,7 @@ export const Container = styled.div`
 
   &::before {
     content: "";
-    width: 86%;
+    width: 90%;
     background: var(--primary);
     height: 100%;
     bottom: 5px;
@@ -23,6 +23,17 @@ export const Container = styled.div`
   img {
     width: 100%;
   }
+
+  & > img {
+    margin-left: -25%;
+    margin-bottom: 80px;
+  }
+
+  /* .img {
+      position: absolute;
+      left: -10%;
+      bottom: 0;
+    } */
 
   .svg {
     width: 30px;
