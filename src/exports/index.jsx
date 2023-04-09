@@ -19,7 +19,7 @@ export const feedbacks = [
   {
     id: 1,
     author: "Khalifah Abdul",
-    text: "I am so impressed with Dibo Ruwa's online laundry service! The website was easy to use, and the free pick-up and delivery made my life so much easier. My clothes came back clean and fresh, and I will definitely be using this service again.",
+    text: "I am so impressed with Dibo Ruwa's laundry service! The website was easy to use, and the free pick-up and delivery made my life so much easier. My clothes came back clean and fresh, and I will definitely be using this service again.",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ export const feedbacks = [
   {
     id: 3,
     author: "Engr. Yusuf Tahir",
-    text: "I cannot say enough good things about Dibo Ruwa's online laundry service. The website is easy to use, and the free pick-up and delivery make it so convenient. Plus, the quality of the laundry is fantastic. I will definitely be recommending this service to my friends and family.",
+    text: "I cannot say enough good things about Dibo Ruwa's laundry service. The website is easy to use, and the free pick-up and delivery make it so convenient. Plus, the quality of the laundry is fantastic. I will definitely be recommending this service to my friends and family.",
   },
   {
     id: 4,

@@ -84,7 +84,7 @@ const questions = [
     id: 1,
     question: "How does Dibo Ruwa work?",
     answer:
-      "Customers can schedule a pick-up of their laundry on the Dibo Ruwa website or app. The laundry will be picked up by a Dibo Ruwa representative and taken to their facility for cleaning. Once cleaned, the laundry will be delivered back to the customer's doorstep.",
+      "You can schedule a pick-up of your laundry on the Dibo Ruwa website, WhatsApp or Call. The laundry will be picked up by one of our representative and taken to our facility for cleaning. Once cleaned, the laundry will be delivered back to your doorstep.",
   },
   {
     id: 2,
@@ -108,13 +108,13 @@ const questions = [
     id: 5,
     question: "Is Dibo Ruwa environmentally friendly?",
     answer:
-      " Yes, Dibo Ruwa uses eco-friendly products and methods to clean your laundry. They also use energy-efficient machines to reduce their carbon footprint.",
+      " Yes, Dibo Ruwa uses eco-friendly products and methods to clean your laundry. We also use energy-efficient machines to reduce our carbon footprint.",
   },
   {
     id: 6,
     question: "How does Dibo Ruwa wash my clothes?",
     answer:
-      "Dibo Ruwa separate the bright and darks before washing them using odour-free, non-allergenic, and biodegradable detergent in our special environmentally friendly technique (which helps remove stains that your home washer can't).",
+      "Dibo Ruwa separate the light and darks before washing them using odour-free, non-allergenic, and biodegradable detergent in our special environmentally friendly technique (which helps remove stains that your home washer can't).",
   },
 ];
 
@@ -139,7 +139,7 @@ const FAQPage = () => {
         </div>
         <h1>Still have questions?</h1>
         <p>
-          Can’t find the answer your looking for? please chat to our friendly
+          Can’t find the answer your looking for? please contact our friendly
           team.
         </p>
       </Card>
