@@ -21,6 +21,7 @@ export const AccordionHeader = styled.div`
   font-size: 20px;
   /* font-weight: bold; */
   cursor: pointer;
+  color: #2F6634;
 `;
 
 export const AccordionContent = styled(motion.div)`

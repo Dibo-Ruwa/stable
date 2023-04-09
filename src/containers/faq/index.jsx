@@ -82,21 +82,39 @@ const Card = styled.div`
 const questions = [
   {
     id: 1,
-    question: "What is Lorem Ipsum?",
+    question: "How does Dibo Ruwa work?",
     answer:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+      "Customers can schedule a pick-up of their laundry on the Dibo Ruwa website or app. The laundry will be picked up by a Dibo Ruwa representative and taken to their facility for cleaning. Once cleaned, the laundry will be delivered back to the customer's doorstep.",
   },
   {
     id: 2,
-    question: "Why do we use it?",
+    question: "How can I schedule a pick-up?",
     answer:
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+      "You can schedule a pick-up on the Dibo Ruwa website, WhatsApp or Call. Just inform us of the date and time that works best for you, and a representative will come to your doorstep to pick up your laundry.",
   },
   {
     id: 3,
-    question: "Where does it come from?",
+    question: "Is there a minimum order size?",
     answer:
-      "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
+      "No, there is no minimum order size. Dibo Ruwa is happy to pick up and clean any amount of laundry.",
+  },
+  {
+    id: 4,
+    question: "What kind of laundry can I send?",
+    answer:
+      "Dibo Ruwa can clean a wide range of laundry, including clothes, bed sheets, towels, and more.",
+  },
+  {
+    id: 5,
+    question: "Is Dibo Ruwa environmentally friendly?",
+    answer:
+      " Yes, Dibo Ruwa uses eco-friendly products and methods to clean your laundry. They also use energy-efficient machines to reduce their carbon footprint.",
+  },
+  {
+    id: 6,
+    question: "How does Dibo Ruwa wash my clothes?",
+    answer:
+      "Dibo Ruwa separate the bright and darks before washing them using odour-free, non-allergenic, and biodegradable detergent in our special environmentally friendly technique (which helps remove stains that your home washer can't).",
   },
 ];
 

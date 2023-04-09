@@ -52,6 +52,7 @@ export const Text = styled.div`
 export const Timeline = styled.div`
   display: flex;
   margin-bottom: 10vh;
+  gap: 50px;
   @media screen and (max-width: 900px) {
     flex-direction: column;
     gap: 30px;

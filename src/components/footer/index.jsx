@@ -23,8 +23,7 @@ const Footer = () => {
             <img src={logo} alt="" /> <span>Dibo Ruwa</span>
           </SectionTitle>
           <p>
-            Your on-demand pick up and delivery laundry service. Fast,
-            convenient and reliable 24/7
+            Your convenient pick up and delivery laundry service. Available 24/7
           </p>
           <div className="icon__list">
             <div className="icon">
@@ -78,7 +77,7 @@ const Footer = () => {
 
         {/* <Section>
           <SectionTitle>Newsletter</SectionTitle>
-          <p>Suscribe to our newsletter for daily news and updates</p>
+          <p>Suscribe to our newsletter for weekly bonuses and updates</p>
           <div className="input__field">
             <input type="email" placeholder="Email address" />
             <button>Send</button>
@@ -86,7 +85,7 @@ const Footer = () => {
         </Section> */}
       </Sections>
 
-      <CopyRight>© 2023 My Company. All rights reserved.</CopyRight>
+      <CopyRight>© 2023 Dibo Ruwa. All rights reserved.</CopyRight>
     </FooterContainer>
   );
 };

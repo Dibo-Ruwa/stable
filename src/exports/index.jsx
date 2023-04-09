@@ -18,42 +18,38 @@ export const spring = {
 export const feedbacks = [
   {
     id: 1,
-    author: "John Doe",
-    text: "Proin eget placerat libero, vel pulvinar enim. Vivamus ac justo sed felis bibendum mollis eu ut est.",
+    author: "Khalifah Abdul",
+    text: "I am so impressed with Dibo Ruwa's online laundry service! The website was easy to use, and the free pick-up and delivery made my life so much easier. My clothes came back clean and fresh, and I will definitely be using this service again.",
   },
   {
     id: 2,
-    author: "Jane Smith",
-    text: "Proin eget placerat libero, vel pulvinar enim. Vivamus ac justo sed felis bibendum mollis eu ut est.",
+    author: "Adetohun Blessing",
+    text: "I was hesitant to try an online laundry service, but Dibo Ruwa exceeded my expectations! The convenience of free pick-up and delivery was a game-changer, and my clothes came back looking like new. I highly recommend this service.",
   },
   {
     id: 3,
-    author: "Bob Johnson",
-    text: "Proin eget placerat libero, vel pulvinar enim. Vivamus ac justo sed felis bibendum mollis eu ut est.",
+    author: "Engr. Yusuf Tahir",
+    text: "I cannot say enough good things about Dibo Ruwa's online laundry service. The website is easy to use, and the free pick-up and delivery make it so convenient. Plus, the quality of the laundry is fantastic. I will definitely be recommending this service to my friends and family.",
   },
   {
     id: 4,
-    author: "Mary Williams",
-    text: "Proin eget placerat libero, vel pulvinar enim. Vivamus ac justo sed felis bibendum mollis eu ut est.",
+    author: "Mariam Dankaka",
+    text: "Dibo Ruwa is a game-changer for busy students like me. I don't have to spend hours doing laundry anymore, and I can focus on my studies and social life. The customer service is exceptional. I appreciate their dedication to providing a hassle-free laundry experience.",
   },
-  {
-    id: 5,
-    author: "Tom Davis",
-    text: "Proin eget placerat libero, vel pulvinar enim. Vivamus ac justo sed felis bibendum mollis eu ut est.",
-  },
+  
 ];
 
 export const benefits = [
   {
     imgSrc: truck,
     imgAlt: "Image 1",
-    title: "Clean Resukts",
-    subtitle: "Duis aute irure dolor simply free in voluptate velit.",
+    title: "Quality Cleaning",
+    subtitle: "Our laundry service uses only high-quality, eco-friendly detergents and follows laundry practices that ensure the clothes are cleaned to the highest standard",
   },
   {
     imgSrc: washer,
     imgAlt: "Image 2",
     title: "Fast Delivery",
-    subtitle: "Duis aute irure dolor simply free in voluptate velit.",
+    subtitle: "Our fast delivery is a highly beneficial feature of our laundry service, as it saves you time and meets your urgent needs.",
   },
 ];

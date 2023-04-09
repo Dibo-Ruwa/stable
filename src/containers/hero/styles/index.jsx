@@ -7,6 +7,13 @@ export const Container = styled.section`
      align-items: center;
      padding:10% 5% 4%;
 
+     .order{
+        color: #2F6634;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+     }
+
      @media screen and (max-width: 900px) {
         flex-direction: column;
         padding:20vh 5% 4%;
