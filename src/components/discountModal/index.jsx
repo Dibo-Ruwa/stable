@@ -33,10 +33,11 @@ const ModalWrapper = styled(motion.div)`
 const Title = styled.h2`
   font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
 `;
 
 const Content = styled.p`
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5;
   text-align: center;
   padding: 0 20px;
@@ -50,6 +51,9 @@ const Button = styled.button`
   color: white;
   border: none;
   font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  cursor: pointer;
 `;
 const CloseButton = styled.button`
   position: absolute;
@@ -69,16 +73,17 @@ const ImageWrapper = styled(motion.div)`
 
   .icon {
     color: var(--primary);
+    margin-left: 25px;
   }
 `;
 
 const Image = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 160px;
+  height: 160px;
 `;
 
 const Text = styled(motion.p)`
-  font-size: 24px;
+  font-size: 12px;
   margin-top: 20px;
 `;
 
@@ -186,13 +191,12 @@ const DiscountModal = () => {
               </motion.div>
             </ImageWrapper>
 
-            <Title>Get 20% off your first purchase!</Title>
+            <Title>Order now and get 30% discount for the next 6 weeks</Title>
             <Content>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-              semper.
+              Our Representative will be right on the way to pick up your laundry
             </Content>
-            <Button onClick={handleClose}>Get Discount</Button>
-            <Text variants={textVariants}>Discount ends soon!</Text>
+            <Button onClick={handleClose}>Order Now!</Button>
+            <Text variants={textVariants}>Terms and Conditions apply</Text>
           </ModalWrapper>
         </Overlay>
       )}
