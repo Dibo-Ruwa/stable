@@ -9,26 +9,28 @@ import laundry from "../../assets/washer.png";
 import dryer from "../../assets/dryer.png";
 
 const Services = [
-  {
-    imageSrc: iron,
-    imageAlt: "Image 1",
-    icon: <TbIroning3 />,
-    title: "Steam iron",
-    sub: "Pellentesque luctus auctor odio, purus convallis eleifend. Donec volutpat arcu et nulla condimentum.",
-  },
+
   {
     imageSrc: laundry,
     imageAlt: "Image 2",
     icon: <MdOutlineLocalLaundryService />,
     title: "Laundry Service",
-    sub: "Pellentesque luctus auctor odio, purus convallis eleifend. Donec volutpat arcu et nulla condimentum.",
+    sub: "Dibo Ruwa is a convenient laundry service that provides free pick up and delivery of clothes through our online platform, making laundry day hassle-free for busy students and professionals. Our professional team ensures that your clothes are cleaned and returned to you promptly and in pristine condition.",
   },
+
   {
     imageSrc: dryer,
     imageAlt: "Image 3",
     icon: <MdDryCleaning/>,
     title: "Dry Cleaning",
-    sub: "Pellentesque luctus auctor odio, purus convallis eleifend. Donec volutpat arcu et nulla condimentum.",
+    sub: "Dibo Ruwa Laundry Service offers dry cleaning services to our customers, providing a hassle-free way to get your clothes cleaned and pressed without ever leaving your home or office. Our reliable and efficient pick-up and delivery service ensures that your clothes are always in good hands, giving you more time to focus on the important things in life",
+  },
+  {
+    imageSrc: iron,
+    imageAlt: "Image 1",
+    icon: <TbIroning3 />,
+    title: "Steam iron",
+    sub: "We offer steam iron service to ensure your clothes are delivered crisp and wrinkle-free straight to your doorstep. Let Dibo Ruwa take care of your laundry needs, including steam ironing, while you focus on what matters most.",
   },
 ];
 
@@ -37,7 +39,7 @@ const trustServices = [
   {
     icon: <FaTruck />,
     title: "Free pickup & delivery",
-    sub: "We know you are busy, we will pick and deliver your laundry for free",
+    sub: "Dibo Ruwa, your convenient laundry solution, offers free pickup and delivery through our user-friendly online platform. Say goodbye to the hassle of laundry and let us take care of it for you!",
   },
   {
     icon: <FaPercentage />,
