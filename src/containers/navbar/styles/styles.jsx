@@ -5,8 +5,7 @@ export const Container = styled.div`
   width: 100%;
   top: ${({ isTop }) => (isTop ? "5vh" : 0)};
   left: 0;
-  backdrop-filter:  ${({ scroll }) =>
-    scroll ? "blur(20px)" : "none"};
+  backdrop-filter: ${({ scroll }) => (scroll ? "blur(20px)" : "none")};
   padding: 0 5%;
   height: 15vh;
   display: flex;
@@ -18,5 +17,9 @@ export const Container = styled.div`
     .cta {
       display: none;
     }
+  }
+
+  @media screen and (min-width: 1600px) {
+    padding: 0 15%;
   }
 `;

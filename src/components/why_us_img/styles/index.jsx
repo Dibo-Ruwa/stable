@@ -2,14 +2,16 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 50%;
+  height: 500px;
   position: relative;
   @media screen and (max-width: 900px) {
     width: 80%;
+    height: 300px;
   }
 
   &::before {
     content: "";
-    width: 86%;
+    width: 90%;
     background: var(--primary);
     height: 100%;
     bottom: 5px;
@@ -23,6 +25,22 @@ export const Container = styled.div`
   img {
     width: 100%;
   }
+
+  .img {
+    top: -50px;
+    left: -70px;
+    border-radius: 50px;
+    position: absolute;
+    @media screen and (max-width: 900px) {
+      left: -30px;
+  }
+  }
+
+  /* .img {
+      position: absolute;
+      left: -10%;
+      bottom: 0;
+    } */
 
   .svg {
     width: 30px;

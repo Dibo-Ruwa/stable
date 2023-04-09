@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from './styles'
-import img from '../../assets/hero_img.png'
+import img from '../../assets/one.png'
 import star from '../../assets/Star 1.svg'
 import scribble from '../../assets/scribble.svg'
 import scribbleC from '../../assets/scribble_circles.svg'
