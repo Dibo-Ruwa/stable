@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 50%;
+  height: 500px;
   position: relative;
   @media screen and (max-width: 900px) {
     width: 80%;
+    height: 300px;
   }
 
   &::before {
@@ -24,9 +26,14 @@ export const Container = styled.div`
     width: 100%;
   }
 
-  & > img {
-    margin-left: -25%;
-    margin-bottom: 80px;
+  .img {
+    top: -50px;
+    left: -70px;
+    border-radius: 50px;
+    position: absolute;
+    @media screen and (max-width: 900px) {
+      left: -30px;
+  }
   }
 
   /* .img {
