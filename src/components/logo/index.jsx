@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../assets/dibo_ruwa_logo.png";
-import { Container, SLogan } from "./styles";
+import { Container } from "./styles";
 import { motion } from "framer-motion";
 import { transition } from "../../exports";
 
@@ -10,8 +10,7 @@ export default function Logo() {
     show: { opacity: 1, y: 0 },
   };
   return (
-    <div>
-      <Container whileHover={{ scale: 1.02 }} whileTap={{ scale: 1.04 }}>
+    <Container whileHover={{ scale: 1.02 }} whileTap={{ scale: 1.04 }}>
       <motion.img
         variants={item}
         transition={transition}
@@ -29,8 +28,5 @@ export default function Logo() {
         Dibo Ruwa
       </motion.h3>
     </Container>
-    {/* <SLogan>The future of Convinience cleaning...</SLogan> */}
-    </div>
-    
   );
 }

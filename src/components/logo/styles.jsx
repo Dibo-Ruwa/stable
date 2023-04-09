@@ -21,9 +21,3 @@ color: #2F6634;
     }
   }
 `;
-
-export const SLogan = styled.p`
-color: #2F6634;
-font-weight: bold;
-
-`;
