@@ -19,7 +19,7 @@ export const feedbacks = [
   {
     id: 1,
     author: "Khalifah Abdul",
-    text: "I am so impressed with Dibo Ruwa's laundry service! The website was easy to use, and the free pick-up and delivery made my life so much easier. My clothes came back clean and fresh, and I will definitely be using this service again.",
+    text: "I am so impressed with Dibo Ruwa's laundry service! The website was easy to use and intuitive, and the free pick-up and delivery made my life so much easier. My clothes came back clean and fresh, and I will definitely be using this service again.",
   },
   {
     id: 2,
