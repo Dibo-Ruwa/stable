@@ -89,16 +89,21 @@ export const NavButton = styled.button`
   }
 `;
 
+export const SliderWrapper = styled.div`
+ 
+`;
+
+
 export const Carousel = styled(Slider)`
   width: 100%;
   position: relative;
 
-  .slick-slide {
-    margin: 0 10px;
+   .slick-slide > div {
+    margin: 0 20px;
   }
-  .slick-list {
+ /* .slick-list {
     margin: 0 -10px;
-  }
+  } */
 `;
 
 export const Item = styled(motion.div)`
@@ -111,6 +116,8 @@ export const Item = styled(motion.div)`
     width: 50px;
     margin-bottom: 20px;
   }
+
+  
   @media screen and (max-width: 900px) {
         width: 300px;
 }
@@ -123,14 +130,14 @@ export const ItemContent = styled.div`
 `;
 
 export const ItemAuthor = styled.p`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   color: var(--primary);
   letter-spacing: 1px;
 `;
 
 export const ItemText = styled.p`
-  font-size: 20px;
+  font-size: 16px;
   color: var(--sub-text);
   margin: 0;
 `;

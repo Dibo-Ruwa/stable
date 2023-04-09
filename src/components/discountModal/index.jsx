@@ -169,7 +169,7 @@ const DiscountModal = () => {
             variants={modalVariants}
             onClick={(e) => e.stopPropagation()}
           >
-            <CloseButton>
+            <CloseButton  onClick={handleClose}>
               <MdOutlineClose />
             </CloseButton>
 

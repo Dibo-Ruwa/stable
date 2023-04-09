@@ -2,42 +2,61 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 40%;
+  height: 450px;
   position: relative;
   @media screen and (max-width: 900px) {
     width: 100%;
-  }
-  @media screen and (min-width: 1600px) {
-    width: 30%;
+    height: 350px;
   }
 
   &::before {
     content: "";
-    width: 66%;
-
+    width: 76%;
     background: var(--primary);
     height: 88%;
     bottom: 10px;
-    left: 20%;
+    left: 16%;
     position: absolute;
     display: block;
     z-index: -1;
     border-radius: 45% 45% 0 0;
+
+    @media screen and (max-width: 900px) {
+      width: 86%;
+      left: 10%;
+    }
   }
   &::after {
     content: "";
-    width: 70%;
+    width: 80%;
     height: 90.5%;
     bottom: 10px;
-    left: 18%;
+    left: 14%;
     border: 1px solid;
     border-bottom: none;
     position: absolute;
     display: block;
     z-index: -1;
     border-radius: 45% 45% 0 0;
+    @media screen and (max-width: 900px) {
+      width: 90%;
+      left: 8%;
+    }
   }
+
   img {
     width: 100%;
+  }
+  .img {
+    position: absolute;
+    top: 15px;
+    left: 2%;
+    width: 600px;
+    margin-left: -15%;
+    @media screen and (max-width: 900px) {
+      width: 450px;
+      left: -2%;
+    }
   }
 
   .svg {
@@ -46,19 +65,28 @@ export const Container = styled.div`
 
     &.star {
       top: 27%;
-      left: 15%;
+      left: 12%;
+      @media screen and (max-width: 900px) {
+        left: 5%;
+      }
     }
 
     &.scribble {
       width: 100px;
       top: 30%;
-      right: 5%;
+      right: -2%;
+      @media screen and (max-width: 900px) {
+        right: -7%;
+      }
     }
 
     &.scribbleC {
       width: 80px;
       bottom: 8%;
-      left: 8%;
+      left: 5%;
+      @media screen and (max-width: 900px) {
+        left: -5%;
+      }
     }
   }
 `;
