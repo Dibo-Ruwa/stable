@@ -123,7 +123,7 @@ export const ItemContent = styled.div`
 `;
 
 export const ItemAuthor = styled.p`
-  font-size: 26px;
+  font-size: 20px;
   font-weight: bold;
   color: var(--primary);
   letter-spacing: 1px;

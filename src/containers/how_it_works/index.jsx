@@ -9,17 +9,17 @@ const steps = [
   {
     icon: pickUp, // replace with the appropriate icon class or image source
     title: "Pick up your clothes",
-    sub: "Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do eiusmod.",
+    sub: "To avail of Dibo Ruwa's laundry service, you can schedule a pickup through our website. The website allows you to select the most convenient date and time for pickup, as well as specify any special instructions or preferences for the cleaning of your clothes. Once the pickup is scheduled, our team will arrive at the specified time to collect the laundry.",
   },
   {
     icon: laundry,
     title: "Laundry & dry clean",
-    sub: "Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do eiusmod.",
+    sub: "After the pickup, the clothes are transported to our facility where they are sorted and washed according to the specified preferences. Our team uses only high-quality detergents and follows eco-friendly laundry practices to ensure that the clothes are cleaned to the highest standards. The clothes are then dried and carefully ironed before being packaged for delivery.",
   },
   {
     icon: clean,
     title: "Fold clothes & deliver",
-    sub: "Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do eiusmod.",
+    sub: "Once the clothes are cleaned and ironed, they are packaged and delivered back to your specified location. We make sure that the clothes remain clean and wrinkle-free during transportation. You will be notified when the clothes are on the way, and our team will deliver the clothes at the specified time and location.",
   },
   // add more steps as needed
 ];
