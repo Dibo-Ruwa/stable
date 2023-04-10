@@ -8,7 +8,7 @@ import scribbleC from '../../assets/scribble_circles.svg'
 const Index = () => {
   return (
     <Container>
-      <img src={img} alt="dibo_wura" />
+      <img src={img} alt="dibo_wura" className="img"/>
       <div className="star svg">
         <img src={star} alt="" />
       </div>
