@@ -100,7 +100,6 @@ const DiscountModal = () => {
   }, []);
 
   const handleClose = () => {
-    window.open("https://wa.link/fjurh5")
     setIsOpen(false);
   };
 
@@ -200,7 +199,10 @@ const DiscountModal = () => {
             <Content>
               Our Representative will be right on the way to pick up your laundry
             </Content>
-            <Button onClick={handleClose}>Order Now!</Button>
+            <Button onClick={() => {
+              window.open("https://wa.link/fjurh5");
+              handleClose();
+            }} >Order Now!</Button>
             <Text variants={textVariants}>Terms and Conditions apply</Text>
           </ModalWrapper>
         </Overlay>
