@@ -14,6 +14,7 @@ import {
   ItemText,
   SubTitle,
   NavButton,
+  SliderWrapper,
 } from "./styles";
 import quote from "../../assets/Quote Left.svg";
 
@@ -41,7 +42,6 @@ const FeedbackCarousel = ({ feedbacks }) => {
     // centerMode: true,
     infinite: true,
     slidesToShow: 3,
-    swipeToSlide: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     responsive: [
@@ -55,7 +55,7 @@ const FeedbackCarousel = ({ feedbacks }) => {
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 900,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
@@ -63,11 +63,10 @@ const FeedbackCarousel = ({ feedbacks }) => {
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 580,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          
           initialSlide: 1
         }
       }
@@ -80,7 +79,8 @@ const FeedbackCarousel = ({ feedbacks }) => {
         <Title>Some Feedbacks</Title>
         <SubTitle>Happy Client Says About Our Company</SubTitle>
       </Header>
-      <Carousel {...settings}>
+      <SliderWrapper>
+          <Carousel {...settings}>
         {feedbacks.map((feedback, index) => (
           <Item key={index}>
             <img src={quote} alt="" />
@@ -91,6 +91,8 @@ const FeedbackCarousel = ({ feedbacks }) => {
           </Item>
         ))}
       </Carousel>
+      </SliderWrapper>
+    
     </Wrapper>
   );
 };

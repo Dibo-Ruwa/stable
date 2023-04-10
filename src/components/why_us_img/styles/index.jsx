@@ -8,6 +8,10 @@ export const Container = styled.div`
     width: 80%;
     height: 300px;
   }
+  @media screen and (max-width: 500px) {
+    width: 80%;
+    height: 250px;
+  }
 
   &::before {
     content: "";
@@ -33,6 +37,10 @@ export const Container = styled.div`
     position: absolute;
     @media screen and (max-width: 900px) {
       left: -30px;
+  }
+  @media screen and (max-width: 500px) {
+    top: -10px;
+    left: -20px;
   }
   }
 
