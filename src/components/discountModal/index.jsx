@@ -62,6 +62,7 @@ const CloseButton = styled.button`
   right: 5%;
   border: none;
   font-size: 26px;
+  cursor: pointer;
 `;
 
 const ImageWrapper = styled(motion.div)`
@@ -96,6 +97,7 @@ const DiscountModal = () => {
   }, []);
 
   const handleClose = () => {
+    window.open("https://wa.link/fjurh5")
     setIsOpen(false);
   };
 
