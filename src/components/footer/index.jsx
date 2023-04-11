@@ -56,8 +56,7 @@ const Footer = () => {
         <Section>
           <SectionTitle>Contact</SectionTitle>
           <p>
-            Suite 4, Student Union Secretariat, BUK New Campus, Bayero
-            University Kano, Nigeria
+            Suite 4, Student Union Secretariat, BUK New Campus, Bayero University Kano, Nigeria
           </p>
           <SectionList>
             <SectionItem>
