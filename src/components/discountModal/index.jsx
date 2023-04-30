@@ -34,9 +34,35 @@ const ModalWrapper = styled(motion.div)`
 `;
 
 const Title = styled.h2`
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 20px;
   text-align: center;
+  p{
+    span{
+      color: #2F6634;
+      font-size: 26px;
+
+      .order{
+        cursor: pointer
+      }
+    }
+  }
+
+
+ @media screen and (max-width: 900px) {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  p{
+    span{
+      color: #2F6634;
+      font-size: 20px;
+      .order{
+        cursor: pointer
+      }
+    }
+  }
+ }
 `;
 
 const Content = styled.p`
@@ -45,6 +71,9 @@ const Content = styled.p`
   text-align: center;
   padding: 0 20px;
   margin-bottom: 20px;
+  @media screen and (max-width: 900px) {
+    font-size: 16px;
+  }
 `;
 
 const Button = styled.button`
@@ -66,6 +95,10 @@ const CloseButton = styled.button`
   border: none;
   font-size: 26px;
   cursor: pointer;
+
+  @media screen and (max-width: 900px) {
+    right: 9%;
+  }
 `;
 
 const ImageWrapper = styled(motion.div)`
@@ -78,6 +111,16 @@ const ImageWrapper = styled(motion.div)`
   .icon {
     color: var(--primary);
     margin-left: 25px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .icon {
+      color: var(--primary);
+      // margin-left: 5px;
+    }
+    .img2{
+      margin-right: 40px;
+    }
   }
 `;
 
@@ -191,11 +234,11 @@ const DiscountModal = () => {
               </motion.div>
 
               <motion.div variants={imageVariants} custom={1}>
-                <Image src={img2} />
+                <Image src={img2} className="img2"/>
               </motion.div>
             </ImageWrapper>
 
-            <Title>Order now and get 30% discount for the next 6 weeks</Title>
+            <Title> <p className='order'> Enjoy our best price ever starting from <span>N250</span> 👉 <span className="order" onClick={() => {window.open("https://wa.link/fjurh5")}}>order now!</span></p></Title>
             <Content>
               Our Representative will be right on the way to pick up your laundry
             </Content>
