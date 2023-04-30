@@ -37,6 +37,13 @@ export const Text = styled.div`
           font-size: 20px;
           color: var(--sub-text);
           line-height: 120%;
+
+          span{
+            font-size: 25px;
+            .order-now{
+                cursor: pointer
+              }
+          }
       }
 
       @media screen and (max-width: 900px) {
