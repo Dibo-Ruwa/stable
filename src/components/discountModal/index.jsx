@@ -30,7 +30,7 @@ const ModalWrapper = styled(motion.div)`
   align-items: center;
   z-index: 998;
   @media screen and (max-width: 900px) {
-    width: 80%;
+    width: 90%;
   }
 `;
 
