@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import img1 from "../../assets/one.png";
 import img2 from "../../assets/two.png";
+import Bag from "../../assets/bag.png";
 import { MdOutlineClose } from "react-icons/md";
 import { ImSpinner9 } from "react-icons/im";
 
@@ -22,12 +23,14 @@ const ModalWrapper = styled(motion.div)`
   width: auto;
   height: auto;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 30px;
   display: flex;
-  padding: 5%;
+  padding: 2%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 500px;
+  max-width: 500px;
   z-index: 998;
   @media screen and (max-width: 900px) {
     width: 95%;
@@ -36,15 +39,24 @@ const ModalWrapper = styled(motion.div)`
 
 const Title = styled.h2`
   font-size: 20px;
-  margin-bottom: 20px;
+  margin: 20px 20px;
   text-align: center;
+  color: #333333;
+  /* width: 50%; */
   p{
+    &.order{
+      font-size: 30px;
+      span{
+        font-size: 30px;
+      }
+    }
     span{
       color: #2F6634;
-      font-size: 26px;
+      font-size: 30px;
 
       .order{
-        cursor: pointer
+        cursor: pointer;
+        
       }
     }
   }
@@ -78,12 +90,12 @@ const Content = styled.p`
 `;
 
 const Button = styled.button`
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 5px;
   background-color: var(--primary);
   color: white;
   border: none;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin-top: 20px;
   cursor: pointer;
@@ -104,7 +116,7 @@ const CloseButton = styled.button`
 
 const ImageWrapper = styled(motion.div)`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: relative;
   font-size: 35px;
@@ -126,8 +138,8 @@ const ImageWrapper = styled(motion.div)`
 `;
 
 const Image = styled.img`
-  width: 160px;
-  height: 160px;
+  width: 220px;
+  height: 180px;
 
   @media screen and (max-width: 768px) {
   width: 120px;
@@ -213,6 +225,21 @@ const DiscountModal = () => {
     },
   };
 
+  /* Previous image with spinner */
+/* 
+          <ImageWrapper>
+              <motion.div variants={imageVariants} custom={0}>
+                <Image src={img1} />
+              </motion.div>
+              <motion.div className="icon">
+                <ImSpinner9 />
+              </motion.div>
+
+              <motion.div variants={imageVariants} custom={1}>
+                <Image src={img2} className="img2"/>
+              </motion.div>
+    </ImageWrapper> */
+
   return (
     <>
       {isOpen && (
@@ -230,27 +257,24 @@ const DiscountModal = () => {
               <MdOutlineClose />
             </CloseButton>
 
-            <ImageWrapper>
-              <motion.div variants={imageVariants} custom={0}>
-                <Image src={img1} />
-              </motion.div>
-              <motion.div className="icon">
-                <ImSpinner9 />
-              </motion.div>
 
-              <motion.div variants={imageVariants} custom={1}>
-                <Image src={img2} className="img2"/>
-              </motion.div>
+            <ImageWrapper>
+              <Image src={Bag} alt="laundry bag" />
             </ImageWrapper>
 
-            <Title> <p className='order'> Enjoy our best price ever starting from <span>N250</span> 👉 <span className="order" onClick={() => {window.open("https://wa.link/fjurh5")}}>order now!</span></p></Title>
+
+            <Title> 
+              <p className='order'> With just <span>N4990, </span>  </p>
+              <p>grab our exclusive Dibo Ruwa laundry bag. </p>
+              <p>Say goodbye to laundry stress, forever!</p>                
+              </Title>
             <Content>
-              Our Representative will be right on the way to pick up your laundry
+              Our Representative will be right on the way to pick up and deliver your laundry twice a week
             </Content>
             <Button onClick={() => {
               window.open("https://wa.link/fjurh5");
               handleClose();
-            }} >Order Now!</Button>
+            }} >Order Now</Button>
             <Text variants={textVariants}>Terms and Conditions apply</Text>
           </ModalWrapper>
         </Overlay>
