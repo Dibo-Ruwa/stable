@@ -141,6 +141,7 @@ const Image = styled.img`
   @media screen and (max-width: 768px) {
   width: 120px;
   height: 120px;
+  }
 `;
 
 const Text = styled(motion.p)`
@@ -187,7 +188,7 @@ const DiscountModal = () => {
     },
   };
 
-  const imageVariants = {
+  /* const imageVariants = {
     initial: {
       opacity: 0,
       scale: 0.8,
@@ -207,7 +208,7 @@ const DiscountModal = () => {
         duration: 0.5,
       },
     },
-  };
+  }; */
 
   const textVariants = {
     initial: {
