@@ -28,8 +28,9 @@ const ModalWrapper = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  z-index: 998;
   @media screen and (max-width: 900px) {
-    width: 100%;
+    width: 95%;
   }
 `;
 
@@ -56,7 +57,7 @@ const Title = styled.h2`
   p{
     span{
       color: #2F6634;
-      font-size: 20px;
+      font-size: 16px;
       .order{
         cursor: pointer
       }
@@ -66,7 +67,7 @@ const Title = styled.h2`
 `;
 
 const Content = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.5;
   text-align: center;
   padding: 0 20px;
@@ -77,7 +78,7 @@ const Content = styled.p`
 `;
 
 const Button = styled.button`
-  padding: 10px 20px;
+  padding: 8px 16px;
   border-radius: 5px;
   background-color: var(--primary);
   color: white;
@@ -95,9 +96,9 @@ const CloseButton = styled.button`
   border: none;
   font-size: 26px;
   cursor: pointer;
-
+  z-index: 999;
   @media screen and (max-width: 900px) {
-    right: 9%;
+    right: 10%;
   }
 `;
 
@@ -127,6 +128,10 @@ const ImageWrapper = styled(motion.div)`
 const Image = styled.img`
   width: 160px;
   height: 160px;
+
+  @media screen and (max-width: 768px) {
+  width: 120px;
+  height: 120px;
 `;
 
 const Text = styled(motion.p)`
