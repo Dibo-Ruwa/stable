@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import img1 from "../../assets/one.png";
-import img2 from "../../assets/two.png";
 import Bag from "../../assets/bag.png";
 import { MdOutlineClose } from "react-icons/md";
-import { ImSpinner9 } from "react-icons/im";
 
 const Overlay = styled(motion.div)`
   position: fixed;
@@ -224,21 +221,6 @@ const DiscountModal = () => {
       },
     },
   };
-
-  /* Previous image with spinner */
-/* 
-          <ImageWrapper>
-              <motion.div variants={imageVariants} custom={0}>
-                <Image src={img1} />
-              </motion.div>
-              <motion.div className="icon">
-                <ImSpinner9 />
-              </motion.div>
-
-              <motion.div variants={imageVariants} custom={1}>
-                <Image src={img2} className="img2"/>
-              </motion.div>
-    </ImageWrapper> */
 
   return (
     <>
