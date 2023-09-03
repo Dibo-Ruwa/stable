@@ -13,8 +13,7 @@ const Index = () => {
 
         {/* <p className='order'>Order now and get 30% discount for the next 6 weeks.</p> */}
         {/* <p className='order'>Order now and get 30% discount for the next 6 weeks.</p> */}
-        <p className='order'> Enjoy our best price ever starting from <span>N250</span>, including free pickup and delivery 👉 <span className="order-now" onClick={() => {window.open("https://wa.link/fjurh5")}}>order now!</span></p>
-
+        <p className='order'> Enjoy our best price ever starting from <span>N180</span>, including free pickup and delivery 👉 <span className="order-now" onClick={() => {window.open("https://wa.link/fjurh5")}}>order now!</span></p>
 
         <BtnGrp>
         <Button size="lg" color={`var(--primary)`}  text="Get Started" />

@@ -252,7 +252,7 @@ const DiscountModal = () => {
               <p>Say goodbye to laundry stress, forever!</p>                
               </Title>
             <Content>
-              Our Representative will be right on the way to pick up and deliver your laundry twice a week
+              Our Representative will be right on the way to pick up and deliver your laundry twice a month
             </Content>
             <Button onClick={() => {
               window.open("https://wa.link/fjurh5");
