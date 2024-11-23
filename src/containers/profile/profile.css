@@ -1,0 +1,12 @@
+.ps_pf_container {
+  display: flex;
+  width: min(93%, 1443px);
+  height: 100%;
+  margin: 6rem auto 0;
+  padding-top: 2rem;
+  gap: 2rem;
+}
+
+.profile_page {
+  background: var(--Background-color, #f8f8f8);
+}

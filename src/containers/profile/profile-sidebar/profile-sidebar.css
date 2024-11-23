@@ -1,0 +1,111 @@
+.ProfileContainer {
+  @apply relative md:absolute md:w-full md:h-full md:z-10;
+}
+
+/* .ProfileSidebarContainer {
+  @apply w-[30vw] h-full flex-shrink-0 rounded-[20px] bg-white transition-transform duration-300 ease-in-out md:w-full md:h-full md:pb-6 sm:pb-0 sm:top-2 sm:absolute sm:z-10;
+} */
+
+.ProfileSidebarContainer {
+  @apply w-[30vw] h-full flex-shrink-0 rounded-[20px] bg-white transition-transform duration-300 ease-in-out md:w-full md:h-full md:pb-6 sm:pb-0 sm:top-2 sm:absolute sm:z-10;
+  transform: translateX(-100%); /* Sidebar hidden initially */
+}
+
+.ProfileSidebarContainer.translate-x-0 {
+  transform: translateX(0); /* Sidebar visible */
+}
+
+.ProfileSidebarContainer.translate-x-0 .CancelIcon {
+  display: block; /* Show cancel icon when sidebar is open */
+}
+
+.ProfileSidebarContainer.translate-x-0 .MenuIcon {
+  display: none; /* Hide menu icon when sidebar is open */
+}
+
+/* .MenuIcon {
+  @apply hidden md:flex w-7 h-7 absolute top-1 left-6 cursor-pointer;
+} */
+
+.MenuIcon {
+  @apply hidden md:flex w-7 h-7 absolute top-[-2rem] left-6 cursor-pointer;
+  display: block;
+}
+
+/* .CancelIcon {
+  @apply hidden md:flex w-7 h-7 absolute right-4 cursor-pointer;
+} */
+
+.CancelIcon {
+  @apply hidden md:flex w-7 h-7 absolute top-[-2rem] left-6 cursor-pointer;
+  display: none;
+}
+
+.ProfileSidebarProfileLink {
+  @apply inline-flex items-center gap-2 p-4 pt-3;
+}
+
+.ProfileSidebarPics {
+  @apply w-[49.465px] h-[49.465px] flex-shrink-0 bg-[#f4f4f4] flex items-center justify-center rounded-full;
+}
+
+.ProfileIcon {
+  @apply text-[24px] text-[#27a124];
+}
+
+.ProfileSidebarName {
+  @apply flex flex-col items-start gap-2;
+}
+
+.ProfileName {
+  @apply text-[var(--Black-100,#2a2a2a)] font-[Poppins,sans-serif] text-base font-medium;
+}
+
+.ProfileEmail {
+  @apply text-[var(--Black-100,#2a2a2a)] font-[Poppins,sans-serif] text-xs font-normal;
+}
+
+.SidebarLine {
+  @apply w-[88%] h-px bg-[#d2d2d2] mx-auto;
+}
+
+.ProfileSidebarSidemenu {
+  @apply flex flex-col items-end w-[92%] gap-5 mx-auto;
+}
+
+.ProfileSidebarList {
+  @apply flex flex-col items-start p-2 w-full gap-5 mx-auto;
+}
+
+.ProfileSidebarItem {
+  @apply flex w-full justify-between items-center p-2 rounded-lg mx-auto transition-colors hover:bg-[#e9e9e9];
+}
+
+.ProfileSidebarItem.active {
+  @apply bg-[rgba(252,252,252,0.25)];
+}
+
+.ProfileSidebarLink {
+  @apply flex justify-center items-center gap-2;
+  text-decoration: none;
+}
+
+.ProfileSidebarLink.active {
+  @apply text-[#27a124];
+}
+
+.ProfileSidebarLeftIcon {
+  @apply flex w-6 h-6 justify-center items-center;
+}
+
+.ProfileSidebarLinkName {
+  @apply text-[var(--Black-100,#2a2a2a)] font-[Poppins,sans-serif] text-base font-normal;
+}
+
+.ProfileSidebarRightIcon {
+  @apply flex w-5 h-5 justify-center items-center flex-shrink-0 cursor-pointer;
+}
+
+.ProfileSidebarRightIcon.active {
+  @apply text-[#27a124];
+}

@@ -1,0 +1,32 @@
+.CustomAddMore_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-radius: 8px;
+    margin: 0 auto 1rem;
+}
+
+.CustomAddMore_content {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.CustomAddMore_content p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.CustomAddMore_content svg {
+  font-size: 18px; 
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.CustomAddMore_container:hover svg {
+  color: #0056b3;
+}

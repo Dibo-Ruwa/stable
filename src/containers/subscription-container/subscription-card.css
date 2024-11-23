@@ -1,0 +1,150 @@
+.sub_container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.5rem;
+  gap: 1.5rem;
+  background: #fefefe;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.sub_FLG_tab {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.5rem 0.7rem;
+  background: #ebebeb;
+  border-radius: 3px;
+}
+
+p.sub_FLG_tabText,
+p.sub_type_text,
+p.sub_amount_text,
+p.sub_SA_text,
+p.SA_amount,
+p.sub_list_item_text {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  line-height: normal;
+}
+
+p.sub_FLG_tabText {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+p.sub_FLG_tabText:hover {
+  background: #fefefe;
+}
+p.sub_FLG_tabText.active {
+  background: #fefefe;
+  font-weight: 500;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  color: #27a124;
+}
+
+.sub_cards {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.sub_card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1 1 12rem;
+}
+
+img.sub_img.laundry_sub_img {
+  width: 3rem;
+  height: 3rem;
+}
+
+img.sub_img.groomimg_sub_img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+}
+
+.sub_ITA {
+  display: flex;
+  gap: 0.7rem;
+  width: 100%;
+  padding: 0.8rem 0.8rem 0;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.sub_TA {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+p.sub_type_text,
+p.sub_amount_text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sub_list_items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  width: 100%;
+}
+
+.sub_list_item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+p.sub_list_item_text {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.sub_SA {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.8rem;
+}
+
+p.sub_SA_text,
+p.SA_amount {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.sub_btn {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem auto;
+  padding: 5.791px 34.744px;
+  gap: 8.272px;
+  border-radius: 4px;
+  border: 0.827px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}

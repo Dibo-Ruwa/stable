@@ -1,0 +1,9 @@
+.OtherRestaurants_container{
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 650px) {
+    .OtherRestaurants_container{
+        display: none;
+    }
+}

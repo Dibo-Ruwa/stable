@@ -1,0 +1,27 @@
+/* ===== Description ===== */
+.RequestSubscription_RequestSubDescriptions {
+  padding: 1rem 2.5rem;
+}
+
+.CustomDescription_DescriptionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.CustomDescription_DescriptionText {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.CustomDescription_DescriptionTextarea {
+  width: 100%;
+  background: rgba(246, 246, 246, 0.66);
+  resize: none;
+  padding: 1rem 0 0 1rem;
+  outline: none;
+  border-radius: 8px;
+}

@@ -1,0 +1,96 @@
+.custombooking_container {
+  padding-bottom: 3rem;
+}
+
+.custombooking_frame {
+  width: min(93%, 1440px);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  background: #fff;
+}
+
+.custombooking_search-min {
+  display: flex;
+  gap: 2rem;
+}
+
+.min-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+button.min-button {
+  display: flex;
+  width: 60.35px;
+  height: 41.521px;
+  padding: 3.415px;
+  justify-content: center;
+  align-items: center;
+  gap: 7.415px;
+  outline: none;
+  border: none;
+  color: #000;
+  flex-shrink: 0;
+  border-radius: 2.966px;
+  background: #fcfcfc;
+  font-family: Poppins;
+  font-feature-settings: "liga" off, "clig" off;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.min-button.active {
+  background-color: #4bb149;
+  color: #ffffff;
+}
+
+.custombooking-search_box {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+input.custombooking-search_input {
+  width: 400px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  padding-left: 1rem;
+  border: 1px solid #ebebeb;
+  background: #fcfcfc;
+  outline: none;
+  position: relative;
+}
+
+img.custombooking-search_img {
+  position: absolute;
+  right: 1rem;
+}
+
+button.custombooking-btn {
+  display: flex;
+  padding: 12.791px 30.744px;
+  font-family: Poppins;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8.272px;
+  flex-shrink: 0;
+  border-radius: 3.309px;
+  border: 0.827px solid #4bb149;
+  background: rgba(183, 224, 182, 0.2);
+  color: var(--Black-100, #2a2a2a);
+  font-size: 13.236px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}

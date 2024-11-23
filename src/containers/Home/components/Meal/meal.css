@@ -1,0 +1,204 @@
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  font-size: 1rem;
+}
+
+.meal-duration{
+  display: flex;
+  justify-content: space-between;
+  margin: 40px auto;
+  /* background-color: red; */
+  width: 92%;
+}
+
+.prep-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  height: fit-content;
+}
+
+
+.prep-menu{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prep-text-active {
+  background: #4BB149;
+  color: #fefefe;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  border-radius: 59.74px;
+  word-wrap: break-word;
+  font-size: 14px;
+  padding: 6px 14px;
+}
+.prep-text {
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 59.74px;
+  border: 0.6px #2a2a2a solid;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+.meal_card {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 auto;
+  gap: 30px;
+}
+
+.meal_card .card {
+  width: 250px;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow-x: hidden;
+  border-radius: 16px;
+}
+
+.card-img{
+  width: 250px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
+}
+.meal_card .card img {
+  width: 250px;
+  height: 150px;
+}
+
+.wish{
+  z-index: 1;
+}
+
+.meal_card .card a {
+  display: flex;
+  flex-direction: column;
+  margin: 12px auto;
+  color: #565656;
+  text-decoration: none;
+  width: 92%;
+}
+.meal-dis{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.meal-dis div > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.meal-dot{
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #4BB149;
+  margin: auto;
+  margin-top: 0.6rem;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin: 6px auto;
+  color: #565656;
+  background-color: #f6f6f6;
+  border-radius: 20px;
+  text-decoration: none;
+  width: 100%;
+}
+
+@media (max-width: 650px) {
+  .meal {
+    width: 90%;
+    padding: 40px 0;
+    color: #565656;
+  }
+
+  .meal_card {
+    display: flex;
+    justify-content: start;
+    flex-wrap: nowrap;
+    width: 90%;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    margin: 0 auto;
+    gap: 20px;
+  }
+
+  .meal_card .card {
+    width: 250px;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    overflow-x: hidden;
+    border-radius: 6px;
+  }
+
+  .meal_card .card img {
+    border-radius: 0px;
+    width: 250px;
+    height: 150px;
+  }
+
+  .meal_card .card a {
+    display: flex;
+    flex-direction: column;
+    margin: 12px auto;
+    color: #565656;
+    text-decoration: none;
+    width: 92%;
+  }
+}
+
+
+@media (max-width: 450px) {
+      
+   
+  
+  .meal_card .card {
+    width: 200px;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    overflow-x: hidden;
+    border-radius: 6px;
+  }
+
+  .meal_card .card img {
+    border-radius: 0px;
+    width: 200px;
+    height: 130px;
+  }
+
+  .meal_card .card a {
+      display: flex;
+      flex-direction: column;
+      margin: 0px auto;
+      color: #565656;
+      text-decoration: none;
+      width: 92%;
+    }
+
+}

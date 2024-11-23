@@ -1,0 +1,216 @@
+.laundry_resturant_container {
+  background: #f8f8f8;
+}
+.container {
+  width: min(100%, 1440px);
+  margin: 0 auto;
+}
+
+.laundry_resturant-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+  margin: 0 auto;
+  width: 90%;
+  gap: 20px;
+}
+
+.laundry_resturant-image {
+  position: relative;
+}
+
+.laundry_desktop-image {
+  display: none;
+}
+
+.laundry_mobile-image {
+  position: relative;
+  margin: 0 auto;
+}
+
+.laundry_mobile-img {
+  position: absolute;
+  top: 10.6rem;
+  right: -0.9rem;
+}
+
+.laundry_img-main {
+  width: 100%;
+}
+
+.laundry_resturant-text_container {
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+}
+.laundry_resturant-btn_text {
+  font-size: 13px;
+  background: #565656;
+  color: #fefefe;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+  display: flex;
+  padding: 8px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 60px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.laundry_rest-subtitle {
+  color: #2a2a2a;
+  font-family: "Poppins", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 1rem;
+}
+
+.laundry_rest-des {
+  color: #565656;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.19rem;
+  margin-bottom: 1rem;
+}
+
+.Check-Out_Vendors {
+  color: #27a124;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.4rem;
+  text-decoration-line: underline;
+  display: none;
+}
+img.service_img {
+  width: 14rem;
+}
+.laundry_rest-title-h1 {
+  color: #7e7e7e;
+  font-size: 2rem;
+  font-family: "poppins", sans-serif;
+  font-weight: 400;
+  margin-bottom: 0.7rem;
+}
+
+.laundry_sub_food {
+  color: #2a2a2a;
+  font-family: Poly;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 1rem 0 0.8rem;
+}
+
+.laundry-service_img {
+  display: flex;
+  justify-content: start;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+@media (min-width: 400px) {
+  .laundry_resturant-content {
+    width: 90%;
+  }
+  .laundry_desktop-image {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .laundry_mobile-image {
+    display: none;
+  }
+}
+
+/* Medium devices */
+@media (min-width: 768px) {
+  .mobile-img {
+    top: 22.6rem;
+    right: -0.2rem;
+    width: 12rem;
+  }
+}
+@media (min-width: 900px) {
+  .laundry_resturant-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .laundry_desktop-image {
+    display: block;
+    width: 27rem;
+    height: 32rem;
+  }
+  .text-content {
+    margin-bottom: 5rem;
+    margin-top: -2rem;
+  }
+  .laundry_rest-title,
+  .laundry_sub_food {
+    display: none;
+  }
+
+  .laundry_mobile-image {
+    display: none;
+  }
+
+  .laundry_resturant-text_container {
+    margin-bottom: 2rem;
+    padding-bottom: 0rem;
+  }
+
+  .laundry_resturant-btn_text {
+    padding: 8px 25px;
+  }
+
+  .laundry_rest-subtitle {
+    font-size: 20px;
+  }
+
+  .laundry_rest-des {
+    font-size: 14px;
+  }
+
+  .Check-Out_Vendors {
+    font-size: 15px;
+    display: inline-block;
+  }
+  .laundry-service_img {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: -2rem 0 0;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1200px) {
+  .laundry_desktop-image {
+    width: 65rem;
+    height: 44rem;
+  }
+
+  img.service_img {
+    width: 19rem;
+  }
+
+  .laundry-service_img {
+    margin: 4rem 0 0;
+  }
+
+  .laundry_resturant-text_container {
+    margin-bottom: 12rem;
+  }
+}
