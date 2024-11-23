@@ -8,6 +8,8 @@ interface CheckboxProps {
   labelClassName?: string;
 }
 
+// checkout
+
 export const Checkbox: React.FC<CheckboxProps> = ({
   label,
   checked = false,
