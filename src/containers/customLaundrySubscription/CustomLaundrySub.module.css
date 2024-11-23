@@ -1,0 +1,12 @@
+.CustomLaundrySub_container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.CustomLaundrySub_content {
+  display: flex;
+  gap: 1.5rem;
+  height: 75rem;
+  width: 100%;
+  padding-bottom: 5rem;
+}

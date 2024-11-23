@@ -1,0 +1,137 @@
+.search_filter_frame {
+  width: min(93%, 1440px);
+  margin: 0 auto;
+}
+
+.search_filter_container {
+  background: var(--White, #fefefe);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5rem;
+  padding-left: 1rem;
+  height: 70px;
+}
+
+button.search_filter_btn {
+  display: flex;
+  width: 105px;
+  height: 42px;
+  align-items: center;
+  justify-content: center;
+  gap: 7.415px;
+  padding: 7.415px;
+  border-radius: 5.966px;
+  border: none;
+  background: var(--Green-1, #27a124);
+  color: var(--white, #fefefe);
+  font-size: 14px;
+  font-family: "Poppins";
+  font-weight: 400;
+  line-height: normal;
+  font-feature-settings: "liga" off, "clig" off;
+  font-style: normal;
+  cursor: pointer;
+}
+
+svg.search_filter_btn_icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease;
+}
+
+.search_filter_btn_icon.rotate {
+  transform: rotate(0deg);
+}
+
+.search_filter_box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.search_filter_input {
+  width: 484px;
+  height: 42px;
+  border-radius: 4px;
+  border: 1px solid #ebebeb;
+  outline: none;
+  background: #fcfcfc;
+  padding-left: 0.9rem;
+}
+
+input#search::placeholder {
+  color: #969bab;
+  font-size: 16px;
+  font-family: "Barlow";
+  font-weight: 400;
+  line-height: normal;
+  font-feature-settings: "liga" off, "clig" off;
+  font-style: normal;
+}
+
+svg.search_filter_icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #292d32;
+  position: absolute;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.overlay_search_filter_container {
+  position: relative;
+}
+
+.overlay_container {
+  background: #fefefe;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 161px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 9px;
+  border-radius: 0.7rem;
+  position: absolute;
+}
+
+.overlay_rating {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    background: transparent;
+    border-radius: 0.4rem;
+    padding: 0.3rem 0 0.3rem 0.1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.overlay_rating:hover {
+  background: #ededed;
+}
+
+svg.overlay_rating_star {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #ffc93f;
+}
+
+
+@media screen and (max-width: 650px) {
+  .search_filter_frame{
+    display: none;
+  }
+}

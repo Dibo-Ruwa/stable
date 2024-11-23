@@ -1,0 +1,23 @@
+.food_details_container {
+  @apply w-[93%] bg-[#f8f8f8] m-auto;
+}
+
+.food_details_frame {
+  @apply mt-24;
+}
+
+.ToggleCheckout_btn {
+  @apply mt-4 px-4 py-2 bg-[#27a124] text-white rounded hover:bg-[#113f11];
+}
+
+.df_cs {
+  @apply relative flex justify-between gap-8;
+}
+
+.df_cs_food {
+  @apply flex-[0.67] w-full md:flex-[1];
+}
+
+.df_cs_foodCheckOut {
+  @apply flex-[0.5] md:w-[90%] md:max-w-[400px] md:top-24 md:right-0 md:h-auto p-6 rounded-[0.6rem] bg-[#fefefe];
+}

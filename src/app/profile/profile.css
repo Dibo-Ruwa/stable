@@ -1,0 +1,44 @@
+.PsPfContainer {
+  display: flex;
+  max-width: 1444px;
+  min-width: 93%;
+  width: 93%;
+  height: 100%;
+  margin: 6rem auto 0;
+  padding-top: 2rem;
+  gap: 2rem;
+  position: relative;
+  padding-bottom: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .PsPfContainer {
+    gap: 1rem;
+    width: 93%;
+  }
+}
+
+@media (max-width: 768px) {
+  .PsPfContainer {
+    gap: 0;
+    width: 100%;
+    display: block;
+  }
+}
+
+.ProfileChildren {
+  width: 61%;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .ProfileChildren {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ProfileChildren {
+    width: 100%;
+  }
+}

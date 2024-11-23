@@ -1,0 +1,148 @@
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  font-size: 1rem;
+}
+
+.prep-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  height: fit-content;
+}
+
+.prep-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.prep-text-active {
+  background: #4bb149;
+  color: #fefefe;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  border-radius: 59.74px;
+  word-wrap: break-word;
+  font-size: 14px;
+  padding: 6px 14px;
+}
+.prep-text {
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 59.74px;
+  border: 0.6px #2a2a2a solid;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.rest {
+  background-color: #f6f6f6;
+  /* background-color: #2a2a2a; */
+  width: 100%;
+  padding: 40px 0;
+  color: #565656;
+}
+
+.rest_card {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 30px auto;
+  padding-bottom: 20px;
+  gap: 30px;
+}
+
+.rest_card .card {
+  width: 250px;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow-x: hidden;
+  border-radius: 6px;
+}
+
+.rest_card .card img {
+  border-radius: 16px;
+
+  width: 250px;
+  height: 150px;
+}
+
+.rest_card .card a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  margin: 16px 14px;
+  color: #565656;
+  background-color: #f6f6f6;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+@media (max-width: 650px) {
+  .rest {
+    padding: 20px 0;
+    color: #565656;
+  }
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    font-size: 1rem;
+    color: #f6f6f6;
+  }
+  .rest_card {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+    overflow-x: hidden;
+    margin: 0 auto;
+    gap: auto;
+  }
+
+  .rest_card .card {
+    width: 45%;
+    max-width: 230px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    overflow-x: hidden;
+    border-radius: 6px;
+  }
+
+  .meal-des {
+    margin: 0 auto 5rem;
+  }
+
+  .meal-title_sub {
+    width: min(90%, 1440px);
+    margin: 0 auto 3rem;
+  }
+
+  .rest_card .card img {
+    border-radius: 0px;
+    width: 250px;
+    height: 150px;
+  }
+
+  .rest_card .card a {
+    /* display: none; */
+    justify-content: space-between;
+    padding: 8px 10px;
+    margin: 8px 10px;
+    color: #565656;
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    text-decoration: none;
+  }
+}
