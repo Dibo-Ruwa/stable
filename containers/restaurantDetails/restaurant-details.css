@@ -1,0 +1,28 @@
+.indi_restCont {
+  display: flex;
+  gap: 1rem;
+}
+
+.ACR_Cont {
+    width: min-content;
+}
+
+@media screen and (max-width: 1024px){
+  .ACR_Cont {
+    width: 60%;
+}
+}
+
+@media screen and (max-width: 768px){
+  .ACR_Cont {
+    width: 70%;
+    margin: 0 auto;
+}
+}
+
+@media screen and (max-width: 668px){
+  .ACR_Cont {
+    width: 100%;
+    margin: 0;
+}
+}

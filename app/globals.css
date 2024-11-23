@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  background-color: var(--light2);
+  font-family: 'Poppins', sans-serif !important;
+}
+
+:root {
+  --primary: #71f76f;
+  --color2: #f7d86a;
+  --color3: #b388f9;
+  --color4: #82daf5;
+  --content: #303030;
+  --primary-20: hsla(119, 68%, 56%, 0.06);
+
+--color2-20: hsla(47, 100%, 60%, 0.06);
+
+--color3-20: hsla(263, 77%, 64%, 0.2);
+
+--color4-20: hsla(194, 88%, 64%, 0.2);
+}
+
+p {
+  text-align: justify;
+}
+
+main.main_container{
+  background: var(--Background-color, #f8f8f8);
+  margin: 6rem auto 0;
+}

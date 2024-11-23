@@ -1,0 +1,71 @@
+.cta_delivery_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  background: #3e3e3e;
+  margin: 2rem 0 12.375rem;
+  padding: 0.5rem 1rem 0.5rem 4rem;
+}
+
+.inc_dec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  color: #ffffff;
+}
+
+.cta_delivery_icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.cta_delivery_num {
+  color: var(--White, #fefefe);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.cta_delivery_btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 81px;
+}
+
+.cta_delivery_pick_up {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  color: var(--White, #fefefe);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.cta_delivery_delivery {
+  display: flex;
+  height: 45px;
+  padding: 8px 64px 7px 66px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  background: var(--Green1, #27a124);
+  color: var(--White, #fefefe);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
