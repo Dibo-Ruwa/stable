@@ -1,0 +1,72 @@
+.MostSoldContainer {
+  @apply pb-12;
+}
+
+.MostSoldFrame {
+  @apply w-full max-w-[1440px] mx-auto;
+}
+
+.MostSoldTitle {
+  @apply text-[#8f8f8f] text-[19.548px] font-normal mb-12;
+}
+
+.MostSoldCards {
+  @apply grid grid-cols-3 gap-[30px] w-full overflow-x-auto mx-auto md:grid-cols-2 md:gap-5 xs:grid-cols-1 xs:gap-4;
+  @layer scroll-snap-x;
+}
+
+.MostSoldCard {
+  @apply snap-center box-border bg-white overflow-hidden rounded-[16px];
+}
+
+.MostSoldCardLinkDiv {
+  @apply w-full box-border bg-white overflow-hidden rounded-[16px];
+}
+
+.MostSoldCardImg {
+  @apply w-full h-[120px] object-cover rounded-xl md:h-[150px];
+}
+
+.FavoriteIcon {
+  @apply text-[#27a124] bg-white p-1.5 rounded-full absolute top-1 left-1;
+}
+
+.MostSoldCardContent {
+  @apply p-4 sm:p-3;
+}
+
+.MostSoldCardContext {
+  @apply flex justify-between items-center mb-2;
+}
+
+.MostSoldCardTitle {
+  @apply text-[#8f8f8f] text-base font-normal sm:text-[14px];
+}
+
+.MostSoldCardDot {
+  @apply bg-[#27a124] w-2 h-2 rounded-full;
+}
+
+.MostSoldCardPrize {
+  @apply flex justify-between items-center mt-4 bg-gray-100 p-2 rounded-[50px];
+}
+
+.MostSoldCardPrizeText {
+  @apply text-[#565656] text-lg font-normal sm:text-base;
+}
+
+.MostSoldCardReminder {
+  @apply text-[#27a124] text-xs font-normal;
+}
+
+.MostSoldCardPrizeLink {
+  @apply inline-flex p-2 justify-center items-center gap-2 rounded-full bg-[#27a124] text-[#fefefe];
+}
+
+.SaleImgsContainer {
+  @apply flex my-12 md:my-8 sm:my-6;
+}
+
+.MostSoldSaleImg {
+  @apply w-full flex items-center;
+}

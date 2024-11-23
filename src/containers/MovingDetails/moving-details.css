@@ -1,0 +1,41 @@
+.Moving_head {
+  width: 93%;
+  margin: 0 auto;
+}
+
+.Moving_restCont {
+  display: flex;
+  gap: 1rem;
+}
+
+.Moving_Cont {
+  width: min-content;
+}
+
+@media screen and (max-width: 1024px) {
+  .Moving_Cont {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Moving_Cont {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .Moving_head {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 668px) {
+  .Back_Button {
+    display: none;
+  }
+
+  .Moving_Cont {
+    width: 100%;
+    margin: 0;
+  }
+}

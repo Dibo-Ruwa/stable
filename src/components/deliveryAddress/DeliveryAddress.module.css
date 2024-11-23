@@ -1,0 +1,65 @@
+.RequestConfirmation_DeliveryAddressContainer {
+  border-radius: 8px;
+  width: 100%;
+}
+.RequestConfirmation_DeliveryAddressTxTEdit {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.RequestConfirmation_DeliveryAddressTxT {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27.129px; /* 171.429% */
+}
+
+.RequestConfirmation_DeliveryAddressEdit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9.043px;
+  cursor: pointer;
+}
+
+.RequestConfirmation_DeliveryAddressEditIcon {
+  width: 22px;
+  height: 22px;
+  color: #27a124;
+}
+
+.RequestConfirmation_DeliveryAddressEditText {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.RequestConfirmation_DeliveryAddress {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.RequestConfirmation_DeliveryAddressTxTArea {
+  width: 100%;
+  background: rgba(246, 246, 246, 0.66);
+  resize: none;
+  padding: 1rem 0 0 1rem;
+  outline: none;
+  border-radius: 8px;
+}
+
+.RequestConfirmation_DeliveryAddressTxTDisplay {
+  white-space: pre-wrap;
+  line-height: 1.5;
+  background: #f7f7f7;
+  padding: 1rem 1rem 6.4rem 1rem;
+  border-radius: 10px;
+}

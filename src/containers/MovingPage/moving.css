@@ -1,0 +1,20 @@
+.Moving_home-container {
+  margin: 6rem 0 0;
+  background-color: #f6f6f6;
+}
+
+.Moving_hero_frame {
+  width: min(93%, 1440px);
+  margin: 0 auto;
+}
+
+
+.OtherMoving_container{
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 650px) {
+    .OtherMoving_container{
+        display: none;
+    }
+}

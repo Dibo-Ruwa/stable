@@ -1,0 +1,559 @@
+.MovingItemContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.AddPropertyContainer {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.AddPropertyCards {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.AddPropertyCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #ffffff;
+  padding: 0.7rem;
+  border-radius: 8px;
+}
+
+.AddPropertyCardText {
+  font-size: 16px;
+}
+
+.AddPropertyEditNameAndCounter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AddPropertyAddMore {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  color: #27a124;
+  margin: 1.5rem 0 0;
+  cursor: pointer;
+  margin-left: auto;
+  width: 6rem;
+}
+
+.AddPropertyAddMoreIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.AddPropertyAddMoreText {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/*====== Checkbox =====*/
+.MovingItemChoices {
+  width: 100%;
+}
+
+.CheckboxGroup {
+  display: flex;
+  gap: 3rem;
+}
+
+.CheckboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  color: #2c2c2c;
+}
+
+.CheckBoxInput {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  cursor: pointer;
+  accent-color: #27a124;
+  border-radius: 10px;
+}
+
+.CheckBoxInput:checked {
+  background-color: #238d22;
+}
+
+/* ===== Edit Property Name ===== */
+.EditPropertyName {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.EditNameInput {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  width: 3rem;
+}
+
+.EditNameIcon {
+  margin-left: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #a2a2a2;
+}
+
+/* ===== Property Counter ====== */
+
+.CounterContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #e0e0e0;
+  border-radius: 5px;
+}
+
+.CounterButton {
+  color: #555555;
+  border: none;
+  border-radius: 4px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.CounterButton:disabled {
+  color: #555555;
+  cursor: not-allowed;
+}
+
+.CountNum {
+  font-size: 16px;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ====== Upload Property Image ====== */
+.PropertyImageContainer {
+  margin: 20px 0;
+}
+
+.PropertyAddImageTexts {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.PropertyAddImageText1 {
+  font-size: 14px;
+  color: #2c2c2c;
+  font-weight: 500;
+}
+
+.PropertyAddImageText2 {
+  color: #cccccc;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.PropertyImageUploader {
+  border: 1px dashed #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.PropertyImageUploader:hover {
+  border-color: #888;
+}
+
+.PropertyImagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.PropertyImageAddImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.PropertyImageIcon {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.PropertyImagePreview {
+  display: flex;
+  align-items: center;
+}
+
+.PropertyImage_img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.PropertyImageRemoveButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.PropertyImageRemoveIcon {
+  font-size: 24px;
+  color: #ff4d4d;
+}
+
+.PropertyImageInput {
+  display: none;
+}
+
+.PropertyImageError {
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ====== Moving Address ====== */
+.MovingBookingAddressContainer {
+  width: 100%;
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.MovingBookingAddressContainerText {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.MovingBookingAddressCards {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.MovingBookingAddressCard {
+  width: 100%;
+}
+
+.MovingBookingAddress_LocationDiv {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.MovingBookingAddressLocationText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.MovingBookingAddressLocation {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.MovingBookingAddressLocationIcon {
+  color: #27a124;
+  width: 20px;
+  height: 20px;
+}
+
+.MovingBookingAddressTextarea {
+  width: 100%;
+  background: #f7f7f7;
+  resize: none;
+  padding: 1rem 0 0 1rem;
+  outline: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+/* ===== Description ===== */
+
+.ItemsDescriptionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.ItemsDescriptionText {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ItemsDescriptionTextarea {
+  width: 100%;
+  background: #ffffff;
+  resize: none;
+  padding: 1rem 0 0 1rem;
+  outline: none;
+  border-radius: 8px;
+}
+
+/* ====== Schedule Date and  Time ====== */
+.MovingScheduleContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.MovingScheduleText {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.MovingScheduleCards {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+}
+/* ====== Schedule Date ====== */
+.MovingScheduleDateCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.MovingScheduleDateFrame {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.MovingScheduleDateIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.MovingScheduleDate {
+  display: flex;
+  flex-direction: column;
+}
+
+.MovingScheduleDateText,
+.MovingScheduleDateNum {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.MovingScheduleDateText {
+  font-size: 12px;
+  color: #cccccc;
+}
+
+/* ====== Schedule Time ====== */
+.MovingScheduleTimeCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.MovingScheduleTimeFrame {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.MovingScheduleTimeIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.MovingScheduleTime {
+  display: flex;
+  flex-direction: column;
+}
+
+.MovingScheduleTimeText,
+.MovingScheduleTimeNum {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.MovingScheduleTimeText {
+  font-size: 12px;
+  color: #cccccc;
+}
+
+/* ======== Confirmation Modal ======== */
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  padding: 1.7rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 30rem;
+  height: 90vh;
+  margin: 0 auto;
+}
+
+.modalContentItems {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalContentItem {
+  display: flex;
+  margin: 1rem 0;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.modalContentTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #27a124;
+  margin-bottom: 0.3rem;
+}
+
+.modalContentCRText {
+  font-size: 14px;
+  color: #cccccc;
+}
+
+.modalContentItemName,
+.modalContentItemQuantity,
+.modalContent_PickupDayDate,
+.modalContent_PickUPTimeNum {
+  font-size: 14px;
+  font-weight: 500;
+  color: #5c5c5c;
+}
+
+.modalContent_Locations,
+.modalContent_PickUpDT {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 1rem auto;
+}
+
+.modalContent_CAndDLocation,
+.modalContent_PickUPTime,
+.modalContent_PickupDay {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modalContent_CAndDLocationType,
+.modalContent_PickupDayText,
+.modalContent_PickUPTimeType {
+  color: #8f8f8f;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.modalContent_CancelAndConfirmBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.closeButton,
+.confirmButton {
+  padding: 0.6rem 1rem;
+  margin: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.closeButton {
+  background: rgba(224, 183, 182, 0.2);
+  border: 0.827px solid var(--red2, #f44336);
+}
+
+.confirmButton {
+  border: 0.827px solid var(--green2, #27a124);
+  background: rgba(183, 224, 182, 0.2);
+}
+
+.closeButton:hover{
+    background-color: #f44336;
+  color: #fff;
+}
+
+.confirmButton:hover{
+ background-color: #27a124;
+  color: #fff;
+}
+
+
+/* ===== Button ===== */
+.MovingDoneButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem auto;
+  padding: 5.791px 34.744px;
+  gap: 8.272px;
+  border-radius: 4px;
+  border: 0.827px solid var(--green2, #27a124);
+  background: rgba(183, 224, 182, 0.2);
+}

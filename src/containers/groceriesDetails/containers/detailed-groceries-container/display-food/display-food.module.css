@@ -1,0 +1,40 @@
+.container {
+      width: 100%;
+}
+
+.display_img {
+}
+
+.ondisplay_img {
+  height: 329px;
+  border-radius: 20px;
+  width: 100%;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.selected_img {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  margin-inline: auto;
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+.onselected_img {
+  width: 16%;
+  height: 63px;
+  flex-shrink: 0;
+}
+
+.prev_btn {
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 100px;
+  background: #eaebee;
+}

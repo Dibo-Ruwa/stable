@@ -1,0 +1,148 @@
+.ProfileSettingContainer {
+  @apply w-full p-8 pb-14 mx-auto md:mx-0 flex flex-col flex-shrink-0 rounded-lg bg-white md:p-6 md:pb-6 sm:px-0 sm:bg-transparent;
+}
+
+@media (max-width: 1024px) {
+  .ProfileSettingContainer {
+    @apply w-[90%] p-4;
+  }
+}
+@media (max-width: 768px) {
+  .ProfileSettingContainer {
+    @apply w-[100%] p-4;
+  }
+}
+
+.ProfileSettingTitle {
+  @apply text-[var(--Black-100,#2a2a2a)] font-[Poppins,sans-serif] text-2xl font-light mb-4 lg:text-xl md:text-lg sm:hidden;
+}
+
+.ProfileSettingsBox {
+  @apply flex p-2 rounded-lg bg-[#f9f9f9] justify-between text-[var(--Soft-black,#565656)] font-[Poppins,sans-serif] text-base gap-4 sm:hidden;
+}
+
+.ProfileSettingsBoxTitle {
+  @apply flex px-12 py-2 justify-center items-center rounded-md text-[var(--Soft-black,#565656)] font-[Poppins,sans-serif] text-base font-normal cursor-pointer lg:text-sm md:px-6 sm:hover:bg-white;
+}
+
+@media (max-width: 1024px) {
+  .ProfileSettingsBoxTitle {
+    @apply pl-[3%] pr-[2%];
+  }
+}
+
+.ProfileSettingsBoxTitleActive {
+  @apply bg-white;
+}
+
+.ProfileSettingsBoxTitleHover:hover {
+  @apply bg-white;
+}
+
+.DropdownMenu {
+  @apply absolute top-full w-48 bg-white shadow-md rounded-md p-4 z-10;
+}
+
+.DropdownMenuItem {
+  @apply px-4 py-2 cursor-pointer rounded-md mb-2 bg-white hover:bg-[#f0f0f0];
+}
+
+.MobileBackBtnSettings {
+  @apply flex items-center relative;
+}
+
+.MobileDropdownButton {
+  @apply flex w-full px-4 py-2 justify-center items-center gap-1 rounded-md bg-[#f6f6f6] cursor-pointer font-[Poppins,sans-serif] text-base font-normal;
+}
+
+.MobileProfileSettingsBox {
+  @apply hidden sm:flex flex-col items-center absolute transform translate-x-[14rem] z-10 justify-center bg-transparent;
+}
+
+.MobileBackButton {
+  @apply mt-4 hidden md:flex text-[#27a124];
+}
+.BackButton {
+  @apply mt-4 md:hidden text-[#27a124];
+}
+
+/* .MobileBackButtonWrapper {
+  @apply hidden sm:block pl-6;
+} */
+
+.FormContainer {
+  @apply flex flex-col items-center gap-6 py-16 rounded-md border border-gray-300 bg-[var(--white,#fefefe)] md:border-0 md:py-0 md:bg-transparent sm:border sm:py-6 sm:bg-[rgba(252,252,252,0.38)] w-full;
+}
+
+@media (max-width: 1024px) {
+  .FormContainer{
+    @apply border-0 bg-transparent;
+  }
+}
+
+.FormFrame {
+  @apply flex flex-col items-center gap-6 py-8 px-20 rounded-md w-full bg-[var(--white,#fefefe)] md:border-0 md:w-full md:py-0 md:bg-transparent;
+}
+
+@media (max-width: 1024px) {
+  .FormFrame{
+    @apply bg-transparent p-0;
+  }
+}
+
+
+
+.FormFirstInput {
+  @apply flex items-center relative gap-4 sm:flex-col w-full;
+}
+
+@media (max-width: 1024px) {
+  .FormFirstInput{
+    @apply flex-col w-full;
+  }
+}
+
+
+.FormName {
+  @apply flex flex-col gap-2 w-full;
+}
+
+.FormLabel {
+  @apply text-[var(--Soft-black,#565656)] font-[Poppins,sans-serif] text-base font-normal;
+}
+
+.FormNameIcon {
+  @apply flex items-center relative w-full;
+}
+
+.FormNameInput {
+  @apply w-[100%] h-10 px-2 rounded-md bg-[#f6f6f6] placeholder:text-[var(--Soft-black,#565656)] placeholder:font-[Poppins,sans-serif] placeholder:text-base placeholder:font-normal focus:border-[#27a124] focus:outline-none md:w-[15.4rem] lg:w-full sm:w-full sm:border sm:border-gray-400;
+}
+
+.EditIcon {
+  @apply absolute right-4 flex items-center w-6 h-6 text-[var(--Soft-black,#565656)] cursor-pointer;
+}
+
+.FormTextareaBox {
+  @apply flex flex-col gap-2 mx-auto sm:mx-0 w-full;
+}
+
+.FormTextareaLabel {
+  @apply text-[var(--Soft-black,#565656)] font-[Poppins,sans-serif] text-base font-normal;
+}
+
+.FormTextareaArea {
+  @apply flex w-[100%] h-32 p-2 rounded-md bg-[rgba(246,246,246,0.66)] resize-none placeholder:text-[var(--Soft-black,#565656)] placeholder:font-[Poppins,sans-serif] placeholder:text-base placeholder:font-normal focus:border-[#27a124] focus:outline-none md:w-[32rem] lg:w-full sm:w-full sm:border sm:border-gray-400;
+}
+
+.FormSubmit {
+  @apply flex w-[100%] p-2 justify-center items-center gap-2 rounded-md bg-[rgba(118,117,117,0.22)] text-[#fcfcfc] font-[Poppins,sans-serif] text-base font-normal sm:w-full;
+}
+
+.SecuritySettingContainer {
+  @apply bg-[rgba(252,252,252,0.38)];
+}
+
+.DeliverySetupContainer {
+  @apply bg-[rgba(252,252,252,0.38)];
+}

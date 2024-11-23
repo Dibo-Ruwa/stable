@@ -1,0 +1,57 @@
+/* ====== Schedule Date ====== */
+.MovingScheduleDateCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.MovingScheduleDateContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  width: 100%;
+}
+.MovingScheduleDateFrame {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.MovingScheduleDateIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.MovingScheduleDate {
+  display: flex;
+  flex-direction: column;
+}
+
+.MovingScheduleDateText,
+.MovingScheduleDateNum {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.MovingScheduleDateText {
+  font-size: 12px;
+  color: #cccccc;
+}
+
+.MovingScheduleDateDetails {
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  color: #666;
+}

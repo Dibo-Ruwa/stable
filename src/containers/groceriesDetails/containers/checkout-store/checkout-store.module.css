@@ -1,0 +1,344 @@
+.stores_container {
+  width: 100%;
+  /* max-width: 302px; */
+  height: fit-content;
+  padding: 1rem;
+  z-index: 1;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White, #fefefe);
+  box-shadow: 0px 184px 51px 0px rgba(158, 158, 158, 0),
+    0px 118px 47px 0px rgba(158, 158, 158, 0.01),
+    0px 66px 40px 0px rgba(158, 158, 158, 0.05),
+    0px 29px 29px 0px rgba(158, 158, 158, 0.05),
+    0px 7px 16px 0px rgba(158, 158, 158, 0.05);
+  /* position: absolute; */
+  right: 10px;
+  top: 0;
+  
+}
+@media screen and (max-width: 900px) {
+  .stores_container {
+    width: 100%;
+    /* max-width: 302px; */
+    display: none;
+    
+  }
+}
+
+.request_container {
+}
+
+.store_owner_box {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9.043px;
+}
+
+.store_owner_name {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.request_check {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.request_box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13.565px;
+  margin: 2rem auto;
+}
+
+.request_line {
+  width: 100%;
+  height: 1.13px;
+  border-style: dashed;
+  color: rgba(143, 143, 143, 0.5);
+}
+
+.requested_food {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.requested_food_name {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.requested_food_quantity {
+  color: var(--Soft-black, #565656);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27.129px;
+}
+
+.account_box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 0 auto 2rem;
+}
+
+.account_content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.account_sub_total_text {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.account_sub_total_amount {
+  color: var(--Soft-black, #565656);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 27.129px;
+}
+
+.account_total_amount {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27.129px;
+}
+
+/* Info Pass */
+.infopass_container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13.565px;
+  margin: 0 auto 2rem;
+}
+
+.infopass_text {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 13.565px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27.129px;
+}
+
+.infopass_textarea {
+  width: 100%;
+  height: 150.342px;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  background: rgba(233, 233, 233, 0.31);
+  resize: none;
+}
+
+/* Delivery Location */
+.location_container {
+  width: 100%;
+  height: 162.776px;
+  border-radius: 11.304px;
+  padding: 1rem;
+  background: #f7f7f7;
+  box-shadow: 0px 7.913px 18.086px 0px rgba(158, 158, 158, 0.05);
+}
+
+.location_dle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-inline: auto;
+  margin-bottom: 1rem;
+}
+
+.location_dle_text {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27.129px;
+}
+
+.location_ie_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9.043px;
+  cursor: pointer;
+}
+
+.location_edit_icon {
+  width: 21.558px;
+  height: 21.558px;
+  flex-shrink: 0;
+  color: #27a124;
+}
+
+.location_edit_icon_text {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.location_dle_text_address {
+  color: var(--disabled-color, #767575);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 1rem;
+}
+
+.location_dle_address_textarea {
+  width: 100%;
+  height: 57.342px;
+  border: none;
+  outline: none;
+  resize: none;
+  background: #f7f7f7;
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-family: Poppins;
+  font-size: 15.825px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27.129px;
+}
+
+/* Schedule Delivery */
+.schdelivery_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 2rem;
+}
+
+.schdelivery_title {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.schdelivery_set_date_timer {
+  width: 100%;
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+  margin-bottom: 1rem;
+  padding: 13px 18px 18px 19px;
+  flex-shrink: 0;
+  border-radius: 11.304px;
+  background: #f7f7f7;
+  box-shadow: 0px 7.913px 18.086px 0px rgba(158, 158, 158, 0.05);
+}
+
+.schdelivery_ic_da_ag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.schdelivery_da_aug {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.schdelivery_icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: #292d32;
+}
+
+.schdelivery_da_aug_text {
+  color: var(--disabled-color, #767575);
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.schdelivery_da_aug_date {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.schdelivery_ic_an {
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 100px;
+  background: rgba(234, 235, 238, 0.49);
+}
+
+/* check out button */
+.checkout_btn {
+  display: flex;
+  width: 100%;
+  height: 51px;
+  cursor: pointer;
+  margin: 2rem auto;
+  padding: 7.913px 47.476px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 11.304px;
+  border-radius: 4.522px;
+  border: 1.13px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}

@@ -1,0 +1,315 @@
+.other_Moving_container {
+  width: 100%;
+  color: #565656;
+}
+
+.other_Moving_cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 94%;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  gap: 1rem;
+}
+
+.other_Moving_card {
+  width: 22.5vw;
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  flex: 1 1 100%;
+  background-color: #fff;
+  overflow-x: hidden;
+  border-radius: 1rem;
+  box-shadow: 0px 184px 51px 0px rgba(158, 158, 158, 0),
+    0px 118px 47px 0px rgba(158, 158, 158, 0.01),
+    0px 66px 40px 0px rgba(158, 158, 158, 0.05),
+    0px 29px 29px 0px rgba(158, 158, 158, 0.05),
+    0px 7px 16px 0px rgba(158, 158, 158, 0.05);
+}
+
+.other_Moving_img {
+  border-radius: 16px;
+  width: 100%;
+  height: 123px;
+}
+
+.other_Moving_card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.other_Moving_text-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.other_Moving_title_rating_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+p.other_Moving_small-title,
+small.other_Moving_rating_num,
+small.other_Moving_reviews,
+.other_Moving_location-text,
+.other_Moving_time,
+.other_Moving_OpeningTime {
+  font-family: "Poppins";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--Black-100, #2a2a2a);
+}
+
+.other_Moving_rating-container {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+svg.other_Moving_rating_star_icon {
+  display: flex;
+  width: 14px;
+  height: 14px;
+  align-items: center;
+  justify-content: center;
+  color: #ffc93f;
+}
+
+.other_Moving_location_time_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.other_Moving_location {
+  display: flex;
+  gap: 0.1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+svg.other_Moving_top_rated_loction_icon {
+  width: 14px;
+  height: 14px;
+}
+
+.other_Moving_time_dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 100px;
+  background-color: #565656;
+  margin-top: 4px;
+}
+
+.location-text,
+.other_Moving_time {
+  color: var(--Soft-black, #565656);
+  font-size: 12px;
+}
+
+.other_Moving_visit-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  color: #565656;
+  background-color: #f6f6f6;
+  border-radius: 10px;
+  border: transparent;
+  text-decoration: none;
+}
+
+.other_Moving_visit-link:hover {
+  border: 1px solid #27a124;
+}
+
+.Mobileother_Moving_container {
+  display: none;
+}
+
+@media (max-width: 650px) {
+  .Mobileother_Moving_container {
+    width: 100%;
+    color: #565656;
+    display: block;
+  }
+
+  .Mobileother_Moving_cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 94%;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    gap: 1rem;
+  }
+
+  .Mobileother_Moving_card {
+    width: 22.5vw;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    flex: 1 1 100%;
+    background-color: #fff;
+    overflow-x: hidden;
+    border-radius: 1rem;
+    box-shadow: 0px 184px 51px 0px rgba(158, 158, 158, 0),
+      0px 118px 47px 0px rgba(158, 158, 158, 0.01),
+      0px 66px 40px 0px rgba(158, 158, 158, 0.05),
+      0px 29px 29px 0px rgba(158, 158, 158, 0.05),
+      0px 7px 16px 0px rgba(158, 158, 158, 0.05);
+  }
+
+  .Mobileother_Moving_img {
+    border-radius: 16px;
+    width: 100%;
+    height: 123px;
+  }
+
+  .Mobileother_Moving_card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .Mobileother_Moving_text-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .Mobileother_Moving_title_rating_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  p.other_Moving_small-title,
+  small.other_Moving_rating_num,
+  small.other_Moving_reviews,
+  .other_Moving_location-text,
+  .Mobileother_Moving_time,
+  .Mobileother_Moving_OpeningTime {
+    font-family: "Poppins";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: var(--Black-100, #2a2a2a);
+  }
+
+  .Mobileother_Moving_rating-container {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  svg.Mobileother_Moving_rating_star_icon {
+    display: flex;
+    width: 14px;
+    height: 14px;
+    align-items: center;
+    justify-content: center;
+    color: #ffc93f;
+  }
+
+  .Mobileother_Moving_location_time_container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .Mobileother_Moving_location {
+    display: flex;
+    gap: 0.1rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  svg.Mobileother_Moving_top_rated_location_icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .Mobileother_Moving_time_dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 100px;
+    background-color: #565656;
+    margin-top: 4px;
+  }
+
+  .Mobileother_Moving_time {
+    color: var(--Soft-black, #565656);
+    font-size: 12px;
+  }
+
+  .Mobileother_Moving_visit-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    color: #565656;
+    background-color: #f6f6f6;
+    border-radius: 10px;
+    border: transparent;
+    text-decoration: none;
+  }
+
+  .Mobileother_Moving_visit-link:hover {
+    border: 1px solid #27a124;
+  }
+
+  .Mobileother_Moving_OpeningTime {
+    font-size: 13.241px;
+  }
+
+  .Mobileother_Moving_OpeningTime.open {
+    color: #27a124;
+  }
+
+  .Mobileother_Moving_OpeningTime.closed {
+    color: #ef5a5a;
+  }
+}
+
+@media (min-width: 768px) {
+  .other_Moving_card {
+    flex: 1 1 calc(33.333% - 1rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .other_Moving_card {
+    flex: 1 1 calc(25% - 1rem);
+  }
+}
+
+/* Hide the last card on screen widths <= 1024px */
+@media (max-width: 1024px) {
+  .other_Moving_cards {
+    position: relative;
+    width: 94%;
+  }
+
+  .other_Moving_card:nth-last-child(1) {
+    display: none;
+  }
+}

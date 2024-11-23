@@ -1,0 +1,141 @@
+.RequestConfirmationContainer {
+  width: 100%;
+  padding: 1.5rem 1.5rem 7rem;
+  border-radius: 9.043px;
+  background: var(--White, #fefefe);
+}
+
+.RequestConfirmationContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+@media screen and (max-width: 1150px) {
+  .RequestConfirmationContent {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 0.6rem;
+  }
+  .RequestConfirmation_DeliveryLocation {
+    width: 100%;
+    padding: 0.7rem;
+  }
+}
+
+.RequestConfirmationTitleDaysPicked {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.RequestConfirmationContainerText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.RequestConfirmationTextGreen {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.RequestConfirmationTextBlack {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.RequestConfirmationPickedDaysAndItems {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.RequestConfirmationPickedDays {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .RequestConfirmationPickedDays {
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .RequestConfirmationPickedDays {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .RequestConfirmationLine {
+    display: none;
+  }
+}
+
+.RequestConfirmationPickedItems {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/* ===== Button ===== */
+.RestaurantSubDoneButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem auto;
+  padding: 5.791px 34.744px;
+  gap: 8.272px;
+  border-radius: 4px;
+  border: 0.827px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}
+
+.ViewModalSub_Weaning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.ViewModalSub_WeaningIcon {
+  color: var(--green2, #4bb149);
+  width: 24px;
+  height: 24px;
+}
+
+.ViewModalSub_WeaningText {
+  font-size: 12px;
+}
+
+@media screen and (min-width: 1100px) {
+  .ViewModalSub_WeaningText {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .ViewModalSub_WeaningIcon {
+    width: 20px;
+    height: 20px;
+  }
+}

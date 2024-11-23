@@ -1,0 +1,71 @@
+.card_active_container {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.card_active_container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+button.services_btn {
+  background: rgb(218, 218, 218);
+  border: 0.4px solid rgb(134, 134, 134);
+  border-radius: 4px;
+  outline: none;
+  color: #242424;
+  padding: 0.5rem 0.8rem;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+}
+
+button.active_services {
+  background: green;
+  border: none;
+  color: #fefefe;
+}
+
+.owner_card_image {
+  width: 9rem;
+}
+
+img.owner_card_img {
+  width: 100%;
+}
+
+.card_ownercontent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+}
+
+p.owner_name,
+.tel_text {
+  color: #242424 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: normal !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .user_cards_container .Service_restaurant_card {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .user_cards_container .Service_restaurant_card,
+  .user_cards_container .Service_owner_card {
+    display: none;
+  }
+
+   .user_cards_container .Service_owner_card {
+    display: none;
+  }
+}
