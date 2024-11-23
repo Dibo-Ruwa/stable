@@ -1,0 +1,195 @@
+.favorite_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #fefefe;
+  padding: 1.7rem;
+  border-radius: 15px;
+}
+
+p.favourite_title {
+  color: #2a2a2a;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+.favourite_cards {
+  display: flex;
+  align-items: center;
+  gap: inherit;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.favourite_card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex: 1 1 10rem;
+}
+
+.favourite_img {
+  width: 100%;
+  height: 100%;
+}
+
+img.fav_img {
+  border-radius: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.favourite_icon_and_img {
+  position: relative;
+}
+
+.favourite_icon {
+  align-items: center;
+  display: flex;
+  padding: 8.516px;
+  gap: 8.516px;
+  border-radius: 100%;
+  border: 0.852px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(3.576864719390869px);
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+svg.fav_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20.439px;
+  height: 20.439px;
+  color: #27a124;
+}
+
+.favourite_food_details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.fav_foodName_and_rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+p.favourite_food_title {
+  color: #2a2a2a;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+.favourite_food_dot {
+  width: 0.39rem;
+  height: 0.39rem;
+  background: #27a124;
+  border-radius: 100%;
+}
+
+svg.favourite_food_rating_star {
+  width: 0.8rem;
+  height: 0.8rem;
+  color: #ffd335;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p.favourite_food_rating_num {
+  color: #2a2a2a;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+.favourite_food_time {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+p.favourite_food_time_text {
+  color: #2a2a2a;
+  font-size: 14px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+p.favourite_food_time_text {
+  color: #2a2a2a;
+  font-size: 14px;
+  font-family:'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+.favourite_food_CLC_btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  padding: 8.516px;
+  margin: auto;
+  width: 95%;
+  gap: 8.516px;
+  border-radius: 2rem;
+  border: 0.952px solid rgb(166 166 166 / 20%);
+  background: rgba(239, 239, 239, 0.6);
+  -webkit-backdrop-filter: blur(3.576864719390869px);
+  backdrop-filter: blur(3.576864719390869px);
+}
+
+small.favourite_food_CLC_small_text {
+  color: #27a124;
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+a.favourite_food_CLC_cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8.516px;
+  width: 2.5rem;
+  height: 2.5rem;
+  gap: 8.516px;
+  border-radius: 100%;
+  border: 0.952px solid rgb(166 166 166 / 20%);
+  background: rgb(39 161 36);
+  color: #fefefe;
+  -webkit-backdrop-filter: blur(3.576864719390869px);
+  backdrop-filter: blur(3.576864719390869px);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 568px) {
+  .favorite_container {
+    width: 93%;
+    margin: 0 auto;
+  }
+  .favourite_cards {
+    flex-direction: column;
+  }
+}

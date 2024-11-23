@@ -1,0 +1,154 @@
+.stores_container {
+  @apply w-full h-auto p-4 z-10 flex-shrink-0 rounded-lg bg-[#fefefe] shadow-lg relative right-2 top-0 md:max-h-[90vh] md:overflow-auto md:p-5 sm:p-4;
+}
+
+.store_owner_box {
+  @apply inline-flex flex-col items-start gap-[9.043px];
+}
+
+.store_owner_name {
+  @apply text-[#27a124] text-[14px] font-normal;
+}
+
+.request_check {
+  @apply text-[#8f8f8f] text-[14px] font-normal;
+}
+
+.request_box {
+  @apply flex flex-col items-start gap-[13.565px] mx-auto my-8;
+}
+
+.request_line {
+  @apply w-full h-[1.13px] border-dashed border-[#8f8f8f] opacity-50;
+}
+
+.requested_food {
+  @apply flex w-full justify-between items-center;
+}
+
+.requested_food_name {
+  @apply text-[#8f8f8f] text-[15.825px] font-normal;
+}
+
+.requested_food_quantity {
+  @apply text-[#565656] text-[15.825px] font-normal;
+}
+
+.account_box {
+  @apply flex flex-col items-start gap-[24px] mx-auto mb-8;
+}
+
+.account_content {
+  @apply flex w-full justify-between items-center;
+}
+
+.account_sub_total_text {
+  @apply text-[#8f8f8f] text-[15.825px] font-normal;
+}
+
+.account_sub_total_amount {
+  @apply text-[#8f8f8f] text-[15.825px] font-normal;
+}
+
+.account_total_amount {
+  @apply text-[15.825px] font-normal;
+}
+
+/* Info Pass */
+.infopass_container {
+  @apply flex w-full flex-col items-start gap-[13.565px] mx-auto mb-8;
+}
+
+.infopass_text {
+  @apply text-[#2a2a2a] text-[13.565px] font-normal leading-[27.129px];
+}
+
+.infopass_textarea {
+  @apply w-full h-[150.342px] p-4 border-none outline-none rounded-lg bg-[rgba(233,233,233,0.31)] resize-none;
+}
+
+/* Delivery Location */
+.location_container {
+  @apply w-full h-[162.776px] rounded-lg p-4 bg-[#f7f7f7] shadow-[0px_7.913px_18.086px_rgba(158,158,158,0.05)];
+}
+
+.location_dle {
+  @apply flex justify-between items-center mx-auto mb-4;
+}
+
+.location_dle_text {
+  @apply text-[#8f8f8f] text-[15.825px] font-normal leading-[27.129px];
+}
+
+.location_ie_icon {
+  @apply flex justify-center items-center gap-2 cursor-pointer;
+}
+
+.location_edit_icon {
+  @apply w-[21.558px] h-[21.558px] flex-shrink-0 text-[#27a124];
+}
+
+.location_edit_icon_text {
+  @apply text-[#27a124] text-[15.825px] font-normal;
+}
+
+.location_dle_text_address {
+  @apply text-[#767575] text-[15.825px] font-normal mb-4;
+}
+
+.location_dle_address_textarea {
+  @apply w-full h-[57.342px] border-none outline-none resize-none bg-[#f7f7f7] text-[#3f3f3f] text-[15.825px] font-normal leading-[27.129px];
+}
+
+/* Schedule Delivery */
+.schdelivery_container {
+  @apply flex flex-col items-start gap-2 mt-8;
+}
+
+.schdelivery_title {
+  @apply text-[#8f8f8f] text-[16px] font-normal;
+}
+
+.schdelivery_set_date_timer {
+  @apply flex justify-between items-center gap-[22px] w-full h-[72px] mb-4 px-[18px] pt-[13px] pb-[18px] bg-[#f7f7f7] rounded-[11.304px] shadow-[0px_7.913px_18.086px_rgba(158,158,158,0.05)];
+}
+
+.schdelivery_ic_da_ag {
+  @apply flex items-center gap-2;
+}
+.schdelivery_da_aug {
+ @apply flex flex-col items-start gap-1;
+}
+
+.schdelivery_icon {
+  @apply flex w-[24px] h-[24px] justify-center items-center text-[#292d32];
+}
+
+.schdelivery_da_aug_text {
+  @apply text-[#767575] text-[12px] font-normal;
+}
+
+.schdelivery_da_aug_date {
+  @apply text-[#2a2a2a] text-[14px] font-normal
+}
+
+.schdelivery_ic_an {
+  @apply flex cursor-pointer justify-center items-center gap-2 bg-[rgba(234,235,238,0.49)] rounded-full p-2;
+}
+
+/* check out button */
+.checkout_btn {
+  display: flex;
+  width: 100%;
+  height: 51px;
+  cursor: pointer;
+  margin: 2rem auto;
+  padding: 7.913px 47.476px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 11.304px;
+  border-radius: 4.522px;
+  border: 1.13px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}

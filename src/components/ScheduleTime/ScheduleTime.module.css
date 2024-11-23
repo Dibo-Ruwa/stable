@@ -1,0 +1,59 @@
+
+/* ====== Schedule Time ====== */
+.MovingScheduleTimeCard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.MovingScheduleTimeContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.7rem;
+}
+.MovingScheduleTimeFrame {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+}
+
+.MovingScheduleTimeIcon {
+  width: 25px;
+  height: 25px;
+}
+
+.MovingScheduleTime {
+  display: flex;
+  flex-direction: column;
+}
+
+.MovingScheduleTimeText,
+.MovingScheduleTimeNum {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.MovingScheduleTimeText {
+  font-size: 12px;
+  color: #cccccc;
+}
+
+
+.MovingScheduleTimeDetails {
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  color: #666;
+}

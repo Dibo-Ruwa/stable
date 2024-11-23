@@ -1,0 +1,54 @@
+.RequestConfirmationContainer {
+  border-radius: 9.043px;
+  background: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 1rem 1.5rem 5rem;
+  width: 100%;
+}
+
+.RequestConfirmationContainerText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.RequestConfirmationTextGreen {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.RequestConfirmationTextBlack {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.RequestConfirmationPickedDaysAndItems {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.RequestConfirmationPickedDays {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.RequestConfirmationPickedItems {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}

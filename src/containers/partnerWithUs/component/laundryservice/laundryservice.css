@@ -1,0 +1,321 @@
+.laundry_width {
+  width: min(93%, 1440px);
+  margin: 5rem auto;
+  position: relative;
+}
+
+img.laundry_img-content {
+  width: 24rem;
+  margin: 0px 0 0 3rem;
+  display: flex;
+  height: 24rem;
+}
+
+.laundry_img {
+  position: relative;
+}
+
+li.laundry_text-li {
+  font-size: 15px;
+  font-weight: 500;
+  font-family: "Poppins";
+  font-style: normal;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  margin-left: 0.5rem;
+}
+
+.laundry_text-content {
+  margin: 3rem 0 0;
+  position: relative;
+}
+
+.laundry-img-text {
+  position: relative;
+}
+
+img.laundry_img-text_content {
+  min-width: -webkit-fill-available;
+  width: 100%;
+}
+
+a.laundry_signup {
+  color: #27a124;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.4rem;
+  display: flex;
+  margin-top: 2rem;
+}
+
+.laundry_img-transparent {
+  display: none;
+}
+
+.laundry_overlay-img {
+  position: absolute;
+  top: 10rem;
+  right: 7rem;
+}
+
+img.laundry_overlay-img_content {
+  width: 23rem;
+}
+
+.LaundryStep_get_started_content {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.LaundryStep_get_started_icon_div {
+  display: flex;
+  flex-direction: column;
+}
+
+.round_progress_line {
+  border: 0.7px solid var(--Green1, #27a124);
+  width: 3.4rem;
+  height: 3.4rem;
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.careers_interview-item-left-tags__u0bD1 {
+  border-radius: 50%;
+  width: 2.2rem;
+  background: linear-gradient(180deg, #48c745 0%, #175316 100%);
+  height: 2.2rem;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.careers_line__N8bur {
+  position: relative;
+}
+
+span.foodvendor_line {
+  width: 1.61px;
+  height: 40px;
+  display: flex;
+  margin: 0.5rem auto;
+  background: #27a124;
+}
+
+.LaundryStep_get_started_text_div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.LaundryStep_get_started_container {
+  position: relative;
+  z-index: 1;
+}
+small.LaundryStep_get_started_icon_div {
+  color: #9b9b9b;
+  font-size: 14px;
+  font-family: "Poppins";
+  font-weight: 500;
+}
+
+p.LaundryStep_get_started_icon_div {
+  color: #5e5e5e;
+  font-size: 14px;
+  font-family: "Poppins";
+  font-weight: 600;
+}
+
+.LaundryStep-content {
+  background: transparent;
+  padding: 0;
+  position: relative;
+  margin-top: 4rem;
+}
+
+ul.LaundryStep-ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+span.LaundryStep_cicle {
+  width: 0.67rem;
+  height: 0.67rem;
+  background: #000000;
+  border-radius: 50%;
+}
+
+@media only screen and (max-width: 400px) {
+  img.laundry_img-content {
+    width: 20rem;
+  }
+
+  .laundry_overlay-img {
+    position: absolute;
+    top: 10rem;
+    right: 0;
+  }
+
+  img.laundry_overlay-img_content {
+    width: 15rem;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  img.laundry_img-content {
+    margin: 0 auto;
+    width: 25rem;
+    height: 23rem;
+  }
+
+  .laundry_overlay-img {
+    top: 10.3rem;
+    left: -2rem;
+  }
+}
+
+@media only screen and (min-width: 728px) {
+  img.laundry_img-content {
+    width: 40rem;
+    height: 30rem;
+  }
+
+  .laundry_overlay-img {
+    top: 14.2rem;
+    right: 0rem;
+  }
+
+  img.laundry_overlay-img_content {
+    width: 25rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  img.laundry_img-content {
+    width: 100%;
+    height: 100%;
+  }
+
+  .laundry_img-text {
+    width: 100%;
+    background: #b2a19124;
+  }
+  .laundry-img-text {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 6rem auto 0;
+  }
+
+  .laundry_overlay-img {
+    top: 18rem;
+    right: -1rem;
+    z-index: 1;
+  }
+
+  img.laundry_overlay-img_content {
+    width: 30rem;
+  }
+
+  .laundry_text-content {
+    margin: 2rem 0 0;
+    position: relative;
+  }
+
+  li.laundry_text-li {
+    font-size: 16px;
+  }
+
+  a.laundry_signup {
+    font-size: 17px;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .laundry_img-transparent {
+    display: flex;
+    position: absolute;
+    margin: 0 auto;
+    top: 0rem;
+    left: 9.2rem;
+  }
+
+  img.laundry_img-transparent_content {
+    width: 15rem;
+  }
+}
+
+@media only screen and (min-width: 950px) {
+  .section.laundry_container {
+    background: #e9e9e929;
+  }
+
+  .laundry_img-transparent {
+    left: 14.7rem;
+  }
+
+  img.laundry_img-transparent_content {
+    width: 18rem;
+  }
+
+  .laundry_overlay-img {
+    top: 10.9rem;
+    left: -6rem;
+  }
+
+  img.laundry_overlay-img_content {
+    width: 23rem;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  section.laundry_container {
+    background: none;
+  }
+
+  .laundry_img {
+    width: 100%;
+  }
+
+  .laundry_img-transparent {
+    left: 14.6rem;
+  }
+
+  .laundry_overlay-img {
+    top: 11rem;
+  }
+
+  .LaundryStep_get_started_content {
+    display: flex;
+    gap: 0.2rem;
+    width: max-content;
+  }
+
+  img.laundry_img-content {
+    width: 100%;
+    height: 33rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .laundry_img-transparent {
+    left: 17.78rem;
+  }
+
+  .laundry_overlay-img {
+    top: 18rem;
+  }
+
+  img.laundry_overlay-img_content {
+    width: 27rem;
+  }
+}
+
+@media only screen and (min-width: 1233px) {
+  .laundry_img-transparent {
+    left: 18.4rem;
+  }
+}

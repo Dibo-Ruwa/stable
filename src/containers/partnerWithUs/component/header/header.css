@@ -1,0 +1,134 @@
+.header_container {
+  background: #fefefe;
+}
+section.partner_header-container {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  padding: 3rem 0 0;
+  margin: 0 auto 7rem;
+}
+
+h1.partner_header-h1 {
+  color: #2a2a2a;
+  font-family: "Poppins", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+p.partner_header-p {
+  color: #2a2a2a;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: 2rem;
+}
+
+button.partner_header-btn {
+  display: flex;
+  padding: 0.7rem 1rem;
+  width: 7rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #2a2a2a;
+  color: #ffffff;
+}
+
+.partner_header-top_text {
+  color: #2a2a2a;
+  font-family: Lateef;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+  line-height: normal;
+}
+.partner_header-top {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3.5rem;
+}
+
+img.partner_header-top_img {
+  width: 20rem;
+}
+
+img.partner_header-img {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1128px) {
+  .header_container {
+    background: #e9e9e929;
+  }
+
+  h1.partner_header-h1 {
+    font-size: 1.4rem;
+  }
+
+  p.partner_header-p {
+    font-size: 13px;
+  }
+
+  .partner_header-content {
+    margin-top: 0rem;
+  }
+
+  img.partner_header-top_img {
+    width: 15rem;
+  }
+
+  .partner_header-top_text {
+    font-size: 17px;
+  }
+
+  .partner_header-top {
+    margin-top: 3rem;
+  }
+
+  img.partner_header-img {
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  section.partner_header-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .header_container-frame {
+    width: min(90%, 1440px);
+    margin: 0 auto;
+  }
+
+  button.partner_header-btn {
+    width: 100%;
+    background: #27a124;
+    border: transparent;
+  }
+
+  .partner_header-top {
+    display: none;
+  }
+
+  .partner_header-text {
+    margin: 0px 0 2.1rem 0;
+  }
+
+  section.partner_header-container {
+    padding: 2rem 0 0;
+    margin: 0 auto 0rem;
+  }
+  img.partner_header-img {
+    width: 120%;
+    margin-top: 1rem;
+    margin-left: -4rem;
+  }
+}

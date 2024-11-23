@@ -1,0 +1,138 @@
+.about_container {
+  margin-top: 2rem;
+}
+.frsr_time {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.food_rating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ptext {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.dot {
+  width: 4.166px;
+  height: 4.166px;
+  flex-shrink: 0;
+  border-radius: 100%;
+  background: var(--Black-100, #2a2a2a);
+}
+
+.rating_star {
+  width: 14.996px;
+  height: 14.996px;
+  flex-shrink: 0;
+  color: #ffc93f;
+}
+
+.rating_num {
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-family: Poppins;
+  font-size: 16.211px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.food_timer {
+  display: flex;
+  align-items: center;
+  gap: 0.5px;
+}
+
+.food_time_icon {
+  width: 20.842px;
+  height: 20.842px;
+  flex-shrink: 0;
+}
+
+.time_num {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 16.211px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.food_des {
+  color: var(--Soft-black, #565656);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 1.5rem 0;
+}
+
+.ofd_lr {
+  display: flex;
+  align-items: center;
+  gap: 7rem;
+  margin-bottom: 3rem;
+}
+
+.ofd {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.lr {
+  color: var(--Red, #ef5a5a);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* AdditionBtn */
+.addmore_things {
+  position: relative; 
+  margin-bottom: 23px;
+  padding-right: 30px; 
+}
+
+.addmore_text {
+  color: #000;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.addmore_icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: #000000;
+}
+
+.addmore_icon_div {
+  position: absolute;
+  left: 7rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+
+

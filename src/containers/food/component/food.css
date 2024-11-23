@@ -1,0 +1,9 @@
+.food_frame {
+  width: min(93%, 1440px);
+  margin: 0 auto;
+}
+
+.food-container {
+  margin: 6rem 0 0;
+  background-color: #F8F8F8;
+}
