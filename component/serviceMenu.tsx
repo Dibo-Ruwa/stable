@@ -54,6 +54,7 @@ const ServiceMenu: FC<Routes> = ({ trigger, routes, toggle }) => {
               minWidth: "200px",
               display: "grid",
               gridGap: "10px",
+              zIndex: "100"
             }}
           >
             {routes &&

@@ -11,7 +11,7 @@ import { HiBars3 } from "react-icons/hi2";
 import { VscClose } from "react-icons/vsc";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
-import { AuthModal } from "@/component/AuthModal"
+import { AuthModal } from "@/component/AuthModal";
 import ServiceMenu from "@/component/serviceMenu";
 import {
   Cta,
@@ -87,9 +87,9 @@ const Navbar = () => {
           <LogoImage src="/logo.png" fill={true} alt="logo" />
         </Link>
       </div>
-      {/* <Toggle onClick={() => setToggle((prev) => !prev)}>
+      <Toggle onClick={() => setToggle((prev) => !prev)}>
         {toggle ? <VscClose /> : <HiBars3 />}
-      </Toggle> */}
+      </Toggle>
       <MenuList className="menu">
         {routes.map((link, index) => {
           return (
@@ -162,6 +162,14 @@ const Navbar = () => {
                     Sign Up
                   </Link>
                 </li>
+              )}
+              {!session && (
+                <Cta
+                  href={`https://admin.diboruwa.com/sign-in`}
+                  target="_blank"
+                >
+                  Partner with us
+                </Cta>
               )}
             </MobileMenu>
           </>

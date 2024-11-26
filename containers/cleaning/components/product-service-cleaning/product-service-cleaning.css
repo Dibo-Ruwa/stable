@@ -6,10 +6,7 @@
 
 
 .Cleaning_hero_cont {
-  display: flex;
   padding: 30px 0;
-  /* margin-top: 40px; */
-  justify-content: space-between;
 }
 
 .Cleaning_hero_prod {
