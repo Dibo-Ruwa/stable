@@ -272,4 +272,8 @@ p.wsa_card_Des {
   .wsa_Cards {
     flex-direction: column;
   }
+
+  p.wsa_card_Des {
+  font-size: 1rem;
+}
 }
