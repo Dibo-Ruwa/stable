@@ -1,0 +1,210 @@
+.AboutUs_Container {
+  background: #fefefe;
+  position: relative;
+}
+
+.AboutHeader_Container {
+  width: 90%;
+  display: flex;
+  gap: 5rem;
+  margin: 7rem auto;
+  justify-content: center;
+  position: relative;
+}
+
+.Header_LeftContainer {
+  position: relative;
+}
+
+img.Dibo_ellipse_Logo {
+  width: 174.48px;
+  height: 45.91px;
+}
+
+p.AboutHeader_Title {
+  color: #282828;
+  width: 77%;
+  font-family: Roboto;
+  font-size: 2.56rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 54.58px;
+  display: ruby;
+  margin-bottom: 0.79rem;
+}
+
+span.AboutHeader_ChangingText {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #243266;
+}
+
+img.AboutHeader_ChangingImage {
+  width: 34.121px;
+  height: 34.121px;
+}
+
+p.AboutHeader_Description {
+  color: #000;
+  font-family: Roboto;
+  font-size: 19.255px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28.883px;
+  letter-spacing: 0.181px;
+}
+
+.AboutHeader_AbsoluteImage {
+  position: absolute;
+  top: -0.4rem;
+  right: 3rem;
+}
+
+img.AboutHeader_AtomImg {
+  width: 456px;
+  height: 456px;
+}
+
+.Header_RightContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+img.Ellipse_top {
+  position: absolute;
+  top: 0rem;
+  width: 6rem;
+  left: -1rem;
+}
+
+img.People_Image {
+  width: 50rem;
+  height: 30rem;
+}
+
+img.Ellipse_bottom {
+  position: absolute;
+  bottom: 1.7rem;
+  right: 0rem;
+  width: 7rem;
+}
+
+@media screen and (max-width: 1168px) {
+  .AboutHeader_AbsoluteImage {
+    right: 0rem;
+    top: 0.5rem;
+  }
+
+  img.AboutHeader_AtomImg {
+    width: 25rem;
+    height: 25rem;
+  }
+
+  img.Ellipse_top {
+    top: 0rem;
+    left: -2rem;
+    width: 5.5rem;
+  }
+
+  img.People_Image {
+    width: 46rem;
+    height: 23rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: 0.6rem;
+    width: 6rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  img.Dibo_ellipse_Logo {
+    width: 135.48px;
+    height: 35.91px;
+  }
+
+  p.AboutHeader_Title {
+    font-size: 1.9rem;
+    line-height: 40px;
+  }
+
+  img.AboutHeader_ChangingImage {
+    width: 27px;
+    height: 27px;
+  }
+
+  p.AboutHeader_Description {
+    font-size: 16.255px;
+    line-height: 21.883px;
+  }
+}
+
+@media screen and (max-width: 868px) {
+  img.AboutHeader_AtomImg {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  img.Ellipse_top {
+    width: 4.79rem;
+  }
+
+  img.People_Image {
+    width: 48rem;
+    height: 19rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: -0.5rem;
+    width: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .AboutHeader_Container {
+    flex-direction: column;
+  }
+  img.People_Image {
+    width: 27rem;
+    height: 19rem;
+    margin: auto;
+  }
+
+  img.Ellipse_top {
+    width: 3.79rem;
+    left: 6.7rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: 1.2rem;
+    width: 4.5rem;
+    right: 6rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .AboutHeader_Container {
+    width: 96%;
+  }
+
+  .AboutHeader_AbsoluteImage {
+    right: 1rem;
+  }
+
+  img.People_Image {
+    width: 100%;
+    height: 100%;
+  }
+
+  img.Ellipse_top {
+    left: 0.7rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: 2.5rem;
+    right: 0rem;
+  }
+}
