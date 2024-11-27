@@ -1,0 +1,21 @@
+.Cleaning_home-container {
+  margin: 6rem 0 0;
+  background-color: #f6f6f6;
+  font-family: 'Lato', sans-serif;
+
+}
+
+.Cleaning_hero_frame {
+  width: min(93%, 1440px);
+  margin: 0 auto;
+}
+
+.OtherCleaning_container{
+    margin-top: 2rem;
+}
+
+@media screen and (max-width: 650px) {
+    .OtherCleaning_container{
+        display: none;
+    }
+}

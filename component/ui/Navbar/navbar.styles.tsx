@@ -88,7 +88,7 @@ export const NavbarContainer = styled.div`
 
     p.SA_location_text {
       color: #000000;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
       font-size: 12px;
       font-style: normal;
       line-height: normal;
@@ -113,7 +113,8 @@ export const Toggle = styled.div`
 
   @media screen and (max-width: 768px) {
     display: block;
-    margin-left: auto;
+    position: absolute;
+    right: 2rem;
   }
 `;
 
@@ -132,7 +133,7 @@ export const MenuList = styled(motion.ul as any)`
   a.link {
     color: #2a2a2a;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 14px;
     font-style: normal;
     line-height: normal;
@@ -197,12 +198,12 @@ export const MobileMenu = styled(motion.ul)`
   border-radius: 10px;
   background-color: #fff;
   z-index: 50;
-  width: 50%;
-  height: auto;
+  width: 20rem;
+  height: 70vh;
   padding: 30px;
   list-style-type: none;
   backdrop-filter: blur(8px);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   gap: 20px;
 
@@ -227,6 +228,9 @@ export const Cta = styled.a`
   border-radius: 6px;
 
   @media screen and (max-width: 900px) {
-    display: none;
+    padding: 8px 14px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
   }
 `;

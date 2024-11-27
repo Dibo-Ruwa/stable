@@ -1,0 +1,41 @@
+.Laundry_head {
+  width: 93%;
+  margin: 0 auto;
+}
+
+.Laundry_restCont {
+  display: flex;
+  gap: 1rem;
+}
+
+.Laundry_Cont {
+  width: min-content;
+}
+
+@media screen and (max-width: 1024px) {
+  .Laundry_Cont {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Laundry_Cont {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .Laundry_head {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 668px) {
+  .Back_Button {
+    display: none;
+  }
+
+  .Laundry_Cont {
+    width: 100%;
+    margin: 0;
+  }
+}

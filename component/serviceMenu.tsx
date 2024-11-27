@@ -46,7 +46,7 @@ const ServiceMenu: FC<Routes> = ({ trigger, routes, toggle }) => {
             style={{
               position: "absolute",
               top: "110%",
-              right: 0,
+              left: "-4rem",
               borderRadius: "12px",
               background: "#fff",
               padding: "15px",
@@ -54,6 +54,7 @@ const ServiceMenu: FC<Routes> = ({ trigger, routes, toggle }) => {
               minWidth: "200px",
               display: "grid",
               gridGap: "10px",
+              zIndex: "100"
             }}
           >
             {routes &&
@@ -61,11 +62,7 @@ const ServiceMenu: FC<Routes> = ({ trigger, routes, toggle }) => {
                 <li key={index} onClick={toggle}>
                   <Link
                     className="link dropdown"
-                    href={
-                      link.name === "Sign Out"
-                        ? `/`
-                        : link?.path
-                    }
+                    href={link.name === "Sign Out" ? `/` : link?.path}
                     style={
                       link.name === "Sign Out"
                         ? {

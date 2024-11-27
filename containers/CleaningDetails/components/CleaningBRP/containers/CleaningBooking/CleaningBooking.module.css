@@ -1,0 +1,342 @@
+.LaundryItemContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.AddPropertyContainer {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.AddPropertyCards {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.AddPropertyCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #ffffff;
+  padding: 0.7rem;
+  border-radius: 8px;
+}
+
+.AddPropertyCardText {
+  font-size: 16px;
+}
+
+.AddPropertyEditNameAndCounter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AddProperty_AddMore {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  color: #27a124;
+  margin: 1.5rem 0 0;
+  cursor: pointer;
+  width: 6rem;
+}
+
+.AddProperty_AddMoreIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.AddProperty_AddMoreText {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/*====== Laundry Item Choices =====*/
+.LaundryItemChoices {
+  width: 100%;
+}
+
+.LaundryItemsGroup {
+  width: 100%;
+  background: #ffffff;
+  padding: 0.8rem 2rem 1rem 0.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.89rem;
+}
+
+.LaundryItemsGroupCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.89rem;
+  width: 100%;
+}
+
+.LaundryItemsGroupCards {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.LaundryItemsGroupCardItems {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.LaundryItemsGroupCardItemsBox {
+  width: 5rem;
+  height: 2.79rem;
+  border-radius: 6px;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.LaundryItemsGroupCardItemsBox_Button,
+.LaundryItemsGroupCardItemsBox_Num {
+  color: #2c2c2c;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ===== Edit Property Name ===== */
+.EditPropertyName {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.EditNameInput {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  width: 3rem;
+}
+
+.EditNameIcon {
+  margin-left: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #a2a2a2;
+}
+
+/* ====== Upload Property Image ====== */
+.PropertyImageContainer {
+  margin: 20px 0;
+}
+
+.PropertyAddImageTexts {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.PropertyAddImageText1 {
+  font-size: 14px;
+  color: #2c2c2c;
+  font-weight: 500;
+}
+
+.PropertyAddImageText2 {
+  color: #cccccc;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.PropertyImageUploader {
+  border: 1px dashed #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.PropertyImageUploader:hover {
+  border-color: #888;
+}
+
+.PropertyImagePlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.PropertyImageAddImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.PropertyImageIcon {
+  font-size: 16px;
+  color: #ccc;
+}
+
+.PropertyImagePreview {
+  display: flex;
+  align-items: center;
+}
+
+.PropertyImage_img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+  margin-right: 10px;
+}
+
+.PropertyImageRemoveButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.PropertyImageRemoveIcon {
+  font-size: 24px;
+  color: #ff4d4d;
+}
+
+.PropertyImageInput {
+  display: none;
+}
+
+.PropertyImageError {
+  color: #ff4d4d;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ====== Laundry Address ====== */
+.LaundryBookingAddressContainer {
+  width: 100%;
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.LaundryBookingAddressContainerText {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.LaundryBookingAddressCards {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.LaundryBookingAddressCard {
+  width: 100%;
+}
+
+.LaundryBookingAddress_LocationDiv {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.LaundryBookingAddressLocationText {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c2c2c;
+}
+
+.LaundryBookingAddressLocation {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.LaundryBookingAddressLocationIcon {
+  color: #27a124;
+  width: 20px;
+  height: 20px;
+}
+
+.LaundryBookingAddressTextarea {
+  width: 100%;
+  background: #f7f7f7;
+  resize: none;
+  padding: 1rem 0 0 1rem;
+  outline: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+}
+
+/* ===== Description ===== */
+
+.ItemsDescriptionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1rem;
+}
+
+.ItemsDescriptionText {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ItemsDescriptionTextarea {
+  width: 100%;
+  background: #ffffff;
+  resize: none;
+  padding: 1rem 0 0 1rem;
+  outline: none;
+  border-radius: 8px;
+}
+
+/* ====== Schedule Date and  Time ====== */
+.LaundryScheduleContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.LaundryScheduleText {
+  color: #cccccc;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.LaundryScheduleCards {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 2rem;
+}
+/* ===== Button ===== */
+.LaundryDoneButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem auto;
+  padding: 5.791px 34.744px;
+  gap: 8.272px;
+  border-radius: 4px;
+  border: 0.827px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}

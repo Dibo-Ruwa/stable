@@ -1,0 +1,173 @@
+.MovingReviewCards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+/* ====== Customer Ratings ====== */
+.CustomersRatingCard {
+  width: 100%;
+  padding: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.CustomersRatingText {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CustomersRatingNumStarAndReviews {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.CustomersRatingNumStar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.CustomersRatingNum,
+.CustomersRatingReviews {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CustomersRatingStars {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.CustomersRatingStar {
+  color: #ffe206;
+  width: 23px;
+  height: 23px;
+}
+
+.CustomersRatingStarAsh {
+  color: #8f8f8f;
+  width: 23px;
+  height: 23px;
+}
+
+/* ====== Customers Rating ====== */
+.CustomersReviewCards {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+}
+
+.CustomersReviewCard {
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.CustomersReviewProfileHead {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.CustomersReviewProfileAndRating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.CustomersReviewProfileNameAndImg {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.CustomersReviewProfileName {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.CustomersReviewProfileHeadDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50px;
+  background: #8f8f8f;
+}
+
+.CustomersReviewNumStar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.CustomersReviewStars {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.CustomersReviewStar {
+  color: #ffe206;
+  width: 18px;
+  height: 18px;
+}
+
+.CustomersReviewStarAsh {
+  color: #8f8f8f;
+  width: 18px;
+  height: 18px;
+}
+
+.CustomersReviewNum {
+  color: var(--Theme-Color-Grey-Body, #464255);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CustomersReviewProfileDateAndTime {
+  color: rgba(11, 11, 11, 0.57);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CustomersReviewText {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
