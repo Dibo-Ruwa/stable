@@ -46,7 +46,7 @@ export const OurTeam = () => {
           </div>
         </div>
 
-        <div className="OurTeams_Cards">
+        <div className="OurTeams_Cards LPPB_Card">
           <div className="OurTeam_Card Purple_Card">
             <div className="OurTeam_CardImage">
               <Image

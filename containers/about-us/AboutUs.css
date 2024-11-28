@@ -277,6 +277,12 @@ span.wsa_card_TickDes {
   }
 }
 
+@media screen and (max-width: 500px) {
+  section.wsa_Container {
+    width: 96%;
+  }
+}
+
 /* ========== Our Teams ========= */
 
 section.OurTeam_Container {
@@ -289,6 +295,7 @@ section.OurTeam_Container {
   align-items: center;
   gap: 0.6rem;
   width: 15rem;
+  margin-bottom: 2.5rem;
 }
 
 p.OurTeam_Title {
@@ -322,16 +329,18 @@ span.OurTeam_Line {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
+  width: 100%;
 }
 
 .OurTeams_Cards {
   display: flex;
   gap: 1rem;
   align-items: flex-end;
+  position: relative;
+  width: 100%;
 }
 
 /* ===== Green Card ===== */
-
 .OurTeam_Card {
   position: relative;
   display: flex;
@@ -351,6 +360,7 @@ span.OurTeam_Line {
   position: absolute;
   bottom: 0rem;
   right: 1rem;
+  left: 1rem;
 }
 
 img.OurTeam_Card_img {
@@ -383,7 +393,7 @@ p.Teams_Name {
 /* ===== Blue Card ===== */
 .Blue_Card {
   background: #51cbea;
-  height: 18rem;
+  height: 15rem;
 }
 
 img.OurTeam_Card_img.blue_image {
@@ -394,23 +404,51 @@ img.OurTeam_Card_img.blue_image {
 
 /* ===== Purple Card ===== */
 .Purple_Card {
-  background: #B5A0FF;
+  background: #b5a0ff;
   height: 22rem;
 }
 
-img.OurTeam_Card_img.purple_image {
+img.OurTeam_Card_img.Purple_image {
   width: 15rem;
-  height: 18rem;
+  height: 22rem;
   flex-shrink: 0;
 }
 /* ===== periwinkleBlue Card ===== */
-.periwinkleBlue_Card{
-  background: #7D7FFF;;
-  height: 15rem;
+.periwinkleBlue_Card {
+  background: #7d7fff;
+  height: 12rem;
 }
 
-img.OurTeam_Card_img.periwinkleBlue_Card_image {
-  width: 15rem;
-  height: 18rem;
+img.OurTeam_Card_img.periwinkleBlue_image {
+  width: 15.79rem;
+  height: 20rem;
   flex-shrink: 0;
+}
+
+@media screen and (max-width: 1186px) {
+  .OurTeam_CardImage {
+    width: 100%;
+    left: 0rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .OurTeam_CardImage {
+    width: 100%;
+    left: 0rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .TeamsCards_Container {
+    grid-template-columns: 1fr;
+  }
+
+  .LPPB_Card {
+    flex-direction: row-reverse;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  section.OurTeam_Container {
+    width: 96%;
+  }
 }
