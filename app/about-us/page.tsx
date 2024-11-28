@@ -1,4 +1,4 @@
-import AboutUs from "@/containers/aboutus/AboutUs";
+import {AboutUs} from "@/containers/about-us/AboutUs";
 
 export const metadata = {
   title: "About",
