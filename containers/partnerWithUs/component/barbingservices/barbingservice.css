@@ -205,8 +205,8 @@ span.BarbingStep_cicle {
   }
 
   img.barbingservice_img-content {
-    width: 33rem;
-    height: 71vh;
+    width: 70rem;
+    height: 80vh;
   }
 
   .barbingservice_text-content {
@@ -261,7 +261,7 @@ span.BarbingStep_cicle {
     top: 11rem;
   }
   img.barbingservice_img-content {
-    width: 37rem;
+    width: 70rem;
     height: 75vh;
   }
 
@@ -282,7 +282,7 @@ span.BarbingStep_cicle {
     top: 14rem;
   }
   img.barbingservice_img-content {
-    width: 40rem;
+    width: 75rem;
     height: 80vh;
   }
 }
