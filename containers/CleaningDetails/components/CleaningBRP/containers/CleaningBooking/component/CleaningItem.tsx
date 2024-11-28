@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "../LaundryBooking.module.css";
+import styles from "../CleaningBooking.module.css";
 import { CleaningItemsGroup } from "./CleaningItemsGroup";
 import { AddProperty } from "./AddProperty";
 // import { LaundryBookingAddress } from "./LaundryBookingAddress";

@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from "../LaundryBooking.module.css";
-import { ScheduleTime } from '../../../../../../../component/ScheduleTime/ScheduleTime';
-import { ScheduleDate } from '../../../../../../../component/ScheduleDate/ScheduleDate';
+import styles from "../CleaningBooking.module.css";
+import { ScheduleDate } from '@/component/ScheduleDate/ScheduleDate';
+import { ScheduleTime } from '@/component/ScheduleTime/ScheduleTime';
 
 export const CleaningSchedule = () => {
   return (

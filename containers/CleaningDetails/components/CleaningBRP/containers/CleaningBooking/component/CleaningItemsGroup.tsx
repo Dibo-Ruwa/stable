@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import styles from "../LaundryBooking.module.css";
+import styles from "../CleaningBooking.module.css";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 // Define types for the laundry items and state
