@@ -1,6 +1,6 @@
 import { assets } from "@/public/assets";
 import josh from "@/public/Joshua.jpeg";
-import  j from "@/publicYakubu.jpg"
+import j from "@/publicYakubu.jpg";
 // Base URL
 const baseURL: string = "https://diboruwa.com";
 
@@ -28,7 +28,7 @@ export const routes: Route[] = [
     subroutes: [
       { name: "Laundry", path: "/laundry", icon: assets.soap },
       { name: "Food", path: "/food", icon: assets.food },
-      { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
+      { name: "Cleaning", path: "/cleaning", icon: assets.cleaningImg },
       { name: "Moving", path: "/moving", icon: assets.scooter },
     ],
   },
@@ -43,15 +43,6 @@ export const routes: Route[] = [
       { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
       { name: "Moving", path: "/moving", icon: assets.scooter },
     ],
-  },
-
-  {
-    name: "About Us",
-    path: "/about-us",
-  },
-  {
-    name: "Contact Us",
-    path: "/contact-us",
   },
 ];
 export const HWW = [
@@ -183,7 +174,7 @@ export const sublinks = [
   {
     title: "Company",
     links: [
-      { name: "About Us", path: "/aboutus" },
+      { name: "About Us", path: "/about-us" },
       { name: "Subscriptions", path: "/subscriptions" },
       { name: "Partner With Us", path: "/partner" },
     ],
@@ -209,8 +200,8 @@ export const sublinks = [
   {
     title: "Other",
     links: [
-      // { name: "Blog", path: "/comingsoon" },
-      // { name: "Contact Us", path: "/comingsoon" },
+      { name: "Blog", path: "/comingsoon" },
+      { name: "Contact Us", path: "/contact-us" },
       { name: "Privacy Policy", path: "/privacy-policy" },
       { name: "Terms & Conditions", path: "/terms" },
     ],
@@ -9221,6 +9212,32 @@ export const ProductServiceLaundryData: ProductServiceLaundryType[] = [
     map: "/images/Frame 2610169.png",
   },
 ];
+// ====== Cleaning data ====== //
+export interface ProductServiceCleaningType {
+  _id?: number;
+  tag?: string;
+  link?: string;
+  image?: string;
+  bigImg?: string;
+  foodText?: string;
+  map?: string;
+  foodImg?: string;
+  bike?: string;
+  title?: string;
+}
+
+export const ProductServiceCleaningData: ProductServiceCleaningType[] = [
+  {
+    _id: 1,
+    tag: "Cleaning",
+    bigImg: "/images/laundry.png",
+    bike: "/images/Frame 2610175.png",
+    foodImg: "/images/image 157.png",
+    foodText:
+      "Get your clothes washed and delivered to your door step within an hour.",
+    map: "/images/Frame 2610169.png",
+  },
+];
 
 export interface TopLaundryType {
   _id?: number;
@@ -9460,7 +9477,244 @@ export const MobileOtherLaundry: OtherLaundryType[] = [
     arrowIcon: FaArrowRightLong,
   },
 ];
+export interface TopCleaningType {
+  _id?: number;
+  tag?: string;
+  title?: string;
+  image?: string;
+  smallTitle?: string;
+  starIcon?: IconType;
+  rating?: string;
+  reviewsText?: string;
+  reviewsNum?: string;
+  locationIcon?: IconType;
+  locationText?: string;
+  timeNum?: string;
+  vistLink?: string;
+  arrowIcon?: IconType;
+}
 
+export interface OtherCleaningType {
+  _id?: number;
+  tag?: string;
+  title?: string;
+  image?: string;
+  smallTitle?: string;
+  starIcon?: IconType;
+  rating?: string;
+  reviewsText?: string;
+  reviewsNum?: string;
+  locationIcon?: IconType;
+  locationText?: string;
+  timeNum?: string;
+  openTime?: string;
+  vistLink?: string;
+  arrowIcon?: IconType;
+}
+
+export const TopCleaning: TopCleaningType[] = [
+  {
+    title: "Top Cleaning Near You",
+  },
+  {
+    _id: 381753,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (16).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 231134,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (13).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 945332,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (14).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 127664,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (15).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+];
+
+export const OtherCleaningRoom: OtherCleaningType[] = [
+  {
+    _id: 387653,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 231196,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 225332,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 497664,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+];
+export const MobileOtherCleaning: OtherCleaningType[] = [
+  {
+    _id: 387653,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (16).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "Closed",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 231196,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (13).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "Open",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 225332,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (14).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "closed",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 497664,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (15).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "Open",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+];
 
 // ====== FoodDelivery and Moving Data ====== //
 export interface ProductServiceDeliveryAndMovingType {
@@ -9488,7 +9742,7 @@ export const ProductServiceDeliveryAndMovingData: ProductServiceDeliveryAndMovin
       foodImg: "/images/Frame 2610173.png",
       foodText:
         "Get your clothes washed and delivered to your door step within an hour.",
-        map: "/images/map.png",
+      map: "/images/map.png",
     },
   ];
 
@@ -9535,7 +9789,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
   },
   {
     _id: 381753,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (16).png",
     smallTitle: "WE HAVE MOVED",
@@ -9552,7 +9806,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 
   {
     _id: 231134,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (13).png",
     smallTitle: "WE HAVE MOVED",
@@ -9569,7 +9823,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 
   {
     _id: 945332,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (14).png",
     smallTitle: "WE HAVE MOVED",
@@ -9586,7 +9840,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 
   {
     _id: 127664,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (15).png",
     smallTitle: "WE HAVE MOVED",
@@ -9605,7 +9859,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
   {
     _id: 387653,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
@@ -9622,7 +9876,7 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 231196,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
@@ -9639,7 +9893,7 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 225332,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
@@ -9656,7 +9910,7 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 497664,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
@@ -9674,7 +9928,7 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
   {
     _id: 387653,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (16).png",
     smallTitle: "WE HAVE MOVED",
@@ -9692,7 +9946,7 @@ export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 231196,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (13).png",
     smallTitle: "WE HAVE MOVED",
@@ -9710,7 +9964,7 @@ export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 225332,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (14).png",
     smallTitle: "WE HAVE MOVED",
@@ -9728,7 +9982,7 @@ export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 497664,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (15).png",
     smallTitle: "WE HAVE MOVED",

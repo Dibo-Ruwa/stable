@@ -1,21 +1,25 @@
 import React from "react";
 import "./freedelivery.css";
 import { FreeDeliveryData } from "@/constants/index";
-
+import Link from "next/link"
 const FreeDelivery: React.FC = () => {
   return (
     <section className="freedelivery_container">
       <div className="freedelivery-frame">
         <p className="freedelivery_title">{FreeDeliveryData[0].title}</p>
         <div className="freedelivery-cards">
-          {FreeDeliveryData[0].items.map((item, index) => {
+          {FreeDeliveryData[0].items.map((item) => {
             // Destructure the Icon components from the item
             const FavoriteIcon = item.favoriteIcon;
             const StarIcon = item.starIcon;
             const TimeIcon = item.timeIcon;
             const PrizeIcon = item.prizeIcon;
             return (
-              <div key={index} className="freedelivery-card">
+              <Link
+                href={`/food/${item.id}`}
+                key={item.id}
+                className="freedelivery-card"
+              >
                 <div className="freedelivery-card_food-img">
                   <img
                     src={item.img}
@@ -52,15 +56,15 @@ const FreeDelivery: React.FC = () => {
                     <p className="freedelivery-card_prize-text">
                       {item.prizeText}
                     </p>
-                    <a
+                    <Link
                       href={item.prizeLink}
                       className="freedelivery-card_prize-link"
                     >
                       <PrizeIcon className="freedelivery-card_prize-icon" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

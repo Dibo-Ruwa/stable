@@ -9,27 +9,27 @@ import { HiArrowRightCircle } from "react-icons/hi2";
 
 const rest = [
   {
-    link: "/",
+    link: "/partner",
     img: "/images/pt1.png",
     con: "Register as food vendor",
   },
   {
-    link: "/",
+    link: "/partner",
     img: "/images/pt2.png",
     con: "Register as Courier",
   },
   {
-    link: "/",
+    link: "/partner",
     img: "/images/pt3.png",
-    con: "Register as Laundry Service",
+    con: "Register as Laundry",
   },
   {
-    link: "/",
+    link: "/partner",
     img: "/images/pt4.png",
     con: "Register as Groceries",
   },
   {
-    link: "/",
+    link: "/partner",
     img: "/images/pt4.png",
     con: "Register as Cleaning",
   },
@@ -84,7 +84,7 @@ export default function Partner() {
             ))}
           </div>
 
-          <div
+          <Link href="/partner"
             style={{
               display: "flex",
               gap: 6,
@@ -102,7 +102,7 @@ export default function Partner() {
                 marginTop: 2,
               }}
             />
-          </div>
+          </Link>
         </div>
       </div>
     </div>

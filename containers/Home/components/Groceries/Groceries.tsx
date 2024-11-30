@@ -8,24 +8,24 @@ import { RiArrowRightSLine } from "react-icons/ri";
 
 const food = [
   {
-    link: "/",
-    img: "/images/dish.png",
+    id: 111,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/dish.png",
+    id: 221,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/dish.png",
+    id: 331,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/dish.png",
+    id: 441,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/dish.png",
+    id: 551,
+    img: "/images/image113.png",
   },
 ];
 export default function Groceries() {
@@ -45,8 +45,8 @@ export default function Groceries() {
        
           </div>
           <div className="meal_card">
-            {food.map((item, index) => (
-              <div key={index} className="card">
+            {food.map((item) => (
+              <div key={item.id} className="card">
                 <div className="card-img">
                   <div
                     style={{
@@ -78,7 +78,7 @@ export default function Groceries() {
                     alt="Chef preparing food"
                   />
                 </div>
-                <Link href={item.link}>
+                <Link href={`/food/${item.id}`}>
                   <div className="meal-dis">
                     <div>
                       <div>

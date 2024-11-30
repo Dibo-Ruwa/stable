@@ -24,6 +24,14 @@
   }
 }
 
+
+@media screen and (max-width: 600px) {
+  
+  .RequestConfirmationContent {
+    flex-direction: column;
+  }
+}
+
 .RequestConfirmationTitleDaysPicked {
   display: flex;
   flex-direction: column;
