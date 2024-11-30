@@ -1,0 +1,162 @@
+.delivery_setup_container {
+  display: flex;
+  flex-direction: column;
+  gap: 13.455px;
+  align-items: center;
+  background: rgba(252, 252, 252, 0.38);
+  padding: 1rem 1.5rem;
+}
+
+.delivery_setup_btns {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  position: relative;
+}
+
+button.delivery_setup_btn {
+  display: flex;
+  padding: 0.7rem 0.9rem;
+  justify-content: center;
+  align-items: center;
+  gap: 7.273px;
+  border: none;
+  border-radius: 4px;
+  background: var(--Green1, #27a124);
+  color: var(--White, #fefefe);
+  font-family: "Poppins";
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.delivery_address_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.delivery_address_content {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  background: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0px 184px 51px 0px rgba(158, 158, 158, 0),
+    0px 118px 47px 0px rgba(158, 158, 158, 0.01),
+    0px 66px 40px 0px rgba(158, 158, 158, 0.05);
+}
+
+.question_det_connt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+p.address_question {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: "Poppins";
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 24px;
+}
+
+.det_container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+svg.det_container_icon.det_delete {
+  color: #ef5a5a;
+}
+
+svg.det_container_icon.det_edit {
+  color: #27a124;
+}
+
+.delivery_address_area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+label.delivery_address_label {
+  color: var(--disabled-color, #767575);
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+textarea.delivery_address_textarea {
+  border: none;
+  outline: none;
+  background: #ffffff;
+  width: 100%;
+  resize: none;
+  height: 55px;
+}
+
+textarea.delivery_address_textarea::placeholder {
+  color: var(--disabled-color, #767575);
+  font-family: "Poppins";
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+}
+
+@media screen and (min-width: 1024px) {
+  .delivery_setup_container {
+    /* border: 0.5px solid rgba(118, 117, 17, 0.21); */
+    background: var(--white, #fefefe);
+    background: rgba(252, 252, 252, 0.38);
+    padding: 9px 0 10rem;
+    border-radius: 0.4rem;
+  }
+
+  .delivery_setup_btns {
+    justify-content: flex-start;
+    padding-left: 1rem;
+  }
+
+  .delivery_address_container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .delivery_address_content {
+    box-shadow: none;
+    border: 0.5px solid rgba(118, 117, 17, 0.21);
+    background: transparent;
+    /* border-bottom: none; */
+  }
+
+  .delivery_address_content.content_1 {
+    /* border-left: none; */
+    border-radius: 0.2rem;
+  }
+  .delivery_address_content.content_2 {
+    /* border-right: none; */
+    border-radius: 0.2rem;
+  }
+
+  textarea.delivery_address_textarea {
+    background: transparent;
+  }
+}

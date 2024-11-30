@@ -3,30 +3,34 @@
     "development"
   ],
   "hints": {
-    "axe/structure": [
-      "default",
-      {
-        "list": "off",
-        "listitem": "off"
-      }
-    ],
     "compat-api/css": [
-      "default",
+      "off",
       {
         "ignore": [
-          "backdrop-filter"
+          "width: -moz-fit-content"
         ]
+      }
+    ],
+    "no-inline-styles": "off",
+    "disown-opener": "off",
+    "axe/forms": [
+      "default",
+      {
+        "label": "off"
       }
     ],
     "axe/name-role-value": [
       "default",
       {
-        "link-name": "off",
         "button-name": "off"
       }
     ],
-    "button-type": "off",
-    "no-inline-styles": "off",
-    "typescript-config/consistent-casing": "off"
+    "axe/aria": [
+      "default",
+      {
+        "aria-allowed-attr": "off",
+        "aria-valid-attr-value": "off"
+      }
+    ]
   }
 }
