@@ -3,10 +3,10 @@
   margin: 0 auto;
 }
 
-
-
 .Cleaning_hero_cont {
   padding: 30px 0;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Cleaning_hero_prod {
@@ -105,13 +105,13 @@
 }
 
 .Cleaning_description {
-    color: #2a2a2a;
-    font-size: 17px;
-    font-family: Poppins;
-    font-weight: 500;
-    width: 370px;
-    line-height: 1.5;
-    margin-top: 10px;
+  color: #2a2a2a;
+  font-size: 17px;
+  font-family: Poppins;
+  font-weight: 500;
+  width: 370px;
+  line-height: 1.5;
+  margin-top: 10px;
 }
 
 .Cleaning_get-started-btn {
@@ -150,11 +150,11 @@
   font-weight: 400;
   word-wrap: break-word;
 }
-.Cleaning_Hero_map{
+.Cleaning_Hero_map {
   border-radius: 8px;
   background: #f3f3f3;
   padding: 1.3rem;
-  display:flex;
+  display: flex;
   gap: 0.7rem;
   flex-direction: column;
 }
@@ -165,14 +165,14 @@
   display: flex;
   align-items: center;
 }
-.CleaningHero_Name{
-  display:flex;
+.CleaningHero_Name {
+  display: flex;
   gap: 0.2rem;
   width: 100%;
   flex-direction: column;
 }
 
-.CleaningPro-name{
+.CleaningPro-name {
   display: flex;
   gap: 0.5rem;
   width: 100%;
@@ -181,34 +181,37 @@
   border-radius: 8px;
 }
 
-.Cleaning_NameAndStarRating{
+.Cleaning_NameAndStarRating {
   display: flex;
   gap: 0.5rem;
   flex-direction: column;
   width: 100%;
 }
 
-.CleaningRating{
-    display: flex;
+.CleaningRating {
+  display: flex;
   gap: 0.5rem;
   width: 100%;
 }
-.Cleaning_RatingStars{
+.Cleaning_RatingStars {
   display: flex;
   gap: 0.5rem;
   align-items: center;
 }
-.Cleaning_RatingStar{
+.Cleaning_RatingStar {
   width: 15px;
   height: 15px;
   color: #ffe206;
 }
-.Cleaning_RatingStarReg{
+.Cleaning_RatingStarReg {
   width: 15px;
   height: 15px;
 }
 
-p.CleaningName, p.RatingNum, p.CleaningTimeD, p.CleaningLocationText{
+p.CleaningName,
+p.RatingNum,
+p.CleaningTimeD,
+p.CleaningLocationText {
   color: #565656;
   font-size: 12.889px;
   font-family: Poppins;
@@ -217,8 +220,8 @@ p.CleaningName, p.RatingNum, p.CleaningTimeD, p.CleaningLocationText{
   line-height: normal;
 }
 
-.CleaningLocationAndTime{
-  display:flex;
+.CleaningLocationAndTime {
+  display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
@@ -226,19 +229,19 @@ p.CleaningName, p.RatingNum, p.CleaningTimeD, p.CleaningLocationText{
   width: 100%;
 }
 
-.CleaningLocation{
+.CleaningLocation {
   display: flex;
   align-items: center;
   gap: 0.3rem;
 }
 
-.CleaningLocationIcon{
-width: 15px;
-height: 15px;
-color: #565656;
+.CleaningLocationIcon {
+  width: 15px;
+  height: 15px;
+  color: #565656;
 }
 
-.CleaningVisitLink{
+.CleaningVisitLink {
   background: #fefefe;
   padding: 0.2rem;
 }
@@ -429,7 +432,7 @@ color: #565656;
     line-height: normal;
   }
 
-  .Mobile_TopCleaning_Images{
+  .Mobile_TopCleaning_Images {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -437,7 +440,7 @@ color: #565656;
     width: 100%;
   }
 
-  .Mobile_TopCleaning_Image{
+  .Mobile_TopCleaning_Image {
     width: 100%;
     height: 73px;
   }

@@ -28,7 +28,7 @@ export const routes: Route[] = [
     subroutes: [
       { name: "Laundry", path: "/laundry", icon: assets.soap },
       { name: "Food", path: "/food", icon: assets.food },
-      { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
+      { name: "Cleaning", path: "/cleaning", icon: assets.cleaningImg },
       { name: "Moving", path: "/moving", icon: assets.scooter },
     ],
   },

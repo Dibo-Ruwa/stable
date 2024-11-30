@@ -1,34 +1,41 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import "./meal.css";
 import Link from "next/link";
 import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
 import { FaBagShopping } from "react-icons/fa6";
 import { MdOutlineTimer } from "react-icons/md";
 import { RiArrowRightSLine } from "react-icons/ri";
+import { Button } from "@/component/shared/Button";
 
 const food = [
   {
-    link: "/",
-    img: "/images/imagescomponent 113 (2)imagescomponent 113 (2).png",
+    id: 21,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/imagescomponent 113 (2)imagescomponent 113 (2).png",
+    id: 45,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/imagescomponent 113 (2)imagescomponent 113 (2).png",
+    id: 56,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/imagescomponent 113 (2)imagescomponent 113 (2).png",
+    id: 34,
+    img: "/images/image113.png",
   },
   {
-    link: "/",
-    img: "/images/imagescomponent 113 (2)imagescomponent 113 (2).png",
+    id: 15,
+    img: "/images/image113.png",
   },
 ];
-export default function Meal() {
+
+const prepTimes: string[] = ["30mins", "45mins", "1hr", "2hr"];
+
+export default function Meal(): JSX.Element {
+  const [activePrepTime, setActivePrepTime] = useState<string>("30mins");
+
   return (
     <div>
       <div className=" meal">
@@ -45,16 +52,22 @@ export default function Meal() {
             <div className="prep-container">
               <p>Prep time:</p>
               <div className="prep-menu">
-                <div className="prep-text-active ">30mins</div>
-                <div className="prep-text">45mins</div>
-                <div className="prep-text">1hr</div>
-                <div className="prep-text">2hrs</div>
+                {prepTimes.map((time) => (
+                  <Button
+                    key={time}
+                    className={`prep-text ${
+                      activePrepTime === time ? "prep-text-active" : ""
+                    }`}
+                    text={time}
+                    onClick={() => setActivePrepTime(time)}
+                  />
+                ))}
               </div>
             </div>
           </div>
           <div className="meal_card">
-            {food.map((item, index) => (
-              <div key={index} className="card">
+            {food.map((item) => (
+              <div key={item.id} className="card">
                 <div className="card-img">
                   <div
                     style={{
@@ -88,7 +101,7 @@ export default function Meal() {
                     alt="Chef preparing food"
                   />
                 </div>
-                <Link href={item.link}>
+                <Link href={`/food/${item.id}`}>
                   <div className="meal-dis">
                     <div>
                       <div>
@@ -144,7 +157,8 @@ export default function Meal() {
             ))}
           </div>
 
-          <Link href="/food"
+          <Link
+            href="/food"
             style={{
               display: "flex",
               gap: 6,

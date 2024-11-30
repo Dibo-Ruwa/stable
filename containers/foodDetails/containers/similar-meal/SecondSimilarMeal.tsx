@@ -20,7 +20,7 @@ import {
   MostSoldCardReminder,
   MostSoldCardPrizeLink,
   SaleImgsContainer,
-  MostSoldSaleImg
+  MostSoldSaleImg,
 } from "./similar-meal.module.styles";
 
 interface FirstSimilarMealProps {
@@ -41,45 +41,45 @@ export const SecondSimilarMeal: React.FC<FirstSimilarMealProps> = ({ id }) => {
             const PrizeIcon = item.prizeIcon;
             return (
               <MostSoldCard key={item.id}>
-                <div style={{position: 'relative'}}>
+                <div style={{ position: "relative" }}>
                   <MostSoldCardLinkDiv href={`/food/${item.id}`} key={item.id}>
-                    <MostSoldCardImg
-                      src={item.img}
-                      alt={item.smallTitle}
-                    />
+                    <MostSoldCardImg src={item.img} alt={item.smallTitle} />
                   </MostSoldCardLinkDiv>
                   <div>
-                    <FavoriteIcon 
+                    <FavoriteIcon
                       style={{
-                        color: '#27A124',
-                        background: 'white',
-                        padding: '6px',
-                        borderRadius: '100%',
-                        position: 'absolute',
+                        color: "#27A124",
+                        background: "white",
+                        padding: "6px",
+                        borderRadius: "100%",
+                        position: "absolute",
                         top: 4,
                         left: 3,
                       }}
-
                       size={40}
                     />
                   </div>
                 </div>
                 <MostSoldCardContent>
                   <MostSoldCardContext>
-                    <div>
+                    <div className="sTitle_dot_starIconText">
                       <MostSoldCardTitle>{item.smallTitle}</MostSoldCardTitle>
                       <MostSoldCardDot />
-                      <StarIcon />
+                      <StarIcon className="sStar_Icon" />
                       <small>{item.rating}</small>
                     </div>
-                    <div>
+                    <div className="sTime_IconText">
                       <TimeIcon />
                       <div>{item.timeText}</div>
                     </div>
                   </MostSoldCardContext>
                   <MostSoldCardPrize>
-                    <MostSoldCardPrizeText>{item.prizeText}</MostSoldCardPrizeText>
-                    <MostSoldCardReminder>{item.remenderText}</MostSoldCardReminder>
+                    <MostSoldCardPrizeText>
+                      {item.prizeText}
+                    </MostSoldCardPrizeText>
+                    <MostSoldCardReminder>
+                      {item.remenderText}
+                    </MostSoldCardReminder>
                     <MostSoldCardPrizeLink href={item.prizeLink}>
                       <PrizeIcon />
                     </MostSoldCardPrizeLink>
