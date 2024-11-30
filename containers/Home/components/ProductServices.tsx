@@ -2,6 +2,8 @@
 import "./home.css";
 import React, { useState } from "react";
 import { Data, DataItem } from "@/constants/index";
+import Link from "next/link";
+import { Button } from "@/component/shared/Button";
 
 const MobileView: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string>("Food");
@@ -124,7 +126,8 @@ const ProductServices: React.FC<ProductServicesProps> = ({
             <div className="prod-cont">
               <div className="tags-container">
                 {Data.map((tagItem) => (
-                  <button
+                  <Link
+                    href={tagItem.tagLink}
                     key={tagItem._id}
                     className={`tag-text ${
                       tagItem.tag === selectedTag ? "tag-text-active" : ""
@@ -132,7 +135,7 @@ const ProductServices: React.FC<ProductServicesProps> = ({
                     onClick={() => setSelectedTag(tagItem.tag)}
                   >
                     {tagItem.tag}
-                  </button>
+                  </Link>
                 ))}
               </div>
               <div className="text-container">

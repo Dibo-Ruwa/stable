@@ -8712,6 +8712,7 @@ export const Data = [
   {
     _id: 1,
     tag: "Food",
+    tagLink:"/food",
     bigImg: "/images/food.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
@@ -8722,6 +8723,7 @@ export const Data = [
   {
     _id: 2,
     tag: "Moving",
+    tagLink:"/moving",
     bigImg: "/images/moving.png",
     bike: "/images/Frame 2610192.png",
     foodImg: "/images/Frame 2610173.png",
@@ -8732,6 +8734,7 @@ export const Data = [
   {
     _id: 3,
     tag: "Laundry",
+    tagLink:"/laundry",
     bigImg: "/images/laundry.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
@@ -8742,6 +8745,7 @@ export const Data = [
   {
     _id: 4,
     tag: "Cleaning",
+    tagLink: "/cleaning",
     bigImg: "/images/laundry.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
@@ -8752,6 +8756,7 @@ export const Data = [
   {
     _id: 5,
     tag: "Groceries",
+    tagLink: "/groceries",
     bigImg: "/images/food.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
@@ -8769,25 +8774,25 @@ export const TopResturant: Category[] = [
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${2}`,
         image: "/images/resturant.png",
         _id: 2,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${3}`,
         image: "/images/Rectangle 248 (4).png",
         _id: 3,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${4}`,
         image: "/images/Rectangle 248 (2).png",
         _id: 4,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${5}`,
         image: "/images/Rectangle 248 (3).png",
         _id: 5,
       },
