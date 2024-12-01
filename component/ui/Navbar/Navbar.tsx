@@ -164,10 +164,7 @@ const Navbar = () => {
                 </li>
               )}
               {!session && (
-                <Cta
-                  href={`https://admin.diboruwa.com/sign-in`}
-                  target="_blank"
-                >
+                <Cta href="./partner" target="_blank">
                   Partner with us
                 </Cta>
               )}
@@ -203,7 +200,7 @@ const Navbar = () => {
           </li>
         )}
         {!session && (
-          <Cta href={`https://admin.diboruwa.com/sign-in`} target="_blank">
+          <Cta href="./partner" target="_blank">
             Partner with us
           </Cta>
         )}

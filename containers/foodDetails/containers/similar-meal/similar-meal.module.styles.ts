@@ -89,6 +89,37 @@ export const MostSoldCardContext = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
+
+  .title_dot_starIconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .Time_IconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+ .star_Icon {
+    color: #ffc93f;
+  }
+  sTitle_dot_starIconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sTime_IconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+ .sStar_Icon {
+    color: #ffc93f;
+  }
 `;
 
 export const MostSoldCardTitle = styled.small`

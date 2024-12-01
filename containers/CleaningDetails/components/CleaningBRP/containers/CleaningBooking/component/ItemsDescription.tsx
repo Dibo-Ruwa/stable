@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from "../LaundryBooking.module.css";
+import styles from "../CleaningBooking.module.css";
 
 export const ItemsDescription = () => {
   return (

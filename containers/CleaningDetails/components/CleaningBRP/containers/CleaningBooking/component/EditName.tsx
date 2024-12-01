@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import styles from "../LaundryBooking.module.css";
+import styles from "../CleaningBooking.module.css";
 import { CiEdit } from "react-icons/ci";
 
 export const EditName = () => {

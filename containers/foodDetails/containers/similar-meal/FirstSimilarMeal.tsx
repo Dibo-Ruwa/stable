@@ -66,13 +66,13 @@ export const FirstSimilarMeal: React.FC<FirstSimilarMealProps> = ({ id }) => {
                 </div>
                 <MostSoldCardContent>
                   <MostSoldCardContext>
-                    <div>
+                    <div className="title_dot_starIconText">
                       <MostSoldCardTitle>{item.smallTitle}</MostSoldCardTitle>
                       <MostSoldCardDot />
-                      <StarIcon />
+                      <StarIcon className="star_Icon" />
                       <small>{item.rating}</small>
                     </div>
-                    <div>
+                    <div className="Time_IconText">
                       <TimeIcon />
                       <div>{item.timeText}</div>
                     </div>

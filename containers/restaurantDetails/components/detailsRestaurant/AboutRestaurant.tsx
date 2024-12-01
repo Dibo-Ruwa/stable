@@ -88,7 +88,6 @@ export const AboutRestaurant = () => {
     <>
       <div className={styles.AboutrestaurantContainer}>
         <div className={styles.restaurantFrame}>
-          <BackButton />
           <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img

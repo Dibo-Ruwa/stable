@@ -29,7 +29,7 @@ p.minsmeal_title {
 }
 
 .minsmeal-card {
-  flex: 1 1 15rem;
+  flex: 1 1 18rem;
   width: 100%;
   scroll-snap-align: center;
   box-sizing: border-box;

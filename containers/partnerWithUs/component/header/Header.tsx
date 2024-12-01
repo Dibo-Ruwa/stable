@@ -20,7 +20,7 @@ export default function Header() {
             <img
               src="/images/Frame 2611554.png"
               className="partner_header-top_img"
-              alt="top paertner"
+              alt="top partner"
             />
           </div>
         </div>

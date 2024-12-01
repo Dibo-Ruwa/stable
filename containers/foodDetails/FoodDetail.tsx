@@ -55,7 +55,7 @@ const DFCSFood = styled.div`
   }
 `;
 
-const DFCSCheck = styled.div<{ isVisible: boolean }>`
+const DFCSCheck = styled.div`
   flex-basis: 30%;
 
   @media (max-width: 900px) {
@@ -65,21 +65,6 @@ const DFCSCheck = styled.div<{ isVisible: boolean }>`
     height: fit-content;
     top: 100px;
     right: 0;
-    display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
-  }
-`;
-
-const ToggleButton = styled.button`
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
   }
 `;
 
@@ -99,15 +84,6 @@ const ClearOut = styled.div`
 `;
 
 const FoodDetail: React.FC<IFoodDetailProps> = ({ id }) => {
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-
-  const toggleVisibility = () => {
-    setIsVisible(prev => !prev);
-  };
-
-  useEffect(() => {
-    
-  }, []);
 
   return (
     <FoodDetailsContainer>
@@ -115,16 +91,13 @@ const FoodDetail: React.FC<IFoodDetailProps> = ({ id }) => {
         <div className="btn">
           <BackButton />
         </div>
-        <ToggleButton onClick={toggleVisibility}>
-          {isVisible ? 'Hide Checkout' : 'Show Checkout'}
-        </ToggleButton>
         <DFCS>
           <DFCSFood>
             <DisplayFood />
             <SimilarMeal id={id} />
           </DFCSFood>
-          <DFCSCheck isVisible={isVisible}>
-            <ClearOut onClick={toggleVisibility} />
+          <DFCSCheck>
+            <ClearOut />
             <CheckoutStore />
           </DFCSCheck>
         </DFCS>

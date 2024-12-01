@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import styles from "../LaundryBooking.module.css";
+import styles from "../CleaningBooking.module.css";
 import { AiOutlinePlus } from "react-icons/ai";
 import { MdClose } from "react-icons/md";
 
