@@ -32,18 +32,26 @@ export const routes: Route[] = [
       { name: "Moving", path: "/moving", icon: assets.scooter },
     ],
   },
-
   {
-    name: "Vendor",
-    path: "/",
-    icon: "🛠️",
-    subroutes: [
-      { name: "Laundry", path: "/laundry", icon: assets.soap },
-      { name: "Food", path: "/food", icon: assets.food },
-      { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
-      { name: "Moving", path: "/moving", icon: assets.scooter },
-    ],
+    name: "Contact Us",
+    path: "/contact-us",
   },
+  {
+    name: "About Us",
+    path: "/about-us",
+  },
+
+  // {
+  //   name: "Vendor",
+  //   path: "/",
+  //   icon: "🛠️",
+  //   subroutes: [
+  //     { name: "Laundry", path: "/laundry", icon: assets.soap },
+  //     { name: "Food", path: "/food", icon: assets.food },
+  //     { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
+  //     { name: "Moving", path: "/moving", icon: assets.scooter },
+  //   ],
+  // },
 ];
 export const HWW = [
   {
