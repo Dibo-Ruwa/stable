@@ -1,8 +1,6 @@
 import { assets } from "@/public/assets";
-import josh from "@/public/Joshua.jpeg";
-import j from "@/publicYakubu.jpg";
 // Base URL
-const baseURL: string = "https://diboruwa.com";
+// const baseURL: string = "https://diboruwa.com";
 
 // Route configuration
 export interface Route {
@@ -32,13 +30,14 @@ export const routes: Route[] = [
       { name: "Moving", path: "/moving", icon: assets.scooter },
     ],
   },
-  {
-    name: "Contact Us",
-    path: "/contact-us",
-  },
+
   {
     name: "About Us",
     path: "/about-us",
+  },
+  {
+    name: "Contact Us",
+    path: "/contact-us",
   },
 
   // {
@@ -8720,7 +8719,7 @@ export const Data = [
   {
     _id: 1,
     tag: "Food",
-    tagLink:"/food",
+    tagLink: "/food",
     bigImg: "/images/food.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
@@ -8731,7 +8730,7 @@ export const Data = [
   {
     _id: 2,
     tag: "Moving",
-    tagLink:"/moving",
+    tagLink: "/moving",
     bigImg: "/images/moving.png",
     bike: "/images/Frame 2610192.png",
     foodImg: "/images/Frame 2610173.png",
@@ -8742,7 +8741,7 @@ export const Data = [
   {
     _id: 3,
     tag: "Laundry",
-    tagLink:"/laundry",
+    tagLink: "/laundry",
     bigImg: "/images/laundry.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
