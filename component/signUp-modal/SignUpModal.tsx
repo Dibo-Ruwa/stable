@@ -19,11 +19,23 @@ type AuthModalProps = {
 };
 
 const signUpFields: AuthField[] = [
+  // {
+  //   name: "fullName",
+  //   label: "Full Name",
+  //   type: "text",
+  //   placeholder: "Enter your name",
+  // },
   {
-    name: "fullName",
-    label: "Full Name",
+    name: "firstName",
+    label: "First Name",
     type: "text",
-    placeholder: "Enter your name",
+    placeholder: "Enter your first name",
+  },
+  {
+    name: "lastName",
+    label: "Last Name",
+    type: "text",
+    placeholder: "Enter your last name",
   },
   {
     name: "email",
