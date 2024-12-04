@@ -25,12 +25,12 @@ const rest = [
   },
   {
     link: "/partner",
-    img: "/images/pt4.png",
+    img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f2bd62bd.jpg",
     con: "Register as Groceries",
   },
   {
     link: "/partner",
-    img: "/images/pt4.png",
+    img: "/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg",
     con: "Register as Cleaning",
   },
 ];

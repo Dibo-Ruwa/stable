@@ -9,7 +9,7 @@ export const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 5%;
+  padding: 0 3.5%;
   height: 10vh;
   position: fixed;
   gap: 20px;
@@ -130,12 +130,6 @@ export const MenuList = styled(motion.ul as any)`
       display: flex;
       gap: 10px;
       align-items: center;
-      padding: 10px;
-
-      &:hover {
-        background: var(--primary-20);
-        border-radius: 10px;
-      }
 
       .icon {
         width: 30px;

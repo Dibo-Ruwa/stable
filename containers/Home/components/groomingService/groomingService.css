@@ -17,6 +17,7 @@
 
 .grooming_desktop-image {
   display: none;
+  border-radius: 1rem;
 }
 
 .grooming_mobile-image {
@@ -32,6 +33,7 @@
 
 .grooming_img-main {
   width: 100%;
+  border-radius: 1rem;
 }
 
 .grooming-text_container {

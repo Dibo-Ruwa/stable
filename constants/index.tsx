@@ -10,7 +10,6 @@ export interface Route {
   subroutes?: {
     name: string;
     path: string;
-    icon: string;
   }[];
 }
 
@@ -22,12 +21,11 @@ export const routes: Route[] = [
   {
     name: "Services",
     path: "/services",
-    icon: "🛠️",
     subroutes: [
-      { name: "Laundry", path: "/laundry", icon: assets.soap },
-      { name: "Food", path: "/food", icon: assets.food },
-      { name: "Cleaning", path: "/cleaning", icon: assets.cleaningImg },
-      { name: "Moving", path: "/moving", icon: assets.scooter },
+      { name: "Laundry", path: "/laundry" },
+      { name: "Food", path: "/food" },
+      { name: "Cleaning", path: "/cleaning" },
+      { name: "Moving", path: "/moving" },
     ],
   },
 
@@ -8753,7 +8751,7 @@ export const Data = [
     _id: 4,
     tag: "Cleaning",
     tagLink: "/cleaning",
-    bigImg: "/images/laundry.png",
+    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -8764,7 +8762,7 @@ export const Data = [
     _id: 5,
     tag: "Groceries",
     tagLink: "/groceries",
-    bigImg: "/images/food.png",
+    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.23_d0e3a72a.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
