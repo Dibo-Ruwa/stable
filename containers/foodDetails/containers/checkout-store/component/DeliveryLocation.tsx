@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CiEdit } from "react-icons/ci";
+import { TfiAngleDown } from "react-icons/tfi";
 
 const LocationContainer = styled.div`
   width: 100%;
@@ -52,6 +53,28 @@ const LocationEditIconText = styled.div`
   line-height: normal;
 `;
 
+const RegionBtn = styled.button`
+  background: #ebebeb;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.7rem;
+  color: #959595;
+`;
+
+const SchdeliveryIcAn = styled.div`
+  display: flex;
+  cursor: pointer;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 100px;
+  background: rgba(234, 235, 238, 0.49);
+`;
+
 const LocationDleTextAddress = styled.p`
   color: var(--disabled-color, #767575);
   font-family: Poppins;
@@ -82,18 +105,26 @@ export const DeliveryLocation = () => {
     <LocationContainer>
       <LocationDle>
         <LocationDleText>Delivery location</LocationDleText>
-        <LocationIeIcon>
+        {/* <LocationIeIcon>
           <LocationEditIcon />
           <LocationEditIconText>Edit</LocationEditIconText>
-        </LocationIeIcon>
+        </LocationIeIcon> */}
       </LocationDle>
-      <LocationDleTextAddress>Address</LocationDleTextAddress>
+
+      <RegionBtn>
+        Select region
+        <SchdeliveryIcAn>
+          <TfiAngleDown />
+        </SchdeliveryIcAn>
+      </RegionBtn>
+
+      {/* <LocationDleTextAddress>Address</LocationDleTextAddress>
       <LocationDleAddressTextarea
         name="message"
         rows={4}
         cols={20}
         placeholder="No 24 Eberechi street, umuahia, Eberechi street, umuahia, Abia state."
-      ></LocationDleAddressTextarea>
+      ></LocationDleAddressTextarea> */}
     </LocationContainer>
   );
 };

@@ -101,7 +101,7 @@ const CTADeliveryButton = styled.button<{ isActive: boolean }>`
 export const CTADelivery = () => {
   const [count, setCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState<"pickup" | "delivery">(
-    "pickup"
+    "delivery"
   );
 
   const increment = () => setCount((prev) => prev + 1);
@@ -123,12 +123,12 @@ export const CTADelivery = () => {
         </CTADeliveryIcon>
       </IncDec>
       <CTADeliveryBtns>
-        <CTADeliveryButton
+        {/* <CTADeliveryButton
           isActive={selectedOption === "pickup"}
           onClick={() => handleOptionSelect("pickup")}
         >
           Pick up
-        </CTADeliveryButton>
+        </CTADeliveryButton> */}
         <CTADeliveryButton
           isActive={selectedOption === "delivery"}
           onClick={() => handleOptionSelect("delivery")}

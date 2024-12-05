@@ -105,7 +105,8 @@ export const MostSoldCardContext = styled.div`
  .star_Icon {
     color: #ffc93f;
   }
-  sTitle_dot_starIconText {
+
+  .sTitle_dot_starIconText {
     display: flex;
     align-items: center;
     gap: 0.5rem;
