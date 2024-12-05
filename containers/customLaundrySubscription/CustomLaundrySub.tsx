@@ -1,4 +1,4 @@
-import { BackButton } from '@/component/ui/BackButton/BackButton';
+import BackButton from '@/component/ui/BackButton/BackButton';
 import styles from './CustomLaundrySub.module.css';
 import React from 'react'
 import { RequestConfirmation } from './components/requestConfirmation/RequestConfirmation';

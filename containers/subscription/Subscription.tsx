@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Loader from "@/component/ui/loader/Loader";
 // import { BackBtn } from "../profile/profile.styles";
-import {BackButton} from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 import useCartStore from "@/store/useCart.store";
 import axios from "axios";
 import { Subscription } from "@/utils/types/types";

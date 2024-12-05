@@ -2,7 +2,7 @@ import React from "react";
 import { AboutCleaning } from "./components/CleaningDetails/AboutCleaning";
 import { LeftCleaningContainer } from "./components/leftCleaningContainer/LeftCleaningContainer";
 import "./cleaning-details.css";
-import { BackButton } from "@/component/ui/BackButton/BackButton";
+import  BackButton  from "@/component/ui/BackButton/BackButton";
 import { CleaningBRP } from "./components/CleaningBRP/CleaningBRP";
 
 export const CleaningDetails = () => {
