@@ -1,7 +1,8 @@
 
 "use client";
 import { useState } from "react";
-import { BackButton, BackButton2 } from "@/component/ui/BackButton/BackButton";
+import { BackButton2 } from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 import { BiEditAlt } from "react-icons/bi";
 import { FaAngleDown } from "react-icons/fa6";
 import styled, { css } from "styled-components";

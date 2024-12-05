@@ -51,6 +51,7 @@ const signUpFields: AuthField[] = [
   },
 ];
 
+
 export const SignUpModal: React.FC<AuthModalProps> = ({
   type,
   AuthCloseModal,

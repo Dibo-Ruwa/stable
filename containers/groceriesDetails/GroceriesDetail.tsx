@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BackButton } from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 import { DisplayGroceries } from "./containers/detailed-groceries-container/display-groceries/DisplayGroceries";
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
 import { SimilarMeal } from "./containers/similar-meal/SimilarMeal";

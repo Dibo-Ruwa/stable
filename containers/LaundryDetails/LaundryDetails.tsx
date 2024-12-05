@@ -2,7 +2,7 @@ import React from "react";
 import { AboutLaundry } from "./components/LaundryDetails/AboutLaundry";
 import { LeftLaundryContainer } from "./components/leftLaundryContainer/LeftLaundryContainer";
 import "./laundry-details.css";
-import { BackButton } from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 import { LaundryBRP } from "./components/LaundryBRP/LaundryBRP";
 
 export const LaundryDetails = () => {

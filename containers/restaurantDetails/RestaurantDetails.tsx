@@ -4,7 +4,7 @@ import { RestaurantMeal } from "./components/restaurantMeals/RestaurantMeal";
 import { AboutRestaurant } from "./components/detailsRestaurant/AboutRestaurant";
 import { LeftRestaurantContainer } from "./components/leftRestaurantContainer/LeftRestaurantContainer";
 import "./restaurant-details.css";
-import { BackButton } from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 
 export const RestaurantDetails = () => {
   return (

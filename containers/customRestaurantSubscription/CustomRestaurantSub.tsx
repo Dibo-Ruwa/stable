@@ -1,4 +1,4 @@
-import { BackButton } from "@/component/ui/BackButton/BackButton";
+import  BackButton  from "@/component/ui/BackButton/BackButton";
 import styles from "./CustomRestaurantSub.module.css";
 import React from "react";
 import { SubscriptionRequestConfirmation } from "./component/SubscriptionRequestConfirmation/SubscriptionRequestConfirmation";

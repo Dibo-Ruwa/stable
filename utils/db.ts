@@ -7,7 +7,7 @@ const MONGODB_URI =
 
 if (!MONGODB_URI) {
   throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
+    "Please define the MONGODB_URI inside .env.local"
   )
 }
 
@@ -35,12 +35,15 @@ async function dbConnect() {
     const opts = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      bufferCommands: false,
+      bufferCommands: true,
     }
 
     cached.promise = mongoose.connect(MONGODB_URI as string, opts).then(mongoose => {
       console.log("Db connected")
       return mongoose.connection
+    }).catch(error => {
+      console.error("MongoDB connection error:", error)
+      throw error
     })
   }
   cached.conn = await cached.promise
