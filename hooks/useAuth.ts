@@ -132,7 +132,7 @@ const useAuth = (): AuthHook => {
         password: formData.password,
       });
 
-      toast.loading("Submiing credentials..", {
+      toast.loading("Submiting credentials..", {
         duration: 1000,
       });
 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f3fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Mobile responsiveness */
+    @media only screen and (max-width: 600px) {
+      table {
+        width: 100% !important;
+      }
+      div {
+        padding: 2% !important;
+      }
+      h1, h3, h4, p {
+        font-size: 16px !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <table cellspacing="0" cellpadding="0" style="background-color: #f3f3fc; width: 100%; font-family: Arial, sans-serif;">
+    <tbody>
+      <tr>
+        <td align="center">
+          <!-- Content Wrapper (max-width 670px) -->
+          <div style="max-width: 670px; width: 100%; background-color: rgba(14, 252, 213, 0.329); padding: 5%; margin: 0 auto;">
+
+            <!-- Company Logo -->
+            <div style="width: 100px; height: 100px; margin: 0 auto;">
+              <img style="width: 100%; height: 100%; object-fit: contain;" src="https://res.cloudinary.com/zeeson-info-tech-and-innovations/image/upload/v1698603012/Deck%20assets/comp_logo_l2_1_fky59a.png" alt="company_logo" />
+            </div>
+
+            <!-- Main Content Container -->
+            <div style="background-color: white; border-radius: 12px; overflow: hidden; margin: 30px 0;">
+              <!-- Email Header -->
+              <div style="background-color: #00a6cf; padding: 20px; text-align: center;">
+                <h1 style="color: white; margin: 0; font-size: 24px;">Laundry Request from {{userName}}</h1>
+              </div>
+
+              <!-- Email Body -->
+              <div style="padding: 5%; text-align: left;">
+                <!-- Greeting -->
+                <p style="color: #121212; line-height: 1.6;">
+                  Hello <strong style="text-transform: capitalize;">{{adminName}}</strong>,
+                </p>
+                <p style="color: #121212; line-height: 1.6;">
+                  We've received a new quote request for laundry services from <strong>{{userName}}</strong>. Here are the details:
+                </p>
+
+                <!-- Customer Information with Laundry Items -->
+                <h3 style="color: #121212; font-size: 18px; margin-bottom: 10px;">Customer Information:</h3>
+                <table cellspacing="0" cellpadding="5" border="1" width="100%" style="border-collapse: collapse; font-family: Arial, sans-serif; text-align: left;">
+                  <tbody>
+                    <tr>
+                      <th style="padding: 8px; background-color: #00a6cf; color: white;">Detail</th>
+                      <th style="padding: 8px; background-color: #00a6cf; color: white;">Information</th>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; color: #121212;">Name</td>
+                      <td style="padding: 8px; color: #121212;">{{userName}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; color: #121212;">Email</td>
+                      <td style="padding: 8px; color: #121212;">{{userEmail}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; color: #121212;">Contact Number</td>
+                      <td style="padding: 8px; color: #121212;">{{userContact}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; color: #121212;">Address</td>
+                      <td style="padding: 8px; color: #121212;">{{userAddress}}</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 8px; color: #121212;">Laundry Items for Quotation</td>
+                      <td style="padding: 8px; color: #121212;">
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                          {{laundryItems}}
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- Instruction -->
+                <p style="color: #121212; line-height: 1.6;">
+                  Please prepare a quote for the above items and send it to the customer as soon as possible.
+                </p>
+                <p style="color: #121212; line-height: 1.6;">Warm regards,</p>
+              </div>
+            </div>
+
+            <!-- Footer with Social Links -->
+            <div style="text-align: center; padding: 20px 0;">
+              <p style="margin-bottom: 10px; color: #121212;">Follow us on:</p>
+              <div style="display: flex; justify-content: center; gap: 20px;">
+                <a href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/" target="_blank">
+                  <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/5968/5968764.png" alt="facebook_logo" />
+                </a>
+                <a href="https://twitter.com/DiboRuwa" target="_blank">
+                  <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/5969/5969020.png" alt="twitter_logo" />
+                </a>
+                <a href="https://www.instagram.com/diboruwa/" target="_blank">
+                  <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/4138/4138124.png" alt="instagram_logo" />
+                </a>
+                <a href="https://www.linkedin.com/company/dibo-ruwa" target="_blank">
+                  <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/145/145807.png" alt="linkedin_logo" />
+                </a>
+              </div>
+
+              <!-- Copyright -->
+              <div style="color: #949494; margin-top: 20px;">&copy; 2024 Diboruwa. All Rights Reserved.</div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

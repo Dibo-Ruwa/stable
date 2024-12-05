@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Dibo Ruwa",
   },
   description:
-    "DiboRuwa - One-Stop App for Home Services | Northern Nigeria | Food | Laundry | Cleaning",
+    "DiboRuwa - One-Stop App for Home Services | Northern Nigeria | Food | Laundry | Cleaning | Moving | Groceries",
   openGraph: {
     type: "website",
     locale: "en_NG",
@@ -35,8 +35,11 @@ export default function RootLayout({
   authModal: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>
+    <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body suppressHydrationWarning>
         <Providers>
           <Navbar />
           {authModal}
