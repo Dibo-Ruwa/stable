@@ -2,6 +2,12 @@
 
 import styled from "styled-components";
 
+interface StyledProps {
+  $isModal?: boolean;
+  $fullWidth?: boolean;
+  $type?: "success" | "error" | "info";
+}
+
 export const Container = styled.div``;
 
 export const Wrapper = styled.div`
@@ -109,4 +115,28 @@ export const Footer = styled.div`
     font-weight: 500;
     text-decoration: none;
   }
+`;
+
+
+export const ErrorMessage = styled.div<StyledProps>`
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+  background-color: ${({ $type }) => 
+    $type === "success" ? "rgba(0, 200, 83, 0.1)" :
+    $type === "error" ? "rgba(255, 0, 0, 0.1)" :
+    "rgba(0, 149, 255, 0.1)"
+  };
+  color: ${({ $type }) => 
+    $type === "success" ? "rgb(0, 200, 83)" :
+    $type === "error" ? "rgb(255, 0, 0)" :
+    "rgb(0, 149, 255)"
+  };
+  border: 1px solid ${({ $type }) => 
+    $type === "success" ? "rgba(0, 200, 83, 0.2)" :
+    $type === "error" ? "rgba(255, 0, 0, 0.2)" :
+    "rgba(0, 149, 255, 0.2)"
+  };
 `;

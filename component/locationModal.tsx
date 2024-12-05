@@ -116,6 +116,7 @@ const LocationModal: React.FC = () => {
       setShowModal(true);
     }
   }, []);
+  
   const handleStateSelect = (selectedOption: string | null) => {
     setSelectedState(selectedOption);
     const regions = selectedOption ? statesAndRegions[selectedOption]?.locations || [] : [];

@@ -21,6 +21,7 @@ import {
   Socials, 
   Title, 
   Wrapper,
+  ErrorMessage,
 } from "./signin.styles";
 
 export type ISignInProps = {};
@@ -110,7 +111,6 @@ const SignIn: React.FC<ISignInProps> = () => {
               value={formData.email}
               onChange={handleChange}
                placeHolder="example@jhon.com"
-              fullWidth
             />
           </FormControl>
           <FormControl>
@@ -122,36 +122,41 @@ const SignIn: React.FC<ISignInProps> = () => {
               value={formData.password}
               onChange={handleChange}
               placeHolder="Enter your password"
-              fullWidth
               showPasswordMeter
             />
             <Link href="/account-recovery">Forgot password?</Link>
           </FormControl>
-          {formResponse && (
+          {/* {formResponse && (
             <Alert
               variant="light"
               color={formResponse.type === "error" ? "red" : "teal"}
               withCloseButton
               onClose={() => setFormResponse(null)}
-              icon={
-                formResponse.type === "error" ? (
-                  <BsShieldExclamation />
-                ) : (
-                  <BsShieldCheck />
-                )
-              }
+              // icon={
+              //   formResponse.type === "error" ? (
+              //     <BsShieldExclamation />
+              //   ) : (
+              //     <BsShieldCheck />
+              //   )
+              // }
             >
               {formResponse.message}
             </Alert>
+          )} */}
+
+          {formResponse && (
+            <ErrorMessage $type={formResponse?.type}>
+              {formResponse?.message || "Please try again"}
+            </ErrorMessage>
           )}
           <Button
             text={isPending ? "Signing In..." : "Sign In"}
             type="submit"
+            fullWidth
             disabled={isPending}
             loading={isPending}
-            fullWidth
             color="var(--green-bg)"
-            size="md"
+        
           />
         </Form>
         <Footer>
