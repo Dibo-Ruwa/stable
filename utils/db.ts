@@ -35,12 +35,15 @@ async function dbConnect() {
     const opts = {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      bufferCommands: false,
+      bufferCommands: true,
     }
 
     cached.promise = mongoose.connect(MONGODB_URI as string, opts).then(mongoose => {
       console.log("Db connected")
       return mongoose.connection
+    }).catch(error => {
+      console.error("MongoDB connection error:", error)
+      throw error
     })
   }
   cached.conn = await cached.promise
