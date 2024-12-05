@@ -1,8 +1,6 @@
 import { assets } from "@/public/assets";
-import josh from "@/public/Joshua.jpeg";
-import j from "@/publicYakubu.jpg";
 // Base URL
-const baseURL: string = "https://diboruwa.com";
+// const baseURL: string = "https://diboruwa.com";
 
 // Route configuration
 export interface Route {
@@ -12,7 +10,6 @@ export interface Route {
   subroutes?: {
     name: string;
     path: string;
-    icon: string;
   }[];
 }
 
@@ -24,21 +21,21 @@ export const routes: Route[] = [
   {
     name: "Services",
     path: "/services",
-    icon: "🛠️",
     subroutes: [
-      { name: "Laundry", path: "/laundry", icon: assets.soap },
-      { name: "Food", path: "/food", icon: assets.food },
-      { name: "Cleaning", path: "/cleaning", icon: assets.cleaningImg },
-      { name: "Moving", path: "/moving", icon: assets.scooter },
+      { name: "Laundry", path: "/laundry" },
+      { name: "Food", path: "/food" },
+      { name: "Cleaning", path: "/cleaning" },
+      { name: "Moving", path: "/moving" },
     ],
+  },
+
+  {
+    name: "About Us",
+    path: "/about-us",
   },
   {
     name: "Contact Us",
     path: "/contact-us",
-  },
-  {
-    name: "About Us",
-    path: "/about-us",
   },
 
   // {
@@ -8720,6 +8717,7 @@ export const Data = [
   {
     _id: 1,
     tag: "Food",
+    tagLink: "/food",
     bigImg: "/images/food.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
@@ -8730,6 +8728,7 @@ export const Data = [
   {
     _id: 2,
     tag: "Moving",
+    tagLink: "/moving",
     bigImg: "/images/moving.png",
     bike: "/images/Frame 2610192.png",
     foodImg: "/images/Frame 2610173.png",
@@ -8740,6 +8739,7 @@ export const Data = [
   {
     _id: 3,
     tag: "Laundry",
+    tagLink: "/laundry",
     bigImg: "/images/laundry.png",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
@@ -8750,7 +8750,8 @@ export const Data = [
   {
     _id: 4,
     tag: "Cleaning",
-    bigImg: "/images/laundry.png",
+    tagLink: "/cleaning",
+    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -8760,7 +8761,8 @@ export const Data = [
   {
     _id: 5,
     tag: "Groceries",
-    bigImg: "/images/food.png",
+    tagLink: "/groceries",
+    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.23_d0e3a72a.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -8777,25 +8779,25 @@ export const TopResturant: Category[] = [
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${2}`,
         image: "/images/resturant.png",
         _id: 2,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${3}`,
         image: "/images/Rectangle 248 (4).png",
         _id: 3,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${4}`,
         image: "/images/Rectangle 248 (2).png",
         _id: 4,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${5}`,
         image: "/images/Rectangle 248 (3).png",
         _id: 5,
       },

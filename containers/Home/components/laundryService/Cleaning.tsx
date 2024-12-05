@@ -38,23 +38,23 @@ export default function Cleaning() {
             </a>
             <div className="laundry-service_img">
               <img
-                src="/images/Rectangle 248 (1).png"
+                src="/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg"
                 className="service_img"
                 alt="resturant guys"
               />
 
               <img
-                src="/images/Rectangle 249.png"
+                src="/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg"
                 className="service_img"
                 alt="resturant guys"
               />
               <img
-                src="/images/Rectangle 250.png"
+                src="/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg"
                 className="service_img"
                 alt="resturant guys"
               />
               <img
-                src="/images/Rectangle 251.png"
+                src="/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg"
                 className="service_img"
                 alt="resturant guys"
               />

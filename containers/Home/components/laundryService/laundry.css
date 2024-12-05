@@ -89,9 +89,13 @@
   text-decoration-line: underline;
   display: none;
 }
+
 img.service_img {
   width: 14rem;
+  border-radius: 0.7rem;
+  height: -webkit-fill-available;
 }
+
 .laundry_rest-title-h1 {
   color: #7e7e7e;
   font-size: 2rem;

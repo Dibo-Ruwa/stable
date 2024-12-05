@@ -1,41 +1,10 @@
 "use client";
-import HeroContainer from "@/component/shared/HeroContainer";
 import React, { useState, useEffect, useMemo } from "react";
-import {
-  Container,
-  FaqAccordionList,
-  FaqSection,
-  FeedBackSection,
-  ServiceList,
-  ServicesSection,
-  WhyChooseUsColored,
-  WhyChooseUsContent,
-  WhyChooseUsImage,
-  WhyChooseUsImageContainer,
-  WhyChooseUsSection,
-  WhyChooseUsText,
-  WhyChooseUsTitle,
-  HeroList,
-  HeroListItem,
-  HeroImageContainer,
-  HeroImage,
-} from "./home.styles";
 import "./components/home.css";
-import Button from "@/component/ui/button/Button";
-import { FiPhoneCall } from "react-icons/fi";
-import { accordionData, services } from "@/constants";
-import ServiceCard from "@/component/serviceCard/ServiceCard";
-import { assets } from "@/public/assets";
-import Accordion from "@/component/ui/accordion/Accordion";
-import NewsletterForm from "@/component/NewsletterForm";
-import { motion } from "framer-motion";
-import FeedbackCarousel from "@/component/feedBacksCarousel/FeedBacks";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import AccordionList from "@/component/AccordionList/AccordionList";
 import ProductServices from "./components/ProductServices";
-import RestAdvert from "./components/restAdvert/RestAdvert";
+// import RestAdvert from "./components/restAdvert/RestAdvert";
 import Meal from "./components/Meal/Meal";
 import Resturant from "./components/restCont/RestContent";
 import FoodImage from "./components/foodImage/FoodImage";
@@ -94,7 +63,7 @@ const Home: React.FC = () => {
   }, [serviceIndex, serviceOptions]);
 
   // Extract the tags from the Data array
-  const tags = useMemo(() => Data.map((item: { tag: any; }) => item.tag), []);
+  const tags = useMemo(() => Data.map((item: { tag: any }) => item.tag), []);
 
   const [selectedTag, setSelectedTag] = useState<string>(tags[0] || "Food");
 
@@ -120,7 +89,7 @@ const Home: React.FC = () => {
             data={[]}
           />
         </div>
-        <RestAdvert selectedTag={selectedTag} />
+        {/* <RestAdvert selectedTag={selectedTag} /> */}
         <Resturant />
         <Meal />
         <Delivery />
@@ -132,17 +101,10 @@ const Home: React.FC = () => {
         <Partner />
         <Newsletter />
       </div>
-
-
-
-      
-
-      
     </>
   );
 };
 export default Home;
-
 
 // {/* <Container>
 

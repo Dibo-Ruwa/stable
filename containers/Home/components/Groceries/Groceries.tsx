@@ -1,7 +1,8 @@
 import React from "react";
 import "./groceries.css";
 import Link from "next/link";
-import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
+import Image from "next/image";
+import { IoIosHeartEmpty } from "react-icons/io";
 import { FaBagShopping } from "react-icons/fa6";
 import { MdOutlineTimer } from "react-icons/md";
 import { RiArrowRightSLine } from "react-icons/ri";
@@ -9,23 +10,23 @@ import { RiArrowRightSLine } from "react-icons/ri";
 const food = [
   {
     id: 111,
-    img: "/images/image113.png",
+    img: "/images/WhatsApp Image 2024-12-04 at 15.15.27_8744cdd7.jpg",
   },
   {
     id: 221,
-    img: "/images/image113.png",
+    img: "/images/WhatsApp Image 2024-12-04 at 15.15.25_47c0ca4c.jpg",
   },
   {
     id: 331,
-    img: "/images/image113.png",
+    img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_c10fd95d.jpg",
   },
   {
     id: 441,
-    img: "/images/image113.png",
+    img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f2bd62bd.jpg",
   },
   {
     id: 551,
-    img: "/images/image113.png",
+    img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f86e40d7.jpg",
   },
 ];
 export default function Groceries() {
@@ -37,12 +38,11 @@ export default function Groceries() {
             <p
               style={{
                 fontSize: "1.3rem",
-                color: 'black',
+                color: "black",
               }}
             >
               Groceries
             </p>
-       
           </div>
           <div className="meal_card">
             {food.map((item) => (
@@ -72,13 +72,15 @@ export default function Groceries() {
               }}
             /> */}
                   </div>
-                  <img
+                  <Image
                     className=""
                     src={item.img}
                     alt="Chef preparing food"
+                    width={250}
+                    height={150}
                   />
                 </div>
-                <Link href={`/food/${item.id}`}>
+                <Link href={`/groceries/${item.id}`}>
                   <div className="meal-dis">
                     <div>
                       <div>
@@ -134,7 +136,8 @@ export default function Groceries() {
             ))}
           </div>
 
-          <Link href="/groceries"
+          <Link
+            href="/groceries"
             style={{
               display: "flex",
               gap: 6,
@@ -152,7 +155,7 @@ export default function Groceries() {
                 marginTop: 2,
               }}
             />
-          </Link >
+          </Link>
         </div>
       </div>
     </div>
