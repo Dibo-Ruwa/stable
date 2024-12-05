@@ -2,7 +2,7 @@ import React from "react";
 import { AboutMoving } from "./components/MovingDetails/AboutMoving";
 import { LeftMovingContainer } from "./components/leftMovingContainer/LeftMovingContainer";
 import "./moving-details.css";
-import { BackButton } from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 import { MovingBRP } from "./components/MovingBRP/MovingBRP";
 
 export const MovingDetails = () => {

@@ -2,6 +2,8 @@
 import "./home.css";
 import React, { useState } from "react";
 import { Data, DataItem } from "@/constants/index";
+import Link from "next/link";
+import { Button } from "@/component/shared/Button";
 
 const MobileView: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string>("Food");
@@ -118,45 +120,54 @@ const ProductServices: React.FC<ProductServicesProps> = ({
   );
   return (
     <>
-      <div className="hero_cont">
-        <div className="hero_prod">
-          <div className="prod">
-            <div className="prod-cont">
-              <div className="tags-container">
-                {Data.map((tagItem) => (
-                  <button
-                    key={tagItem._id}
-                    className={`tag-text ${
-                      tagItem.tag === selectedTag ? "tag-text-active" : ""
-                    }`}
-                    onClick={() => setSelectedTag(tagItem.tag)}
-                  >
-                    {tagItem.tag}
-                  </button>
-                ))}
+      {/* <div className="hero_cont"> */}
+      <div className="hero_prod">
+        <div className="prod">
+          <div className="prod-cont">
+            <div className="tags-container">
+              {Data.map((tagItem) => (
+                <Link
+                  href={tagItem.tagLink}
+                  key={tagItem._id}
+                  className={`tag-text ${
+                    tagItem.tag === selectedTag ? "tag-text-active" : ""
+                  }`}
+                  onClick={() => setSelectedTag(tagItem.tag)}
+                >
+                  {tagItem.tag}
+                </Link>
+              ))}
+            </div>
+            <div className="text-container">
+              <p className="highlight">Your Ultimate Solution for</p>
+              <p className="highlight2">Modern Lifestyle Needs</p>
+              <div className="description">
+                One platform, endless convenience. Simplify your life with our
+                intuitive solution for all your needs.
               </div>
-              <div className="text-container">
-                <p className="highlight">Your Ultimate Solution for</p>
-                <p className="highlight2">Modern Lifestyle Needs</p>
-                <div className="description">
-                  One platform, endless convenience. Simplify your life with our
-                  intuitive solution for all your needs.
-                </div>
-                <button className="get-started-btn">Get Started</button>
+              <button className="get-started-btn">Get Started</button>
+            </div>
+          </div>
+          {selectedItem && (
+            <div className="image">
+              <img src={selectedItem.bigImg} alt={selectedItem.tag} />
+              <div className="overlay">
+                <div className="footer-text">{selectedItem.foodText}</div>
               </div>
             </div>
-            {selectedItem && (
-              <div className="image">
-                <img src={selectedItem.bigImg} alt={selectedItem.tag} />
-                <div className="overlay">
-                  <div className="footer-text">{selectedItem.foodText}</div>
-                </div>
-              </div>
-            )}
-          </div>
+          )}
         </div>
+        <MobileView />
+      </div>
 
-        {selectedItem && (
+      {/* </div> */}
+    </>
+  );
+};
+export default ProductServices;
+
+{
+  /* {selectedItem && (
           <div className="hero_map">
             <img
               className="map"
@@ -180,59 +191,5 @@ const ProductServices: React.FC<ProductServicesProps> = ({
               </div>
             </div>
           </div>
-        )}
-        <MobileView />
-      </div>
-    </>
-  );
-};
-export default ProductServices;
-// {
-//  <div className="container">
-// <div>
-
-// </div>
-// <div className="tags-container">
-//   <div className="tag tag-food">
-//   <div className="tag-text">Food</div>
-//   </div>
-//   <div className="tag tag-courier">
-//     <div className="tag-text">Courier</div>
-//   </div>
-//   <div className="tag tag-laundry">
-//     <div className="tag-text">Laundry</div>
-//   </div>
-//   <div className="tag tag-grooming">
-//     <div className="tag-text">Grooming</div>
-//   </div>
-// </div>
-// <img
-//   className="image"
-//   src="https://via.placeholder.com/449x276"
-//   alt="Chef preparing food"
-// />
-// <div className="text-container">
-//   <div className="highlight">
-//     Your Ultimate Solution for Modern Lifestyle Needs
-//   </div>
-//   <div className="description">
-//     One platform, endless convenience. Simplify your life with our
-//     intuitive solution for all your needs.
-//   </div>
-// </div>
-// <div className="get-started-btn">
-//   <div className="get-started-text">Get Started</div>
-//   <div className="arrow-container">
-//     <div className="arrow">
-//       <div className="arrow-part arrow-part-1"></div>
-//       <div className="arrow-part arrow-part-2"></div>
-//     </div>
-//   </div>
-// </div>
-// <div className="overlay" />
-// <div className="footer-text">
-//   Order from your favorite restaurant and get your meal delivered in
-//   minutes.
-// </div>
-// </div>
-// }
+        )} */
+}

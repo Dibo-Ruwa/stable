@@ -6,17 +6,20 @@ import { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
 import * as React from "react";
 import { NextUIProvider } from "@nextui-org/react";
+import { MantineProvider } from '@mantine/core';
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <SessionProvider>
-      <NextUIProvider>
-      <StyledComponentsRegistry>
-        <AuthGuard>
-          {children} <Toaster />
-        </AuthGuard>
-      </StyledComponentsRegistry>
-      </NextUIProvider>
+      <MantineProvider>
+        <NextUIProvider>
+        <StyledComponentsRegistry>
+          <AuthGuard>
+            {children} <Toaster />
+          </AuthGuard>
+        </StyledComponentsRegistry>
+        </NextUIProvider>
+      </MantineProvider>
     </SessionProvider>
   );
 };

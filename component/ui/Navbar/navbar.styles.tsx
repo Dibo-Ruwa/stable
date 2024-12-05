@@ -9,33 +9,20 @@ export const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 15vh;
-  padding: 0 5%;
+  padding: 0 3.5%;
+  height: 10vh;
   position: fixed;
   gap: 20px;
   left: 0;
   top: 0;
   z-index: 50;
   transition: all 200ms;
+  border-bottom: 1px solid var(--primary-20);
 
   .logo {
     position: relative;
     width: 100px;
     height: 40px;
-
-    a {
-      &::after {
-        content: "beta";
-        position: absolute;
-        top: -10px;
-        left: 70%;
-        padding: 3px 8px;
-        color: #fff;
-        border-radius: 20px;
-        font-size: 14px;
-        background: var(--primary);
-      }
-    }
   }
 
   .cart {
@@ -143,12 +130,6 @@ export const MenuList = styled(motion.ul as any)`
       display: flex;
       gap: 10px;
       align-items: center;
-      padding: 10px;
-
-      &:hover {
-        background: var(--primary-20);
-        border-radius: 10px;
-      }
 
       .icon {
         width: 30px;

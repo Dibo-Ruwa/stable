@@ -41,22 +41,26 @@ interface BackButtonProps {
   onClick?: () => void;
 }
 
-export const BackButton: React.FC<BackButtonProps> = ({className, onClick}) => {
+const BackButton: React.FC<BackButtonProps> = ({ className, onClick }) => {
   const router = useRouter();
 
   const handleClick = () => {
     if (onClick) {
-      onClick()
-    } else (
-      router.back()
-    )
-  }
+      onClick();
+    } else {
+      router.back();
+    }
+  };
+
   return (
-    <Container onClick={handleClick} className={className}>
-      <ArrowLeftIcon className="icon" /> <span className="span_back">Back</span>
+    <Container className={className} onClick={handleClick}>
+      <LiaAngleLeftSolid className="icon" />
+      <span className="span_back">Back</span>
     </Container>
   );
 };
+
+export default BackButton;
 
 export const BackButton2: React.FC<BackButtonProps> = ({ className, onClick }) => {
   const router = useRouter();
@@ -75,5 +79,3 @@ export const BackButton2: React.FC<BackButtonProps> = ({ className, onClick }) =
     </Container>
   );
 };
-
- 

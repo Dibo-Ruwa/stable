@@ -8,13 +8,13 @@ export default function GroomingService() {
         <p className="sub_food">Groceries</p>
         <div className="grooming-image">
           <img
-            src="/images/Frame 2610228 (2).png"
+            src="/images/WhatsApp Image 2024-12-04 at 15.15.23_f2bd62bd.jpg"
             className="grooming_desktop-image"
             alt="resturant guys"
           />
           <div className="grooming_mobile-image">
             <img
-              src="/images/image 160 (1).png"
+              src="/images/WhatsApp Image 2024-12-04 at 15.15.23_f2bd62bd.jpg"
               className="grooming_img-main"
               alt="resturant guys"
             />

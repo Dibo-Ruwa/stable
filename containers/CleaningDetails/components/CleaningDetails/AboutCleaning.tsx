@@ -8,7 +8,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { CiCalendar, CiClock2 } from "react-icons/ci";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { SlideInSub } from "./SlideInSub/SlideInSub";
-import { BackButton } from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 
 const MobileAboutCleaning = () => {
   const [isSubOpen, setIsSubOpen] = useState<boolean>(false);

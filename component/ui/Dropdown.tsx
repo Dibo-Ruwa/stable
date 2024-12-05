@@ -6,6 +6,8 @@ interface DropdownProps {
   placeholder?: string;
   options: string[];
   onSelect: (selectedOption: string) => void;
+  value?: string;
+  disabled?: boolean;
 }
 
 const DropdownContainer = styled.div`
@@ -13,21 +15,28 @@ const DropdownContainer = styled.div`
   /* z-index: 999; */
 `;
 
-const DropdownButton = styled.button`
-  padding: 8px 16px;
+const DropdownButton = styled.button<{ $isOpen?: boolean; disabled?: boolean }>`
+  padding: 12px 16px;
   outline: none;
-  border: 1px solid var(--primary);
-  padding: 10px 15px;
+  border: 2px solid transparent;
   border-radius: 10px;
-  transition: all 0.5s ease-in-out;
-  background-color: var(--primary);
+  transition: all 0.3s ease;
+  background-color: ${props => props.$isOpen ? '#2ecc71' : props.disabled ? '#ccc' : 'var(--primary)'};
   color: #fff;
-  border: none;
-  min-width: 100px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: ${props => props.disabled ? 'not-allowed' : 'pointer'};
+  opacity: ${props => props.disabled ? 0.7 : 1};
+  
   &:hover {
-    background: var(--primary);
+    background: ${props => props.disabled ? 'var(--primary)' : '#2ecc71'};
+    transform: ${props => props.disabled ? 'none' : 'translateY(-1px)'};
   }
-  cursor: pointer;
+
+  &:focus {
+    border-color: #2ecc71;
+    box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.2);
+  }
 `;
 
 const DropdownList = styled.ul`
@@ -37,39 +46,62 @@ const DropdownList = styled.ul`
   list-style: none;
   border-radius: 10px;
   width: 100%;
-  max-height: 150px;
-  overflow: scroll;
+  max-height: 200px;
+  overflow-y: auto;
   padding: 0;
   margin: 4px 0 0;
   background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* overflow: hidden; */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+  /* Custom Scrollbar Styling */
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border-radius: 4px;
+    
+    &:hover {
+      background-color: darken(var(--primary), 10%);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+  }
 `;
 
 const DropdownItem = styled.li`
-  padding: 5px 16px;
-  outline: none;
-  width: 100%;
-  border: 1px solid var(--primary);
-  padding: 10px 15px;
-  transition: all 0.5s ease-in-out;
-  color: var(--primary);
-  font-size: 14px;
-  border: none;
-  &:hover {
-    background: var(--primary);
-    color: #fff;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  color: #333;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #f0f0f0;
+  
+  &:last-child {
+    border-bottom: none;
   }
-  cursor: pointer;
+
+  &:hover {
+    background: #f8f9fa;
+    color: var(--primary);
+    padding-left: 20px;
+  }
 `;
 
 const Dropdown: React.FC<DropdownProps> = ({
   options,
   onSelect,
   placeholder,
+  value,
+  disabled,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(value || null);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -78,12 +110,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    if (!disabled) {
+      setIsOpen(!isOpen);
+    }
   };
 
   return (
     <DropdownContainer>
-      <DropdownButton onClick={toggleDropdown}>
+      <DropdownButton onClick={toggleDropdown} $isOpen={isOpen} disabled={disabled}>
         {selectedOption || placeholder || "Select an option"}
       </DropdownButton>
       {isOpen && (

@@ -1,0 +1,119 @@
+<table cellspacing="0" cellpadding="0" style="background-color: #f3f3fc; width: 100%; font-family: Arial, sans-serif;">
+  <tbody>
+    <tr>
+      <td align="center">
+        <!-- Content Wrapper (max-width 670px) -->
+        <div style="max-width: 670px; width: 100%; background-color: rgba(14, 252, 213, 0.329); padding: 5%; margin: 0 auto;">
+
+          <!-- Company Logo -->
+          <div style="width: 100px; height: 100px; margin: 0 auto;">
+            <img style="width: 100%; height: 100%; object-fit: contain;" src="https://res.cloudinary.com/zeeson-info-tech-and-innovations/image/upload/v1698603012/Deck%20assets/comp_logo_l2_1_fky59a.png" alt="company_logo" />
+          </div>
+
+          <!-- Main Content Container -->
+          <div style="background-color: white; border-radius: 12px; overflow: hidden; margin: 30px 0;">
+            <!-- Email Header -->
+            <div style="background-color: #00a6cf; padding: 20px; text-align: center;">
+              <h1 style="color: white; margin: 0; font-size: 24px;">New Order Placed</h1>
+            </div>
+
+            <!-- Email Body -->
+            <div style="padding: 5%; text-align: left;">
+              <!-- Greeting -->
+              <p style="color: #121212; line-height: 1.6;">Admin Team,</p>
+              <p style="color: #121212; line-height: 1.6;">
+                We've received a new order placed by <strong>{{customerFullName}}</strong>, and it has been assigned to <strong>{{partnerFullName}}</strong> for fulfillment.
+              </p>
+
+              <!-- Order Summary -->
+              <h3 style="color: #121212; font-size: 18px;">Order Summary:</h3>
+              <ul style="list-style: none; padding: 20px; margin: 20px 0; border: 2px solid #00a6cf; display: grid; gap: 10px;">
+                <li><strong>Order ID:</strong> #{{orderNumber}}</li>
+
+                <!-- Order Items -->
+                <div>
+                  {{itemsOrdered}} <!-- This will be dynamically replaced with formatted list of order items -->
+                </div>
+
+                <li><strong>Price (Items Total):</strong> ₦{{amount}}</li>
+                <li><strong>Delivery Fee:</strong> ₦{{deliveryFee}}</li>
+                <li><strong>Total Amount:</strong> ₦{{total}}</li>
+                <li><strong>Delivery Address:</strong> {{customerAddress}}</li>
+                <li><strong>Phone Number:</strong> {{customerPhone}}</li>
+                <li><strong>Assigned Partner:</strong> {{partnerFullName}}</li>
+                <li><strong>Order Date & Time:</strong> {{orderTimestamp}}</li>
+              </ul>
+
+              <!-- Access Admin Dashboard Button -->
+              <!-- <div style="text-align: center; margin: 20px 0;">
+                <a href="{{adminDashboardLink}}" target="_blank" rel="noopener noreferrer"
+                   style="text-decoration: none; background-color: #00a6cf; color: #fff; padding: 10px 20px; border-radius: 5px; font-size: 14px;">
+                  Access Admin Dashboard
+                </a>
+              </div> -->
+
+               <!-- Access Admin Dashboard Button -->
+               <div style="text-align: center; margin: 20px 0;">
+                <a href="{{adminDashboardLink}}" target="_blank" rel="noopener noreferrer"
+                  style="text-decoration: none; background-color: #00afdb; color: #fff; max-width: 300px; height: 50px; line-height: 50px; border-radius: 4px; display: block; font-size: 12px; text-align: center; margin: 0 auto;">
+                  Access Admin Dashboard
+                </a>
+              </div>
+
+              <!-- Note -->
+              <p style="color: #121212; line-height: 1.6;">
+                <strong>Note:</strong> <em>The button links directly to the order in the admin dashboard.</em>
+              </p>
+              
+              <!-- Closing Message -->
+              <p style="color: #121212; line-height: 1.6;">
+                Thank you for ensuring our customers receive the best service possible.
+              </p>
+              <p style="color: #121212; line-height: 1.6;">Warm Regards, <br /> Diboruwa Operations</p>
+            </div>
+          </div>
+
+          <!-- Footer with Social Links -->
+          <div style="text-align: center; padding: 20px 0;">
+            <p style="margin-bottom: 10px; color: #121212;">Follow us on:</p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+              <a href="https://web.facebook.com/people/Dibo-Ruwa/100091340989617/" target="_blank">
+                <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/5968/5968764.png" alt="facebook_logo" />
+              </a>
+              <a href="https://twitter.com/DiboRuwa" target="_blank">
+                <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/5969/5969020.png" alt="twitter_logo" />
+              </a>
+              <a href="https://www.instagram.com/diboruwa/" target="_blank">
+                <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/4138/4138124.png" alt="instagram_logo" />
+              </a>
+              <a href="https://www.linkedin.com/company/dibo-ruwa" target="_blank">
+                <img style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/128/145/145807.png" alt="linkedin_logo" />
+              </a>
+            </div>
+
+            <!-- Copyright -->
+            <div style="color: #949494; margin-top: 20px;">&copy; 2024 Diboruwa. All Rights Reserved.</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Mobile responsiveness -->
+<style>
+  @media only screen and (max-width: 600px) {
+    table {
+      width: 100% !important;
+    }
+    div {
+      padding: 2% !important;
+    }
+    h1 {
+      font-size: 20px !important;
+    }
+    a {
+      padding: 15px 0 !important;
+    }
+  }
+</style>
