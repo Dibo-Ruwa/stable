@@ -193,11 +193,11 @@ const CloseButton = styled.div`
 
 const slideIn = keyframes`
   from {
-    transform: translateX(100%);
+    transform: translateY(-100%);
     opacity: 0;
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 `;
@@ -211,7 +211,7 @@ const fadeOut = keyframes`
   }
 `;
 
-const Toast = styled.div<{ isVisible: boolean }>`
+const Toast = styled.div<{ $isVisible: boolean }>`
   position: fixed;
   top: 20px;
   right: 20px;
@@ -224,7 +224,7 @@ const Toast = styled.div<{ isVisible: boolean }>`
   gap: 10px;
   box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
   z-index: 1000;
-  animation: ${props => props.isVisible ? slideIn : fadeOut} 0.3s ease-in-out;
+  animation: ${props => props.$isVisible ? slideIn : fadeOut} 0.3s ease-in-out;
 
   svg {
     font-size: 1.2rem;
@@ -329,25 +329,39 @@ const LocationModal: React.FC = () => {
     fetchStatesAndRegions();
   }, [url]);
 
-  const handleStateSelect = (state: string) => {
-    setSelectedState(state);
-    if (state && statesAndRegions[state]) {
-      setAvailableRegions(statesAndRegions[state]);
-    } else {
-      setAvailableRegions([]);
+  useEffect(() => {
+    const hasLocation = Cookies.get(`${companyName}_location`);
+    if (!hasLocation) {
+      setShowModal(true);
     }
-    setSelectedRegion("");
+  }, [companyName]);
+
+  // const handleStateSelect = (state: string) => {
+  //   setSelectedState(state);
+  //   if (state && statesAndRegions[state]) {
+  //     setAvailableRegions(statesAndRegions[state]);
+  //   } else {
+  //     setAvailableRegions([]);
+  //   }
+  //   setSelectedRegion("");
+  // };
+
+  const handleStateSelect = (state: string) => {
+    setSelectedState(state || null);
+    setAvailableRegions(statesAndRegions[state] || []);
   };
 
-  const handleRegionSelect = (selectedOption: string) => {
-    setSelectedRegion(selectedOption.toLowerCase());
+  // const handleRegionSelect = (selectedOption: string) => {
+  //   setSelectedRegion(selectedOption.toLowerCase());
+  // };
+
+  const handleRegionSelect = (region: string) => {
+    setSelectedRegion(region || "");
   };
 
   const handleModalClose = () => {
     if (selectedState && selectedRegion) {
-      Cookies.set(`${companyName}_hasVisited`, "true", { expires: 1 });
-      Cookies.set(`${companyName}_selectedState`, selectedState, { expires: 1 });
-      Cookies.set(`${companyName}_selectedRegion`, selectedRegion, { expires: 1 });
+      Cookies.set("hasVisited", "true", { expires: 1 }); // Set to expire in 24 hours
     }
     setShowModal(false);
   };
@@ -358,7 +372,7 @@ const LocationModal: React.FC = () => {
       Cookies.set(`${companyName}_location`, JSON.stringify({
         state: selectedState,
         region: selectedRegion
-      }), { expires: 7 });
+      }), { expires: 1 });
       
       // Close modal immediately
       setShowModal(false);
@@ -373,13 +387,6 @@ const LocationModal: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    const hasVisited = Cookies.get(`${companyName}_hasVisited`);
-
-    if (!hasVisited) {
-      setShowModal(true);
-    }
-  }, [companyName]);
 
   return (
     <>
@@ -430,7 +437,7 @@ const LocationModal: React.FC = () => {
       )}
       
       {showToast && (
-        <Toast isVisible={showToast}>
+        <Toast $isVisible={showToast}>
           <FaCheckCircle />
           Location successfully updated!
         </Toast>

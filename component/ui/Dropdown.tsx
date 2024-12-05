@@ -15,13 +15,13 @@ const DropdownContainer = styled.div`
   /* z-index: 999; */
 `;
 
-const DropdownButton = styled.button<{ isOpen?: boolean; disabled?: boolean }>`
+const DropdownButton = styled.button<{ $isOpen?: boolean; disabled?: boolean }>`
   padding: 12px 16px;
   outline: none;
   border: 2px solid transparent;
   border-radius: 10px;
   transition: all 0.3s ease;
-  background-color: ${props => props.isOpen ? '#2ecc71' : props.disabled ? '#ccc' : 'var(--primary)'};
+  background-color: ${props => props.$isOpen ? '#2ecc71' : props.disabled ? '#ccc' : 'var(--primary)'};
   color: #fff;
   width: 100%;
   font-size: 1rem;
@@ -117,7 +117,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <DropdownContainer>
-      <DropdownButton onClick={toggleDropdown} isOpen={isOpen} disabled={disabled}>
+      <DropdownButton onClick={toggleDropdown} $isOpen={isOpen} disabled={disabled}>
         {selectedOption || placeholder || "Select an option"}
       </DropdownButton>
       {isOpen && (
