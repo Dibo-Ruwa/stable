@@ -24,7 +24,7 @@ export async function GET(req: Request, res: Response) {
 
       return NextResponse.json(
         {
-          message: "An email has been sent to verify your account!!!",
+          message: "An email has been sent to verify your account.",
           email: user.email,
           success: true,
         },
@@ -33,7 +33,7 @@ export async function GET(req: Request, res: Response) {
     } else {
       return NextResponse.json(
         {
-          message: "Invalid token!!!",
+          message: "Invalid token",
           success: true,
         },
         { status: 403 }
@@ -42,7 +42,9 @@ export async function GET(req: Request, res: Response) {
   } catch (err) {
     return NextResponse.json(err);
   } finally {
-    await closeDB();
+    // await closeDB();
+    console.log("Final")
+
   }
 }
 export async function POST(req: Request, res: Response) {
@@ -60,7 +62,7 @@ export async function POST(req: Request, res: Response) {
 
     if (!userExists) {
       return new Response(
-        "User does not exists. Try entering other email address",
+        "User does not exists. Try entering other email address.",
         { status: 400 }
       );
     }
@@ -76,7 +78,7 @@ export async function POST(req: Request, res: Response) {
 
     return NextResponse.json(
       {
-        message: "Password Changed successfuly!!!",
+        message: "Password changed successfully",
 
         success: true,
       },
@@ -85,6 +87,8 @@ export async function POST(req: Request, res: Response) {
   } catch (err) {
     return NextResponse.json(err);
   } finally {
-    await closeDB();
+    // await closeDB();
+    console.log("Final")
+
   }
 }

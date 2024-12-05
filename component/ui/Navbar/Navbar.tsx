@@ -151,14 +151,14 @@ const Navbar = () => {
               ))}
               {!session && (
                 <li>
-                  <Link className="link" href="/signin">
+                  <Link className="link" href={"/sign-in"}>
                     Sign In
                   </Link>
                 </li>
               )}
               {!session && (
                 <li>
-                  <Link className="link" href="/signup">
+                  <Link className="link" href={"/sign-up"}>
                     Sign Up
                   </Link>
                 </li>
@@ -175,28 +175,28 @@ const Navbar = () => {
       <MenuList>
         {!session && (
           <li>
-            <button
-              onClick={() => openAuthModal("signup")}
+            <Link 
+              href="/sign-up"
               style={{
-                color: "#27A124",
+                color: "var(--green-bg)",
               }}
               className="link"
             >
               Register
-            </button>
+            </Link>
           </li>
         )}
         {!session && (
           <li>
-            <button
-              onClick={() => openAuthModal("signin")}
+            <Link 
+              href="/sign-in"
               style={{
-                color: "#27A124",
+                color: "var(--green-bg)",
               }}
               className="link"
             >
               Login
-            </button>
+            </Link>
           </li>
         )}
         {!session && (
@@ -218,14 +218,12 @@ const Navbar = () => {
             ) : (
               <></>
             )}
-            <>
-              <Link
-                href="/cart"
-                style={{ textDecoration: "none", color: "var(--primary)" }}
-              >
-                <FaBagShopping className="cart_icon" />
-              </Link>
-            </>
+            <Link
+              href="/cart"
+              style={{ textDecoration: "none", color: "var(--primary)" }}
+            >
+              <FaBagShopping className="cart_icon" />
+            </Link>
           </div>
         )}
       </MenuList>

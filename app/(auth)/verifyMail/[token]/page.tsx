@@ -1,11 +1,19 @@
 import VerifyMail from "@/containers/verifyMail/VerifyMail";
 
-const page = ({ params }: { params: { token: string } }) => {
+interface PageProps {
+  params: {
+    token: string;
+  };
+}
+
+async function Page({ params }: PageProps) {
+  const token = params.token;
+  
   return (
     <div>
-      <VerifyMail token={params.token} />
+      <VerifyMail token={token} />
     </div>
   );
-};
+}
 
-export default page;
+export default Page;

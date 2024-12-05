@@ -28,24 +28,31 @@ const ModalContent = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 `;
 
-const Header = styled.header`
+const ModalHeader = styled.header`
   text-align: center;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-  h2 {
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
+const ModalBody = styled.div`
+  padding: 20px;
+`;
 
-  p {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
+const ErrorMessage = styled.div`
+  color: #e74c3c;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #fdeaea;
+  border-radius: 4px;
+  text-align: center;
+`;
 
-  .small {
-    font-size: 14px;
-    margin-bottom: 30px;
-  }
+const LoadingMessage = styled.div`
+  text-align: center;
+  padding: 20px;
+  color: #666;
 `;
 
 const FormControl = styled.div`
@@ -68,6 +75,11 @@ const SubmitButton = styled.div`
   cursor: pointer;
 `;
 
+const CloseButton = styled.div`
+  font-size: 24px;
+  cursor: pointer;
+`;
+
 interface CityData {
   _id: string;
   name: string;
@@ -79,36 +91,96 @@ const LocationModal: React.FC = () => {
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [availableRegions, setAvailableRegions] = useState<string[]>([]);
+  const [availableStates, setAvailableStates] = useState<string[]>([]);
   const [statesAndRegions, setStatesAndRegions] = useState<{ [key: string]: string[] }>({});
   const [companyName] = useState<string>("diboruwa");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const url = process.env.NEXT_PUBLIC_ADMIN_URL;
-console.log(url)
+  const url = process.env.NEXT_PUBLIC_ADMIN_URL || 'https://diboruwa-admin-test.vercel.app';
+
   useEffect(() => {
     const fetchStatesAndRegions = async () => {
+      setIsLoading(true);
+      setError(null);
+      
       try {
-        const response = await axios.get(`${url}/api/locations`);
-        const cityData: CityData[] = response.data.cities;
-
-        const formattedData: { [key: string]: string[] } = {};
-
-        cityData.forEach(city => {
-          formattedData[city.name] = city.regions.map(region => region.name);
+        const apiUrl = `${url}/api/locations`;
+        console.log('Fetching from:', apiUrl);
+        
+        const response = await axios({
+          method: 'GET',
+          url: apiUrl,
+          timeout: 15000,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          validateStatus: (status) => status === 200
         });
 
-        setStatesAndRegions(formattedData);
+        console.log('Raw response:', response);
+
+        if (!response.data) {
+          throw new Error('No data received from server');
+        }
+
+        const { cities } = response.data;
+        
+        if (!Array.isArray(cities)) {
+          throw new Error('Invalid data format: cities is not an array');
+        }
+
+        const statesRegionsMap: { [key: string]: string[] } = {};
+        const states: string[] = [];
+
+        cities.forEach((city: CityData) => {
+          if (city?.name && Array.isArray(city?.regions)) {
+            states.push(city.name);
+            statesRegionsMap[city.name] = city.regions
+              .filter(region => region && region.name)
+              .map(region => region.name);
+          }
+        });
+
+        if (states.length === 0) {
+          throw new Error('No valid cities found in response');
+        }
+
+        setAvailableStates(states);
+        setStatesAndRegions(statesRegionsMap);
       } catch (error) {
-        console.error("Error fetching state and region data:", error);
+        console.error('Location fetch error:', error);
+        if (axios.isAxiosError(error)) {
+          const errorMessage = error.response?.data?.message 
+            || error.message 
+            || 'Failed to fetch locations';
+          setError(errorMessage);
+          console.error('Axios error details:', {
+            message: error.message,
+            response: error.response?.data,
+            status: error.response?.status,
+            config: {
+              url: error.config?.url,
+              method: error.config?.method
+            }
+          });
+        } else {
+          setError('An unexpected error occurred');
+          console.error('Non-Axios error:', error);
+        }
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchStatesAndRegions();
   }, [url]);
 
-  const handleStateSelect = (selectedOption: string | null) => {
-    setSelectedState(selectedOption);
-    if (selectedOption) {
-      setAvailableRegions(statesAndRegions[selectedOption] || []);
+  const handleStateSelect = (state: string) => {
+    setSelectedState(state);
+    if (state && statesAndRegions[state]) {
+      setAvailableRegions(statesAndRegions[state]);
     } else {
       setAvailableRegions([]);
     }
@@ -141,33 +213,38 @@ console.log(url)
       {showModal && (
         <ModalWrapper>
           <ModalContent>
-            <Header>
-              <FaMapMarkerAlt size={70} style={{ 
-                marginBottom: "40px",
-                margin: 'auto',
-
-               }} color="green" />
-              <h2>Set your Delivery location</h2>
-              <p>Hello! DiboRuwa currently provides services in key cities across Nigeria.</p>
-              <small className="small">
-                Delivery options and fees may vary based on your location.
-              </small>
-            </Header>
-
-            <FormControl>
-              <Dropdown
-                placeholder="Select city"
-                options={Object.keys(statesAndRegions)}
-                onSelect={handleStateSelect}
-              />
-              <Dropdown
-                placeholder="Select region"
-                options={availableRegions}
-                onSelect={handleRegionSelect}
-              />
-            </FormControl>
-
-            <SubmitButton onClick={handleModalClose}>Submit</SubmitButton>
+            <ModalHeader>
+              <h2>Select Your Location</h2>
+              <CloseButton onClick={handleModalClose}>&times;</CloseButton>
+            </ModalHeader>
+            <ModalBody>
+              {error && (
+                <ErrorMessage>
+                  {error}
+                </ErrorMessage>
+              )}
+              {isLoading ? (
+                <LoadingMessage>Loading locations...</LoadingMessage>
+              ) : (
+                <FormControl>
+                  <Dropdown
+                    placeholder="Select city"
+                    options={availableStates}
+                    onSelect={handleStateSelect}
+                    value={selectedState || ''}
+                    disabled={isLoading}
+                  />
+                  <Dropdown
+                    placeholder="Select region"
+                    options={availableRegions}
+                    onSelect={handleRegionSelect}
+                    value={selectedRegion}
+                    disabled={!selectedState || isLoading}
+                  />
+                </FormControl>
+              )}
+              <SubmitButton onClick={handleModalClose}>Submit</SubmitButton>
+            </ModalBody>
           </ModalContent>
         </ModalWrapper>
       )}

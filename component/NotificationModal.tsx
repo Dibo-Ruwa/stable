@@ -26,7 +26,7 @@ const NotificationModal: React.FC<ModalProps> = ({
           {errorType === "success" ? <BsCheckCircleFill /> : <MdError />}
         </div>
 
-        <Message>{message}</Message>
+        <h1>{message}</h1>
 
         {errorType === "info" ? (
           <ProfileButton onClick={() => router.push("/profile")}>
@@ -57,46 +57,52 @@ const ModalContainer = styled.div`
 
 const ModalContent = styled.div<{ errorType: string }>`
   /* Styling for the modal content */
-
-  background: #fff;
-  border: ${(props) =>
-    props.errorType === "success"
-      ? "1px solid #4CAF50"
-      : props.errorType === "error"
-      ? "1px solid #F44336"
-      : "1px solid #2196F3"};
-  color: ${(props) =>
-    props.errorType === "success"
-      ? "1px solid #4CAF50"
-      : props.errorType === "error"
-      ? "1px solid #F44336"
-      : "1px solid #2196F3"};
-
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border-radius: 8px;
   text-align: center;
   z-index: 999;
-  text-align: center;
-  width: 25%;
+  width: 90%;
+  max-width: 500px;
 
   @media screen and (max-width: 768px) {
-    width: 80%;
+    width: 95%;
   }
 
   .icon {
     font-size: 60px;
     margin-bottom: 20px;
+    color: ${(props) => (props.errorType === "success" ? "#4CAF50" : "#F44336")};
+  }
+
+  h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #121212;
   }
 
   p {
-    font-size: 20px;
+    font-size: 16px;
+    color: #666;
     margin-bottom: 20px;
   }
-`;
 
-const Message = styled.p`
-  /* Styling for the message */
-  margin: 0;
+  .button {
+    background-color: #00afdb;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 20px 0;
+    transition: background-color 0.3s;
+  }
+
+  .button:hover {
+    background-color: #0091c8;
+  }
 `;
 
 const CloseButton = styled.button`

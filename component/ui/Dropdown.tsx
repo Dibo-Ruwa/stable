@@ -6,6 +6,8 @@ interface DropdownProps {
   placeholder?: string;
   options: string[];
   onSelect: (selectedOption: string) => void;
+  value?: string;
+  disabled?: boolean;
 }
 
 const DropdownContainer = styled.div`
@@ -67,9 +69,11 @@ const Dropdown: React.FC<DropdownProps> = ({
   options,
   onSelect,
   placeholder,
+  value,
+  disabled,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>(value || null);
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -78,12 +82,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   };
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    if (!disabled) {
+      setIsOpen(!isOpen);
+    }
   };
 
   return (
     <DropdownContainer>
-      <DropdownButton onClick={toggleDropdown}>
+      <DropdownButton onClick={toggleDropdown} disabled={disabled}>
         {selectedOption || placeholder || "Select an option"}
       </DropdownButton>
       {isOpen && (
