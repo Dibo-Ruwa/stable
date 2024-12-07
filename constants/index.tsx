@@ -8723,7 +8723,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
       " Order from your favorite restaurant and get your meal delivered in minutes.",
-    map: "/images/map.png",
+    map: "/images/map1.jpg",
   },
   {
     _id: 2,
@@ -8734,7 +8734,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173.png",
     foodText:
       "Moving to a new building? No worries, courier is here to help you convey your properties.",
-    map: "/images/map.png",
+    map: "/images/map2.jpg",
   },
   {
     _id: 3,
@@ -8756,7 +8756,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
       " Order from your favorite restaurant and get your meal delivered in minutes.",
-    map: "/images/map.png",
+    map: "/images/map3.jpg",
   },
   {
     _id: 5,

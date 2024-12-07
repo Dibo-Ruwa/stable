@@ -4,7 +4,7 @@ import "./components/home.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import ProductServices from "./components/ProductServices";
-// import RestAdvert from "./components/restAdvert/RestAdvert";
+import RestAdvert from "./components/restAdvert/RestAdvert";
 import Meal from "./components/Meal/Meal";
 import Resturant from "./components/restCont/RestContent";
 import FoodImage from "./components/foodImage/FoodImage";
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
             data={[]}
           />
         </div>
-        {/* <RestAdvert selectedTag={selectedTag} /> */}
+        <RestAdvert selectedTag={selectedTag} />
         <Resturant />
         <Meal />
         <Delivery />

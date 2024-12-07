@@ -4,20 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 
-export const NavbarContainer = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 3.5%;
-  height: 10vh;
+export const NavbarContainer = styled.section`
+  background: rgb(255, 255, 255);
   position: fixed;
-  gap: 20px;
   left: 0;
+  right: 0;
   top: 0;
   z-index: 50;
   transition: all 200ms;
   border-bottom: 1px solid var(--primary-20);
+`;
+
+export const NavbarFrame = styled.div`
+  width: min(93%, 1440px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.3rem auto;
+  height: 10vh;
+  gap: 20px;
 
   .logo {
     position: relative;

@@ -32,9 +32,7 @@
 .prod {
   display: flex;
   position: relative;
-  justify-content: space-between;
   height: 350px;
-  margin-bottom: 3rem;
 }
 
 .prod-cont {
@@ -73,7 +71,7 @@
 }
 .image {
   right: 0;
-  position: relative;
+  position: absolute;
   border-radius: 7.17px;
 }
 
@@ -82,7 +80,6 @@
   width: 600px;
   height: 350px;
   position: relative;
-  border-radius: 1rem;
 }
 .text-container {
   margin-top: 20px;
@@ -93,7 +90,7 @@
   color: #2a2a2a;
   font-size: 2.5rem;
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   width: 528px;
   line-height: 55px;
   padding: 4px 9px 4px 0;
@@ -105,7 +102,7 @@
   color: #2a2a2a;
   font-size: 2.5rem;
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: 600;
   width: fit-content;
   padding: 0 16px 4px 0;
   line-height: 50px;

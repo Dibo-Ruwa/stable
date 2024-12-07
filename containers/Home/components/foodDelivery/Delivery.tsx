@@ -25,7 +25,7 @@ export default function Delivery() {
           </div>
         </div>
         <div className="delivery-text_container">
-          <button className="delivery-btn_text">Courier</button>
+          <button className="delivery-btn_text">Moving</button>
           <h4 className="delivery-subtitle">Food delivery & Moving</h4>
           <p className="delivery-des">
             Need to move or deliver food? We've got the wheels and the expertise
