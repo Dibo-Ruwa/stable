@@ -238,7 +238,7 @@ interface CityData {
 }
 
 const LocationModal: React.FC = () => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(true);
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [availableRegions, setAvailableRegions] = useState<string[]>([]);
