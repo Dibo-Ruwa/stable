@@ -23,7 +23,7 @@
 }
 
 .rest-ad-card .card {
-  width: 250px;
+  width: 100%;
   margin: 0 auto;
   scroll-snap-align: center;
   flex-shrink: 0;

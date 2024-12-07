@@ -1,15 +1,11 @@
 "use client";
-import styled from "styled-components";
 import { routes } from "@/constants";
-import { assets } from "@/public/assets";
-import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
+import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiBars3 } from "react-icons/hi2";
 import { VscClose } from "react-icons/vsc";
-import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { CaretDownIcon } from "@radix-ui/react-icons";
 import { AuthModal } from "@/component/AuthModal";
 import ServiceMenu from "@/component/serviceMenu";
@@ -30,12 +26,16 @@ import { ImLocation } from "react-icons/im";
 import { useCart } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
 import useCartStore from "@/store/useCart.store";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const { data: session, status } = useSession({
     required: false,
   });
-
+  const [location, setLocation] = useState<{
+    state: string;
+    region: string;
+  } | null>(null);
   //get partName to render route types
   const pathname = usePathname();
   const [toggle, setToggle] = useState(false);
@@ -70,6 +70,14 @@ const Navbar = () => {
   const openAuthModal = (type: "signup" | "signin") => setAuthModal(type); // Type added to function parameter
   const closeAuthModal = () => setAuthModal(null);
 
+  useEffect(() => {
+    const locationData = Cookies.get(
+      `${process.env.NEXT_PUBLIC_COMPANY_NAME}_location`
+    );
+    if (locationData) {
+      setLocation(JSON.parse(locationData));
+    }
+  }, []);
   return (
     <NavbarContainer
       style={
@@ -208,7 +216,12 @@ const Navbar = () => {
           {session && (
             <div className="SA_location">
               <ImLocation className="SA_location_icon" />
-              <p className="SA_location_text">Tanke, Ilorin</p>
+              <p className="SA_location_text">
+                {" "}
+                {location
+                  ? `${location.state}, ${location.region}`
+                  : "Select your location"}
+              </p>
             </div>
           )}
           {session && <UserDropdown />}

@@ -163,13 +163,13 @@ const ProductServices: React.FC<ProductServicesProps> = ({
         <div className="hero_map">
           <img className="map" src={selectedItem.map} alt={selectedItem.tag} />
           <div className="pro-logo">
-            <div className="pro-name">
+            {/* <div className="pro-name">
               <img
                 className="pro-img"
                 src={selectedItem.foodImg}
                 alt={selectedItem.tag}
               />
-            </div>
+            </div> */}
             <div className="b-l">
               <img
                 className="bike"
