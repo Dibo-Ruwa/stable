@@ -120,7 +120,7 @@ const ProductServices: React.FC<ProductServicesProps> = ({
   );
   return (
     <>
-      {/* <div className="hero_cont"> */}
+      <div className="hero_cont">
       <div className="hero_prod">
         <div className="prod">
           <div className="prod-cont">
@@ -157,39 +157,32 @@ const ProductServices: React.FC<ProductServicesProps> = ({
             </div>
           )}
         </div>
-        <MobileView />
+        </div>
+        
+      {selectedItem && (
+        <div className="hero_map">
+          <img className="map" src={selectedItem.map} alt={selectedItem.tag} />
+          <div className="pro-logo">
+            <div className="pro-name">
+              <img
+                className="pro-img"
+                src={selectedItem.foodImg}
+                alt={selectedItem.tag}
+              />
+            </div>
+            <div className="b-l">
+              <img
+                className="bike"
+                src={selectedItem.bike}
+                alt={selectedItem.tag}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+      <MobileView />
       </div>
-
-      {/* </div> */}
     </>
   );
 };
 export default ProductServices;
-
-{
-  /* {selectedItem && (
-          <div className="hero_map">
-            <img
-              className="map"
-              src={selectedItem.map}
-              alt={selectedItem.tag}
-            />
-            <div className="pro-logo">
-              <div className="pro-name">
-                <img
-                  className="pro-img"
-                  src={selectedItem.foodImg}
-                  alt={selectedItem.tag}
-                />
-              </div>
-              <div className="b-l">
-                <img
-                  className="bike"
-                  src={selectedItem.bike}
-                  alt={selectedItem.tag}
-                />
-              </div>
-            </div>
-          </div>
-        )} */
-}
