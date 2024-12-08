@@ -8723,7 +8723,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
       " Order from your favorite restaurant and get your meal delivered in minutes.",
-    map: "/images/map.png",
+    map: "/images/map1.jpg",
   },
   {
     _id: 2,
@@ -8734,7 +8734,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173.png",
     foodText:
       "Moving to a new building? No worries, courier is here to help you convey your properties.",
-    map: "/images/map.png",
+    map: "/images/map2.jpg",
   },
   {
     _id: 3,
@@ -8756,7 +8756,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
       " Order from your favorite restaurant and get your meal delivered in minutes.",
-    map: "/images/map.png",
+    map: "/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg",
   },
   {
     _id: 5,
@@ -8767,7 +8767,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
       "Book a barber for home service to get a nice haircut at your own pace.",
-    map: "/images/Frame 2610169 (1).png",
+    map: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f86e40d7.jpg",
   },
 ];
 
@@ -8842,25 +8842,25 @@ export const TopResturant: Category[] = [
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry1.png",
         _id: 12,
       },
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry2.png",
         _id: 13,
       },
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry3.png",
         _id: 14,
       },
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry4.png",
         _id: 15,
       },
     ],
@@ -8873,25 +8873,25 @@ export const TopResturant: Category[] = [
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry1.png",
         _id: 17,
       },
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry2.png",
         _id: 18,
       },
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry3.png",
         _id: 19,
       },
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry4.png",
         _id: 20,
       },
     ],
