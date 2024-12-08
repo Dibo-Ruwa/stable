@@ -7,6 +7,7 @@ import { LaundryBRP } from "./components/LaundryBRP/LaundryBRP";
 
 export const LaundryDetails = () => {
   return (
+    <div className="Laundry_Container">
     <div className="Laundry_head">
       <BackButton className="Back_Button"/>
       <div className="Laundry_restCont">
@@ -16,6 +17,8 @@ export const LaundryDetails = () => {
         </div>
         <LeftLaundryContainer />
       </div>
+    </div>
+
     </div>
   );
 };

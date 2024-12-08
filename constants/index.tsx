@@ -26,6 +26,7 @@ export const routes: Route[] = [
       { name: "Food", path: "/food" },
       { name: "Cleaning", path: "/cleaning" },
       { name: "Moving", path: "/moving" },
+      { name: "Groceries", path: "/groceries" },
     ],
   },
 

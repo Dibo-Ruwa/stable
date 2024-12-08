@@ -20,6 +20,10 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+main.main_container{
+  margin: 4rem 0 0;
+}
+
 section {
   width: 100%;
 }
