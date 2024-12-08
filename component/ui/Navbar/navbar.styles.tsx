@@ -75,7 +75,7 @@ export const NavbarFrame = styled.div`
     .SA_location_icon {
       width: 28px;
       height: 28px;
-      color: color: var(--Red, #EF5A5A);;
+      color: var(--Red, #EF5A5A);
     }
 
     p.SA_location_text {

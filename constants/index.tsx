@@ -8724,7 +8724,7 @@ export const Data = [
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
       " Order from your favorite restaurant and get your meal delivered in minutes.",
-    map: "/images/map1.jpg",
+    map: "/images/Rectangle 248 (11).png",
   },
   {
     _id: 2,
