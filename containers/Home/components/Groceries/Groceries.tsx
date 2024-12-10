@@ -24,10 +24,6 @@ const food = [
     id: 441,
     img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f2bd62bd.jpg",
   },
-  {
-    id: 551,
-    img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f86e40d7.jpg",
-  },
 ];
 export default function Groceries() {
   return (

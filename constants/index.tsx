@@ -695,10 +695,10 @@ export const teamMembers = [
     name: "Okorie Joshua",
     role: "Operations",
     imageUrl:
-      "https://res.cloudinary.com/zeeson-info-tech-and-innovations/image/upload/v1700948246/dbr33_rbtgb5.png",
+    "https://res.cloudinary.com/zeeson-info-tech-and-innovations/image/upload/v1700948246/dbr33_rbtgb5.png",
   },
-  // Add more team members as needed
 ];
+  // Add more team members as needed
 
 export interface Product {
   id: number | string;

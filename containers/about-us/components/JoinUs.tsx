@@ -2,6 +2,7 @@ import React from "react";
 import { GoArrowDownRight } from "react-icons/go";
 import Image from "next/image";
 import { Button } from "@/component/shared/Button";
+import Link from "next/link";
 export const JoinUs = () => {
   return (
     <section className="JoinUs_Container">
@@ -32,7 +33,12 @@ export const JoinUs = () => {
             passionate about making life easier, simpler, and more fulfilling,
             we'd love to hear from you.
           </p>
-          <Button text="Apply Now" className="JoinUs_CTA" />
+          <Link
+            href="https://admin.diboruwa.com/sign-in"
+            className="JoinUs_CTA"
+          >
+            Apply Now
+          </Link>
         </div>
       </div>
     </section>

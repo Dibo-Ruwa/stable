@@ -1,6 +1,6 @@
 .laundry_width {
   width: min(93%, 1440px);
-  margin: 5rem auto;
+  margin: 5rem 0rem 5rem auto;
   position: relative;
 }
 

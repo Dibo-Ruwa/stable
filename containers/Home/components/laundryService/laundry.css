@@ -15,6 +15,15 @@
   gap: 20px;
 }
 
+.Cleaning_resturant-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+  margin: 0 auto;
+  width: 90%;
+  gap: 20px;
+}
+
 .laundry_resturant-image {
   position: relative;
 }
@@ -159,11 +168,17 @@ img.service_img {
   .laundry_resturant-content {
     width: 90%;
   }
+
+  .Cleaning_resturant-content {
+    width: 90%;
+  }
+
   .laundry_desktop-image {
     display: block;
     width: 100%;
     margin: 0 auto;
   }
+
   .cleaning_desktop-image {
     display: block;
     width: 100%;
@@ -189,11 +204,17 @@ img.service_img {
     justify-content: space-between;
   }
 
+  .Cleaning_resturant-content {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
   .laundry_desktop-image {
     display: block;
     width: 27rem;
     height: 32rem;
   }
+
   .cleaning_desktop-image {
     display: block;
     width: 27rem;
