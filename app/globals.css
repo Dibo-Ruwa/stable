@@ -8,19 +8,20 @@
   box-sizing: border-box;
   list-style-type: none;
   text-decoration: none;
+  font-family: "Poppins", sans-serif;
 }
 
 :root {
-  --input-bg: #D2D2D24D;
-  --green-bg: #27A124;
+  --input-bg: #d2d2d24d;
+  --green-bg: #27a124;
   --disabled-green: #5b875a;
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-main.main_container{
+main.main_container {
   margin: 4rem 0 0;
 }
 

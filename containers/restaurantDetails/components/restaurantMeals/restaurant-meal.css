@@ -20,7 +20,7 @@
 }
 
 p.RestaurantMeal_realAmount, p.RestaurantMeal_N,
-p.RestaurantMeal_R_Num, p.RestaurantMeal_title_filter, p.RestaurantMeal_Liters {
+p.RestaurantMeal_R_Num, p.RestaurantMeal_title_filter, p.RestaurantMeal_Liters, .RestaurantMeal_T_Time {
 font-family: 'Poppins', sans-serif;
   font-style: normal;
   line-height: normal;
@@ -52,15 +52,16 @@ font-family: 'Poppins', sans-serif;
   align-items: center;
   gap: 1rem;
   width: 100%;
-  overflow-x: scroll;
+  flex-wrap: wrap;
   scroll-snap-type: x mandatory;
   margin: 0 auto;
 }
 
 .RestaurantMeal_card{
-     width: 37%;
+     width: 32%;
   scroll-snap-align: center;
   flex-shrink: 0;
+  flex: 1 1 10rem;
   box-sizing: border-box;
   background-color: #fff;
   overflow-x: hidden;
@@ -122,8 +123,8 @@ font-family: 'Poppins', sans-serif;
 }
 
 p.RestaurantMeal_N,
-p.RestaurantMeal_R_Num {
-  font-size: 16px;
+p.RestaurantMeal_R_Num, p.RestaurantMeal_T_Time {
+  font-size: 13px;
   font-weight: 400;
 }
 
@@ -171,7 +172,7 @@ p.RestaurantMeal_Liters {
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  padding: 0.6rem;
+  padding: 0.5rem;
   justify-content: space-between;
   border-radius: 50px;
   background: linear-gradient(
@@ -198,7 +199,7 @@ p.RestaurantMeal_realAmount {
 .RestaurantMeal_cart {
   display: flex;
   width: 40%;
-  padding: 10.314px;
+  padding: 7.314px;
   justify-content: center;
   align-items: center;
   gap: 10.314px;

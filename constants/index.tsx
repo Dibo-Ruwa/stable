@@ -8951,7 +8951,7 @@ export const ProductServiceVendorData: ProductServiceVendorType[] = [
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText: " We are here to serve you better",
-    map: "/images/map.png",
+    map: "/images/Rectangle 248 (11).png",
   },
 ];
 
@@ -9241,12 +9241,12 @@ export const ProductServiceCleaningData: ProductServiceCleaningType[] = [
   {
     _id: 1,
     tag: "Cleaning",
-    bigImg: "/images/laundry.png",
+    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/image 157.png",
     foodText:
       "Get your clothes washed and delivered to your door step within an hour.",
-    map: "/images/Frame 2610169.png",
+    map: "/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg",
   },
 ];
 
@@ -9753,7 +9753,7 @@ export const ProductServiceDeliveryAndMovingData: ProductServiceDeliveryAndMovin
       foodImg: "/images/Frame 2610173.png",
       foodText:
         "Get your clothes washed and delivered to your door step within an hour.",
-      map: "/images/map.png",
+      map: "/images/map2.jpg",
     },
   ];
 
