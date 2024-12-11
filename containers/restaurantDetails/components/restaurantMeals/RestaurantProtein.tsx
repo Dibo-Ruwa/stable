@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
@@ -11,9 +11,6 @@ import {
 } from "@/constants";
 import "./restaurant-meal.css";
 import Link from "next/link";
-import { RestaurantProtein } from "./RestaurantProtein";
-import { RestaurantDrink } from "./RestaurantDrink";
-import { RestaurantExtras } from "./RestaurantExtras";
 
 const MobileRestaurantMeal = () => {
   return (
@@ -81,7 +78,7 @@ interface RestaurantMealProps {
   selectedTime: string;
 }
 
-export const RestaurantMeal: React.FC<RestaurantMealProps> = ({
+export const RestaurantProtein: React.FC<RestaurantMealProps> = ({
   selectedTime,
 }) => {
   const filteredFood =
@@ -90,45 +87,9 @@ export const RestaurantMeal: React.FC<RestaurantMealProps> = ({
       : RestaurantFood.filter((item) =>
           item.timeText.toLowerCase().includes(selectedTime.toLowerCase())
         );
-
-  const [activeTab, setActiveTab] = useState("Meal");
-
-  const renderActiveTab = () => {
-    switch (activeTab) {
-      case "Meal":
-        return <p>Meal content goes here.</p>;
-      case "Protein":
-        return <RestaurantProtein selectedTime={selectedTime} />;
-      case "Drink":
-        return <RestaurantDrink selectedTime={selectedTime} />;
-      case "Extras":
-        return <RestaurantExtras selectedTime={selectedTime} />;
-      default:
-        return null;
-    }
-  };
-
   return (
     <div className="RestaurantMeal_container">
       <div className="RestaurantMeal_Frame">
-        {/* Tabs Section */}
-        <div className="restaurant_Meal_filter_line">
-          <div className="restaurant_Meal_filter">
-            {["Meal", "Protein", "Drink", "Extras"].map((tab) => (
-              <p
-                key={tab}
-                className={`RestaurantMeal_title_filter ${
-                  activeTab === tab ? "active" : ""
-                }`}
-                onClick={() => setActiveTab(tab)}
-              >
-                {tab}
-              </p>
-            ))}
-          </div>
-          <hr className="RestaurantMeal_title_subLine" />
-        </div>
-
         <div className="RestaurantMeal_cards">
           {filteredFood.map((item: MobileRestaurantFoodType) => (
             <Link

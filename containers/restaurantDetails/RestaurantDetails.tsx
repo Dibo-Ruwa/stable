@@ -9,17 +9,16 @@ import BackButton from "@/component/ui/BackButton/BackButton";
 export const RestaurantDetails = () => {
   return (
     <div className="Restaurant_Container">
-    <div className="indi_restCont">
-      <BackButton />
-      <div className="Restaurant_restCont">
-      <div className="ACR_Cont">
-        <AboutRestaurant />
-        <CustomBooking />
-        <RestaurantMeal />
+      <div className="indi_restCont">
+        <BackButton />
+        <div className="Restaurant_restCont">
+          <div className="ACR_Cont">
+            <AboutRestaurant />
+            <CustomBooking />
+          </div>
+          <LeftRestaurantContainer />
+        </div>
       </div>
-      <LeftRestaurantContainer />
-      </div>
-    </div>
     </div>
   );
 };
