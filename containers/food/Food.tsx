@@ -6,6 +6,7 @@ import CustomBooking from "./component/custombooking/CustomBooking";
 import MostSold from "./component/mostsold/MostSold";
 import MinsMeals from "./component/30MinsMeals/MinsMeals";
 import FreeDelivery from "./component/freedelivery/FreeDelivery";
+import { useState } from "react";
 
 const isBetween10amAnd6pm = () => {
   const now = new Date();
@@ -21,6 +22,9 @@ interface FoodProps {
 
 const Food: React.FC<FoodProps> = ({ params }) => {
   const { id } = params;
+  const [searchQuery, setSearchQuery] = useState<string>("");
+   const [activeButton, setActiveButton] = useState<string>("All");
+
   // const { modal, closeModal } = useCartStore();
 
   // const { data: session } = useSession();
@@ -29,14 +33,17 @@ const Food: React.FC<FoodProps> = ({ params }) => {
   return (
     <div className="food-container">
       <Discount />
-      <CustomBooking />
-      <MostSold id={id} />
-      <MinsMeals />
-      <FreeDelivery />
+      <CustomBooking
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        activeButton={activeButton}
+        setActiveButton={setActiveButton}
+      />
+      <MostSold id={id} searchQuery={searchQuery} activeButton={activeButton} />
+      <MinsMeals searchQuery={searchQuery} activeButton={activeButton} />
+      <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} />
     </div>
   );
 };
 
 export default Food;
-
-

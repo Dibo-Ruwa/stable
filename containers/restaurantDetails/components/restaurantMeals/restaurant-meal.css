@@ -1,3 +1,6 @@
+.RestaurantMeal_container{
+  margin: 2rem 0;
+}
 .RestaurantMeal_Frame {
   display: flex;
   flex-direction: column;
@@ -17,6 +20,7 @@
   align-items: center;
   gap: 2rem;
   position: relative;
+  cursor: pointer;
 }
 
 p.RestaurantMeal_realAmount, p.RestaurantMeal_N,
@@ -27,25 +31,39 @@ font-family: 'Poppins', sans-serif;
   color: #2a2a2a;
 }
 
-.RestaurantMeal_title_filter {
-  font-size: 14px;
-  font-weight: 400;
+
+.MPDE_Container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 2rem auto;
 }
 
-.RestaurantMeal_title_filter::after {
-  position: absolute;
-  content: "";
-  width: 57px;
-  height: 6px;
-  top: 24px;
-  left: -12px;
-  border-radius: 100px 100px 0 0;
-  margin: 0 auto;
-  background: #27a124;
+.MPDE_Tabs {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 4rem;
 }
+
+.MPDE_Tab {
+  cursor: pointer;
+}
+
+.MPDE_TabText {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 14px;
+}
+
+.MPDE_ActiveTabLine {
+  height: 0.3rem;
+  border-radius: 2rem 2rem 0 0;
+  background: #27a124;
+}
+
+.active .MPDE_TabText {
+  color: #27a124;
+}
+
+
 
 .RestaurantMeal_cards {
   display: flex;

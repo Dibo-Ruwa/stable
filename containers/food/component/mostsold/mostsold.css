@@ -21,7 +21,6 @@ p.mostsold_title {
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-x: scroll;
   flex-wrap: wrap;
   scroll-snap-type: x mandatory;
   margin: 0 auto;

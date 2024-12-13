@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 import "./custom-booking.css";
 import { RestaurantMeal } from "../restaurantMeals/RestaurantMeal";
+import { RestaurantMPDE } from "../restaurantMeals/RestaurantMPDE";
+import { CustomBookingModal } from "@/containers/food/component/custombooking/CustomBookingModal";
 
 const MobileCustomBooking: React.FC = () => {
   const [activeButton, setActiveButton] = useState<string>("All");
@@ -15,7 +17,7 @@ const MobileCustomBooking: React.FC = () => {
       <div className="mobile_custombooking_frame">
         <div className="mobile_custombooking_search-min">
           <div className="mobile_min-buttons">
-            {["All", "30 Mins", "45 Mins", "1 Hr"].map((label) => (
+            {["All", "30mins", "45mins", "1hr"].map((label) => (
               <button
                 key={label}
                 className={`mobile_min-button ${
@@ -35,11 +37,26 @@ const MobileCustomBooking: React.FC = () => {
     </div>
   );
 };
+
 export const CustomBooking: React.FC = () => {
   const [activeButton, setActiveButton] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleButtonClick = (label: string) => {
     setActiveButton(label);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -47,7 +64,7 @@ export const CustomBooking: React.FC = () => {
       <div className="rest_custombooking_frame">
         <div className="rest_custombooking_search-min">
           <div className="rest_min-buttons">
-            {["All", "30 Mins", "45 Mins", "1 Hr", "2Hr"].map((label) => (
+            {["All", "30mins", "45mins", "1hr", "2hr"].map((label) => (
               <button
                 key={label}
                 className={`rest_min-button ${
@@ -65,6 +82,8 @@ export const CustomBooking: React.FC = () => {
               placeholder="Search here"
               required
               className="rest_custombooking-search_input"
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
             <img
               src="/images/search-normal.svg"
@@ -73,12 +92,17 @@ export const CustomBooking: React.FC = () => {
             />
           </div>
         </div>
-        <button type="submit" className="rest_custombooking-btn">
+        <button
+          type="submit"
+          className="rest_custombooking-btn"
+          onClick={openModal}
+        >
           Custom Booking
         </button>
+        <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
       <MobileCustomBooking />
-      <RestaurantMeal selectedTime={activeButton} />
+      <RestaurantMPDE activeButton={activeButton} searchQuery={searchQuery} />
     </div>
   );
 };

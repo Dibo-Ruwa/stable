@@ -1,8 +1,5 @@
+
 import React from "react";
-import { CiHeart } from "react-icons/ci";
-import { FaStar } from "react-icons/fa";
-import { FaBagShopping } from "react-icons/fa6";
-import { RxStopwatch } from "react-icons/rx";
 import {
   RestDiscountSale,
   MobileRestaurantFood,
@@ -74,19 +71,28 @@ const MobileRestaurantMeal = () => {
   );
 };
 
-interface RestaurantMealProps {
+interface RestaurantExtrasProps {
   selectedTime: string;
+  searchQuery: string;
 }
 
-export const RestaurantExtras: React.FC<RestaurantMealProps> = ({
+export const RestaurantExtras: React.FC<RestaurantExtrasProps> = ({
   selectedTime,
+  searchQuery,
 }) => {
-  const filteredFood =
-    selectedTime === "All"
-      ? RestaurantFood
-      : RestaurantFood.filter((item) =>
-          item.timeText.toLowerCase().includes(selectedTime.toLowerCase())
-        );
+  const filteredFood = RestaurantFood.filter((item) => {
+    const matchesTime =
+      selectedTime === "All" ||
+      item.timeText.toLowerCase() === selectedTime.toLowerCase();
+    const matchesSearch = item.smallTitle
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchesTime && matchesSearch;
+  });
+
+  console.log("Selected Time:", selectedTime);
+  console.log("Restaurant Food:", RestaurantFood);
+
   return (
     <div className="RestaurantMeal_container">
       <div className="RestaurantMeal_Frame">
