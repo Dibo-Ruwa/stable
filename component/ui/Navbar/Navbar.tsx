@@ -42,6 +42,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [authModal, setAuthModal] = useState<"signup" | "signin" | null>(null);
   const switchModal = (type: "signup" | "signin") => setAuthModal(type);
+  const [companyName] = useState<string>("diboruwa");
 
   const { cartItems, getCart, getSubscriptions, subscriptions } =
     useCartStore();
@@ -71,10 +72,9 @@ const Navbar = () => {
   const closeAuthModal = () => setAuthModal(null);
 
   useEffect(() => {
-    const locationData = Cookies.get(
-      `${process.env.NEXT_PUBLIC_COMPANY_NAME}_location`
-    );
+    const locationData = Cookies.get(`${companyName}_location`);
     if (locationData) {
+      console.log(locationData);
       setLocation(JSON.parse(locationData));
     }
   }, []);
@@ -219,7 +219,7 @@ const Navbar = () => {
               <p className="SA_location_text">
                 {" "}
                 {location
-                  ? `${location.state}, ${location.region}`
+                  ? `${location?.state}, ${location?.region}`
                   : "Select your location"}
               </p>
             </div>

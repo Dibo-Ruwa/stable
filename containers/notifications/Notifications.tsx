@@ -22,7 +22,7 @@ export const Notifications: React.FC = () => {
             <div className="message_details">
               <p className="message_details_title">{message.messageTitle}</p>
               <p className="message_details_des">{message.messageDes}</p>
-              <Link href="" className="message_details_link">
+              <Link href="/or-ders" className="message_details_link">
                 {message.viewOrderLink} <message.viewOrderIcon />
               </Link>
             </div>

@@ -1,4 +1,4 @@
-import  BackButton  from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 import styles from "./CustomRestaurantSub.module.css";
 import React from "react";
 import { SubscriptionRequestConfirmation } from "./component/SubscriptionRequestConfirmation/SubscriptionRequestConfirmation";
@@ -6,14 +6,16 @@ import { SubscriptionRequest } from "./component/subscriptionRequest/Subscriptio
 
 export const CustomRestaurantSub = () => {
   return (
-    <div className={styles.CustomRestaurantSub_container}>
-      <BackButton className="Back_Button" />
-      <p className={styles.CustomRestaurantSub_contentTitle}>
-        My Subscription Request
-      </p>
-      <div className={styles.CustomRestaurantSub_content}>
-        <SubscriptionRequest />
-        <SubscriptionRequestConfirmation />
+    <div className={styles.CustomRestaurantSub_section}>
+      <div className={styles.CustomRestaurantSub_container}>
+        <BackButton className="Back_Button" />
+        <p className={styles.CustomRestaurantSub_contentTitle}>
+          My Subscription Request
+        </p>
+        <div className={styles.CustomRestaurantSub_content}>
+          <SubscriptionRequest />
+          <SubscriptionRequestConfirmation />
+        </div>
       </div>
     </div>
   );

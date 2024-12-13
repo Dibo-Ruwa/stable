@@ -71,12 +71,12 @@ const MobileRestaurantMeal = () => {
   );
 };
 
-interface RestaurantMealProps {
+interface RestaurantExtrasProps {
   selectedTime: string;
   searchQuery: string;
 }
 
-export const RestaurantMeal: React.FC<RestaurantMealProps> = ({
+export const RestaurantExtras: React.FC<RestaurantExtrasProps> = ({
   selectedTime,
   searchQuery,
 }) => {

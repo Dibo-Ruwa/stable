@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   RestDiscountSale,
@@ -71,12 +70,12 @@ const MobileRestaurantMeal = () => {
   );
 };
 
-interface RestaurantMealProps {
+interface RestaurantDrinkProps {
   selectedTime: string;
   searchQuery: string;
 }
 
-export const RestaurantMeal: React.FC<RestaurantMealProps> = ({
+export const RestaurantDrink: React.FC<RestaurantDrinkProps> = ({
   selectedTime,
   searchQuery,
 }) => {

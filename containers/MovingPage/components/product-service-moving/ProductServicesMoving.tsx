@@ -133,13 +133,13 @@ export const ProductServicesMoving: React.FC = () => {
               alt={selectedVendor.tag1}
             />
             <div className="Moving_pro-logo">
-              <div className="Moving_pro-name">
+              {/* <div className="Moving_pro-name">
                 <img
                   className="Moving_pro-img"
                   src={selectedVendor.foodImg}
                   alt={selectedVendor.tag1}
                 />
-              </div>
+              </div> */}
               <div className="Moving_b-l">
                 <img
                   className="Moving_bike"

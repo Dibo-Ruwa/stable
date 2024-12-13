@@ -263,7 +263,7 @@ const LocationModal: React.FC = () => {
         const response = await axios({
           method: 'GET',
           url: apiUrl,
-          timeout: 15000,
+          // timeout: 90000,
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

@@ -2,6 +2,10 @@
 import { ProfileSidebar } from "@/containers/profile/profile-sidebar/ProfileSidebar";
 import styled from "styled-components";
 
+const PsPfFrame = styled.section`
+  background: #f8f8f8;
+`;
+
 const PsPfContainer = styled.div`
   display: flex;
   width: min(93%, 1443px);
@@ -25,20 +29,21 @@ const PsPfContainer = styled.div`
 `;
 
 const ProfileChildren = styled.div`
-width: 75%;
+  width: 75%;
 
-@media screen and (max-width: 768px){
-  width: 100%;
-
-}
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <PsPfContainer>
-      <ProfileSidebar />
-      <ProfileChildren >{children}</ProfileChildren>
-    </PsPfContainer>
+    <PsPfFrame>
+      <PsPfContainer>
+        <ProfileSidebar />
+        <ProfileChildren>{children}</ProfileChildren>
+      </PsPfContainer>
+    </PsPfFrame>
   );
 };
 

@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-inline: auto;
+  margin: 6rem auto;
   width: 90%;
 }
 
@@ -192,6 +192,7 @@ button.button.smsMessage_Btn {
 
 .mapLocation_img {
   height: 100%;
+  width: 50vw;
 }
 
 /* ======== FAQs ========= */
@@ -215,7 +216,7 @@ button.button.smsMessage_Btn {
   padding: 0;
   margin: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
@@ -247,8 +248,7 @@ button.button.smsMessage_Btn {
 }
 
 .faq-question.active {
-  background: #27a124;
-  color: #fefefe;
+  color: #555555;
 }
 
 .faq-icon {
@@ -257,7 +257,6 @@ button.button.smsMessage_Btn {
 
 .faq-answer {
   padding: 10px 15px;
-  background: #f1f1f1;
   font-size: 0.9rem;
   color: #555;
   width: 100%;

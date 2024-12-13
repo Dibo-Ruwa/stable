@@ -4,7 +4,7 @@ export default function Cleaning() {
   return (
     <section className="laundry_resturant_container">
       <div className="container">
-        <div className="hero_frame laundry_resturant-content">
+        <div className="hero_frame Cleaning_resturant-content">
           <p className="laundry_sub_food">Courier</p>
           <div className="cleaning_resturant-image">
             <img

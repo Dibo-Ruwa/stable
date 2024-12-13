@@ -31,7 +31,7 @@ export const SMSMap = () => {
       </form>
       <div className="mapLocation_image">
         <img
-          src="./images/Rectangle.png"
+          src="./images/WhatsApp Image 2024-12-03 at 18.39.34_3276a10e.jpg"
           alt="map Location"
           className="mapLocation_img"
         />

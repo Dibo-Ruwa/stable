@@ -1,3 +1,6 @@
+.Restaurant_Container {
+  background: #f8f8f8;
+}
 .indi_restCont {
   display: flex;
   gap: 1rem;
