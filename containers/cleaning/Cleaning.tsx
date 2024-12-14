@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "./components/product-service-cleaning/product-service-cleaning.css";
 import "./cleaning.css";
 import { ProductServicesCleaning } from "./components/product-service-cleaning/ProductServicesCleaning";
@@ -11,17 +11,28 @@ import { OtherCleaning2 } from "./components/other-cleaning/OtherCleaning2";
 import { MobileOtherCleaningRoom } from "./components/other-cleaning/MobileOtherCleaningRoom";
 
 export const Cleaning: React.FC = () => {
+  const [selectedRating, setSelectedRating] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   return (
     <div className="Cleaning_home-container">
       <div className="Cleaning_hero_frame">
         <ProductServicesCleaning />
       </div>
       <TopClean />
-      <SearchFilter />
+      <SearchFilter
+        setSelectedRating={setSelectedRating}
+        setSearchQuery={setSearchQuery}
+      />
       <MobileOtherCleaningRoom />
       <div className="OtherCleaning_container">
-        <OtherCleaning1 />
-        <OtherCleaning2 />
+        <OtherCleaning1
+          selectedRating={selectedRating}
+          searchQuery={searchQuery}
+        />
+        <OtherCleaning2
+          selectedRating={selectedRating}
+          searchQuery={searchQuery}
+        />
       </div>
       <Newsletter />
     </div>

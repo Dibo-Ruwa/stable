@@ -8,7 +8,7 @@ interface OverlayFilterProps {
 export const OverlayFilter: React.FC<OverlayFilterProps> = ({
   onRatingSelect,
 }) => {
-  const ratings = ["5.0", "4.0", "3.0", "2.0"];
+  const ratings = ["All", "5.0", "4.0", "3.0", "2.0"];
 
   return (
     <div className="overlay_container">

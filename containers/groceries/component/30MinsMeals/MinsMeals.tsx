@@ -1,22 +1,39 @@
 import React from "react";
 import "./minsmeal.css";
-import { DiscountSale, MinsGroceriesData } from "@/constants/index";
+import { DiscountSale, MinsMealsData } from "@/constants";
 import Link from "next/link";
 
-const MinsMeals: React.FC = () => {
+interface MinsMealsProps {
+  searchQuery: string;
+  activeButton: string;
+}
+
+const MinsMeals: React.FC<MinsMealsProps> = ({ searchQuery, activeButton }) => {
+  // Filter items based on searchQuery and activeButton
+  const filteredItems = MinsMealsData[0].items.filter((item) => {
+    const matchesSearch = item.smallTitle
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesTime =
+      activeButton === "All" || item.timeText === activeButton;
+    return matchesSearch && matchesTime;
+  });
   return (
     <section className="minsmeal_container">
       <div className="minsmeal-frame">
-        <p className="minsmeal_title">{MinsGroceriesData[0].title}</p>
+        <p className="minsmeal_title">{MinsMealsData[0].title}</p>
         <div className="minsmeal-cards">
-          {MinsGroceriesData[0].items.map((item, index) => {
-            // Destructure the Icon components from the item
+          {filteredItems.map((item) => {
             const FavoriteIcon = item.favoriteIcon;
             const StarIcon = item.starIcon;
             const TimeIcon = item.timeIcon;
             const PrizeIcon = item.prizeIcon;
             return (
-              <Link key={item.id} href={`/groceries/${item.id}`} className="minsmeal-card">
+              <Link
+                key={item.id}
+                href={`/food/${item.id}`}
+                className="minsmeal-card"
+              >
                 <div className="minsmeal-card_food-img">
                   <img
                     src={item.img}

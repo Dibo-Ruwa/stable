@@ -1,11 +1,36 @@
 import React, { useState } from "react";
 import "./custombooking.css";
+import { CustomBookingModal } from "./CustomBookingModal";
 
-const CustomBooking: React.FC = () => {
-  const [activeButton, setActiveButton] = useState<string>("All");
+interface CustomBookingProps {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  activeButton: string;
+  setActiveButton: (label: string) => void;
+}
+
+const CustomBooking: React.FC<CustomBookingProps> = ({
+  searchQuery,
+  setSearchQuery,
+  activeButton,
+  setActiveButton,
+}) => {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleButtonClick = (label: string) => {
     setActiveButton(label);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -13,10 +38,12 @@ const CustomBooking: React.FC = () => {
       <div className="custombooking_frame">
         <div className="custombooking_search-min">
           <div className="min-buttons">
-            {["All", "30 Mins", "45 Mins", "1 Hr", "2 Hr"].map((label) => (
+            {["All", "30mins", "45mins", "1hr", "2hr"].map((label) => (
               <button
                 key={label}
-                className={`min-button ${activeButton === label ? "active" : ""}`}
+                className={`min-button ${
+                  activeButton === label ? "active" : ""
+                }`}
                 onClick={() => handleButtonClick(label)}
               >
                 {label}
@@ -29,6 +56,8 @@ const CustomBooking: React.FC = () => {
               placeholder="Search here"
               required
               className="custombooking-search_input"
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
             <img
               src="/images/search-normal.svg"
@@ -37,9 +66,10 @@ const CustomBooking: React.FC = () => {
             />
           </div>
         </div>
-        <button type="submit" className="custombooking-btn">
+        <button type="button" className="custombooking-btn" onClick={openModal}>
           Custom Booking
         </button>
+        <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
     </div>
   );
