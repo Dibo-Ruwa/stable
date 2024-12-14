@@ -1,6 +1,10 @@
+.Laundry_Container {
+  background: #f8f8f8;
+}
+
 .Laundry_head {
   width: 93%;
-  margin: 0 auto;
+  margin: 4rem+ auto;
 }
 
 .Laundry_restCont {

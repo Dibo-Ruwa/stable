@@ -1,3 +1,6 @@
+.CustomRestaurantSub_section {
+  background: #f8f8f8;
+}
 .CustomRestaurantSub_container {
   width: 90%;
   margin: 0 auto;
@@ -31,4 +34,5 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 2rem;
 }

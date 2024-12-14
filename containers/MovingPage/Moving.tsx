@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import "./moving.css";
 import { ProductServicesMoving } from "./components/product-service-moving/ProductServicesMoving";
 import { TopLaundries } from "./components/top-moving/TopMoving";
@@ -10,17 +10,28 @@ import { OtherMoving2 } from "./components/other-moving/OtherMoving2";
 import { MobileOtherMoving } from "./components/other-moving/MobileOtherMoving";
 
 export const Moving: React.FC = () => {
+    const [selectedRating, setSelectedRating] = useState<string>("All");
+    const [searchQuery, setSearchQuery] = useState<string>("");
   return (
     <div className="Moving_home-container">
       <div className="Moving_hero_frame">
         <ProductServicesMoving />
       </div>
       <TopLaundries />
-      <SearchFilter />
+      <SearchFilter
+        setSelectedRating={setSelectedRating}
+        setSearchQuery={setSearchQuery}
+      />
       <MobileOtherMoving />
       <div className="OtherMoving_container">
-        <OtherMoving1 />
-        <OtherMoving2 />
+        <OtherMoving1
+          selectedRating={selectedRating}
+          searchQuery={searchQuery}
+        />
+        <OtherMoving2
+          selectedRating={selectedRating}
+          searchQuery={searchQuery}
+        />
       </div>
       <Newsletter />
     </div>

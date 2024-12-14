@@ -31,7 +31,7 @@ const RestAdvert: React.FC<RestAdvertProps> = ({ selectedTag }) => {
           <div key={index} className="hero_frame">
             <p className="title">{items[0].title}</p>
             <div className="rest-ad-card">
-              {selectedItem.map((item, itemIndex) => (
+              {selectedItem.map((item) => (
                 <div key={item._id} className="card">
                   <img
                     className="top-restaurants"

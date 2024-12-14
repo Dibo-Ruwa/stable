@@ -4,7 +4,7 @@ import {
 } from "@/constants";
 import React from "react";
 
-export const GroomingSubscription = () => {
+export const CleaningSubscription = () => {
   return (
     <div className="sub_cards">
       {GroomingSubscriptionPlansData.map(

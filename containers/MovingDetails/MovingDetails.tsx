@@ -7,14 +7,16 @@ import { MovingBRP } from "./components/MovingBRP/MovingBRP";
 
 export const MovingDetails = () => {
   return (
-    <div className="Moving_head">
-      <BackButton className="Back_Button"/>
-      <div className="Moving_restCont">
-        <div className="Moving_Cont">
-          <AboutMoving />
-          <MovingBRP />
+    <div className="MovingDetails_container">
+      <div className="Moving_head">
+        <BackButton className="Back_Button" />
+        <div className="Moving_restCont">
+          <div className="Moving_Cont">
+            <AboutMoving />
+            <MovingBRP />
+          </div>
+          <LeftMovingContainer />
         </div>
-        <LeftMovingContainer />
       </div>
     </div>
   );

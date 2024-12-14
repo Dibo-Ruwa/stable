@@ -15,12 +15,29 @@
   gap: 20px;
 }
 
+.Cleaning_resturant-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+  margin: 0 auto;
+  width: 90%;
+  gap: 20px;
+}
+
 .laundry_resturant-image {
+  position: relative;
+}
+
+.cleaning_resturant-image {
   position: relative;
 }
 
 .laundry_desktop-image {
   display: none;
+}
+.cleaning_desktop-image {
+  display: none;
+  border-radius: 0.6rem;
 }
 
 .laundry_mobile-image {
@@ -42,7 +59,29 @@
   margin-top: 1rem;
   padding-bottom: 2rem;
 }
+.cleaning_resturant-text_container {
+  /* margin-top: 1rem; */
+  padding-bottom: 2rem;
+}
 .laundry_resturant-btn_text {
+  font-size: 13px;
+  background: #565656;
+  color: #fefefe;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+  display: flex;
+  padding: 8px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 60px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.cleaning_resturant-btn_text {
   font-size: 13px;
   background: #565656;
   color: #fefefe;
@@ -129,11 +168,23 @@ img.service_img {
   .laundry_resturant-content {
     width: 90%;
   }
+
+  .Cleaning_resturant-content {
+    width: 90%;
+  }
+
   .laundry_desktop-image {
     display: block;
     width: 100%;
     margin: 0 auto;
   }
+
+  .cleaning_desktop-image {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+
   .laundry_mobile-image {
     display: none;
   }
@@ -152,11 +203,24 @@ img.service_img {
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .Cleaning_resturant-content {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
   .laundry_desktop-image {
     display: block;
     width: 27rem;
     height: 32rem;
   }
+
+  .cleaning_desktop-image {
+    display: block;
+    width: 27rem;
+    height: 32rem;
+  }
+
   .text-content {
     margin-bottom: 5rem;
     margin-top: -2rem;
@@ -174,8 +238,16 @@ img.service_img {
     margin-bottom: 2rem;
     padding-bottom: 0rem;
   }
+  .cleaning_resturant-text_container {
+    margin-bottom: 2rem;
+    padding-bottom: 0rem;
+  }
 
   .laundry_resturant-btn_text {
+    padding: 8px 25px;
+  }
+
+  .cleaning_resturant-btn_text {
     padding: 8px 25px;
   }
 
@@ -203,7 +275,11 @@ img.service_img {
 @media (min-width: 1200px) {
   .laundry_desktop-image {
     width: 65rem;
-    height: 44rem;
+    height: 39rem;
+  }
+  .cleaning_desktop-image {
+    width: 65rem;
+    height: 42rem;
   }
 
   img.service_img {

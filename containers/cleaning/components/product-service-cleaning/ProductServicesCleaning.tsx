@@ -137,7 +137,7 @@ export const ProductServicesCleaning: React.FC = () => {
               alt={selectedVendor.tag}
             />
             <div className="CleaningHero_Name">
-              <div className="CleaningPro-name">
+              {/* <div className="CleaningPro-name">
                 <img
                   className="CleaningPro-img"
                   src={selectedVendor.foodImg}
@@ -156,7 +156,7 @@ export const ProductServicesCleaning: React.FC = () => {
                     <p className="Cleaning_RatingNum">4.5</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="CleaningLocationAndTime">
                 <p className="CleaningTimeD">17 - Mon</p>
                 <p className="CleaningTimeD">2pm - Wed</p>

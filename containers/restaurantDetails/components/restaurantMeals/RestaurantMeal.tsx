@@ -1,8 +1,5 @@
+
 import React from "react";
-import { CiHeart } from "react-icons/ci";
-import { FaStar } from "react-icons/fa";
-import { FaBagShopping } from "react-icons/fa6";
-import { RxStopwatch } from "react-icons/rx";
 import {
   RestDiscountSale,
   MobileRestaurantFood,
@@ -74,22 +71,33 @@ const MobileRestaurantMeal = () => {
   );
 };
 
-export const RestaurantMeal = () => {
+interface RestaurantMealProps {
+  selectedTime: string;
+  searchQuery: string;
+}
+
+export const RestaurantMeal: React.FC<RestaurantMealProps> = ({
+  selectedTime,
+  searchQuery,
+}) => {
+  const filteredFood = RestaurantFood.filter((item) => {
+    const matchesTime =
+      selectedTime === "All" ||
+      item.timeText.toLowerCase() === selectedTime.toLowerCase();
+    const matchesSearch = item.smallTitle
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    return matchesTime && matchesSearch;
+  });
+
+  console.log("Selected Time:", selectedTime);
+  console.log("Restaurant Food:", RestaurantFood);
+
   return (
     <div className="RestaurantMeal_container">
       <div className="RestaurantMeal_Frame">
-        <div className="restaurant_Meal_filter_line">
-          <div className="restaurant_Meal_filter">
-            <p className="RestaurantMeal_title_filter">Meal</p>
-            <p className="RestaurantMeal_title_filter">Protein</p>
-            <p className="RestaurantMeal_title_filter">Drink</p>
-            <p className="RestaurantMeal_title_filter">Extras</p>
-          </div>
-          <hr className="RestaurantMeal_title_subLine" />
-        </div>
-
         <div className="RestaurantMeal_cards">
-          {RestaurantFood.map((item: MobileRestaurantFoodType) => (
+          {filteredFood.map((item: MobileRestaurantFoodType) => (
             <Link
               href={`/food/${item.id}`}
               key={item.id}
@@ -145,7 +153,7 @@ export const RestaurantMeal = () => {
         </div>
 
         <div className="RestaurantMeal_cards">
-          {RestaurantFood.map((item: MobileRestaurantFoodType) => (
+          {filteredFood.map((item: MobileRestaurantFoodType) => (
             <Link
               href={`/food/${item.id}`}
               key={item.id}
@@ -189,7 +197,7 @@ export const RestaurantMeal = () => {
         </div>
 
         <div className="RestaurantMeal_cards">
-          {RestaurantFood.map((item: MobileRestaurantFoodType) => (
+          {filteredFood.map((item: MobileRestaurantFoodType) => (
             <Link
               href={`/food/${item.id}`}
               key={item.id}

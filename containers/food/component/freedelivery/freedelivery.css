@@ -22,7 +22,6 @@ p.freedelivery_title {
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  overflow-x: scroll;
   scroll-snap-type: x mandatory;
   margin: 0 auto;
   gap: 30px;

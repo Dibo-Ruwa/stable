@@ -4,17 +4,17 @@ export default function Cleaning() {
   return (
     <section className="laundry_resturant_container">
       <div className="container">
-        <div className="hero_frame laundry_resturant-content">
+        <div className="hero_frame Cleaning_resturant-content">
           <p className="laundry_sub_food">Courier</p>
-          <div className="laundry_resturant-image">
+          <div className="cleaning_resturant-image">
             <img
-              src="/images/image 159 (1).png"
-              className="laundry_desktop-image"
+              src="/images/WhatsApp Image 2024-12-06 at 15.56.10_2231738e.jpg"
+              className="cleaning_desktop-image"
               alt="resturant guys"
             />
             <div className="laundry_mobile-image">
               <img
-                src="/images/image 161.png"
+                src="/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg"
                 className="laundry_img-main"
                 alt="resturant guys"
               />
@@ -25,8 +25,8 @@ export default function Cleaning() {
               />
             </div>
           </div>
-          <div className="laundry_resturant-text_container">
-            <button className="laundry_resturant-btn_text">Cleaning</button>
+          <div className="cleaning_resturant-text_container">
+            <button className="cleaning_resturant-btn_text">Cleaning</button>
             <h4 className="laundry_rest-subtitle">Cleaning Service</h4>
             <p className="laundry_rest-des">
               Our hassle-free laundry service ensures that your clothes are

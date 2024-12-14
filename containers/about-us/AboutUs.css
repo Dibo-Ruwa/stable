@@ -530,7 +530,7 @@ p.JoinUs_des {
   line-height: 25px;
 }
 
-button.button.JoinUs_CTA {
+a.JoinUs_CTA {
   color: var(--White-90, #fcfcfc);
   font-family: Roboto;
   font-size: 14px;

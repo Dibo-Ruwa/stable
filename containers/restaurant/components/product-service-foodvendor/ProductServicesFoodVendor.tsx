@@ -114,13 +114,13 @@ export const ProductServicesFoodVendor: React.FC = () => {
               alt={selectedVendor.tag}
             />
             <div className="pro-logo">
-              <div className="pro-name">
+              {/* <div className="pro-name">
                 <img
                   className="pro-img"
                   src={selectedVendor.foodImg}
                   alt={selectedVendor.tag}
                 />
-              </div>
+              </div> */}
               <div className="b-l">
                 <img
                   className="bike"

@@ -1,7 +1,16 @@
 import React from "react";
 import { GoArrowDownRight } from "react-icons/go";
 import Image from "next/image";
+import { teamMembers } from "@/constants";
+
 export const OurTeam = () => {
+  const cardStyles = [
+    "Green_Card",
+    "Blue_Card",
+    "Purple_Card",
+    "periwinkleBlue_Card",
+  ];
+
   return (
     <section className="OurTeam_Container">
       <div className="OurTeam_title_icon">
@@ -12,73 +21,30 @@ export const OurTeam = () => {
         </div>
       </div>
       <div className="TeamsCards_Container">
-        <div className="OurTeams_Cards">
-          <div className="OurTeam_Card Green_Card">
+        {teamMembers.map((member, index) => (
+          <div
+            key={index}
+            className={`OurTeam_Card ${cardStyles[index % cardStyles.length]}`}
+          >
             <div className="OurTeam_CardImage">
               <Image
-                src="/images/image 22.png"
-                alt="Team image"
+                src={member.imageUrl}
+                alt={`${member.name}'s picture`}
                 width={314}
                 height={396}
-                className="OurTeam_Card_img Green_image"
+                className={`OurTeam_Card_img ${cardStyles[
+                  index % cardStyles.length
+                ]
+                  .split("_")[0]
+                  .toLowerCase()}_image`}
               />
             </div>
             <div className="Teams_Name_skill">
-              <p className="Teams_Name">Mustapha Idris</p>
-              <p className="Teams_Skills"> Marketing & Customer Success</p>
+              <p className="Teams_Name">{member.name}</p>
+              <p className="Teams_Skills">{member.role}</p>
             </div>
           </div>
-
-          <div className="OurTeam_Card Blue_Card">
-            <div className="OurTeam_CardImage">
-              <Image
-                src="/images/image 23.png"
-                alt="Team image"
-                width={314}
-                height={396}
-                className="OurTeam_Card_img blue_image"
-              />
-            </div>
-            <div className="Teams_Name_skill">
-              <p className="Teams_Name">Mustapha Idris</p>
-              <p className="Teams_Skills"> Marketing & Customer Success</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="OurTeams_Cards LPPB_Card">
-          <div className="OurTeam_Card Purple_Card">
-            <div className="OurTeam_CardImage">
-              <Image
-                src="/images/image 24.png"
-                alt="Team image"
-                width={314}
-                height={396}
-                className="OurTeam_Card_img Purple_image"
-              />
-            </div>
-            <div className="Teams_Name_skill">
-              <p className="Teams_Name">Mustapha Idris</p>
-              <p className="Teams_Skills"> Marketing & Customer Success</p>
-            </div>
-          </div>
-
-          <div className="OurTeam_Card periwinkleBlue_Card">
-            <div className="OurTeam_CardImage">
-              <Image
-                src="/images/image 25.png"
-                alt="Team image"
-                width={314}
-                height={396}
-                className="OurTeam_Card_img periwinkleBlue_image"
-              />
-            </div>
-            <div className="Teams_Name_skill">
-              <p className="Teams_Name">Mustapha Idris</p>
-              <p className="Teams_Skills"> Marketing & Customer Success</p>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );

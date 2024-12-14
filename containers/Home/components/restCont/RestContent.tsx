@@ -31,7 +31,7 @@ export default function Resturant() {
           </div>
         </div>
         <div className="resturant-text_container">
-          <button className="resturant-btn_text">Resturant</button>
+          <button type="button" className="resturant-btn_text">Food</button>
           <h4 className="rest-subtitle">
             Over 100 food vendors are waiting for your order!
           </h4>

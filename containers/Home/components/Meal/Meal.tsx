@@ -25,10 +25,6 @@ const food = [
     id: 34,
     img: "/images/image113.png",
   },
-  {
-    id: 15,
-    img: "/images/image113.png",
-  },
 ];
 
 const prepTimes: string[] = ["30mins", "45mins", "1hr", "2hr"];
