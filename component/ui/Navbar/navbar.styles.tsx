@@ -21,7 +21,6 @@ export const NavbarFrame = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0.3rem auto;
-  height: 10vh;
   gap: 20px;
 
   .logo {
