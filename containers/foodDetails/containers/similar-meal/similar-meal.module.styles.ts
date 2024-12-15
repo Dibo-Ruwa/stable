@@ -54,7 +54,7 @@ export const MostSoldCard = styled.div`
   text-decoration: none;
 `;
 
-export const MostSoldCardLinkDiv = styled(Link)`
+export const MostSoldCardLinkDiv = styled.div`
   width: 100%;
   scroll-snap-align: center;
   box-sizing: border-box;
@@ -169,7 +169,7 @@ export const MostSoldCardReminder = styled.small`
   font-weight: 400;
 `;
 
-export const MostSoldCardPrizeLink = styled.a`
+export const MostSoldCardPrizeLink = styled.div`
   display: inline-flex;
   padding: 8.324px;
   justify-content: center;

@@ -160,7 +160,7 @@ const ProductServices: React.FC<ProductServicesProps> = ({
         </div>
         
       {selectedItem && (
-        <div className="hero_map">
+        <div className="hero_map ">
           <img className="map" src={selectedItem.map} alt={selectedItem.tag} />
           <div className="pro-logo">
             {/* <div className="pro-name">

@@ -86,9 +86,16 @@ const ErrorMessage = styled.div`
   animation: shake 0.5s ease-in-out;
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
   }
 `;
 
@@ -102,7 +109,7 @@ const LoadingMessage = styled.div`
   gap: 10px;
 
   &::after {
-    content: '';
+    content: "";
     width: 20px;
     height: 20px;
     border: 2px solid #ddd;
@@ -112,7 +119,9 @@ const LoadingMessage = styled.div`
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -224,7 +233,8 @@ const Toast = styled.div<{ $isVisible: boolean }>`
   gap: 10px;
   box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
   z-index: 1000;
-  animation: ${props => props.$isVisible ? slideIn : fadeOut} 0.3s ease-in-out;
+  animation: ${(props) => (props.$isVisible ? slideIn : fadeOut)} 0.3s
+    ease-in-out;
 
   svg {
     font-size: 1.2rem;
@@ -243,44 +253,45 @@ const LocationModal: React.FC = () => {
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [availableRegions, setAvailableRegions] = useState<string[]>([]);
   const [availableStates, setAvailableStates] = useState<string[]>([]);
-  const [statesAndRegions, setStatesAndRegions] = useState<{ [key: string]: string[] }>({});
+  const [statesAndRegions, setStatesAndRegions] = useState<{
+    [key: string]: string[];
+  }>({});
   const [companyName] = useState<string>("diboruwa");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [showToast, setShowToast] = useState(false);
 
-  const url = process.env.NEXT_PUBLIC_ADMIN_URL || 'https://diboruwa-admin-test.vercel.app';
+  const url =
+    process.env.NEXT_PUBLIC_ADMIN_URL ||
+    "https://diboruwa-admin-test.vercel.app";
 
   useEffect(() => {
     const fetchStatesAndRegions = async () => {
       setIsLoading(true);
       setError(null);
-      
+
       try {
         const apiUrl = `${url}/api/locations`;
-        console.log('Fetching from:', apiUrl);
-        
+
         const response = await axios({
-          method: 'GET',
+          method: "GET",
           url: apiUrl,
           // timeout: 90000,
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
-          validateStatus: (status) => status === 200
+          validateStatus: (status) => status === 200,
         });
 
-        console.log('Raw response:', response);
-
         if (!response.data) {
-          throw new Error('No data received from server');
+          throw new Error("No data received from server");
         }
 
         const { cities } = response.data;
-        
+
         if (!Array.isArray(cities)) {
-          throw new Error('Invalid data format: cities is not an array');
+          throw new Error("Invalid data format: cities is not an array");
         }
 
         const statesRegionsMap: { [key: string]: string[] } = {};
@@ -290,36 +301,37 @@ const LocationModal: React.FC = () => {
           if (city?.name && Array.isArray(city?.regions)) {
             states.push(city.name);
             statesRegionsMap[city.name] = city.regions
-              .filter(region => region && region.name)
-              .map(region => region.name);
+              .filter((region) => region && region.name)
+              .map((region) => region.name);
           }
         });
 
         if (states.length === 0) {
-          throw new Error('No valid cities found in response');
+          throw new Error("No valid cities found in response");
         }
 
         setAvailableStates(states);
         setStatesAndRegions(statesRegionsMap);
       } catch (error) {
-        console.error('Location fetch error:', error);
+        console.error("Location fetch error:", error);
         if (axios.isAxiosError(error)) {
-          const errorMessage = error.response?.data?.message 
-            || error.message 
-            || 'Failed to fetch locations';
+          const errorMessage =
+            error.response?.data?.message ||
+            error.message ||
+            "Failed to fetch locations";
           setError(errorMessage);
-          console.error('Axios error details:', {
+          console.error("Axios error details:", {
             message: error.message,
             response: error.response?.data,
             status: error.response?.status,
             config: {
               url: error.config?.url,
-              method: error.config?.method
-            }
+              method: error.config?.method,
+            },
           });
         } else {
-          setError('An unexpected error occurred');
-          console.error('Non-Axios error:', error);
+          setError("An unexpected error occurred");
+          console.error("Non-Axios error:", error);
         }
       } finally {
         setIsLoading(false);
@@ -329,11 +341,39 @@ const LocationModal: React.FC = () => {
     fetchStatesAndRegions();
   }, [url]);
 
+  // useEffect(() => {
+  //   const hasLocation = Cookies.get(`${companyName}_location`);
+  //   if (!hasLocation) {
+  //     setShowModal(true);
+  //   }
+  // }, [companyName]);
+
   useEffect(() => {
-    const hasLocation = Cookies.get(`${companyName}_location`);
-    if (!hasLocation) {
-      setShowModal(true);
-    }
+    const checkModalVisibility = () => {
+      const locationData = Cookies.get(`${companyName}_location`);
+      const lastModalShown = Cookies.get(`${companyName}_modal_timestamp`);
+      setShowModal(false);
+
+      if (locationData) {
+        // If location is already set, check the timestamp
+        setShowModal(false);
+
+        if (lastModalShown) {
+          const lastShownTime = new Date(lastModalShown).getTime();
+          const currentTime = new Date().getTime();
+          const hoursSinceLastShown =
+            (currentTime - lastShownTime) / (1000 * 60 * 60);
+
+          // Only show modal if more than 24 hours have passed
+          setShowModal(hoursSinceLastShown >= 24);
+        }
+      } else {
+        setShowModal(true);
+
+      }
+    };
+
+    checkModalVisibility();
   }, [companyName]);
 
   // const handleStateSelect = (state: string) => {
@@ -368,25 +408,33 @@ const LocationModal: React.FC = () => {
 
   const handleSubmit = () => {
     if (selectedState && selectedRegion) {
-      // Save to cookies
-      Cookies.set(`${companyName}_location`, JSON.stringify({
-        state: selectedState,
-        region: selectedRegion
-      }), { expires: 1 });
-      
+      // Save location to cookies
+      Cookies.set(
+        `${companyName}_location`,
+        JSON.stringify({
+          state: selectedState,
+          region: selectedRegion,
+        }),
+        { expires: 1 }
+      );
+
+      // Save timestamp to cookies
+      Cookies.set(`${companyName}_modal_timestamp`, new Date().toISOString(), {
+        expires: 1,
+      });
+
       // Close modal immediately
       setShowModal(false);
-      
+
       // Show success toast
       setShowToast(true);
-      
+
       // Hide toast after 3 seconds
       setTimeout(() => {
         setShowToast(false);
       }, 3000);
     }
   };
-
 
   return (
     <>
@@ -396,8 +444,13 @@ const LocationModal: React.FC = () => {
             <ModalHeader>
               <FaMapMarkerAlt size={70} color="#2ecc71" />
               <h2>Set your Delivery location</h2>
-              <p>Hello! We currently provide services in key cities across Nigeria</p>
-              <small className="small">Delivery options and fees may vary based on your location</small>
+              <p>
+                Hello! We currently provide services in key cities across
+                Nigeria
+              </p>
+              <small className="small">
+                Delivery options and fees may vary based on your location
+              </small>
               <CloseButton onClick={handleModalClose}>✖</CloseButton>
             </ModalHeader>
             <ModalBody>
@@ -411,7 +464,7 @@ const LocationModal: React.FC = () => {
                       placeholder="Select your state"
                       options={availableStates}
                       onSelect={handleStateSelect}
-                      value={selectedState || ''}
+                      value={selectedState || ""}
                     />
                   </DropdownWrapper>
                   <DropdownWrapper>
@@ -425,7 +478,7 @@ const LocationModal: React.FC = () => {
                   </DropdownWrapper>
                 </FormControl>
               )}
-              <SubmitButton 
+              <SubmitButton
                 onClick={handleSubmit}
                 disabled={!selectedState || !selectedRegion}
               >
@@ -435,7 +488,7 @@ const LocationModal: React.FC = () => {
           </ModalContent>
         </ModalWrapper>
       )}
-      
+
       {showToast && (
         <Toast $isVisible={showToast}>
           <FaCheckCircle />
