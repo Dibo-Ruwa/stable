@@ -21,19 +21,18 @@ p.mostsold_title {
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-x: scroll;
+  flex-wrap: wrap;
   scroll-snap-type: x mandatory;
   margin: 0 auto;
   gap: 30px;
-  flex-wrap: wrap;
 }
 
 .mostsold-card {
   width: 100%;
+  flex: 1 1 15rem;
   scroll-snap-align: center;
   box-sizing: border-box;
   background-color: #fff;
-  flex: 1 1 15rem;
   overflow-x: hidden;
   border-radius: 16px;
   text-decoration: none;

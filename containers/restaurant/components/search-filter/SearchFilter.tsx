@@ -5,9 +5,17 @@ import { FaStar } from "react-icons/fa";
 import "./search-filter.css";
 import { OverlayFilter } from "./OverlayFilter";
 
-export const SearchFilter = () => {
+interface SearchFilterProps {
+  setSelectedRating: (rating: string) => void;
+  setSearchQuery: (query: string) => void;
+}
+
+export const SearchFilter: React.FC<SearchFilterProps> = ({
+  setSelectedRating,
+  setSearchQuery,
+}) => {
   const [isOverlayVisible, setOverlayVisible] = useState(false);
-  const [selectedRating, setSelectedRating] = useState<string>("All");
+  const [selectedRating, setSelectedRatingState] = useState<string>("All");
   const [selectedStars, setSelectedStars] = useState<number | null>(null); // Track selected stars
 
   // Function to toggle overlay visibility
@@ -17,11 +25,11 @@ export const SearchFilter = () => {
 
   // Function to handle rating selection from OverlayFilter
   const handleRatingSelect = (rating: string) => {
-    setSelectedRating(rating);
+    setSelectedRatingState(rating);
     setSelectedStars(Number(rating)); // Convert rating to a number for star icons
+    setSelectedRating(rating); // Set the selected rating in the parent component
     setOverlayVisible(false); // Close the overlay after selecting
   };
-
   return (
     <div className="search_filter_frame">
       <div className="search_filter_container">
@@ -48,6 +56,7 @@ export const SearchFilter = () => {
             id="search"
             placeholder="Search here"
             className="search_filter_input"
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <RiSearch2Line className="search_filter_icon" />
         </div>
