@@ -3,7 +3,7 @@ section.vendor_container {
 }
 
 .vendor_width {
-  width: min(100%, 1440px);
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -83,6 +83,10 @@ p.Foodvendor_get_started_icon_div {
   background: #ffffff;
   padding: 3rem;
   position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 ul.vendor_text-ul {

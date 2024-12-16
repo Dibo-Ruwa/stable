@@ -63,7 +63,7 @@ small.other_Cleaning_reviews,
 .other_Cleaning_location-text,
 .other_Cleaning_time,
 .other_Cleaning_OpeningTime {
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

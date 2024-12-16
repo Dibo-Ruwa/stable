@@ -5,7 +5,7 @@ const BarbingStep = () => {
     <div className="BarbingStep-content">
       <ul className="BarbingStep-ul">
         <span className="BarbingStep_cicle"></span>
-        <li className="BarbingStep-li">Grooming</li>
+        <li className="BarbingStep-li">Groceries</li>
       </ul>
       <div className="BarbingStep_get_started_container">
         <div className="BarbingStep_get_started_content">

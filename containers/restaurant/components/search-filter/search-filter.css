@@ -26,7 +26,7 @@ button.search_filter_btn {
   background: var(--Green-1, #27a124);
   color: var(--white, #fefefe);
   font-size: 14px;
-  font-family: "Poppins";
+    font-family: "Poppins", sans-serif;
   font-weight: 400;
   line-height: normal;
   font-feature-settings: "liga" off, "clig" off;

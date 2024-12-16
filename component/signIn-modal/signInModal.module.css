@@ -1,6 +1,6 @@
 .SignUp_Title {
   color: var(--Black-100, #151515);
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-size: 30px;
   font-style: normal;
   font-weight: 500;
@@ -36,7 +36,7 @@
 
 .choice_Text {
   color: var(--Black-100, #151515);
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;
@@ -46,7 +46,7 @@
 
 .buttonText {
   color: var(--Black-90, #1b1b1b);
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 400;

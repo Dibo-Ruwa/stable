@@ -21,7 +21,7 @@
 
 .CustomersRatingText {
   color: var(--Ash-100, #8f8f8f);
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -43,7 +43,7 @@
 .CustomersRatingNum,
 .CustomersRatingReviews {
   color: var(--Black-100, #2a2a2a);
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -108,7 +108,7 @@
 
 .CustomersReviewProfileName {
   color: var(--Black-100, #2a2a2a);
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -147,7 +147,7 @@
 
 .CustomersReviewNum {
   color: var(--Theme-Color-Grey-Body, #464255);
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -156,7 +156,7 @@
 
 .CustomersReviewProfileDateAndTime {
   color: rgba(11, 11, 11, 0.57);
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -165,7 +165,7 @@
 
 .CustomersReviewText {
   color: var(--Black-100, #2a2a2a);
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

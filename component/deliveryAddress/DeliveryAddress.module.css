@@ -11,7 +11,7 @@
 
 .RequestConfirmation_DeliveryAddressTxT {
   color: var(--Ash-100, #8f8f8f);
-  font-family: Poppins;
+  font-family:"Poppins", sans-serif;
   font-size: 15.825px;
   font-style: normal;
   font-weight: 400;
@@ -34,7 +34,7 @@
 
 .RequestConfirmation_DeliveryAddressEditText {
   color: var(--Green1, #27a124);
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-size: 15.825px;
   font-style: normal;
   font-weight: 400;

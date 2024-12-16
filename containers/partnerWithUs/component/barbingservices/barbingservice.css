@@ -242,10 +242,10 @@ span.BarbingStep_cicle {
   .barbingservice_img-transparent {
     left: 14.7rem;
   }
-  
-      img.barbingservice_img-transparent_content {
-        width: 22rem;
-    }
+
+  img.barbingservice_img-transparent_content {
+    width: 22rem;
+  }
   .barbingservice_overlay-img {
     top: 7rem;
   }
@@ -283,7 +283,7 @@ span.BarbingStep_cicle {
   }
   img.barbingservice_img-content {
     width: 75rem;
-    height: 80vh;
+    height: 32rem;
   }
 }
 

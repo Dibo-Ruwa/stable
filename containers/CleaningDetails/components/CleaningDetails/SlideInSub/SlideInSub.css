@@ -37,7 +37,7 @@
 .SlideInSub_restaurantSubText,
 .SlideInSub_SeeMore_SubText, .SlideInSub_Close_SubText {
   color: #27a124;
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 0.875rem;
   font-style: normal;
   line-height: normal;
@@ -91,7 +91,7 @@
 
 p.SlideInSub_Cust_sub_type_text {
   font-size: 13px;
-  font-family: "Poppins";
+    font-family: "Poppins", sans-serif;
   font-style: normal;
   line-height: normal;
   font-weight: 500;
@@ -99,7 +99,7 @@ p.SlideInSub_Cust_sub_type_text {
 
 p.SlideInSub_Cust_sub_amount_text {
   font-size: 13px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   line-height: normal;
   font-weight: 500;
@@ -122,7 +122,7 @@ p.SlideInSub_Cust_sub_amount_text {
 
 p.SlideInSub_Cust_sub_list_item_text {
   font-size: 13px;
-  font-family: "Poppins";
+   font-family: "Poppins", sans-serif;
   font-style: normal;
   line-height: normal;
   font-weight: 400;
@@ -138,7 +138,7 @@ p.SlideInSub_Cust_sub_list_item_text {
 
 p.SlideInSub_Cust_sub_SA_text {
   font-size: 14px;
-  font-family: "Poppins";
+   font-family: "Poppins", sans-serif;
   font-style: normal;
   line-height: normal;
   font-weight: 400;
@@ -146,7 +146,7 @@ p.SlideInSub_Cust_sub_SA_text {
 
 p.SlideInSub_Cust_SA_amount {
   font-size: 14px;
-  font-family: "Poppins";
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   line-height: normal;
   font-weight: 400;
