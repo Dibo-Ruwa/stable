@@ -1,6 +1,6 @@
 .laundry_width {
-  width: min(93%, 1440px);
-  margin: 5rem 0rem 5rem auto;
+  width: 100%;
+  margin: auto;
   position: relative;
 }
 
@@ -43,10 +43,18 @@ a.laundry_signup {
   color: #27a124;
   font-size: 17px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4rem;
   display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
   margin-top: 2rem;
+}
+
+.get_started_icon {
+  width: 15px;
+  height: 15px;
 }
 
 .laundry_img-transparent {
@@ -121,10 +129,10 @@ small.LaundryStep_get_started_icon_div {
 }
 
 p.LaundryStep_get_started_icon_div {
-  color: #5e5e5e;
+  color: #2a2a2a;
   font-size: 14px;
   font-family: "Poppins";
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .LaundryStep-content {
@@ -201,7 +209,7 @@ span.LaundryStep_cicle {
   }
 
   .laundry_img-text {
-    width: 50vw;
+    width: 60vh;
     background: #b2a19124;
     position: relative;
     z-index: -0;
@@ -212,6 +220,7 @@ span.LaundryStep_cicle {
     display: flex;
     flex-direction: row-reverse;
     margin: 6rem auto 0;
+    justify-content: center;
   }
 
   .laundry_overlay-img {
@@ -257,6 +266,10 @@ span.LaundryStep_cicle {
     background: #e9e9e929;
   }
 
+  .laundry_img-text {
+    width: 50vh;
+  }
+
   .laundry_img-transparent {
     left: 14.7rem;
   }
@@ -292,6 +305,10 @@ span.LaundryStep_cicle {
     top: 11rem;
   }
 
+  .laundry_img-text {
+    width: 75vh;
+  }
+
   .LaundryStep_get_started_content {
     display: flex;
     gap: 0.2rem;
@@ -305,6 +322,10 @@ span.LaundryStep_cicle {
 }
 
 @media only screen and (min-width: 1200px) {
+  .laundry_img-text {
+    width: 40rem;
+  }
+
   .laundry_img-transparent {
     left: 17.78rem;
   }

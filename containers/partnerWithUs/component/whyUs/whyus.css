@@ -10,7 +10,7 @@
   padding: 2.7rem 0px;
   justify-content: center;
   gap: 3rem;
-  width: 80rem;
+  width: 69rem;
 }
 
 .why_us-card {
@@ -27,7 +27,7 @@ img.why_us-card_img {
 
 h4.why_us-card_h4 {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   font-style: normal;
   line-height: 1.5;
   font-family: "Poppins";

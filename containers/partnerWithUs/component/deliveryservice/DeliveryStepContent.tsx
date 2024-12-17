@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 import { IoIosCheckmark } from "react-icons/io";
 
 const DeliveryStepContent = () => {
@@ -84,9 +86,10 @@ const DeliveryStepContent = () => {
           </div>
         </div>
       </div>
-      <a href="/" className="vendor_signup">
+      <Link href="/sign-up" className="deliveryservice_signup">
         Sign Up
-      </a>
+        <FaArrowRight className="get_started_icon" />
+      </Link>
       <div className="deliveryservice_img-transparent">
         <img
           src="/images/Ellipse 109.png"

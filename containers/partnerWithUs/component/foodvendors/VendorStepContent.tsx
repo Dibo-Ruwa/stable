@@ -1,5 +1,7 @@
+import { FaArrowRight } from "react-icons/fa";
 import "./foodvendors.css";
 import { IoIosCheckmark } from "react-icons/io";
+import Link from "next/link";
 const VendorStepContent = () => {
   return (
     <div className="vendor_text-content">
@@ -79,9 +81,10 @@ const VendorStepContent = () => {
           </div>
         </div>
       </div>
-      <a href="/" className="vendor_signup">
+      <Link href="/sign-up" className="vendor_signup">
         Sign Up
-      </a>
+         <FaArrowRight className="get_started_icon" />
+      </Link>
 
       <div className="vendor_img-transparent">
         <img

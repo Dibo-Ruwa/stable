@@ -123,10 +123,10 @@ small.BarbingStep_get_started_icon_div {
 }
 
 p.BarbingStep_get_started_icon_div {
-  color: #5e5e5e;
+  color: #2a2a2a;
   font-size: 14px;
   font-family: "Poppins";
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .BarbingStep-content {
@@ -190,11 +190,16 @@ span.BarbingStep_cicle {
     position: relative;
     display: flex;
     margin: 6rem auto 0;
-    gap: 2rem;
   }
+
+  .BarbingStep-content_padding {
+    padding: 2rem;
+  }
+
   .BarbingStep-content {
     margin: 0;
   }
+
   .barbingservice_overlay-img {
     top: 4rem;
     right: -1rem;
@@ -268,7 +273,12 @@ span.BarbingStep_cicle {
   .BarbingStep-content {
     margin: auto;
   }
+
+  .BarbingStep-content_padding {
+    padding: 2rem;
+  }
 }
+
 @media only screen and (min-width: 1200px) {
   .barbingservice_img-transparent {
     left: 17.78rem;
@@ -282,8 +292,8 @@ span.BarbingStep_cicle {
     top: 14rem;
   }
   img.barbingservice_img-content {
-    width: 75rem;
-    height: 32rem;
+    width: 85rem;
+    height: 37rem;
   }
 }
 
@@ -292,94 +302,3 @@ span.BarbingStep_cicle {
     left: 18.4rem;
   }
 }
-/* section.barbingservice_container {
-  background: #e9e9e942;
-}
-
-.barbingservice_width {
-  width: min(100%, 1440px);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-}
-
-img.barbingservice_img-content {
-  width: 100%;
-  margin-left: 0rem;
-  margin-top: 5rem;
-}
-
-img.barbingservice_img-text_content {
-  width: 80%;
-}
-
-.barbingservice_img-transparent {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  position: absolute;
-  top: 28rem;
-  right: 2rem;
-}
-
-img.barbingservice_img-transparent_content {
-  width: 15rem;
-}
-
-@media only screen and (max-width: 1128px) {
-  img.barbingservice_img-content {
-    margin-left: 4rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .barbingservice_img-transparent {
-    display: flex;
-    align-items: center;
-    margin: 0 auto;
-    position: absolute;
-    top: 18rem;
-  }
-}
-@media only screen and (max-width: 950px) {
-  i.barbingservice_text-li {
-    font-size: 11px;
-  }
-
-  img.barbingservice_img-text_content {
-    width: 100%;
-  }
-
-  a.barbingservice_signup {
-    font-size: 15px;
-  }
-  img.barbingservice_img-transparent_content {
-    width: 12rem;
-  }
-
-  .barbingservice_img-transparent {
-    top: 23rem;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  section.barbingservice_container {
-    background: none;
-  }
-  .barbingservice_width {
-    grid-template-columns: 1fr;
-  }
-  img.barbingservice_img-content {
-    margin-left: 0;
-    position: relative;
-    z-index: 1;
-  }
-  img.barbingservice_img-transparent_content {
-    display: none;
-  }
-
-  .barbingservice_text-content {
-    background: none;
-  }
-} */

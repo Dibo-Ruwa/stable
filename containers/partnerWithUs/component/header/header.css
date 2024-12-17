@@ -3,8 +3,8 @@
 }
 section.partner_header-container {
   display: grid;
-  grid-template-columns: 40% 60%;
-  padding: 3rem 0 0;
+  grid-template-columns: 37% 63%;
+  align-items: flex-end;
   margin: 0 auto 7rem;
 }
 
@@ -13,7 +13,7 @@ h1.partner_header-h1 {
   font-family: "Poppins", sans-serif;
   font-size: 25px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.3;
   margin-bottom: 1rem;
 }
@@ -28,20 +28,26 @@ p.partner_header-p {
   margin-bottom: 2rem;
 }
 
-button.partner_header-btn {
+a.partner_header-btn {
   display: flex;
   padding: 0.7rem 1rem;
   width: 9rem;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  background: #27a124;
+  gap: 10px;
+  background: #2a2a2a;
   color: #ffffff;
+}
+
+.get_started_icon {
+  width: 15px;
+  height: 15px;
 }
 
 .partner_header-top_text {
   color: #2a2a2a;
-  font-family: Lateef;
+  font-family: "Lateef", serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
