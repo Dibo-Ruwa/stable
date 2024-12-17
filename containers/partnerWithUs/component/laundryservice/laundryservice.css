@@ -139,6 +139,8 @@ p.LaundryStep_get_started_icon_div {
   background: transparent;
   padding: 0;
   position: relative;
+  margin: 0 auto;
+  width: 93%;
   margin-top: 4rem;
 }
 
@@ -206,6 +208,13 @@ span.LaundryStep_cicle {
   img.laundry_img-content {
     width: 100%;
     height: 100%;
+  }
+
+  .LaundryStep-content {
+    background: transparent;
+    padding: 0;
+    position: relative;
+    margin-top: 4rem;
   }
 
   .laundry_img-text {
