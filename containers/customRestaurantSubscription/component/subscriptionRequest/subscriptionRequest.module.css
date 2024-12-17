@@ -78,6 +78,13 @@
   gap: 1.4rem;
 }
 
+@media screen and (max-width: 768px) {
+  .SelectedDays_Cards {
+    flex-direction: column;
+}
+
+}
+
 .SelectedDays_Card {
   display: flex;
   width: 100%;
