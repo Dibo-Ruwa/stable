@@ -60,3 +60,13 @@
   width: 100%;
   z-index: 1;
 }
+/* ========================= Date Range Picker ============================== */
+
+/* Example Custom Styling */
+.rdrDay.rdrDaySelected {
+  background-color: #4CAF50;
+  color: #fff;
+}
+.rdrDayHovered {
+  background-color: #E8F5E9;
+}
