@@ -31,7 +31,7 @@
 
 .DeliveryType_Title {
   color: var(--Ash-100, #8f8f8f);
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -78,6 +78,13 @@
   gap: 1.4rem;
 }
 
+@media screen and (max-width: 768px) {
+  .SelectedDays_Cards {
+    flex-direction: column;
+}
+
+}
+
 .SelectedDays_Card {
   display: flex;
   width: 100%;
@@ -92,7 +99,7 @@
 
 .SelectedDays_CardTitle {
   color: var(--primary-color-2-black-50, #3f3f3f);
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -140,7 +147,7 @@
 
 .SelectedDays_ScheduleTimeOpt {
   color: var(--Ash-100, #8f8f8f);
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 13.754px;
   font-style: normal;
   font-weight: 400;

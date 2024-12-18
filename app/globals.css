@@ -23,8 +23,24 @@ body {
 
 main.main_container {
   margin: 4rem 0 0;
+  font-family: "Poppins", sans-serif;
 }
 
 section {
   width: 100%;
+}
+
+p,
+div,
+small,
+h1,
+h2,
+h3,
+h4,
+h5,
+span,
+a,
+ul,
+li {
+  font-family: "Poppins", sans-serif !important;
 }

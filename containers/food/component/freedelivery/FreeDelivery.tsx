@@ -75,12 +75,12 @@ const FreeDelivery: React.FC<FreeDeliveryProps> = ({
                     <p className="freedelivery-card_prize-text">
                       {item.prizeText}
                     </p>
-                    <Link
-                      href={item.prizeLink}
+                    <button
+                      type='button'
                       className="freedelivery-card_prize-link"
                     >
                       <PrizeIcon className="freedelivery-card_prize-icon" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </Link>

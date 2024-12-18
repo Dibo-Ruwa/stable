@@ -9,6 +9,8 @@ import { ScheduleTime } from "@/component/ScheduleTime/ScheduleTime";
 
 export const SelectedDays = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [pickupTime, setPickupTime] = useState<string>("8:00 AM"); // State for pickup time
+  const [deliveryTime, setDeliveryTime] = useState<string>("1:00 PM"); // State for delivery time
 
   const handlePickUpChange = () => {
     setSelectedOption(selectedOption === "pickup" ? null : "pickup");
@@ -58,9 +60,10 @@ export const SelectedDays = () => {
             Schedule Delivery (optional)
           </p>
           <ScheduleTime
-            time="12:00pm"
+            time={pickupTime} // Use the state for pickup time
             label="Time"
             className={styles.SelectedDays_ScheduleTimeSetOpt}
+            onTimeChange={setPickupTime} // Update Monday's time
           />
         </div>
       </div>
@@ -103,9 +106,10 @@ export const SelectedDays = () => {
             Schedule Delivery (optional)
           </p>
           <ScheduleTime
-            time="12:00pm"
+            time={deliveryTime} // Use the state for delivery time
             label="Time"
             className={styles.SelectedDays_ScheduleTimeSetOpt}
+            onTimeChange={setDeliveryTime} // Update Monday's time
           />
         </div>
       </div>

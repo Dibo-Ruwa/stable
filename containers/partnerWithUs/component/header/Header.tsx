@@ -1,4 +1,6 @@
+import { FaArrowRight } from "react-icons/fa";
 import "./header.css"
+import Link from "next/link"
 export default function Header() {
   return (
     <>
@@ -13,7 +15,9 @@ export default function Header() {
               Streamline Operations, Manage Logistics, and Delight Customers
               Across Laundry, Food Delivery, Moving, and Barbing Services
             </p>
-            <button className="partner_header-btn">Get Started</button>
+            <Link href="" className="partner_header-btn">Get Started
+            <FaArrowRight className="get_started_icon" />
+            </Link>
           </div>
           <div className="partner_header-top">
             <span className="partner_header-top_text">Top Partners</span>

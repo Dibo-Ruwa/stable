@@ -68,7 +68,7 @@ small.reviews,
 small.reviews,
 span.location-text,
 span.time {
-  font-family: "Poppins";
+    font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

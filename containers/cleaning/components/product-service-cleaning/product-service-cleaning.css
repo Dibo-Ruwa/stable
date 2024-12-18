@@ -82,7 +82,7 @@
 .Cleaning_highlight {
   color: #2a2a2a;
   font-size: 34px;
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-weight: 600;
   width: 472px;
   line-height: 51px;
@@ -94,7 +94,7 @@
 .Cleaning_highlight2 {
   color: #2a2a2a;
   font-size: 36px;
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-weight: 600;
   width: -moz-fit-content;
   width: 311px;
@@ -108,7 +108,7 @@
 .Cleaning_description {
   color: #2a2a2a;
   font-size: 17px;
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-weight: 500;
   width: 370px;
   line-height: 1.5;
@@ -216,7 +216,7 @@ p.CleaningTimeD,
 p.CleaningLocationText {
   color: #565656;
   font-size: 12.889px;
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
   font-style: normal;
   line-height: normal;
@@ -427,7 +427,7 @@ p.CleaningLocationText {
 
   .MobileTopCleaning_Text {
     color: #2a2a2a;
-    font-family: Poppins;
+   font-family: "Poppins", sans-serif;
     font-size: 14px;
     font-weight: 400;
     font-style: normal;

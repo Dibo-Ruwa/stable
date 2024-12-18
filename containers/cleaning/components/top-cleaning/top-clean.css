@@ -68,7 +68,7 @@ Laundry_small.reviews,
 Laundry_small.reviews,
 .Laundry_location-text,
 .Laundry_time {
-  font-family: "Poppins";
+   font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

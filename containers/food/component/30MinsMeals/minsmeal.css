@@ -9,7 +9,7 @@
 
 p.minsmeal_title {
   color: var(--Ash-100, #8f8f8f);
-  font-family: Poppins;
+   font-family: "Poppins", sans-serif;
   font-size: 19.548px;
   font-style: normal;
   font-weight: 400;
@@ -89,7 +89,7 @@ svg.minsmeal-card_img-icon {
 
 small.minsmeal-card_title {
   color: var(--Black-100, #2a2a2a);
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -98,7 +98,7 @@ small.minsmeal-card_title {
 
 .minsmeal-card_timer-text {
   color: #565656;
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -135,7 +135,7 @@ svg.minsmeal-card_timer-icon {
 
 small.minsmeal-card_remender {
   color: #ef5a5a;
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
@@ -155,14 +155,14 @@ small.minsmeal-card_remender {
 
 p.minsmeal-card_prize-text {
   color: var(--Soft-black, #565656);
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-a.minsmeal-card_prize-link {
+.minsmeal-card_prize-link {
   display: flex;
   width: 148px;
   padding: 10px;

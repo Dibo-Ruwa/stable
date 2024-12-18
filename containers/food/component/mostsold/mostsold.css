@@ -164,7 +164,7 @@ p.mostsold-card_prize-text {
   line-height: normal;
 }
 
-a.mostsold-card_prize-link {
+.mostsold-card_prize-link {
   display: flex;
   width: 148px;
   padding: 10px;
