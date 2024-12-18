@@ -69,7 +69,8 @@ const MinsMeals: React.FC<MinsMealsProps> = ({ searchQuery, activeButton }) => {
                   <div className="minsmeal-card_prize">
                     <p className="minsmeal-card_prize-text">{item.prizeText}</p>
                     <Link
-                      href={item.prizeLink}
+                      // href={item.prizeLink}
+                      href={`/food/${item.id}`}
                       className="minsmeal-card_prize-link"
                     >
                       <PrizeIcon className="minsmeal-card_prize-icon" />
