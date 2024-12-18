@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { LuCalendarDays } from "react-icons/lu";
-import { BsClock } from "react-icons/bs";
-import { TfiAngleDown } from "react-icons/tfi";
 import { ScheduleTime } from "@/component/ScheduleTime/ScheduleTime";
 import { ScheduleDate } from "@/component/ScheduleDate/ScheduleDate";
 
@@ -12,6 +9,15 @@ const SchdeliveryContainer = styled.div`
   align-items: flex-start;
   gap: 8px;
   margin-top: 2rem;
+`;
+
+const SchdeliveryTitle = styled.p`
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 `;
 
 // Styled version of ScheduleTime
@@ -50,15 +56,6 @@ const StyledScheduleDate = styled(ScheduleDate)`
     border-radius: 100px;
     background: rgba(234, 235, 238, 0.49);
   }
-`;
-
-const SchdeliveryTitle = styled.p`
-  color: var(--Ash-100, #8f8f8f);
-  font-family: Poppins;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 `;
 
 export const SchDeliveryOpl = () => {

@@ -29,9 +29,9 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
     setIsOpen(!isOpen);
   };
 
- const handleTimeChange = (newTime: string) => {
-   onTimeChange(newTime); // Call the callback with the new time
- };
+  const handleTimeChange = (newTime: string) => {
+    onTimeChange(newTime); // Call the callback with the new time
+  };
 
   return (
     <>
@@ -49,7 +49,9 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
             </div>
           </div>
 
-          <div className={`${styles.MovingScheduleDate_ArrowIcons } ${iconClass}`}>
+          <div
+            className={`${styles.MovingScheduleDate_ArrowIcons} ${iconClass}`}
+          >
             {isOpen ? (
               <FaAngleUp className={styles.MovingScheduleTimeArrow} />
             ) : (
@@ -57,13 +59,13 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
             )}
           </div>
         </div>
+        {isOpen && (
+          <div className={styles.MovingScheduleTimeDetails}>
+            {/* Additional details go here (e.g., a time picker or additional information) */}
+            <TimePicker onTimeChange={handleTimeChange} />
+          </div>
+        )}
       </div>
-      {isOpen && (
-        <div className={styles.MovingScheduleTimeDetails}>
-          {/* Additional details go here (e.g., a time picker or additional information) */}
-         <TimePicker onTimeChange={handleTimeChange} />
-        </div>
-      )}
     </>
   );
 };

@@ -16,7 +16,7 @@ interface ScheduleDateProps {
 export const ScheduleDate: React.FC<ScheduleDateProps> = ({
   date,
   className,
-    iconClass,
+  iconClass,
   label,
   icon: Icon = CiCalendar,
 }) => {
@@ -42,7 +42,9 @@ export const ScheduleDate: React.FC<ScheduleDateProps> = ({
               <p className={styles.MovingScheduleDateNum}>{date}</p>
             </div>
           </div>
-          <div className={`${styles.MovingScheduleDate_ArrowIcons} ${iconClass}`}>
+          <div
+            className={`${styles.MovingScheduleDate_ArrowIcons} ${iconClass}`}
+          >
             {isOpen ? (
               <FaAngleUp className={styles.MovingScheduleDateArrow} />
             ) : (
@@ -50,15 +52,13 @@ export const ScheduleDate: React.FC<ScheduleDateProps> = ({
             )}
           </div>
         </div>
+        {isOpen && (
+          <div className={styles.MovingScheduleDateDetails}>
+            {/* Additional details go here (e.g., a date picker) */}
+            <p>Choose a new date...</p>
+          </div>
+        )}
       </div>
-
-      {isOpen && (
-        <div className={styles.MovingScheduleDateDetails}>
-          {/* Additional details go here (e.g., a date picker) */}
-          <p>Choose a new date...</p>
-          {/* You can add a date picker or additional information */}
-        </div>
-      )}
     </>
   );
 };
