@@ -91,12 +91,12 @@ const MostSold: React.FC<MostSoldProps> = ({
                   </small>
                   <div className="mostsold-card_prize">
                     <p className="mostsold-card_prize-text">{item.prizeText}</p>
-                    <Link
-                      href={item.prizeLink}
+                    <button
+                    type="button"
                       className="mostsold-card_prize-link"
                     >
                       <PrizeIcon className="mostsold-card_prize-icon" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </Link>

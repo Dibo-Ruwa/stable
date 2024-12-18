@@ -7,6 +7,7 @@ import { TimePicker } from "./TimePicker";
 interface ScheduleTimeProps {
   time: string;
   className?: string;
+  iconClass?: string;
   label: string;
   icon?: React.ElementType;
   onTimeChange: (newTime: string) => void;
@@ -16,6 +17,7 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
   time,
   className,
   label,
+  iconClass,
   icon: Icon = CiClock2,
   onTimeChange,
 }) => {
@@ -47,7 +49,7 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
             </div>
           </div>
 
-          <div className={styles.MovingScheduleDate_ArrowIcons}>
+          <div className={`${styles.MovingScheduleDate_ArrowIcons } ${iconClass}`}>
             {isOpen ? (
               <FaAngleUp className={styles.MovingScheduleTimeArrow} />
             ) : (
