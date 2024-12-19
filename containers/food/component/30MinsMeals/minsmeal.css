@@ -162,7 +162,7 @@ p.minsmeal-card_prize-text {
   line-height: normal;
 }
 
-a.minsmeal-card_prize-link {
+.minsmeal-card_prize-link {
   display: flex;
   width: 148px;
   padding: 10px;
