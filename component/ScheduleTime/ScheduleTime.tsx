@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiClock2 } from "react-icons/ci";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import styles from "./ScheduleTime.module.css";
@@ -29,10 +29,16 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
     setIsOpen(!isOpen);
   };
 
- const handleTimeChange = (newTime: string) => {
-   onTimeChange(newTime); // Call the callback with the new time
- };
+  // Handle time change from TimePicker
+  const handleTimeChange = (newTime: string) => {
+    setSelectedTime(newTime); // Update local state
+    onTimeChange(newTime); // Call the callback with the new time
+  };
 
+  // Update selectedTime when the time prop changes
+  useEffect(() => {
+    setSelectedTime(time);
+  }, [time]);
   return (
     <>
       <div
@@ -49,7 +55,9 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
             </div>
           </div>
 
-          <div className={`${styles.MovingScheduleDate_ArrowIcons } ${iconClass}`}>
+          <div
+            className={`${styles.MovingScheduleDate_ArrowIcons} ${iconClass}`}
+          >
             {isOpen ? (
               <FaAngleUp className={styles.MovingScheduleTimeArrow} />
             ) : (
@@ -57,13 +65,16 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
             )}
           </div>
         </div>
+        {isOpen && (
+          <div
+            className={styles.MovingScheduleTimeDetails}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Additional details go here (e.g., a time picker or additional information) */}
+            <TimePicker onTimeChange={handleTimeChange} />
+          </div>
+        )}
       </div>
-      {isOpen && (
-        <div className={styles.MovingScheduleTimeDetails}>
-          {/* Additional details go here (e.g., a time picker or additional information) */}
-         <TimePicker onTimeChange={handleTimeChange} />
-        </div>
-      )}
     </>
   );
 };

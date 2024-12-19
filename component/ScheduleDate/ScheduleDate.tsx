@@ -4,21 +4,24 @@ import React, { useState } from "react";
 import { CiCalendar } from "react-icons/ci";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import styles from "./ScheduleDate.module.css";
+import { DateRangePicker } from "./DateRangePicker";
 
 interface ScheduleDateProps {
-  date: string;
+  date: string; // This can be a formatted string for display
   className?: string;
   iconClass?: string;
   label: string;
   icon?: React.ElementType;
+  onDateChange: (startDate: Date, endDate: Date) => void; // New prop
 }
 
 export const ScheduleDate: React.FC<ScheduleDateProps> = ({
   date,
   className,
-    iconClass,
+  iconClass,
   label,
   icon: Icon = CiCalendar,
+  onDateChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,7 +45,9 @@ export const ScheduleDate: React.FC<ScheduleDateProps> = ({
               <p className={styles.MovingScheduleDateNum}>{date}</p>
             </div>
           </div>
-          <div className={`${styles.MovingScheduleDate_ArrowIcons} ${iconClass}`}>
+          <div
+            className={`${styles.MovingScheduleDate_ArrowIcons} ${iconClass}`}
+          >
             {isOpen ? (
               <FaAngleUp className={styles.MovingScheduleDateArrow} />
             ) : (
@@ -50,15 +55,16 @@ export const ScheduleDate: React.FC<ScheduleDateProps> = ({
             )}
           </div>
         </div>
+        {isOpen && (
+          <div
+            className={styles.MovingScheduleDateDetails}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Additional details go here (e.g., a date picker) */}
+            <DateRangePicker onDateChange={onDateChange} />
+          </div>
+        )}
       </div>
-
-      {isOpen && (
-        <div className={styles.MovingScheduleDateDetails}>
-          {/* Additional details go here (e.g., a date picker) */}
-          <p>Choose a new date...</p>
-          {/* You can add a date picker or additional information */}
-        </div>
-      )}
     </>
   );
 };
