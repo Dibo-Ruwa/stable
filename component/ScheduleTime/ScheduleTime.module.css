@@ -129,7 +129,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
   margin: 0.6rem 0 4rem;
 }
 
