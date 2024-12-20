@@ -7,18 +7,18 @@ const BarbingService = () => {
         <div className="barbingservice-img-text">
           <div className="barbingservice_img">
             <img
-              src="/images/Rectangle 319.png"
+              src="/images/WhatsApp Image 2024-12-04 at 15.15.23_f2bd62bd.jpg"
               className="barbingservice_img-content"
               alt=""
             />
 
-            <div className="barbingservice_overlay-img">
+            {/* <div className="barbingservice_overlay-img">
               <img
                 src="/images/Frame 2609849.png"
                 className="barbingservice_overlay-img_content"
                 alt=""
               />
-            </div>
+            </div> */}
           </div>
           <BarbingStep />
         </div>

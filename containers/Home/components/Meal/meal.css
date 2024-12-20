@@ -51,14 +51,15 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-x: auto;
+  flex-wrap: wrap;
   scroll-snap-type: x mandatory;
   margin: 0 auto;
   gap: 30px;
 }
 
 .meal_card .card {
-  width: 250px;
+  width: 100%;
+  flex: 1 1 15rem;
   scroll-snap-align: center;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -68,15 +69,14 @@
 }
 
 .card-img {
-  width: 268px;
-  height: 150px;
+  width: 100%;
   overflow: hidden;
   border-radius: 16px;
   position: relative;
 }
 .meal_card .card img {
-  width: 290px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
 }
 
 .wish {
@@ -134,17 +134,13 @@
 
   .meal_card {
     display: flex;
-    justify-content: start;
-    flex-wrap: nowrap;
     width: 90%;
-    overflow-x: scroll;
     scroll-snap-type: x mandatory;
     margin: 0 auto;
     gap: 20px;
   }
 
   .meal_card .card {
-    width: 250px;
     scroll-snap-align: center;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -155,8 +151,8 @@
 
   .meal_card .card img {
     border-radius: 0px;
-    width: 250px;
-    height: 150px;
+    /* width: 250px;
+    height: 150px; */
   }
 
   .meal_card .card a {
@@ -171,7 +167,6 @@
 
 @media (max-width: 450px) {
   .meal_card .card {
-    width: 200px;
     scroll-snap-align: center;
     flex-shrink: 0;
     box-sizing: border-box;
@@ -182,8 +177,8 @@
 
   .meal_card .card img {
     border-radius: 0px;
-    width: 200px;
-    height: 130px;
+    /* width: 200px;
+    height: 130px; */
   }
 
   .meal_card .card a {
