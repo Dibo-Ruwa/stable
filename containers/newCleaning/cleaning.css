@@ -1,0 +1,36 @@
+.partner-container {
+    background-color: #fcfcfc;
+  }
+
+  .Cleaning_hero_frame {
+    width: min(93%, 1440px);
+    margin: 0 auto;
+  }
+  
+  /* Example: Fade-in animation */
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 1s forwards;
+  }
+  
+  /* Additional custom styles if needed */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 40px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
