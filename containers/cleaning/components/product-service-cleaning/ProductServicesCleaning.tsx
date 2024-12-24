@@ -167,7 +167,8 @@ export const ProductServicesCleaning: React.FC = () => {
               </div>
               <div className="CleaningVisitLink">
                 <Link
-                  href={`/cleaning/${selectedVendor._id}`}
+                  // href={`/cleaning/${selectedVendor._id}`}
+                  href={``}
                   className="Cleaning_visit-link"
                 >
                   <p className="Cleaning_visit-link_text">visit</p>
