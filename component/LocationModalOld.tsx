@@ -344,12 +344,6 @@ const LocationModal: React.FC = () => {
     fetchStatesAndRegions();
   }, [url]);
 
-  // useEffect(() => {
-  //   const hasLocation = Cookies.get(`${companyName}_location`);
-  //   if (!hasLocation) {
-  //     setShowModal(true);
-  //   }
-  // }, [companyName]);
 
   useEffect(() => {
     const checkModalVisibility = () => {
