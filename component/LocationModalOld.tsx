@@ -5,6 +5,7 @@ import axios from "axios";
 import Dropdown from "./ui/Dropdown";
 import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import Cookies from "js-cookie";
+import { useLocation } from "@/context/LocationProvider";
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -248,6 +249,8 @@ interface CityData {
 }
 
 const LocationModal: React.FC = () => {
+  const { setLocation } = useLocation();
+
   const [showModal, setShowModal] = useState<boolean>(true);
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
@@ -341,12 +344,6 @@ const LocationModal: React.FC = () => {
     fetchStatesAndRegions();
   }, [url]);
 
-  // useEffect(() => {
-  //   const hasLocation = Cookies.get(`${companyName}_location`);
-  //   if (!hasLocation) {
-  //     setShowModal(true);
-  //   }
-  // }, [companyName]);
 
   useEffect(() => {
     const checkModalVisibility = () => {
@@ -376,24 +373,11 @@ const LocationModal: React.FC = () => {
     checkModalVisibility();
   }, [companyName]);
 
-  // const handleStateSelect = (state: string) => {
-  //   setSelectedState(state);
-  //   if (state && statesAndRegions[state]) {
-  //     setAvailableRegions(statesAndRegions[state]);
-  //   } else {
-  //     setAvailableRegions([]);
-  //   }
-  //   setSelectedRegion("");
-  // };
 
   const handleStateSelect = (state: string) => {
     setSelectedState(state || null);
     setAvailableRegions(statesAndRegions[state] || []);
   };
-
-  // const handleRegionSelect = (selectedOption: string) => {
-  //   setSelectedRegion(selectedOption.toLowerCase());
-  // };
 
   const handleRegionSelect = (region: string) => {
     setSelectedRegion(region || "");
@@ -406,24 +390,47 @@ const LocationModal: React.FC = () => {
     setShowModal(false);
   };
 
+  // const handleSubmit = () => {
+  //   if (selectedState && selectedRegion) {
+  //     // Save location to cookies
+  //     Cookies.set(
+  //       `${companyName}_location`,
+  //       JSON.stringify({
+  //         state: selectedState,
+  //         region: selectedRegion,
+  //       }),
+  //       { expires: 1 }
+  //     );
+
+  //     // Save timestamp to cookies
+  //     Cookies.set(`${companyName}_modal_timestamp`, new Date().toISOString(), {
+  //       expires: 1,
+  //     });
+
+  //     // Close modal immediately
+  //     setShowModal(false);
+
+  //     // Show success toast
+  //     setShowToast(true);
+
+  //     // Hide toast after 3 seconds
+  //     setTimeout(() => {
+  //       setShowToast(false);
+  //     }, 3000);
+  //   }
+  // };
+  
   const handleSubmit = () => {
     if (selectedState && selectedRegion) {
-      // Save location to cookies
-      Cookies.set(
-        `${companyName}_location`,
-        JSON.stringify({
-          state: selectedState,
-          region: selectedRegion,
-        }),
-        { expires: 1 }
-      );
+      // Update context
+      setLocation(selectedState, selectedRegion);
 
       // Save timestamp to cookies
       Cookies.set(`${companyName}_modal_timestamp`, new Date().toISOString(), {
         expires: 1,
       });
 
-      // Close modal immediately
+      // Close modal
       setShowModal(false);
 
       // Show success toast

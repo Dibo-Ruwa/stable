@@ -4,6 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { HiBars3 } from "react-icons/hi2";
 import { VscClose } from "react-icons/vsc";
 import { CaretDownIcon } from "@radix-ui/react-icons";
@@ -21,6 +22,7 @@ import {
   NavbarFrame,
 } from "./navbar.styles";
 import UserDropdown from "@/component/userDropdown/UserDropdown";
+import { useLocation } from "@/context/LocationProvider";
 import { FaBagShopping } from "react-icons/fa6";
 import { ImLocation } from "react-icons/im";
 import { useCart } from "@/hooks/useCart";
@@ -32,12 +34,11 @@ const Navbar = () => {
   const { data: session, status } = useSession({
     required: false,
   });
-  const [location, setLocation] = useState<{
-    state: string;
-    region: string;
-  } | null>(null);
-  //get partName to render route types
+ 
   const pathname = usePathname();
+  const router = useRouter();
+  const { location } = useLocation();
+
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [authModal, setAuthModal] = useState<"signup" | "signin" | null>(null);
@@ -71,13 +72,7 @@ const Navbar = () => {
   const openAuthModal = (type: "signup" | "signin") => setAuthModal(type); // Type added to function parameter
   const closeAuthModal = () => setAuthModal(null);
 
-  useEffect(() => {
-    const locationData = Cookies.get(`${companyName}_location`);
-    if (locationData) {
-      console.log(locationData);
-      setLocation(JSON.parse(locationData));
-    }
-  }, []);
+
   return (
     <NavbarContainer
       style={
@@ -213,17 +208,22 @@ const Navbar = () => {
               Partner with us
             </Cta>
           )}
+
           {session && (
-            <div className="SA_location">
+            <div className="SA_location" aria-label="User location">
               <ImLocation className="SA_location_icon" />
               <p className="SA_location_text">
-                {" "}
-                {location
-                  ? `${location?.state}, ${location?.region}`
-                  : "Select your location"}
+                {location?.state && location?.region ? (
+                  `${location?.state}, ${location?.region}`
+                ) : (
+                  <span onClick={() => router.push("/")}>
+                    Select your location
+                  </span>
+                )}
               </p>
             </div>
           )}
+
           {session && <UserDropdown />}
           {session && (
             <div className="cart">
@@ -242,6 +242,7 @@ const Navbar = () => {
           )}
         </MenuList>
         {/* Render AuthModal based on state */}
+        
         {authModal && (
           <AuthModal
             type={authModal}

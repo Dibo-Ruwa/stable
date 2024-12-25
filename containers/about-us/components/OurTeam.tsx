@@ -20,18 +20,22 @@ export const OurTeam = () => {
           <span className="OurTeam_Line"></span>
         </div>
       </div>
-      <div className="TeamsCards_Container">
+      <div className="OurTeams_Cards">
         {teamMembers.map((member, index) => (
           <div
             key={index}
-            className={`OurTeam_Card ${cardStyles[index % cardStyles.length]}`}
+            className={`OurTeam_Card `}
           >
+            <div
+            className={`${cardStyles[index % cardStyles.length]}`}
+            
+             />
             <div className="OurTeam_CardImage">
               <Image
                 src={member.imageUrl}
                 alt={`${member.name}'s picture`}
-                width={314}
-                height={396}
+                width={154}
+                height={226}
                 className={`OurTeam_Card_img ${cardStyles[
                   index % cardStyles.length
                 ]
