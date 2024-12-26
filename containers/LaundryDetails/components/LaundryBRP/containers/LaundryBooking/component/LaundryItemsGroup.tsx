@@ -16,8 +16,16 @@ interface QuantityState {
 
 // Array of laundry item groups
 const laundryItems: LaundryItemGroup[] = [
-  { id: 1, category: "From 0-17 years", items: ["Shirt", "Pants", "Dress", "Jacket", "Socks"] },
-  { id: 2, category: "Adults", items: ["Shirt", "Pants", "Dress", "Jacket", "Socks"] },
+  {
+    id: 1,
+    category: "From 0-17 years",
+    items: ["Shirt", "Pants", "Dress", "Jacket", "Socks"],
+  },
+  {
+    id: 2,
+    category: "Adults",
+    items: ["Shirt", "Pants", "Dress", "Jacket", "Socks"],
+  },
   // Add more groups here if needed
 ];
 
@@ -44,7 +52,10 @@ export const LaundryItemsGroup: React.FC = () => {
   const handleDecrement = (groupId: number, item: string) => {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [`${groupId}-${item}`]: Math.max(prevQuantities[`${groupId}-${item}`] - 1, 0),
+      [`${groupId}-${item}`]: Math.max(
+        prevQuantities[`${groupId}-${item}`] - 1,
+        0
+      ),
     }));
   };
 

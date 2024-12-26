@@ -93,7 +93,7 @@ export const AboutLaundry = () => {
           <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img
-                src="/images/image 200.png"
+                src="/images/image 200 (1).png"
                 alt=""
                 className={styles.coverImg}
               />

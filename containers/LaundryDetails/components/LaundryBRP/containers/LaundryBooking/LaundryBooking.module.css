@@ -6,6 +6,44 @@
   margin: 1rem 0;
 }
 
+/* ============== Add Custom ============== */
+.LaundryAddCustomContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.LaundryAddCustomContainerText {
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
+
+.AddCustom {
+  display: flex;
+  align-items: center;
+  color: #27a124;
+  gap: 0.6rem;
+}
+
+.AddCustom_AddMoreIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.AddCustom_Text {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
 .AddPropertyContainer {
   width: 100%;
   margin: 0 auto;
@@ -121,10 +159,9 @@
 .EditNameInput {
   flex: 1;
   border: 1px solid #ccc;
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
+  border: 0;
   width: 3rem;
+  outline: none;
 }
 
 .EditNameIcon {
