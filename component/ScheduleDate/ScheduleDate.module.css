@@ -21,18 +21,19 @@
 .MovingScheduleDateFrame {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 100%;
   gap: 0.7rem;
 }
 
 .MovingScheduleDateIcon {
   width: 25px;
-  height: 25px;
+  height: 35px;
 }
 
 .MovingScheduleDate {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .MovingScheduleDateText,
@@ -40,11 +41,16 @@
   font-size: 13px;
   font-weight: 500;
   color: #2c2c2c;
+  width: 100%;
 }
 
 .MovingScheduleDateText {
   font-size: 12px;
   color: #cccccc;
+}
+.MovingScheduleDateInput{
+  width: 100%;
+
 }
 
 .MovingScheduleDateDetails {

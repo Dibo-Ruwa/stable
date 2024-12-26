@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { useRouter } from "next/navigation";
 

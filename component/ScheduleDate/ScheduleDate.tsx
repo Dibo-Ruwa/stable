@@ -29,6 +29,7 @@ export const ScheduleDate: React.FC<ScheduleDateProps> = ({
             <input
               type="date"
               className={styles.MovingScheduleDateInput}
+              
               value={date}
               onChange={(e) => onDateChange(e.target.value)}
             />

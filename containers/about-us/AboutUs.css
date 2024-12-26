@@ -326,118 +326,133 @@ span.OurTeam_Line {
 }
 
 .TeamsCards_Container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* grid-template-columns: 1fr 1fr; */
+  gap: 2rem;
   width: 100%;
+  background-color: #000;
 }
 
 .OurTeams_Cards {
-  display: flex;
+  /* background-color: red; */
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  align-items: flex-end;
-  position: relative;
   width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 0rem;
 }
 
-/* ===== Green Card ===== */
+/* Base card styles */
 .OurTeam_Card {
   position: relative;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  width: 50%;
+  width: 100%;
+  height: 20rem;
+  /* margin-top: auto; */
 }
 
+/* Card variations */
 .Green_Card {
+  margin-top: auto;
+  border-radius: 16px;
+
   background: #67e164;
-  height: 22rem;
+  height: 20rem;
 }
 
+.Blue_Card {
+border-radius: 16px;
+margin-top: auto;
+  background: #51cbea;
+  height: 17rem;
+}
+
+.Purple_Card {
+  margin-top: auto;
+  border-radius: 16px;
+
+  background: #b5a0ff;
+  height: 20rem;
+}
+
+.periwinkleBlue_Card {
+  margin-top: auto;
+border-radius: 16px;
+  background: #7d7fff;
+  height: 16rem;
+}
+
+/* Card image container */
 .OurTeam_CardImage {
   height: auto;
-  width: 15.9rem;
+  width: 100%;
   position: absolute;
-  bottom: 0rem;
-  right: 1rem;
-  left: 1rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-img.OurTeam_Card_img {
-  width: 36rem;
-  height: 20rem;
-  flex-shrink: 0;
+/* Card images */
+.OurTeam_Card_img {
+  width: 70%;
+  margin: 0 auto;
+  /* height: 15rem; */
+  object-fit: cover;
+  object-position: top;
 }
 
+/* Name and skill section */
 .Teams_Name_skill {
   position: absolute;
-  bottom: 0rem;
+  bottom: 0;
   border-radius: 4.315px;
   background: linear-gradient(180deg, rgba(21, 21, 21, 0) 0%, #151515 100%);
   width: 100%;
-  height: 67.141px;
-  flex-shrink: 0;
   padding: 0.7rem;
 }
 
-p.Teams_Skills,
-p.Teams_Name {
-  color: var(--White-70, #fdfdfd);
+/* Text styles */
+.Teams_Name,
+.Teams_Skills {
+  color: #fdfdfd;
   font-family: Roboto;
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
   line-height: 24.476px;
-}
-
-/* ===== Blue Card ===== */
-.Blue_Card {
-  background: #51cbea;
-  height: 15rem;
-}
-
-img.OurTeam_Card_img.blue_image {
-  width: 15rem;
-  height: 21rem;
-  flex-shrink: 0;
-}
-
-/* ===== Purple Card ===== */
-.Purple_Card {
-  background: #b5a0ff;
-  height: 22rem;
-}
-
-img.OurTeam_Card_img.Purple_image {
-  width: 15rem;
-  height: 22rem;
-  flex-shrink: 0;
-}
-/* ===== periwinkleBlue Card ===== */
-.periwinkleBlue_Card {
-  background: #7d7fff;
-  height: 12rem;
-}
-
-img.OurTeam_Card_img.periwinkleBlue_image {
-  width: 15.79rem;
-  height: 20rem;
-  flex-shrink: 0;
+  margin: 0;
 }
 
 @media screen and (max-width: 1186px) {
+  .OurTeams_Cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
   .OurTeam_CardImage {
     width: 100%;
     left: 0rem;
   }
 }
 @media screen and (max-width: 1024px) {
+ 
   .OurTeam_CardImage {
     width: 100%;
     left: 0rem;
   }
 }
+@media screen and (max-width: 900px) {
+  .OurTeams_Cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media screen and (max-width: 768px) {
+ 
   .TeamsCards_Container {
     grid-template-columns: 1fr;
   }
@@ -448,6 +463,9 @@ img.OurTeam_Card_img.periwinkleBlue_image {
 }
 
 @media screen and (max-width: 500px) {
+  .OurTeams_Cards {
+    grid-template-columns: 1fr;
+  }
   section.OurTeam_Container {
     width: 96%;
   }
