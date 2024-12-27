@@ -71,7 +71,7 @@ export const NavbarFrame = styled.div`
       right: 13rem;
       width: 29.5rem;
       transform: translate(15rem, 2rem);
-      padding: 17px;
+      padding: 0.7rem 2rem 2rem;
       background: #fefefe;
       border-radius: 0.1rem;
     }

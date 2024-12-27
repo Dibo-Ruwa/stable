@@ -25,6 +25,13 @@ module.exports = {
         ratingTextColor: "#3f3f3f",
         greenText: "#27a124",
         bgCounter: "#f6f6f6",
+        bgBtn: "rgba(183, 224, 182, 0.20)",
+      },
+      borderWidth: {
+        btn: "1px",
+      },
+      borderColor: {
+        btn: "var(--green2, #4BB149)",
       },
       spacing: {
         128: "32rem",
