@@ -1,0 +1,117 @@
+.CartDropdown_Container {
+  @apply flex flex-col gap-2 w-full;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.CartDropdown_checkAndClear {
+  @apply flex justify-between w-full;
+}
+
+.CartDropdown_label,
+.CartDropdown_Clear,
+.CartTitle,
+.CartRating_number,
+.CartTime_ClockText,
+.Cart_OD,
+.Cart_Amount,
+.cartCard_OFS {
+  @apply text-black text-base font-normal leading-normal not-italic font-poppins;
+}
+.CartDropdown_Clear {
+  @apply text-redText;
+}
+
+.CartDropdown_Cards {
+  @apply flex flex-col items-center gap-4 w-full;
+}
+
+.CartDropdown_Card {
+  @apply flex w-full p-[10px] flex-col justify-center gap-[10px] rounded-[10px] bg-cartCardColor;
+}
+
+.CartDropdown_CardTop {
+  @apply flex gap-[67px] items-center justify-between;
+}
+
+.CartDropdown_Details {
+  @apply flex justify-center items-center gap-[8px];
+}
+
+/* .CartDropdown_DetailsImage {
+}
+
+.TheCartImage {
+} */
+
+.CartTitleRatingANDTime {
+  @apply flex flex-col items-start gap-[14px];
+}
+
+.CartTitleRating {
+  @apply flex items-center justify-between w-full;
+}
+
+.CartTitle {
+  @apply text-textColor;
+}
+
+.CartRating_Content {
+  @apply flex items-center gap-1;
+}
+
+.CartRating_Star {
+  @apply w-[14.996px] h-[14.996px] text-starColor;
+}
+
+.CartRating_number {
+  @apply text-[14px] text-ratingTextColor;
+}
+
+.CartTime_Content {
+  @apply flex items-center gap-1;
+}
+
+.CartTime_Clock {
+  @apply w-[18px] h-[18px] text-textColor;
+}
+
+.CartTime_ClockText {
+  @apply text-[14px] text-textColor;
+}
+
+.Cart_ODAmount {
+  @apply flex flex-col justify-between items-end gap-[14px];
+}
+
+.Cart_OD {
+  @apply text-[12px] text-greenText;
+}
+
+.Cart_Amount {
+  @apply text-textColor;
+}
+
+.CartDropdown_CardDown {
+  @apply flex w-full justify-between items-center;
+}
+
+.Cart_CheckboxStock {
+  @apply flex justify-between items-center w-[179px];
+}
+
+.cartCard_OFS {
+  @apply text-redText text-[14px];
+}
+
+
+.counterContainer {
+
+}
+
+.counterButton {
+    @apply flex !rounded-full !bg-bgCounter !w-[20px] !h-[20px] !items-center !justify-center;
+}
+

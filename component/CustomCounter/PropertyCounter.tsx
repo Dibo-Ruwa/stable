@@ -10,6 +10,7 @@ interface PropertyCounterProps {
   step?: number;
   onCountChange?: (count: number) => void;
   className?: string;
+  buttonClass?: string;
 }
 
 export const PropertyCounter: React.FC<PropertyCounterProps> = ({
@@ -18,7 +19,8 @@ export const PropertyCounter: React.FC<PropertyCounterProps> = ({
   max = 10,
   step = 1,
   onCountChange,
-  className="",
+  className = "",
+  buttonClass = "",
 }) => {
   const [count, setCount] = useState<number>(initialCount);
 
@@ -41,7 +43,7 @@ export const PropertyCounter: React.FC<PropertyCounterProps> = ({
       <button
         type="button"
         onClick={decreaseCount}
-        className={styles.CounterButton}
+        className={`${styles.CounterButton} ${buttonClass}`}
         disabled={count === min}
         aria-label="Decrease count"
       >
@@ -51,7 +53,7 @@ export const PropertyCounter: React.FC<PropertyCounterProps> = ({
       <button
         type="button"
         onClick={increaseCount}
-        className={styles.CounterButton}
+        className={`${styles.CounterButton} ${buttonClass}`}
         disabled={count === max}
         aria-label="Increase count"
       >

@@ -12,8 +12,19 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
       colors: {
         customBlue: "#1DA1F2",
+        black: "#000000",
+        redText: "#ef5a5a",
+        cartCardColor: "rgba(248, 248, 248, 0.87)",
+        textColor: "#2a2a2a",
+        starColor: "#ffc93f",
+        ratingTextColor: "#3f3f3f",
+        greenText: "#27a124",
+        bgCounter: "#f6f6f6",
       },
       spacing: {
         128: "32rem",

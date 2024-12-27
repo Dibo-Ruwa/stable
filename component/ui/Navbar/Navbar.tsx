@@ -74,26 +74,24 @@ const Navbar = () => {
   const openAuthModal = (type: "signup" | "signin") => setAuthModal(type); // Type added to function parameter
   const closeAuthModal = () => setAuthModal(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        cartDropdownRef.current &&
+        !cartDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
+      }
+    };
 
-useEffect(() => {
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      cartDropdownRef.current &&
-      !cartDropdownRef.current.contains(event.target as Node)
-    ) {
-      setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
-    }
-  };
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
 
-  // Bind the event listener
-  document.addEventListener("mousedown", handleClickOutside);
-
-  // Cleanup the event listener on component unmount
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, [cartDropdownRef]);
-
+    // Cleanup the event listener on component unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [cartDropdownRef]);
 
   return (
     <NavbarContainer
@@ -262,12 +260,12 @@ useEffect(() => {
                 >
                   <FaBagShopping className="cart_icon" />
                 </button>
+                {isCartDropdownOpen && (
+                  <div ref={cartDropdownRef} className="CartDropdown">
+                    <CartDropdown />
+                  </div>
+                )}
               </div>
-              {isCartDropdownOpen && (
-                <div ref={cartDropdownRef}>
-                  <CartDropdown />
-                </div>
-              )}
             </>
           )}
         </MenuList>
