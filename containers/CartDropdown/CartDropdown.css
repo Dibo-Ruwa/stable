@@ -106,12 +106,10 @@
   @apply text-redText text-[14px];
 }
 
-
 .counterContainer {
-
+  @apply !bg-transparent;
 }
 
 .counterButton {
-    @apply flex !rounded-full !bg-bgCounter !w-[20px] !h-[20px] !items-center !justify-center;
+  @apply flex !rounded-full !bg-bgCounter !w-[20px] !h-[20px] !items-center !justify-center;
 }
-
