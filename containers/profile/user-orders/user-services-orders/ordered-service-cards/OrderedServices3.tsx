@@ -20,7 +20,9 @@ export const OrderedServices3 = () => {
               className={`user_cards Service_food_card`}
               key={orderedService._id}
             >
-              <UserOrdersCard className="user_card">
+              <UserOrdersCard className="user_card"  
+              id={orderedService._id} 
+              type={orderedService?.type}>
                 <div className="card_image">
                   <img
                     src={orderedService.foodImg}
@@ -81,7 +83,10 @@ export const OrderedServices3 = () => {
               className={`user_cards Service_restaurant_card`}
               key={orderedService._id}
             >
-              <UserOrdersCard className="user_card">
+              <UserOrdersCard className="user_card"
+               id={orderedService._id} 
+               type={orderedService?.type}
+              >
                 <div className="card_image">
                   <img
                     src={orderedService.restaurantImg}
@@ -125,7 +130,10 @@ export const OrderedServices3 = () => {
           // Owner card
           return (
             <div className={`user_cards Service_owner_card`} key={orderedService._id}>
-              <UserOrdersCard className="user_card">
+              <UserOrdersCard className="user_card"
+               id={orderedService._id} 
+               type={orderedService?.type}
+              >
                 <div className="owner_card_image">
                   <img
                     src={orderedService.ownerImg}

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { usePathname, useSearchParams } from "next/navigation";
 import { BsPersonCircle } from "react-icons/bs";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { IoPersonOutline } from "react-icons/io5";
@@ -196,13 +197,13 @@ const ProfileSidebarRightIcon = styled(LiaAngleRightSolid)<{ active: boolean }>`
 
 export const ProfileSidebar: React.FC = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
-  const [activeItem, setActiveItem] = useState<string>("Profile Settings");
+  const pathname = usePathname();
 
   const profileInfo = {
     icon: <ProfileIcon />,
     name: "Kelivin Chikezie",
     email: "chikeziekelivin@gmial.com",
-    href: "/profile"
+    href: "/profile",
   };
 
   const menuItems: MenuItem[] = [
@@ -211,25 +212,21 @@ export const ProfileSidebar: React.FC = () => {
       label: "Profile Settings",
       href: "/profile/profile-settings",
     },
-
     {
       icon: <HiOutlineCube />,
       label: "Orders",
-      href: "/profile/or-ders",
+      href: "/profile/orders",
     },
-
     {
       icon: <IoIosHeartEmpty />,
       label: "Favorite",
       href: "/profile/favorite",
     },
-
     {
       icon: <LiaAwardSolid />,
       label: "Subscriptions",
       href: "/profile/subscriptions",
     },
-
     {
       icon: <HiOutlineEnvelope />,
       label: "Notifications",
@@ -237,18 +234,15 @@ export const ProfileSidebar: React.FC = () => {
     },
   ];
 
-  const handleItemClick = (label: string) => {
-    setActiveItem(label);
-  };
+  // Determine the active item dynamically based on the current pathname
+  const activeItem = menuItems.find((item) => pathname.startsWith(item.href))?.label || "";
 
   return (
     <ProfileContainer>
       <MenuIcon onClick={() => setSidebarVisible(!isSidebarVisible)} />
       <ProfileSidebarContainer isVisible={isSidebarVisible}>
         <CancelIcon onClick={() => setSidebarVisible(!isSidebarVisible)} />
-        <ProfileSidebarProfileLink
-        href={profileInfo.href}
-        >
+        <ProfileSidebarProfileLink href={profileInfo.href}>
           <ProfileSidebarPics>{profileInfo.icon}</ProfileSidebarPics>
           <ProfileSidebarName>
             <ProfileName>{profileInfo.name}</ProfileName>
@@ -262,12 +256,8 @@ export const ProfileSidebar: React.FC = () => {
               <ProfileSidebarItem
                 key={index}
                 active={activeItem === item.label}
-                onClick={() => handleItemClick(item.label)}
               >
-                <ProfileSidebarLink
-                  href={item.href}
-                  active={activeItem === item.label}
-                >
+                <ProfileSidebarLink href={item.href} active={activeItem === item.label}>
                   <ProfileSidebarLeftIcon>{item.icon}</ProfileSidebarLeftIcon>
                   <ProfileSidebarLinkName active={activeItem === item.label}>
                     {item.label}

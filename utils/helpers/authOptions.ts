@@ -2,7 +2,7 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { closeDB, connectDB } from "@/utils/db";
 import User from "@/utils/models/Users";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import { UserType } from "../types/types";
 import { NextResponse } from "next/server";
 import { sendMail } from "../sendMail";

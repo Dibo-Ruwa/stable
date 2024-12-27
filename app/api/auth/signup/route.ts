@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 import User from "@/utils/models/Users";
 import { connectDB, closeDB } from "@/utils/db";
 import { Cart } from "@/utils/models/Cart";

@@ -17,23 +17,28 @@
   justify-content: space-between;
   gap: 0.7rem;
   width: 100%;
+  cursor: pointer;
 }
 .MovingScheduleDateFrame {
   display: flex;
   align-items: center;
   width: 100%;
   gap: 0.7rem;
+  cursor: pointer;
 }
 
 .MovingScheduleDateIcon {
   width: 25px;
   height: 35px;
+  color: var(--Ash-100, #8f8f8f);
+  cursor: pointer;
 }
 
 .MovingScheduleDate {
   display: flex;
   flex-direction: column;
   width: 100%;
+  cursor: pointer;
 }
 
 .MovingScheduleDateText,

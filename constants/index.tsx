@@ -10801,11 +10801,12 @@ export interface OrderedFoodDataType {
   restaurantRatingNum?: string;
   restPhoneIcon?: IconType;
   restaurantPhoneNum?: string;
+  type: "order" | "service";
 }
 
 export const FoodOrdered1: OrderedFoodDataType[] = [
   {
-    _id: 1222344,
+    _id: 1,
     foodImg: "/images/Frame 2610552.png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
@@ -10815,30 +10816,35 @@ export const FoodOrdered1: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "order",
   },
   {
-    _id: 1344,
+    _id: 2,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
+
   },
   {
-    _id: 1344,
+    _id: 3,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
+
   },
 ];
 
 export const FoodOrdered2: OrderedFoodDataType[] = [
   {
-    _id: 1221044,
+    _id: 12,
     foodImg: "/images/Frame 2610552.png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
@@ -10848,29 +10854,33 @@ export const FoodOrdered2: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "order",
+
   },
   {
-    _id: 1321,
+    _id: 13,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
   {
-    _id: 1321,
+    _id: 14,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
 ];
 export const FoodOrdered3: OrderedFoodDataType[] = [
   {
-    _id: 1245344,
+    _id: 21,
     foodImg: "/images/Frame 2610552.png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
@@ -10880,25 +10890,29 @@ export const FoodOrdered3: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "order",
+
   },
 
   {
-    _id: 1432,
+    _id: 22,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
   {
-    _id: 1432,
+    _id: 23,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
 ];
 
@@ -10914,6 +10928,7 @@ export const FoodOrdered4: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "order",
   },
 
   {
@@ -10924,6 +10939,7 @@ export const FoodOrdered4: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
   {
     _id: 1309,
@@ -10933,6 +10949,7 @@ export const FoodOrdered4: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
 ];
 
@@ -10948,6 +10965,7 @@ export const FoodOrdered5: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "order",
   },
 
   {
@@ -10958,6 +10976,7 @@ export const FoodOrdered5: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
   {
     _id: 1021,
@@ -10967,6 +10986,7 @@ export const FoodOrdered5: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
 ];
 export const FoodOrdered6: OrderedFoodDataType[] = [
@@ -10981,6 +11001,7 @@ export const FoodOrdered6: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "order",
   },
 
   {
@@ -10991,6 +11012,7 @@ export const FoodOrdered6: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
   {
     _id: 1332,
@@ -11000,6 +11022,7 @@ export const FoodOrdered6: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
 ];
 export const FoodOrdered7: OrderedFoodDataType[] = [
@@ -11014,6 +11037,7 @@ export const FoodOrdered7: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "order",
   },
   {
     _id: 9045,
@@ -11023,6 +11047,7 @@ export const FoodOrdered7: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
   {
     _id: 9045,
@@ -11032,6 +11057,7 @@ export const FoodOrdered7: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "order",
   },
 ];
 
@@ -11056,6 +11082,7 @@ export interface OrderedServicesDataType {
   ownerName?: string;
   ownerPhoneIcon?: IconType;
   ownersPhoneNum?: string;
+  type: string;
 }
 
 export const OrderedServicesData1: OrderedServicesDataType[] = [
@@ -11070,6 +11097,7 @@ export const OrderedServicesData1: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
   },
   {
     _id: 9015,
@@ -11079,6 +11107,7 @@ export const OrderedServicesData1: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
   },
   {
     _id: 1344,
@@ -11086,6 +11115,7 @@ export const OrderedServicesData1: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
   },
 ];
 export const OrderedServicesData2: OrderedServicesDataType[] = [
@@ -11100,6 +11130,8 @@ export const OrderedServicesData2: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
   {
     _id: 3245,
@@ -11109,6 +11141,8 @@ export const OrderedServicesData2: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1321,
@@ -11116,6 +11150,8 @@ export const OrderedServicesData2: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData3: OrderedServicesDataType[] = [
@@ -11130,6 +11166,8 @@ export const OrderedServicesData3: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
   {
     _id: 9215,
@@ -11139,6 +11177,8 @@ export const OrderedServicesData3: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1432,
@@ -11146,6 +11186,8 @@ export const OrderedServicesData3: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData4: OrderedServicesDataType[] = [
@@ -11160,6 +11202,8 @@ export const OrderedServicesData4: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
 
   {
@@ -11170,6 +11214,8 @@ export const OrderedServicesData4: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1309,
@@ -11177,6 +11223,8 @@ export const OrderedServicesData4: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData5: OrderedServicesDataType[] = [
@@ -11191,6 +11239,8 @@ export const OrderedServicesData5: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
 
   {
@@ -11201,6 +11251,8 @@ export const OrderedServicesData5: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1021,
@@ -11208,6 +11260,8 @@ export const OrderedServicesData5: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData6: OrderedServicesDataType[] = [
@@ -11222,6 +11276,7 @@ export const OrderedServicesData6: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
   },
   {
     _id: 9332,
@@ -11231,6 +11286,7 @@ export const OrderedServicesData6: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
   },
 
   {
@@ -11239,6 +11295,7 @@ export const OrderedServicesData6: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
   },
 ];
 export const OrderedServicesData7: OrderedServicesDataType[] = [
@@ -11253,6 +11310,7 @@ export const OrderedServicesData7: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
   },
   {
     _id: 9010,
@@ -11262,6 +11320,7 @@ export const OrderedServicesData7: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
   },
 
   {
@@ -11270,6 +11329,7 @@ export const OrderedServicesData7: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
   },
 ];
 export interface FavouriteFoodDataType {
