@@ -1,11 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../MovingBooking.module.css";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
+import {
+  AiOutlinePlus,
+  AiOutlineMinus,
+} from "react-icons/ai";
+import useQuote from "@/hooks/useQuote";
+import { MovingItemType } from "@/utils/types/types";
 
-interface Item {
-  name: string;
-  quantity: number;
-}
+type FormState = {
+  categories: string[];
+  items: MovingItemType[];
+  currentLocation: string;
+  deliveryLocation: string;
+  pickUpDate: string;
+  pickUpTime: string;
+  description: string;
+};
 
 interface DeliveryDetails {
   currentLocation: string;
@@ -17,9 +31,10 @@ interface DeliveryDetails {
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  items: Item[];
+  formData: FormState;
+  items: MovingItemType[];
   deliveryDetails: DeliveryDetails;
-  onConfirm: (updatedItems: Item[]) => void; // Callback for the confirm action
+  onConfirm: (updatedFormState: FormState) => void;
 }
 
 export const ConfirmationModel: React.FC<Props> = ({
@@ -28,17 +43,45 @@ export const ConfirmationModel: React.FC<Props> = ({
   items,
   deliveryDetails,
   onConfirm,
+  formData,
 }) => {
-  // Local state to manage quantities of items
-  const [updatedItems, setUpdatedItems] = useState<Item[]>(items);
+  const [updatedFormState, setUpdatedFormState] = useState<FormState>(formData);
+  const { handleQuote, loading } = useQuote();
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  // Handler to adjust the quantity of items
+  useEffect(() => {
+    setUpdatedFormState(formData);
+  }, [formData]);
+
   const handleQuantityChange = (index: number, change: number) => {
-    setUpdatedItems((prevItems) =>
-      prevItems.map((item, i) =>
-        i === index ? { ...item, quantity: item.quantity + change } : item
-      )
-    );
+    setUpdatedFormState((prevState) => ({
+      ...prevState,
+      items: prevState.items.map((item, i) =>
+        i === index
+          ? { ...item, quantity: Math.max(item.quantity + change, 0) }
+          : item
+      ),
+    }));
+  };
+
+  console.log(session, "SESSION");
+  const handleSubmission = async () => {
+    if (!session) {
+      toast.error("Please sign in to submit your request.");
+      router.push("/sign-in");
+      return;
+    }
+
+    try {
+      await handleQuote(updatedFormState);
+      console.log("Calling handleQuote with data:", updatedFormState); 
+      // toast.success("Request submitted successfully, please go ahead and pay.");
+      // onClose();
+    } catch (error) {
+      console.error("Submission failed", error);
+      toast.error("Failed to submit the request.");
+    }
   };
 
   if (!isOpen) return null;
@@ -47,25 +90,33 @@ export const ConfirmationModel: React.FC<Props> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalContentTextContainer}>
-          <h2 className={styles.modalContentTitle}>Delivery confirmation</h2>
+          <h2 className={styles.modalContentTitle}>Delivery Confirmation</h2>
           <p className={styles.modalContentCRText}>
-            Please confirm your Request
+            Please confirm your request.
           </p>
         </div>
         <hr className={styles.modalContentLine} />
 
-        {/* Map through items to display dynamically with adjustable quantities */}
+        {/* Items Section */}
         <div className={styles.modalContentItems}>
-          {updatedItems.map((item, index) => (
+          {updatedFormState.items.map((item, index) => (
             <div key={index} className={styles.modalContentItem}>
               <p className={styles.modalContentItemName}>{item.name}</p>
-              <div className={styles.modalContentItemQuantityContainer}>
+              <div
+                className={styles.modalContentItemQuantityContainer}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 10,
+                }}
+              >
                 <button
                   className={styles.quantityButton}
                   onClick={() => handleQuantityChange(index, -1)}
                   disabled={item.quantity <= 0}
                 >
-                  -
+                  <AiOutlineMinus />
                 </button>
                 <p className={styles.modalContentItemQuantity}>
                   {item.quantity}
@@ -74,16 +125,15 @@ export const ConfirmationModel: React.FC<Props> = ({
                   className={styles.quantityButton}
                   onClick={() => handleQuantityChange(index, 1)}
                 >
-                  +
+                  <AiOutlinePlus />
                 </button>
               </div>
             </div>
           ))}
         </div>
-
         <hr className={styles.modalContentLine} />
 
-        {/* Dynamic locations */}
+        {/* Locations */}
         <div className={styles.modalContent_Locations}>
           <div className={styles.modalContent_CAndDLocation}>
             <p className={styles.modalContent_CAndDLocationType}>
@@ -102,10 +152,9 @@ export const ConfirmationModel: React.FC<Props> = ({
             </p>
           </div>
         </div>
-
         <hr className={styles.modalContentLine} />
 
-        {/* Dynamic pick-up details */}
+        {/* Pick-up Details */}
         <div className={styles.modalContent_PickUpDT}>
           <div className={styles.modalContent_PickupDay}>
             <p className={styles.modalContent_PickupDayText}>Pick Up Day</p>
@@ -120,22 +169,21 @@ export const ConfirmationModel: React.FC<Props> = ({
             </p>
           </div>
         </div>
-
         <hr className={styles.modalContentLine} />
 
-        {/* Cancel and Confirm buttons */}
+        {/* Actions */}
         <div className={styles.modalContent_CancelAndConfirmBtn}>
           <button onClick={onClose} className={styles.closeButton}>
-            Cancel
+            Go back
           </button>
           <button
             onClick={() => {
-              onConfirm(updatedItems);
-              onClose();
-            }}
+              handleSubmission();
+            } }
             className={styles.confirmButton}
+            disabled={loading}
           >
-            Confirm
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </div>
       </div>

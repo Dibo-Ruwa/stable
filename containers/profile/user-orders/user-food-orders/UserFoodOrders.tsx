@@ -17,8 +17,15 @@ export const UserFoodOrders: React.FC = () => {
           if (orderedFood.foodTitle) {
             // Food card
             return (
-              <div className={`user_cards food_card`} key={orderedFood._id}>
-                <UserOrdersCard className="user_card">
+              <div className={`user_cards food_card`} 
+              key={orderedFood._id} 
+             
+              >
+                <UserOrdersCard 
+                  className="user_card"
+                  id={orderedFood._id}
+                  type={orderedFood?.type}
+                >
                   <div className="card_image">
                     <img
                       src={orderedFood.foodImg}
@@ -125,7 +132,10 @@ export const UserFoodOrders: React.FC = () => {
             // Food card
             return (
               <div  className={`user_cards food_card`} key={orderedFood._id}>
-                <UserOrdersCard className="user_card">
+                <UserOrdersCard className="user_card" 
+                id={orderedFood._id} 
+                type={orderedFood?.type}
+                >
                   <div className="card_image">
                     <img
                       src={orderedFood.foodImg}
@@ -235,7 +245,10 @@ export const UserFoodOrders: React.FC = () => {
                 className={`user_cards food_card`}
                 key={orderedFood._id}
               >
-                <UserOrdersCard className="user_card">
+                <UserOrdersCard className="user_card" 
+                id={orderedFood._id} 
+                type={orderedFood?.type}
+                >
                   <div className="card_image">
                     <img
                       src={orderedFood.foodImg}

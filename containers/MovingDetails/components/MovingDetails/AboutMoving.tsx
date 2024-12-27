@@ -44,7 +44,7 @@ const MobileAboutMoving = () => {
         <div className={styles.MobileNRSContent}>
           <div className={styles.MobileNRRestaurant}>
             <p className={styles.MobilerestaurantProfileName}>
-              Flora Restaurant
+              Moving Service
             </p>
             <div className={styles.MobilerestaurantRating}>
               <FaStar className={styles.MobilerestaurantRatingIcon} />
@@ -110,11 +110,11 @@ export const AboutMoving = () => {
           <div className={styles.aboutRestaurantContainer}>
             <div className={styles.NRSContent}>
               <div className={styles.NRRestaurant}>
-                <p className={styles.restaurantProfileName}>Flora Restaurant</p>
-                <div className={styles.restaurantRating}>
+                <p className={styles.restaurantProfileName}>Moving and Delivery Services</p>
+                {/* <div className={styles.restaurantRating}>
                   <FaStar className={styles.restaurantRatingIcon} />
                   <p className={styles.restaurantRatingNum}>4.5</p>
-                </div>
+                </div> */}
               </div>
 
               <div className={styles.restaurantOpeningTimePhoneNum}>
@@ -131,23 +131,22 @@ export const AboutMoving = () => {
                   <p className={styles.restaurantOpeningTimeText}>8am - 5pm</p>
                 </div>
 
-                <div className={styles.restaurantDot}></div>
+                {/* <div className={styles.restaurantDot}></div>
                 <div className={styles.restaurantPhoneNum}>
                   <FiPhone className={styles.restaurantPhoneNumIcon} />
                   <p className={styles.restaurantPhoneNumText}>0903 414 5971</p>
-                </div>
+                </div> */}
               </div>
             </div>
 
-            <div className={styles.restaurantLocation}>
+            {/* <div className={styles.restaurantLocation}>
               <SlLocationPin className={styles.restaurantLocationIcon} />
               <p className={styles.restaurantLocationText}>Ikeja, Lagos</p>
-            </div>
+            </div> */}
             <div className={styles.restaurantDescription_DT}>
               <p className={styles.restaurantDescription}>
-                Our hassie-free Laundry service ensures that your clothes are
-                cleaned, folded, and delivered with care, so you can spend less
-                time on chores and more time doing what you love.
+                Our hassle-free moving service ensures that your items are
+                relocated with care, so you can spend less time worrying and more time enjoying your new space.
               </p>
             </div>
           </div>
