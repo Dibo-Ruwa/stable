@@ -50,15 +50,12 @@ const couriers: Courier[] = [
 
 export const SelectCourier: React.FC<SelectCourierProps> = ({ onClose }) => {
   const [selectedCourier, setSelectedCourier] = useState<number | null>(null); // Track the selected courier ID
-  const [isCourierStep, setIsCourierStep] = useState(false); // Define isCourierStep state
+  // const [isCourierStep, setIsCourierStep] = useState(false); // Define isCourierStep state
 
   const handleBack = () => {
-    if (isCourierStep) {
-      setIsCourierStep(false);
-    } else {
-      onClose();
-    }
+    onClose(); // Close the modal directly on back
   };
+
 
   const handlePay = () => {
     if (!selectedCourier) {
@@ -66,7 +63,7 @@ export const SelectCourier: React.FC<SelectCourierProps> = ({ onClose }) => {
       return;
     }
     console.log("Payment processed.");
-    onClose();
+   onClose();
   };
 
   const handleCourierSelection = (courierId: number) => {

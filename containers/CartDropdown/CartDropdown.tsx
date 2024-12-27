@@ -35,7 +35,7 @@ export const CartDropdown = () => {
               onChange={setIsAllChecked}
               labelClassName="CartDropdown_label"
             />
-            <p className="CartDropdown_Clear">Clear</p>
+            <button type="button" className="CartDropdown_Clear">Clear</button>
           </div>
           <div className="CartDropdown_Cards">
             <div className="CartDropdown_Card">
