@@ -15,6 +15,7 @@ interface Courier {
 
 interface SelectCourierProps {
   onClose: () => void; // Function to close the modal
+  onBack: () => void;
 }
 
 const couriers: Courier[] = [
@@ -48,7 +49,10 @@ const couriers: Courier[] = [
   },
 ];
 
-export const SelectCourier: React.FC<SelectCourierProps> = ({ onClose }) => {
+export const SelectCourier: React.FC<SelectCourierProps> = ({
+  onClose,
+  onBack,
+}) => {
   const [selectedCourier, setSelectedCourier] = useState<number | null>(null); // Track the selected courier ID
   // const [isCourierStep, setIsCourierStep] = useState(false); // Define isCourierStep state
 
@@ -56,14 +60,13 @@ export const SelectCourier: React.FC<SelectCourierProps> = ({ onClose }) => {
     onClose(); // Close the modal directly on back
   };
 
-
   const handlePay = () => {
     if (!selectedCourier) {
       alert("Please select a courier before continuing."); // Ensure a courier is selected
       return;
     }
     console.log("Payment processed.");
-   onClose();
+    onClose();
   };
 
   const handleCourierSelection = (courierId: number) => {
@@ -80,46 +83,50 @@ export const SelectCourier: React.FC<SelectCourierProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="selectCourierModal">
-      <div className="courierContent">
-        <div className="BBTitle">
-          <BackButton2 className='Back_Btn' onClick={handleBack} />
-          <h2 className="courierModal_Title">Select Courier</h2>
+    <div className="CartDropdown_selectCourierModal">
+      <div className="CartDropdown_courierContent">
+        <div className="CartDropdown_BBTitle">
+          <BackButton2 className="CartDropdown_Back_Btn" onClick={onBack} />
+          <h2 className="CartDropdown_courierModal_Title">Select Courier</h2>
         </div>
-        <div className="courierModal_LeftContent">
-          <div className="courierModal_Cards">
+        <div className="CartDropdown_courierModal_LeftContent">
+          <div className="CartDropdown_courierModal_Cards">
             {couriers.map((courier) => (
-              <div className="courierModal_Card" key={courier.id}>
-                <div className="courierModal_Card_Image_and_D">
+              <div className="CartDropdown_courierModal_Card" key={courier.id}>
+                <div className="CartDropdown_courierModal_Card_Image_and_D">
                   <img
                     src={courier.image}
                     alt={courier.name}
-                    className="courierModal_CardImage"
+                    className="CartDropdown_courierModal_CardImage"
                   />
-                  <div className="courierModal_CardContent">
-                    <p className="courierModal_CardContent_Text">
+                  <div className="CartDropdown_courierModal_CardContent">
+                    <p className="CartDropdown_courierModal_CardContent_Text">
                       {courier.name}
                     </p>
-                    <div className="courierModal_CardContentRating">
-                      <FaStar className="courierModal_CardContent_ratingStar" />
-                      <p className="courierModal_CardContent_ratingNum">
+                    <div className="CartDropdown_courierModal_CardContentRating">
+                      <FaStar className="CartDropdown_courierModal_CardContent_ratingStar" />
+                      <p className="CartDropdown_courierModal_CardContent_ratingNum">
                         {courier.rating}
                       </p>
                     </div>
                   </div>
                 </div>
-                <p className="CourierModal_card_Prize">
+                <p className="CartDropdown_CourierModal_card_Prize">
                   ${courier.price.toLocaleString("en-US")}
                 </p>
                 <Checkbox
                   checked={selectedCourier === courier.id}
                   onChange={() => handleCourierSelection(courier.id)}
-                  labelClassName="CourierCheckBox_Label"
+                  labelClassName="CartDropdown_CourierCheckBox_Label"
                 />
               </div>
             ))}
           </div>
-          <Button text="Continue" onClick={handlePay} className="payButton" />
+          <Button
+            text="Continue"
+            onClick={handlePay}
+            className="CartDropdown_payButton"
+          />
         </div>
       </div>
     </div>

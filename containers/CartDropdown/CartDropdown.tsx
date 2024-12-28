@@ -7,7 +7,7 @@ import { FaStar } from "react-icons/fa";
 import { CiClock2 } from "react-icons/ci";
 import { PropertyCounter } from "@/component/CustomCounter/PropertyCounter";
 import Link from "next/link";
-import { Button } from "@/component/shared/Button";;
+import { Button } from "@/component/shared/Button";
 import "./CartDropdown.css";
 import { SelectCourier } from "./SelectCourier";
 
@@ -15,14 +15,22 @@ export const CartDropdown = () => {
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isCardChecked, setIsCardChecked] = useState<boolean>(false);
   const [isCourierStep, setIsCourierStep] = useState<boolean>(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(true); // Track dropdown visibility
 
-  const handleModalClose = () => {
-    setIsCourierStep(false); // Reset the courier step when the modal is closed
-  };
+   const handleModalClose = () => {
+     setIsCourierStep(false); // Reset to CartDropdown
+   };
 
   const handleCheckoutClick = () => {
-    setIsCourierStep(true); // Open the courier step when the checkout button is clicked
+    setIsCourierStep(true); // Open the courier step modal
   };
+
+  const handleCloseAll = () => {
+    setIsCourierStep(false); // Close the modal
+    setIsDropdownOpen(false); // Close the dropdown
+  };
+
+  if (!isDropdownOpen) return null; // Hide dropdown when closed
 
   return (
     <div className="CartDropdown_Container">
@@ -35,7 +43,9 @@ export const CartDropdown = () => {
               onChange={setIsAllChecked}
               labelClassName="CartDropdown_label"
             />
-            <button type="button" className="CartDropdown_Clear">Clear</button>
+            <button type="button" className="CartDropdown_Clear">
+              Clear
+            </button>
           </div>
           <div className="CartDropdown_Cards">
             <div className="CartDropdown_Card">
@@ -91,7 +101,7 @@ export const CartDropdown = () => {
           />
         </>
       ) : (
-        <SelectCourier onClose={handleModalClose} />
+        <SelectCourier onClose={handleCloseAll} onBack={handleModalClose} />
       )}
     </div>
   );

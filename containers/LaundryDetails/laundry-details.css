@@ -3,7 +3,7 @@
 }
 
 .Laundry_head {
-  width: 93%;
+ width: min(93%, 1440px);
   margin: 4rem auto;
 }
 

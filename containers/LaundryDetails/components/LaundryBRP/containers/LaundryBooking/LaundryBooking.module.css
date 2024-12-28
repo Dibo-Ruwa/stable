@@ -125,6 +125,12 @@
   gap: 2rem;
 }
 
+@media screen and (max-width: 1195px) {
+  .LaundryItemsGroupCards {
+    display: flex;
+  }
+}
+
 .LaundryItemsGroupCardItems {
   display: flex;
   align-items: center;
@@ -140,6 +146,12 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
+}
+
+@media screen and (max-width: 1195px) {
+  .LaundryItemsGroupCardItemsBox {
+    width: 100%;
+  }
 }
 
 .LaundryItemsGroupCardItemsBox_Button,

@@ -2,14 +2,15 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 100%;
+  /* width: 100%; */
   width: min(93%, 1444px);
+  margin: 0 auto;
 }
 
-@media screen and (max-width: 768px){
-.LeftLaundryContainer {
-  display: none;
-}
+@media screen and (max-width: 768px) {
+  .LeftLaundryContainer {
+    display: none;
+  }
 }
 
 .RestSub_container {
@@ -27,9 +28,15 @@
   border-radius: 10px;
 }
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 1280px) {
   .RestSub_container {
-      width: 76%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .RestSub_container {
+    width: 100%;
   }
 }
 
@@ -192,6 +199,18 @@ p.Cust_SA_amount {
   border-radius: 0.7rem;
 }
 
+@media screen and (max-width: 1280px) {
+  .OurLaundryServiceContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .OurLaundryServiceContainer {
+    display: none;
+  }
+}
+
 .OurLaundryServiceCards {
   display: flex;
   align-items: center;
@@ -200,6 +219,14 @@ p.Cust_SA_amount {
   border-radius: 8px;
   width: 100%;
   background: #ffffff;
+}
+
+@media screen and (max-width: 1280px) {
+  .OurLaundryServiceCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 50%;
+  }
 }
 
 .OurLaundryServiceCard {

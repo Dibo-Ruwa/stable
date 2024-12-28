@@ -118,11 +118,11 @@
 }
 
 /* ======== Select Courier Modal ======== */
-.selectCourierModal {
+.CartDropdown_selectCourierModal {
   width: 100%;
 }
 
-.courierContent {
+.CartDropdown_courierContent {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -131,29 +131,29 @@
   gap: 13px;
 }
 
-.Back_Btn{
-    padding: 0 !important;
+.CartDropdown_Back_Btn {
+  padding: 0;
 }
 
-.courierModal_LeftContent {
+.CartDropdown_courierModal_LeftContent {
   width: 100%;
   border-radius: 8px;
-  padding: 23px 32px 37px 32px !important;
+  padding: 23px 32px 37px 32px;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   background: #fff;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
-.BBTitle {
+.CartDropdown_BBTitle {
   display: flex;
   align-items: center;
   width: 100%;
   gap: 7rem;
 }
 
-.courierModal_Title {
+.CartDropdown_courierModal_Title {
   color: var(--disabled-color, #767575);
   font-family: Inter !important;
   text-align: center;
@@ -163,7 +163,7 @@
   line-height: normal;
 }
 
-.courierModal_Cards {
+.CartDropdown_courierModal_Cards {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -171,14 +171,14 @@
   gap: 20px;
 }
 
-.courierModal_Card_Image_and_D {
+.CartDropdown_courierModal_Card_Image_and_D {
   display: flex;
   justify-content: center;
   align-items: flex-end;
   gap: 4.548px;
 }
 
-.courierModal_Card {
+.CartDropdown_courierModal_Card {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -189,15 +189,15 @@
   background: var(--primary-color-1-white-40, #f9f9f9);
 }
 
-.courierModal_CardContent {
+.CartDropdown_courierModal_CardContent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.courierModal_CardContent_Text,
-.courierModal_CardContent_ratingNum,
-.CourierModal_card_Prize {
+.CartDropdown_courierModal_CardContent_Text,
+.CartDropdown_courierModal_CardContent_ratingNum,
+.CartDropdown_CourierModal_card_Prize {
   color: var(--Soft-black, #565656);
   font-family: Poppins;
   font-size: 14px;
@@ -210,19 +210,19 @@
   font-size: 1rem;
 }
 
-.courierModal_CardContentRating {
+.CartDropdown_courierModal_CardContentRating {
   display: flex;
   align-items: center;
   gap: 3.557px;
 }
 
-.courierModal_CardContent_ratingStar {
+.CartDropdown_courierModal_CardContent_ratingStar {
   width: 16px;
   height: 16px;
   color: #ffc93f;
 }
 
-.payButton {
+.CartDropdown_payButton {
   display: flex;
   width: 100%;
   align-items: center;
