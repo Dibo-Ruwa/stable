@@ -5,10 +5,10 @@
   gap: 1rem;
 }
 
-@media screen and (max-width:1198px){
+@media screen and (max-width: 1198px) {
   .restaurantFrame {
-  width: 100%;
-}
+    width: 100%;
+  }
 }
 .CPImage {
   width: 100%;
@@ -296,7 +296,7 @@
   }
 
   .MobilecoverImage {
-    width: 29rem;
+    width: 100%;
     position: relative;
   }
 
@@ -306,7 +306,7 @@
 
   .MobilerestProfileImage {
     position: absolute;
-    top: 9rem;
+    top: 18rem;
     left: 1rem;
   }
 
@@ -434,6 +434,22 @@
     color: #2a2a2a;
   }
 
+  .MobSubPlan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: 1.5rem auto;
+  }
+  .MobSubPlanText {
+    color: var(--Black-100, #2a2a2a);
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   .MobilerestaurantReview {
     color: #27a124;
     font-family: Poppins;
@@ -475,7 +491,7 @@
   }
 
   .MobilerestProfileImage {
-    top: 11rem;
+    top: 14rem;
   }
 }
 
@@ -485,7 +501,7 @@
   }
 
   .MobilerestProfileImage {
-    top: 10rem;
+            top: 13rem;
   }
 }
 

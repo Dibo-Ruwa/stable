@@ -9,7 +9,7 @@ export const LaundryDetails = () => {
   return (
     <div className="Laundry_Container">
     <div className="Laundry_head">
-      <BackButton className="Back_Button"/>
+      <BackButton className="LaundryBack_Button"/>
       <div className="Laundry_restCont">
         <div className="Laundry_Cont">
           <AboutLaundry />

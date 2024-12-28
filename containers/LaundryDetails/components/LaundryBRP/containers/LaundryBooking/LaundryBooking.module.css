@@ -6,6 +6,19 @@
   margin: 1rem 0;
 }
 
+@media screen and (max-width: 1024px) {
+  .LaundryItemContainer {
+    background-color: #ffffff;
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 568px) {
+  .LaundryItemContainer {
+    background-color: transparent;
+    margin: 1rem auto;
+    width: 95%;
+  }
+}
 /* ============== Add Custom ============== */
 .LaundryAddCustomContainer {
   display: flex;
@@ -55,7 +68,11 @@
   margin: 0 auto;
   gap: 2rem;
 }
-
+@media screen and (max-width: 1024px) {
+  .AddPropertyCards {
+    flex-direction: column;
+  }
+}
 .AddPropertyCard {
   display: flex;
   flex-direction: column;
@@ -63,6 +80,12 @@
   background: #ffffff;
   padding: 0.7rem;
   border-radius: 8px;
+}
+
+@media screen and (max-width: 1024px) {
+  .AddPropertyCard {
+    background: #fefefe;
+  }
 }
 
 .AddPropertyCardText {
@@ -137,6 +160,13 @@
   gap: 0.2rem;
 }
 
+@media screen and (max-width: 568px) {
+  .LaundryItemsGroupCardItems {
+    width: 100%;
+  gap: 6rem;
+}
+}
+
 .LaundryItemsGroupCardItemsBox {
   width: 5rem;
   height: 2.79rem;
@@ -151,6 +181,12 @@
 @media screen and (max-width: 1195px) {
   .LaundryItemsGroupCardItemsBox {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .LaundryItemsGroupCardItemsBox {
+    gap: 5rem;
   }
 }
 
@@ -356,6 +392,17 @@
   border-radius: 8px;
 }
 
+@media screen and (max-width: 1024px) {
+  .ItemsDescriptionTextarea {
+    background: #f9f9f9 !important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .ItemsDescriptionTextarea {
+    background: #ffffff !important;
+  }
+}
+
 /* ====== Schedule Date and  Time ====== */
 .LaundryScheduleContainer {
   width: 100%;
@@ -375,6 +422,36 @@
   width: 100%;
   align-items: center;
   gap: 2rem;
+}
+@media screen and (max-width: 1024px) {
+  .DateContain {
+    background: #f9f9f9 !important;
+  }
+
+  .InputStyle {
+    background: #f9f9f9;
+  }
+
+  .SelectedDays_ScheduleTimeSetOpt {
+    background: #f9f9f9 !important;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .LaundryScheduleCards {
+    flex-direction: column;
+}
+  .DateContain {
+    background: #f1f1f1 !important;
+  }
+
+  .InputStyle {
+    background: #f1f1f1;
+  }
+
+  .SelectedDays_ScheduleTimeSetOpt {
+    background: #f1f1f1 !important;
+  }
 }
 /* ===== Button ===== */
 .LaundryDoneButton {

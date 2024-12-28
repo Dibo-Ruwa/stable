@@ -38,6 +38,8 @@ export const LaundrySchedule = () => {
             label="Date"
             date={pickupDate}
             onDateChange={handlePickupDateChange}
+            className={styles.DateContain}
+            InputClassName={styles.InputStyle}
           />
 
           <ScheduleTime
@@ -55,6 +57,8 @@ export const LaundrySchedule = () => {
             label="Date"
             date={deliveryDate}
             onDateChange={handleDeliveryDateChange}
+            className={styles.DateContain}
+            InputClassName={styles.InputStyle}
           />
           <ScheduleTime
             time={deliveryTime} // Use the state for delivery time

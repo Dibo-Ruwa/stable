@@ -8,7 +8,6 @@ import { SlLocationPin } from "react-icons/sl";
 import { CiCalendar, CiClock2 } from "react-icons/ci";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { SlideInSub } from "./SlideInSub/SlideInSub";
-import BackButton from "@/component/ui/BackButton/BackButton";
 
 const MobileAboutLaundry = () => {
   const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
@@ -27,7 +26,7 @@ const MobileAboutLaundry = () => {
       <div className={styles.MobileCPImage}>
         <div className={styles.MobilecoverImage}>
           <img
-            src="/images/image 200.png"
+            src="/images/image 230.png"
             alt=""
             className={styles.MobilecoverImg}
           />
@@ -51,22 +50,10 @@ const MobileAboutLaundry = () => {
               <p className={styles.MobilerestaurantRatingNum}>4.5</p>
             </div>
           </div>
-          <button
-            className={styles.MobilerestaurantSubNav}
-            onClick={handleSubClick}
-          >
-            <p className={styles.MobilerestaurantSubText}>Subscription</p>
-            <LiaAngleRightSolid className={styles.MobilerestaurantSubIcon} />
-          </button>
-          {isSubOpen && (
-            <div
-              className={`${styles.slideInSub} ${
-                isSubOpen ? styles.activeSub : styles.hiddenSub
-              }`}
-            >
-              <SlideInSub onClose={handleCloseSub} />
-            </div>
-          )}
+        </div>
+        <div className={styles.MobilerestaurantLocation}>
+          <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
+          <p className={styles.MobilerestaurantLocationText}>Ikeja, Lagos</p>
         </div>
         <div className={styles.MobilerestaurantOpeningTimePhoneNum}>
           <p className={styles.MobilerestaurantOpeningDay}>Mon - Friday</p>
@@ -75,12 +62,73 @@ const MobileAboutLaundry = () => {
           <div className={styles.MobilerestaurantDot}></div>
           <p className={styles.MobilerestaurantPhoneNum}>0903 414 5971</p>
         </div>
-        <div className={styles.MobilerestaurantLocation}>
-          <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
-          <p className={styles.MobilerestaurantLocationText}>Ikeja, Lagos</p>
-        </div>
-        <button className={styles.MobilerestaurantReview}>Reviews</button>
       </div>
+      <div className={styles.OurLaundryServiceContainer}>
+        <p>Pricing</p>
+
+        <div className={styles.OurLaundryServiceCards}>
+          <div className={styles.OurLaundryServiceCard}>
+            <div className={styles.OurLaundryServiceImage}>
+              <img
+                src="/images/image 207.png"
+                alt=""
+                className={styles.OurLaundryServiceCardImage}
+              />
+            </div>
+            <p className={styles.OurLaundryServiceCardText}>Wash and Fold</p>
+          </div>
+          <div className={styles.OurLaundryServiceCard}>
+            <div className={styles.OurLaundryServiceImage}>
+              <img
+                src="/images/image 208.png"
+                alt=""
+                className={styles.OurLaundryServiceCardImage}
+              />
+            </div>
+            <p className={styles.OurLaundryServiceCardText}>Iron and Fold</p>
+          </div>
+          <div className={styles.OurLaundryServiceCard}>
+            <div className={styles.OurLaundryServiceImage}>
+              <img
+                src="/images/image 153.png"
+                alt=""
+                className={styles.OurLaundryServiceCardImage}
+              />
+            </div>
+            <p className={styles.OurLaundryServiceCardText}>Dry clean</p>
+          </div>
+          <div className={styles.OurLaundryServiceCard}>
+            <div className={styles.OurLaundryServiceImage}>
+              <img
+                src="/images/image 155.png"
+                alt=""
+                className={styles.OurLaundryServiceCardImage}
+              />
+            </div>
+            <p className={styles.OurLaundryServiceCardText}>Household clean</p>
+          </div>
+        </div>
+      </div>
+      <div className={styles.MobSubPlan}>
+        <p className={styles.MobSubPlanText}>Need Subscription Plan?</p>
+        <button
+          className={styles.MobilerestaurantSubNav}
+          onClick={handleSubClick}
+        >
+          <p className={styles.MobilerestaurantSubText}>See Subscription List</p>
+          <LiaAngleRightSolid className={styles.MobilerestaurantSubIcon} />
+        </button>
+      </div>
+
+      {isSubOpen && (
+        <div
+          className={`${styles.slideInSub} ${
+            isSubOpen ? styles.activeSub : styles.hiddenSub
+          }`}
+        >
+          <SlideInSub onClose={handleCloseSub} />
+        </div>
+      )}
     </div>
   );
 };
