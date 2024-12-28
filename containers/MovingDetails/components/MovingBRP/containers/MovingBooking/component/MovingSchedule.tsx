@@ -1,44 +1,56 @@
-import React, { useState } from 'react'
+'use client';
+import React, { useState, useEffect } from 'react';
 import styles from "../MovingBooking.module.css";
 import { ScheduleDate } from '@/component/ScheduleDate/ScheduleDate';
 import { ScheduleTime } from '@/component/ScheduleTime/ScheduleTime';
 
-export const MovingSchedule = () => {
+interface MovingScheduleProps {
+  onDateChange: (date: string) => void;
+  onTimeChange: (time: string) => void;
+}
 
-   const [pickupDate, setPickupDate] = useState<string>("17, August, 2024");
-    const [deliveryDate, setDeliveryDate] = useState<string>("18, August, 2024");
-    const [pickupTime, setPickupTime] = useState<string>("8:00 AM");
-    const [deliveryTime, setDeliveryTime] = useState<string>("1:00 PM");
-  
-    const formatDate = (date: Date) =>
-      date.toLocaleDateString("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      });
-  
-    const handlePickupDateChange = (startDate: Date, endDate: Date) => {
-      setPickupDate(formatDate(startDate));
-      setDeliveryDate(formatDate(endDate)); // Automatically set delivery date as endDate
-    };
-  
+export const MovingSchedule: React.FC<MovingScheduleProps> = ({
+  onDateChange,
+  onTimeChange,
+}) => {
+  const [selectedDate, setSelectedDate] = useState<string>(
+    localStorage.getItem("pickupDate") || new Date().toISOString().split("T")[0]
+  );
+  const [selectedTime, setSelectedTime] = useState<string>(
+    localStorage.getItem("pickupTime") || "12:00 PM"
+  );
+
+  useEffect(() => {
+    onDateChange(selectedDate);
+    onTimeChange(selectedTime);
+  }, [selectedDate, selectedTime, onDateChange, onTimeChange]);
+
+  const handlePickupDateChange = (date: string) => {
+    setSelectedDate(date);
+    localStorage.setItem("pickupDate", date); // Save to localStorage
+  };
+
+  const handlePickupTimeChange = (time: string) => {
+    setSelectedTime(time);
+    localStorage.setItem("pickupTime", time); // Save to localStorage
+  };
 
   return (
     <div className={styles.MovingScheduleContainer}>
       <p className={styles.MovingScheduleText}>Schedule</p>
       <div className={styles.MovingScheduleCards}>
         <ScheduleDate
-          date={pickupDate}
+          date={selectedDate} // Controlled date state
           label="Date"
           onDateChange={handlePickupDateChange}
         />
         <ScheduleTime
-          time={pickupTime} // Use the state for pickup time
+          time={selectedTime} // Controlled time state
           label="Time"
           className={styles.SelectedDays_ScheduleTimeSetOpt}
-          onTimeChange={setPickupTime} // Update Monday's time
+          onTimeChange={handlePickupTimeChange}
         />
       </div>
     </div>
   );
-}
+};

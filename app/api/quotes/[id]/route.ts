@@ -1,23 +1,16 @@
 import { NextResponse } from "next/server";
 import User from "@/utils/models/Users";
 import { connectDB, closeDB } from "@/utils/db";
-import { Cart } from "@/utils/models/Cart";
-import { generateToken } from "@/templates/authTemplates";
-import ActivateAccount from "@/emails/ActivateAccount";
 import sendEmail from "@/utils/resend";
-import { sendMail } from "@/utils/sendMail";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/utils/helpers/authOptions";
 import {
-  AdminHomeCleaningQuoteRequest,
-  AdminLaundryQuoteRequest,
   AdminQuotePaymentConfirmation,
   CourierQuoteRequestNotification,
   UserQuotePaymentConfirmation,
-  UserQuoteRequestConfirmation,
 } from "@/emails";
 import moment from "moment";
 import { Request } from "@/utils/models/Requests";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/utils/helpers/authOptions";
 
 export async function GET(
   req: Request,
@@ -25,7 +18,9 @@ export async function GET(
 ) {
   try {
     await connectDB();
-    const id = params.id;
+
+    // Extract ID from params
+    const { id } = params;
 
     if (!id) {
       return NextResponse.json(
@@ -36,17 +31,17 @@ export async function GET(
 
     const session = await getServerSession(authOptions);
     if (!session) {
-      return NextResponse.json({ message: "You are not logged in" });
+      return NextResponse.json({ message: "You are not logged in" }, { status: 401 });
     }
 
     const user = await User.findById(session.user._id);
     if (!user) {
-      return NextResponse.json({ message: "User does not exist" });
+      return NextResponse.json({ message: "User does not exist" }, { status: 404 });
     }
 
-    const quote = await Request.findById(id); // Assuming Quote is your Mongoose model for quotes
+    const quote = await Request.findById(id);
     if (!quote) {
-      return NextResponse.json({ message: "Quote does not exist" });
+      return NextResponse.json({ message: "Quote does not exist" }, { status: 404 });
     }
 
     return NextResponse.json({ quote, success: true }, { status: 200 });
@@ -65,20 +60,21 @@ export async function PUT(
   try {
     await connectDB();
 
-    const requestId = params.id;
+    // Extract ID from params
+    const { id } = params;
     const body = await req.json();
 
-    if (!requestId) {
+    if (!id) {
       return NextResponse.json(
         { error: "Request ID and new status are required" },
         { status: 400 }
       );
     }
 
-    const request = await Request.findById(requestId).populate("user courier partner");
+    const request = await Request.findById(id).populate("user courier partner");
 
     if (!request) {
-      return NextResponse.json({ message: "Request does not exist" });
+      return NextResponse.json({ message: "Request does not exist" }, { status: 404 });
     }
 
     const quoteText = request.items
@@ -95,9 +91,10 @@ export async function PUT(
 
     await request.save();
 
+    // Sending payment confirmation emails
     await sendEmail(
       request.user.email,
-      " Payment Confirmation",
+      "Payment Confirmation",
       UserQuotePaymentConfirmation({
         firstName: request.user.firstName,
         serviceName: request.type,
@@ -106,6 +103,7 @@ export async function PUT(
         adminEmail: "info@diboruwa.com",
       })
     );
+
     await sendEmail(
       "ibrahim.saliman.zainab@gmail.com",
       "Payment Confirmation",
@@ -114,9 +112,10 @@ export async function PUT(
         serviceName: request.type,
         paymentAmount: request.total,
         paymentDate: moment().format("MMMM DD, YYYY"),
-        userEmail: "info@diboruwa.com",
+        userEmail: request.user.email,
       })
     );
+
     await sendEmail(
       request.courier.email,
       "Payment Confirmation",
@@ -129,7 +128,6 @@ export async function PUT(
         serviceType: request.type,
         description: quoteText,
         timestamp: moment().format("MMMM DD, YYYY"),
-
       })
     );
 
