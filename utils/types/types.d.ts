@@ -105,3 +105,11 @@ export interface Order {
   createdAt: Date;
   updatedAt: Date;
 }
+
+
+export interface MovingItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+}

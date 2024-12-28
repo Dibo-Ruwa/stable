@@ -126,11 +126,11 @@ const QuotePage = ({ id }: { id: string }) => {
             )}
 
             <QuoteDetail>
-              <strong>Total: </strong> ₦ {quote.total || "N/A"}
+              <strong>Total: </strong>{quote?.total ? `₦${quote.total}` : "Not paid yet"}
             </QuoteDetail>
             <QuoteDetail>
               <strong>Date: </strong>
-              {moment(quote.date).format("MMMM DD, YYYY")}
+              {moment(quote.date).format("MMM D, YYYY")}
             </QuoteDetail>
 
             <QuoteDetail>

@@ -1,94 +1,206 @@
-'use client'
-import React, { useEffect, useState } from "react";
+"use client";
+import React, { useCallback, useEffect, useState } from "react";
 import styles from "../MovingBooking.module.css";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { CheckboxGroup } from "./CheckboxGroup";
-import { AddProperty } from "./AddProperty";
-import { MovingBookingAddress } from "./MovingBookingAddress";
+import { AddItem } from "./AddItems";
+import { MovingBookingLocation } from "./MovingDeliveryLocation";
 import { ItemsDescription } from "./ItemsDescription";
 import { MovingSchedule } from "./MovingSchedule";
 import { Button } from "@/component/shared/Button";
 import { ConfirmationModel } from "./ConfirmationModel";
+import useQuote from "@/hooks/useQuote";
+import { MovingItemType } from "@/utils/types/types";
+
+type FormState = {
+  type: string; // Type of booking
+  categories: string[]; // List of selected categories
+  items: MovingItemType[]; // List of added items with details
+  currentLocation: string;
+  deliveryLocation: string;
+  pickUpDate: string;
+  pickUpTime: string;
+  description: string;
+};
 
 interface Item {
+  id: number;
   name: string;
-  quantity: number;
+  quantity: number; // Unified to use 'quantity'
+  image: string | null;
 }
 
 export const MovingItem = () => {
- const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const { handleQuote, showModal, modalErrorType, modalMessage } = useQuote();
+  const { data: session } = useSession();
+  const router = useRouter();
 
-const handleOpenModal = (): void =>{
-  setIsModalOpen(true)
-  }
-  
-const handleCloseModal = (): void =>{
-  setIsModalOpen(false)
-}
+  const [formState, setFormState] = useState({
+    type: "moving",
+    categories: [] as string[], // Selected categories
+    items: [] as MovingItemType[], // Items array
+    currentLocation: "",
+    deliveryLocation: "",
+    pickUpDate: "",
+    pickUpTime: "",
+    description: "",
+  });
 
+  const handleOpenModal = useCallback((): void => {
+    setIsModalOpen(true);
+  }, []);
 
-const initialItems = [
-  { name: "Chair", quantity: 20 },
-  { name: "Table", quantity: 10 },
-  { name: "Sofa", quantity: 5 },
-  { name: "Radio", quantity: 6 },
-];
+  const handleCloseModal = useCallback((): void => {
+    setIsModalOpen(false);
+  }, []);
 
-const deliveryDetails = {
-  currentLocation: "24 Eberechi Street Umuahia",
-  deliveryLocation: "34 Akara Road, Aba",
-  pickUpDate: "27 : 10 : 2024",
-  pickUpTime: "12 : 00PM",
-};
+  const handleInputChange = useCallback((field: string, value: any) => {
+    setFormState((prevState) => {
+      if (prevState[field as keyof typeof prevState] !== value) {
+        return {
+          ...prevState,
+          [field]: value,
+        };
+      }
+      return prevState;
+    });
+  }, []);
 
-const handleConfirm = (updatedItems: Item[]) => {
-  console.log("Confirmed items:", updatedItems);
-  // Add additional actions here, such as submitting to a backend.
-};
+  const handleSubmit = useCallback(() => {
+    console.log("Form Data:", formState);
+    // Call the API with the formState
+  }, [formState]);
 
-  
-useEffect(() => {
+  console.log("Form State:", formState);
+
+  useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-    // Clean up overflow style on component unmount
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [isModalOpen]);
 
+  const handleConfirm = (confirmedItems: MovingItemType[]) => {
+    // Update the state with the confirmed items
+    setFormState((prevState) => ({
+      ...prevState,
+      items: confirmedItems,
+    }));
+  };
 
   return (
     <div className={styles.MovingBookingContainer}>
       <div className={styles.MovingItemContainer}>
-        <p className={styles.MovingItemTextQuest}>What do you want to move?</p>
+        <p className={styles.MovingItemTextQuest}>
+          What do you want to move or deliver?
+        </p>
 
+        {/* Checkbox Group */}
         <div className={styles.MovingItemChoices}>
-          <CheckboxGroup />
+          <CheckboxGroup
+            onChange={useCallback(
+              (categories: string[]) =>
+                handleInputChange("categories", categories),
+              [handleInputChange]
+            )}
+          />
         </div>
+
+        {/* Add Item */}
         <div className={styles.MovingPropertyContainer}>
-          <AddProperty />
+          <AddItem
+            onItemsChange={useCallback(
+              (items: MovingItemType[]) => handleInputChange("items", items),
+              [handleInputChange]
+            )}
+          />
         </div>
+
+        {/* Address Section */}
         <div className={styles.Moving_AddressContainer}>
-          <MovingBookingAddress />
+          <MovingBookingLocation
+            onChange={useCallback(
+              (locationData: {
+                currentLocation: string;
+                deliveryLocation: string;
+              }) => {
+                handleInputChange(
+                  "currentLocation",
+                  locationData.currentLocation
+                );
+                handleInputChange(
+                  "deliveryLocation",
+                  locationData.deliveryLocation
+                );
+              },
+              [handleInputChange]
+            )}
+          />
         </div>
+
+        {/* Items Description */}
         <div className={styles.Moving_ItemsDescription}>
-          <ItemsDescription />
+          <ItemsDescription
+            onChange={useCallback(
+              (description: string) =>
+                handleInputChange("description", description),
+              [handleInputChange]
+            )}
+          />
         </div>
-        <MovingSchedule />
-        {/* Pass the handleCloseModal function to the modal for closing */}
+
+        {/* Schedule */}
+        <MovingSchedule
+          onDateChange={useCallback(
+            (date: string) => handleInputChange("pickUpDate", date),
+            [handleInputChange]
+          )}
+          onTimeChange={useCallback(
+            (time: string) => handleInputChange("pickUpTime", time),
+            [handleInputChange]
+          )}
+        />
+
+        {/* Confirmation Modal */}
         <ConfirmationModel
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          items={initialItems}
-          deliveryDetails={deliveryDetails}
-          onConfirm={handleConfirm}
+          formData={formState}
+          items={formState.items}
+          deliveryDetails={{
+            currentLocation: formState.currentLocation,
+            deliveryLocation: formState.deliveryLocation,
+            pickUpDate: formState.pickUpDate,
+            pickUpTime: formState.pickUpTime,
+          }}
+          onConfirm={(updatedFormState) =>
+            setFormState((prevState) => ({ ...prevState, ...updatedFormState }))
+          }
         />
 
+        {/* Submit Button */}
         <Button
           text="Done"
-          onClick={handleOpenModal}
+          onClick={() => {
+            if (
+              formState.categories.length === 0 ||
+              formState.items.length === 0 ||
+              !formState.currentLocation ||
+              !formState.deliveryLocation ||
+              !formState.pickUpDate ||
+              !formState.pickUpTime
+            ) {
+              alert("Please fill in all required fields before confirming.");
+              return;
+            }
+            handleOpenModal();
+          }}
           className={styles.MovingDoneButton}
         />
       </div>
