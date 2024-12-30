@@ -23,7 +23,7 @@ export interface Quote {
   user: string;
   createdAt: Date;
   updatedAt: Date;
-  status: string;
+  status: 'processing' | 'delivered' | 'pending';
   paymentId?: string;
   isPaid: boolean;
 }
@@ -131,12 +131,14 @@ const useQuote = (): QuoteHook => {
             },
           });
           openModal("success", "Submitted successfully!");
-          router.push(`/dashboard/requests/${res.data.quote._id}`);
+          router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
         } else {
           const res = await interceptor.post(`/quotes`, { data });
           openModal("success", "Submitted successfully!");
-          router.push(`/dashboard/requests/${res.data.quote._id}`);
+          router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
+
         }
+
       } else {
         openModal("info", "Please complete your profile.");
       }

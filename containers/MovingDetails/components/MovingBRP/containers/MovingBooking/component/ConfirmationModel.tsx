@@ -10,6 +10,8 @@ import {
 } from "react-icons/ai";
 import useQuote from "@/hooks/useQuote";
 import { MovingItemType } from "@/utils/types/types";
+import NotificationModal from "@/component/NotificationModal"; 
+
 
 type FormState = {
   categories: string[];
@@ -46,7 +48,7 @@ export const ConfirmationModel: React.FC<Props> = ({
   formData,
 }) => {
   const [updatedFormState, setUpdatedFormState] = useState<FormState>(formData);
-  const { handleQuote, loading } = useQuote();
+  const { handleQuote, getQuotes, loading, showModal, modalErrorType, modalMessage, closeModal, } = useQuote();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -65,7 +67,6 @@ export const ConfirmationModel: React.FC<Props> = ({
     }));
   };
 
-  console.log(session, "SESSION");
   const handleSubmission = async () => {
     if (!session) {
       toast.error("Please sign in to submit your request.");
@@ -73,11 +74,24 @@ export const ConfirmationModel: React.FC<Props> = ({
       return;
     }
 
+    if (
+      !session?.user.phone ||
+      !session?.user.address ||
+      !session?.user.state ||
+      !session?.user.lga
+    ) {
+      closeModal(); 
+      toast.error("Please complete your profile to submit the request.");
+      router.push("/profile");
+      return;
+    }
+
     try {
       await handleQuote(updatedFormState);
       console.log("Calling handleQuote with data:", updatedFormState); 
-      // toast.success("Request submitted successfully, please go ahead and pay.");
-      // onClose();
+      toast.success("Request submitted successfully");
+      onClose();
+      getQuotes();
     } catch (error) {
       console.error("Submission failed", error);
       toast.error("Failed to submit the request.");
@@ -85,8 +99,10 @@ export const ConfirmationModel: React.FC<Props> = ({
   };
 
   if (!isOpen) return null;
+  
 
   return (
+   
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalContentTextContainer}>
@@ -187,6 +203,16 @@ export const ConfirmationModel: React.FC<Props> = ({
           </button>
         </div>
       </div>
+     
+      {showModal && (
+        <NotificationModal
+          message={modalMessage}
+          errorType={modalErrorType}
+          onClose={closeModal}
+        />
+      )}
     </div>
+    
+
   );
 };

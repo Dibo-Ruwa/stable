@@ -9,7 +9,8 @@ import Providers from "@/utils/Providers";
 import { assets } from "@/public/assets";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import LocationModal from "@/component/locationModal";
+// import LocationModal from "@/component/locationModal";
+import LocationModal from "@/component/newLocationModal/LocationModal";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Dibo Ruwa",
   },
   description:
-    "DiboRuwa - One-Stop App for Home Services | Northern Nigeria | Food | Laundry | Cleaning | Moving | Groceries",
+    "DiboRuwa - One-Stop App for Home Services | Food | Laundry | Cleaning | Moving | Groceries",
   openGraph: {
     type: "website",
     locale: "en_NG",
@@ -41,6 +42,7 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <Providers>
+      {/* <LocationModal /> */}
           <Navbar />
           {authModal}
 

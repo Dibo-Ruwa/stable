@@ -12,6 +12,8 @@ import { Button } from "@/component/shared/Button";
 import { ConfirmationModel } from "./ConfirmationModel";
 import useQuote from "@/hooks/useQuote";
 import { MovingItemType } from "@/utils/types/types";
+import NotificationModal from "@/component/NotificationModal"; 
+import toast from "react-hot-toast";
 
 type FormState = {
   type: string; // Type of booking
@@ -33,14 +35,15 @@ interface Item {
 
 export const MovingItem = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const { handleQuote, showModal, modalErrorType, modalMessage } = useQuote();
+  const { handleQuote, getQuotes, loading, showModal, modalErrorType, modalMessage, closeModal, } = useQuote();
+
   const { data: session } = useSession();
   const router = useRouter();
 
   const [formState, setFormState] = useState({
     type: "moving",
-    categories: [] as string[], // Selected categories
-    items: [] as MovingItemType[], // Items array
+    categories: [] as string[],
+    items: [] as MovingItemType[],
     currentLocation: "",
     deliveryLocation: "",
     pickUpDate: "",
@@ -95,6 +98,7 @@ export const MovingItem = () => {
   };
 
   return (
+    <>   
     <div className={styles.MovingBookingContainer}>
       <div className={styles.MovingItemContainer}>
         <p className={styles.MovingItemTextQuest}>
@@ -196,7 +200,12 @@ export const MovingItem = () => {
               !formState.pickUpDate ||
               !formState.pickUpTime
             ) {
-              alert("Please fill in all required fields before confirming.");
+              toast.error("Please fill in all required fields before confirming.");
+              return;
+            } else if(
+              formState.items.some((item) => item.quantity <= 0)
+            ){
+              toast.error("Please select atleast one quantity for each item.");
               return;
             }
             handleOpenModal();
@@ -204,6 +213,9 @@ export const MovingItem = () => {
           className={styles.MovingDoneButton}
         />
       </div>
+
     </div>
+   
+    </>
   );
 };
