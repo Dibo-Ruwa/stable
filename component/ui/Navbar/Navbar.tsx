@@ -20,6 +20,7 @@ import {
   Toggle,
   SMCDI,
   NavbarFrame,
+  Toast
 } from "./navbar.styles";
 import UserDropdown from "@/component/userDropdown/UserDropdown";
 import { useLocation } from "@/context/LocationProvider";
@@ -29,6 +30,9 @@ import { useCart } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
 import useCartStore from "@/store/useCart.store";
 import Cookies from "js-cookie";
+import LocationModal from "@/component/newLocationModal/LocationModal";
+import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
+
 
 const Navbar = () => {
   const { data: session, status } = useSession({
@@ -38,13 +42,14 @@ const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { location } = useLocation();
-
+  const [showToast, setShowToast] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [authModal, setAuthModal] = useState<"signup" | "signin" | null>(null);
   const switchModal = (type: "signup" | "signin") => setAuthModal(type);
   const [companyName] = useState<string>("diboruwa");
 
+  const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const { cartItems, getCart, getSubscriptions, subscriptions } =
     useCartStore();
 
@@ -72,8 +77,38 @@ const Navbar = () => {
   const openAuthModal = (type: "signup" | "signin") => setAuthModal(type); // Type added to function parameter
   const closeAuthModal = () => setAuthModal(null);
 
+  useEffect(() => {
+    const checkModalVisibility = () => {
+      const locationData = Cookies.get("diboruwa_location");
+      const lastModalShown = Cookies.get("diboruwa_modal_timestamp");
+
+      if (!locationData) {
+        setIsLocationModalOpen(true);
+      } else if (lastModalShown) {
+        const lastShownTime = new Date(lastModalShown).getTime();
+        const currentTime = new Date().getTime();
+        const hoursSinceLastShown = (currentTime - lastShownTime) / (1000 * 60 * 60);
+
+        // Open modal if more than 24 hours have passed
+        if (hoursSinceLastShown >= 24) {
+          setIsLocationModalOpen(true);
+        }
+      }
+    };
+
+    checkModalVisibility();
+  }, []);
+
+  const openLocationModal = () => setIsLocationModalOpen(true);
+  const closeLocationModal = () => setIsLocationModalOpen(false);
+
+  const triggerToast = () => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   return (
+    <>
     <NavbarContainer
       style={
         isScrolled
@@ -210,14 +245,19 @@ const Navbar = () => {
           )}
 
           {session && (
-            <div className="SA_location" aria-label="User location">
+            <div 
+              className="SA_location" 
+              aria-label="User location"
+              onClick={openLocationModal}
+              style={{cursor: "pointer" }}
+            >
               <ImLocation className="SA_location_icon" />
               <p className="SA_location_text">
                 {location?.state && location?.region ? (
                   `${location?.state}, ${location?.region}`
                 ) : (
                   <span onClick={() => router.push("/")}>
-                    Select your location
+                    Reload to select your location
                   </span>
                 )}
               </p>
@@ -252,6 +292,22 @@ const Navbar = () => {
         )}
       </NavbarFrame>
     </NavbarContainer>
+    {isLocationModalOpen && (
+        <LocationModal
+          isOpen={isLocationModalOpen}
+          onClose={closeLocationModal}
+          onShowToast={triggerToast}
+          
+        />
+      )}
+
+      {showToast && (
+              <Toast $isVisible={showToast}>
+                <FaCheckCircle />
+                Location successfully updated!
+              </Toast>
+            )}
+    </>
   );
 };
 

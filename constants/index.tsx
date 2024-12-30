@@ -11085,10 +11085,49 @@ export interface OrderedServicesDataType {
   type: string;
 }
 
+export interface NewOrderedServicesDataType {
+  _id: number;
+  foodImg?: string;
+  foodTitle?: string;
+  foodAmount?: string;
+  ratingIcon?: IconType;
+  ratingNum?: string;
+  timmIcon?: IconType;
+  timeText?: string;
+  deliveryText?: string;
+  amountInUsd?: string;
+  restaurantImg?: string;
+  restaurantTitle?: string;
+  restaurantRatingIcon?: IconType;
+  restaurantRatingNum?: string;
+  restPhoneIcon?: IconType;
+  restaurantPhoneNum?: string;
+  ownerImg?: string;
+  ownerName?: string;
+  ownerPhoneIcon?: IconType;
+  ownersPhoneNum?: string;
+  type: string;
+}
+
+export const OrderedServicesData: OrderedServicesDataType =   {
+    _id: 1000,
+    foodImg: "/images/Frame 2610552 (1).png",
+    foodTitle: "Jollof Rice",
+    foodAmount: "+3",
+    ratingIcon: FaStar,
+    ratingNum: "4.5",
+    timmIcon: IoMdStopwatch,
+    timeText: "30mins",
+    deliveryText: "offer Delivery",
+    amountInUsd: "$40,000",
+    type: "service",
+  }
+
+
 export const OrderedServicesData1: OrderedServicesDataType[] = [
   {
     _id: 1222344,
-    foodImg: "/images/Frame 2610552.png",
+    foodImg: "/images/Frame 2610552 (1).png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
     ratingIcon: FaStar,
