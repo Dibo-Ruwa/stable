@@ -3,7 +3,7 @@ import { routes } from "@/constants";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { HiBars3 } from "react-icons/hi2";
 import { VscClose } from "react-icons/vsc";
@@ -32,24 +32,28 @@ import useCartStore from "@/store/useCart.store";
 import Cookies from "js-cookie";
 import LocationModal from "@/component/newLocationModal/LocationModal";
 import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
+import { CartDropdown } from "@/containers/CartDropdown/CartDropdown";
 
 
 const Navbar = () => {
   const { data: session, status } = useSession({
     required: false,
   });
- 
+
   const pathname = usePathname();
   const router = useRouter();
   const { location } = useLocation();
   const [showToast, setShowToast] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const [authModal, setAuthModal] = useState<"signup" | "signin" | null>(null);
   const switchModal = (type: "signup" | "signin") => setAuthModal(type);
   const [companyName] = useState<string>("diboruwa");
-
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
+
+  const cartDropdownRef = useRef<HTMLDivElement | null>(null);
+
   const { cartItems, getCart, getSubscriptions, subscriptions } =
     useCartStore();
 
@@ -78,6 +82,7 @@ const Navbar = () => {
   const closeAuthModal = () => setAuthModal(null);
 
   useEffect(() => {
+
     const checkModalVisibility = () => {
       const locationData = Cookies.get("diboruwa_location");
       const lastModalShown = Cookies.get("diboruwa_modal_timestamp");
@@ -106,6 +111,25 @@ const Navbar = () => {
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
   };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        cartDropdownRef.current &&
+        !cartDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
+      }
+    };
+
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [cartDropdownRef]);
+
 
   return (
     <>
@@ -266,23 +290,31 @@ const Navbar = () => {
 
           {session && <UserDropdown />}
           {session && (
-            <div className="cart">
-              {totalQuantities >= 1 ? (
-                <div className="badge">{totalQuantities}</div>
-              ) : (
-                <></>
-              )}
-              <Link
-                href="/cart"
-                style={{ textDecoration: "none", color: "var(--primary)" }}
-              >
-                <FaBagShopping className="cart_icon" />
-              </Link>
-            </div>
+            <>
+              <div className="cart">
+                {totalQuantities >= 1 ? (
+                  <div className="badge">{totalQuantities}</div>
+                ) : (
+                  <></>
+                )}
+                <button
+                  type="button"
+                  style={{ textDecoration: "none", color: "var(--primary)" }}
+                  onClick={() => setIsCartDropdownOpen((prev) => !prev)}
+                >
+                  <FaBagShopping className="cart_icon" />
+                </button>
+                {isCartDropdownOpen && (
+                  <div ref={cartDropdownRef} className="CartDropdown">
+                    <CartDropdown />
+                  </div>
+                )}
+              </div>
+            </>
           )}
         </MenuList>
         {/* Render AuthModal based on state */}
-        
+
         {authModal && (
           <AuthModal
             type={authModal}

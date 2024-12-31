@@ -1,0 +1,236 @@
+.CartDropdown_Container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.CartDropdown_checkAndClear {
+  @apply flex justify-between w-full;
+}
+
+.CartDropdown_label,
+.CartDropdown_Clear,
+.CartTitle,
+.CartRating_number,
+.CartTime_ClockText,
+.Cart_OD,
+.Cart_Amount,
+.cartCard_OFS {
+  @apply text-black text-base font-normal leading-normal not-italic font-poppins;
+}
+.CartDropdown_Clear {
+  @apply text-redText;
+}
+
+.CartDropdown_Cards {
+  @apply flex flex-col items-center gap-4 w-full;
+}
+
+.CartDropdown_Card {
+  @apply flex w-full p-[10px] flex-col justify-center gap-[10px] rounded-[10px] bg-cartCardColor;
+}
+
+.CartDropdown_CardTop {
+  @apply flex gap-[67px] items-center justify-between;
+}
+
+.CartDropdown_Details {
+  @apply flex justify-center items-center gap-[8px];
+}
+
+/* .CartDropdown_DetailsImage {
+}
+
+.TheCartImage {
+} */
+
+.CartTitleRatingANDTime {
+  @apply flex flex-col items-start gap-[14px];
+}
+
+.CartTitleRating {
+  @apply flex items-center justify-between w-full;
+}
+
+.CartTitle {
+  @apply text-textColor;
+}
+
+.CartRating_Content {
+  @apply flex items-center gap-1;
+}
+
+.CartRating_Star {
+  @apply w-[14.996px] h-[14.996px] text-starColor;
+}
+
+.CartRating_number {
+  @apply text-[14px] text-ratingTextColor;
+}
+
+.CartTime_Content {
+  @apply flex items-center gap-1;
+}
+
+.CartTime_Clock {
+  @apply w-[18px] h-[18px] text-textColor;
+}
+
+.CartTime_ClockText {
+  @apply text-[14px] text-textColor;
+}
+
+.Cart_ODAmount {
+  @apply flex flex-col justify-between items-end gap-[14px];
+}
+
+.Cart_OD {
+  @apply text-[12px] text-greenText;
+}
+
+.Cart_Amount {
+  @apply text-textColor;
+}
+
+.CartDropdown_CardDown {
+  @apply flex w-full justify-between items-center;
+}
+
+.Cart_CheckboxStock {
+  @apply flex justify-between items-center w-[179px];
+}
+
+.cartCard_OFS {
+  @apply text-redText text-[14px];
+}
+
+.counterContainer {
+  @apply !bg-transparent;
+}
+
+.counterButton {
+  @apply flex !rounded-full !bg-bgCounter !w-[20px] !h-[20px] !items-center !justify-center;
+}
+
+.BtnCheckout {
+  @apply flex w-full mt-4 py-[7px] px-[42px] flex-col justify-center items-center gap-[10px] rounded-[4px] border-btn bg-bgBtn text-textColor text-base font-poppins;
+}
+
+/* ======== Select Courier Modal ======== */
+.CartDropdown_selectCourierModal {
+  width: 100%;
+}
+
+.CartDropdown_courierContent {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 13px;
+}
+
+.CartDropdown_Back_Btn {
+  padding: 0;
+}
+
+.CartDropdown_courierModal_LeftContent {
+  width: 100%;
+  border-radius: 8px;
+  padding: 23px 32px 37px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #fff;
+  box-shadow: none;
+}
+
+.CartDropdown_BBTitle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 7rem;
+}
+
+.CartDropdown_courierModal_Title {
+  color: var(--disabled-color, #767575);
+  font-family: Inter !important;
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CartDropdown_courierModal_Cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.CartDropdown_courierModal_Card_Image_and_D {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 4.548px;
+}
+
+.CartDropdown_courierModal_Card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.65rem;
+  gap: 10px;
+  border-radius: 10px;
+  background: var(--primary-color-1-white-40, #f9f9f9);
+}
+
+.CartDropdown_courierModal_CardContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.CartDropdown_courierModal_CardContent_Text,
+.CartDropdown_courierModal_CardContent_ratingNum,
+.CartDropdown_CourierModal_card_Prize {
+  color: var(--Soft-black, #565656);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CourierModal_card_Prize {
+  font-size: 1rem;
+}
+
+.CartDropdown_courierModal_CardContentRating {
+  display: flex;
+  align-items: center;
+  gap: 3.557px;
+}
+
+.CartDropdown_courierModal_CardContent_ratingStar {
+  width: 16px;
+  height: 16px;
+  color: #ffc93f;
+}
+
+.CartDropdown_payButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem auto;
+  padding: 5.791px 34.744px;
+  gap: 8.272px;
+  border-radius: 4px;
+  border: 0.827px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}

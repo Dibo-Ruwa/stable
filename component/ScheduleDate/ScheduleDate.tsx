@@ -7,6 +7,7 @@ import styles from "./ScheduleDate.module.css";
 interface ScheduleDateProps {
   date: string; // This can be a formatted string for display
   className?: string;
+  InputClassName?: string;
   label: string;
   icon?: React.ElementType;
   onDateChange: (date: string) => void; // Updated to string for input field
@@ -15,6 +16,7 @@ interface ScheduleDateProps {
 export const ScheduleDate: React.FC<ScheduleDateProps> = ({
   date,
   className,
+  InputClassName,
   label,
   icon: Icon = CiCalendar,
   onDateChange,
@@ -28,8 +30,7 @@ export const ScheduleDate: React.FC<ScheduleDateProps> = ({
             <span className={styles.MovingScheduleDateText}>{label}</span>
             <input
               type="date"
-              className={styles.MovingScheduleDateInput}
-              
+              className={`${styles.MovingScheduleDateInput}  ${InputClassName}`}
               value={date}
               onChange={(e) => onDateChange(e.target.value)}
             />

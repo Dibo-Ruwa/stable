@@ -64,6 +64,17 @@ export const NavbarFrame = styled.div`
       justify-content: center;
       align-items: center;
     }
+
+    .CartDropdown {
+      position: absolute;
+      top: 1.6rem;
+      right: 13rem;
+      width: 29.5rem;
+      transform: translate(15rem, 2rem);
+      padding: 0.7rem 2rem 2rem;
+      background: #fefefe;
+      border-radius: 0.1rem;
+    }
   }
 
   .SA_location {
@@ -74,7 +85,7 @@ export const NavbarFrame = styled.div`
     .SA_location_icon {
       width: 28px;
       height: 28px;
-      color: var(--Red, #EF5A5A);
+      color: var(--Red, #ef5a5a);
     }
 
     p.SA_location_text {

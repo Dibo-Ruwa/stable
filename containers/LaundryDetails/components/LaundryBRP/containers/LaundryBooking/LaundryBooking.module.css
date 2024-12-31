@@ -6,6 +6,57 @@
   margin: 1rem 0;
 }
 
+@media screen and (max-width: 1024px) {
+  .LaundryItemContainer {
+    background-color: #ffffff;
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 568px) {
+  .LaundryItemContainer {
+    background-color: transparent;
+    margin: 1rem auto;
+    width: 95%;
+  }
+}
+/* ============== Add Custom ============== */
+.LaundryAddCustomContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.LaundryAddCustomContainerText {
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+}
+
+.AddCustom {
+  display: flex;
+  align-items: center;
+  color: #27a124;
+  gap: 0.6rem;
+}
+
+.AddCustom_AddMoreIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.AddCustom_Text {
+  color: var(--Green1, #27a124);
+  font-family: Poppins;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
 .AddPropertyContainer {
   width: 100%;
   margin: 0 auto;
@@ -17,18 +68,30 @@
   margin: 0 auto;
   gap: 2rem;
 }
-
+@media screen and (max-width: 1024px) {
+  .AddPropertyCards {
+    flex-direction: column;
+  }
+}
 .AddPropertyCard {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: #ffffff;
+  background: #fefefe;
   padding: 0.7rem;
   border-radius: 8px;
 }
 
+@media screen and (max-width: 1024px) {
+  .AddPropertyCard {
+    background: #fefefe;
+  }
+}
+
 .AddPropertyCardText {
   font-size: 16px;
+  color: #8f8f8f;
+  font-weight: 400;
 }
 
 .AddPropertyEditNameAndCounter {
@@ -87,10 +150,23 @@
   gap: 2rem;
 }
 
+@media screen and (max-width: 1195px) {
+  .LaundryItemsGroupCards {
+    display: flex;
+  }
+}
+
 .LaundryItemsGroupCardItems {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.5rem;
+}
+
+@media screen and (max-width: 568px) {
+  .LaundryItemsGroupCardItems {
+    width: 100%;
+    gap: 6rem;
+  }
 }
 
 .LaundryItemsGroupCardItemsBox {
@@ -100,8 +176,21 @@
   background: #f8f8f8;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0.5rem;
+}
+
+@media screen and (max-width: 1195px) {
+  .LaundryItemsGroupCardItemsBox {
+    width: 4rem;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .LaundryItemsGroupCardItemsBox {
+    gap: 5rem;
+    width: 100%;
+  }
 }
 
 .LaundryItemsGroupCardItemsBox_Button,
@@ -109,6 +198,28 @@
   color: #2c2c2c;
   font-size: 16px;
   font-weight: 500;
+}
+
+.LaundryItemsGroupText {
+  color: #2a2a2a;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.LaundryItemsGroupCardItems_Text {
+  color: #565656;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.LaundryItemsGroupCardItemsBox_Input {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  background: #f8f8f8;
+  outline: none;
+  text-align: center;
 }
 
 /* ===== Edit Property Name ===== */
@@ -121,10 +232,15 @@
 .EditNameInput {
   flex: 1;
   border: 1px solid #ccc;
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
+  border: 0;
   width: 3rem;
+  outline: none;
+}
+
+.EditNameInput::placeholder {
+  color: #565656;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .EditNameIcon {
@@ -148,20 +264,23 @@
 }
 
 .PropertyAddImageText1 {
-  font-size: 14px;
-  color: #2c2c2c;
-  font-weight: 500;
+  font-size: 12px;
+  color: #3f3f3f;
+  font-weight: 400;
 }
 
 .PropertyAddImageText2 {
-  color: #cccccc;
-  font-size: 14px;
-  font-weight: 500;
+  color: #8f8f8f;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .PropertyImageUploader {
-  border: 1px dashed #ccc;
+  border: 1px dashed #000000;
+  background: #fefefe;
   padding: 20px;
+  width: 100%;
+  height: 105px;
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -307,6 +426,17 @@
   border-radius: 8px;
 }
 
+@media screen and (max-width: 1024px) {
+  .ItemsDescriptionTextarea {
+    background: #f9f9f9;
+  }
+}
+@media screen and (max-width: 568px) {
+  .ItemsDescriptionTextarea {
+    background: #ffffff !important;
+  }
+}
+
 /* ====== Schedule Date and  Time ====== */
 .LaundryScheduleContainer {
   width: 100%;
@@ -326,6 +456,36 @@
   width: 100%;
   align-items: center;
   gap: 2rem;
+}
+@media screen and (max-width: 1024px) {
+  .DateContain {
+    background: #f9f9f9 !important;
+  }
+
+  .InputStyle {
+    background: #f9f9f9;
+  }
+
+  .SelectedDays_ScheduleTimeSetOpt {
+    background: #f9f9f9 !important;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .LaundryScheduleCards {
+    flex-direction: column;
+  }
+  .DateContain {
+    background: #f1f1f1 !important;
+  }
+
+  .InputStyle {
+    background: #f1f1f1;
+  }
+
+  .SelectedDays_ScheduleTimeSetOpt {
+    background: #f1f1f1 !important;
+  }
 }
 /* ===== Button ===== */
 .LaundryDoneButton {

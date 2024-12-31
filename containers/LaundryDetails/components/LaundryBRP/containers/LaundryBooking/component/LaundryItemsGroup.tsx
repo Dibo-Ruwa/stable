@@ -1,12 +1,9 @@
-"use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../LaundryBooking.module.css";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
-// Define types for the laundry items and state
 interface LaundryItemGroup {
   id: number;
-  category: string;
+  category?: string;
   items: string[];
 }
 
@@ -14,38 +11,59 @@ interface QuantityState {
   [key: string]: number;
 }
 
-// Array of laundry item groups
 const laundryItems: LaundryItemGroup[] = [
-  { id: 1, category: "From 0-17 years", items: ["Shirt", "Pants", "Dress", "Jacket", "Socks"] },
-  { id: 2, category: "Adults", items: ["Shirt", "Pants", "Dress", "Jacket", "Socks"] },
-  // Add more groups here if needed
+  {
+    id: 1,
+    category: "From 0-17 years",
+    items: ["Shirt", "Shirt", "Shirt", "Shirt", "Shirt"],
+  },
+  {
+    id: 2,
+    items: ["Shirt", "Shirt", "Shirt", "Shirt", "Shirt"],
+  },
 ];
 
 export const LaundryItemsGroup: React.FC = () => {
-  // Initialize state with the QuantityState type
   const [quantities, setQuantities] = useState<QuantityState>(
     laundryItems.reduce((acc, group) => {
       group.items.forEach((item) => {
-        acc[`${group.id}-${item}`] = 0; // Initialize quantity to 0 for each item
+        acc[`${group.id}-${item}`] = 0;
       });
       return acc;
-    }, {} as QuantityState) // Specify initial value as QuantityState type
+    }, {} as QuantityState)
   );
 
-  // Function to increment the quantity of a specific item
-  const handleIncrement = (groupId: number, item: string) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [`${groupId}-${item}`]: prevQuantities[`${groupId}-${item}`] + 1,
-    }));
-  };
+  const [visibleItems, setVisibleItems] = useState<number>(
+    laundryItems[0].items.length
+  );
 
-  // Function to decrement the quantity of a specific item
-  const handleDecrement = (groupId: number, item: string) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [`${groupId}-${item}`]: Math.max(prevQuantities[`${groupId}-${item}`] - 1, 0),
-    }));
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 568) {
+        setVisibleItems(1);
+      } else if (window.innerWidth <= 1024) {
+        setVisibleItems(3);
+      } else {
+        setVisibleItems(laundryItems[0].items.length);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const handleInputChange = (groupId: number, item: string, value: string) => {
+    const numericValue = Math.max(0, parseInt(value) || 0);
+    setQuantities((prevQuantities) => {
+      const updatedQuantities = {
+        ...prevQuantities,
+        [`${groupId}-${item}`]: numericValue,
+      };
+      console.log("Updated quantities:", updatedQuantities); // Log updated quantities
+      return updatedQuantities;
+    });
   };
 
   return (
@@ -54,27 +72,19 @@ export const LaundryItemsGroup: React.FC = () => {
         <div key={group.id} className={styles.LaundryItemsGroupCard}>
           <p className={styles.LaundryItemsGroupText}>{group.category}</p>
           <div className={styles.LaundryItemsGroupCards}>
-            {group.items.map((item, index) => (
+            {group.items.slice(0, visibleItems).map((item, index) => (
               <div key={index} className={styles.LaundryItemsGroupCardItems}>
                 <p className={styles.LaundryItemsGroupCardItems_Text}>{item}</p>
                 <div className={styles.LaundryItemsGroupCardItemsBox}>
-                  <button
-                    className={styles.LaundryItemsGroupCardItemsBox_Button}
-                    type="button"
-                    onClick={() => handleDecrement(group.id, item)}
-                  >
-                    <AiOutlineMinus />
-                  </button>
-                  <div className={styles.LaundryItemsGroupCardItemsBox_Num}>
-                    {quantities[`${group.id}-${item}`]}
-                  </div>
-                  <button
-                    className={styles.LaundryItemsGroupCardItemsBox_Button}
-                    type="button"
-                    onClick={() => handleIncrement(group.id, item)}
-                  >
-                    <AiOutlinePlus />
-                  </button>
+                  <input
+                    type="text"
+                    placeholder="0"
+                    className={styles.LaundryItemsGroupCardItemsBox_Input}
+                    value={quantities[`${group.id}-${item}`]}
+                    onChange={(e) =>
+                      handleInputChange(group.id, item, e.target.value)
+                    }
+                  />
                 </div>
               </div>
             ))}

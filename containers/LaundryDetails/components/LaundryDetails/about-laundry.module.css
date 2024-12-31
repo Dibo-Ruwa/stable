@@ -3,8 +3,12 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
 
-  width: min(93%, 1444px);
+@media screen and (max-width: 1198px) {
+  .restaurantFrame {
+    width: 100%;
+  }
 }
 .CPImage {
   width: 100%;
@@ -16,7 +20,7 @@
 }
 
 .coverImage {
-  width: 55vw;
+  width: 100%;
   position: relative;
 }
 
@@ -38,7 +42,7 @@
 .aboutRestaurantContainer {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 0 1rem;
   width: 100%;
   margin: 0 auto;
   margin-top: 1.5rem;
@@ -92,7 +96,7 @@
   font-size: 1rem;
   font-style: normal;
   line-height: normal;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .restaurantOpeningTimePhoneNum {
@@ -108,7 +112,7 @@
 .restaurantLocationText,
 .restaurantDescription,
 .restaurantDeliveryTime {
-  color: #000000;
+  color: #2a2a2a;
   font-family: Poppins;
   font-size: 0.875rem;
   font-style: normal;
@@ -139,11 +143,23 @@
   color: #2a2a2a;
 }
 
+.restaurantLocationText {
+  color: #2a2a2a;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .restaurantDescription_DT {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin-top: 0.7rem;
+}
+
+.restaurantDescription {
+  color: #565656;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .restaurantDeliveryTime {
@@ -182,6 +198,13 @@
   flex-direction: column;
   gap: 1rem;
   border-radius: 0.7rem;
+  margin-top: 1rem;
+}
+
+.OurLaundryServiceContainerTitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #565656;
 }
 
 .OurLaundryServiceCards {
@@ -292,7 +315,7 @@
   }
 
   .MobilecoverImage {
-    width: 29rem;
+    width: 100%;
     position: relative;
   }
 
@@ -302,7 +325,7 @@
 
   .MobilerestProfileImage {
     position: absolute;
-    top: 9rem;
+    top: 18rem;
     left: 1rem;
   }
 
@@ -430,6 +453,22 @@
     color: #2a2a2a;
   }
 
+  .MobSubPlan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: 1.5rem auto;
+  }
+  .MobSubPlanText {
+    color: var(--Black-100, #2a2a2a);
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   .MobilerestaurantReview {
     color: #27a124;
     font-family: Poppins;
@@ -471,7 +510,7 @@
   }
 
   .MobilerestProfileImage {
-    top: 11rem;
+    top: 14rem;
   }
 }
 
@@ -481,7 +520,7 @@
   }
 
   .MobilerestProfileImage {
-    top: 10rem;
+    top: 13rem;
   }
 }
 

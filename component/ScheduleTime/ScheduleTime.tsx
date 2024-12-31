@@ -70,7 +70,7 @@ export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
   return (
     <>
       <div
-        className={`${styles.MovingScheduleTimeCard}  ${className}`}
+        className={`${styles.MovingScheduleTimeCard} ${className}`}
         onClick={handleToggle}
         aria-expanded={isOpen}
       >
