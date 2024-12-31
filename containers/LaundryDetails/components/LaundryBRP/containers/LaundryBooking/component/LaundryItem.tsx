@@ -8,31 +8,38 @@ import { Button } from "@/component/shared/Button";
 import { AiOutlinePlus } from "react-icons/ai";
 
 interface PredefinedItems {
-  [key: string]: number; // Clothing types (e.g., Shirts, Pants) and their quantities
+  [key: string]: number;
 }
 
 interface CustomProperty {
-  name: string; // Name of the custom item
-  quantity: number; // Quantity of the custom item
+  name: string;
+  quantity: number;
 }
 
 interface BookingData {
-  predefinedItems: PredefinedItems; // Predefined laundry items
-  customProperties: CustomProperty[]; // Array of custom properties
-  schedule: string; // Laundry schedule
+  predefinedItems: PredefinedItems;
+  customProperties: CustomProperty[];
+  schedule: {
+    pickupDate: string;
+    pickupTime: string;
+    deliveryDate: string;
+    deliveryTime: string;
+  };
 }
 
 export const LaundryItem = () => {
-  // State to manage the visibility of the LaundryPropertyContainer
   const [isAddPropertyVisible, setAddPropertyVisible] = useState(false);
-
-  // State to manage booking data
   const [bookingData, setBookingData] = useState<BookingData>({
-    predefinedItems: {}, // Example: { Shirts: 2, Pants: 3 }
-    customProperties: [], // Example: [{ name: "Custom1", quantity: 2 }]
-    schedule: "", // Example: "Morning"
+    predefinedItems: {},
+    customProperties: [],
+    schedule: {
+      pickupDate: "",
+      pickupTime: "8:00 AM",
+      deliveryDate: "",
+      deliveryTime: "1:00 PM",
+    },
   });
-  // Retrieve booking data from local storage on mount
+
   useEffect(() => {
     const storedData = localStorage.getItem("laundryBookingData");
     if (storedData) {
@@ -40,48 +47,58 @@ export const LaundryItem = () => {
     }
   }, []);
 
-  // Save booking data to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem("laundryBookingData", JSON.stringify(bookingData));
+    console.log("Current booking data:", bookingData); // Log booking data whenever it changes
   }, [bookingData]);
 
-  // Toggle visibility when the button is clicked
   const handleToggleAddProperty = () => {
     setAddPropertyVisible((prev) => !prev);
   };
 
-  // Validate booking data before "sending"
+  const handleScheduleChange = (newSchedule: {
+    pickupDate: string;
+    pickupTime: string;
+    deliveryDate: string;
+    deliveryTime: string;
+  }) => {
+    setBookingData((prevData) => ({
+      ...prevData,
+      schedule: newSchedule,
+    }));
+  };
+
   const validateBookingData = () => {
     const { predefinedItems, customProperties, schedule } = bookingData;
-
-    // Ensure at least one item has a quantity > 0
     const hasItems =
       Object.values(predefinedItems).some((qty) => qty > 0) ||
       customProperties.some((prop) => prop.quantity > 0);
-
-    // Ensure schedule is selected
-    return hasItems && schedule !== "";
+    return (
+      hasItems &&
+      schedule.pickupDate &&
+      schedule.pickupTime &&
+      schedule.deliveryDate &&
+      schedule.deliveryTime
+    );
   };
 
-  // Handle "Send" button click
   const handleSend = () => {
     if (!validateBookingData()) {
       alert("Please complete all required fields.");
       return;
     }
-
-    // Simulate a successful booking process
-    console.log("Booking data sent successfully:", bookingData);
+    console.log("Booking data sent successfully:", bookingData); // Log booking data on send
     alert("Booking request processed successfully!");
-
-    // Clear local storage after sending
     localStorage.removeItem("laundryBookingData");
-
-    // Reset booking data state
     setBookingData({
       predefinedItems: {},
       customProperties: [],
-      schedule: "",
+      schedule: {
+        pickupDate: "",
+        pickupTime: "8:00 AM",
+        deliveryDate: "",
+        deliveryTime: "1:00 PM",
+      },
     });
   };
 
@@ -112,7 +129,10 @@ export const LaundryItem = () => {
           </div>
         )}
 
-        <LaundrySchedule />
+        <LaundrySchedule
+          schedule={bookingData.schedule}
+          setSchedule={handleScheduleChange}
+        />
         <div className={styles.Laundry_ItemsDescription}>
           <ItemsDescription />
         </div>

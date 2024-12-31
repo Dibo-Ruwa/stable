@@ -11,7 +11,6 @@ export const AddProperty = () => {
     { id: 2, editing: false },
   ]);
 
-  // Handle input edit
   const handleEdit = (id: number) => {
     setProperties((prev) =>
       prev.map((property) =>
@@ -20,16 +19,22 @@ export const AddProperty = () => {
     );
   };
 
-  // Handle removing a property card
   const handleRemove = (id: number) => {
-    setProperties((prev) => prev.filter((property) => property.id !== id));
+    setProperties((prev) => {
+      const updatedProperties = prev.filter((property) => property.id !== id);
+      console.log("Updated properties after removal:", updatedProperties); // Log properties after removal
+      return updatedProperties;
+    });
   };
 
-  // Handle adding a new property card
   const handleAddMore = () => {
     const newId =
       properties.length > 0 ? properties[properties.length - 1].id + 1 : 1;
-    setProperties((prev) => [...prev, { id: newId, editing: false }]);
+    setProperties((prev) => {
+      const updatedProperties = [...prev, { id: newId, editing: false }];
+      console.log("Updated properties after adding more:", updatedProperties); // Log properties after adding
+      return updatedProperties;
+    });
   };
 
   return (
@@ -46,7 +51,7 @@ export const AddProperty = () => {
 
             <div
               className={styles.AddPropertyEditNameAndCounter}
-              onChange={() => handleEdit(property.id)} // Trigger edit detection
+              onChange={() => handleEdit(property.id)}
             >
               <EditName />
               <PropertyCounter />

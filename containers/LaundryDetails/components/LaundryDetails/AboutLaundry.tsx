@@ -198,7 +198,7 @@ export const AboutLaundry = () => {
               </p>
             </div>
             <div className={styles.OurLaundryServiceContainer}>
-              <p>Our Services</p>
+              <p className={styles.OurLaundryServiceContainerTitle}>Our Services</p>
 
               <div className={styles.OurLaundryServiceCards}>
                 <div className={styles.OurLaundryServiceCard}>
