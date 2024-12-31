@@ -31,18 +31,19 @@
 }
 
 .active .BookingReviewsPostsTabText {
-  color: #27a124;
+  color: #2a2a2a;
 }
+
 @media screen and (max-width: 1024px) {
   .BookingReviewsPostsTabs {
     background: #ffffff;
-    padding: 0.2rem;
+    padding: 0.5rem 0.8rem;
     border-radius: 4px;
   }
 
   .BookingReviewsPostsTab {
-    padding: 0.7rem;
-    width: 21%;
+    padding: 0.5rem;
+    width: 28%;
     display: flex;
     justify-content: center;
     align-items: center;

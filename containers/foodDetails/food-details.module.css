@@ -3,7 +3,7 @@
 }
 .food_details_frame {
   margin: auto;
-  margin-top: 6rem;
+  margin-top: 3rem;
   width: min(93%, 1440px);
 }
 
@@ -22,7 +22,7 @@
   flex-basis: 100%;
 }
 
-.df_cs_check{
+/* .df_cs_check{
   /* flex-basis: 30%; */
   
-}
+/* } */

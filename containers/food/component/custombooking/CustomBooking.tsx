@@ -3,15 +3,11 @@ import "./custombooking.css";
 import { CustomBookingModal } from "./CustomBookingModal";
 
 interface CustomBookingProps {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
   activeButton: string;
   setActiveButton: (label: string) => void;
 }
 
 const CustomBooking: React.FC<CustomBookingProps> = ({
-  searchQuery,
-  setSearchQuery,
   activeButton,
   setActiveButton,
 }) => {
@@ -21,10 +17,6 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
     setActiveButton(label);
   };
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-  };
-
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -32,6 +24,16 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
   const closeModal = () => {
     setIsModalOpen(false);
   };
+
+  // Define the food categories
+  const foodCategories = [
+    { value: "swallow", label: "Swallow" },
+    { value: "drinks", label: "Drinks" },
+    { value: "protein", label: "Protein" },
+    { value: "rice_and_grain", label: "Rice and Grain" },
+    { value: "snacks", label: "Snacks and Fries" },
+    { value: "extras", label: "Extras" },
+  ];
 
   return (
     <div className="custombooking_container">
@@ -50,21 +52,20 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
               </button>
             ))}
           </div>
-          <div className="custombooking-search_box">
-            <input
-              type="text"
-              placeholder="Search here"
-              required
-              className="custombooking-search_input"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-            <img
-              src="/images/search-normal.svg"
-              alt="search-normal"
-              className="custombooking-search_img"
-            />
+          <div className="min-buttons">
+            {foodCategories.map((category) => (
+              <button
+                key={category.value}
+                className={`min-button ${
+                  activeButton === category.label ? "active" : ""
+                }`}
+                onClick={() => handleButtonClick(category.label)}
+              >
+                {category.label}
+              </button>
+            ))}
           </div>
+         
         </div>
         <button type="button" className="custombooking-btn" onClick={openModal}>
           Custom Booking

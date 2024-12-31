@@ -103,7 +103,7 @@ export const LaundryItem = () => {
   };
 
   return (
-    <div className={styles.LaundryBookingContainer}>
+    <form className={styles.LaundryBookingContainer}>
       <div className={styles.LaundryItemContainer}>
         <div className={styles.LaundryItemChoices}>
           <LaundryItemsGroup />
@@ -142,6 +142,6 @@ export const LaundryItem = () => {
           className={styles.LaundryDoneButton}
         />
       </div>
-    </div>
+    </form>
   );
 };

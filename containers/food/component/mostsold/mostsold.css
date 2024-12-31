@@ -19,7 +19,7 @@ p.mostsold_title {
 
 .mostsold-cards {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   width: 100%;
   flex-wrap: wrap;
   scroll-snap-type: x mandatory;
@@ -28,8 +28,8 @@ p.mostsold_title {
 }
 
 .mostsold-card {
-  width: 100%;
-  flex: 1 1 15rem;
+  width: 290px;
+  /* flex: 1 1 15rem; */
   scroll-snap-align: center;
   box-sizing: border-box;
   background-color: #fff;
@@ -215,11 +215,11 @@ img.mostsold-sale_img {
   svg.mostsold-card_timer-icon {
     width: 14px;
     height: 14px;
-}
+  }
 
-a.mostsold-card_prize-link {
+  a.mostsold-card_prize-link {
     width: 100px;
-}
+  }
 }
 /* @media (max-width: 768px) {
   .mostsold-card {
