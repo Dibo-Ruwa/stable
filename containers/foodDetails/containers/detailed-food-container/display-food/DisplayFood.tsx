@@ -69,7 +69,7 @@ export const DisplayFood = () => {
       <DisplayImg>
         <OnDisplayImg src="/images/Frame 2610163.png" alt="on display" />
       </DisplayImg>
-      <SelectedImg>
+      {/* <SelectedImg>
         <PrevBtn />
         <OnSelectedImg
           src="/images/151e2d46640e246f42f769231cc76bab.png"
@@ -92,7 +92,7 @@ export const DisplayFood = () => {
           alt="on selected"
         />
         <NextBtn />
-      </SelectedImg>
+      </SelectedImg> */}
       <AboutFood />
       <CTADelivery />
     </Container>

@@ -40,8 +40,8 @@ const Food: React.FC<FoodProps> = ({ params }) => {
         setActiveButton={setActiveButton}
       />
       <MostSold id={id} searchQuery={searchQuery} activeButton={activeButton} />
-      <MinsMeals searchQuery={searchQuery} activeButton={activeButton} />
-      <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} />
+      {/* <MinsMeals searchQuery={searchQuery} activeButton={activeButton} /> */}
+      {/* <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} /> */}
     </div>
   );
 };

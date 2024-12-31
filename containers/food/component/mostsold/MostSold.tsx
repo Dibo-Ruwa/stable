@@ -103,7 +103,7 @@ const MostSold: React.FC<MostSoldProps> = ({
             );
           })}
         </div>
-        <div className="sale-imgs-container">
+        {/* <div className="sale-imgs-container">
           {DiscountSale.map((item, index) => (
             <div className="sale-imgs" key={index}>
               <img
@@ -113,7 +113,7 @@ const MostSold: React.FC<MostSoldProps> = ({
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

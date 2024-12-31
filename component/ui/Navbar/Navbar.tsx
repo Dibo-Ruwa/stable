@@ -299,15 +299,15 @@ const Navbar = () => {
                   <button
                     type="button"
                     style={{ textDecoration: "none", color: "var(--primary)" }}
-                    onClick={() => setIsCartDropdownOpen((prev) => !prev)}
+                    onClick={() => router.push('/food')}
                   >
                     <FaBagShopping className="cart_icon" />
                   </button>
-                  {isCartDropdownOpen && (
+                  {/* {isCartDropdownOpen && (
                     <div ref={cartDropdownRef} className="CartDropdown">
                       <CartDropdown />
                     </div>
-                  )}
+                  )} */}
                 </div>
               </>
             )}

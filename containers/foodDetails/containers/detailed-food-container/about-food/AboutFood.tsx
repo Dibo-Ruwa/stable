@@ -27,7 +27,7 @@ export const AboutFood = () => {
           </p>
           <div className={styles.ofd_lr}>
             <div className={styles.ofd}>Offers Free Delivery</div>
-            <div className={styles.lr}>10 Liters remaining</div>
+            {/* <div className={styles.lr}>10 Liters remaining</div> */}
           </div>
           <AdditionBtn />
         </div>
