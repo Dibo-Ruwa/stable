@@ -1,10 +1,10 @@
 "use client";
-
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useParams, useSearchParams } from "next/navigation";
 import { FoodOrderDetails } from "./components/FoodOrderDetails";
 import { ServiceOrderDetails } from "./components/ServiceOrderDetails";
+import useQuote from "@/hooks/useQuote";
 
 const OrderDetailsContainer = styled.div`
   max-width: 1200px;
@@ -15,14 +15,21 @@ const OrderDetailsContainer = styled.div`
 const OrderPage = () => {
   const params = useParams();
   const searchParams = useSearchParams();
-  const orderType = searchParams.get('type'); // Get type from URL query parameter
+  const orderType = searchParams.get('type');
+  const { quote, getQuoteById } = useQuote();
+
+  useEffect(() => {
+    if (params.id) {
+      getQuoteById(params.id as string);
+    }
+  }, [params.id]);
 
   return (
     <OrderDetailsContainer>
       {orderType === 'order' ? (
         <FoodOrderDetails orderId={params.id as string} />
       ) : (
-        <ServiceOrderDetails orderId={params.id as string} />
+        <ServiceOrderDetails orderId={params.id as string} quote={quote} />
       )}
     </OrderDetailsContainer>
   );

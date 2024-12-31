@@ -164,7 +164,7 @@ const SignIn: React.FC<ISignInProps> = () => {
             Don't have an account?
             <Link href="/sign-up">Sign up</Link>
           </p>
-          <Link href="/account-recovery">Forgot Password?</Link>
+          <Link href="/forgot-password">Forgot Password?</Link>
         </Footer>
       </Wrapper>
     </Container>

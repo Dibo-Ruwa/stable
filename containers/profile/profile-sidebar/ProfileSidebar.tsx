@@ -11,6 +11,8 @@ import { LiaAwardSolid } from "react-icons/lia";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { MdRestaurantMenu } from "react-icons/md";
+import useAuth from "@/hooks/useAuth";
+
 
 interface MenuItem {
   icon: JSX.Element;
@@ -198,11 +200,18 @@ const ProfileSidebarRightIcon = styled(LiaAngleRightSolid)<{ active: boolean }>`
 export const ProfileSidebar: React.FC = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
   const pathname = usePathname();
+  const { session, userUpdate } = useAuth();
+
+  console.log(session?.user);
+
+  const firstName = session?.user?.firstName;
+  const lastName = session?.user?.lastName;
+  const email = session?.user?.email;
 
   const profileInfo = {
     icon: <ProfileIcon />,
-    name: "Kelivin Chikezie",
-    email: "chikeziekelivin@gmial.com",
+    name: `${firstName} ${lastName}`,
+    email: email,
     href: "/profile",
   };
 

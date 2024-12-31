@@ -99,13 +99,13 @@ export const AboutMoving = () => {
                 className={styles.coverImg}
               />
             </div>
-            <div className={styles.restProfileImage}>
+            {/* <div className={styles.restProfileImage}>
               <img
                 src="/images/Ellipse 92.png"
                 alt=""
                 className={styles.restProfileImg}
               />
-            </div>
+            </div> */}
           </div>
           <div className={styles.aboutRestaurantContainer}>
             <div className={styles.NRSContent}>

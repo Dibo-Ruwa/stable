@@ -1,166 +1,240 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
-import { FaStar } from "react-icons/fa";
 import { IoMdStopwatch } from "react-icons/io";
-import { LuPhone } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
+import { FaBoxes, FaMoneyBillWave } from "react-icons/fa";
+import PaymentButton from "@/component/paymentButton/PayButton";
+import useOrder from "@/hooks/useOrder";
+import { nanoid } from "nanoid";
 
-const OrderHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
+const Container = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
 `;
 
-const OrderInfo = styled.div`
-  h1 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .order-status {
+const Card = styled.div`
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 50vh;
+`;
+
+const CardHeader = styled.div`
+  background: #f8fafc;
+  padding: 2rem;
+  border-bottom: 1px solid #eee;
+`;
+
+const CardBody = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #eee;
+  flex: 1;
+`;
+
+const PaymentSection = styled.div`
+  background: white;
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .amount {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #4CAF50;
-    font-weight: 500;
+    font-size: 1.2rem;
+    color: #1a1a1a;
+    
+    svg {
+      color: #666;
+    }
+  }
+
+  .btn {
+    button {
+      background: var(--primary);
+      font-size: 14px;
+      padding: 8px 20px;
+      border-radius: 8px;
+    }
   }
 `;
 
-const ServiceDetails = styled.div`
+const MainInfo = styled.div`
   background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+
+  h1 {
+    font-size: 1.3rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: ${props => props.isPaid ? '#e8f5e9' : '#fff3e0'};
+    color: ${props => props.isPaid ? '#2e7d32' : '#f57c00'};
+  }
 `;
 
-const ProviderInfo = styled.div`
+const ServiceInfo = styled.div`
+  background: white;
+  padding: 1.5rem;
+`;
+
+const InfoSection = styled.div`
+  margin-bottom: 1rem;
+
+  .label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .value {
+    color: #1a1a1a;
+  }
+`;
+
+const ItemsGrid = styled.div`
   display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #eee;
-  
-  .provider-image {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-  
-  .provider-details {
-    flex: 1;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  .item {
+    background: #f1f5f9;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #475569;
     
-    h3 {
-      margin-bottom: 0.5rem;
-    }
-    
-    .rating {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      color: #FFA500;
-      margin-bottom: 0.5rem;
-    }
-    
-    .contact {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #666;
+    span {
+      font-weight: 500;
+      color: #333;
+      margin-left: 0.25rem;
     }
   }
 `;
 
-const ServiceStatus = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 2rem;
-  padding: 1rem;
-  background: #f8f8f8;
-  border-radius: 8px;
-  
-  .status-item {
-    text-align: center;
-    
-    .label {
-      color: #666;
-      font-size: 0.9rem;
-    }
-    
-    .value {
-      font-weight: 600;
-      margin-top: 0.25rem;
-    }
-  }
-`;
+export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({ orderId, quote }) => {
+  const { openModal, handleRequestPayment } = useOrder();
+  const referenceId = nanoid(8);
 
-interface ServiceOrderDetailsProps {
-  orderId: string;
-}
+  const onSuccess = () => {
+    handleRequestPayment(referenceId, orderId);
+  };
 
-export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({ orderId }) => {
+  const onClose = () => {
+    console.log("closed");
+  };
+
+  if (!quote) return (
+    <Container>
+      <Card style={{ display: 'block', padding: '2rem', textAlign: 'center' }}>
+        <IoMdStopwatch style={{ fontSize: '2rem', color: '#666', marginBottom: '1rem' }} />
+        <h2>Loading service details...</h2>
+      </Card>
+    </Container>
+  );
+
   return (
-    <>
-      <OrderHeader>
-        <OrderInfo>
-          <h1>Service Order Details</h1>
-          <span className="order-id">Order #{orderId}</span>
-          <div className="order-status">
-            <IoMdStopwatch />
-            <span>In Progress</span>
+    <Container>
+      <Card>
+        <CardHeader>
+          <h1>{quote.type.charAt(0).toUpperCase() + quote.type.slice(1)} Service</h1>
+          <div className="status-badge">
+            {quote.status} • {quote.isPaid ? "Paid" : "Pending Payment"}
           </div>
-        </OrderInfo>
-      </OrderHeader>
+        </CardHeader>
 
-      <ServiceDetails>
-        <h2>Service Information</h2>
-        <p>Service Type: Moving Service</p>
-        <p>Scheduled Date: February 5, 2024</p>
-        <p>Time Slot: 2:00 PM - 4:00 PM</p>
-        <p>Address: 123 Customer Street, City</p>
-        
-        <ProviderInfo>
-          <div className="provider-image">
-            <Image
-              src="/images/provider-avatar.jpg"
-              alt="Service Provider"
-              fill
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-          <div className="provider-details">
-            <h3>Provider Name</h3>
-            <div className="rating">
-              <FaStar />
-              <span>4.8</span>
-            </div>
-            <div className="contact">
-              <LuPhone />
-              <span>+234 123 456 7890</span>
-            </div>
-          </div>
-        </ProviderInfo>
+        <CardBody>
+          <MainInfo isPaid={quote.isPaid}>
+            <InfoSection>
+              <div className="label">
+                <IoMdStopwatch />
+                Schedule
+              </div>
+              <div className="value">
+                {new Date(quote.date).toLocaleDateString()}
+                {quote.pickUpTime && ` at ${quote.pickUpTime}`}
+              </div>
+            </InfoSection>
 
-        <ServiceStatus>
-          <div className="status-item">
-            <div className="label">Order Status</div>
-            <div className="value">In Progress</div>
-          </div>
-          <div className="status-item">
-            <div className="label">Payment Status</div>
-            <div className="value">Paid</div>
-          </div>
-          <div className="status-item">
-            <div className="label">Amount</div>
-            <div className="value">₦15,000</div>
-          </div>
-        </ServiceStatus>
-      </ServiceDetails>
-    </>
+            {quote.type === 'moving' && (
+              <InfoSection>
+                <div className="label">
+                  <IoLocationOutline />
+                  Route
+                </div>
+                <div className="value">
+                  From: {quote.currentLocation}<br />
+                  To: {quote.deliveryLocation}
+                </div>
+              </InfoSection>
+            )}
+
+            {(quote.type === 'cleaning' || quote.type === 'laundry') && (
+              <InfoSection>
+                <div className="label">
+                  <IoLocationOutline />
+                  Service Location
+                </div>
+                <div className="value">{quote.from || quote.user.address}</div>
+              </InfoSection>
+            )}
+          </MainInfo>
+
+          <ServiceInfo>
+            <InfoSection>
+              <div className="label">
+                <FaBoxes />
+                Service Items
+              </div>
+              <ItemsGrid>
+                {quote.items.map(item => (
+                  <div key={item._id} className="item">
+                    {item.name}<span>×{item.amount}</span>
+                  </div>
+                ))}
+              </ItemsGrid>
+            </InfoSection>
+          </ServiceInfo>
+        </CardBody>
+
+        {!quote.isPaid  && (
+          <PaymentSection>
+            <div className="amount">
+              <FaMoneyBillWave />
+              Total: ₦{quote.total}
+            </div>
+            <div className="btn">
+              <PaymentButton
+                totalPrice={quote.total}
+                openModal={openModal}
+                buttonText="Pay Now"
+                color="primary"
+                onSuccess={onSuccess}
+                onClose={onClose}
+                referenceId={referenceId}
+              />
+            </div>
+          </PaymentSection>
+        )}
+      </Card>
+    </Container>
   );
 };
