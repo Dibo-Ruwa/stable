@@ -90,7 +90,7 @@ const useAuth = (): AuthHook => {
 
       openModal("success", res.data.message);
       setTimeout(() => {
-        router.push("/signin");
+        router.push("/sign-in");
       }, 3000);
     } catch (error: any) {
       // console.log(error.response.data);
@@ -112,7 +112,7 @@ const useAuth = (): AuthHook => {
 
       openModal("success", res.data.message);
       setTimeout(() => {
-        router.push("/signin");
+        router.push("/sign-in");
       }, 3000);
     } catch (error: any) {
       // console.log(error.response.data);

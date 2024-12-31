@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { CiLocationOn } from "react-icons/ci";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import { useLocation } from "@/context/LocationProvider";
 
 // Styled components
 const AddressContainer = styled.div`
@@ -85,6 +88,12 @@ interface MovingBookingLocationProps {
   }) => void;
 }
 
+interface CityData {
+  _id: string;
+  name: string;
+  regions: { _id: string; name: string }[];
+}
+
 export const MovingBookingLocation: React.FC<MovingBookingLocationProps> = ({
   onChange,
 }) => {
@@ -92,10 +101,53 @@ export const MovingBookingLocation: React.FC<MovingBookingLocationProps> = ({
   const [currentCity, setCurrentCity] = useState<string>("");
   const [deliveryAddress, setDeliveryAddress] = useState<string>("");
   const [deliveryCity, setDeliveryCity] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [availableRegions, setAvailableRegions] = useState<string[]>([]);
+
+  const { location } = useLocation();
+
+  const fetchStatesAndRegions = async (state: string | null) => {
+    if (!state) {
+      toast.error("State information is missing.");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.get(
+        `${
+          process.env.NEXT_PUBLIC_ADMIN_URL ||
+          "https://diboruwa-admin-test.vercel.app"
+        }/api/locations`
+      );
+      const { cities } = response.data;
+
+      const regions = cities.find((city: CityData) => city.name === state)
+        ?.regions.map((region: { name: string }) => region.name) || [];
+
+      setAvailableRegions(regions);
+    } catch (error) {
+      setError("Failed to fetch regions.");
+      toast.error("Failed to load region data.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const currentLocation = `${currentAddress}${currentCity ? ", " + currentCity : ""}`;
-    const deliveryLocation = `${deliveryAddress}${deliveryCity ? ", " + deliveryCity : ""}`;
+    fetchStatesAndRegions(location.state);
+  }, [location.state]);
+
+  useEffect(() => {
+    const currentLocation = `${currentAddress}${
+      currentCity ? ", " + currentCity : ""
+    }`;
+    const deliveryLocation = `${deliveryAddress}${
+      deliveryCity ? ", " + deliveryCity : ""
+    }`;
     onChange({ currentLocation, deliveryLocation });
   }, [currentAddress, currentCity, deliveryAddress, deliveryCity, onChange]);
 
@@ -127,10 +179,14 @@ export const MovingBookingLocation: React.FC<MovingBookingLocationProps> = ({
               name="currentCity"
               onChange={(e) => setCurrentCity(e.target.value)}
               value={currentCity}
+              disabled={isLoading}
             >
               <option value="">Select</option>
-              <option value="City 1">Region 1</option>
-              <option value="City 2">Region 2</option>
+              {availableRegions.map((region, index) => (
+                <option key={index} value={region}>
+                  {region}
+                </option>
+              ))}
             </Select>
           </div>
         </AddressCard>
@@ -159,10 +215,14 @@ export const MovingBookingLocation: React.FC<MovingBookingLocationProps> = ({
               name="deliveryCity"
               onChange={(e) => setDeliveryCity(e.target.value)}
               value={deliveryCity}
+              disabled={isLoading}
             >
               <option value="">Select</option>
-              <option value="Region 1">Region 1</option>
-              <option value="Region 2">Region 2</option>
+              {availableRegions.map((region, index) => (
+                <option key={index} value={region}>
+                  {region}
+                </option>
+              ))}
             </Select>
           </div>
         </AddressCard>

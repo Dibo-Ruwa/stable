@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 export const NavbarContainer = styled.section`
   background: rgb(255, 255, 255);
@@ -228,5 +228,46 @@ export const Cta = styled.a`
     font-size: 14px;
     display: flex;
     justify-content: center;
+  }
+`;
+
+export const slideIn = keyframes`
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
+
+export const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`;
+
+export const Toast = styled.div<{ $isVisible: boolean }>`
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2ecc71;
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.2);
+  z-index: 1000;
+  animation: ${(props) => (props.$isVisible ? slideIn : fadeOut)} 0.3s
+    ease-in-out;
+
+  svg {
+    font-size: 1.2rem;
   }
 `;

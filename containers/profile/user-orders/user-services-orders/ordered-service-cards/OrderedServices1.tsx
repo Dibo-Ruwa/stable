@@ -14,18 +14,21 @@ interface UserOrdersCardProps {
 
 export const OrderedServices1: React.FC = () => {
   return (
-    <div className="user_cards_container">
+    <div className="user_cards_container" style={{width: "100%"}}>
       {OrderedServicesData1.map((orderedService: OrderedServicesDataType) => {
         if (orderedService.foodTitle) {
-          // Food card
+          // Service card
           return (
             <div
-              className={` user_cards Service_food_card`}
+              className={`user_cards Service_food_card`}
               key={orderedService._id}
+              style={{ width: "100%" }}
             >
-              <UserOrdersCard className="user_card" 
+              <UserOrdersCard 
+              className="user_card" 
               id={orderedService._id} 
               type={orderedService?.type}
+              
               >
                 <div className="card_image">
                   <img
@@ -87,7 +90,7 @@ export const OrderedServices1: React.FC = () => {
               className={`user_cards Service_restaurant_card`}
               key={orderedService._id}
             >
-              <UserOrdersCard className="user_card"  
+              {/* <UserOrdersCard className="user_card"  
               id={orderedService._id} 
               type={orderedService?.type}>
                 <div className="card_image">
@@ -126,7 +129,7 @@ export const OrderedServices1: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </UserOrdersCard>
+              </UserOrdersCard> */}
             </div>
           );
         } else {
@@ -136,7 +139,7 @@ export const OrderedServices1: React.FC = () => {
               className={`user_cards Service_owner_card`}
               key={orderedService._id}
             >
-              <UserOrdersCard className="user_card"
+              {/* <UserOrdersCard className="user_card"
                  id={orderedService._id} 
                  type={orderedService?.type}
               >
@@ -162,12 +165,12 @@ export const OrderedServices1: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </UserOrdersCard>
+              </UserOrdersCard> */}
             </div>
           );
         }
       })}
-      <ViewMoreBtn />
+      {/* <ViewMoreBtn /> */}
     </div>
   );
 };

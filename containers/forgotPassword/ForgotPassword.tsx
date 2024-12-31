@@ -81,7 +81,7 @@ const ForgotPassword = () => {
       <Form onSubmit={handleSubmit}>
         <Header>
           <h3>Forgot your Password</h3>
-          <p>please enter your registered email to reset yor password.</p>
+          <p>Please enter your registered email to reset yor password.</p>
         </Header>
 
         <InputField>
