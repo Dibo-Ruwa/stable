@@ -154,10 +154,10 @@ export interface FoodData {
     }[];
   };
   discount: number;
-  extras: any[]; // Adjust this type based on what extras contain
+  extras: any[];
   createdAt: string;
   updatedAt: string;
   slug: string;
   __v: number;
-  id: string; // This seems to be a duplicate of _id, consider removing if not needed
+  id: string;
 }
