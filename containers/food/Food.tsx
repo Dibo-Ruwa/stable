@@ -13,8 +13,8 @@ interface FoodProps {
 
 const url = process.env.NEXT_PUBLIC_ADMIN_URL;
 
-const Food: React.FC<FoodProps> = ({ params }) => {
-  const { id } = params;
+const Food: React.FC<FoodProps> = () => {
+ 
   const { location } = useLocation();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -44,7 +44,7 @@ const Food: React.FC<FoodProps> = ({ params }) => {
         }
 
         setFoodData(data); // Set the original data (optional, if needed elsewhere)
-        console.log("Fetched food data:", data); // Log fetched data
+        // console.log("Fetched food data:", data); // Log fetched data
       } catch (error) {
         console.error("Error fetching food data:", error);
         setError("Failed to fetch food data");
@@ -68,7 +68,7 @@ const Food: React.FC<FoodProps> = ({ params }) => {
       />
       {!loading && (
         <MostSold
-          id={id}
+          
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           activeButton={activeButton}

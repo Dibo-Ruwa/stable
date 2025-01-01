@@ -35,6 +35,7 @@ p.mostsold_title {
   border-radius: 16px;
   text-decoration: none;
   /* border: 2px solid black; */
+  cursor: pointer;
   display: flex;
   flex-direction: column;
 }

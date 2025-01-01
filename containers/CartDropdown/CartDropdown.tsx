@@ -10,19 +10,30 @@ import Link from "next/link";
 import { Button } from "@/component/shared/Button";
 import "./CartDropdown.css";
 import { SelectCourier } from "./SelectCourier";
+import { FoodData } from "@/utils/types/types";
+import { useRouter } from "next/navigation";
+import { useFoodItem } from "@/context/FooItemProvider";
 
-export const CartDropdown = () => {
+interface CartDropdownProps {
+  selectedItem: FoodData | null; // Allow null
+}
+
+export const CartDropdown: React.FC<CartDropdownProps> = ({ selectedItem }) => {
+  const router = useRouter();
+  const { clearSelectedItem } = useFoodItem();
+
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isCardChecked, setIsCardChecked] = useState<boolean>(false);
   const [isCourierStep, setIsCourierStep] = useState<boolean>(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(true); // Track dropdown visibility
 
-   const handleModalClose = () => {
-     setIsCourierStep(false); // Reset to CartDropdown
-   };
+  const handleModalClose = () => {
+    setIsCourierStep(false); // Reset to CartDropdown
+  };
 
   const handleCheckoutClick = () => {
-    setIsCourierStep(true); // Open the courier step modal
+    setIsCourierStep(false); // Open the courier step modal
+    router.push(`/food/checkout`); // Navigate to the item's page
   };
 
   const handleCloseAll = () => {
@@ -30,39 +41,69 @@ export const CartDropdown = () => {
     setIsDropdownOpen(false); // Close the dropdown
   };
 
-  if (!isDropdownOpen) return null; // Hide dropdown when closed
-
+  // if (!isDropdownOpen) return null; // Hide dropdown when closed
+  if (!selectedItem) {
+    return(
+    <div>
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: "2rem",
+          height: '70px',
+          // background: '#565656'
+        }}
+      >
+        No item selected
+      </p>
+    </div>);
+  }
   return (
     <div className="CartDropdown_Container">
       {!isCourierStep ? (
         <>
           <div className="CartDropdown_checkAndClear">
-            <Checkbox
+            {/* <Checkbox
               label="Select All"
               checked={isAllChecked}
               onChange={setIsAllChecked}
               labelClassName="CartDropdown_label"
-            />
-            <button type="button" className="CartDropdown_Clear">
+            /> */}
+            <button
+              type="button"
+              onClick={clearSelectedItem}
+              className="CartDropdown_Clear"
+            >
               Clear
             </button>
           </div>
+
           <div className="CartDropdown_Cards">
             <div className="CartDropdown_Card">
               <Link href="/profile/or-ders" className="CartDropdown_CardTop">
                 <div className="CartDropdown_Details">
-                  <div className="CartDropdown_DetailsImage">
-                    <Image
-                      className="TheCartImage"
-                      src="/images/Frame 2610552.png"
-                      alt="Cart image"
-                      width={70}
-                      height={60}
-                    />
+                  <div
+                    style={{
+                      position: "relative",
+                    }}
+                  >
+                    {/* Reflection (mimic ::before pseudo-element) */}
+                    {/* <div
+                      className="CartDropdown_DetailsImage_dup "
+                    /> */}
+                    <div className="CartDropdown_DetailsImage">
+                      {/* Image */}
+                      <Image
+                        className="TheCartImage"
+                        src={selectedItem.imageUrl}
+                        alt={selectedItem.title}
+                        width={70}
+                        height={60}
+                      />
+                    </div>
                   </div>
                   <div className="CartTitleRatingANDTime">
                     <div className="CartTitleRating">
-                      <p className="CartTitle">Fried Rice</p>
+                      <p className="CartTitle">{selectedItem.title}</p>
                       <div className="CartRating_Content">
                         <FaStar className="CartRating_Star" />
                         <p className="CartRating_number">4.5</p>
@@ -70,13 +111,15 @@ export const CartDropdown = () => {
                     </div>
                     <div className="CartTime_Content">
                       <CiClock2 className="CartTime_Clock" />
-                      <p className="CartTime_ClockText">30mins</p>
+                      <p className="CartTime_ClockText">
+                        {selectedItem.prep_time}
+                      </p>
                     </div>
                   </div>
                 </div>
                 <div className="Cart_ODAmount">
                   <small className="Cart_OD">Offers Delivery</small>
-                  <p className="Cart_Amount">$40,000</p>
+                  <p className="Cart_Amount">₦{selectedItem.price}</p>
                 </div>
               </Link>
               <div className="CartDropdown_CardDown">

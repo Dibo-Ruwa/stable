@@ -4,9 +4,11 @@ import Link from "next/link";
 import { FoodData } from "@/utils/types/types";
 import { FaStar } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
+import { useFoodItem } from "@/context/FooItemProvider";// Import the hook
+import { useRouter } from "next/navigation";
 
 interface MostSoldProps {
-  id: string;
+ 
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   activeButton: string;
@@ -14,38 +16,47 @@ interface MostSoldProps {
 }
 
 const MostSold: React.FC<MostSoldProps> = ({
-  id,
+  
   foodData,
   searchQuery,
   setSearchQuery,
   activeButton,
 }) => {
-  const [visibleItems, setVisibleItems] = useState<FoodData[]>(foodData); // Initialize with foodData
+  const [visibleItems, setVisibleItems] = useState<FoodData[]>(foodData);
+  const { setSelectedItem } = useFoodItem(); // Use the hook
+  const router = useRouter();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
 
+   // Function to handle item click
+   const handleItemClick = (item: FoodData) => {
+    console.log(item)
+    setSelectedItem(item); // Save the selected item to context
+    router.push(`/food/checkout`); // Navigate to the item's page
+  };
+
+
   // Filter foodData based on activeButton and searchQuery
   useEffect(() => {
     let filteredData = foodData;
-  
-    // Filter by activeButton (category)
+
     if (activeButton !== "all") {
       filteredData = filteredData.filter((item) =>
         item.categories.includes(activeButton)
       );
     }
-  
-    // Filter by searchQuery (title)
+
     if (searchQuery) {
       filteredData = filteredData.filter((item) =>
         item.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-  
+
     setVisibleItems(filteredData);
-  }, [activeButton, searchQuery]); // Remove foodData from dependencies
+  }, [activeButton, searchQuery]);
+
   // Handle window resize for visible items
   useEffect(() => {
     const handleResize = () => {
@@ -60,70 +71,70 @@ const MostSold: React.FC<MostSoldProps> = ({
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [foodData]); // Add foodData as a dependency
+  }, [foodData]);
 
   return (
     <div>
       <section className="mostsold_container">
-      {visibleItems?.length === 0 ? (
-            <p 
+        {visibleItems?.length === 0 ? (
+          <p
             style={{
-              textAlign: 'center',
-              fontSize: '30px',
+              textAlign: "center",
+              fontSize: "30px",
               fontWeight: 600,
-              marginTop: '20px',
+              marginTop: "20px",
             }}
-            >No  meal found</p>
-          ) : (
-        <div className="mostsold-frame">
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                maxWidth: "450px",
-                padding: "1rem",
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Search here"
+          >
+            No meal found
+          </p>
+        ) : (
+          <div className="mostsold-frame">
+            <div style={{ display: "flex", justifyContent: "flex-end" }}>
+              <div
                 style={{
-                  height: "42px",
-                  flexShrink: 0,
-                  borderRadius: "4px",
-                  paddingLeft: "1rem",
-                  paddingRight: "2.5rem", // Tailwind's pr-10
-                  border: "1px solid #ebebeb",
-                  backgroundColor: "#fcfcfc",
-                  outline: "none",
+                  position: "relative",
                   width: "100%",
+                  maxWidth: "450px",
+                  padding: "1rem",
                 }}
-                value={searchQuery}
-                onChange={handleSearchChange}
-              />
-              <img
-                src="/images/search-normal.svg"
-                alt="search-normal"
-                style={{
-                  position: "absolute",
-                  right: "2rem",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
+              >
+                <input
+                  type="text"
+                  placeholder="Search here"
+                  style={{
+                    height: "42px",
+                    flexShrink: 0,
+                    borderRadius: "4px",
+                    paddingLeft: "1rem",
+                    paddingRight: "2.5rem", // Tailwind's pr-10
+                    border: "1px solid #ebebeb",
+                    backgroundColor: "#fcfcfc",
+                    outline: "none",
+                    width: "100%",
+                  }}
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                />
+                <img
+                  src="/images/search-normal.svg"
+                  alt="search-normal"
+                  style={{
+                    position: "absolute",
+                    right: "2rem",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    width: "20px",
+                    height: "20px",
+                  }}
+                />
+              </div>
             </div>
-          </div>
-          {/* <p className="mostsold_title">Most Sold Items</p> */}
-      
             <div className="mostsold-cards">
               {visibleItems.map((item) => (
-                <Link
-                  href={`./food/${item.slug}`}
+                <div
                   key={item._id}
                   className="mostsold-card"
+                  onClick={() => handleItemClick(item)}// Save the selected item
                 >
                   <div className="mostsold-card_food-img">
                     <img
@@ -147,13 +158,14 @@ const MostSold: React.FC<MostSoldProps> = ({
                         {/* Display preparation time */}
                       </div>
                     </div>
-                    <p 
-                    // className="small.mostsold-card_remender"
-                    style={{
-                      fontSize: '14px',
-                      color: '#8F8F8F',
-                    }}
-                    >{item?.vendor?.name}</p>
+                    <p
+                      style={{
+                        fontSize: "14px",
+                        color: "#8F8F8F",
+                      }}
+                    >
+                      {item?.vendor?.name}
+                    </p>
                     <div className="mostsold-card_prize">
                       <p className="mostsold-card_prize-text">₦{item.price}</p>
                       <button
@@ -164,11 +176,11 @@ const MostSold: React.FC<MostSoldProps> = ({
                       </button>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))}
             </div>
-        </div>
-    )}
+          </div>
+        )}
       </section>
     </div>
   );

@@ -20,7 +20,7 @@
   @apply text-black text-base font-normal leading-normal not-italic font-poppins;
 }
 .CartDropdown_Clear {
-  @apply text-redText;
+  @apply text-redText ml-auto;
 }
 
 .CartDropdown_Cards {
@@ -39,11 +39,18 @@
   @apply flex justify-center items-center gap-[8px];
 }
 
-/* .CartDropdown_DetailsImage {
+
+
+.CartDropdown_DetailsImage {
+  @apply relative flex bg-green-500 justify-center  items-center gap-[8px] overflow-hidden rounded-[10px];
 }
 
+.CartDropdown_DetailsImage_dup {
+  @apply absolute bg-red-500 top-0 h-[48px] w-[70px] -left-1 transform scale-y-100 rotate-[-25deg];
+}
 .TheCartImage {
-} */
+ @apply object-cover
+}
 
 .CartTitleRatingANDTime {
   @apply flex flex-col items-start gap-[14px];
