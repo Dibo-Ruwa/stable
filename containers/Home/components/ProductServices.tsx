@@ -61,7 +61,7 @@ const MobileView: React.FC = () => {
               paddingBottom: "10px",
               borderRadius: 50,
               // margin: "8px auto",
-              overflow: "hidden",
+              // overflow: "hidden",
               // background:
               //   "linear-gradient(0deg, #E6E6E6 0%, #E6E6E6 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%)",
               display: "flex",
@@ -94,7 +94,7 @@ const MobileView: React.FC = () => {
               }}
             >
               <img
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%" }}
                 src={selectedData?.map}
                 alt="Map"
               />
