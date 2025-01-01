@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./mostsold.css";
 import Link from "next/link";
 import { FoodData } from "@/utils/types/types";
+import { FaStar } from "react-icons/fa";
+import { FaBagShopping } from "react-icons/fa6";
 
 interface MostSoldProps {
   id: string;
@@ -24,12 +26,33 @@ const MostSold: React.FC<MostSoldProps> = ({
     setSearchQuery(event.target.value);
   };
 
+  // Filter foodData based on activeButton and searchQuery
+  useEffect(() => {
+    let filteredData = foodData;
+  
+    // Filter by activeButton (category)
+    if (activeButton !== "all") {
+      filteredData = filteredData.filter((item) =>
+        item.categories.includes(activeButton)
+      );
+    }
+  
+    // Filter by searchQuery (title)
+    if (searchQuery) {
+      filteredData = filteredData.filter((item) =>
+        item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+  
+    setVisibleItems(filteredData);
+  }, [activeButton, searchQuery]); // Remove foodData from dependencies
+  // Handle window resize for visible items
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        setVisibleItems(foodData.slice(0, 4)); // Show first 4 items on large screens
+        // setVisibleItems((prev) => prev.slice(0, 4)); // Show first 4 items on large screens
       } else {
-        setVisibleItems(foodData); // Show all items on smaller screens
+        // setVisibleItems((prev) => prev); // Show all items on smaller screens
       }
     };
 
@@ -39,72 +62,115 @@ const MostSold: React.FC<MostSoldProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, [foodData]); // Add foodData as a dependency
 
-  // Filter items based on searchQuery and activeButton
-  const filteredItems = visibleItems?.filter((item) => {
-    const matchesSearch = item.title
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const matchesTime =
-      activeButton === "All" || item.categories.includes(activeButton);
-    return matchesSearch && matchesTime;
-  });
-
   return (
-    <section className="mostsold_container">
-      <div className="mostsold-frame">
-        <p className="mostsold_title">Most Sold Items</p>
-        <div className="custombooking-search_box">
-          <input
-            type="text"
-            placeholder="Search here"
-            required
-            className="custombooking-search_input"
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-          <img
-            src="/images/search-normal.svg"
-            alt="search-normal"
-            className="custombooking-search_img"
-          />
-        </div>
-        <div className="mostsold-cards">
-          {filteredItems.map((item) => (
-            <Link
-              href={`./food/${item.slug}`}
-              key={item._id}
-              className="mostsold-card"
+    <div>
+      <section className="mostsold_container">
+      {visibleItems?.length === 0 ? (
+            <p 
+            style={{
+              textAlign: 'center',
+              fontSize: '30px',
+              fontWeight: 600,
+              marginTop: '20px',
+            }}
+            >No  meal found</p>
+          ) : (
+        <div className="mostsold-frame">
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "450px",
+                padding: "1rem",
+              }}
             >
-              <div className="mostsold-card_food-img">
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  className="mostsold-card_img"
-                />
-              </div>
-              <div className="mostsold-card_content">
-                <div className="mostsold-card_context">
-                  <div className="mostsold-card_context-top">
-                    <small className="mostsold-card_title">{item.title}</small>
-                    <div className="mostsold-card_dot"></div>
-                    <small className="mostsold-card_rating">
-                      {item.price} {/* Display price instead of rating */}
-                    </small>
+              <input
+                type="text"
+                placeholder="Search here"
+                style={{
+                  height: "42px",
+                  flexShrink: 0,
+                  borderRadius: "4px",
+                  paddingLeft: "1rem",
+                  paddingRight: "2.5rem", // Tailwind's pr-10
+                  border: "1px solid #ebebeb",
+                  backgroundColor: "#fcfcfc",
+                  outline: "none",
+                  width: "100%",
+                }}
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              <img
+                src="/images/search-normal.svg"
+                alt="search-normal"
+                style={{
+                  position: "absolute",
+                  right: "2rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+            </div>
+          </div>
+          {/* <p className="mostsold_title">Most Sold Items</p> */}
+      
+            <div className="mostsold-cards">
+              {visibleItems.map((item) => (
+                <Link
+                  href={`./food/${item.slug}`}
+                  key={item._id}
+                  className="mostsold-card"
+                >
+                  <div className="mostsold-card_food-img">
+                    <img
+                      src={item.imageUrl}
+                      alt={item.title}
+                      className="mostsold-card_img"
+                    />
                   </div>
-                  <div className="mostsold-card_timer">
-                    <span>{item.prep_time}</span>{" "}
-                    {/* Display preparation time */}
+                  <div className="mostsold-card_content">
+                    <div className="mostsold-card_context">
+                      <div className="mostsold-card_context-top">
+                        <small className="mostsold-card_title">
+                          {item.title}
+                        </small>
+                        <div className="mostsold-card_dot"></div>
+                        <FaStar className="mostsold-card_star" />
+                        <small className="mostsold-card_rating">4.5</small>
+                      </div>
+                      <div className="mostsold-card_timer">
+                        <span>{item.prep_time}</span>{" "}
+                        {/* Display preparation time */}
+                      </div>
+                    </div>
+                    <p 
+                    // className="small.mostsold-card_remender"
+                    style={{
+                      fontSize: '14px',
+                      color: '#8F8F8F',
+                    }}
+                    >{item?.vendor?.name}</p>
+                    <div className="mostsold-card_prize">
+                      <p className="mostsold-card_prize-text">₦{item.price}</p>
+                      <button
+                        type="button"
+                        className="mostsold-card_prize-link"
+                      >
+                        <FaBagShopping className="mostsold-card_prize-icon" />
+                      </button>
+                    </div>
                   </div>
-                </div>
-                <div className="mostsold-card_prize">
-                  <p className="mostsold-card_prize-text">{item.price} NGN</p>
-                </div>
-              </div>
-            </Link>
-          ))}
+                </Link>
+              ))}
+            </div>
         </div>
-      </div>
-    </section>
+    )}
+      </section>
+    </div>
   );
 };
 

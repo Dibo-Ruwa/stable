@@ -1,5 +1,7 @@
 .custombooking_container {
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
+  /* background-color: #EAE1E1; */
+  background: #f8f8f8;
 }
 
 .custombooking_frame {
@@ -22,13 +24,14 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  overflow-x: auto;
 }
 
 button.min-button {
   display: flex;
-  width: 60.35px;
-  height: 41.521px;
-  padding: 3.415px;
+  width: fit-content;
+  /* height: 41.521px; */
+  padding: 6px 12px;
   justify-content: center;
   align-items: center;
   gap: 7.415px;
@@ -62,6 +65,20 @@ button.min-button {
   .custombooking-search_box {
     display: none;
   }
+
+  .custombooking_frame {
+    width: min(93%, 1440px);
+    /* margin: 0 auto; */
+    /* display: flex; */
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 1rem;
+    background: #fff;
+  }
+  
 }
 
 input.custombooking-search_input {

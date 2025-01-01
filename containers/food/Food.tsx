@@ -3,7 +3,7 @@ import axios from "axios";
 import Discount from "./component/discount/Discount";
 import CustomBooking from "./component/custombooking/CustomBooking";
 import MostSold from "./component/mostsold/MostSold";
-import { FoodData } from "@/utils/types/types";
+import { useLocation } from "@/context/LocationProvider";
 
 interface FoodProps {
   params: {
@@ -15,9 +15,12 @@ const url = process.env.NEXT_PUBLIC_ADMIN_URL;
 
 const Food: React.FC<FoodProps> = ({ params }) => {
   const { id } = params;
+  const { location } = useLocation();
+
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeButton, setActiveButton] = useState<string>("All");
-  const [foodData, setFoodData] = useState<FoodData[]>([]);
+  const [activeButton, setActiveButton] = useState<string>("all");
+  const [foodData, setFoodData] = useState([]);
+  const [filteredFoodData, setFilteredFoodData] = useState([]); // New state for filtered data
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
 
@@ -25,9 +28,23 @@ const Food: React.FC<FoodProps> = ({ params }) => {
     const fetchFoodData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get<FoodData[]>(`${url}/api/products`);
-        setFoodData(response.data);
-        console.log("Fetched food data:", response.data); // Log fetched data
+        const response = await axios.get(`${url}/api/products`);
+        const data = response.data?.data;
+
+        // Filter foodData based on location.state
+        if (location?.state) {
+          const filteredData = data.filter((item: { vendor: { branch: any[]; }; }) =>
+            item.vendor.branch.some(
+              (branch) => branch.location.city.name === location.state
+            )
+          );
+          setFilteredFoodData(filteredData); // Set filtered data
+        } else {
+          setFilteredFoodData(data); // If no location, use all data
+        }
+
+        setFoodData(data); // Set the original data (optional, if needed elsewhere)
+        console.log("Fetched food data:", data); // Log fetched data
       } catch (error) {
         console.error("Error fetching food data:", error);
         setError("Failed to fetch food data");
@@ -37,9 +54,9 @@ const Food: React.FC<FoodProps> = ({ params }) => {
     };
 
     fetchFoodData();
-  }, [url]);
+  }, [url, location?.state]); // Add location.state as a dependency
 
-  if (loading) return <div>Loading...</div>;
+  // if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
@@ -49,13 +66,17 @@ const Food: React.FC<FoodProps> = ({ params }) => {
         activeButton={activeButton}
         setActiveButton={setActiveButton}
       />
-      <MostSold
-        id={id}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        activeButton={activeButton}
-        foodData={foodData} // Pass the fetched food data
-      />
+      {!loading && (
+        <MostSold
+          id={id}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          activeButton={activeButton}
+          foodData={filteredFoodData} // Pass the filtered food data
+        />
+      )}
+      {/* <MinsMeals searchQuery={searchQuery} activeButton={activeButton} /> */}
+      {/* <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} /> */}
     </div>
   );
 };
