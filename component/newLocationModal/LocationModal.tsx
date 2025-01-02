@@ -18,6 +18,7 @@ import { ModalWrapper,
 } from "./location.style";
 
 
+
 interface CityData {
   _id: string;
   name: string;
@@ -29,7 +30,7 @@ const LocationModal: React.FC<{
   onClose: () => void;
   onShowToast: () => void;
 }> = ({ isOpen, onClose, onShowToast }) => {
-  const { setLocation } = useLocation();
+  const { setLocation , location} = useLocation();
 
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
@@ -146,7 +147,9 @@ const LocationModal: React.FC<{
           <small className="small">
             Delivery options and fees may vary based on your location
           </small>
+          {location?.state!== '' && location?.region!== '' &&
           <CloseButton onClick={handleModalClose}>✖</CloseButton>
+          }
         </ModalHeader>
         <ModalBody>
           {error && <ErrorMessage>{error}</ErrorMessage>}

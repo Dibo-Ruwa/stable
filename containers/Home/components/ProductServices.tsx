@@ -56,14 +56,18 @@ const MobileView: React.FC = () => {
           <div
             style={{
               width: "90%",
-              height: "100px",
+              height: "100%",
               paddingTop: "10px",
               paddingBottom: "10px",
               borderRadius: 50,
-              margin: "8px auto",
-              overflow: "hidden",
-              background:
-                "linear-gradient(0deg, #E6E6E6 0%, #E6E6E6 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%)",
+              // margin: "8px auto",
+              // overflow: "hidden",
+              // background:
+              //   "linear-gradient(0deg, #E6E6E6 0%, #E6E6E6 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              margin: "auto",
             }}
           >
             <div
@@ -76,7 +80,7 @@ const MobileView: React.FC = () => {
               }}
             >
               <img
-                style={{ width: "100%", height: 30 }}
+                style={{ width: "100%" }}
                 src={selectedData?.bike}
                 alt="Bike"
               />
@@ -90,7 +94,7 @@ const MobileView: React.FC = () => {
               }}
             >
               <img
-                style={{ width: "100%", height: "30%" }}
+                style={{ width: "100%" }}
                 src={selectedData?.map}
                 alt="Map"
               />

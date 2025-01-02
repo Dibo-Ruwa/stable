@@ -40,6 +40,17 @@
   }
 }
 
+@media screen and (max-width: 848px) {
+  .RestSub_container {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 818px) {
+  .RestSub_container {
+    width: 80%;
+  }
+}
+
 .customSub {
   display: flex;
   justify-content: space-between;

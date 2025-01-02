@@ -1,18 +1,9 @@
-"use client";
-import "./component/food.css";
-// import ProductList from "@/component/ProductList/ProductList";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Discount from "./component/discount/Discount";
 import CustomBooking from "./component/custombooking/CustomBooking";
 import MostSold from "./component/mostsold/MostSold";
-import MinsMeals from "./component/30MinsMeals/MinsMeals";
-import FreeDelivery from "./component/freedelivery/FreeDelivery";
-import { useState } from "react";
-
-const isBetween10amAnd6pm = () => {
-  const now = new Date();
-  const hours = now.getHours();
-  return hours >= 10 && hours < 18;
-};
+import { useLocation } from "@/context/LocationProvider";
 
 interface FoodProps {
   params: {
@@ -20,28 +11,72 @@ interface FoodProps {
   };
 }
 
-const Food: React.FC<FoodProps> = ({ params }) => {
-  const { id } = params;
+const url = process.env.NEXT_PUBLIC_ADMIN_URL;
+
+const Food: React.FC<FoodProps> = () => {
+ 
+  const { location } = useLocation();
+
   const [searchQuery, setSearchQuery] = useState<string>("");
-   const [activeButton, setActiveButton] = useState<string>("All");
+  const [activeButton, setActiveButton] = useState<string>("all");
+  const [foodData, setFoodData] = useState([]);
+  const [filteredFoodData, setFilteredFoodData] = useState([]); // New state for filtered data
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
-  // const { modal, closeModal } = useCartStore();
+  useEffect(() => {
+    const fetchFoodData = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${url}/api/products`);
+        const data = response.data?.data;
 
-  // const { data: session } = useSession();
-  // const router = useRouter();
+        // Filter foodData based on location.state
+        if (location?.state) {
+          const filteredData = data.filter((item: { vendor: { branch: any[]; }; }) =>
+            item.vendor.branch.some(
+              (branch) => branch.location.city.name === location.state
+            )
+          );
+          setFilteredFoodData(filteredData); // Set filtered data
+        } else {
+          setFilteredFoodData(data); // If no location, use all data
+        }
+
+        setFoodData(data); // Set the original data (optional, if needed elsewhere)
+        // console.log("Fetched food data:", data); // Log fetched data
+      } catch (error) {
+        console.error("Error fetching food data:", error);
+        setError("Failed to fetch food data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFoodData();
+  }, [url, location?.state]); // Add location.state as a dependency
+
+  // if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div className="food-container">
       <Discount />
       <CustomBooking
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
         activeButton={activeButton}
         setActiveButton={setActiveButton}
       />
-      <MostSold id={id} searchQuery={searchQuery} activeButton={activeButton} />
-      <MinsMeals searchQuery={searchQuery} activeButton={activeButton} />
-      <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} />
+      {!loading && (
+        <MostSold
+          
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          activeButton={activeButton}
+          foodData={filteredFoodData} // Pass the filtered food data
+        />
+      )}
+      {/* <MinsMeals searchQuery={searchQuery} activeButton={activeButton} /> */}
+      {/* <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} /> */}
     </div>
   );
 };

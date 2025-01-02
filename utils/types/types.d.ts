@@ -113,3 +113,51 @@ export interface MovingItemType {
   quantity: number;
   image: string | null;
 }
+
+export interface FoodData {
+  _id: string;
+  title: string;
+  prep_time: string;
+  categories: string[];
+  price: number;
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    name: string;
+    owner: string;
+    branch: {
+      location: {
+        city: {
+          _id: string;
+          name: string;
+        };
+        region: {
+          _id: string;
+          name: string;
+        };
+      };
+      _id: string;
+      deliveries: {
+        region: {
+          _id: string;
+          name: string;
+        };
+        price: number;
+        _id: string;
+      }[];
+    }[];
+    operations: {
+      day: string;
+      openingHour: string;
+      closingHour: string;
+      _id: string;
+    }[];
+  };
+  discount: number;
+  extras: any[];
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  __v: number;
+  id: string;
+}

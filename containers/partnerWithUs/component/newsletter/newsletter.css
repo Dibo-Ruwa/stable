@@ -56,6 +56,12 @@ button.newsletter-btn {
   margin-left: -1rem;
 }
 
+@media screen and (max-width: 399px) {
+  .button.newsletter-btn {
+    padding: 11px 12px 10px 11px;
+  }
+}
+
 .newsletter-box {
   display: flex;
 }
