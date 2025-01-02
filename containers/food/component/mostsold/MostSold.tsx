@@ -8,7 +8,6 @@ import { useFoodItem } from "@/context/FooItemProvider";// Import the hook
 import { useRouter } from "next/navigation";
 
 interface MostSoldProps {
- 
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   activeButton: string;
@@ -78,7 +77,7 @@ const MostSold: React.FC<MostSoldProps> = ({
       <section className="mostsold_container">
         {visibleItems?.length === 0 ? (
           <p
-            style={{
+            style={{  
               textAlign: "center",
               fontSize: "30px",
               fontWeight: 600,

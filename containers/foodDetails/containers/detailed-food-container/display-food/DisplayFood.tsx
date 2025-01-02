@@ -4,7 +4,11 @@ import { AboutFood } from "../about-food/AboutFood";
 import { CTADelivery } from "../cta-delivery/CTADelivery";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { FaAngleRight } from "react-icons/fa";
+import { FoodData } from "@/utils/types/types";
 
+interface DisplayFoodProps {
+  food: FoodData;
+}
 // Styled components
 const Container = styled.section`
   width: 100%;
@@ -63,11 +67,11 @@ const NextBtn = styled(TfiAngleRight)`
   background: #eaebee;
 `;
 
-export const DisplayFood = () => {
+export const DisplayFood: React.FC<DisplayFoodProps> = ({food}) => {
   return (
     <Container>
       <DisplayImg>
-        <OnDisplayImg src="/images/Frame 2610163.png" alt="on display" />
+        <OnDisplayImg src={food?.imageUrl} alt={food?.title} />
       </DisplayImg>
       {/* <SelectedImg>
         <PrevBtn />
@@ -93,7 +97,7 @@ export const DisplayFood = () => {
         />
         <NextBtn />
       </SelectedImg> */}
-      <AboutFood />
+      <AboutFood food={food}/>
       <CTADelivery />
     </Container>
   );
