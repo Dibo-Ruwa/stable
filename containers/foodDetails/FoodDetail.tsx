@@ -6,7 +6,7 @@ import { DisplayFood } from "./containers/detailed-food-container/display-food/D
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
 import { FoodData } from "@/utils/types/types";
 
-// Styled components
+// Styled components remain the same...
 const FoodDetailsContainer = styled.section`
   background: var(--Background-color, #f8f8f8);
 `;
@@ -80,37 +80,92 @@ const Loader = styled.div`
 const FoodDetail: React.FC = () => {
   const [foodDetail, setFoodDetail] = useState<FoodData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-useEffect(() => {
-  const fetchFoodDetail = async () => {
-    try {
-      const savedFood = localStorage.getItem("selectedFood");
-      if (!savedFood) throw new Error("No food found in localStorage");
+  useEffect(() => {
+    const fetchFoodDetail = async () => {
+      try {
+        // Debug: Log all localStorage keys
+        console.log("All localStorage keys:", Object.keys(localStorage));
 
-      const parsedFood = JSON.parse(savedFood);
-      setFoodDetail(parsedFood);
+        // Debug: Log the raw localStorage value
+        const rawSavedFood = localStorage.getItem("selectedFoodItem");
+        console.log("Raw localStorage value:", rawSavedFood);
 
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error parsing food details:", error.message);
-      } else {
-        console.error("An unexpected error occurred:", error);
+        if (!rawSavedFood) {
+          console.warn("selectedFood is null or undefined in localStorage");
+          setError("No food found in localStorage");
+          return;
+        }
+
+        // Debug: Log the actual string content
+        console.log("localStorage content length:", rawSavedFood.length);
+        console.log("First 100 characters:", rawSavedFood.substring(0, 100));
+
+        try {
+          const parsedFood = JSON.parse(rawSavedFood);
+          console.log("Successfully parsed food details:", parsedFood);
+
+          // Debug: Verify the parsed data structure
+          if (!parsedFood || typeof parsedFood !== "object") {
+            console.error("Parsed food is not an object:", parsedFood);
+            setError("Invalid food data structure");
+            return;
+          }
+
+          // Debug: Log expected properties
+          console.log("Parsed food properties:", Object.keys(parsedFood));
+
+          setFoodDetail(parsedFood);
+        } catch (parseError) {
+          console.error("JSON Parse Error:", parseError);
+          console.error("Attempted to parse:", rawSavedFood);
+          setError("Failed to parse food data");
+          return;
+        }
+      } catch (error) {
+        const errorMessage =
+          error instanceof Error
+            ? error.message
+            : "An unexpected error occurred";
+        console.error("Main try-catch error:", errorMessage);
+        setError(errorMessage);
+      } finally {
+        setIsLoading(false);
       }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    };
 
-  fetchFoodDetail();
-}, []);
+    // Debug: Log when effect runs
+    console.log("Effect running - attempting to fetch food detail");
+    fetchFoodDetail();
+  }, []);
+
+  // Debug: Log component state
+  console.log("Component State - isLoading:", isLoading);
+  console.log("Component State - error:", error);
+  console.log("Component State - foodDetail:", foodDetail);
 
   if (isLoading) {
     return <Loader>Loading food details...</Loader>;
   }
 
-  // Log the food item before rendering
-  if (foodDetail) {
-    console.log("Rendering food item:", foodDetail);
+  if (error) {
+    return (
+      <FoodDetailsContainer>
+        <FoodDetailsFrame>
+          <div className="btn">
+            <BackButton />
+          </div>
+          <p style={{ textAlign: "center", fontSize: "20px", color: "red" }}>
+            Error: {error}
+            <br />
+            <small style={{ fontSize: "16px" }}>
+              Please check browser console for detailed information.
+            </small>
+          </p>
+        </FoodDetailsFrame>
+      </FoodDetailsContainer>
+    );
   }
 
   return (
