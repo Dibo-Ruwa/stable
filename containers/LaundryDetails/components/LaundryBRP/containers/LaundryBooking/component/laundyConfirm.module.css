@@ -574,3 +574,22 @@
   border: 0.827px solid var(--green2, #27a124);
   background: rgba(183, 224, 182, 0.2);
 }
+
+.modalContent_EstimatedReturn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.modalContent_EstimatedReturnText {
+  font-size: 14px;
+  color: #8f8f8f;
+  font-weight: 500;
+}
+
+.modalContent_EstimatedReturnValue {
+  font-size: 14px;
+  color: #27a124; /* Match the theme color */
+  font-weight: 600;
+}

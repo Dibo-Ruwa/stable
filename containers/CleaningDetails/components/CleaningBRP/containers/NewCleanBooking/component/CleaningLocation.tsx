@@ -22,10 +22,7 @@ const AddressContainerText = styled.p`
 `;
 
 const AddressCards = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
+  width: 100%;
 `;
 
 const AddressCard = styled.div`
@@ -81,11 +78,8 @@ const AddressTextarea = styled.textarea`
   color: #555555;
 `;
 
-interface MovingBookingLocationProps {
-  onChange: (locationData: {
-    currentLocation: string;
-    deliveryLocation: string;
-  }) => void;
+interface CleaningLocationProps {
+  onChange: (locationData: { currentLocation: string }) => void;
 }
 
 interface CityData {
@@ -94,13 +88,11 @@ interface CityData {
   regions: { _id: string; name: string }[];
 }
 
-export const MovingBookingLocation: React.FC<MovingBookingLocationProps> = ({
+export const CleaningLocation: React.FC<CleaningLocationProps> = ({
   onChange,
 }) => {
-  const [currentAddress, setCurrentAddress] = useState<string>("");
-  const [currentCity, setCurrentCity] = useState<string>("");
-  const [deliveryAddress, setDeliveryAddress] = useState<string>("");
-  const [deliveryCity, setDeliveryCity] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [availableRegions, setAvailableRegions] = useState<string[]>([]);
@@ -142,82 +134,40 @@ export const MovingBookingLocation: React.FC<MovingBookingLocationProps> = ({
   }, [location.state]);
 
   useEffect(() => {
-    const currentLocation = `${currentAddress}${
-      currentCity ? ", " + currentCity : ""
-    }`;
-    const deliveryLocation = `${deliveryAddress}${
-      deliveryCity ? ", " + deliveryCity : ""
-    }`;
-    onChange({ currentLocation, deliveryLocation });
-  }, [currentAddress, currentCity, deliveryAddress, deliveryCity, onChange]);
+    const fullLocation = `${address}${region ? ", " + region : ""}`;
+    onChange({ currentLocation: fullLocation });
+  }, [address, region, onChange]);
 
   return (
     <AddressContainer>
-      <AddressContainerText>Delivery Location</AddressContainerText>
+      <AddressContainerText>Cleaning Location</AddressContainerText>
       <AddressCards>
-        {/* Current Location */}
         <AddressCard>
           <LocationDiv>
             <LocationIcon />
-            <LocationText>Pickup Location</LocationText>
+            <LocationText>Service Location</LocationText>
           </LocationDiv>
           <div>
-            <Label htmlFor="currentAddress">Address</Label>
+            <Label htmlFor="address">Address</Label>
             <AddressTextarea
-              id="currentAddress"
-              name="currentAddress"
-              placeholder="Write..."
+              id="address"
+              name="address"
+              placeholder="Enter the cleaning location address..."
               rows={3}
-              onChange={(e) => setCurrentAddress(e.target.value)}
-              value={currentAddress}
+              onChange={(e) => setAddress(e.target.value)}
+              value={address}
             />
           </div>
           <div>
-            <Label htmlFor="currentCity">Region</Label>
+            <Label htmlFor="region">Region</Label>
             <Select
-              id="currentCity"
-              name="currentCity"
-              onChange={(e) => setCurrentCity(e.target.value)}
-              value={currentCity}
+              id="region"
+              name="region"
+              onChange={(e) => setRegion(e.target.value)}
+              value={region}
               disabled={isLoading}
             >
-              <option value="">Select</option>
-              {availableRegions.map((region, index) => (
-                <option key={index} value={region}>
-                  {region}
-                </option>
-              ))}
-            </Select>
-          </div>
-        </AddressCard>
-
-        {/* Delivery Location */}
-        <AddressCard>
-          <LocationDiv>
-            <LocationIcon />
-            <LocationText>Delivery Location</LocationText>
-          </LocationDiv>
-          <div>
-            <Label htmlFor="deliveryAddress">Address</Label>
-            <AddressTextarea
-              id="deliveryAddress"
-              name="deliveryAddress"
-              placeholder="Write..."
-              rows={3}
-              onChange={(e) => setDeliveryAddress(e.target.value)}
-              value={deliveryAddress}
-            />
-          </div>
-          <div>
-            <Label htmlFor="deliveryCity">Region</Label>
-            <Select
-              id="deliveryCity"
-              name="deliveryCity"
-              onChange={(e) => setDeliveryCity(e.target.value)}
-              value={deliveryCity}
-              disabled={isLoading}
-            >
-              <option value="">Select</option>
+              <option value="">Select region</option>
               {availableRegions.map((region, index) => (
                 <option key={index} value={region}>
                   {region}

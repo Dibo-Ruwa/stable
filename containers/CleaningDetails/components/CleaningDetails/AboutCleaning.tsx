@@ -44,7 +44,7 @@ const MobileAboutCleaning = () => {
         <div className={styles.MobileNRSContent}>
           <div className={styles.MobileNRRestaurant}>
             <p className={styles.MobilerestaurantProfileName}>
-              Flora Restaurant
+              Professional Cleaning Service
             </p>
             <div className={styles.MobilerestaurantRating}>
               <FaStar className={styles.MobilerestaurantRatingIcon} />
@@ -69,11 +69,11 @@ const MobileAboutCleaning = () => {
           )}
         </div>
         <div className={styles.MobilerestaurantOpeningTimePhoneNum}>
-          <p className={styles.MobilerestaurantOpeningDay}>Mon - Friday</p>
+          <p className={styles.MobilerestaurantOpeningDay}>Mon - Saturday</p>
           <div className={styles.MobilerestaurantDot}></div>
-          <p className={styles.MobilerestaurantOpeningTime}>8am - 5pm</p>
+          <p className={styles.MobilerestaurantOpeningTime}>7am - 6pm</p>
           <div className={styles.MobilerestaurantDot}></div>
-          <p className={styles.MobilerestaurantPhoneNum}>0903 414 5971</p>
+          <p className={styles.MobilerestaurantPhoneNum}>Contact Support</p>
         </div>
         <div className={styles.MobilerestaurantLocation}>
           <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
@@ -93,23 +93,24 @@ export const AboutCleaning = () => {
           <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img
-                src="/images/image 200.png"
-                alt=""
+                src="/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg"
+                alt="Cleaning Service"
                 className={styles.coverImg}
-              />
-            </div>
-            <div className={styles.restProfileImage}>
-              <img
-                src="/images/Ellipse 92.png"
-                alt=""
-                className={styles.restProfileImg}
+                style={{
+                  height: "400px",
+                  width: "100%",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
               />
             </div>
           </div>
           <div className={styles.aboutRestaurantContainer}>
             <div className={styles.NRSContent}>
               <div className={styles.NRRestaurant}>
-                <p className={styles.restaurantProfileName}>Flora Restaurant</p>
+                <p className={styles.restaurantProfileName}>
+                  Professional Cleaning Services
+                </p>
                 <div className={styles.restaurantRating}>
                   <FaStar className={styles.restaurantRatingIcon} />
                   <p className={styles.restaurantRatingNum}>4.5</p>
@@ -120,33 +121,33 @@ export const AboutCleaning = () => {
                 <div className={styles.restaurantOpeningDay}>
                   <CiCalendar className={styles.restaurantOpeningDayIcon} />
                   <p className={styles.restaurantOpeningDayText}>
-                    Mon - Friday
+                    Mon - Sun
                   </p>
                 </div>
 
                 <div className={styles.restaurantDot}></div>
                 <div className={styles.restaurantOpeningTime}>
                   <CiClock2 className={styles.restaurantOpeningTimeIcon} />
-                  <p className={styles.restaurantOpeningTimeText}>8am - 5pm</p>
+                  <p className={styles.restaurantOpeningTimeText}>8am - 6pm</p>
                 </div>
 
                 <div className={styles.restaurantDot}></div>
                 <div className={styles.restaurantPhoneNum}>
                   <FiPhone className={styles.restaurantPhoneNumIcon} />
-                  <p className={styles.restaurantPhoneNumText}>0903 414 5971</p>
+                  <p className={styles.restaurantPhoneNumText}>08059303261</p>
                 </div>
               </div>
             </div>
 
-            <div className={styles.restaurantLocation}>
+            {/* <div className={styles.restaurantLocation}>
               <SlLocationPin className={styles.restaurantLocationIcon} />
               <p className={styles.restaurantLocationText}>Ikeja, Lagos</p>
-            </div>
+            </div> */}
             <div className={styles.restaurantDescription_DT}>
               <p className={styles.restaurantDescription}>
-                Our hassie-free Laundry service ensures that your clothes are
-                cleaned, folded, and delivered with care, so you can spend less
-                time on chores and more time doing what you love.
+                Experience professional cleaning services that transform your space. 
+                Our expert cleaners deliver thorough and reliable cleaning solutions, 
+                letting you enjoy a spotless environment without the hassle.
               </p>
             </div>
             <div className={styles.OurLaundryServiceContainer}>
@@ -156,47 +157,74 @@ export const AboutCleaning = () => {
                 <div className={styles.OurLaundryServiceCard}>
                   <div className={styles.OurLaundryServiceImage}>
                     <img
-                      src="/images/image 207.png"
-                      alt=""
+                      src="/images/minh-pham-OtXADkUh3-I-unsplash.jpg"
+                      alt="Regular Cleaning"
                       className={styles.OurLaundryServiceCardImage}
+                      style={{
+                        height: "50px",
+                        width: "100%",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                      }}
                     />
                   </div>
                   <p className={styles.OurLaundryServiceCardText}>
-                    Wash and Fold
+                    Regular Home Cleaning
                   </p>
                 </div>
                 <div className={styles.OurLaundryServiceCard}>
                   <div className={styles.OurLaundryServiceImage}>
                     <img
-                      src="/images/image 208.png"
-                      alt=""
+                      src="/images/industrial_clean.jpg"
+                      alt="Deep Cleaning"
                       className={styles.OurLaundryServiceCardImage}
+                      style={{
+                        height: "50px",
+                        width: "100%",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                      }}
                     />
                   </div>
                   <p className={styles.OurLaundryServiceCardText}>
-                    Iron and Fold
+                    Deep Cleaning
                   </p>
                 </div>
                 <div className={styles.OurLaundryServiceCard}>
                   <div className={styles.OurLaundryServiceImage}>
                     <img
-                      src="/images/image 153.png"
-                      alt=""
+                      src="/images/office_cleaning.jpg"
+                      alt="Commercial Cleaning"
                       className={styles.OurLaundryServiceCardImage}
+                      style={{
+                        height: "50px",
+                        width: "100%",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                      }}
+                      
                     />
                   </div>
-                  <p className={styles.OurLaundryServiceCardText}>Dry clean</p>
+                  <p className={styles.OurLaundryServiceCardText}>
+                    Commercial Cleaning
+                  </p>
                 </div>
                 <div className={styles.OurLaundryServiceCard}>
                   <div className={styles.OurLaundryServiceImage}>
                     <img
-                      src="/images/image 155.png"
-                      alt=""
+                      src="/images/WhatsApp Image 2024-12-06 at 15.56.10_2231738e.jpg"
+                      alt="Specialized Cleaning"
                       className={styles.OurLaundryServiceCardImage}
+                      style={{
+                        height: "50px",
+                        width: "100%",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                      }}
                     />
                   </div>
                   <p className={styles.OurLaundryServiceCardText}>
-                    Household clean
+                    Specialized Cleaning
                   </p>
                 </div>
               </div>

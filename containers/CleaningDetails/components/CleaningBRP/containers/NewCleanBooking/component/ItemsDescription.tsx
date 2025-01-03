@@ -1,19 +1,14 @@
-import React, { useState } from "react";
-import styles from "../LaundryBooking.module.css";
+'use client';
+import React from 'react';
+import styles from "../MovingBooking.module.css";
 
 interface ItemsDescriptionProps {
   onChange: (description: string) => void;
 }
 
 export const ItemsDescription: React.FC<ItemsDescriptionProps> = ({ onChange }) => {
-  const [description, setDescription] = useState("");
-
-  const handleDescriptionChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const updatedDescription = event.target.value;
-    setDescription(updatedDescription);
-    onChange(updatedDescription); // Pass updated description to parent
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange(e.target.value);
   };
 
   return (
@@ -22,13 +17,13 @@ export const ItemsDescription: React.FC<ItemsDescriptionProps> = ({ onChange }) 
         Description
       </label>
       <textarea
+        id="description"
         name="description"
         className={styles.ItemsDescriptionTextarea}
         placeholder="Write..."
         cols={30}
         rows={5}
-        value={description}
-        onChange={handleDescriptionChange} // Handle change event
+        onChange={handleInputChange}
       ></textarea>
     </div>
   );

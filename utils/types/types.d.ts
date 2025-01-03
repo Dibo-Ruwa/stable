@@ -113,3 +113,20 @@ export interface MovingItemType {
   quantity: number;
   image: string | null;
 }
+
+export interface CleaningItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+  video: string | null;
+}
+
+
+export interface LaundryItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+}
+

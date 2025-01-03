@@ -9,15 +9,15 @@ import {
   AiOutlineMinus,
 } from "react-icons/ai";
 import useQuote from "@/hooks/useQuote";
-import { MovingItemType } from "@/utils/types/types";
+import { CleaningItemType } from "@/utils/types/types";
 import NotificationModal from "@/component/NotificationModal"; 
 
 
 type FormState = {
+  type: string;
   categories: string[];
-  items: MovingItemType[];
+  items: CleaningItemType[];
   currentLocation: string;
-  deliveryLocation: string;
   pickUpDate: string;
   pickUpTime: string;
   description: string;
@@ -25,7 +25,6 @@ type FormState = {
 
 interface DeliveryDetails {
   currentLocation: string;
-  deliveryLocation: string;
   pickUpDate: string;
   pickUpTime: string;
 }
@@ -34,7 +33,7 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   formData: FormState;
-  items: MovingItemType[];
+  items: CleaningItemType[];
   deliveryDetails: DeliveryDetails;
   onConfirm: (updatedFormState: FormState) => void;
 }
@@ -74,13 +73,8 @@ export const ConfirmationModel: React.FC<Props> = ({
       return;
     }
 
-    if (
-      !session?.user.phone ||
-      !session?.user.address ||
-      !session?.user.state ||
-      !session?.user.lga
-    ) {
-      closeModal(); 
+    if (!session?.user.phone || !session?.user.address || !session?.user.state || !session?.user.lga) {
+      closeModal();
       toast.error("Please complete your profile to submit the request.");
       router.push("/profile");
       return;
@@ -88,12 +82,12 @@ export const ConfirmationModel: React.FC<Props> = ({
 
     try {
       await handleQuote(updatedFormState);
-      console.log("Calling handleQuote with data:", updatedFormState); 
+      
       toast.success("Request submitted successfully");
       onClose();
       getQuotes();
     } catch (error) {
-      console.error("Submission failed", error);
+      console.error("Submission failed:", error);
       toast.error("Failed to submit the request.");
     }
   };
@@ -153,18 +147,10 @@ export const ConfirmationModel: React.FC<Props> = ({
         <div className={styles.modalContent_Locations}>
           <div className={styles.modalContent_CAndDLocation}>
             <p className={styles.modalContent_CAndDLocationType}>
-              Current Location
+              Service Location
             </p>
             <p className={styles.modalContent_CAndDLocationName}>
               {deliveryDetails.currentLocation}
-            </p>
-          </div>
-          <div className={styles.modalContent_CAndDLocation}>
-            <p className={styles.modalContent_CAndDLocationType}>
-              Delivery Location
-            </p>
-            <p className={styles.modalContent_CAndDLocationName}>
-              {deliveryDetails.deliveryLocation}
             </p>
           </div>
         </div>

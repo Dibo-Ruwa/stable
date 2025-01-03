@@ -1,45 +1,42 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import styles from "../MovingBooking.module.css";
+import styles from "./laundyConfirm.module.css";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import {
-  AiOutlinePlus,
-  AiOutlineMinus,
-} from "react-icons/ai";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import useQuote from "@/hooks/useQuote";
-import { MovingItemType } from "@/utils/types/types";
-import NotificationModal from "@/component/NotificationModal"; 
-
+import { LaundryItemType } from "@/utils/types/types";
+import NotificationModal from "@/component/NotificationModal";
 
 type FormState = {
+  type: string;
   categories: string[];
-  items: MovingItemType[];
+  items: LaundryItemType[];
   currentLocation: string;
-  deliveryLocation: string;
   pickUpDate: string;
   pickUpTime: string;
   description: string;
+  estimatedReturn: string; 
 };
 
 interface DeliveryDetails {
   currentLocation: string;
-  deliveryLocation: string;
   pickUpDate: string;
   pickUpTime: string;
+  returnEstimate: string;
 }
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   formData: FormState;
-  items: MovingItemType[];
+  items: LaundryItemType[];
   deliveryDetails: DeliveryDetails;
   onConfirm: (updatedFormState: FormState) => void;
 }
 
-export const ConfirmationModel: React.FC<Props> = ({
+export const ConfirmationModal: React.FC<Props> = ({
   isOpen,
   onClose,
   items,
@@ -48,7 +45,15 @@ export const ConfirmationModel: React.FC<Props> = ({
   formData,
 }) => {
   const [updatedFormState, setUpdatedFormState] = useState<FormState>(formData);
-  const { handleQuote, getQuotes, loading, showModal, modalErrorType, modalMessage, closeModal, } = useQuote();
+  const {
+    handleQuote,
+    getQuotes,
+    loading,
+    showModal,
+    modalErrorType,
+    modalMessage,
+    closeModal,
+  } = useQuote();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -80,7 +85,7 @@ export const ConfirmationModel: React.FC<Props> = ({
       !session?.user.state ||
       !session?.user.lga
     ) {
-      closeModal(); 
+      closeModal();
       toast.error("Please complete your profile to submit the request.");
       router.push("/profile");
       return;
@@ -88,21 +93,21 @@ export const ConfirmationModel: React.FC<Props> = ({
 
     try {
       await handleQuote(updatedFormState);
-      console.log("Calling handleQuote with data:", updatedFormState); 
+
       toast.success("Request submitted successfully");
       onClose();
       getQuotes();
     } catch (error) {
-      console.error("Submission failed", error);
+      console.error("Submission failed:", error);
       toast.error("Failed to submit the request.");
     }
   };
 
   if (!isOpen) return null;
-  
+
+  console.log(updatedFormState, "Updated Form State");
 
   return (
-   
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalContentTextContainer}>
@@ -153,37 +158,39 @@ export const ConfirmationModel: React.FC<Props> = ({
         <div className={styles.modalContent_Locations}>
           <div className={styles.modalContent_CAndDLocation}>
             <p className={styles.modalContent_CAndDLocationType}>
-              Current Location
+              Service Location
             </p>
             <p className={styles.modalContent_CAndDLocationName}>
               {deliveryDetails.currentLocation}
             </p>
           </div>
-          <div className={styles.modalContent_CAndDLocation}>
-            <p className={styles.modalContent_CAndDLocationType}>
-              Delivery Location
-            </p>
-            <p className={styles.modalContent_CAndDLocationName}>
-              {deliveryDetails.deliveryLocation}
-            </p>
-          </div>
         </div>
         <hr className={styles.modalContentLine} />
 
-        {/* Pick-up Details */}
+        {/* Pick-up and Estimated Return Details */}
         <div className={styles.modalContent_PickUpDT}>
           <div className={styles.modalContent_PickupDay}>
             <p className={styles.modalContent_PickupDayText}>Pick Up Day</p>
             <p className={styles.modalContent_PickupDayDate}>
-              {deliveryDetails.pickUpDate}
+              {updatedFormState?.pickUpDate}
             </p>
           </div>
           <div className={styles.modalContent_PickUPTime}>
             <p className={styles.modalContent_PickUPTimeType}>Time</p>
             <p className={styles.modalContent_PickUPTimeNum}>
-              {deliveryDetails.pickUpTime}
+              {updatedFormState?.pickUpTime}
             </p>
           </div>
+        </div>
+
+        {/* Estimated Return Section */}
+        <div className={styles.modalContent_EstimatedReturn}>
+          <p className={styles.modalContent_EstimatedReturnText}>
+            Estimated Return
+          </p>
+          <p className={styles.modalContent_EstimatedReturnValue}>
+            {deliveryDetails.returnEstimate}
+          </p>
         </div>
         <hr className={styles.modalContentLine} />
 
@@ -195,15 +202,17 @@ export const ConfirmationModel: React.FC<Props> = ({
           <button
             onClick={() => {
               handleSubmission();
-            } }
-            className={`${styles.confirmButton} ${loading ? styles.disabledButton : ""}`}
+            }}
+            className={`${styles.confirmButton} ${
+              loading ? styles.disabledButton : ""
+            }`}
             disabled={loading}
           >
             {loading ? "Submitting..." : "Submit"}
           </button>
         </div>
       </div>
-     
+
       {showModal && (
         <NotificationModal
           message={modalMessage}
@@ -212,7 +221,5 @@ export const ConfirmationModel: React.FC<Props> = ({
         />
       )}
     </div>
-    
-
   );
 };

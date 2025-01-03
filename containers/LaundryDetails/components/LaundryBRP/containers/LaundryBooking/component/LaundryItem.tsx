@@ -1,144 +1,165 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
 import styles from "../LaundryBooking.module.css";
 import { LaundryItemsGroup } from "./LaundryItemsGroup";
-import { AddProperty } from "./AddProperty";
+import { LaundryLocation } from "./LaundryLocation";
 import { ItemsDescription } from "./ItemsDescription";
 import { LaundrySchedule } from "./LaundrySchedule";
 import { Button } from "@/component/shared/Button";
-import { AiOutlinePlus } from "react-icons/ai";
+import { ConfirmationModal } from "./ConfirmationModal";
+import useQuote from "@/hooks/useQuote";
+import toast from "react-hot-toast";
 
-interface PredefinedItems {
-  [key: string]: number;
-}
-
-interface CustomProperty {
+type LaundryItemType = {
   name: string;
   quantity: number;
-}
+  image?: string | null;
+};
 
-interface BookingData {
-  predefinedItems: PredefinedItems;
-  customProperties: CustomProperty[];
-  schedule: {
-    pickupDate: string;
-    pickupTime: string;
-    deliveryDate: string;
-    deliveryTime: string;
-  };
-}
+type FormState = {
+  type: string;
+  categories: string[];
+  items: LaundryItemType[];
+  currentLocation: string;
+  pickUpDate: string;
+  pickUpTime: string;
+  estimatedReturn: string; // Include estimated return
+  description: string;
+};
 
 export const LaundryItem = () => {
-  const [isAddPropertyVisible, setAddPropertyVisible] = useState(false);
-  const [bookingData, setBookingData] = useState<BookingData>({
-    predefinedItems: {},
-    customProperties: [],
-    schedule: {
-      pickupDate: "",
-      pickupTime: "8:00 AM",
-      deliveryDate: "",
-      deliveryTime: "1:00 PM",
-    },
+  const { handleQuote, loading } = useQuote();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const [formState, setFormState] = useState<FormState>({
+    type: "laundry",
+    categories: [],
+    items: [],
+    currentLocation: "",
+    pickUpDate: "",
+    pickUpTime: "",
+    estimatedReturn: "", 
+    description: "",
   });
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("laundryBookingData");
-    if (storedData) {
-      setBookingData(JSON.parse(storedData));
-    }
+  const handleOpenModal = useCallback((): void => {
+    setIsModalOpen(true);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("laundryBookingData", JSON.stringify(bookingData));
-    console.log("Current booking data:", bookingData); // Log booking data whenever it changes
-  }, [bookingData]);
+  const handleCloseModal = useCallback((): void => {
+    setIsModalOpen(false);
+  }, []);
 
-  const handleToggleAddProperty = () => {
-    setAddPropertyVisible((prev) => !prev);
-  };
-
-  const handleScheduleChange = (newSchedule: {
-    pickupDate: string;
-    pickupTime: string;
-    deliveryDate: string;
-    deliveryTime: string;
-  }) => {
-    setBookingData((prevData) => ({
-      ...prevData,
-      schedule: newSchedule,
+  const handleInputChange = useCallback((field: string, value: any) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      [field]: value,
     }));
-  };
+  }, []);
 
-  const validateBookingData = () => {
-    const { predefinedItems, customProperties, schedule } = bookingData;
-    const hasItems =
-      Object.values(predefinedItems).some((qty) => qty > 0) ||
-      customProperties.some((prop) => prop.quantity > 0);
-    return (
-      hasItems &&
-      schedule.pickupDate &&
-      schedule.pickupTime &&
-      schedule.deliveryDate &&
-      schedule.deliveryTime
-    );
-  };
+  const handleConfirm = useCallback(() => {
+    handleQuote(formState);
+  }, [formState, handleQuote]);
 
-  const handleSend = () => {
-    if (!validateBookingData()) {
-      alert("Please complete all required fields.");
-      return;
-    }
-    console.log("Booking data sent successfully:", bookingData); // Log booking data on send
-    alert("Booking request processed successfully!");
-    localStorage.removeItem("laundryBookingData");
-    setBookingData({
-      predefinedItems: {},
-      customProperties: [],
-      schedule: {
-        pickupDate: "",
-        pickupTime: "8:00 AM",
-        deliveryDate: "",
-        deliveryTime: "1:00 PM",
-      },
-    });
-  };
+  console.log("FORM STATE", formState);
 
   return (
     <div className={styles.LaundryBookingContainer}>
       <div className={styles.LaundryItemContainer}>
+        <p className={styles.MovingItemTextQuest}>What do you want to clean?</p>
+
         <div className={styles.LaundryItemChoices}>
-          <LaundryItemsGroup />
+          <LaundryItemsGroup
+            onItemsChange={useCallback(
+              (items) => handleInputChange("items", items),
+              [handleInputChange]
+            )}
+          />
         </div>
 
-        <div className={styles.LaundryAddCustomContainer}>
-          <p className={styles.LaundryAddCustomContainerText}>
-            Can’t find your clothing type?
-          </p>
-          <button
-            type="button"
-            className={styles.AddCustom}
-            onClick={handleToggleAddProperty}
-          >
-            <AiOutlinePlus className={styles.AddCustom_AddMoreIcon} />
-            <p className={styles.AddCustom_Text}>Add Custom</p>
-          </button>
+        <div className={styles.Moving_AddressContainer}>
+          <LaundryLocation
+            onChange={useCallback(
+              (locationData: { currentLocation: string }) => {
+                handleInputChange(
+                  "currentLocation",
+                  locationData.currentLocation
+                );
+              },
+              [handleInputChange]
+            )}
+          />
         </div>
-
-        {isAddPropertyVisible && (
-          <div className={styles.LaundryPropertyContainer}>
-            <AddProperty />
-          </div>
-        )}
 
         <LaundrySchedule
-          schedule={bookingData.schedule}
-          setSchedule={handleScheduleChange}
+          pickUpDate={formState.pickUpDate}
+          pickUpTime={formState.pickUpTime}
+          setPickUpDate={useCallback(
+            (date) => handleInputChange("pickUpDate", date),
+            [handleInputChange]
+          )}
+          setPickUpTime={useCallback(
+            (time) => handleInputChange("pickUpTime", time),
+            [handleInputChange]
+          )}
+          totalLaundryItems={formState.items.reduce(
+            (total, item) => total + item.quantity,
+            0
+          )}
+          onEstimatedReturnChange={useCallback(
+            (estimatedReturn) =>
+              handleInputChange("estimatedReturn", estimatedReturn),
+            [handleInputChange]
+          )}
         />
+
         <div className={styles.Laundry_ItemsDescription}>
-          <ItemsDescription />
+          <ItemsDescription
+            onChange={useCallback(
+              (description: string) =>
+                handleInputChange("description", description),
+              [handleInputChange]
+            )}
+          />
         </div>
+
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          formData={formState}
+          items={formState.items}
+          deliveryDetails={{
+            currentLocation: formState.currentLocation,
+            pickUpDate: formState.pickUpDate,
+            pickUpTime: formState.pickUpTime,
+            returnEstimate: formState.estimatedReturn, // Pass estimated return
+          }}
+          onConfirm={handleConfirm}
+        />
+
         <Button
-          text="Send"
-          onClick={handleSend}
+          text="Confirm"
+          onClick={() => {
+            const { items, currentLocation, pickUpDate, pickUpTime } =
+              formState;
+
+            if (
+              items.length === 0 ||
+              !currentLocation ||
+              !pickUpDate ||
+              !pickUpTime
+            ) {
+              toast.error(
+                "Please fill in all required fields before confirming."
+              );
+              return;
+            }
+            if (items.some((item) => item.quantity <= 0)) {
+              toast.error("Please select at least one quantity for each item.");
+              return;
+            }
+            handleOpenModal();
+          }}
+          loading={loading}
           className={styles.LaundryDoneButton}
         />
       </div>
