@@ -1,5 +1,6 @@
 import React from "react";
-import './Checkbox.css'
+import "./Checkbox.css";
+
 interface CheckboxProps {
   label?: string;
   checked?: boolean;
@@ -22,9 +23,8 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
       />
-          <div className="checkmark"></div>
+      <div className="checkmark"></div>
       {label && <div className={`checkbox_Label ${labelClassName}`}>{label}</div>}
     </label>
   );
 };
-

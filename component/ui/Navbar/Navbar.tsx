@@ -20,10 +20,11 @@ import {
   Toggle,
   SMCDI,
   NavbarFrame,
-  Toast
+  Toast,
 } from "./navbar.styles";
 import UserDropdown from "@/component/userDropdown/UserDropdown";
 import { useLocation } from "@/context/LocationProvider";
+import { useCartItems } from "@/context/CartItems";
 import { FaBagShopping } from "react-icons/fa6";
 import { ImLocation } from "react-icons/im";
 import { useCart } from "@/hooks/useCart";
@@ -33,16 +34,16 @@ import Cookies from "js-cookie";
 import LocationModal from "@/component/newLocationModal/LocationModal";
 import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { CartDropdown } from "@/containers/CartDropdown/CartDropdown";
-
+import { FoodData } from "@/utils/types/types";
 
 const Navbar = () => {
   const { data: session, status } = useSession({
     required: false,
   });
-
   const pathname = usePathname();
   const router = useRouter();
   const { location } = useLocation();
+  const { cartItems } = useCartItems(); // Use the new context
   const [showToast, setShowToast] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -51,11 +52,7 @@ const Navbar = () => {
   const switchModal = (type: "signup" | "signin") => setAuthModal(type);
   const [companyName] = useState<string>("diboruwa");
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
-
   const cartDropdownRef = useRef<HTMLDivElement | null>(null);
-
-  const { cartItems, getCart, getSubscriptions, subscriptions } =
-    useCartStore();
 
   const { totalQuantities } = useCart();
 
@@ -78,7 +75,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const openAuthModal = (type: "signup" | "signin") => setAuthModal(type); // Type added to function parameter
+  const openAuthModal = (type: "signup" | "signin") => setAuthModal(type);
   const closeAuthModal = () => setAuthModal(null);
 
   useEffect(() => {
@@ -91,7 +88,8 @@ const Navbar = () => {
       } else if (lastModalShown) {
         const lastShownTime = new Date(lastModalShown).getTime();
         const currentTime = new Date().getTime();
-        const hoursSinceLastShown = (currentTime - lastShownTime) / (1000 * 60 * 60);
+        const hoursSinceLastShown =
+          (currentTime - lastShownTime) / (1000 * 60 * 60);
 
         // Open modal if more than 24 hours have passed
         if (hoursSinceLastShown >= 24) {
@@ -113,18 +111,17 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        cartDropdownRef.current &&
-        !cartDropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
-      }
+      setTimeout(() => {
+        if (
+          cartDropdownRef.current &&
+          !cartDropdownRef.current.contains(event.target as Node)
+        ) {
+          setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
+        }
+      }, 100); // Add a 100ms delay
     };
 
-    // Bind the event listener
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Cleanup the event listener on component unmount
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -158,7 +155,10 @@ const Navbar = () => {
                 <li key={index}>
                   {link?.subroutes ? (
                     <SMCDI>
-                      <ServiceMenu trigger={link.name} routes={link?.subroutes} />
+                      <ServiceMenu
+                        trigger={link.name}
+                        routes={link?.subroutes}
+                      />
                       <CaretDownIcon className="icon" aria-hidden />
                     </SMCDI>
                   ) : (
@@ -192,7 +192,9 @@ const Navbar = () => {
                         <>
                           <ServiceMenu
                             toggle={() =>
-                              setToggle((prev) => (prev === true ? false : false))
+                              setToggle((prev) =>
+                                prev === true ? false : false
+                              )
                             }
                             trigger={link.name}
                             routes={link?.subroutes}
@@ -268,11 +270,11 @@ const Navbar = () => {
             )}
 
             {session && (
-              <div 
-                className="SA_location" 
+              <div
+                className="SA_location"
                 aria-label="User location"
                 onClick={openLocationModal}
-                style={{cursor: "pointer" }}
+                style={{ cursor: "pointer" }}
               >
                 <ImLocation className="SA_location_icon" />
                 <p className="SA_location_text">
@@ -291,21 +293,37 @@ const Navbar = () => {
             {session && (
               <>
                 <div className="cart">
-                  {totalQuantities >= 1 ? (
-                    <div className="badge">{totalQuantities}</div>
+                  {cartItems.length >= 1 ? (
+                    <div className="badge">{cartItems.length}</div>
                   ) : (
                     <></>
                   )}
-                  <button
-                    type="button"
-                    style={{ textDecoration: "none", color: "var(--primary)" }}
-                    onClick={() => setIsCartDropdownOpen((prev) => !prev)}
-                  >
-                    <FaBagShopping className="cart_icon" />
-                  </button>
+                  {isCartDropdownOpen ? (
+                    <div
+                      style={{
+                        textDecoration: "none",
+                        color: "var(--primary)",
+                      }}
+                    >
+                      <p style={{ display: "none" }}>ggc</p>
+                      <FaBagShopping className="cart_icon" />
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      style={{
+                        textDecoration: "none",
+                        color: "var(--primary)",
+                      }}
+                      onClick={() => setIsCartDropdownOpen(true)}
+                    >
+                      <FaBagShopping className="cart_icon" />
+                    </button>
+                  )}
+
                   {isCartDropdownOpen && (
                     <div ref={cartDropdownRef} className="CartDropdown">
-                      <CartDropdown />
+                      <CartDropdown cartItems={cartItems}  setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Pass cartItems */}
                     </div>
                   )}
                 </div>
@@ -324,20 +342,19 @@ const Navbar = () => {
         </NavbarFrame>
       </NavbarContainer>
       {isLocationModalOpen && (
-          <LocationModal
-            isOpen={isLocationModalOpen}
-            onClose={closeLocationModal}
-            onShowToast={triggerToast}
-            
-          />
-        )}
+        <LocationModal
+          isOpen={isLocationModalOpen}
+          onClose={closeLocationModal}
+          onShowToast={triggerToast}
+        />
+      )}
 
-        {showToast && (
-                <Toast $isVisible={showToast}>
-                  <FaCheckCircle />
-                  Location successfully updated!
-                </Toast>
-              )}
+      {showToast && (
+        <Toast $isVisible={showToast}>
+          <FaCheckCircle />
+          Location successfully updated!
+        </Toast>
+      )}
     </>
   );
 };

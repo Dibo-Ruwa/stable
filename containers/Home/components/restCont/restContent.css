@@ -39,6 +39,11 @@
   margin-top: -4rem;
   padding-bottom: 2rem;
 }
+@media screen and (max-width: 399px) {
+  .resturant-text_container {
+    margin-top: 0;
+  }
+}
 .resturant-btn_text {
   font-size: 13px;
   background: #565656;

@@ -6,15 +6,18 @@ import Dropdown from "./ui/Dropdown";
 import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import Cookies from "js-cookie";
 import { useLocation } from "@/context/LocationProvider";
-import { ModalWrapper, 
-  ModalBody, 
-  ModalContent, ModalHeader, 
-  CloseButton, LoadingMessage, 
-  ErrorMessage, 
-  DropdownWrapper, 
-  SubmitButton, 
-  FormControl, 
-  Toast 
+import {
+  ModalWrapper,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  CloseButton,
+  LoadingMessage,
+  ErrorMessage,
+  DropdownWrapper,
+  SubmitButton,
+  FormControl,
+  Toast,
 } from "./newLocationModal/location.style";
 
 interface CityData {
@@ -23,8 +26,10 @@ interface CityData {
   regions: { _id: string; name: string }[];
 }
 
-const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
-  
+const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
+  isOpen,
+  onClose,
+}) => {
   const { setLocation } = useLocation();
 
   const [showModal, setShowModal] = useState<boolean>(true);
@@ -40,9 +45,7 @@ const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isO
   const [error, setError] = useState<string | null>(null);
   const [showToast, setShowToast] = useState(false);
 
-  const url =
-    process.env.NEXT_PUBLIC_ADMIN_URL ||
-    "https://diboruwa-admin-test.vercel.app";
+  const url = process.env.NEXT_PUBLIC_ADMIN_URL;
 
   useEffect(() => {
     const fetchStatesAndRegions = async () => {
@@ -120,7 +123,6 @@ const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isO
     fetchStatesAndRegions();
   }, [url]);
 
-
   useEffect(() => {
     const checkModalVisibility = () => {
       const locationData = Cookies.get(`${companyName}_location`);
@@ -142,13 +144,11 @@ const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isO
         }
       } else {
         setShowModal(true);
-
       }
     };
 
     checkModalVisibility();
   }, [companyName]);
-
 
   const handleStateSelect = (state: string) => {
     setSelectedState(state || null);
@@ -195,7 +195,7 @@ const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isO
   //     }, 3000);
   //   }
   // };
-  
+
   const handleSubmit = () => {
     if (selectedState && selectedRegion) {
       // Update context
@@ -219,7 +219,6 @@ const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isO
     }
   };
 
-  
   return (
     <>
       {showModal && (

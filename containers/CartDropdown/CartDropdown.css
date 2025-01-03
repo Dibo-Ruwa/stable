@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: 0.6rem;
   width: 100%;
+  /* height: 95vh; */
+  /* overflow-y: auto; */
 }
 
 .CartDropdown_checkAndClear {
@@ -20,15 +22,15 @@
   @apply text-black text-base font-normal leading-normal not-italic font-poppins;
 }
 .CartDropdown_Clear {
-  @apply text-redText;
+  @apply text-redText ml-auto;
 }
 
 .CartDropdown_Cards {
-  @apply flex flex-col items-center gap-4 w-full;
+  @apply flex flex-col items-center gap-4 w-full max-h-[85vh] overflow-auto;
 }
 
 .CartDropdown_Card {
-  @apply flex w-full p-[10px] flex-col justify-center gap-[10px] rounded-[10px] bg-cartCardColor;
+  @apply flex w-full  p-[10px] flex-col justify-center gap-[10px] rounded-[10px] bg-cartCardColor;
 }
 
 .CartDropdown_CardTop {
@@ -39,11 +41,18 @@
   @apply flex justify-center items-center gap-[8px];
 }
 
-/* .CartDropdown_DetailsImage {
+
+
+.CartDropdown_DetailsImage {
+  @apply relative flex bg-gray-400 h-[50px] object-cover justify-center  items-center gap-[8px] overflow-hidden rounded-[10px];
 }
 
+.CartDropdown_DetailsImage_dup {
+  @apply absolute bg-red-500 top-0 h-[48px] w-[70px] -left-1 transform scale-y-100 rotate-[-25deg];
+}
 .TheCartImage {
-} */
+ @apply object-cover
+}
 
 .CartTitleRatingANDTime {
   @apply flex flex-col items-start gap-[14px];

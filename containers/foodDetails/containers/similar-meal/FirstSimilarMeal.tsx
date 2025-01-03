@@ -103,13 +103,13 @@ export const FirstSimilarMeal: React.FC<FirstSimilarMealProps> = ({ id }) => {
             );
           })}
         </MostSoldCards>
-        <SaleImgsContainer>
+        {/* <SaleImgsContainer>
           {FoodDiscountSale.map((item, index) => (
             <div key={index}>
               <MostSoldSaleImg src={item.img} alt={item.alt} />
             </div>
           ))}
-        </SaleImgsContainer>
+        </SaleImgsContainer> */}
       </MostSoldFrame>
     </MostSoldContainer>
   );

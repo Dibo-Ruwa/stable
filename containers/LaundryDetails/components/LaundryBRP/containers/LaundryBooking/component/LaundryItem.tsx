@@ -63,7 +63,7 @@ export const LaundryItem = () => {
   console.log("FORM STATE", formState);
 
   return (
-    <div className={styles.LaundryBookingContainer}>
+    <form className={styles.LaundryBookingContainer}>
       <div className={styles.LaundryItemContainer}>
         <p className={styles.MovingItemTextQuest}>What do you want to clean?</p>
 
@@ -163,6 +163,6 @@ export const LaundryItem = () => {
           className={styles.LaundryDoneButton}
         />
       </div>
-    </div>
+    </form>
   );
 };

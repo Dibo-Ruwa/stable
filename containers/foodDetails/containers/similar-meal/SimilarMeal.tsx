@@ -16,7 +16,7 @@ export const SimilarMeal: React.FC<SimilarMealProps> = ({ id }) => {
   return (
     <MostSoldContainer>
       <FirstSimilarMeal id={id} />
-      <SecondSimilarMeal id={id} />
+      {/* <SecondSimilarMeal id={id} /> */}
     </MostSoldContainer>
   );
 };

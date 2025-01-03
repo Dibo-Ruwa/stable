@@ -5,11 +5,7 @@ import { CTADelivery } from "../cta-delivery/CTADelivery";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { FaAngleRight } from "react-icons/fa";
 import { useFoodItem } from "@/context/FooItemProvider";
-import { FoodData } from "@/utils/types/types";
 
-interface DisplayFoodProps {
-  food: FoodData;
-}
 // Styled components
 const Container = styled.section`
   width: 100%;
@@ -68,7 +64,7 @@ const NextBtn = styled(TfiAngleRight)`
   background: #eaebee;
 `;
 
-export const DisplayFood = () => {
+export const AllCartsFood = () => {
   const { selectedItem } = useFoodItem();
 
   return (
@@ -76,7 +72,7 @@ export const DisplayFood = () => {
       <DisplayImg>
       <OnDisplayImg src={selectedItem?.imageUrl} alt="on display" />
       </DisplayImg>
-      {/* <SelectedImg>
+      <SelectedImg>
         <PrevBtn />
         <OnSelectedImg
           src="/images/151e2d46640e246f42f769231cc76bab.png"
@@ -99,7 +95,7 @@ export const DisplayFood = () => {
           alt="on selected"
         />
         <NextBtn />
-      </SelectedImg> */}
+      </SelectedImg>
       <AboutFood  selectedItem={selectedItem}/>
       <CTADelivery />
     </Container>
