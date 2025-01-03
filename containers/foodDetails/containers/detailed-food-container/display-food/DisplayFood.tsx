@@ -5,7 +5,11 @@ import { CTADelivery } from "../cta-delivery/CTADelivery";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { FaAngleRight } from "react-icons/fa";
 import { useFoodItem } from "@/context/FooItemProvider";
+import { FoodData } from "@/utils/types/types";
 
+interface DisplayFoodProps {
+  food: FoodData;
+}
 // Styled components
 const Container = styled.section`
   width: 100%;

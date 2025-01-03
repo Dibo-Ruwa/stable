@@ -104,7 +104,7 @@ const MostSold: React.FC<MostSoldProps> = ({
       <section className="mostsold_container">
         {visibleItems?.length === 0 ? (
           <p
-            style={{
+            style={{  
               textAlign: "center",
               fontSize: "30px",
               fontWeight: 600,
