@@ -4,11 +4,12 @@ import Link from "next/link";
 import { FoodData } from "@/utils/types/types";
 import { FaStar } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
-import { useFoodItem } from "@/context/FooItemProvider";// Import the hook
+import { useFoodItem } from "@/context/FooItemProvider"; // For setSelectedItem
+import { useCartItems } from "@/context/CartItems"; // For addToCart
 import { useRouter } from "next/navigation";
+import { Toast } from "@/lib/Toast";
 
 interface MostSoldProps {
- 
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   activeButton: string;
@@ -16,27 +17,52 @@ interface MostSoldProps {
 }
 
 const MostSold: React.FC<MostSoldProps> = ({
-  
   foodData,
   searchQuery,
   setSearchQuery,
   activeButton,
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>(foodData);
-  const { setSelectedItem } = useFoodItem(); // Use the hook
+  const { setSelectedItem } = useFoodItem(); // Use the old context
+  const { addToCart, cartItems, setIsCart } = useCartItems(); // Use the new context
   const router = useRouter();
+  const [showToast, setShowToast] = useState(false); // State for toast visibility
+  const [addedItems, setAddedItems] = useState<Set<string>>(new Set()); // Track added items
+
+  // Load added items from local storage on component mount
+  useEffect(() => {
+    const savedCartItems = localStorage.getItem("cartItems");
+    if (savedCartItems) {
+      const parsedCartItems: FoodData[] = JSON.parse(savedCartItems);
+      const itemIds = new Set(parsedCartItems.map((item) => item._id));
+      setAddedItems(itemIds);
+    }
+  }, []);
+
+  // Update addedItems when cartItems change
+  useEffect(() => {
+    const itemIds = new Set(cartItems.map((item) => item._id));
+    setAddedItems(itemIds);
+  }, [cartItems]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
 
-   // Function to handle item click
-   const handleItemClick = (item: FoodData) => {
-    console.log(item)
-    setSelectedItem(item); // Save the selected item to context
+  // Function to handle item click
+  const handleItemClick = (item: FoodData) => {
+    console.log(item);
+    setSelectedItem(item); // Save the selected item using useFoodItem
+    setIsCart(true) // To display the select item in the details page
     router.push(`/food/checkout`); // Navigate to the item's page
   };
 
+  // Function to handle adding item to cart
+  const handleItemAddToCart = (item: FoodData) => {
+    console.log(item);
+    addToCart(item); // Add the item to the cart using useCartItems
+    setShowToast(true); // Show toast when item is added to cart
+  };
 
   // Filter foodData based on activeButton and searchQuery
   useEffect(() => {
@@ -131,12 +157,11 @@ const MostSold: React.FC<MostSoldProps> = ({
             </div>
             <div className="mostsold-cards">
               {visibleItems.map((item) => (
-                <div
-                  key={item._id}
-                  className="mostsold-card"
-                  onClick={() => handleItemClick(item)}// Save the selected item
-                >
-                  <div className="mostsold-card_food-img">
+                <div key={item._id} className="mostsold-card">
+                  <div
+                    onClick={() => handleItemClick(item)} // Save the selected item
+                    className="mostsold-card_food-img"
+                  >
                     <img
                       src={item.imageUrl}
                       alt={item.title}
@@ -144,7 +169,10 @@ const MostSold: React.FC<MostSoldProps> = ({
                     />
                   </div>
                   <div className="mostsold-card_content">
-                    <div className="mostsold-card_context">
+                    <div
+                      onClick={() => handleItemClick(item)} // Save the selected item
+                      className="mostsold-card_context"
+                    >
                       <div className="mostsold-card_context-top">
                         <small className="mostsold-card_title">
                           {item.title}
@@ -163,14 +191,24 @@ const MostSold: React.FC<MostSoldProps> = ({
                         fontSize: "14px",
                         color: "#8F8F8F",
                       }}
+                      onClick={() => handleItemClick(item)} // Save the selected item
                     >
                       {item?.vendor?.name}
                     </p>
                     <div className="mostsold-card_prize">
-                      <p className="mostsold-card_prize-text">₦{item.price}</p>
+                      <p
+                        onClick={() => handleItemClick(item)} // Save the selected item
+                        className="mostsold-card_prize-text"
+                      >
+                        ₦{item.price}
+                      </p>
                       <button
+                        onClick={() => handleItemAddToCart(item)} // Add the item to the cart
                         type="button"
-                        className="mostsold-card_prize-link"
+                        className={`mostsold-card_prize-link ${
+                          addedItems.has(item._id) ? "added-to-cart" : ""
+                        }`}
+                        disabled={addedItems.has(item._id)} // Disable the button if the item is already in the cart
                       >
                         <FaBagShopping className="mostsold-card_prize-icon" />
                       </button>
@@ -182,6 +220,13 @@ const MostSold: React.FC<MostSoldProps> = ({
           </div>
         )}
       </section>
+
+      {/* Toast for adding item to cart */}
+      <Toast
+        message="Item added to cart!"
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
     </div>
   );
 };

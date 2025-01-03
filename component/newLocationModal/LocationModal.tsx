@@ -147,11 +147,12 @@ const LocationModal: React.FC<{
           <small className="small">
             Delivery options and fees may vary based on your location
           </small>
-          {location?.state!== '' && location?.region!== '' &&
-          <CloseButton onClick={handleModalClose}>✖</CloseButton>
-          }
+          {location?.state && (
+            <CloseButton onClick={handleModalClose}>✖</CloseButton>
+          )}
         </ModalHeader>
         <ModalBody>
+         
           {error && <ErrorMessage>{error}</ErrorMessage>}
           {isLoading ? (
             <LoadingMessage>Loading locations...</LoadingMessage>

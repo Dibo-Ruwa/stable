@@ -161,3 +161,5 @@ export interface FoodData {
   __v: number;
   id: string;
 }
+
+export type FoodDatas = FoodData[];

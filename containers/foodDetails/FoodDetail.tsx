@@ -13,7 +13,8 @@ import toast from "react-hot-toast";
 import { DisplayFood } from "./containers/detailed-food-container/display-food/DisplayFood";
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
 import { SimilarMeal } from "./containers/similar-meal/SimilarMeal";
-
+import { useCartItems } from "@/context/CartItems";
+import { AllCartsFood } from "./containers/detailed-food-container/display-food/allCartsFood";
 
 // Styled components
 const FoodDetailsContainer = styled.section`
@@ -81,6 +82,7 @@ const ClearOut = styled.div`
 `;
 
 const FoodDetail: React.FC = () => {
+  const { isCart, setIsCart } = useCartItems();
 
   return (
     <FoodDetailsContainer>
@@ -90,7 +92,13 @@ const FoodDetail: React.FC = () => {
         </div>
         <DFCS>
           <DFCSFood>
-            <DisplayFood />
+            {isCart ?
+            (
+
+              <DisplayFood />
+            ):(
+              <AllCartsFood />
+            )}
             {/* <SimilarMeal id={id} /> */}
           </DFCSFood>
           <DFCSCheck>

@@ -43,7 +43,7 @@ const Food: React.FC<FoodProps> = () => {
           setFilteredFoodData(data); // If no location, use all data
         }
 
-        setFoodData(data); // Set the original data (optional, if needed elsewhere)
+        // setFoodData(data); // Set the original data (optional, if needed elsewhere)
         // console.log("Fetched food data:", data); // Log fetched data
       } catch (error) {
         console.error("Error fetching food data:", error);
