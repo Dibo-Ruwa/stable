@@ -14,7 +14,7 @@ import { DisplayFood } from "./containers/detailed-food-container/display-food/D
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
 import { SimilarMeal } from "./containers/similar-meal/SimilarMeal";
 import { useCartItems } from "@/context/CartItems";
-import { AllCartsFood } from "./containers/detailed-food-container/display-food/allCartsFood";
+import { AllCartsFood } from "./containers/detailed-food-container/display-food/AllCartsFood";
 
 // Styled components
 const FoodDetailsContainer = styled.section`
