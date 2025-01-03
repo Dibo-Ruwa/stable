@@ -176,6 +176,20 @@ p.mostsold-card_prize-text {
   color: #fefefe;
 }
 
+/* Style for the disabled "Add to Cart" button */
+.mostsold-card_prize-link.added-to-cart {
+  background-color: #ccc; /* Gray background */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  opacity: 0.7; /* Reduce opacity */
+}
+
+/* Style for the disabled button (native disabled attribute) */
+.mostsold-card_prize-link:disabled {
+  background-color: #ccc; /* Gray background */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  opacity: 0.7; /* Reduce opacity */
+}
+
 .sale-imgs-container {
   display: flex;
   margin: 3rem auto;

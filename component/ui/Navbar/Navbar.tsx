@@ -24,7 +24,7 @@ import {
 } from "./navbar.styles";
 import UserDropdown from "@/component/userDropdown/UserDropdown";
 import { useLocation } from "@/context/LocationProvider";
-import { useFoodItem } from "@/context/FooItemProvider";
+import { useCartItems } from "@/context/CartItems";
 import { FaBagShopping } from "react-icons/fa6";
 import { ImLocation } from "react-icons/im";
 import { useCart } from "@/hooks/useCart";
@@ -36,7 +36,6 @@ import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { CartDropdown } from "@/containers/CartDropdown/CartDropdown";
 import { FoodData } from "@/utils/types/types";
 
-
 const Navbar = () => {
   const { data: session, status } = useSession({
     required: false,
@@ -44,7 +43,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { location } = useLocation();
-  const { selectedItem } = useFoodItem();
+  const { cartItems } = useCartItems(); // Use the new context
   const [showToast, setShowToast] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -54,9 +53,6 @@ const Navbar = () => {
   const [companyName] = useState<string>("diboruwa");
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const cartDropdownRef = useRef<HTMLDivElement | null>(null);
-
-  const { cartItems, getCart, getSubscriptions, subscriptions } =
-    useCartStore();
 
   const { totalQuantities } = useCart();
 
@@ -79,7 +75,7 @@ const Navbar = () => {
     };
   }, []);
 
-  const openAuthModal = (type: "signup" | "signin") => setAuthModal(type); // Type added to function parameter
+  const openAuthModal = (type: "signup" | "signin") => setAuthModal(type);
   const closeAuthModal = () => setAuthModal(null);
 
   useEffect(() => {
@@ -297,25 +293,19 @@ const Navbar = () => {
             {session && (
               <>
                 <div className="cart">
-                  {totalQuantities >= 1 ? (
-                    <div className="badge">{totalQuantities}</div>
+                  {cartItems.length >= 1 ? (
+                    <div className="badge">{cartItems.length}</div>
                   ) : (
                     <></>
                   )}
                   {isCartDropdownOpen ? (
                     <div
-                      // type="button"
                       style={{
                         textDecoration: "none",
                         color: "var(--primary)",
                       }}
-                      // onClick={() => setIsCartDropdownOpen(false)}
                     >
-                      <p 
-                      style={{
-                        display: 'none'
-                      }}
-                      >ggc</p>
+                      <p style={{ display: "none" }}>ggc</p>
                       <FaBagShopping className="cart_icon" />
                     </div>
                   ) : (
@@ -333,7 +323,7 @@ const Navbar = () => {
 
                   {isCartDropdownOpen && (
                     <div ref={cartDropdownRef} className="CartDropdown">
-                      <CartDropdown selectedItem={selectedItem} />
+                      <CartDropdown cartItems={cartItems}  setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Pass cartItems */}
                     </div>
                   )}
                 </div>

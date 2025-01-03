@@ -9,6 +9,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import { MantineProvider } from "@mantine/core";
 import { LocationProvider } from "@/context/LocationProvider";
 import { FoodItemProvider } from "@/context/FooItemProvider";
+import { CartItemsProvider } from "@/context/CartItems";
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
@@ -16,13 +17,15 @@ const Providers = ({ children }: { children: ReactNode }) => {
       <MantineProvider>
         <NextUIProvider>
           <LocationProvider>
-            <FoodItemProvider>
-              <StyledComponentsRegistry>
-                <AuthGuard>
-                  {children} <Toaster />
-                </AuthGuard>
-              </StyledComponentsRegistry>
-            </FoodItemProvider>
+            <CartItemsProvider>
+              <FoodItemProvider>
+                <StyledComponentsRegistry>
+                  <AuthGuard>
+                    {children} <Toaster />
+                  </AuthGuard>
+                </StyledComponentsRegistry>
+              </FoodItemProvider>
+            </CartItemsProvider>
           </LocationProvider>
         </NextUIProvider>
       </MantineProvider>

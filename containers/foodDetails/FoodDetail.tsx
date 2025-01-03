@@ -1,19 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Product, products, restaurants } from "@/constants";
-import Image from "next/image";
-import ProductCard from "@/component/ProductCard/ProductCard";
-import useCartStore from "@/store/useCart.store";
-import Modal from "@/component/modals/Modal";
 import BackButton from "@/component/ui/BackButton/BackButton";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import { DisplayFood } from "./containers/detailed-food-container/display-food/DisplayFood";
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
 import { SimilarMeal } from "./containers/similar-meal/SimilarMeal";
-
+import { useCartItems } from "@/context/CartItems";
+import { AllCartsFood } from "./containers/detailed-food-container/display-food/AllCartsFood";
 
 // Styled components
 const FoodDetailsContainer = styled.section`
@@ -25,21 +18,20 @@ const FoodDetailsFrame = styled.div`
   margin-top: 6rem;
   width: min(95%, 1440px);
 
-
-   @media (max-width: 900px) {
-        width: min(95%, 1440px);
+  @media (max-width: 900px) {
+    width: min(95%, 1440px);
   }
 `;
 
 const DFCS = styled.div`
-  
   display: flex;
   gap: 3%;
   justify-content: space-between;
   position: relative;
 
-   @media (max-width: 900px) {
-      gap: 0%;
+  @media (max-width: 900px) {
+    gap: 0%;
+    flex-direction: column;
   }
 `;
 
@@ -47,7 +39,6 @@ const DFCSFood = styled.div`
   flex-basis: 67%;
 
   @media (max-width: 900px) {
-    /* Adjust styling for screens smaller than 900px */
     flex-basis: 100%;
   }
 `;
@@ -56,7 +47,7 @@ const DFCSCheck = styled.div`
   flex-basis: 30%;
 
   @media (max-width: 900px) {
-  position: fixed;
+    position: fixed;
     width: 400px;
     max-width: 90%;
     height: fit-content;
@@ -67,9 +58,9 @@ const DFCSCheck = styled.div`
 
 const ClearOut = styled.div`
   position: fixed;
-  width: 100dvw;
-  height: 100dvh;
-  background: transparent; 
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
   left: 0;
   top: 0;
   display: none;
@@ -77,10 +68,19 @@ const ClearOut = styled.div`
   @media (max-width: 900px) {
     display: block;
   }
- 
+`;
+
+const Loader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #888;
 `;
 
 const FoodDetail: React.FC = () => {
+  const { isCart, setIsCart } = useCartItems();
 
   return (
     <FoodDetailsContainer>
@@ -90,7 +90,13 @@ const FoodDetail: React.FC = () => {
         </div>
         <DFCS>
           <DFCSFood>
-            <DisplayFood />
+            {isCart ?
+            (
+
+              <DisplayFood />
+            ):(
+              <AllCartsFood />
+            )}
             {/* <SimilarMeal id={id} /> */}
           </DFCSFood>
           <DFCSCheck>
@@ -98,7 +104,6 @@ const FoodDetail: React.FC = () => {
             <CheckoutStore />
           </DFCSCheck>
         </DFCS>
-       
       </FoodDetailsFrame>
     </FoodDetailsContainer>
   );
