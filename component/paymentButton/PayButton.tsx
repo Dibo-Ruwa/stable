@@ -1,8 +1,7 @@
 import { usePaystackPayment } from "react-paystack";
 import { toast } from "react-hot-toast";
 import { useSession } from "next-auth/react";
-
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import Button from "../ui/button/Button";
 import useOrder from "@/hooks/useOrder";
@@ -17,7 +16,7 @@ interface PaymentButtonProps {
     errorType: "success" | "error" | "info",
     errorMessage: string
   ) => void;
-  onSuccess: () => void;
+  onSuccess: () => Promise<void>;
   onClose: () => void;
 }
 
@@ -33,6 +32,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   onClose,
   referenceId,
 }) => {
+  const [isProcessing, setIsProcessing] = useState(false);
   const { data: session } = useSession();
 
   const getPaystackConfig = (
@@ -60,26 +60,40 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   const config = getPaystackConfig(referenceId, totalPrice, planCode);
   const paymentFn = usePaystackPayment(config);
   const handlePayment = () => {
-    if (
-      session?.user.phone &&
-      session?.user.address &&
-      session?.user.state &&
-      session?.user.lga
-    ) {
-      paymentFn(onSuccess, onClose);
-    } else {
-      toast.error("Please complete your profile before making a payment.");
-      openModal &&
-        openModal(
-          "info",
-          "Please complete your profile before making a payment."
-        );
+    if (isProcessing) return;
+
+    try {
+      setIsProcessing(true);
+      if (!session?.user.phone || !session?.user.address || !session?.user.state || !session?.user.lga) {
+        toast.error("Please complete your profile before making a payment.");
+        openModal?.("info", "Please complete your profile before making a payment.");
+        return;
+      }
+
+      paymentFn(
+        () => {
+          onSuccess();
+          setIsProcessing(false);
+        },
+        () => {
+          onClose();
+          setIsProcessing(false);
+        }
+      );
+    } catch (error) {
+      setIsProcessing(false);
+      toast.error("Payment failed to initialize");
     }
   };
 
   return (
-    <Button size="small"  color={color} onClick={handlePayment}>
-      {buttonText}
+    <Button 
+      size="small" 
+      color={color} 
+      onClick={handlePayment}
+      disabled={isProcessing}
+    >
+      {isProcessing ? "Processing..." : buttonText}
     </Button>
   );
 };

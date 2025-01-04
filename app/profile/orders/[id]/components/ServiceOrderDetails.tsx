@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IoMdStopwatch } from "react-icons/io";
 import { IoLocationOutline } from "react-icons/io5";
@@ -6,6 +6,53 @@ import { FaBoxes, FaMoneyBillWave } from "react-icons/fa";
 import PaymentButton from "@/component/paymentButton/PayButton";
 import useOrder from "@/hooks/useOrder";
 import { nanoid } from "nanoid";
+import { ServiceOrderDetailsProps, StatusConfig } from "@/types/service.types";
+import { MdPayments, MdPending } from "react-icons/md";
+import { FaCheckCircle, FaTruck, FaBoxOpen, FaSpinner } from "react-icons/fa";
+
+const capitalizeStatus = (status: string): string => {
+  return status?.charAt(0).toUpperCase() + status?.slice(1).toLowerCase();
+};
+
+const getStatusConfig = (status: string): StatusConfig => {
+  switch (status?.toLowerCase()) {
+    case "processing":
+      return {
+        bg: "#e3f2fd",
+        text: "#1976d2",
+        icon: <FaSpinner className="animate-spin" />,
+        label: "Processing",
+      };
+    case "dispatched":
+      return {
+        bg: "#fff3e0",
+        text: "#f57c00",
+        icon: <FaTruck className="animate-bounce" />,
+        label: "On the way",
+      };
+    case "delivered":
+      return {
+        bg: "#e8f5e9",
+        text: "#2e7d32",
+        icon: <FaCheckCircle />,
+        label: "Completed",
+      };
+    default:
+      return {
+        bg: "#f3e5f5",
+        text: "#7b1fa2",
+        icon: <MdPending />,
+        label: "Pending",
+      };
+  }
+};
+
+const getPaymentBadge = (isPaid: boolean) => ({
+  bg: isPaid ? "#e8f5e9" : "#fff3e0",
+  text: isPaid ? "#2e7d32" : "#f57c00",
+  icon: isPaid ? <FaCheckCircle /> : <MdPayments className="animate-pulse" />,
+  label: isPaid ? "Paid" : "Payment Required",
+});
 
 const Container = styled.div`
   max-width: 800px;
@@ -26,6 +73,10 @@ const CardHeader = styled.div`
   background: #f8fafc;
   padding: 2rem;
   border-bottom: 1px solid #eee;
+
+  h1 {
+    margin-bottom: 15px;
+  }
 `;
 
 const CardBody = styled.div`
@@ -50,7 +101,7 @@ const PaymentSection = styled.div`
     gap: 0.5rem;
     font-size: 1.2rem;
     color: #1a1a1a;
-    
+
     svg {
       color: #666;
     }
@@ -66,7 +117,7 @@ const PaymentSection = styled.div`
   }
 `;
 
-const MainInfo = styled.div`
+const MainInfo = styled.div<{ statusColor: Pick<StatusConfig, "bg" | "text"> }>`
   background: white;
   padding: 1.5rem;
 
@@ -82,8 +133,8 @@ const MainInfo = styled.div`
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
-    background: ${props => props.isPaid ? '#e8f5e9' : '#fff3e0'};
-    color: ${props => props.isPaid ? '#2e7d32' : '#f57c00'};
+    background: ${(props) => props.statusColor.bg};
+    color: ${(props) => props.statusColor.text};
   }
 `;
 
@@ -121,7 +172,7 @@ const ItemsGrid = styled.div`
     border-radius: 6px;
     font-size: 0.85rem;
     color: #475569;
-    
+
     span {
       font-weight: 500;
       color: #333;
@@ -130,39 +181,85 @@ const ItemsGrid = styled.div`
   }
 `;
 
-export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({ orderId, quote }) => {
-  const { openModal, handleRequestPayment } = useOrder();
-  const referenceId = nanoid(8);
+const StatusBadge = styled.div<{ config: StatusConfig }>`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: ${(props) => props.config.bg};
+  color: ${(props) => props.config.text};
 
-  const onSuccess = () => {
-    handleRequestPayment(referenceId, orderId);
+  .icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+
+  .divider {
+    margin: 0 0.5rem;
+    opacity: 0.5;
+  }
+`;
+
+const StatusBadges = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`;
+
+export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({
+  orderId,
+  quote,
+}) => {
+  const { openModal, handleRequestPayment, isSubmitting } = useOrder();
+  const referenceId = nanoid(8);
+  const statusConfig = getStatusConfig(quote?.status);
+  const paymentConfig = getPaymentBadge(quote?.isPaid);
+
+  const onSuccess = async () => {
+    await handleRequestPayment(referenceId, orderId);
   };
 
   const onClose = () => {
     console.log("closed");
   };
 
-  if (!quote) return (
-    <Container>
-      <Card style={{ display: 'block', padding: '2rem', textAlign: 'center' }}>
-        <IoMdStopwatch style={{ fontSize: '2rem', color: '#666', marginBottom: '1rem' }} />
-        <h2>Loading service details...</h2>
-      </Card>
-    </Container>
-  );
+  if (!quote)
+    return (
+      <Container>
+        <Card
+          style={{ display: "block", padding: "2rem", textAlign: "center" }}
+        >
+          <IoMdStopwatch
+            style={{ fontSize: "2rem", color: "#666", marginBottom: "1rem" }}
+          />
+          <h2>Loading service details...</h2>
+        </Card>
+      </Container>
+    );
 
   return (
     <Container>
       <Card>
         <CardHeader>
-          <h1>{quote.type.charAt(0).toUpperCase() + quote.type.slice(1)} Service</h1>
-          <div className="status-badge">
-            {quote.status} • {quote.isPaid ? "Paid" : "Pending Payment"}
-          </div>
+          <h1>{capitalizeStatus(quote.type)} Service</h1>
+          <StatusBadges>
+            <StatusBadge config={statusConfig}>
+              <span className="icon">{statusConfig.icon}</span>
+              <span>Status: {capitalizeStatus(quote.status)}</span>
+            </StatusBadge>
+            <StatusBadge config={paymentConfig}>
+              <span className="icon">{paymentConfig.icon}</span>
+              <span>{paymentConfig.label}</span>
+            </StatusBadge>
+          </StatusBadges>
         </CardHeader>
 
         <CardBody>
-          <MainInfo isPaid={quote.isPaid}>
+          <MainInfo statusColor={statusConfig}>
             <InfoSection>
               <div className="label">
                 <IoMdStopwatch />
@@ -174,20 +271,21 @@ export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({ orderI
               </div>
             </InfoSection>
 
-            {quote.type === 'moving' && (
+            {quote.type === "moving" && (
               <InfoSection>
                 <div className="label">
                   <IoLocationOutline />
                   Route
                 </div>
                 <div className="value">
-                  From: {quote.currentLocation}<br />
+                  From: {quote.currentLocation}
+                  <br />
                   To: {quote.deliveryLocation}
                 </div>
               </InfoSection>
             )}
 
-            {(quote.type === 'cleaning' || quote.type === 'laundry') && (
+            {(quote.type === "cleaning" || quote.type === "laundry") && (
               <InfoSection>
                 <div className="label">
                   <IoLocationOutline />
@@ -205,9 +303,10 @@ export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({ orderI
                 Service Items
               </div>
               <ItemsGrid>
-                {quote.items.map(item => (
+                {quote.items.map((item) => (
                   <div key={item._id} className="item">
-                    {item.name}<span>×{item.amount}</span>
+                    {item.name}
+                    <span>×{item.amount}</span>
                   </div>
                 ))}
               </ItemsGrid>
@@ -215,7 +314,7 @@ export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({ orderI
           </ServiceInfo>
         </CardBody>
 
-        {!quote.isPaid  && (
+        {!quote.isPaid && !isSubmitting && (
           <PaymentSection>
             <div className="amount">
               <FaMoneyBillWave />
@@ -233,6 +332,12 @@ export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({ orderI
               />
             </div>
           </PaymentSection>
+        )}
+
+        {isSubmitting && (
+          <div className="flex justify-center p-4">
+            <span>Processing payment...</span>
+          </div>
         )}
       </Card>
     </Container>

@@ -36,6 +36,7 @@ import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { CartDropdown } from "@/containers/CartDropdown/CartDropdown";
 import { FoodData } from "@/utils/types/types";
 
+
 const Navbar = () => {
   const { data: session, status } = useSession({
     required: false,
@@ -55,6 +56,7 @@ const Navbar = () => {
   const cartDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const { totalQuantities } = useCart();
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -126,6 +128,7 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [cartDropdownRef]);
+
 
   return (
     <>

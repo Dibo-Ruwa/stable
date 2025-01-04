@@ -3,7 +3,6 @@ import {
   PartnerOrderNotificationComponent,
 } from "@/emails";
 import OrderConfirmation from "@/emails/FoodOrder";
-
 import { closeDB, connectDB } from "@/utils/db";
 import { authOptions } from "@/utils/helpers/authOptions";
 import { Cart } from "@/utils/models/Cart";
@@ -11,7 +10,6 @@ import { Order } from "@/utils/models/Order";
 import User from "@/utils/models/Users";
 import sendEmail from "@/utils/resend";
 import { sendMail } from "@/utils/sendMail";
-
 import moment from "moment";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
