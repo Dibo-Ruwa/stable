@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
-import { AboutFood } from "../about-food/AboutFood";
-import { CTADelivery } from "../cta-delivery/CTADelivery";
+import { AboutFoodCart } from "../about-food/AboutFoodCart";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
-import { FaAngleRight } from "react-icons/fa";
 import { useFoodItem } from "@/context/FooItemProvider";
+import { useCartItems } from "@/context/CartItems";
 
 // Styled components
 const Container = styled.section`
@@ -27,30 +26,66 @@ const SelectedImg = styled.div`
   display: flex;
   gap: 16px;
   justify-content: start;
-  margin-top: 1rem;
+  padding: 0 3.5rem;
+  margin: 1rem 0;
   overflow-x: auto;
+  scroll-behavior: smooth;
+  position: relative;
+`;
+
+const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const OnSelectedImg = styled.img`
-  width: 27%;
+  width: 120px;
   height: 120px;
   flex-shrink: 0;
+  border-radius: 10px;
+  object-fit: cover;
 
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
     height: 100px;
+    width: 100px;
   }
+`;
 
+const ItemTitle = styled.span`
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
 `;
 
 const PrevBtn = styled(TfiAngleLeft)`
   display: flex;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  padding: 10px;
+  height: 3rem;
   justify-content: center;
   align-items: center;
   gap: 10px;
   border-radius: 100px;
-  background: #eaebee;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
 `;
 
 const NextBtn = styled(TfiAngleRight)`
@@ -62,42 +97,54 @@ const NextBtn = styled(TfiAngleRight)`
   gap: 10px;
   border-radius: 100px;
   background: #eaebee;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  cursor: pointer;
 `;
 
 export const AllCartsFood = () => {
-  const { selectedItem } = useFoodItem();
+  const { selectedItem, setSelectedItem } = useFoodItem();
+  const { cartItems } = useCartItems();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Function to handle scrolling left
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+  };
+
+  // Function to handle scrolling right
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
+
+  // Function to handle item click
+  const handleItemClick = (item: typeof cartItems[0]) => {
+    setSelectedItem(item);
+  };
 
   return (
     <Container>
-      <DisplayImg>
-      <OnDisplayImg src={selectedItem?.imageUrl} alt="on display" />
-      </DisplayImg>
-      <SelectedImg>
-        <PrevBtn />
-        <OnSelectedImg
-          src="/images/151e2d46640e246f42f769231cc76bab.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/d8cc774cbb454c39b0c0a291406db198.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/d8cc774cbb454c39b0c0a291406db198.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/d8cc774cbb454c39b0c0a291406db198.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/7440670515731ae400623ae77f2ecbd7.png"
-          alt="on selected"
-        />
-        <NextBtn />
+      <SelectedImg ref={scrollRef}>
+        <PrevBtn onClick={scrollLeft} />
+        {cartItems.map((item) => (
+          <ItemContainer key={item._id} onClick={() => handleItemClick(item)}>
+            <OnSelectedImg src={item.imageUrl} alt={item.title} />
+            <ItemTitle>{item.title}</ItemTitle>
+          </ItemContainer>
+        ))}
+        <NextBtn onClick={scrollRight} />
       </SelectedImg>
-      <AboutFood  selectedItem={selectedItem}/>
-      <CTADelivery />
+      <DisplayImg>
+        <OnDisplayImg src={selectedItem?.imageUrl} alt="on display" />
+      </DisplayImg>
+      <AboutFoodCart selectedItem={selectedItem} />
     </Container>
   );
 };

@@ -5,17 +5,25 @@ import { CustomBookingModal } from "./CustomBookingModal";
 interface CustomBookingProps {
   activeButton: string;
   setActiveButton: (label: string) => void;
+  setSearchQuery: (label: string) => void;
 }
 
 const CustomBooking: React.FC<CustomBookingProps> = ({
   activeButton,
   setActiveButton,
+  setSearchQuery,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const handleButtonClick = (label: string) => {
-    setActiveButton(label);
-    console.log(label);
+  const handleButtonClick = (value: string) => {
+    setActiveButton(value);
+    if (value !== "all") {
+      setSearchQuery(value); // Only set search query if value is not "all"
+    } else {
+      setSearchQuery(''); // Only set search query if value is not "all"
+
+    }
+    console.log(value);
   };
 
   const openModal = () => {
@@ -31,7 +39,7 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
     { value: "all", label: "All" },
     { value: "swallow", label: "Swallow" },
     { value: "drinks", label: "Drinks" },
-    { value: "meats", label: "Protein" },
+    { value: "meat", label: "Protein" },
     { value: "Rice and Grain", label: "Rice and Grain" },
     { value: "snacks", label: "Snacks and Fries" },
     { value: "extras", label: "Extras" },
@@ -40,7 +48,6 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
   return (
     <div className="custombooking_container">
       <div className="custombooking_frame">
-
         <div className="min-buttons">
           {foodCategories.map((category) => (
             <button
