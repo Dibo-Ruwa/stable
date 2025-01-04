@@ -114,6 +114,22 @@ export interface MovingItemType {
   image: string | null;
 }
 
+export interface CleaningItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+  video: string | null;
+}
+
+
+export interface LaundryItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+}
+
 // export interface FoodData {
 //   _id: string;
 //   title: string;

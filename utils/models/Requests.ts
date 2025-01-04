@@ -25,6 +25,9 @@ const requestSchema = new Schema(
         image: {
           type: String, // Optional image for items
         },
+        video: {
+          type: String, // Optional video for cleaning items
+        },
       },
     ],
     currentLocation: {
@@ -37,6 +40,9 @@ const requestSchema = new Schema(
       type: Date, // Pickup date for the request
     },
     pickUpTime: {
+      type: String, // Pickup time for the request
+    },
+    estimatedReturn: {
       type: String, // Pickup time for the request
     },
     description: {

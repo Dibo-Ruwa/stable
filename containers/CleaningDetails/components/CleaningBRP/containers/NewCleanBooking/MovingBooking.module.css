@@ -554,12 +554,14 @@
   color: #fff;
 }
 
+
 .disabledButton {
   background: #cccccc;
   border: 1px solid #999999;
   color: #666666;
   cursor: not-allowed;
 }
+
 
 /* ===== Button ===== */
 .MovingDoneButton {

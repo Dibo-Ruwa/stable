@@ -10,7 +10,7 @@ export interface Quote {
   _id: string;
   type: string;
   categories: string[];
-  items: { name: string; quantity: number; image: string | null }[];
+  items: { name: string; quantity: number; image: string | null, video: string | null }[];
   currentLocation?: string;
   deliveryLocation?: string;
   pickUpDate?: string;
@@ -107,7 +107,6 @@ const useQuote = (): QuoteHook => {
   };
 
   const handleQuote = async (data: any): Promise<void> => {
-    console.log("Handle QUote"); // Debugging log
     setLoading(true);
     try {
       console.log("Sending data to API:", data);
@@ -132,11 +131,34 @@ const useQuote = (): QuoteHook => {
           });
           openModal("success", "Submitted successfully!");
           router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
-        } else {
-          const res = await interceptor.post(`/quotes`, { data });
+        } else if (data.type === "cleaning") {
+          const res = await interceptor.post(`/quotes/cleaning`, { data: {
+              type: data.type,
+              categories: data.categories,
+              items: data.items,
+              currentLocation: data.currentLocation,
+              pickUpDate: data.pickUpDate,
+              pickUpTime: data.pickUpTime,
+              description: data.description,
+            },
+         });
           openModal("success", "Submitted successfully!");
           router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
 
+        } else if(data.type === "laundry"){
+          const res = await interceptor.post(`/quotes/laundry`, { data: {
+              type: data.type,
+              categories: data.categories,
+              items: data.items,
+              currentLocation: data.currentLocation,
+              pickUpDate: data.pickUpDate,
+              pickUpTime: data.pickUpTime,
+              estimatedReturn: data.estimatedReturn,
+              description: data.description,
+            }, 
+          });
+          openModal("success", "Submitted successfully!");
+          router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
         }
 
       } else {
@@ -149,6 +171,29 @@ const useQuote = (): QuoteHook => {
       setLoading(false);
     }
   };
+
+  // const handleQuote = async (data: any): Promise<void> => {
+  //   setLoading(true);
+  //   try {
+  //     if (
+  //       session?.user.phone &&
+  //       session?.user.address &&
+  //       session?.user.state &&
+  //       session?.user.lga
+  //     ) {
+  //       const res = await interceptor.post(`/quotes/${data.type}`, { type: data.type, data });
+  //       toast.success("Submitted successfully!");
+  //       router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
+  //     } else {
+  //       toast.error("Please complete your profile.");
+  //     }
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //     toast.error(error.response?.data || "An error occurred");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return {
     showModal,
