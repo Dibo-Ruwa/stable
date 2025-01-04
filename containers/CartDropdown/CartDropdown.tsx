@@ -129,7 +129,15 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
                     </div>
                     <div className="CartTitleRatingANDTime">
                       <div className="CartTitleRating">
-                        <p className="CartTitle">{item?.title}</p>
+                        <p 
+                          style={{
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            // width: '150px',
+                            // background: '#453345'
+                          }}
+                        className="CartTitle ">{item?.title}</p>
                         <div className="CartRating_Content">
                           <FaStar className="CartRating_Star" />
                           <p className="CartRating_number">4.5</p>
@@ -143,8 +151,7 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
                   </div>
                   <div className="Cart_ODAmount">
                     <small className="Cart_OD">Offers Delivery</small>
-                    {/* <p className="Cart_Amount">₦{item?.price}</p> */}
-                    <p className="Cart_Amount">₦{item.totalPrice || item.price * item.quantity}</p>
+                    <p className="Cart_Amount">₦{item.totalPrice || item.price * Number(item?.quantity)}</p>
                   </div>
                 </div>
                 <div className="CartDropdown_CardDown">

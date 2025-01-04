@@ -55,15 +55,15 @@
 }
 
 .CartTitleRatingANDTime {
-  @apply flex flex-col items-start gap-[14px] w-[100px] mr-[4px];
+  @apply flex flex-col items-start gap-[14px] w-fit max-w-[150px] mr-[4px];
 }
 
 .CartTitleRating {
-  @apply flex items-center justify-between w-full;
+  @apply flex items-center justify-between w-fit;
 }
 
 .CartTitle {
-  @apply text-textColor;
+  @apply text-textColor w-[100px] max-w-[150px] ;
 }
 
 .CartRating_Content {
