@@ -4,7 +4,7 @@ import styled from "styled-components";
 import BackButton from "@/component/ui/BackButton/BackButton";
 import { DisplayFood } from "./containers/detailed-food-container/display-food/DisplayFood";
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
-import { SimilarMeal } from "./containers/similar-meal/SimilarMeal";
+// import { SimilarMeal } from "./containers/similar-meal/SimilarMeal";
 import { useCartItems } from "@/context/CartItems";
 import { AllCartsFood } from "./containers/detailed-food-container/display-food/AllCartsFood";
 
@@ -90,13 +90,11 @@ const FoodDetail: React.FC = () => {
         </div>
         <DFCS>
           <DFCSFood>
-            {isCart ?
-            (
-
-              <DisplayFood />
-            ):(
-              <AllCartsFood />
-            )}
+            {!isCart ? 
+            <DisplayFood /> 
+            :
+            <AllCartsFood />
+             }
             {/* <SimilarMeal id={id} /> */}
           </DFCSFood>
           <DFCSCheck>

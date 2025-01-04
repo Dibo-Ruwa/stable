@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { HiMinus } from "react-icons/hi2";
 import styled from "styled-components";
+import { useCartItems } from "@/context/CartItems"; // Import the cart context
+import { FoodData } from "@/utils/types/types"; // Import the FoodData type
 
 // Styled components
 const CTADeliveryContainer = styled.div`
@@ -98,14 +100,45 @@ const CTADeliveryButton = styled.button<{ isActive: boolean }>`
   }
 `;
 
-export const CTADelivery = () => {
-  const [count, setCount] = useState(0);
+interface CTADeliveryProps {
+  selectedItem: FoodData; // Pass the current item as a prop
+}
+
+export const CTADelivery: React.FC<CTADeliveryProps> = ({ selectedItem }) => {
   const [selectedOption, setSelectedOption] = useState<"pickup" | "delivery">(
     "delivery"
   );
 
-  const increment = () => setCount((prev) => prev + 1);
-  const decrement = () => setCount((prev) => (prev > 0 ? prev - 1 : 0));
+  const { addToCart, updateItemQuantity, cartItems } = useCartItems(); // Use the cart context
+
+  // Find the selected item in the cart to get its quantity
+  const cartItem = cartItems.find((item) => item._id === selectedItem._id);
+  const itemQuantity = cartItem?.quantity ?? 0; // Default to 0 if quantity is undefined
+
+  // Handle increment
+  const increment = () => {
+    const newQuantity = itemQuantity + 1;
+
+    if (cartItem) {
+      // If the item is already in the cart, update its quantity
+      updateItemQuantity(selectedItem._id, newQuantity);
+    } else {
+      // If the item is not in the cart, add it with the new quantity
+      addToCart(selectedItem, newQuantity);
+    }
+  };
+
+  // Handle decrement
+  const decrement = () => {
+    if (itemQuantity > 0) {
+      const newQuantity = itemQuantity - 1;
+
+      if (cartItem) {
+        // If the item is in the cart, update its quantity
+        updateItemQuantity(selectedItem._id, newQuantity);
+      }
+    }
+  };
 
   const handleOptionSelect = (option: "pickup" | "delivery") => {
     setSelectedOption(option);
@@ -114,21 +147,15 @@ export const CTADelivery = () => {
   return (
     <CTADeliveryContainer>
       <IncDec>
-        <CTADeliveryIcon onClick={decrement} disabled={count === 0}>
+        <CTADeliveryIcon onClick={decrement} disabled={itemQuantity === 0}>
           <HiMinus />
         </CTADeliveryIcon>
-        <CTADeliveryNum>{count}</CTADeliveryNum>
+        <CTADeliveryNum>{itemQuantity}</CTADeliveryNum>
         <CTADeliveryIcon onClick={increment}>
           <MdAdd />
         </CTADeliveryIcon>
       </IncDec>
       <CTADeliveryBtns>
-        {/* <CTADeliveryButton
-          isActive={selectedOption === "pickup"}
-          onClick={() => handleOptionSelect("pickup")}
-        >
-          Pick up
-        </CTADeliveryButton> */}
         <CTADeliveryButton
           isActive={selectedOption === "delivery"}
           onClick={() => handleOptionSelect("delivery")}
