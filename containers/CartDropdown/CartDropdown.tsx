@@ -22,7 +22,7 @@ interface CartDropdownProps {
 
 export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCartDropdownOpen }) => {
   const router = useRouter();
-  const { removeFromCart, setIsCart } = useCartItems(); // Use the removeFromCart function
+  const { removeFromCart, setIsCart, updateItemQuantity } = useCartItems(); // Use the removeFromCart and updateItemQuantity functions
 
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isCardChecked, setIsCardChecked] = useState<boolean>(false);
@@ -37,7 +37,7 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
 
   const handleCheckoutClick = () => {
     setIsCartDropdownOpen(false);
-    setIsCart(false)
+    setIsCart(true);
     router.push(`/food/checkout`); // Navigate to the item's page
   };
 
@@ -64,11 +64,16 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
     checkedItems.forEach((itemId) => {
       removeFromCart(itemId); // Remove each checked item from the cart
     });
+    setIsCart(false)
     setCheckedItems(new Set()); // Clear the checked items
     setShowToast(true); // Show toast when items are removed
   };
 
-  // if (!isDropdownOpen) return null; // Hide dropdown when closed
+  // Handle quantity change for an item
+  const handleQuantityChange = (itemId: string, newQuantity: number) => {
+    updateItemQuantity(itemId, newQuantity);
+  };
+
   if (cartItems?.length === 0) {
     return (
       <div>
@@ -77,7 +82,6 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
             textAlign: "center",
             fontSize: "2rem",
             height: "70px",
-            // background: '#565656'
           }}
         >
           No item selected
@@ -139,7 +143,8 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
                   </div>
                   <div className="Cart_ODAmount">
                     <small className="Cart_OD">Offers Delivery</small>
-                    <p className="Cart_Amount">₦{item?.price}</p>
+                    {/* <p className="Cart_Amount">₦{item?.price}</p> */}
+                    <p className="Cart_Amount">₦{item.totalPrice || item.price * item.quantity}</p>
                   </div>
                 </div>
                 <div className="CartDropdown_CardDown">
@@ -152,6 +157,10 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
                     />
                   </div>
                   <PropertyCounter
+                    initialCount={item.quantity}
+                    onCountChange={(newQuantity) =>
+                      handleQuantityChange(item._id, newQuantity)
+                    }
                     buttonClass="counterButton"
                     className="counterContainer"
                   />

@@ -8,28 +8,30 @@ import { FaStar } from "react-icons/fa";
 import { CiClock2 } from "react-icons/ci";
 
 interface ExtraWithQuantity {
-  // _id: string;
-  // name: string;
-  // price: number;
-  // quantity: number;
-  // imageUrl: string;
-  // title: string;
-  // prep_time: string;
-
-  quantity: number;
-  _id: string;
-  title: string;
-  prep_time: string;
-  categories: string[];
-  price: number;
-  imageUrl: string;
-  vendor: {
+//   _id: string;
+//   name: string;
+//   price: number;
+//   quantity: number;
+//   imageUrl: string;
+//   title: string;
+//   prep_time: string;
+// export interface Extra {
+    quantity: number;
     _id: string;
-    name: string;
-  };
-  discount?: number;
-  slug: string;
-  id: string;
+    title: string;
+    prep_time: string;
+    categories: string[];
+    price: number;
+    imageUrl: string;
+    vendor: {
+      _id: string;
+      name: string;
+    };
+    discount?: number;
+    slug: string;
+    id: string;
+    // quantity?: number; 
+//   }
 }
 
 interface CartDropdownProps {
@@ -37,7 +39,7 @@ interface CartDropdownProps {
   onExtraQuantityChange: (extraId: string, newQuantity: number) => void; // Callback for extra quantity changes
 }
 
-export const AdditionBtn: React.FC<CartDropdownProps> = ({
+export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
   foodDetails,
   onExtraQuantityChange,
 }) => {
