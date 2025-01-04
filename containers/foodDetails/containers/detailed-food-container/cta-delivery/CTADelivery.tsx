@@ -105,22 +105,21 @@ interface CTADeliveryProps {
 }
 
 export const CTADelivery: React.FC<CTADeliveryProps> = ({ selectedItem }) => {
-  const [count, setCount] = useState(0);
   const [selectedOption, setSelectedOption] = useState<"pickup" | "delivery">(
     "delivery"
   );
 
   const { addToCart, updateItemQuantity, cartItems } = useCartItems(); // Use the cart context
 
-  // Check if the item is already in the cart
-  const isItemInCart = cartItems.some((item) => item._id === selectedItem._id);
+  // Find the selected item in the cart to get its quantity
+  const cartItem = cartItems.find((item) => item._id === selectedItem._id);
+  const itemQuantity = cartItem?.quantity ?? 0; // Default to 0 if quantity is undefined
 
   // Handle increment
   const increment = () => {
-    const newQuantity = count + 1;
-    setCount(newQuantity);
+    const newQuantity = itemQuantity + 1;
 
-    if (isItemInCart) {
+    if (cartItem) {
       // If the item is already in the cart, update its quantity
       updateItemQuantity(selectedItem._id, newQuantity);
     } else {
@@ -131,11 +130,10 @@ export const CTADelivery: React.FC<CTADeliveryProps> = ({ selectedItem }) => {
 
   // Handle decrement
   const decrement = () => {
-    if (count > 0) {
-      const newQuantity = count - 1;
-      setCount(newQuantity);
+    if (itemQuantity > 0) {
+      const newQuantity = itemQuantity - 1;
 
-      if (isItemInCart) {
+      if (cartItem) {
         // If the item is in the cart, update its quantity
         updateItemQuantity(selectedItem._id, newQuantity);
       }
@@ -149,10 +147,10 @@ export const CTADelivery: React.FC<CTADeliveryProps> = ({ selectedItem }) => {
   return (
     <CTADeliveryContainer>
       <IncDec>
-        <CTADeliveryIcon onClick={decrement} disabled={count === 0}>
+        <CTADeliveryIcon onClick={decrement} disabled={itemQuantity === 0}>
           <HiMinus />
         </CTADeliveryIcon>
-        <CTADeliveryNum>{count}</CTADeliveryNum>
+        <CTADeliveryNum>{itemQuantity}</CTADeliveryNum>
         <CTADeliveryIcon onClick={increment}>
           <MdAdd />
         </CTADeliveryIcon>

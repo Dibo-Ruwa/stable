@@ -157,11 +157,25 @@ const MostSold: React.FC<MostSoldProps> = ({
 
   
   // Handle adding item to cart
-  const handleItemAddToCart = (item: FoodData) => {
-  console.log(item)
+  // const handleItemAddToCart = (item: FoodData) => {
+  // console.log(item)
 
-    // addToCart(item);
-    // setShowToast(true);
+  //   addToCart(item);
+  //   setShowToast(true);
+  // };
+
+  const handleItemAddToCart = (item: FoodData) => {
+    console.log(item);
+  
+    // Ensure extras is included in the item
+    const itemWithExtras = {
+      ...item,
+      extras: item.extras ?? [], // Initialize extras as an empty array if undefined
+    };
+  
+    // Add the item to the cart
+    addToCart(itemWithExtras);
+    setShowToast(true);
   };
 
   return (

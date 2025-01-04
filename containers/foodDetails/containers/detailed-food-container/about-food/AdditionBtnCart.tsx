@@ -121,16 +121,16 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
                       </div>
                       <div className="CartTime_Content">
                         <CiClock2 className="CartTime_Clock" />
-                        <p className="CartTime_ClockText">{item.prep_time}</p>
+                        <p className="CartTime_ClockText">{item.prep_time} {item.prep_time > '0' ? 'mins' : 'min'}</p>
                       </div>
                     </div>
                   </div>
                   <div className="Cart_ODAmount">
                     <small className="Cart_OD">Offers Delivery</small>
-                    <p className="Cart_Amount">₦{item.price}</p>
+                    <p className="Cart_Amount">₦{item?.price * (item?.quantity >= 1 ?  item?.quantity :  1)}</p>
                   </div>
                 </div>
-                <div className="CartDropdown_CardDown">
+                {/* <div className="CartDropdown_CardDown"> */}
                   <div className={styles.counterContainer}>
                     <button
                       className={styles.counterButton}
@@ -139,15 +139,20 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
                     >
                       <HiMinus />
                     </button>
-                    <div className={styles.countNum}>{item.quantity}</div>
+                    <div className={styles.countNum}>{item?.quantity}</div>
                     <button
                       className={styles.counterButton}
                       onClick={() => incrementExtra(item._id)}
                     >
-                      <MdAdd />
+                      <MdAdd 
+                      style={{
+                        width: '20px',
+                        height: ""
+                      }}
+                      />
                     </button>
                   </div>
-                </div>
+                {/* </div> */}
               </div>
             ))}
           </div>

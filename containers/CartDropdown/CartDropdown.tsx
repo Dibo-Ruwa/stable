@@ -145,7 +145,7 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
                       </div>
                       <div className="CartTime_Content">
                         <CiClock2 className="CartTime_Clock" />
-                        <p className="CartTime_ClockText">{item?.prep_time}</p>
+                        <p className="CartTime_ClockText">{item?.prep_time} {item.prep_time > '0' ? 'mins' : 'min'}</p>
                       </div>
                     </div>
                   </div>

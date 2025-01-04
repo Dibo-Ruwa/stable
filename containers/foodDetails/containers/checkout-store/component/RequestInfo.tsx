@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useCartItems } from "@/context/CartItems"; // Import the cart context
+import { FoodData } from "@/utils/types/types"; // Import the FoodData type
 
+// Styled components
 const RequestContainer = styled.div`
   /* No specific styles provided for this container */
 `;
@@ -70,6 +73,17 @@ const RequestedFoodQuantity = styled.p`
   line-height: 27.129px;
 `;
 
+const ExtrasContainer = styled.div`
+  margin-left: 20px; /* Indent extras */
+`;
+
+const ExtraItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
 const AccountBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -113,47 +127,74 @@ const AccountTotalAmount = styled.p`
 `;
 
 export const RequestInfo = () => {
+  const { cartItems } = useCartItems(); // Get cart items from context
+
+  // Calculate subtotal
+  const subtotal = cartItems.reduce((total, item) => {
+    const itemQuantity = item.quantity ?? 1; // Default to 1 if quantity is undefined
+    const itemTotal = item.price * itemQuantity;
+    const extrasTotal = item.extras?.reduce((extraTotal, extra) => {
+      return extraTotal + extra.price * extra.quantity;
+    }, 0) || 0;
+    return total + itemTotal + extrasTotal;
+  }, 0);
+
+  // Calculate delivery fee
+  const baseDeliveryFee = 600;
+  const additionalFee = Math.floor(cartItems.length / 2) * 200;
+  const deliveryFee = baseDeliveryFee + additionalFee;
+
+  // Calculate total
+  const total = subtotal + deliveryFee;
+
   return (
     <RequestContainer>
       <StoreOwnerBox>
-        <StoreOwnerName>Carolina Stores</StoreOwnerName>
+        <StoreOwnerName>Cart items</StoreOwnerName>
         <RequestCheck>Please confirm your Request</RequestCheck>
       </StoreOwnerBox>
       <RequestBox>
-        <RequestLine />
-        <RequestedFood>
-          <RequestedFoodName>Fried Rice</RequestedFoodName>
-          <RequestedFoodQuantity>2Plates</RequestedFoodQuantity>
-        </RequestedFood>
-        <RequestLine />
-        <RequestedFood>
-          <RequestedFoodName>Protein</RequestedFoodName>
-          <RequestedFoodQuantity>4</RequestedFoodQuantity>
-        </RequestedFood>
-        <RequestLine />
-        <RequestedFood>
-          <RequestedFoodName>Drink</RequestedFoodName>
-          <RequestedFoodQuantity>5</RequestedFoodQuantity>
-        </RequestedFood>
-        <RequestLine />
-        <RequestedFood>
-          <RequestedFoodName>Extras</RequestedFoodName>
-          <RequestedFoodQuantity>4</RequestedFoodQuantity>
-        </RequestedFood>
+        {cartItems.map((item) => {
+          const itemQuantity = item.quantity ?? 1; // Default to 1 if quantity is undefined
+          return (
+            <React.Fragment key={item._id}>
+              <RequestLine />
+              <RequestedFood>
+                <RequestedFoodName>{item.title}</RequestedFoodName>
+                <RequestedFoodQuantity>
+                  {itemQuantity} {itemQuantity > 1 ? "items" : "item"} - ₦{item.price * itemQuantity}
+                </RequestedFoodQuantity>
+              </RequestedFood>
+              {item.extras && item.extras.length > 0 && (
+                <ExtrasContainer>
+                  <RequestedFoodName>Extras:</RequestedFoodName>
+                  {item.extras.map((extra) => (
+                    <ExtraItem key={extra._id}>
+                      <RequestedFoodName>{extra.title}</RequestedFoodName>
+                      <RequestedFoodQuantity>
+                        {extra.quantity} {extra.quantity > 1 ? "items" : "item"} - ₦{extra.price * extra.quantity}
+                      </RequestedFoodQuantity>
+                    </ExtraItem>
+                  ))}
+                </ExtrasContainer>
+              )}
+            </React.Fragment>
+          );
+        })}
         <RequestLine />
       </RequestBox>
       <AccountBox>
         <AccountContent>
           <AccountSubTotalText>Sub Total</AccountSubTotalText>
-          <AccountSubTotalAmount>$10,000</AccountSubTotalAmount>
+          <AccountSubTotalAmount>₦{subtotal}</AccountSubTotalAmount>
         </AccountContent>
         <AccountContent>
           <AccountSubTotalText>Delivery</AccountSubTotalText>
-          <AccountSubTotalAmount>$10,000</AccountSubTotalAmount>
+          <AccountSubTotalAmount>₦{deliveryFee}</AccountSubTotalAmount>
         </AccountContent>
         <AccountContent>
           <AccountSubTotalText>Total</AccountSubTotalText>
-          <AccountTotalAmount>$100,000</AccountTotalAmount>
+          <AccountTotalAmount>₦{total}</AccountTotalAmount>
         </AccountContent>
       </AccountBox>
     </RequestContainer>

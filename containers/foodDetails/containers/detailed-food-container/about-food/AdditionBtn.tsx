@@ -128,7 +128,7 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
                     <p className="Cart_Amount">₦{item.price}</p>
                   </div>
                 </div>
-                <div className="CartDropdown_CardDown">
+                {/* <div className="CartDropdown_CardDown">
                   <div className={styles.counterContainer}>
                     <button
                       className={styles.counterButton}
@@ -145,7 +145,7 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
                       <MdAdd />
                     </button>
                   </div>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

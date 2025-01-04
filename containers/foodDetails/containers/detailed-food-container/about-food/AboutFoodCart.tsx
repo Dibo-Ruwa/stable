@@ -6,6 +6,7 @@ import { AdditionBtn } from "./AdditionBtn";
 import { FoodData } from "@/utils/types/types";
 import { CTADelivery } from "../cta-delivery/CTADelivery";
 import { useCartItems } from "@/context/CartItems"; // Import the cart context
+import { AdditionBtnCart } from "./AdditionBtnCart";
 
 interface CartDropdownProps {
   selectedItem: FoodData | null; // Allow null
@@ -108,7 +109,7 @@ export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem }) => 
             {/* <div className={styles.ofd}>Offers Free Delivery</div> */}
             {/* <div className={styles.lr}>10 Liters remaining</div> */}
           </div>
-          <AdditionBtn
+          <AdditionBtnCart
             foodDetails={foodDetails}
             onExtraQuantityChange={handleExtraQuantityChange}
           />

@@ -44,34 +44,45 @@ export const CartItemsProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("isCart", JSON.stringify(isCart));
   }, [isCart]);
 
-  const addToCart = (item: FoodData, quantity: number = 1, extras: Extra[] = []) => {
+  const addToCart = (item: FoodData, quantity: number = 1) => {
     setCartItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex((cartItem) => cartItem._id === item._id);
-
+  
       if (existingItemIndex !== -1) {
+        // If the item already exists in the cart, update its quantity and extras
         const updatedItems = [...prevItems];
         updatedItems[existingItemIndex].quantity = (updatedItems[existingItemIndex].quantity || 0) + quantity;
-
-        if (extras.length > 0) {
+  
+        // Merge extras from the item with existing extras in the cart item
+        if (item.extras && item.extras.length > 0) {
+          // Initialize extras as an empty array if it doesn't exist
           updatedItems[existingItemIndex].extras = updatedItems[existingItemIndex].extras ?? [];
-          extras.forEach((extra) => {
+  
+          item.extras.forEach((extra) => {
             const existingExtraIndex = updatedItems[existingItemIndex].extras.findIndex((e) => e._id === extra._id);
             if (existingExtraIndex !== -1) {
+              // If the extra already exists, update its quantity
               updatedItems[existingItemIndex].extras[existingExtraIndex].quantity =
                 (updatedItems[existingItemIndex].extras[existingExtraIndex].quantity || 0) + extra.quantity;
             } else {
+              // If the extra does not exist, add it to the extras array
               updatedItems[existingItemIndex].extras.push({ ...extra, quantity: extra.quantity || 1 });
             }
           });
         }
-
+  
         return updatedItems;
       } else {
-        const newItem = { ...item, quantity, extras: extras ?? [] };
+        // If the item does not exist in the cart, add it with the specified quantity and extras
+        const newItem = { ...item, quantity, extras: item.extras ?? [] }; // Initialize extras as an empty array if undefined
         return [...prevItems, newItem];
       }
     });
   };
+
+  console.log(cartItems);
+
+
 
   const updateItemQuantity = (itemId: string, newQuantity: number) => {
     setCartItems((prevItems) =>

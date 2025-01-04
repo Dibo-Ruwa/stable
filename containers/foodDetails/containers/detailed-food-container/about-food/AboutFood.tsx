@@ -112,7 +112,7 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
               }}
               onClick={handleAddToCart}
             >
-              Add to cart
+              Add to cart 
             </div>
           
           <div className={styles.frsr_time}>
