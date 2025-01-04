@@ -1,5 +1,5 @@
 .laundry_width {
-    width: min(100%, 1444px);
+  width: min(100%, 1444px);
   margin: auto;
   position: relative;
 }
@@ -170,12 +170,22 @@ span.LaundryStep_cicle {
 
   .laundry_overlay-img {
     position: absolute;
-          top: 15rem;
-        right: 8rem;
+    top: 15rem;
+    right: 8rem;
   }
 
   img.laundry_overlay-img_content {
     width: 15rem;
+  }
+}
+
+@media only screen and (max-width: 355px) {
+  img.laundry_img-content {
+    width: 17rem;
+    height: 17rem;
+  }
+  .laundry_overlay-img {
+    top: 8rem;
   }
 }
 
