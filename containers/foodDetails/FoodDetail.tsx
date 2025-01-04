@@ -90,13 +90,11 @@ const FoodDetail: React.FC = () => {
         </div>
         <DFCS>
           <DFCSFood>
-            {isCart ?
-            (
-
-              <DisplayFood />
-            ):(
-              <AllCartsFood />
-            )}
+            {!isCart ? 
+            <DisplayFood /> 
+            :
+            <AllCartsFood />
+             }
             {/* <SimilarMeal id={id} /> */}
           </DFCSFood>
           <DFCSCheck>

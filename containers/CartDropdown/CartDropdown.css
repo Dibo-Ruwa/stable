@@ -55,7 +55,7 @@
 }
 
 .CartTitleRatingANDTime {
-  @apply flex flex-col items-start gap-[14px];
+  @apply flex flex-col items-start gap-[14px] w-[100px] mr-[4px];
 }
 
 .CartTitleRating {

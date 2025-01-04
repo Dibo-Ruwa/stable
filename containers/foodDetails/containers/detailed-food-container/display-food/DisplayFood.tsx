@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { AboutFood } from "../about-food/AboutFood";
-import { CTADelivery } from "../cta-delivery/CTADelivery";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { FaAngleRight } from "react-icons/fa";
 import { useFoodItem } from "@/context/FooItemProvider";
@@ -10,6 +9,7 @@ import { FoodData } from "@/utils/types/types";
 interface DisplayFoodProps {
   food: FoodData;
 }
+
 // Styled components
 const Container = styled.section`
   width: 100%;
@@ -40,10 +40,9 @@ const OnSelectedImg = styled.img`
   height: 120px;
   flex-shrink: 0;
 
-   @media (max-width: 768px) {
+  @media (max-width: 768px) {
     height: 100px;
   }
-
 `;
 
 const PrevBtn = styled(TfiAngleLeft)`
@@ -74,34 +73,11 @@ export const DisplayFood = () => {
   return (
     <Container>
       <DisplayImg>
-      <OnDisplayImg src={selectedItem?.imageUrl} alt="on display" />
+        <OnDisplayImg src={selectedItem?.imageUrl} alt="on display" />
       </DisplayImg>
-      {/* <SelectedImg>
-        <PrevBtn />
-        <OnSelectedImg
-          src="/images/151e2d46640e246f42f769231cc76bab.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/d8cc774cbb454c39b0c0a291406db198.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/d8cc774cbb454c39b0c0a291406db198.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/d8cc774cbb454c39b0c0a291406db198.png"
-          alt="on selected"
-        />
-        <OnSelectedImg
-          src="/images/7440670515731ae400623ae77f2ecbd7.png"
-          alt="on selected"
-        />
-        <NextBtn />
-      </SelectedImg> */}
-      <AboutFood  selectedItem={selectedItem}/>
-      <CTADelivery />
+
+      {/* Only AboutFood is needed here now */}
+      <AboutFood selectedItem={selectedItem} />
     </Container>
   );
 };

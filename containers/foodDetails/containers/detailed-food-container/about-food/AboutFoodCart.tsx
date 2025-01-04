@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styles from "./about-food.module.css";
 import { IoIosStar } from "react-icons/io";
 import { MdOutlineTimer } from "react-icons/md";
@@ -12,46 +11,31 @@ interface CartDropdownProps {
   selectedItem: FoodData | null; // Allow null
 }
 
-const url = process.env.NEXT_PUBLIC_ADMIN_URL;
-
-export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
+export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem }) => {
   const [foodDetails, setFoodDetails] = useState<FoodData | null>(null);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
   const [extrasQuantities, setExtrasQuantities] = useState<Record<string, number>>({});
 
-  // Use the cart context to access addToCart and updateExtraQuantity
-  const { addToCart, updateExtraQuantity, setIsCart, isCart } = useCartItems();
+  // Use the cart context to access cartItems, addToCart, and updateExtraQuantity
+  const { cartItems, addToCart, updateExtraQuantity, setIsCart, isCart } = useCartItems();
 
-  useEffect(() => {
-    const fetchFoodData = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(`${url}/api/products/${selectedItem?._id}`);
-        const data = response.data?.data;
-        setFoodDetails(data);
-      } catch (error) {
-        console.error("Error fetching food data:", error);
-        setError("Failed to fetch food data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (selectedItem?._id) {
-      fetchFoodData();
-    }
-  }, [selectedItem?._id, url]);
-
-  // Check if the product is in the cart
+  // Check if the selectedItem is in the cart and set foodDetails
   useEffect(() => {
     if (selectedItem) {
-      const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-      const isInCart = cartItems.some((item: FoodData) => item._id === selectedItem._id);
-      setIsProductInCart(isInCart);
+      const itemInCart = cartItems.find((item) => item._id === selectedItem._id);
+      if (itemInCart) {
+        setFoodDetails(itemInCart); // Set foodDetails to the item found in the cart
+        setIsProductInCart(true); // Mark the product as in the cart
+        console.log('done')
+      } else {
+        setError("Item not found in the cart");
+      }
+      setLoading(false); // Stop loading
     }
-  }, [selectedItem]);
+
+  }, [selectedItem, cartItems]);
 
   // Handle "Add to Cart" button click
   const handleAddToCart = () => {
@@ -62,7 +46,7 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
       }));
       addToCart(selectedItem, 1, extras); // Add the item to the cart with extras
       setIsProductInCart(true);
-      setIsCart(true)
+      setIsCart(true);
     }
   };
 
@@ -98,23 +82,6 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
     <>
       <div className={styles.about_container}>
         <div className={styles.about_content}>
-          {/* Conditionally render the "Add to Cart" button */}
-         
-            <div
-              style={{
-                background: "#27a124",
-                textAlign: "center",
-                color: "#fff",
-                padding: "8px",
-                borderRadius: "6px",
-                marginBottom: "20px",
-                cursor: "pointer",
-              }}
-              onClick={handleAddToCart}
-            >
-              Add to cart
-            </div>
-          
           <div className={styles.frsr_time}>
             <div className={styles.food_rating}>
               <p className={styles.ptext}>{foodDetails?.title}</p>
@@ -145,6 +112,7 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
             foodDetails={foodDetails}
             onExtraQuantityChange={handleExtraQuantityChange}
           />
+          <CTADelivery selectedItem={foodDetails} />
         </div>
       </div>
     </>

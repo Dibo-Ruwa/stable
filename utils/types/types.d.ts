@@ -114,12 +114,79 @@ export interface MovingItemType {
   image: string | null;
 }
 
+// export interface FoodData {
+//   _id: string;
+//   title: string;
+//   prep_time: string;
+//   categories: string[];
+//   price: number;
+//   imageUrl: string;
+//   vendor: {
+//     _id: string;
+//     name: string;
+//     owner: string;
+//     branch: {
+//       location: {
+//         city: {
+//           _id: string;
+//           name: string;
+//         };
+//         region: {
+//           _id: string;
+//           name: string;
+//         };
+//       };
+//       _id: string;
+//       deliveries: {
+//         region: {
+//           _id: string;
+//           name: string;
+//         };
+//         price: number;
+//         _id: string;
+//       }[];
+//     }[];
+//     operations: {
+//       day: string;
+//       openingHour: string;
+//       closingHour: string;
+//       _id: string;
+//     }[];
+//   };
+//   discount: number;
+//   extras: any[];
+//   createdAt: string;
+//   updatedAt: string;
+//   slug: string;
+//   __v: number;
+//   id: string;
+// }
+
+export interface Extra {
+  quantity: number;
+  _id: string;
+  title: string;
+  prep_time: string;
+  categories: string[];
+  price: number;
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    name: string;
+  };
+  discount?: number;
+  slug: string;
+  id: string;
+  // quantity?: number; 
+}
+
 export interface FoodData {
   _id: string;
   title: string;
   prep_time: string;
   categories: string[];
   price: number;
+  totalPrice?: number; // Optional
   imageUrl: string;
   vendor: {
     _id: string;
@@ -154,12 +221,13 @@ export interface FoodData {
     }[];
   };
   discount: number;
-  extras: any[];
+  extras: Extra[]; // Updated to use the `Extra` interface
   createdAt: string;
   updatedAt: string;
   slug: string;
   __v: number;
   id: string;
+  quantity?: number; // Optional
 }
 
 export type FoodDatas = FoodData[];

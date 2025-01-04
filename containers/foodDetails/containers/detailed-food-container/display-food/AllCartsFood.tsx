@@ -5,6 +5,7 @@ import { CTADelivery } from "../cta-delivery/CTADelivery";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { FaAngleRight } from "react-icons/fa";
 import { useFoodItem } from "@/context/FooItemProvider";
+import { AboutFoodCart } from "../about-food/AboutFoodCart";
 
 // Styled components
 const Container = styled.section`
@@ -96,8 +97,8 @@ export const AllCartsFood = () => {
         />
         <NextBtn />
       </SelectedImg>
-      <AboutFood  selectedItem={selectedItem}/>
-      <CTADelivery />
+      <AboutFoodCart  selectedItem={selectedItem}/>
+      {/* <CTADelivery /> */}
     </Container>
   );
 };
