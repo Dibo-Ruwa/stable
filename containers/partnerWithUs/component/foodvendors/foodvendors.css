@@ -217,6 +217,12 @@ a.vendor_signup {
   }
 
   .vendor_img {
-    height: 0;
+    height: 22rem;
   }
+}
+
+@media only screen and (max-width: 378px) {
+    .vendor_img {
+        height: 15rem;
+    }
 }
