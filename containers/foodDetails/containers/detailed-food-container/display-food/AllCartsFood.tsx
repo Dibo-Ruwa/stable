@@ -29,8 +29,11 @@ const SelectedImg = styled.div`
   padding: 0 3.5rem;
   margin: 1rem 0;
   overflow-x: auto;
+  // width: 100%;
+  max-width: 1000px;
   scroll-behavior: smooth;
   position: relative;
+  height: 150px; // Ensure the container has a fixed height
 `;
 
 const ItemContainer = styled.div`
@@ -40,7 +43,7 @@ const ItemContainer = styled.div`
   gap: 8px;
   cursor: pointer;
   transition: transform 0.2s;
-
+  min-width: 120px; // Ensure each item has a minimum width
   &:hover {
     transform: scale(1.05);
   }
@@ -109,6 +112,7 @@ export const AllCartsFood = () => {
   const { selectedItem, setSelectedItem } = useFoodItem();
   const { cartItems } = useCartItems();
   const scrollRef = useRef<HTMLDivElement>(null);
+
   // Function to handle scrolling left
   const scrollLeft = () => {
     if (scrollRef.current) {

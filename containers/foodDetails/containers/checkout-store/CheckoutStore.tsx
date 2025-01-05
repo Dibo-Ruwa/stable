@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { RequestInfo } from './component/RequestInfo';
 import { InfoPass } from './component/InfoPass';
 import { DeliveryLocation } from './component/DeliveryLocation';
 import { SchDeliveryOpl } from './component/SchDeliveryOpl';
@@ -44,8 +43,24 @@ export const CheckoutStore = () => {
     date: "dd/mm/yyyy",
     time: "8:00 AM",
   });
+  const [deliveryRegions, setDeliveryRegions] = useState<{ name: string; price: number }[]>([]); // Delivery regions and prices
+  const [locationError, setLocationError] = useState<string | null>(null); // Error message for location selection
 
-  // Calculate subtotal, delivery fee, and total
+  // Fetch delivery regions and prices from the first item in cartItems
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      const firstItem = cartItems[0];
+      if (firstItem.vendor?.branch?.[0]?.deliveries) {
+        const regions = firstItem.vendor.branch[0].deliveries.map((delivery) => ({
+          name: delivery.region.name,
+          price: delivery.price,
+        }));
+        setDeliveryRegions(regions);
+      }
+    }
+  }, [cartItems]);
+
+  // Calculate subtotal
   const subtotal = cartItems.reduce((total, item) => {
     const itemQuantity = item.quantity ?? 1;
     const itemTotal = item.price * itemQuantity;
@@ -53,13 +68,23 @@ export const CheckoutStore = () => {
     return total + itemTotal + extrasTotal;
   }, 0);
 
-  const baseDeliveryFee = 600;
-  const additionalFee = Math.floor((cartItems.length - 1) / 2) * 100;
+  // Calculate delivery fee
+  const baseDeliveryFee = selectedRegion
+    ? deliveryRegions.find((region) => region.name === selectedRegion)?.price || 0
+    : 0;
+  const additionalFee = Math.floor((cartItems.length - 1) / 2) * 100; // Add ₦100 for every 2 items
   const deliveryFee = baseDeliveryFee + additionalFee;
+
+  // Calculate total
   const total = subtotal + deliveryFee;
 
   // Handle checkout button click
   const handleCheckout = () => {
+    if (!selectedRegion) {
+      setLocationError("Please select a delivery location.");
+      return;
+    }
+
     const checkoutData = {
       cartItems: cartItems.map((item) => ({
         title: item.title,
@@ -84,11 +109,23 @@ export const CheckoutStore = () => {
 
   return (
     <StoresContainer>
-      <CartInfo />
+      <CartInfo
+        subtotal={subtotal}
+        deliveryFee={deliveryFee}
+        total={total}
+      />
       <InfoPass onInfoPassChange={setInfoPass} />
-      <DeliveryLocation onRegionSelect={setSelectedRegion} />
+      <DeliveryLocation
+        regions={deliveryRegions}
+        onRegionSelect={setSelectedRegion}
+        error={locationError}
+        onErrorClear={() => setLocationError(null)}
+      />
       <SchDeliveryOpl onScheduleChange={setScheduledDelivery} />
-      <CheckoutButton onClick={handleCheckout} />
+      <CheckoutButton
+        onClick={handleCheckout}
+        disabled={!selectedRegion}
+      />
     </StoresContainer>
   );
 };

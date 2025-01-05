@@ -24,7 +24,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
   const { setSelectedItem } = useFoodItem();
-  const { addToCart, cartItems, setIsCart } = useCartItems();
+  const { addToCart, cartItems, setIsCart, selectedVendor } = useCartItems();
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
@@ -135,12 +135,6 @@ const MostSold: React.FC<MostSoldProps> = ({
     });
   }, [visibleItems]);
 
-  // Handle item click
-  // const handleItemClick = (item: FoodData) => {
-  //   setSelectedItem(item);
-  //   setIsCart(false);
-  //   router.push(`/food/checkout`);
-  // };
 
   const handleItemClick = (item: FoodData) => {
     setSelectedItem(item);
@@ -155,24 +149,20 @@ const MostSold: React.FC<MostSoldProps> = ({
     router.push(`/food/checkout`);
   };
 
-  
-  // Handle adding item to cart
-  // const handleItemAddToCart = (item: FoodData) => {
-  // console.log(item)
-
-  //   addToCart(item);
-  //   setShowToast(true);
-  // };
 
   const handleItemAddToCart = (item: FoodData) => {
-    console.log(item);
-  
+    // Check if the item's vendor matches the selected vendor
+    if (selectedVendor && item.vendor.name !== selectedVendor) {
+      // Show a modal or toast to inform the user
+      alert("You can only select items from one vendor. Please remove items from the current vendor before adding items from another vendor.");
+      return;
+    }
     // Ensure extras is included in the item
     const itemWithExtras = {
       ...item,
       extras: item.extras ?? [], // Initialize extras as an empty array if undefined
     };
-  
+
     // Add the item to the cart
     addToCart(itemWithExtras);
     setShowToast(true);

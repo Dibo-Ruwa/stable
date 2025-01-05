@@ -67,7 +67,12 @@ const AccountTotalAmount = styled.p`
   line-height: 27.129px;
 `;
 
-export const CartInfo: React.FC<CartDropdownProps> = ({}) => {
+interface CartDropdownProps {
+  subtotal: number;
+  deliveryFee: number;
+  total: number;
+} 
+export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, total }) => {
   const router = useRouter();
   const { removeFromCart, setIsCart, updateItemQuantity, cartItems, updateExtraQuantity } =
     useCartItems(); // Use the removeFromCart and updateItemQuantity functions
@@ -75,22 +80,6 @@ export const CartInfo: React.FC<CartDropdownProps> = ({}) => {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set()); // Track checked items
   const [showToast, setShowToast] = useState(false); // State for toast visibility
 
-    // Calculate subtotal
-    const subtotal = cartItems.reduce((total, item) => {
-        const itemQuantity = item.quantity ?? 1; // Default to 1 if quantity is undefined
-        const itemTotal = item.price * itemQuantity;
-        const extrasTotal = item.extras?.reduce((extraTotal, extra) => {
-          return extraTotal + extra.price * extra.quantity;
-        }, 0) || 0;
-        return total + itemTotal + extrasTotal;
-      }, 0);
-    
-     // Calculate delivery fee
-const baseDeliveryFee = 600;
-const additionalFee = Math.floor((cartItems.length - 1) / 2) * 100; // Add ₦100 for every 2 items after the first 2
-const deliveryFee = baseDeliveryFee + additionalFee;
-      // Calculate total
-      const total = subtotal + deliveryFee;
 
   // Handle increment for extras
   const incrementExtra = (itemId: string, extraId: string) => {
