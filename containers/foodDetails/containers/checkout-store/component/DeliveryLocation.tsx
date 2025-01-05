@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { TfiAngleDown } from "react-icons/tfi";
-import Cookies from "js-cookie";
-import axios from "axios";
-import { useLocation } from "@/context/LocationProvider";
-
 
 const LocationContainer = styled.div`
   width: 100%;
-  height: 162.776px;
+  height: fit-content;
   border-radius: 11.304px;
   padding: 1rem;
   background: #f7f7f7;
@@ -39,7 +35,6 @@ const RegionBtn = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
- 
   border-radius: 0.7rem;
   color: #959595;
   cursor: pointer;
@@ -70,60 +65,33 @@ const DropdownItem = styled.div`
   }
 `;
 
-export const DeliveryLocation = () => {
-  const { location } = useLocation();
+const ErrorMessage = styled.p`
+  color: red;
+  font-family: Poppins;
+  font-size: 14px;
+  margin-top: 8px;
+`;
 
-  const url =
-    process.env.NEXT_PUBLIC_ADMIN_URL ||
-    "https://diboruwa-admin-test.vercel.app";
+interface DeliveryLocationProps {
+  regions: { name: string; price: number }[];
+  onRegionSelect: (region: string | null) => void;
+  error: string | null;
+  onErrorClear: () => void;
+}
 
-  const [regions, setRegions] = useState<string[]>([]);
+export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({
+  regions,
+  onRegionSelect,
+  error,
+  onErrorClear,
+}) => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchRegions = async () => {
-      const locationCookie = Cookies.get("diboruwa_location");
-      const location = locationCookie ? JSON.parse(locationCookie) : null;
-  
-      if (location?.state) {
-        const apiUrl = `${url}/api/locations`;
-  
-        try {
-          const response = await axios.get(apiUrl);
-          const apiCities = response.data?.cities; 
-  
-          if (apiCities && Array.isArray(apiCities)) {
-        
-            const matchedCity = apiCities.find(
-              (city: { name: string }) => city.name === location.state
-            );
-  
-            if (matchedCity) {
-           
-              const regionNames = matchedCity.regions.map(
-                (region: { name: string }) => region.name
-              );
-              setRegions(regionNames); 
-            } else {
-              console.error("No matching city found in API data for the state:", location.state);
-            }
-          } else {
-            console.error("Invalid API data format. Expected 'cities' array.");
-          }
-        } catch (error) {
-          console.error("Error fetching regions:", error);
-        }
-      }
-    };
-  
-    fetchRegions();
-  }, []);
-  
-
   const handleRegionSelect = (region: string) => {
     setSelectedRegion(region);
-    Cookies.set("region", region, { expires: 7 }); 
+    onRegionSelect(region); // Pass selected region to parent
+    onErrorClear(); // Clear error when a region is selected
     setDropdownOpen(false);
   };
 
@@ -143,9 +111,9 @@ export const DeliveryLocation = () => {
               regions.map((region, index) => (
                 <DropdownItem
                   key={index}
-                  onClick={() => handleRegionSelect(region)}
+                  onClick={() => handleRegionSelect(region.name)}
                 >
-                  {region}
+                  {region.name} (₦{region.price})
                 </DropdownItem>
               ))
             ) : (
@@ -154,6 +122,8 @@ export const DeliveryLocation = () => {
           </Dropdown>
         )}
       </RegionBtn>
+
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </LocationContainer>
   );
 };

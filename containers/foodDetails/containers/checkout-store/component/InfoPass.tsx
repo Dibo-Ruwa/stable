@@ -30,7 +30,15 @@ const InfoPassTextarea = styled.textarea`
   resize: none;
 `;
 
-export const InfoPass = () => {
+interface InfoPassProps {
+  onInfoPassChange: (info: string) => void;
+}
+
+export const InfoPass: React.FC<InfoPassProps> = ({ onInfoPassChange }) => {
+  const handleInfoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onInfoPassChange(e.target.value);
+  };
+
   return (
     <InfoPassContainer>
       <InfoPassText>Want to pass an info?</InfoPassText>
@@ -39,6 +47,7 @@ export const InfoPass = () => {
         name="message"
         rows={4}
         cols={50}
+        onChange={handleInfoChange}
       ></InfoPassTextarea>
     </InfoPassContainer>
   );

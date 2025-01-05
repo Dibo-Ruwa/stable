@@ -37,6 +37,7 @@ const DFCS = styled.div`
 
 const DFCSFood = styled.div`
   flex-basis: 67%;
+  
 
   @media (max-width: 900px) {
     flex-basis: 100%;

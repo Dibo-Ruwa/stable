@@ -29,7 +29,6 @@ export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem }) => 
       if (itemInCart) {
         setFoodDetails(itemInCart); // Set foodDetails to the item found in the cart
         setIsProductInCart(true); // Mark the product as in the cart
-        console.log('done')
       } else {
         setError("Item not found in the cart");
       }

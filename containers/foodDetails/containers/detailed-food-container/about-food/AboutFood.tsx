@@ -21,8 +21,8 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
   const [isProductInCart, setIsProductInCart] = useState<boolean>(false);
   const [extrasQuantities, setExtrasQuantities] = useState<Record<string, number>>({});
 
-  // Use the cart context to access addToCart and updateExtraQuantity
-  const { addToCart, updateExtraQuantity, setIsCart, isCart } = useCartItems();
+  // Use the cart context to access addToCart, updateExtraQuantity, and selectedVendor
+  const { addToCart, updateExtraQuantity, setIsCart, isCart, selectedVendor } = useCartItems();
 
   useEffect(() => {
     const fetchFoodData = async () => {
@@ -55,15 +55,31 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
 
   // Handle "Add to Cart" button click
   const handleAddToCart = () => {
-    if (selectedItem) {
-      const extras = selectedItem.extras.map((extra) => ({
-        ...extra,
-        quantity: extrasQuantities[extra._id] || 0,
-      }));
-      addToCart(selectedItem, 1, extras); // Add the item to the cart with extras
-      setIsProductInCart(true);
-      setIsCart(true)
+    if (!selectedItem) return;
+
+    // Check if the item's vendor matches the selected vendor
+    if (selectedVendor && selectedItem.vendor.name !== selectedVendor) {
+      // Show an alert or modal to inform the user
+      alert("You can only select items from one vendor. Please remove items from the current vendor before adding items from another vendor.");
+      return;
     }
+
+    // If no vendor is selected, set the vendor to the item's vendor
+    if (!selectedVendor) {
+      // Update the selected vendor in the context
+      // Note: You need to add `setSelectedVendor` to the context if it's not already there
+      // For now, we'll assume it's available in the context
+      // setSelectedVendor(selectedItem.vendor.name);
+    }
+
+    // Add the item to the cart with extras
+    const extras = selectedItem.extras.map((extra) => ({
+      ...extra,
+      quantity: extrasQuantities[extra._id] || 0,
+    }));
+    addToCart(selectedItem, 1, extras); // Add the item to the cart with extras
+    setIsProductInCart(true);
+    setIsCart(true);
   };
 
   // Handle extra quantity changes
@@ -99,22 +115,21 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
       <div className={styles.about_container}>
         <div className={styles.about_content}>
           {/* Conditionally render the "Add to Cart" button */}
-         
-            <div
-              style={{
-                background: "#27a124",
-                textAlign: "center",
-                color: "#fff",
-                padding: "8px",
-                borderRadius: "6px",
-                marginBottom: "20px",
-                cursor: "pointer",
-              }}
-              onClick={handleAddToCart}
-            >
-              Add to cart 
-            </div>
-          
+          <div
+            style={{
+              background: "#27a124",
+              textAlign: "center",
+              color: "#fff",
+              padding: "8px",
+              borderRadius: "6px",
+              marginBottom: "20px",
+              cursor: "pointer",
+            }}
+            onClick={handleAddToCart}
+          >
+            Add to cart
+          </div>
+
           <div className={styles.frsr_time}>
             <div className={styles.food_rating}>
               <p className={styles.ptext}>{foodDetails?.title}</p>

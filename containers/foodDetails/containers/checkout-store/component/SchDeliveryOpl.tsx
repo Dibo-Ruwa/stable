@@ -39,42 +39,48 @@ const StyledScheduleTime = styled(ScheduleTime)`
     background: rgba(234, 235, 238, 0.49);
   }
 `;
+
 const StyledScheduleDate = styled(ScheduleDate)`
   gap: 18.912px;
   border-radius: 10.315px;
   padding: 0.7rem;
   background: #f7f7f7 !important;
   box-shadow: 0px 6.802px 15.547px 0px rgba(158, 158, 158, 0.05);
-
-  .SchdeliveryIcAn {
-    display: flex;
-    cursor: pointer;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 100px;
-    background: rgba(234, 235, 238, 0.49);
-  }
 `;
 
-export const SchDeliveryOpl = () => {
+interface SchDeliveryOplProps {
+  onScheduleChange: (schedule: { date: string; time: string }) => void;
+}
+
+export const SchDeliveryOpl: React.FC<SchDeliveryOplProps> = ({ onScheduleChange }) => {
   const [pickupTime, setPickupTime] = useState<string>("8:00 AM");
+  const [pickupDate, setPickupDate] = useState<string>("dd/mm/yyyy");
+
+  const handleTimeChange = (time: string) => {
+    setPickupTime(time);
+    onScheduleChange({ date: pickupDate, time });
+  };
+
+  const handleDateChange = (date: string) => {
+    setPickupDate(date);
+    onScheduleChange({ date, time: pickupTime });
+  };
+
   return (
     <SchdeliveryContainer>
       <SchdeliveryTitle>Schedule Delivery (optional)</SchdeliveryTitle>
       <StyledScheduleDate
         className="SelectedDays_ScheduleTimeSetOpt"
-        iconClass="SchdeliveryIcAn"
-        date="17, August, 2024"
+        date={pickupDate}
         label="Date"
+        onDateChange={handleDateChange}
       />
       <StyledScheduleTime
-        time={pickupTime} // Use the state for pickup time
+        time={pickupTime}
         label="Time"
         className="SelectedDays_ScheduleTimeSetOpt"
         iconClass="SchdeliveryIcAn"
-        onTimeChange={setPickupTime} // Update Monday's time
+        onTimeChange={handleTimeChange}
       />
     </SchdeliveryContainer>
   );
