@@ -69,16 +69,16 @@ const MobileAboutMoving = () => {
           )}
         </div>
         <div className={styles.MobilerestaurantOpeningTimePhoneNum}>
-          <p className={styles.MobilerestaurantOpeningDay}>Mon - Friday</p>
+          <p className={styles.MobilerestaurantOpeningDay}>Operating Hours</p>
           <div className={styles.MobilerestaurantDot}></div>
           <p className={styles.MobilerestaurantOpeningTime}>8am - 5pm</p>
           <div className={styles.MobilerestaurantDot}></div>
-          <p className={styles.MobilerestaurantPhoneNum}>0903 414 5971</p>
+          <p className={styles.MobilerestaurantPhoneNum}>08059303261</p>
         </div>
-        <div className={styles.MobilerestaurantLocation}>
+        {/* <div className={styles.MobilerestaurantLocation}>
           <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
           <p className={styles.MobilerestaurantLocationText}>Ikeja, Lagos</p>
-        </div>
+        </div> */}
         <button className={styles.MobilerestaurantReview}>Reviews</button>
       </div>
     </div>
@@ -94,34 +94,52 @@ export const AboutMoving = () => {
           <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img
-                src="/images/image 200.png"
+                src="/images/fd2.png"
                 alt=""
                 className={styles.coverImg}
+                style={{
+                  width: "100%",
+                  height: "270px",
+                  objectFit: "cover",
+                  borderRadius: "10px",
+                }}
               />
             </div>
-            {/* <div className={styles.restProfileImage}>
+            <div className={styles.restProfileImage}
+              style={{
+                border: "1px solid rgb(25, 221, 84)",
+                borderRadius: "50%",
+              }}
+            >
               <img
-                src="/images/Ellipse 92.png"
+                src="/images/fd3.png"
                 alt=""
                 className={styles.restProfileImg}
+                style={{
+                  width: "100%",
+                  height: "70px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+               
+                }}
               />
-            </div> */}
+            </div>
           </div>
           <div className={styles.aboutRestaurantContainer}>
             <div className={styles.NRSContent}>
               <div className={styles.NRRestaurant}>
                 <p className={styles.restaurantProfileName}>Moving and Delivery Services</p>
-                {/* <div className={styles.restaurantRating}>
+                <div className={styles.restaurantRating}>
                   <FaStar className={styles.restaurantRatingIcon} />
                   <p className={styles.restaurantRatingNum}>4.5</p>
-                </div> */}
+                </div>
               </div>
 
               <div className={styles.restaurantOpeningTimePhoneNum}>
                 <div className={styles.restaurantOpeningDay}>
                   <CiCalendar className={styles.restaurantOpeningDayIcon} />
                   <p className={styles.restaurantOpeningDayText}>
-                    Mon - Friday
+                    Operating Hours
                   </p>
                 </div>
 

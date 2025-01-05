@@ -4,6 +4,7 @@ import styles from "./CleaningBRP.module.css";
 import { MovingReviews } from "./containers/MovingReviews/MovingReviews";
 import { MovingPost } from "./containers/MovingPost/MovingPost";
 import { CleaningBooking } from "./containers/CleaningBooking/CleaningBooking";
+import { CleaningBook } from "./containers/NewCleanBooking/CleaningBook";
 
 type TabType = "Booking" | "Reviews" | "Posts";
 
@@ -38,7 +39,7 @@ export const CleaningBRP = () => {
             <div className={styles.BookingReviewsPostsActiveTabLine}></div>
           )}
         </div>
-        <div
+        {/* <div
           className={`${styles.BookingReviewsPostsTab} ${
             activeTab === "Reviews" ? styles.active : ""
           }`}
@@ -48,8 +49,8 @@ export const CleaningBRP = () => {
           {activeTab === "Reviews" && (
             <div className={styles.BookingReviewsPostsActiveTabLine}></div>
           )}
-        </div>
-        <div
+        </div> */}
+        {/* <div
           className={`${styles.BookingReviewsPostsTab} ${
             activeTab === "Posts" ? styles.active : ""
           }`}
@@ -59,12 +60,12 @@ export const CleaningBRP = () => {
           {activeTab === "Posts" && (
             <div className={styles.BookingReviewsPostsActiveTabLine}></div>
           )}
-        </div>
+        </div> */}
       </div>
       <hr />
-      {activeTab === "Booking" && <CleaningBooking />}
-      {activeTab === "Reviews" && <MovingReviews />}
-      {activeTab === "Posts" && <MovingPost />}
+      {activeTab === "Booking" && <CleaningBook />}
+      {/* {activeTab === "Reviews" && <MovingReviews />} */}
+      {/* {activeTab === "Posts" && <MovingPost />} */}
     </div>
   );
 };

@@ -150,32 +150,20 @@ const useOrder = () => {
       setIsSubmitting(false);
     }
   };
-  const handleRequestPayment = async (
-    referenceId: string,
-    requestId: any,
-
-  ) => {
+  const handleRequestPayment = async (referenceId: string, requestId: string) => {
     setIsSubmitting(true);
-    setIsError(false);
-    setIsSuccess(false);
-
     try {
       const { data } = await axios.put(`/api/quotes/${requestId}`, {
         referenceId,
       });
 
-      toast.loading("Payment is being proccessed", {
-        duration: 2000,
-      });
-
-      setTimeout(() => {
-        useCartStore.getState().getSubscriptions();
-        setIsSuccess(true);
-        toast.success("Payment submitted successfully!");
-      }, 500);
+      if (data.success) {
+        toast.success("Payment successful!");
+        // Force reload to show updated status
+        window.location.reload();
+      }
     } catch (error) {
-      setIsError(true);
-      toast.error("Error submitting Payment."); // Show error toast
+      toast.error("Payment processing failed");
     } finally {
       setIsSubmitting(false);
     }

@@ -38,7 +38,7 @@ export const LaundryBRP = () => {
             <div className={styles.BookingReviewsPostsActiveTabLine}></div>
           )}
         </div>
-        <div
+        {/* <div
           className={`${styles.BookingReviewsPostsTab} ${
             activeTab === "Reviews" ? styles.active : ""
           }`}
@@ -48,8 +48,8 @@ export const LaundryBRP = () => {
           {activeTab === "Reviews" && (
             <div className={styles.BookingReviewsPostsActiveTabLine}></div>
           )}
-        </div>
-        <div
+        </div> */}
+        {/* <div
           className={`${styles.BookingReviewsPostsTab} ${
             activeTab === "Posts" ? styles.active : ""
           }`}
@@ -59,12 +59,12 @@ export const LaundryBRP = () => {
           {activeTab === "Posts" && (
             <div className={styles.BookingReviewsPostsActiveTabLine}></div>
           )}
-        </div>
+        </div> */}
       </div>
       <hr />
       {activeTab === "Booking" && <LaundryBooking />}
-      {activeTab === "Reviews" && <MovingReviews />}
-      {activeTab === "Posts" && <MovingPost />}
+      {/* {activeTab === "Reviews" && <MovingReviews />} */}
+      {/* {activeTab === "Posts" && <MovingPost />} */}
     </div>
   );
 };
