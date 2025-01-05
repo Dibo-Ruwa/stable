@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./PropertyCounter.module.css";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
@@ -16,25 +16,24 @@ interface PropertyCounterProps {
 export const PropertyCounter: React.FC<PropertyCounterProps> = ({
   initialCount = 0,
   min = 0,
-  max = 10,
+  max = 100,
   step = 1,
   onCountChange,
   className = "",
   buttonClass = "",
 }) => {
-  const [count, setCount] = useState<number>(initialCount);
+  // Remove internal state and rely on initialCount
+  const count = initialCount;
 
   const increaseCount = (): void => {
     if (count + step <= max) {
-      setCount((prevCount) => prevCount + step);
-      onCountChange?.(count + step);
+      onCountChange?.(count + step); // Notify parent of the new count
     }
   };
 
   const decreaseCount = (): void => {
     if (count - step >= min) {
-      setCount((prevCount) => prevCount - step);
-      onCountChange?.(count - step);
+      onCountChange?.(count - step); // Notify parent of the new count
     }
   };
 

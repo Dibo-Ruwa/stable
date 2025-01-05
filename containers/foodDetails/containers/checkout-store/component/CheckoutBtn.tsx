@@ -17,9 +17,13 @@ const CheckoutBtn = styled.button`
   background: rgba(183, 224, 182, 0.2);
 `;
 
-export const CheckoutButton = () => {
+interface CheckoutButtonProps {
+  onClick: () => void;
+}
+
+export const CheckoutButton: React.FC<CheckoutButtonProps> = ({ onClick }) => {
   return (
-    <CheckoutBtn>
+    <CheckoutBtn onClick={onClick}>
       Check Out
     </CheckoutBtn>
   );

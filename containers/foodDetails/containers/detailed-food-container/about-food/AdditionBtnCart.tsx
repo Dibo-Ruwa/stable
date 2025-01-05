@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
 import { HiMinus } from "react-icons/hi2";
 import styles from "./about-food.module.css";
@@ -8,30 +8,20 @@ import { FaStar } from "react-icons/fa";
 import { CiClock2 } from "react-icons/ci";
 
 interface ExtraWithQuantity {
-//   _id: string;
-//   name: string;
-//   price: number;
-//   quantity: number;
-//   imageUrl: string;
-//   title: string;
-//   prep_time: string;
-// export interface Extra {
-    quantity: number;
+  quantity: number;
+  _id: string;
+  title: string;
+  prep_time: string;
+  categories: string[];
+  price: number;
+  imageUrl: string;
+  vendor: {
     _id: string;
-    title: string;
-    prep_time: string;
-    categories: string[];
-    price: number;
-    imageUrl: string;
-    vendor: {
-      _id: string;
-      name: string;
-    };
-    discount?: number;
-    slug: string;
-    id: string;
-    // quantity?: number; 
-//   }
+    name: string;
+  };
+  discount?: number;
+  slug: string;
+  id: string;
 }
 
 interface CartDropdownProps {
@@ -43,9 +33,19 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
   foodDetails,
   onExtraQuantityChange,
 }) => {
-  const [extras, setExtras] = useState<ExtraWithQuantity[]>(
-    foodDetails?.extras.map((extra) => ({ ...extra, quantity: 0 })) || []
-  );
+  // Initialize extras state with quantity from foodDetails
+  const [extras, setExtras] = useState<ExtraWithQuantity[]>([]);
+
+  useEffect(() => {
+    if (foodDetails?.extras) {
+      // Initialize extras with quantity from foodDetails, defaulting to 0 if quantity is undefined
+      const initializedExtras = foodDetails.extras.map((extra) => ({
+        ...extra,
+        quantity: extra.quantity || 0,
+      }));
+      setExtras(initializedExtras);
+    }
+  }, [foodDetails]);
 
   // Handle increment for extras
   const incrementExtra = (extraId: string) => {
@@ -96,11 +96,7 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
               >
                 <div className="CartDropdown_CardTop">
                   <div className="CartDropdown_Details">
-                    <div
-                      style={{
-                        position: "relative",
-                      }}
-                    >
+                    <div style={{ position: "relative" }}>
                       <div className="CartDropdown_DetailsImage">
                         <Image
                           className="TheCartImage"
@@ -121,38 +117,40 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
                       </div>
                       <div className="CartTime_Content">
                         <CiClock2 className="CartTime_Clock" />
-                        <p className="CartTime_ClockText">{item.prep_time} {item.prep_time > '0' ? 'mins' : 'min'}</p>
+                        <p className="CartTime_ClockText">
+                          {item.prep_time} {item.prep_time > "0" ? "mins" : "min"}
+                        </p>
                       </div>
                     </div>
                   </div>
                   <div className="Cart_ODAmount">
                     <small className="Cart_OD">Offers Delivery</small>
-                    <p className="Cart_Amount">₦{item?.price * (item?.quantity >= 1 ?  item?.quantity :  1)}</p>
+                    <p className="Cart_Amount">
+                      ₦{item.price * (item.quantity >= 1 ? item.quantity : 1)}
+                    </p>
                   </div>
                 </div>
-                {/* <div className="CartDropdown_CardDown"> */}
-                  <div className={styles.counterContainer}>
-                    <button
-                      className={styles.counterButton}
-                      onClick={() => decrementExtra(item._id)}
-                      disabled={item.quantity === 0}
-                    >
-                      <HiMinus />
-                    </button>
-                    <div className={styles.countNum}>{item?.quantity}</div>
-                    <button
-                      className={styles.counterButton}
-                      onClick={() => incrementExtra(item._id)}
-                    >
-                      <MdAdd 
+                <div className={styles.counterContainer}>
+                  <button
+                    className={styles.counterButton}
+                    onClick={() => decrementExtra(item._id)}
+                    disabled={item.quantity === 0}
+                  >
+                    <HiMinus />
+                  </button>
+                  <div className={styles.countNum}>{item.quantity}</div>
+                  <button
+                    className={styles.counterButton}
+                    onClick={() => incrementExtra(item._id)}
+                  >
+                    <MdAdd
                       style={{
-                        width: '20px',
-                        height: ""
+                        width: "20px",
+                        height: "20px",
                       }}
-                      />
-                    </button>
-                  </div>
-                {/* </div> */}
+                    />
+                  </button>
+                </div>
               </div>
             ))}
           </div>

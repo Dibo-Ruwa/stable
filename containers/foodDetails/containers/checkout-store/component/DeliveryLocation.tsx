@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { useLocation } from "@/context/LocationProvider";
 
-
 const LocationContainer = styled.div`
   width: 100%;
   height: 162.776px;
@@ -70,60 +69,56 @@ const DropdownItem = styled.div`
   }
 `;
 
-export const DeliveryLocation = () => {
+interface DeliveryLocationProps {
+  onRegionSelect: (region: string | null) => void;
+}
+
+
+export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({ onRegionSelect }) => {
   const { location } = useLocation();
-
-  const url =
-    process.env.NEXT_PUBLIC_ADMIN_URL ||
-    "https://diboruwa-admin-test.vercel.app";
-
   const [regions, setRegions] = useState<string[]>([]);
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
 
   useEffect(() => {
     const fetchRegions = async () => {
       const locationCookie = Cookies.get("diboruwa_location");
       const location = locationCookie ? JSON.parse(locationCookie) : null;
-  
+
       if (location?.state) {
-        const apiUrl = `${url}/api/locations`;
-  
+        const apiUrl = `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/locations`;
+
         try {
           const response = await axios.get(apiUrl);
-          const apiCities = response.data?.cities; 
-  
+          const apiCities = response.data?.cities;
+
           if (apiCities && Array.isArray(apiCities)) {
-        
             const matchedCity = apiCities.find(
               (city: { name: string }) => city.name === location.state
             );
-  
+
             if (matchedCity) {
-           
               const regionNames = matchedCity.regions.map(
                 (region: { name: string }) => region.name
               );
-              setRegions(regionNames); 
-            } else {
-              console.error("No matching city found in API data for the state:", location.state);
+              setRegions(regionNames);
             }
-          } else {
-            console.error("Invalid API data format. Expected 'cities' array.");
           }
         } catch (error) {
           console.error("Error fetching regions:", error);
         }
       }
     };
-  
+
     fetchRegions();
   }, []);
   
-
+  
   const handleRegionSelect = (region: string) => {
     setSelectedRegion(region);
-    Cookies.set("region", region, { expires: 7 }); 
+    onRegionSelect(region); // Pass selected region to parent
+    Cookies.set("region", region, { expires: 7 });
     setDropdownOpen(false);
   };
 

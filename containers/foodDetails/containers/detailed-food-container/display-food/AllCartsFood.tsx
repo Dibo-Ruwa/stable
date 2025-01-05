@@ -109,7 +109,6 @@ export const AllCartsFood = () => {
   const { selectedItem, setSelectedItem } = useFoodItem();
   const { cartItems } = useCartItems();
   const scrollRef = useRef<HTMLDivElement>(null);
-
   // Function to handle scrolling left
   const scrollLeft = () => {
     if (scrollRef.current) {
