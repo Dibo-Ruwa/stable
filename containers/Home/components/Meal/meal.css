@@ -58,8 +58,8 @@
 }
 
 .meal_card .card {
-  width: 100%;
-  flex: 1 1 15rem;
+  width: 300px;
+  /* flex: 1 1 15rem; */
   scroll-snap-align: center;
   flex-shrink: 0;
   box-sizing: border-box;
@@ -125,6 +125,20 @@
   width: 100%;
 }
 
+@media (max-width: 850px) {
+  .meal_card {
+    justify-content: center;
+  }
+  .meal_card .card {
+    width: 350px;
+  }
+}
+
+@media (max-width: 801px) {
+  .meal_card .card {
+    width: 100%;
+  }
+}
 @media (max-width: 650px) {
   .meal {
     width: 90%;
