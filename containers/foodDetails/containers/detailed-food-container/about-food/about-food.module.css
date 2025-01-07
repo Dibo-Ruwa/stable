@@ -141,6 +141,84 @@
  margin-top: 6px;
 }
 
-.counterButton {
-  
+
+.add_to_cart_button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.add_to_cart_button:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add_to_cart_button:active {
+  transform: translateY(0);
+}
+
+.added_to_cart {
+  composes: add_to_cart_button;
+  background: var(--success, #27a124);
+  cursor: default;
+  animation: slideIn 0.3s ease;
+}
+
+.button_icon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.add_to_cart_button:hover .button_icon {
+  transform: translateX(3px);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading state */
+.button_loading {
+  composes: add_to_cart_button;
+  background: var(--primary-light);
+  cursor: wait;
+}
+
+.button_loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -107,8 +107,8 @@ export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({
 
         {dropdownOpen && (
           <Dropdown>
-            {regions.length > 0 ? (
-              regions.map((region, index) => (
+            {regions?.length > 0 ? (
+              regions?.map((region, index) => (
                 <DropdownItem
                   key={index}
                   onClick={() => handleRegionSelect(region.name)}

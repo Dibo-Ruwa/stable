@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { AboutFoodCart } from "../about-food/AboutFoodCart";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { useFoodItem } from "@/context/FooItemProvider";
-import { useCartItems } from "@/context/CartItems";
+import useCartStore from "@/store/useCart.store";
+import { CartItem, FoodData } from "@/utils/types/types";
 
 // Styled components
 const Container = styled.section`
@@ -110,8 +111,12 @@ const NextBtn = styled(TfiAngleRight)`
 
 export const AllCartsFood = () => {
   const { selectedItem, setSelectedItem } = useFoodItem();
-  const { cartItems } = useCartItems();
+  const { cartItems, getCart } = useCartStore();
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    getCart();
+  }, [getCart]);
 
   // Function to handle scrolling left
   const scrollLeft = () => {
@@ -128,26 +133,59 @@ export const AllCartsFood = () => {
   };
 
   // Function to handle item click
-  const handleItemClick = (item: typeof cartItems[0]) => {
-    setSelectedItem(item);
+  const handleItemClick = (item: CartItem) => {
+    const selectedFoodItem: FoodData = {
+      _id: item._id || "",
+      title: item.title,
+      prep_time: item.prep_time,
+      categories: item.categories,
+      price: item.price,
+      imageUrl: item.imageUrl,
+      vendor: {
+        ...item.vendor,
+        owner: "",
+        branch: [],
+        operations: []
+      },
+      discount: item.discount || 0,
+      extras: item.extras || [],
+      createdAt: "",
+      updatedAt: "",
+      slug: item.slug,
+      __v: 0,
+      id: item.id.toString(), // Ensure id is a string
+      quantity: item.quantity
+    };
+    setSelectedItem(selectedFoodItem);
   };
+
+  useEffect(() => {
+    if (cartItems.length > 0 && !selectedItem) {
+      handleItemClick(cartItems[0]);
+    }
+  }, [cartItems, selectedItem]);
+
+  console.log(selectedItem, "ITEM");
 
   return (
     <Container>
-      <SelectedImg ref={scrollRef}>
-        <PrevBtn onClick={scrollLeft} />
-        {cartItems.map((item) => (
-          <ItemContainer key={item._id} onClick={() => handleItemClick(item)}>
-            <OnSelectedImg src={item.imageUrl} alt={item.title} />
-            <ItemTitle>{item.title}</ItemTitle>
-          </ItemContainer>
-        ))}
-        <NextBtn onClick={scrollRight} />
-      </SelectedImg>
-      <DisplayImg>
-        <OnDisplayImg src={selectedItem?.imageUrl} alt="on display" />
-      </DisplayImg>
-      <AboutFoodCart selectedItem={selectedItem} />
+      {cartItems.length > 1 ? (
+        <SelectedImg ref={scrollRef}>
+          <PrevBtn onClick={scrollLeft} />
+          {cartItems?.map((item) => (
+            <ItemContainer key={item._id} onClick={() => handleItemClick(item)}>
+              <OnSelectedImg src={item.imageUrl || "/placeholder.png"} alt={item.title} />
+              <ItemTitle>{item.title}</ItemTitle>
+            </ItemContainer>
+          ))}
+          <NextBtn onClick={scrollRight} />
+        </SelectedImg>
+      ) : (
+        <DisplayImg>
+          <OnDisplayImg src={selectedItem?.imageUrl || "/placeholder.png"} alt="on display" />
+        </DisplayImg>
+      )}
+      <AboutFoodCart selectedItem={selectedItem} cartsFood={true} />
     </Container>
   );
 };
