@@ -24,18 +24,14 @@ import {
 } from "./navbar.styles";
 import UserDropdown from "@/component/userDropdown/UserDropdown";
 import { useLocation } from "@/context/LocationProvider";
-import { useCartItems } from "@/context/CartItems";
 import { FaBagShopping } from "react-icons/fa6";
 import { ImLocation } from "react-icons/im";
-import { useCart } from "@/hooks/useCart";
 import { useSession } from "next-auth/react";
 import useCartStore from "@/store/useCart.store";
 import Cookies from "js-cookie";
 import LocationModal from "@/component/newLocationModal/LocationModal";
 import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { CartDropdown } from "@/containers/CartDropdown/CartDropdown";
-import { FoodData } from "@/utils/types/types";
-
 
 const Navbar = () => {
   const { data: session, status } = useSession({
@@ -44,7 +40,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { location } = useLocation();
-  const { cartItems } = useCartItems(); // Use the new context
+  const { cartItems, getCart } = useCartStore(); // Use the store's state and actions
   const [showToast, setShowToast] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -55,8 +51,9 @@ const Navbar = () => {
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const cartDropdownRef = useRef<HTMLDivElement | null>(null);
 
-  const { totalQuantities } = useCart();
-
+  useEffect(() => {
+    getCart(); // Fetch cart data on mount
+  }, [getCart]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -128,7 +125,6 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [cartDropdownRef]);
-
 
   return (
     <>
@@ -326,7 +322,7 @@ const Navbar = () => {
 
                   {isCartDropdownOpen && (
                     <div ref={cartDropdownRef} className="CartDropdown">
-                      <CartDropdown cartItems={cartItems}  setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Pass cartItems */}
+                      <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Removed cartItems prop */}
                     </div>
                   )}
                 </div>

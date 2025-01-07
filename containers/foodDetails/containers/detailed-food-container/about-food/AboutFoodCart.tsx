@@ -10,9 +10,10 @@ import { AdditionBtnCart } from "./AdditionBtnCart";
 
 interface CartDropdownProps {
   selectedItem: FoodData | null; // Allow null
+  cartsFood?: boolean; // Add optional cartsFood prop
 }
 
-export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem }) => {
+export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem, cartsFood }) => {
   const [foodDetails, setFoodDetails] = useState<FoodData | null>(null);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
@@ -25,17 +26,19 @@ export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem }) => 
   // Check if the selectedItem is in the cart and set foodDetails
   useEffect(() => {
     if (selectedItem) {
-      const itemInCart = cartItems.find((item) => item._id === selectedItem._id);
+      const itemInCart = cartItems?.find((item) => item._id === selectedItem._id);
       if (itemInCart) {
         setFoodDetails(itemInCart); // Set foodDetails to the item found in the cart
+        setIsProductInCart(true); // Mark the product as in the cart
+      } else if (cartsFood) {
+        setFoodDetails(selectedItem); // Set foodDetails to the selected item
         setIsProductInCart(true); // Mark the product as in the cart
       } else {
         setError("Item not found in the cart");
       }
       setLoading(false); // Stop loading
     }
-
-  }, [selectedItem, cartItems]);
+  }, [selectedItem, cartItems, cartsFood]);
 
   // Handle "Add to Cart" button click
   const handleAddToCart = () => {
