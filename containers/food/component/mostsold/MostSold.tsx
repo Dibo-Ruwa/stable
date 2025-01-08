@@ -25,7 +25,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
   const { setSelectedItem } = useFoodItem();
-  const { cartItems, addToCartWithExtras } = useCartStore(); // Use the store's state and actions
+  const { cartItems, addToCartWithExtras, selectedVendor } = useCartStore(); // Use the store's state and actions
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
@@ -150,6 +150,14 @@ const MostSold: React.FC<MostSoldProps> = ({
 
   const handleItemAddToCart = async (item: FoodData) => {
     try {
+      // if (selectedVendor && item.vendor.name !== selectedVendor) {
+      //   // Show a modal or toast to inform the user
+      //   alert("You can only select items from one vendor. Please remove items from the current vendor before adding items from another vendor.");
+      //   return;
+      //   console.log('cant add')
+      // }else {
+        
+      // }
       // Ensure extras is included in the item
       const itemWithExtras = {
         ...item,
