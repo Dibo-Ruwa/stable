@@ -95,6 +95,11 @@ export async function PUT(
 
         console.log('Updated extra quantity:', extra.quantity);
 
+        // Filter out extras with quantity 0
+        existingCartItem.extras = existingCartItem.extras.filter(
+          (extra: any) => extra.quantity > 0
+        );
+
         // Calculate extras total
         const extrasTotal = existingCartItem.extras.reduce((acc: number, extra: any) => {
           return acc + (extra.price * (extra.quantity || 0));
@@ -144,13 +149,13 @@ export async function PUT(
     });
 
     return NextResponse.json(
-      { cart: populatedCart, success: true },
+      { cart: populatedCart, success: true, prep_time: populatedCart.prep_time },
       { status: 200 }
     );
   } catch (error) {
     console.error('Cart PUT error:', error);
     return NextResponse.json(
-      { error: "An error occurred", details: error.message },
+      { error: "An error occurred", details: error },
       { status: 500 }
     );
   } finally {

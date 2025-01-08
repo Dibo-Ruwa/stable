@@ -14,7 +14,9 @@ export const addCartItemAPI = async (product: FoodData) => {
   try {
     const response = await axios.post("/api/cart", {
       ...product,
-      imageUrl: product.imageUrl || "/placeholder.png" // Ensure imageUrl is used
+      imageUrl: product.imageUrl || "/placeholder.png",
+      prep_time: product.prep_time,
+
     });
     return response.data;
   } catch (error) {

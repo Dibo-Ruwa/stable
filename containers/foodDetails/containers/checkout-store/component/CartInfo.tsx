@@ -10,6 +10,7 @@ import { HiMinus } from "react-icons/hi2";
 import { MdAdd } from "react-icons/md"; // Import MdAdd for the increment button
 import styled from "styled-components";
 import useCartStore from "@/store/useCart.store";
+import { toast } from "react-hot-toast"; // Import toast from react-hot-toast
 
 const StoreOwnerName = styled.p`
   color: var(--Green1, #27a124);
@@ -124,10 +125,10 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
             item._id === itemId
               ? {
                   ...item,
-                  extras: item.extras.map(e =>
-                    e._id === extraId ? updatedExtra : e
-                  )
-                }
+                  extras: item.extras
+                    .map(e => (e._id === extraId ? updatedExtra : e))
+                    .filter(e => e.quantity > 0) // Filter out extras with quantity 0
+              }
               : item
           )
         );
@@ -270,14 +271,17 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
                   <PropertyCounter
                     initialCount={itemQuantity}
                     onCountChange={(newQuantity) =>
-                      handleQuantityChange(item._id, newQuantity > itemQuantity ? "increase" : "decrease")
+                      handleQuantityChange(
+                        item._id,
+                        newQuantity > itemQuantity ? "increase" : "decrease"
+                      )
                     }
                     buttonClass="counterButton"
                     className="counterContainer"
                   />
                 </div>
 
-                {item.extras && item.extras.some(extra => extra.quantity > 0) && (
+                {item.extras && item.extras.some((extra) => extra.quantity > 0) && (
                   <div style={{ marginLeft: "15%" }}>
                     <p className={styles.addmore_text}>Extras</p>
                     <br />
@@ -300,6 +304,13 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
                               <div className="CartTitleRating">
                                 <p className="CartTitle">{extra.title}</p>
                               </div>
+                              <div className="CartTime_Content">
+                                <CiClock2 className="CartTime_Clock" />
+                                <p className="CartTime_ClockText">
+                                  {extra.prep_time}{" "}
+                                  {extra.prep_time > "0" ? "mins" : "min"}
+                                </p>
+                              </div>
                             </div>
                           </div>
                           <div className="Cart_ODAmount">
@@ -310,8 +321,8 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
                         </div>
                         <div
                           style={{
-                            marginLeft: 'auto',
-                            width: 'fit-content'
+                            marginLeft: "auto",
+                            width: "fit-content",
                           }}
                           className={styles.counterContainer}
                         >

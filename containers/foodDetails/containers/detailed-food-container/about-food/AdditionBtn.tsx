@@ -21,7 +21,9 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
   );
 
   useEffect(() => {
-    setExtras(foodDetails?.extras.map((extra) => ({ ...extra, quantity: 0 })) || []);
+    setExtras(
+      foodDetails?.extras.map((extra) => ({ ...extra, quantity: 0 })) || []
+    );
   }, [foodDetails]);
 
   // Handle increment for extras
@@ -98,7 +100,12 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
                       </div>
                       <div className="CartTime_Content">
                         <CiClock2 className="CartTime_Clock" />
-                        <p className="CartTime_ClockText">{item.prep_time}</p>
+                        <p className="CartTime_ClockText">
+                          {item.prep_time}{" "}
+                          {item.prep_time === "1" || item.prep_time === "0"
+                            ? "min"
+                            : "mins"}
+                        </p>
                       </div>
                     </div>
                   </div>

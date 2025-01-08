@@ -135,7 +135,8 @@ const useCartStore = create<CartState>()((set) => ({
     try {
       const normalizedProduct = {
         ...productObj,
-        imageUrl: productObj.imageUrl || "/placeholder.png" // Ensure imageUrl is used
+        imageUrl: productObj.imageUrl || "/placeholder.png", // Ensure imageUrl is used
+        prep_time: productObj.prep_time // Ensure prep_time is included
       };
 
       const response = await addCartItemAPI(normalizedProduct);
@@ -176,6 +177,7 @@ const useCartStore = create<CartState>()((set) => ({
       const normalizedProduct = {
         ...productObj,
         imageUrl: productObj.imageUrl || "/placeholder.png", // Ensure imageUrl is used
+        prep_time: productObj.prep_time, // Ensure prep_time is included
         extras: extras.filter(extra => extra.quantity > 0) // Only include extras with quantity > 0
       };
 
