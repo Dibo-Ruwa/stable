@@ -15,6 +15,8 @@ import { nanoid } from "nanoid";
 import styled from "styled-components";
 import Lottie from "lottie-react";
 import MovingAnimation from "./MovingAnimation.json";
+import Loader from "@/component/ui/loader/Loader";
+
 
 type TabType = "Active" | "Rendered";
 
@@ -95,11 +97,7 @@ export const UserServicesOrders = () => {
   const renderContent = () => {
     if (loading) {
       return (
-        <LoadingState>
-          <div className="animation-container">
-            <Lottie animationData={MovingAnimation} loop={true} />
-          </div>
-        </LoadingState>
+            <Loader />
       );
     }
 

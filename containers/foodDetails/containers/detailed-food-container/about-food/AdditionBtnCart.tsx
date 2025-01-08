@@ -37,7 +37,7 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
 }) => {
   const [extras, setExtras] = useState<ExtraWithQuantity[]>([]);
   const [isUpdating, setIsUpdating] = useState(false);
-  const { updateQuantity } = useCartStore();
+  const { updateQuantity, cartItems } = useCartStore();
 
   useEffect(() => {
     if (foodDetails?.extras) {
@@ -48,6 +48,20 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
       setExtras(initializedExtras);
     }
   }, [foodDetails]);
+
+  useEffect(() => {
+    if (foodDetails) {
+      const cartItem = cartItems.find(item => item._id === foodDetails._id);
+      if (cartItem) {
+        setExtras(prevExtras =>
+          prevExtras.map(extra => {
+            const cartExtra = cartItem.extras.find(e => e._id === extra._id);
+            return cartExtra ? { ...extra, quantity: cartExtra.quantity } : extra;
+          })
+        );
+      }
+    }
+  }, [cartItems, foodDetails]);
 
   // Handle increment for extras
   const incrementExtra = async (extraId: string) => {
@@ -60,19 +74,19 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
         throw new Error('Extra not found');
       }
 
-      // Send all extra details when incrementing
-      await updateQuantity(foodDetails._id, "increase", extraId, {
+      // Only send necessary extra details
+      const extraInfo = {
+        _id: extraDetails._id,
         title: extraDetails.title,
         price: extraDetails.price,
         imageUrl: extraDetails.imageUrl,
         prep_time: extraDetails.prep_time,
-        categories: extraDetails.categories,
-        vendor: extraDetails.vendor,
-        slug: extraDetails.slug,
-        _id: extraDetails._id
-      });
+        quantity: (extraDetails.quantity || 0) + 1
+      };
 
-      // Update the state immediately after the API call
+      await updateQuantity(foodDetails._id, "increase", extraId, extraInfo);
+
+      // Update local state
       setExtras(prevExtras =>
         prevExtras.map(e =>
           e._id === extraId

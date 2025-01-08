@@ -20,6 +20,9 @@ export const UserOrdersCard: React.FC<UserOrdersCardProps> = ({
     <Link
       href={id ? `/profile/orders/${id}?type=${type}` : '#'}
       className={`${styles.card} ${className}`}
+      style={{
+        padding: "5px 10px",
+      }}
     >
       {children}
     </Link>

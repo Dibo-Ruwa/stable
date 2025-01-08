@@ -86,20 +86,6 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
         // Optimistically update the UI
         const updatedExtra = { ...extra, quantity: (extra.quantity || 0) + 1 };
         await updateQuantity(itemId, "increase", extraId, updatedExtra);
-        
-        // Update the state immediately after the API call
-        setCartItems(prevItems =>
-          prevItems.map(item =>
-            item._id === itemId
-              ? {
-                  ...item,
-                  extras: item.extras.map(e =>
-                    e._id === extraId ? updatedExtra : e
-                  )
-                }
-              : item
-          )
-        );
       }
     } catch (error) {
       console.error('Error incrementing extra:', error);
@@ -118,20 +104,6 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
         // Optimistically update the UI
         const updatedExtra = { ...extra, quantity: Math.max(0, (extra.quantity || 0) - 1) };
         await updateQuantity(itemId, "decrease", extraId, updatedExtra);
-        
-        // Update the state immediately after the API call
-        setCartItems(prevItems =>
-          prevItems.map(item =>
-            item._id === itemId
-              ? {
-                  ...item,
-                  extras: item.extras
-                    .map(e => (e._id === extraId ? updatedExtra : e))
-                    .filter(e => e.quantity > 0) // Filter out extras with quantity 0
-              }
-              : item
-          )
-        );
       }
     } catch (error) {
       console.error('Error decrementing extra:', error);

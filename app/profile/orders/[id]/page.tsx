@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { FoodOrderDetails } from "./components/FoodOrderDetails";
 import { ServiceOrderDetails } from "./components/ServiceOrderDetails";
 import useQuote from "@/hooks/useQuote";
+import useOrder from "@/hooks/useOrder";
 
 const OrderDetailsContainer = styled.div`
   max-width: 1200px;
@@ -17,6 +18,8 @@ const OrderPage = () => {
   const searchParams = useSearchParams();
   const orderType = searchParams.get('type');
   const { quote, getQuoteById } = useQuote();
+  const { order, getOrderById } = useOrder();
+
 
   useEffect(() => {
     if (params.id) {
@@ -24,10 +27,16 @@ const OrderPage = () => {
     }
   }, [params.id]);
 
+  useEffect(() => {
+    if(params.id){
+      getOrderById(params.id as string);
+    }
+  }, [params.id])
+
   return (
     <OrderDetailsContainer>
-      {orderType === 'order' ? (
-        <FoodOrderDetails orderId={params.id as string} />
+      {orderType === 'cart' ? (
+        <FoodOrderDetails orderId={params.id as string} order={order} />
       ) : (
         <ServiceOrderDetails orderId={params.id as string} quote={quote} />
       )}

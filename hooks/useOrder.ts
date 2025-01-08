@@ -80,7 +80,9 @@ const useOrder = () => {
         setIsSuccess(true);
         toast.success("Cart order submitted successfully!");
       }, 500);
-      router.push(`/profile/orders/${data.order?._id}/${data.order?.type}`);
+      // router.push(`/profile/orders/${data.order?._id}/${data.order?.type}`);
+      router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
+
     } catch (error) {
       setIsError(true);
       toast.error("Error submitting cart order."); // Show error toast
@@ -121,7 +123,8 @@ const useOrder = () => {
           setIsSuccess(true);
           toast.success("Subscription order submitted successfully!");
         }, 500);
-        router.push(`/profile/orders/${data.order?._id}`);
+        // router.push(`/profile/orders/${data.order?._id}`);
+        router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
       } else {
         const { subscription } = subscriptionOrderData;
 
@@ -141,7 +144,9 @@ const useOrder = () => {
           openModal("success", "Subscription order submitted successfully!");
           toast.success("Subscription order submitted successfully!");
         }, 500);
-        router.push(`/profile/subscriptions/${data.subscription?._id}`);
+        // router.push(`/profile/subscriptions/${data.subscription?._id}`);
+        router.push(`/profile/subscriptions/${data.subscription?._id}?type=${data.subscription?.type}`);
+
       }
     } catch (error) {
       setIsError(true);
