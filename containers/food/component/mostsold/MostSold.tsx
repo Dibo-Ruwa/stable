@@ -66,7 +66,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products`,
+        `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products?type=food`,
         {
           params: {
             page,
@@ -128,7 +128,7 @@ const MostSold: React.FC<MostSoldProps> = ({
     const debouncedScroll = debounce(handleScroll, 200); // Debounce for 200ms
     window.addEventListener("scroll", debouncedScroll);
     return () => window.removeEventListener("scroll", debouncedScroll);
-  }, [searchQuery, loadingMore]);
+  }, [searchQuery, activeButton, loadingMore]);
 
   // Filter out duplicates based on _id
   const uniqueItems = useMemo(() => {
