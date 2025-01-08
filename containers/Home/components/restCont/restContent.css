@@ -151,13 +151,13 @@
 @media (min-width: 900px) {
   .resturant-content {
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     width: min(90%, 1440px);
   }
   .desktop-image {
     display: block;
-    width: 60rem;
+    width: 25rem;
     margin-bottom: -4rem;
   }
   .rest-title,
