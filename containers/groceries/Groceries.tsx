@@ -1,18 +1,9 @@
-"use client";
-import "./component/groceries.css";
-// import ProductList from "@/component/ProductList/ProductList";
-import Discount from "./component/discount/Discount";
-import CustomBooking from "./component/custombooking/CustomBooking";
-import MostSold from "./component/mostsold/MostSold";
-import MinsMeals from "./component/30MinsMeals/MinsMeals";
-import FreeDelivery from "./component/freedelivery/FreeDelivery";
-import { useState } from "react";
 
-const isBetween10amAnd6pm = () => {
-  const now = new Date();
-  const hours = now.getHours();
-  return hours >= 10 && hours < 18;
-};
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Discount from "./component/discount/Discount";
+import GCustomBooking from "./component/custombooking/CustomBooking";
+import GMostSold from "./component/mostsold/MostSold";
 
 interface FoodProps {
   params: {
@@ -20,32 +11,35 @@ interface FoodProps {
   };
 }
 
-const Groceries: React.FC<FoodProps> = ({ params }) => {
-  const { id } = params;
-   const [searchQuery, setSearchQuery] = useState<string>("");
-   const [activeButton, setActiveButton] = useState<string>("All");
+const url = process.env.NEXT_PUBLIC_ADMIN_URL;
 
-  // const { modal, closeModal } = useCartStore();
+const Groceries: React.FC<FoodProps> = () => {
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeButton, setActiveButton] = useState<string>("all");
 
-  // const { data: session } = useSession();
-  // const router = useRouter();
+
 
   return (
     <div className="food-container">
       <Discount />
-      <CustomBooking
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
+      {/* <GCustomBooking
         activeButton={activeButton}
         setActiveButton={setActiveButton}
-      />
-      <MostSold id={id} searchQuery={searchQuery} activeButton={activeButton} />
-      <MinsMeals searchQuery={searchQuery} activeButton={activeButton} />
-      <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} />
+        setSearchQuery={setSearchQuery}
+      /> */}
+      
+        <GMostSold
+          
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          activeButton={activeButton}
+          // foodData={filteredFoodData} // Pass the filtered food data
+        />
+      
+      {/* <MinsMeals searchQuery={searchQuery} activeButton={activeButton} /> */}
+      {/* <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} /> */}
     </div>
   );
 };
 
 export default Groceries;
-
-
