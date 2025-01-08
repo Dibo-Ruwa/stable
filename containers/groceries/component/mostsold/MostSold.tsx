@@ -1,122 +1,328 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import "./mostsold.css";
-import { DiscountSale, FoodVendor } from "@/constants/index";
-import Link from "next/link";
+import { FoodData } from "@/utils/types/types";
+import { FaStar } from "react-icons/fa";
+import { FaBagShopping } from "react-icons/fa6";
+import { useFoodItem } from "@/context/FooItemProvider";
+import { useCartItems } from "@/context/CartItems";
+import { useRouter } from "next/navigation";
+import { Toast } from "@/lib/Toast";
+import axios from "axios";
+import { useLocation } from "@/context/LocationProvider";
+import { debounce } from "lodash";
 
 interface MostSoldProps {
-  id: string;
   searchQuery: string;
+  setSearchQuery: (query: string) => void;
   activeButton: string;
 }
 
-const MostSold: React.FC<MostSoldProps> = ({
-  id,
+const GMostSold: React.FC<MostSoldProps> = ({
   searchQuery,
+  setSearchQuery,
   activeButton,
 }) => {
-  const [visibleItems, setVisibleItems] = useState(FoodVendor[0].items);
+  const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
+  const { setSelectedItem } = useFoodItem();
+  const { addToCart, cartItems, setIsCart, selectedVendor } = useCartItems();
+  const router = useRouter();
+  const [showToast, setShowToast] = useState(false);
+  const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
+  const [page, setPage] = useState(1); // Track current page
+  const [loadingMore, setLoadingMore] = useState(false); // Track loading state for infinite scroll
+  const [hasMore, setHasMore] = useState(true); // Track if there's more data to load
+  const { location } = useLocation(); // Get location from context
+  const [loading, setLoading] = useState(true); // Track initial loading state
 
+  console.log(searchQuery)
+  // Load added items from local storage on component mount
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setVisibleItems(FoodVendor[0].items.slice(0, 4)); // Show first 4 items on large screens
+    const savedCartItems = localStorage.getItem("cartItems");
+    if (savedCartItems) {
+      const parsedCartItems: FoodData[] = JSON.parse(savedCartItems);
+      const itemIds = new Set(parsedCartItems.map((item) => item._id));
+      setAddedItems(itemIds);
+    }
+  }, []);
+
+  // Update addedItems when cartItems change
+  useEffect(() => {
+    const itemIds = new Set(cartItems.map((item) => item._id));
+    setAddedItems(itemIds);
+  }, [cartItems]);
+
+  // Fetch data from the API
+  const fetchData = useCallback(async () => {
+    if (loadingMore || !hasMore) return;
+
+    setLoadingMore(true);
+  
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products?type=grocery`,
+        {
+          params: {
+            page,
+            limit: 20,
+            search: searchQuery,
+          },
+        }
+      );
+
+      const newData = response.data?.data;
+      const pagination = response.data?.pagination;
+
+      // Filter data based on location.state
+      const filteredData = location?.state
+        ? newData.filter((item: { vendor: { branch: any[] } }) =>
+            item.vendor.branch.some(
+              (branch) => branch.location.city.name === location.state
+            )
+          )
+        : newData;
+        
+
+      // setLoading(false); // Set loading to false after the first fetch
+
+      if (filteredData.length > 0) {
+        setVisibleItems((prevItems) => [...prevItems, ...filteredData]);
+        setPage((prevPage) => prevPage + 1);
+        setHasMore(pagination?.hasNextPage || false); // Update hasMore based on API response
       } else {
-        setVisibleItems(FoodVendor[0].items); // Show all items on smaller screens
+        setHasMore(false); // No more data to load
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoadingMore(false);
+      setLoading(false); // Set loading to false after the first fetch
+    }
+  }, [page, searchQuery, activeButton, loadingMore, hasMore, location]);
+
+  // Initial data fetch when the component mounts or searchQuery/activeButton changes
+  useEffect(() => {
+    setVisibleItems([]); // Clear existing data
+    setPage(1); // Reset page
+    setHasMore(true); // Reset hasMore
+    setLoading(true); // Set loading to true before fetching
+    fetchData(); // Fetch new data
+  }, [searchQuery, activeButton, location]); // Add activeButton to dependency array
+
+  // Debounce scroll event
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+      if (scrollHeight - (scrollTop + clientHeight) < 700 && !loadingMore) {
+        fetchData();
       }
     };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    const debouncedScroll = debounce(handleScroll, 200); // Debounce for 200ms
+    window.addEventListener("scroll", debouncedScroll);
+    return () => window.removeEventListener("scroll", debouncedScroll);
+  }, [searchQuery, activeButton, loadingMore]);
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Filter out duplicates based on _id
+  const uniqueItems = useMemo(() => {
+    const seen = new Set();
+    return visibleItems.filter((item) => {
+      if (seen.has(item._id)) {
+        return false; // Skip duplicate
+      }
+      seen.add(item._id);
+      return true;
+    });
+  }, [visibleItems]);
 
-  // Filter items based on searchQuery and activeButton
-  const filteredItems = visibleItems.filter((item) => {
-    const matchesSearch = item.smallTitle
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const matchesTime =
-      activeButton === "All" || item.timeText === activeButton;
-    return matchesSearch && matchesTime;
-  });
+
+  const handleItemClick = (item: FoodData) => {
+    setSelectedItem(item);
+  console.log(item)
+    // Check if the item's _id is in the cartItems
+    const isItemInCart = cartItems.some((cartItem) => cartItem._id === item._id);
+  
+    // Set isCart based on whether the item is in the cart
+    setIsCart(isItemInCart);
+  
+    // Navigate to the checkout page
+    router.push(`/food/checkout`);
+  };
+
+
+  const handleItemAddToCart = (item: FoodData) => {
+    // Check if the item's vendor matches the selected vendor
+    if (selectedVendor && item.vendor.name !== selectedVendor) {
+      // Show a modal or toast to inform the user
+      alert("You can only select items from one vendor. Please remove items from the current vendor before adding items from another vendor.");
+      return;
+    }
+    // Ensure extras is included in the item
+    const itemWithExtras = {
+      ...item,
+      extras: item.extras ?? [], // Initialize extras as an empty array if undefined
+    };
+
+    // Add the item to the cart
+    addToCart(itemWithExtras);
+    setShowToast(true);
+  };
 
   return (
-    <section className="mostsold_container">
-      <div className="mostsold-frame">
-        <p className="mostsold_title">{FoodVendor[0].title}</p>
-        <div className="mostsold-cards">
-          {filteredItems.map((item) => {
-            const FavoriteIcon = item.favoriteIcon;
-            const StarIcon = item.starIcon;
-            const TimeIcon = item.timeIcon;
-            const PrizeIcon = item.prizeIcon;
-            return (
-              <Link
-                href={`./food/${item.id}`}
-                key={item.id}
-                className="mostsold-card"
+    <div>
+      <section className="mostsold_container">
+        <div className="mostsold-frame">
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "450px",
+                padding: "1rem",
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Search here"
+                style={{
+                  height: "42px",
+                  flexShrink: 0,
+                  borderRadius: "4px",
+                  paddingLeft: "1rem",
+                  paddingRight: "2.5rem",
+                  border: "1px solid #ebebeb",
+                  backgroundColor: "#fcfcfc",
+                  outline: "none",
+                  width: "100%",
+                }}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <img
+                src="/images/search-normal.svg"
+                alt="search-normal"
+                style={{
+                  position: "absolute",
+                  right: "2rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+            </div>
+          </div>
+          <div className="mostload">
+            {loading ? ( // Show loading effect while fetching initial data
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "30px",
+                  fontWeight: 600,
+                  marginTop: "20px",
+                }}
               >
-                <div className="mostsold-card_food-img">
-                  <img
-                    src={item.img}
-                    alt={item.smallTitle}
-                    className="mostsold-card_img"
-                  />
-                  <div className="mostsold-card_img-iconcontainer">
-                    <FavoriteIcon className="mostsold-card_img-icon" />
-                  </div>
-                </div>
-                <div className="mostsold-card_content">
-                  <div className="mostsold-card_context">
-                    <div className="mostsold-card_context-top">
-                      <small className="mostsold-card_title">
-                        {item.smallTitle}
-                      </small>
-                      <div className="mostsold-card_dot"></div>
-                      <StarIcon className="mostsold-card_star" />
-                      <small className="mostsold-card_rating">
-                        {item.rating}
-                      </small>
+                Loading meals...
+              </p>
+            ) : uniqueItems.length === 0 ? ( // Show "No meal found" only after loading is complete
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "30px",
+                  fontWeight: 600,
+                  marginTop: "20px",
+                  background: "#43e656",
+                }}
+              >
+                No meal found on your current location
+              </p>
+            ) : (
+              <>
+              <div className="mostsold-cards">
+                {uniqueItems.map((item) => (
+                  <div key={item._id} className="mostsold-card">
+                    <div
+                      onClick={() => handleItemClick(item)}
+                      className="mostsold-card_food-img"
+                    >
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
+                        className="mostsold-card_img"
+                      />
                     </div>
-                    <div className="mostsold-card_timer">
-                      <TimeIcon className="mostsold-card_timer-icon" />
-                      <div className="mostsold-card_timer-text">
-                        {item.timeText}
+                    <div className="mostsold-card_content">
+                      <div
+                        onClick={() => handleItemClick(item)}
+                        className="mostsold-card_context"
+                      >
+                        <div className="mostsold-card_context-top">
+                          <small className="mostsold-card_title">
+                            {item.title}
+                          </small>
+                          <div className="mostsold-card_dot"></div>
+                          <FaStar className="mostsold-card_star" />
+                          <small className="mostsold-card_rating">4.5</small>
+                        </div>
+                        <div className="mostsold-card_timer">
+                          <span>{item.prep_time}</span>
+                        </div>
+                      </div>
+                      <p
+                        style={{
+                          fontSize: "14px",
+                          color: "#8F8F8F",
+                        }}
+                        onClick={() => handleItemClick(item)}
+                      >
+                        {item?.vendor?.name}
+                      </p>
+                      <div className="mostsold-card_prize">
+                        <p
+                          onClick={() => handleItemClick(item)}
+                          className="mostsold-card_prize-text"
+                        >
+                          ₦{item.price}
+                        </p>
+                        <button
+                          onClick={() => handleItemAddToCart(item)}
+                          type="button"
+                          className={`mostsold-card_prize-link ${
+                            addedItems.has(item._id) ? "added-to-cart" : ""
+                          }`}
+                          disabled={addedItems.has(item._id)}
+                        >
+                          <FaBagShopping className="mostsold-card_prize-icon" />
+                        </button>
                       </div>
                     </div>
                   </div>
-                  <small className="mostsold-card_remender">
-                    {item.remenderText}
-                  </small>
-                  <div className="mostsold-card_prize">
-                    <p className="mostsold-card_prize-text">{item.prizeText}</p>
-                    <Link
-                      href={item.prizeLink}
-                      className="mostsold-card_prize-link"
-                    >
-                      <PrizeIcon className="mostsold-card_prize-icon" />
-                    </Link>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
+                ))}
+              </div>
+              </>
+            )}
+          </div>
+          {loadingMore && (
+            <p style={{ textAlign: "center", marginTop: "20px" }}>
+              Loading more meals...
+            </p>
+          )}
+          {/* {!hasMore && (
+            <p style={{ textAlign: "center", marginTop: "20px" }}>
+              No more meals to load.
+            </p>
+          )} */}
         </div>
-        <div className="sale-imgs-container">
-          {DiscountSale.map((item, index) => (
-            <div className="sale-imgs" key={index}>
-              <img
-                src={item.img}
-                alt={item.alt}
-                className="mostsold-sale_img"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Toast for adding item to cart */}
+      <Toast
+        message="Item added to cart!"
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
+    </div>
   );
 };
 
-export default MostSold;
+export default GMostSold;

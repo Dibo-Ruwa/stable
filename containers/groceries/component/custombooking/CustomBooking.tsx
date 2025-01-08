@@ -3,26 +3,27 @@ import "./custombooking.css";
 import { CustomBookingModal } from "./CustomBookingModal";
 
 interface CustomBookingProps {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
   activeButton: string;
   setActiveButton: (label: string) => void;
+  setSearchQuery: (label: string) => void;
 }
 
-const CustomBooking: React.FC<CustomBookingProps> = ({
-  searchQuery,
-  setSearchQuery,
+const GCustomBooking: React.FC<CustomBookingProps> = ({
   activeButton,
   setActiveButton,
+  setSearchQuery,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const handleButtonClick = (label: string) => {
-    setActiveButton(label);
-  };
+  const handleButtonClick = (value: string) => {
+    setActiveButton(value);
+    if (value !== "all") {
+      setSearchQuery(value); // Only set search query if value is not "all"
+    } else {
+      setSearchQuery(''); // Only set search query if value is not "all"
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
+    }
+    console.log(value);
   };
 
   const openModal = () => {
@@ -33,46 +34,43 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
     setIsModalOpen(false);
   };
 
+  // Define the food categories
+  const foodCategories = [
+    { value: "all", label: "All" },
+    { value: "swallow", label: "Swallow" },
+    { value: "drinks", label: "Drinks" },
+    { value: "meat", label: "Protein" },
+    { value: "Rice and Grain", label: "Rice and Grain" },
+    { value: "snacks", label: "Snacks and Fries" },
+    { value: "extras", label: "Extras" },
+  ];
+
   return (
     <div className="custombooking_container">
       <div className="custombooking_frame">
-        <div className="custombooking_search-min">
-          <div className="min-buttons">
-            {["All", "30mins", "45mins", "1hr", "2hr"].map((label) => (
-              <button
-                key={label}
-                className={`min-button ${
-                  activeButton === label ? "active" : ""
-                }`}
-                onClick={() => handleButtonClick(label)}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-          <div className="custombooking-search_box">
-            <input
-              type="text"
-              placeholder="Search here"
-              required
-              className="custombooking-search_input"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-            <img
-              src="/images/search-normal.svg"
-              alt="search-normal"
-              className="custombooking-search_img"
-            />
-          </div>
+        <div className="min-buttons">
+          {foodCategories.map((category) => (
+            <button
+              key={category.value}
+              className={`min-button ${
+                activeButton === category.value ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick(category.value)}
+            >
+              {category.label}
+            </button>
+          ))}
         </div>
+
         <button type="button" className="custombooking-btn" onClick={openModal}>
           Custom Booking
         </button>
         <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
+
+      <div className="flex justify-end"></div>
     </div>
   );
 };
 
-export default CustomBooking;
+export default GCustomBooking;
