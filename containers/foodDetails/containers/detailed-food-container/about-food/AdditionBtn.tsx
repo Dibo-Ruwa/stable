@@ -1,36 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
 import { HiMinus } from "react-icons/hi2";
 import styles from "./about-food.module.css";
-import { FoodData } from "@/utils/types/types";
+import { FoodData, Extra } from "@/utils/types/types";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { CiClock2 } from "react-icons/ci";
-
-interface ExtraWithQuantity {
-  // _id: string;
-  // name: string;
-  // price: number;
-  // quantity: number;
-  // imageUrl: string;
-  // title: string;
-  // prep_time: string;
-
-  quantity: number;
-  _id: string;
-  title: string;
-  prep_time: string;
-  categories: string[];
-  price: number;
-  imageUrl: string;
-  vendor: {
-    _id: string;
-    name: string;
-  };
-  discount?: number;
-  slug: string;
-  id: string;
-}
 
 interface CartDropdownProps {
   foodDetails: FoodData | null; // Allow null
@@ -41,9 +16,15 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
   foodDetails,
   onExtraQuantityChange,
 }) => {
-  const [extras, setExtras] = useState<ExtraWithQuantity[]>(
+  const [extras, setExtras] = useState<Extra[]>(
     foodDetails?.extras.map((extra) => ({ ...extra, quantity: 0 })) || []
   );
+
+  useEffect(() => {
+    setExtras(
+      foodDetails?.extras.map((extra) => ({ ...extra, quantity: 0 })) || []
+    );
+  }, [foodDetails]);
 
   // Handle increment for extras
   const incrementExtra = (extraId: string) => {
@@ -83,7 +64,7 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
               gap: ".7rem",
             }}
           >
-            {extras.map((item) => (
+            {extras?.map((item) => (
               <div
                 key={item._id}
                 style={{
@@ -102,7 +83,7 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
                       <div className="CartDropdown_DetailsImage">
                         <Image
                           className="TheCartImage"
-                          src={item.imageUrl}
+                          src={item.imageUrl || "/placeholder.png"}
                           alt={item.title}
                           width={70}
                           height={60}
@@ -119,7 +100,12 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
                       </div>
                       <div className="CartTime_Content">
                         <CiClock2 className="CartTime_Clock" />
-                        <p className="CartTime_ClockText">{item.prep_time}</p>
+                        <p className="CartTime_ClockText">
+                          {item.prep_time}{" "}
+                          {item.prep_time === "1" || item.prep_time === "0"
+                            ? "min"
+                            : "mins"}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -128,7 +114,7 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
                     <p className="Cart_Amount">₦{item.price}</p>
                   </div>
                 </div>
-                {/* <div className="CartDropdown_CardDown">
+                <div className="CartDropdown_CardDown">
                   <div className={styles.counterContainer}>
                     <button
                       className={styles.counterButton}
@@ -145,7 +131,7 @@ export const AdditionBtn: React.FC<CartDropdownProps> = ({
                       <MdAdd />
                     </button>
                   </div>
-                </div> */}
+                </div>
               </div>
             ))}
           </div>

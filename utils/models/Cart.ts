@@ -1,24 +1,37 @@
-import mongoose, { Document, Model, Schema, model, models } from "mongoose";
+import mongoose, { Schema, model, models } from "mongoose";
 
-const cartSchema = new Schema(
-  {
-    cartItems: [
-      {
-        title: { type: String, required: true },
-        price: { type: Number, required: true },
-        prepTime: { type: Number },
-        imageUrl: { type: String,  },
-        // categories: { type: [String], required: true },
-        vendor: { type: String,  },
-        discount: { type: String},
-        quantity: { type: Number, required: true },
-        total: { type: Number, required: true },
-      },
-    ],
-    total: { type: Number, default: 0 },
-    user: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+const cartItemSchema = new Schema({
+  title: { type: String, required: true },
+  price: { type: Number, required: true },
+  imageUrl: { type: String, required: true }, 
+  vendor: { 
+    type: Object, // Store vendor details directly
+    required: true
   },
-  { timestamps: true }
-);
+  quantity: { type: Number, required: true },
+  extras: [{
+    title: { type: String },
+    price: { type: Number },
+    quantity: { type: Number },
+    imageUrl: { type: String },
+    prep_time: { type: String }
+  }],
+  total: { type: Number, required: true },
+  prep_time: { type: String, required: true }
+});
+
+const cartSchema = new Schema({
+  cartItems: [cartItemSchema],
+  subtotal: { type: Number, default: 0 },
+  deliveryFee: { type: Number, default: 0 },
+  total: { type: Number, default: 0 },
+  selectedRegion: { type: String },
+  scheduledDelivery: {
+    date: { type: String },
+    time: { type: String }
+  },
+  additionalInfo: { type: String },
+  user: { type: mongoose.Types.ObjectId, ref: "User", required: true }
+}, { timestamps: true });
 
 export const Cart = models.Cart || model("Cart", cartSchema);

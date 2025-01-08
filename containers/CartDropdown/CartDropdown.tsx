@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Checkbox } from "@/component/Checkbox/Checkbox";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
@@ -12,17 +12,16 @@ import "./CartDropdown.css";
 import { SelectCourier } from "./SelectCourier";
 import { FoodDatas } from "@/utils/types/types";
 import { useRouter } from "next/navigation";
-import { useCartItems } from "@/context/CartItems";
+import useCartStore from "@/store/useCart.store"; // Use the store instead of context
 import { Toast } from "@/lib/Toast"; // Import the Toast component
 
 interface CartDropdownProps {
-  cartItems: FoodDatas | null; // Allow null
   setIsCartDropdownOpen: (isOpen: boolean) => void; // Correct function type
 }
 
-export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCartDropdownOpen }) => {
+export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpen }) => {
   const router = useRouter();
-  const { removeFromCart, setIsCart, updateItemQuantity } = useCartItems(); // Use the removeFromCart and updateItemQuantity functions
+  const { cartItems, removeFromCart, updateQuantity, getCart } = useCartStore(); // Use the store's state and actions
 
   const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
   const [isCardChecked, setIsCardChecked] = useState<boolean>(false);
@@ -31,13 +30,16 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set()); // Track checked items
   const [showToast, setShowToast] = useState(false); // State for toast visibility
 
+  useEffect(() => {
+    getCart(); // Fetch cart data on mount
+  }, [getCart]);
+
   const handleModalClose = () => {
     setIsCourierStep(false); // Reset to CartDropdown
   };
 
   const handleCheckoutClick = () => {
     setIsCartDropdownOpen(false);
-    setIsCart(true);
     router.push(`/food/checkout`); // Navigate to the item's page
   };
 
@@ -64,14 +66,13 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
     checkedItems.forEach((itemId) => {
       removeFromCart(itemId); // Remove each checked item from the cart
     });
-    setIsCart(false)
     setCheckedItems(new Set()); // Clear the checked items
     setShowToast(true); // Show toast when items are removed
   };
 
   // Handle quantity change for an item
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
-    updateItemQuantity(itemId, newQuantity);
+    updateQuantity(itemId, newQuantity > 1 ? "increase" : "decrease");
   };
 
   if (cartItems?.length === 0) {
@@ -80,7 +81,7 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
         <p
           style={{
             textAlign: "center",
-            fontSize: "2rem",
+            fontSize: "1.3rem",
             height: "70px",
           }}
         >
@@ -134,8 +135,6 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ cartItems, setIsCart
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
-                            // width: '150px',
-                            // background: '#453345'
                           }}
                         className="CartTitle ">{item?.title}</p>
                         <div className="CartRating_Content">
