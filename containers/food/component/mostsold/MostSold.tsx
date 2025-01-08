@@ -4,12 +4,13 @@ import { FoodData } from "@/utils/types/types";
 import { FaStar } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { useFoodItem } from "@/context/FooItemProvider";
-import { useCartItems } from "@/context/CartItems";
 import { useRouter } from "next/navigation";
 import { Toast } from "@/lib/Toast";
 import axios from "axios";
 import { useLocation } from "@/context/LocationProvider";
 import { debounce } from "lodash";
+import { MdOutlineTimer } from "react-icons/md";
+import useCartStore from "@/store/useCart.store"; // Import the store
 
 interface MostSoldProps {
   searchQuery: string;
@@ -24,7 +25,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
   const { setSelectedItem } = useFoodItem();
-  const { addToCart, cartItems, setIsCart, selectedVendor } = useCartItems();
+  const { cartItems, addToCartWithExtras } = useCartStore(); // Use the store's state and actions
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
@@ -34,7 +35,7 @@ const MostSold: React.FC<MostSoldProps> = ({
   const { location } = useLocation(); // Get location from context
   const [loading, setLoading] = useState(true); // Track initial loading state
 
-  console.log(searchQuery)
+  console.log(searchQuery);
   // Load added items from local storage on component mount
   useEffect(() => {
     const savedCartItems = localStorage.getItem("cartItems");
@@ -56,7 +57,7 @@ const MostSold: React.FC<MostSoldProps> = ({
     if (loadingMore || !hasMore) return;
 
     setLoadingMore(true);
-  
+
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products`,
@@ -80,7 +81,6 @@ const MostSold: React.FC<MostSoldProps> = ({
             )
           )
         : newData;
-        
 
       // setLoading(false); // Set loading to false after the first fetch
 
@@ -111,7 +111,8 @@ const MostSold: React.FC<MostSoldProps> = ({
   // Debounce scroll event
   useEffect(() => {
     const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
 
       if (scrollHeight - (scrollTop + clientHeight) < 700 && !loadingMore) {
         fetchData();
@@ -135,37 +136,33 @@ const MostSold: React.FC<MostSoldProps> = ({
     });
   }, [visibleItems]);
 
-
   const handleItemClick = (item: FoodData) => {
     setSelectedItem(item);
-  console.log(item)
+    console.log(item);
     // Check if the item's _id is in the cartItems
-    const isItemInCart = cartItems.some((cartItem) => cartItem._id === item._id);
-  
-    // Set isCart based on whether the item is in the cart
-    setIsCart(isItemInCart);
-  
+    const isItemInCart = cartItems.some(
+      (cartItem) => cartItem._id === item._id
+    );
+
     // Navigate to the checkout page
     router.push(`/food/checkout`);
   };
 
+  const handleItemAddToCart = async (item: FoodData) => {
+    try {
+      // Ensure extras is included in the item
+      const itemWithExtras = {
+        ...item,
+        extras: item.extras ?? [], // Initialize extras as an empty array if undefined
+      };
 
-  const handleItemAddToCart = (item: FoodData) => {
-    // Check if the item's vendor matches the selected vendor
-    if (selectedVendor && item.vendor.name !== selectedVendor) {
-      // Show a modal or toast to inform the user
-      alert("You can only select items from one vendor. Please remove items from the current vendor before adding items from another vendor.");
-      return;
+      // Add the item to the cart using the store's method
+      await addToCartWithExtras(itemWithExtras, itemWithExtras.extras);
+      setShowToast(true);
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      toast.error('Failed to add item to cart');
     }
-    // Ensure extras is included in the item
-    const itemWithExtras = {
-      ...item,
-      extras: item.extras ?? [], // Initialize extras as an empty array if undefined
-    };
-
-    // Add the item to the cart
-    addToCart(itemWithExtras);
-    setShowToast(true);
   };
 
   return (
@@ -238,67 +235,79 @@ const MostSold: React.FC<MostSoldProps> = ({
               </p>
             ) : (
               <>
-              <div className="mostsold-cards">
-                {uniqueItems.map((item) => (
-                  <div key={item._id} className="mostsold-card">
-                    <div
-                      onClick={() => handleItemClick(item)}
-                      className="mostsold-card_food-img"
-                    >
-                      <img
-                        src={item.imageUrl}
-                        alt={item.title}
-                        className="mostsold-card_img"
-                      />
-                    </div>
-                    <div className="mostsold-card_content">
+                <div className="mostsold-cards">
+                  {uniqueItems.map((item) => (
+                    <div key={item._id} className="mostsold-card">
                       <div
                         onClick={() => handleItemClick(item)}
-                        className="mostsold-card_context"
+                        className="mostsold-card_food-img"
                       >
-                        <div className="mostsold-card_context-top">
-                          <small className="mostsold-card_title">
-                            {item.title}
-                          </small>
-                          <div className="mostsold-card_dot"></div>
-                          <FaStar className="mostsold-card_star" />
-                          <small className="mostsold-card_rating">4.5</small>
-                        </div>
-                        <div className="mostsold-card_timer">
-                          <span>{item.prep_time}</span>
-                        </div>
+                        <img
+                          src={item.imageUrl}
+                          alt={item.title}
+                          className="mostsold-card_img"
+                        />
                       </div>
-                      <p
-                        style={{
-                          fontSize: "14px",
-                          color: "#8F8F8F",
-                        }}
-                        onClick={() => handleItemClick(item)}
-                      >
-                        {item?.vendor?.name}
-                      </p>
-                      <div className="mostsold-card_prize">
-                        <p
+                      <div className="mostsold-card_content">
+                        <div
                           onClick={() => handleItemClick(item)}
-                          className="mostsold-card_prize-text"
+                          className="mostsold-card_context"
                         >
-                          ₦{item.price}
+                          <div className="mostsold-card_context-top">
+                            <small className="mostsold-card_title">
+                              {item.title}
+                            </small>
+                            <div className="mostsold-card_dot"></div>
+                            <FaStar className="mostsold-card_star" />
+                            <small className="mostsold-card_rating">4.5</small>
+                          </div>
+                          <div className="mostsold-card_timer">
+                            <span
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              {" "}
+                              <MdOutlineTimer style={{ marginTop: "-2px" }} /> {item.prep_time}{" "}
+                              {item?.prep_time == "1" || item?.prep_time == "0"
+                                ? "min"
+                                : "mins"}
+                            </span>
+                          </div>
+                        </div>
+                        <p
+                          style={{
+                            fontSize: "14px",
+                            color: "#8F8F8F",
+                          }}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          {item?.vendor?.name}
                         </p>
-                        <button
-                          onClick={() => handleItemAddToCart(item)}
-                          type="button"
-                          className={`mostsold-card_prize-link ${
-                            addedItems.has(item._id) ? "added-to-cart" : ""
-                          }`}
-                          disabled={addedItems.has(item._id)}
-                        >
-                          <FaBagShopping className="mostsold-card_prize-icon" />
-                        </button>
+                        <div className="mostsold-card_prize">
+                          <p
+                            onClick={() => handleItemClick(item)}
+                            className="mostsold-card_prize-text"
+                          >
+                            ₦{item.price}
+                          </p>
+                          <button
+                            onClick={() => handleItemAddToCart(item)}
+                            type="button"
+                            className={`mostsold-card_prize-link ${
+                              addedItems.has(item._id) ? "added-to-cart" : ""
+                            }`}
+                            disabled={addedItems.has(item._id)}
+                          >
+                            <FaBagShopping className="mostsold-card_prize-icon" />
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
               </>
             )}
           </div>

@@ -2,7 +2,6 @@ import { usePaystackPayment } from "react-paystack";
 import { toast } from "react-hot-toast";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import useAuth from "@/hooks/useAuth";
 import Button from "../ui/button/Button";
 import useOrder from "@/hooks/useOrder";
 
@@ -18,9 +17,9 @@ interface PaymentButtonProps {
   ) => void;
   onSuccess: () => Promise<void>;
   onClose: () => void;
+  disabled: boolean;
+  className?: string; // New prop for custom styling
 }
-
-// const publicKey = 'pk_test_14121288702e553e78036414c7df4b89ad7a720f';
 
 const PaymentButton: React.FC<PaymentButtonProps> = ({
   totalPrice,
@@ -31,6 +30,8 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   onSuccess,
   onClose,
   referenceId,
+  disabled,
+  className, // New prop for custom styling
 }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const { data: session } = useSession();
@@ -60,7 +61,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   const config = getPaystackConfig(referenceId, totalPrice, planCode);
   const paymentFn = usePaystackPayment(config);
   const handlePayment = () => {
-    if (isProcessing) return;
+    if (isProcessing || disabled) return;
 
     try {
       setIsProcessing(true);
@@ -91,7 +92,8 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
       size="small" 
       color={color} 
       onClick={handlePayment}
-      disabled={isProcessing}
+      disabled={isProcessing || disabled}
+      className={className} // Apply custom className
     >
       {isProcessing ? "Processing..." : buttonText}
     </Button>

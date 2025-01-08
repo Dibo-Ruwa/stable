@@ -37,17 +37,21 @@ export type LoginUserParams = {
 };
 
 export interface Product {
-  id: string | number ;
+  id: string | number;
   title: string;
   prep_time: string;
   opening_time: string;
   categories: string[];
   slug: string;
   price: number;
-  imageURL: string;
-  vendor: string;
+  imageUrl: string; // Changed from imageURL to imageUrl
+  vendor: {
+    _id: string;
+    name: string;
+  };
   discount?: number;
-  extras?: Extra[]; // Nested extras property within Product
+  extras?: Extra[];
+  quantity?: number;
 }
 
 export interface Subscription {
@@ -84,11 +88,13 @@ export type CartState = {
   getSubscriptions: () => void;
   addSubscription: (item: Subscription) => void;
   removeSubscription: (itemId: string | undefined) => void;
-  addToCart: (item: Product) => void;
+  addToCart: (item: FoodData) => void;
+  addToCartWithExtras: (item: FoodData, extras: Extra[]) => void;
   removeFromCart: (itemId: string) => void;
-  updateQuantity: (id: string, action: "increase" | "decrease") => void;
+  updateQuantity: (id: string, action: "increase" | "decrease", extraId?: string) => void;
   clearCart: () => void;
   closeModal: () => void;
+  updateExtraQuantity: (itemId: string, extraId: string, newQuantity: number) => Promise<void>;
 };
 
 export interface Order {
@@ -194,6 +200,61 @@ export interface Extra {
   slug: string;
   id: string;
   // quantity?: number; 
+}
+
+// Remove ExtraWithQuantity interface
+// export interface ExtraWithQuantity extends Extra {
+//   quantity: number;
+// }
+
+export interface ProductData {
+  _id: string;
+  title: string;
+  prep_time: string;
+  categories: string[];
+  price: number;
+  totalPrice?: number; // Optional
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    name: string;
+    owner: string;
+    branch: {
+      location: {
+        city: {
+          _id: string;
+          name: string;
+        };
+        region: {
+          _id: string;
+          name: string;
+        };
+      };
+      _id: string;
+      deliveries: {
+        region: {
+          _id: string;
+          name: string;
+        };
+        price: number;
+        _id: string;
+      }[];
+    }[];
+    operations: {
+      day: string;
+      openingHour: string;
+      closingHour: string;
+      _id: string;
+    }[];
+  };
+  discount: number;
+  extras: Extra[]; // Updated to use the `Extra` interface
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  __v: number;
+  id: string;
+  quantity?: number; // Optional
 }
 
 export interface FoodData {

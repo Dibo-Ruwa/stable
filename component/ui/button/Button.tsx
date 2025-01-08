@@ -2,7 +2,6 @@
 
 import React from "react";
 import styled from "styled-components";
-import CSSProperties from "styled-components";
 import { motion } from "framer-motion";
 
 type ButtonProps = {
@@ -11,6 +10,7 @@ type ButtonProps = {
   onClick?: () => void;
   children: React.ReactNode;
   disabled?: boolean;
+  className?: string; // New prop for custom styling
 };
 
 const ButtonContainer = styled(motion.button)<{
@@ -23,7 +23,8 @@ const ButtonContainer = styled(motion.button)<{
   border: none;
   border-radius: 8px;
   font-size: 1rem;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
   outline: none;
 
   @media (max-width: 768px) {
@@ -54,6 +55,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
   disabled,
+  className, // New prop for custom styling
 }) => {
   return (
     <ButtonContainer
@@ -62,6 +64,7 @@ const Button: React.FC<ButtonProps> = ({
       onClick={disabled ? undefined : onClick}
       whileTap={{ scale: 0.95 }}
       disabled={disabled}
+      className={className} // Apply custom className
     >
       {children}
     </ButtonContainer>

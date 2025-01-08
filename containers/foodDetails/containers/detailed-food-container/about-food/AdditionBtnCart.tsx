@@ -6,6 +6,8 @@ import { FoodData } from "@/utils/types/types";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import { CiClock2 } from "react-icons/ci";
+import useCartStore from "@/store/useCart.store";
+import { toast } from "react-hot-toast";
 
 interface ExtraWithQuantity {
   quantity: number;
@@ -33,12 +35,12 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
   foodDetails,
   onExtraQuantityChange,
 }) => {
-  // Initialize extras state with quantity from foodDetails
   const [extras, setExtras] = useState<ExtraWithQuantity[]>([]);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const { updateQuantity } = useCartStore();
 
   useEffect(() => {
     if (foodDetails?.extras) {
-      // Initialize extras with quantity from foodDetails, defaulting to 0 if quantity is undefined
       const initializedExtras = foodDetails.extras.map((extra) => ({
         ...extra,
         quantity: extra.quantity || 0,
@@ -48,27 +50,69 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
   }, [foodDetails]);
 
   // Handle increment for extras
-  const incrementExtra = (extraId: string) => {
-    setExtras((prevExtras) =>
-      prevExtras.map((extra) =>
-        extra._id === extraId
-          ? { ...extra, quantity: extra.quantity + 1 }
-          : extra
-      )
-    );
-    onExtraQuantityChange(extraId, 1); // Notify parent component of the change
+  const incrementExtra = async (extraId: string) => {
+    if (!foodDetails?._id) return;
+    
+    setIsUpdating(true);
+    try {
+      const extraDetails = extras.find(e => e._id === extraId);
+      if (!extraDetails) {
+        throw new Error('Extra not found');
+      }
+
+      // Send all extra details when incrementing
+      await updateQuantity(foodDetails._id, "increase", extraId, {
+        title: extraDetails.title,
+        price: extraDetails.price,
+        imageUrl: extraDetails.imageUrl,
+        prep_time: extraDetails.prep_time,
+        categories: extraDetails.categories,
+        vendor: extraDetails.vendor,
+        slug: extraDetails.slug,
+        _id: extraDetails._id
+      });
+
+      // Update the state immediately after the API call
+      setExtras(prevExtras =>
+        prevExtras.map(e =>
+          e._id === extraId
+            ? { ...e, quantity: (e.quantity || 0) + 1 }
+            : e
+        )
+      );
+      onExtraQuantityChange(extraId, 1);
+    } catch (error) {
+      console.error('Error incrementing extra:', error);
+      toast.error('Failed to update extra quantity');
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   // Handle decrement for extras
-  const decrementExtra = (extraId: string) => {
-    setExtras((prevExtras) =>
-      prevExtras.map((extra) =>
-        extra._id === extraId && extra.quantity > 0
-          ? { ...extra, quantity: extra.quantity - 1 }
-          : extra
-      )
-    );
-    onExtraQuantityChange(extraId, -1); // Notify parent component of the change
+  const decrementExtra = async (extraId: string) => {
+    if (!foodDetails?._id) return;
+    
+    const extra = extras.find(e => e._id === extraId);
+    if (!extra || extra.quantity === 0) return;
+
+    setIsUpdating(true);
+    try {
+      await updateQuantity(foodDetails._id, "decrease", extraId, extra);
+      setExtras(prevExtras =>
+        prevExtras.map(e =>
+          e._id === extraId
+            ? { ...e, quantity: Math.max(0, (e.quantity || 0) - 1) }
+            : e
+        )
+      );
+      onExtraQuantityChange(extraId, -1);
+    } catch (error) {
+      console.error('Error decrementing extra:', error);
+      toast.error('Failed to update extra quantity');
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   return (
@@ -77,23 +121,12 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
         <p>No extras available for this product</p>
       ) : (
         <div className={styles.addmore_things}>
-          <p className={styles.addmore_text}>Extras</p>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: ".7rem",
-            }}
-          >
+          <p className={styles.addmore_text}>
+            Extras {isUpdating && <span>(Updating...)</span>}
+          </p>
+          <div style={{ display: "flex", flexDirection: "column", gap: ".7rem" }}>
             {extras.map((item) => (
-              <div
-                key={item._id}
-                style={{
-                  width: "fit-content",
-                  borderBottom: "2px solid gray-500",
-                }}
-                className="CartDropdown_Card"
-              >
+              <div key={item._id} className="CartDropdown_Card">
                 <div className="CartDropdown_CardTop">
                   <div className="CartDropdown_Details">
                     <div style={{ position: "relative" }}>
@@ -134,14 +167,15 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
                   <button
                     className={styles.counterButton}
                     onClick={() => decrementExtra(item._id)}
-                    disabled={item.quantity === 0}
+                    disabled={item.quantity === 0 || isUpdating}
                   >
                     <HiMinus />
                   </button>
-                  <div className={styles.countNum}>{item.quantity}</div>
+                  <div className={styles.countNum}>{item.quantity || 0}</div>
                   <button
                     className={styles.counterButton}
                     onClick={() => incrementExtra(item._id)}
+                    disabled={isUpdating}
                   >
                     <MdAdd
                       style={{

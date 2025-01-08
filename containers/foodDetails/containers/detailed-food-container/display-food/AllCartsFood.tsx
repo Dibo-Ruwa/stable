@@ -1,65 +1,69 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { AboutFoodCart } from "../about-food/AboutFoodCart";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import { useFoodItem } from "@/context/FooItemProvider";
-import { useCartItems } from "@/context/CartItems";
+import useCartStore from "@/store/useCart.store";
+import { CartItem, FoodData } from "@/utils/types/types";
 
 // Styled components
 const Container = styled.section`
   width: 100%;
+  padding: 1rem;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const DisplayImg = styled.div`
-  /* additional styles can be added here if needed */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 `;
 
 const OnDisplayImg = styled.img`
-  height: 329px;
+  height: 400px;
   border-radius: 20px;
   width: 100%;
-  flex-shrink: 0;
+  max-width: 800px;
   object-fit: cover;
 `;
 
-const SelectedImg = styled.div`
+const CarouselContainer = styled.div`
   display: flex;
-  gap: 16px;
-  justify-content: start;
-  padding: 0 3.5rem;
-  margin: 1rem 0;
-  overflow-x: auto;
-  // width: 100%;
-  max-width: 1000px;
-  scroll-behavior: smooth;
+  align-items: center;
   position: relative;
-  height: 150px; // Ensure the container has a fixed height
+`;
+
+const Carousel = styled.div`
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem 0;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ItemContainer = styled.div`
+  flex: 0 0 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   cursor: pointer;
   transition: transform 0.2s;
-  min-width: 120px; // Ensure each item has a minimum width
   &:hover {
     transform: scale(1.05);
   }
 `;
 
 const OnSelectedImg = styled.img`
-  width: 120px;
-  height: 120px;
-  flex-shrink: 0;
+  width: 100%;
+  height: 200px;
   border-radius: 10px;
   object-fit: cover;
-
-  @media (max-width: 768px) {
-    height: 100px;
-    width: 100px;
-  }
 `;
 
 const ItemTitle = styled.span`
@@ -70,7 +74,7 @@ const ItemTitle = styled.span`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 120px;
+  max-width: 100%;
 `;
 
 const PrevBtn = styled(TfiAngleLeft)`
@@ -84,34 +88,41 @@ const PrevBtn = styled(TfiAngleLeft)`
   border-radius: 100px;
   background: #fff;
   position: absolute;
-  left: 0;
+  left: -1rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const NextBtn = styled(TfiAngleRight)`
   display: flex;
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  padding: 10px;
+  height: 3rem;
   justify-content: center;
   align-items: center;
   gap: 10px;
   border-radius: 100px;
-  background: #eaebee;
+  background: #fff;
   position: absolute;
-  right: 0;
+  right: -1rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
   cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 export const AllCartsFood = () => {
   const { selectedItem, setSelectedItem } = useFoodItem();
-  const { cartItems } = useCartItems();
+  const { cartItems, getCart } = useCartStore();
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    getCart();
+  }, [getCart]);
 
   // Function to handle scrolling left
   const scrollLeft = () => {
@@ -128,26 +139,61 @@ export const AllCartsFood = () => {
   };
 
   // Function to handle item click
-  const handleItemClick = (item: typeof cartItems[0]) => {
-    setSelectedItem(item);
+  const handleItemClick = (item: CartItem) => {
+    const selectedFoodItem: FoodData = {
+      _id: item._id || "",
+      title: item.title,
+      prep_time: item.prep_time,
+      categories: item.categories,
+      price: item.price,
+      imageUrl: item.imageUrl,
+      vendor: {
+        ...item.vendor,
+        owner: "",
+        branch: [],
+        operations: []
+      },
+      discount: item.discount || 0,
+      extras: item.extras || [],
+      createdAt: "",
+      updatedAt: "",
+      slug: item.slug,
+      __v: 0,
+      id: item.id?.toString() || "", // Ensure id is a string
+      quantity: item.quantity
+    };
+    setSelectedItem(selectedFoodItem);
   };
+
+  useEffect(() => {
+    if (cartItems.length > 0 && !selectedItem) {
+      handleItemClick(cartItems[0]);
+    }
+  }, [cartItems, selectedItem]);
+
+  console.log(selectedItem, "ITEM");
 
   return (
     <Container>
-      <SelectedImg ref={scrollRef}>
-        <PrevBtn onClick={scrollLeft} />
-        {cartItems.map((item) => (
-          <ItemContainer key={item._id} onClick={() => handleItemClick(item)}>
-            <OnSelectedImg src={item.imageUrl} alt={item.title} />
-            <ItemTitle>{item.title}</ItemTitle>
-          </ItemContainer>
-        ))}
-        <NextBtn onClick={scrollRight} />
-      </SelectedImg>
-      <DisplayImg>
-        <OnDisplayImg src={selectedItem?.imageUrl} alt="on display" />
-      </DisplayImg>
-      <AboutFoodCart selectedItem={selectedItem} />
+      {cartItems.length > 1 ? (
+        <CarouselContainer>
+          {cartItems.length > 5 && <PrevBtn onClick={scrollLeft} />}
+          <Carousel ref={scrollRef}>
+            {cartItems?.map((item) => (
+              <ItemContainer key={item._id} onClick={() => handleItemClick(item)}>
+                <OnSelectedImg src={item.imageUrl || "/placeholder.png"} alt={item.title} />
+                <ItemTitle>{item.title}</ItemTitle>
+              </ItemContainer>
+            ))}
+          </Carousel>
+          {cartItems.length > 5 && <NextBtn onClick={scrollRight} />}
+        </CarouselContainer>
+      ) : (
+        <DisplayImg>
+          <OnDisplayImg src={selectedItem?.imageUrl || "/placeholder.png"} alt="on display" />
+        </DisplayImg>
+      )}
+      <AboutFoodCart selectedItem={selectedItem} cartsFood={true} />
     </Container>
   );
 };
