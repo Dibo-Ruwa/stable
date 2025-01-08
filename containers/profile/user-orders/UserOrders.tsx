@@ -4,11 +4,19 @@ import { UserFoodOrders } from "./user-food-orders/UserFoodOrders";
 import { UserServicesOrders } from "./user-services-orders/UserServicesOrders";
 import './user-food-orders/user-food-orders.css'
 import './user-services-orders/user-services-orders.css'
+import useOrder from "@/hooks/useOrder";
 
 type TabType = "food" | "services";
 
 const UserOrders = () => {
   const [activeTab, setActiveTab] = useState<TabType>("food"); // Initialize active tab to "food"
+  
+    const { orders, getOrders } = useOrder();
+  
+     useEffect(() => {
+        getOrders();
+      }, []);
+    
 
   useEffect(() => {
     // Store active tab in local storage
@@ -47,7 +55,7 @@ const UserOrders = () => {
           Services
         </p>
       </div>
-      {activeTab === "food" ? <UserFoodOrders /> : <UserServicesOrders/>}
+      {activeTab === "food" ? <UserFoodOrders orders={orders} /> : <UserServicesOrders/>}
     </div>
   );
 };

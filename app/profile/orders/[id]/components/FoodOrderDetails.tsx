@@ -5,6 +5,7 @@ import { FaStar } from "react-icons/fa";
 import { IoMdStopwatch } from "react-icons/io";
 import { LuPhone } from "react-icons/lu";
 import { IoLocationOutline } from "react-icons/io5";
+import { FaStore } from "react-icons/fa"; // Importing a vendor/store icon
 
 const OrderHeader = styled.div`
   display: flex;
@@ -17,12 +18,12 @@ const OrderInfo = styled.div`
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
   }
-  
+
   .order-status {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #4CAF50;
+    color: #4caf50;
     font-weight: 500;
   }
 `;
@@ -82,7 +83,7 @@ const RestaurantInfo = styled.div`
   margin-top: 1.5rem;
   padding-top: 1.5rem;
   border-top: 1px solid #eee;
-  
+
   .restaurant-image {
     position: relative;
     width: 80px;
@@ -90,22 +91,22 @@ const RestaurantInfo = styled.div`
     border-radius: 8px;
     overflow: hidden;
   }
-  
+
   .restaurant-details {
     flex: 1;
-    
+
     h3 {
       margin-bottom: 0.5rem;
     }
-    
+
     .rating {
       display: flex;
       align-items: center;
       gap: 0.25rem;
-      color: #FFA500;
+      color: #ffa500;
       margin-bottom: 0.5rem;
     }
-    
+
     .contact {
       display: flex;
       align-items: center;
@@ -138,78 +139,103 @@ const OrderSummary = styled.div`
 
 interface FoodOrderDetailsProps {
   orderId: string;
+  order: any;
 }
 
-export const FoodOrderDetails: React.FC<FoodOrderDetailsProps> = ({ orderId }) => {
+export const FoodOrderDetails: React.FC<FoodOrderDetailsProps> = ({
+  orderId,
+  order,
+}) => {
+  if (!order) {
+    return <div>Loading...</div>;
+  }
+
+  const shortOrderId = orderId.slice(0, 5);
+
+  // Access the branch data properly
+  const branch = order?.orderItems[0]?.vendor?.branch[0];
+  const vendorName = order?.orderItems[0]?.vendor?.name;
+  
   return (
     <>
       <OrderHeader>
         <OrderInfo>
           <h1>Food Order Details</h1>
-          <span className="order-id">Order #{orderId}</span>
+          <span className="order-id">Order #{shortOrderId}</span>
           <div className="order-status">
             <IoMdStopwatch />
-            <span>Delivered</span>
+            <span>{order?.status}</span>
           </div>
         </OrderInfo>
       </OrderHeader>
 
       <FoodDetails>
         <OrderItems>
-          <div className="order-item">
-            <div className="item-image">
-              <Image
-                src="/images/jollof-rice.jpg"
-                alt="Jollof Rice"
-                fill
-                style={{ objectFit: "cover" }}
-              />
+          {order?.orderItems.map((item: any) => (
+            <div className="order-item" key={item._id}>
+              <div className="item-image">
+                <Image
+                  src={item?.imageUrl}
+                  alt={item?.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div className="item-details">
+                <h3>{item?.title}</h3>
+                <div className="quantity">Quantity: {item.quantity}</div>
+                <div className="price">₦{item.price}</div>
+              </div>
             </div>
-            <div className="item-details">
-              <h3>Jollof Rice</h3>
-              <div className="quantity">Quantity: 2</div>
-              <div className="price">₦3,000</div>
-            </div>
-          </div>
-          <div className="order-item">
-            <div className="item-image">
-              <Image
-                src="/images/chicken.jpg"
-                alt="Grilled Chicken"
-                fill
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-            <div className="item-details">
-              <h3>Grilled Chicken</h3>
-              <div className="quantity">Quantity: 1</div>
-              <div className="price">₦2,500</div>
-            </div>
-          </div>
+          ))}
         </OrderItems>
 
         <RestaurantInfo>
           <div className="restaurant-image">
-            <Image
-              src="/images/restaurant-logo.jpg"
-              alt="Restaurant"
-              fill
-              style={{ objectFit: "cover" }}
-            />
+            {branch?.imageUrl ? (
+              <Image
+                src={branch.imageUrl}
+                alt={order?.vendor?.name}
+                fill
+                style={{ objectFit: "cover" }}
+              />
+            ) : (
+              <div
+                style={{
+                  backgroundColor: "#f0f0f0",
+                  height: "100%",
+                  width: "100%",
+                  borderRadius: "8px",
+                }}
+              >
+                <div className="card_image" style={{ background: "#fff" }}>
+                  <FaStore
+                    className="card_img"
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                      backgroundColor: "#f5f5f5",
+                      borderRadius: "50%",
+                      display: "flex",
+                      justifyContent: "center",
+                      // color: "#90EE90",
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
           <div className="restaurant-details">
-            <h3>Restaurant Name</h3>
+            <h3>{vendorName}</h3>
             <div className="rating">
               <FaStar />
-              <span>4.8</span>
-            </div>
-            <div className="contact">
-              <LuPhone />
-              <span>+234 123 456 7890</span>
+              <span>{order?.vendor?.rating || "4.5"}</span>
             </div>
             <div className="contact">
               <IoLocationOutline />
-              <span>123 Restaurant Street, City</span>
+              <span>
+                {branch?.location?.city?.name}, {branch?.location?.region?.name}
+              </span>
             </div>
           </div>
         </RestaurantInfo>
@@ -217,15 +243,15 @@ export const FoodOrderDetails: React.FC<FoodOrderDetailsProps> = ({ orderId }) =
         <OrderSummary>
           <div className="summary-row">
             <span>Subtotal</span>
-            <span>₦5,500</span>
+            <span>₦{order.total - order.deliveryFee}</span>
           </div>
           <div className="summary-row">
             <span>Delivery Fee</span>
-            <span>₦500</span>
+            <span>₦{order.deliveryFee}</span>
           </div>
           <div className="summary-row total">
             <span>Total</span>
-            <span>₦6,000</span>
+            <span>₦{order?.total}</span>
           </div>
         </OrderSummary>
       </FoodDetails>

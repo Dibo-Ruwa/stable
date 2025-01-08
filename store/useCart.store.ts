@@ -14,7 +14,8 @@ import {
   Subscription,
   ProductData,
   FoodData,
-  Extra
+  Extra,
+  ExtraInfo
 } from "@/utils/types/types";
 import {
   addCartItemAPI,
@@ -31,7 +32,7 @@ import {
 import { toast } from "react-hot-toast";
 import { useModal } from "@/hooks/useModal";
 
-const useCartStore = create<CartState>()((set) => ({
+const useCartStore = create<CartState>()((set, get) => ({
   modal: {
     isOpen: false,
     message: "",
@@ -129,10 +130,23 @@ const useCartStore = create<CartState>()((set) => ({
     }
   },
 
+  getCurrentVendor: () => {
+    const state = get();
+    if (state.cartItems.length > 0) {
+      return state.cartItems[0].vendor.name;
+    }
+    return null;
+  },
+
   addToCart: async (productObj: FoodData): Promise<void> => {
     const loadingToast = toast.loading("Adding item to cart...");
     
     try {
+      const currentVendor = get().getCurrentVendor();
+      if (currentVendor && currentVendor !== productObj.vendor.name) {
+        throw new Error(`You can only order from one vendor at a time. Please clear your cart or complete your order from ${currentVendor} first.`);
+      }
+
       const normalizedProduct = {
         ...productObj,
         imageUrl: productObj.imageUrl || "/placeholder.png", // Ensure imageUrl is used
@@ -174,6 +188,11 @@ const useCartStore = create<CartState>()((set) => ({
     const loadingToast = toast.loading("Adding item to cart...");
     
     try {
+      const currentVendor = get().getCurrentVendor();
+      if (currentVendor && currentVendor !== productObj.vendor.name) {
+        throw new Error(`You can only order from one vendor at a time. Please clear your cart or complete your order from ${currentVendor} first.`);
+      }
+
       const normalizedProduct = {
         ...productObj,
         imageUrl: productObj.imageUrl || "/placeholder.png", // Ensure imageUrl is used
@@ -242,33 +261,24 @@ const useCartStore = create<CartState>()((set) => ({
       });
     }
   },
-  updateQuantity: async (id: string, action: string, extraId?: string, extraDetails?: any) => {
-    const loadingToast = toast.loading("Updating item...", {
-      duration: 1000,
-      position: "top-center",
-    });
+  updateQuantity: async (id: string, action: string, extraId?: string, extraInfo?: ExtraInfo) => {
+    const loadingToast = toast.loading("Updating item...");
   
     try {
-      const response = await updateItemQuantityAPI(id, action, extraId, extraDetails);
+      const response = await updateItemQuantityAPI(id, action, extraId, extraInfo);
       
       if (response?.cart?.cartItems) {
         set((state) => ({
           cartItems: response.cart.cartItems,
         }));
   
-        toast.success("Item updated successfully", {
-          duration: 1000, // Reduced duration
-          position: "top-center",
-        });
+        toast.success("Item updated successfully");
       } else {
         throw new Error('Invalid response structure');
       }
     } catch (error: any) {
       console.error('Update quantity error:', error);
-      toast.error(error.message || 'Failed to update quantity', {
-        duration: 3000,
-        position: "top-center",
-      });
+      toast.error(error.message || 'Failed to update quantity');
     } finally {
       toast.dismiss(loadingToast);
     }

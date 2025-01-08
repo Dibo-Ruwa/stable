@@ -14,6 +14,7 @@ import { signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 import { AuthPromptModal } from '@/components/ui/AuthPromptModal/AuthPromptModal';
 import { useRouter } from 'next/navigation';
+import VendorModal from '@/component/modals/VendorModal';
 
 interface CartDropdownProps {
   selectedItem: FoodData | null; // Allow null
@@ -30,11 +31,15 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isCheckingCart, setIsCheckingCart] = useState(false);
+  const [vendorModal, setVendorModal] = useState({
+    isOpen: false,
+    currentVendor: ''
+  });
 
   // Move useSession to component level
   const { data: session } = useSession();
   const { setIsCart } = useCartItems();
-  const { addToCartWithExtras, cartItems } = useCartStore(); // Add cartItems from store
+  const { addToCartWithExtras, cartItems, getCurrentVendor, } = useCartStore(); // Add cartItems from store
   const router = useRouter();
 
   useEffect(() => {
@@ -101,6 +106,17 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
     try {
       setIsAdding(true);
       
+      // Check for current vendor
+      const currentVendor = getCurrentVendor();
+      if (currentVendor && currentVendor !== selectedItem.vendor.name) {
+        setVendorModal({
+          isOpen: true,
+          currentVendor: currentVendor
+        });
+        setIsAdding(false);
+        return;
+      }
+
       // Format the product for cart according to the new structure
       const cartProduct: FoodData = {
         _id: selectedItem._id,
@@ -178,6 +194,13 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
   const handleSignIn = () => {
     setShowAuthModal(false);
     router.push('/sign-in');
+  };
+
+  const handleCloseVendorModal = () => {
+    setVendorModal({
+      isOpen: false,
+      currentVendor: ''
+    });
   };
 
   // Handle extra quantity changes
@@ -304,6 +327,12 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
           onSignIn={handleSignIn}
         />
       )}
+
+      <VendorModal 
+        isOpen={vendorModal.isOpen}
+        onClose={handleCloseVendorModal}
+        currentVendor={vendorModal.currentVendor}
+      />
     </>
   );
 };

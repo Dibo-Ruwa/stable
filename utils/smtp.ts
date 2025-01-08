@@ -9,16 +9,28 @@ if (!passKey) {
 }
 
 // Create transporter object for SMTP
+// const transporter = nodemailer.createTransport({
+//   host: 'smtp.zeptomail.com',
+//   port: 587,
+//   secure: false, // true for 465, false for other ports
+//   auth: {
+//     user: 'emailapikey',
+//     pass: passKey,
+//   },
+//   debug: true, // Enable debugging
+// });
+
 const transporter = nodemailer.createTransport({
   host: 'smtp.zeptomail.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
+  port: 465,
+  secure: true, // true for SSL
   auth: {
     user: 'emailapikey',
     pass: passKey,
   },
-  debug: true, // Enable debugging
+  debug: true,
 });
+
 
 // Verify SMTP connection configuration
 transporter.verify(function(error, success) {

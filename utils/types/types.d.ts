@@ -80,18 +80,27 @@ export type Modal = {
   type: "success" | "error";
 };
 
+export interface ExtraInfo {
+  _id: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
 export type CartState = {
   modal: Modal;
   cartItems: CartItem[];
   subscriptions: Subscription[];
   getCart: () => void;
+  getCurrentVendor: () => string | null;
   getSubscriptions: () => void;
   addSubscription: (item: Subscription) => void;
   removeSubscription: (itemId: string | undefined) => void;
   addToCart: (item: FoodData) => void;
   addToCartWithExtras: (item: FoodData, extras: Extra[]) => void;
   removeFromCart: (itemId: string) => void;
-  updateQuantity: (id: string, action: "increase" | "decrease", extraId?: string) => void;
+  // updateQuantity: (id: string, action: "increase" | "decrease", extraId?: string) => void;
+  updateQuantity: (itemId: string, action: string, extraId?: string, extraInfo?: ExtraInfo) => Promise<void>;
   clearCart: () => void;
   closeModal: () => void;
   updateExtraQuantity: (itemId: string, extraId: string, newQuantity: number) => Promise<void>;
