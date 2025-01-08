@@ -4,13 +4,13 @@ import { FoodData } from "@/utils/types/types";
 import { FaStar } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { useFoodItem } from "@/context/FooItemProvider";
-import { useCartItems } from "@/context/CartItems";
 import { useRouter } from "next/navigation";
 import { Toast } from "@/lib/Toast";
 import axios from "axios";
 import { useLocation } from "@/context/LocationProvider";
 import { debounce } from "lodash";
 import { MdOutlineTimer } from "react-icons/md";
+import useCartStore from "@/store/useCart.store"; // Import the store
 
 interface MostSoldProps {
   searchQuery: string;
@@ -25,7 +25,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
   const { setSelectedItem } = useFoodItem();
-  const { addToCart, cartItems, setIsCart, selectedVendor } = useCartItems();
+  const { cartItems, addToCartWithExtras } = useCartStore(); // Use the store's state and actions
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
@@ -144,31 +144,25 @@ const MostSold: React.FC<MostSoldProps> = ({
       (cartItem) => cartItem._id === item._id
     );
 
-    // Set isCart based on whether the item is in the cart
-    setIsCart(isItemInCart);
-
     // Navigate to the checkout page
     router.push(`/food/checkout`);
   };
 
-  const handleItemAddToCart = (item: FoodData) => {
-    // Check if the item's vendor matches the selected vendor
-    if (selectedVendor && item.vendor.name !== selectedVendor) {
-      // Show a modal or toast to inform the user
-      alert(
-        "You can only select items from one vendor. Please remove items from the current vendor before adding items from another vendor."
-      );
-      return;
-    }
-    // Ensure extras is included in the item
-    const itemWithExtras = {
-      ...item,
-      extras: item.extras ?? [], // Initialize extras as an empty array if undefined
-    };
+  const handleItemAddToCart = async (item: FoodData) => {
+    try {
+      // Ensure extras is included in the item
+      const itemWithExtras = {
+        ...item,
+        extras: item.extras ?? [], // Initialize extras as an empty array if undefined
+      };
 
-    // Add the item to the cart
-    addToCart(itemWithExtras);
-    setShowToast(true);
+      // Add the item to the cart using the store's method
+      await addToCartWithExtras(itemWithExtras, itemWithExtras.extras);
+      setShowToast(true);
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+      toast.error('Failed to add item to cart');
+    }
   };
 
   return (

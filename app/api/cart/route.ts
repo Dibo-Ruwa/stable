@@ -6,6 +6,7 @@ import { authOptions } from "@/utils/helpers/authOptions";
 import User from "@/utils/models/Users";
 import { CartItem } from "@/utils/types/types";
 import { Subscription } from "@/utils/models/Subscription";
+import mongoose from "mongoose"; // Import mongoose
 
 export async function POST(req: Request, res: Response) {
   try {
@@ -29,16 +30,17 @@ export async function POST(req: Request, res: Response) {
 
     const body = await req.json();
     const cartItem = {
-      _id: body.id,
+      _id: new mongoose.Types.ObjectId(), // Ensure _id is a valid ObjectId
       id: body.id,
       title: body.title,
       price: body.price,
       imageUrl: body.imageUrl,
-      vendor: body.vendor, // Store vendor details directly
+      vendor: body.vendor,
       quantity: 1,
       extras: body.extras || [],
       total: body.price,
-      categories: body.categories || []
+      categories: body.categories || [],
+      prep_time: body.prep_time
     };
 
     const existingCart = await Cart.findOne({ user: user._id });
@@ -74,8 +76,15 @@ export async function POST(req: Request, res: Response) {
     existingCart.total = cartTotal;
     await existingCart.save();
 
+    const populatedCart = await Cart.findById(existingCart._id).populate({
+      path: 'cartItems.vendor',
+      populate: {
+        path: 'branch.location.city branch.location.region branch.deliveries.region operations'
+      }
+    });
+
     return NextResponse.json(
-      { cart: existingCart, success: true },
+      { cart: populatedCart, success: true },
       { status: 201 }
     );
   } catch (err) {
@@ -103,7 +112,12 @@ export async function GET(req: Request, res: Response) {
       return NextResponse.json({ message: "User does not exist" });
     }
 
-    const cart = await Cart.findOne({ user: user._id });
+    const cart = await Cart.findOne({ user: user._id }).populate({
+      path: 'cartItems.vendor',
+      populate: {
+        path: 'branch.location.city branch.location.region branch.deliveries.region operations'
+      }
+    });
 
     if (!cart) {
       return NextResponse.json({ message: "Cart is empty" });

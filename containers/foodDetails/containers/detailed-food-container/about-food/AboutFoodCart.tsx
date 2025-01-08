@@ -115,7 +115,9 @@ export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem, carts
             foodDetails={foodDetails}
             onExtraQuantityChange={handleExtraQuantityChange}
           />
+          {cartsFood ? ("") : (
           <CTADelivery selectedItem={foodDetails} />
+          )}
         </div>
       </div>
     </>
