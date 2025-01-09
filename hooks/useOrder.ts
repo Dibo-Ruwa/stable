@@ -51,6 +51,21 @@ const useOrder = () => {
 
   const router = useRouter();
 
+    // Function to check if a user has an active subscription of the same type
+    const checkActiveSubscription = async (subscriptionType: string) => {
+      try {
+        const { data } = await axios.get(`/api/subscriptions/check?type=${subscriptionType}`);
+        if (data?.hasActiveSubscription) {
+          return true;
+        }
+        return false;
+      } catch (error) {
+        console.error("Error checking active subscription", error);
+        return false; // Assume no subscription on error
+      }
+    };
+    
+
   const getOrders = () => {
     setIsSubmitting(true);
     // Fetch orders
@@ -124,7 +139,7 @@ const useOrder = () => {
           useCartStore.getState().getSubscriptions();
 
           setIsSuccess(true);
-          toast.success("Subscription order submitted successfully!");
+          toast.success("Subscription recieved successfully");
           setIsRedirecting(true); // Set redirecting state to true
           router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
         }, 500);
@@ -136,7 +151,7 @@ const useOrder = () => {
           subscription,
         });
 
-        toast.loading("Subscription order is being processed", {
+        toast.loading("Subscription is being processed", {
           duration: 2000,
         });
 
@@ -144,8 +159,8 @@ const useOrder = () => {
           useCartStore.getState().getSubscriptions();
 
           setIsSuccess(true);
-          openModal("success", "Subscription order submitted successfully!");
-          toast.success("Subscription order submitted successfully!");
+          openModal("success", "Subscription recieved successfully");
+          toast.success("Subscription recieved successfully");
           setIsRedirecting(true); // Set redirecting state to true
           router.push(`/profile/subscriptions/${data.subscription?._id}?type=${data.subscription?.type}`);
         }, 500);
@@ -206,7 +221,8 @@ const useOrder = () => {
     getOrderById,
     handleCartOrderSubmit,
     handleSubscriptionOrderSubmit,
-    handleRequestPayment
+    handleRequestPayment,
+    checkActiveSubscription,
   };
 };
 

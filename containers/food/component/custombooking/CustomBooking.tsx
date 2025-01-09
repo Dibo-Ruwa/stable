@@ -3,6 +3,7 @@ import "./custombooking.css";
 import { CustomBookingModal } from "./CustomBookingModal";
 
 interface CustomBookingProps {
+  searchQuery: string;
   activeButton: string;
   setActiveButton: (label: string) => void;
   setSearchQuery: (label: string) => void;
@@ -12,6 +13,7 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
   activeButton,
   setActiveButton,
   setSearchQuery,
+  searchQuery
 }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
@@ -62,10 +64,50 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
           ))}
         </div>
 
-        <button type="button" className="custombooking-btn" onClick={openModal}>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                maxWidth: "450px",
+                padding: "1rem",
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Search here"
+                style={{
+                  height: "42px",
+                  flexShrink: 0,
+                  borderRadius: "4px",
+                  paddingLeft: "1rem",
+                  paddingRight: "2.5rem",
+                  border: "1px solid #ebebeb",
+                  backgroundColor: "#fcfcfc",
+                  outline: "none",
+                  width: "100%",
+                }}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <img
+                src="/images/search-normal.svg"
+                alt="search-normal"
+                style={{
+                  position: "absolute",
+                  right: "2rem",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: "20px",
+                  height: "20px",
+                }}
+              />
+            </div>
+          </div>
+        {/* <button type="button" className="custombooking-btn" onClick={openModal}>
           Custom Booking
-        </button>
-        <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} />
+        </button> */}
+        {/* <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} /> */}
       </div>
 
       <div className="flex justify-end"></div>
