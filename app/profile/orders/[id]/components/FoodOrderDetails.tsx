@@ -39,7 +39,7 @@ const FoodDetails = styled.div`
 const OrderItems = styled.div`
   .order-item {
     display: flex;
-    align-items: center;
+    // align-items: center;
     gap: 1rem;
     padding: 1rem 0;
     border-bottom: 1px solid #eee;
@@ -61,6 +61,8 @@ const OrderItems = styled.div`
 
       h3 {
         margin-bottom: 0.25rem;
+        font-size: 1.1rem;
+        font-weight: 600;
       }
 
       .quantity {
@@ -71,6 +73,45 @@ const OrderItems = styled.div`
       .price {
         font-weight: 600;
         color: #007bff;
+        margin-top: 0.25rem;
+      }
+
+      .extras {
+        margin-top: 0.5rem;
+        padding-left: 1rem;
+        border-left: 2px solid #eee;
+
+        .extras-cont{
+          display: flex;
+          gap: 1rem;
+        }
+
+        h4 {
+          margin-bottom: 0.25rem;
+          font-size: 1rem;
+          font-weight: 600;
+        }
+
+        .extra-item {
+          display: flex;
+          gap: 0.5rem;
+          margin-bottom: 0.5rem;
+
+          .extra-image {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+          }
+
+          .extra-details {
+            p {
+              margin: 0;
+              font-size: 0.85rem;
+            }
+          }
+        }
       }
     }
   }
@@ -178,13 +219,38 @@ export const FoodOrderDetails: React.FC<FoodOrderDetailsProps> = ({
                   src={item?.imageUrl}
                   alt={item?.title}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover", }}
                 />
               </div>
               <div className="item-details">
                 <h3>{item?.title}</h3>
                 <div className="quantity">Quantity: {item.quantity}</div>
                 <div className="price">₦{item.price}</div>
+                {item.extras && item.extras.length > 0 && (
+                  <div className="extras">
+                    <h4>Extras:</h4>
+                    <div className="extras-cont">
+                    {item.extras.map((extra: any) => (
+                      <div key={extra._id} className="extra-item">
+                        <div className="extra-image">
+                          <Image
+                            src={extra.imageUrl}
+                            alt={extra.title}
+                            width={40}
+                            height={40}
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
+                        <div className="extra-details">
+                          <p>{extra.title}</p>
+                          <p>Quantity: {extra.quantity}</p>
+                          <p>₦{extra.price}</p>
+                        </div>
+                      </div>
+                    ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}
