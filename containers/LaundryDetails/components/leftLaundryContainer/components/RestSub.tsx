@@ -6,11 +6,17 @@ import { IoCheckmarkSharp } from "react-icons/io5";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { IconType } from "react-icons/lib";
 import { ViewSubscription } from "./ViewSubscription";
+import { nanoid } from "nanoid";
+import useOrder from "@/hooks/useOrder";
+import NotificationModal from "@/component/NotificationModal";
+import LoaderComponent from "@/app/loading";
+import PaymentButton from "@/component/paymentButton/SubButton";
 
 export interface RestSubPlansDataType {
   subImg: string;
   subType: string;
-  subAmount: string;
+  subAmount: number;
+  planCode: string;
   subItem: {
     tickIcon: IconType;
     subItemText: string;
@@ -21,100 +27,106 @@ export interface RestSubPlansDataType {
 
 const RestSubPlansData: RestSubPlansDataType[] = [
   {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subImg: "/laundry to.png",
+    subType: "Student",
+    subAmount: 6990,
+    planCode: "PLN_jjx1iqwxol2hch4a",
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Approx 20 items in a bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Gentle washing for delicate fabrics",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Stain treatment",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Picked up once a month",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for individual",
       },
     ],
     subFeeText: "Service Fee:",
     ViewSubDetailsLink: "View",
   },
   {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subImg: "/laundry to.png",
+    subType: "Professional",
+    subAmount: 12900,
+    planCode: "PLN_jd0nwcnhvifs0no",
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Free Diboruwa Laundry Bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Approx 44 items in a bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Gentle washing for delicate fabrics",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Stain treatment",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "2 pickups/month (22 items each)",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for family of two",
       },
     ],
     subFeeText: "Service Fee:",
     ViewSubDetailsLink: "View",
   },
   {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subImg: "/laundry to.png",
+    subType: "Family",
+    subAmount: 22400,
+    planCode: "PLN_d3km1qswvj8nbot",
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Dibo Ruwa Laundry Bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Approx 100 items in a bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Gentle washing for delicate fabrics",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
-      },
-    ],
-    subFeeText: "Service Fee:",
-    ViewSubDetailsLink: "View",
-  },
-  {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
-    subItem: [
-      {
-        tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Stain treatment",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Quick-dry service",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Emergencies",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Max 4 pickups/month (25 items each)",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for family of four",
       },
     ],
     subFeeText: "Service Fee:",
@@ -129,6 +141,41 @@ export const RestSub = () => {
     useState<RestSubPlansDataType | null>(null);
   const visibleData = showAll ? RestSubPlansData : RestSubPlansData.slice(0, 2);
 
+  const {
+    isSubmitting,
+    isError,
+    isSuccess,
+    handleSubscriptionOrderSubmit,
+    showModal,
+    modalMessage,
+    modalErrorType,
+    openModal,
+    closeModal,
+  } = useOrder();
+
+  const referenceId = nanoid(8);
+
+  const onSuccess = (sub: any) => {
+    const subscription = {
+      plan: sub.subType,
+      type: "laundry",
+      isPaid: true,
+      total: sub.subAmount,
+    };
+
+    console.log(subscription);
+    handleSubscriptionOrderSubmit(referenceId, { subscription }, "recurring");
+  };
+
+  const onClose = () => {
+    console.log("closed");
+  };
+
+   // Show loader while data is loading
+  //  if (isSubmitting) {
+  //   return <LoaderComponent />; 
+  // }
+
   const handleSeeMoreClick = () => {
     setShowAll(!showAll);
   };
@@ -138,19 +185,19 @@ export const RestSub = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedSubscription(null);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  //   setSelectedSubscription(null);
+  // };
 
   return (
     <div className="RestSub_container">
       <div className="customSub">
         <p className="customSub_Title">Subscription Plan</p>
-        <Link href="/custom-laundry-subscriptions" className="restaurantSub">
+        {/* <Link href="/custom-laundry-subscriptions" className="restaurantSub">
           <p className="restaurantSubText">Custom Subscription</p>
           <LiaAngleRightSolid className="restaurantSubIcon" />
-        </Link>
+        </Link> */}
       </div>
       <div className="Cust_sub_cards">
         {visibleData.map((plan: RestSubPlansDataType, index) => (
@@ -158,9 +205,13 @@ export const RestSub = () => {
             <div className="Cust_sub_ITA">
               <div className="Cust_sub_image">
                 <img
-                  src={plan.subImg}
+                  src={plan?.subImg}
                   alt="sub image"
                   className="Cust_sub_img"
+                  style={{
+                    height: "50px",
+                    width: "50px",
+                  }}
                 />
               </div>
               <div className="Cust_sub_TA">
@@ -185,12 +236,23 @@ export const RestSub = () => {
               <p className="Cust_sub_amount_text SA_amount">{plan.subAmount}</p>
             </div>
             <hr className="Cust_sub_line_divider" />
-            <button
+            {/* <button
               className="Cust_sub_btn"
               onClick={() => handleViewDetailsClick(plan)}
             >
               {plan.ViewSubDetailsLink}
-            </button>
+            </button> */}
+            <PaymentButton
+              totalPrice={plan.subAmount}
+              openModal={openModal}
+              buttonText="Select Plan"
+              planCode={plan.planCode}
+              onSuccess={() => onSuccess(plan)}
+              onClose={onClose}
+              referenceId={referenceId}
+              subscriptionType={plan.subType} 
+              className="sub_btn"
+            />
           </div>
         ))}
       </div>
@@ -199,11 +261,19 @@ export const RestSub = () => {
         <LiaAngleRightSolid className="SeeMore_SubIcon" />
       </button>
 
-      <ViewSubscription
+      {/* <ViewSubscription
         isOpen={isModalOpen}
         onClose={closeModal}
         subscriptionData={selectedSubscription}
-      />
+      /> */}
+
+{showModal && (
+        <NotificationModal
+          message={modalMessage}
+          errorType={modalErrorType}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

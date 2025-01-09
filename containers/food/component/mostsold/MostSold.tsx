@@ -195,7 +195,8 @@ const MostSold: React.FC<MostSoldProps> = ({
     <div>
       <section className="mostsold_container">
         <div className="mostsold-frame">
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          {/* Moved search bar to the Custom booking file */}
+          {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <div
               style={{
                 position: "relative",
@@ -234,7 +235,7 @@ const MostSold: React.FC<MostSoldProps> = ({
                 }}
               />
             </div>
-          </div>
+          </div> */}
           <div className="mostload">
             {loading ? ( // Show loading effect while fetching initial data
               <p
