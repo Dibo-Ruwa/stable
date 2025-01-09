@@ -210,10 +210,10 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
                         >
                           {item?.title}
                         </p>
-                        <div className="CartRating_Content">
+                        {/* <div className="CartRating_Content">
                           <FaStar className="CartRating_Star" />
                           <p className="CartRating_number">4.5</p>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="CartTime_Content">
                         <CiClock2 className="CartTime_Clock" />

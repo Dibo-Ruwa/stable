@@ -54,6 +54,10 @@ const orderSchema = new Schema(
       ref: "User",
       required: true,
     },
+    selectedRegion: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

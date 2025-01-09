@@ -10,6 +10,7 @@ import { nanoid } from "nanoid";
 import { Spinner } from "@nextui-org/react";
 import PaymentButton from "@/component/paymentButton/PayButton";
 import useOrder from "@/hooks/useOrder";
+import Loader from "@/component/ui/loader/Loader";
 
 const StoresContainer = styled.div`
   width: 100%;
@@ -53,6 +54,22 @@ const StoresContainer = styled.div`
     border-radius: 4.522px;
     border: 1.13px solid var(--green2, #4bb149);
     background: rgba(183, 224, 182, 0.2);
+    transition: background 0.3s, color 0.3s;
+
+    &.disabled {
+      cursor: not-allowed;
+      background: rgba(183, 224, 182, 0.5);
+      color: rgba(53, 51, 51, 0.5);
+    }
+
+    &:hover {
+      background: rgba(183, 224, 182, 0.3);
+    }
+
+    &.disabled:hover {
+      background: rgba(183, 224, 182, 0.5);
+      color: rgba(53, 51, 51, 0.5);
+    }
   }
 `;
 
@@ -69,7 +86,7 @@ export const CheckoutStore = () => {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { isSubmitting, isError, isSuccess, handleCartOrderSubmit } = useOrder();
+  const { isSubmitting, isError, isSuccess, isRedirecting, handleCartOrderSubmit } = useOrder();
 
   const { cartItems, getCart } = useCartStore();
   const referenceId = nanoid(8);
@@ -105,11 +122,22 @@ export const CheckoutStore = () => {
   const additionalFee = Math.floor((cartItems.length - 1) / 2) * 100;
   const deliveryFee = baseDeliveryFee + additionalFee;
 
-  // Calculate total price
-  const totalPrice = cartItems.reduce((acc, item) => acc + item.total, 0) + deliveryFee;
+  // Calculate subtotal and total price including extras
+  const subtotal = cartItems.reduce((acc, item) => {
+    const itemTotal = item.price * item.quantity;
+    const extrasTotal = item.extras.reduce((extraAcc, extra) => extraAcc + (extra.price * extra.quantity), 0);
+    return acc + itemTotal + extrasTotal;
+  }, 0);
+
+  const totalPrice = subtotal + deliveryFee;
 
   const onSuccess = async () => {
-    await handleCartOrderSubmit(referenceId, totalPrice, deliveryFee);
+    if (!selectedRegion) {
+      setLocationError("Please select a delivery location.");
+      return;
+    }
+    await handleCartOrderSubmit(referenceId, totalPrice, deliveryFee, selectedRegion);
+    setIsLoading(true);
   };
 
   const handleCheckout = () => {
@@ -130,10 +158,10 @@ export const CheckoutStore = () => {
     // Proceed with checkout...
   };
 
-  if (isLoading) {
+  if (isLoading || isRedirecting) {
     return (
       <StoresContainer className="flex justify-center items-center">
-        <Spinner size="lg" />
+        <Loader />
       </StoresContainer>
     );
   }
@@ -141,11 +169,9 @@ export const CheckoutStore = () => {
   return (
     <StoresContainer>
       <CartInfo
-        subtotal={cartItems.reduce((acc, item) => acc + item.total, 0)}
+        subtotal={subtotal}
         deliveryFee={deliveryFee}
-        total={
-          cartItems.reduce((acc, item) => acc + item.total, 0) + deliveryFee
-        }
+        total={totalPrice}
       />
       <InfoPass onInfoPassChange={setInfoPass} />
       <DeliveryLocation
@@ -155,10 +181,6 @@ export const CheckoutStore = () => {
         onErrorClear={() => setLocationError(null)}
       />
       <SchDeliveryOpl onScheduleChange={setScheduledDelivery} />
-      {/* <CheckoutButton
-        onClick={handleCheckout}
-        disabled={!selectedRegion || cartItems.length === 0}
-      /> */}
       <PaymentButton
         totalPrice={totalPrice}
         openModal={(type, message) => console.log(type, message)}

@@ -11,7 +11,14 @@ import { authOptions } from "@/utils/helpers/authOptions";
 interface CartItem {
   title: string;
   quantity: number;
-  total: number;
+  price: number;
+  extras: Extra[];
+}
+
+interface Extra {
+  title: string;
+  price: number;
+  quantity: number;
 }
 
 export async function POST(req: Request, res: Response) {
@@ -48,6 +55,13 @@ export async function POST(req: Request, res: Response) {
       return NextResponse.json({ error: "Cart not found" }, { status: 400 });
     }
 
+    // Calculate the total amount including extras
+    const totalAmount = existingCart.cartItems.reduce((acc, item) => {
+      const itemTotal = item.price * item.quantity;
+      const extrasTotal = item.extras.reduce((extraAcc, extra) => extraAcc + (extra.price * extra.quantity), 0);
+      return acc + itemTotal + extrasTotal;
+    }, 0);
+
     // Create a new order object with all required fields
     const order = new Order({
       orderItems: existingCart.cartItems,
@@ -55,20 +69,22 @@ export async function POST(req: Request, res: Response) {
       email: user.email,
       phone: user.phone,
       address: user.address,
-      total: body.amount,
+      total: totalAmount + body.deliveryFee,
       user,
       deliveryFee: body.deliveryFee,
       paymentId: body.referenceId,
+      selectedRegion: body.selectedRegion // Include selected region
     });
 
     // Save the new order to the database
     await order.save();
     console.log("Order saved successfully", order);
 
-
     // Format the order items for the email template
     const formattedOrderItems = existingCart.cartItems.map((item: CartItem) => {
-      return `<li>${item.title} - ${item.quantity} - ₦${item.total}</li>`;
+      const itemTotal = item.price * item.quantity;
+      const extras = item.extras.map(extra => `${extra.title} (x${extra.quantity}) - ₦${extra.price * extra.quantity}`).join(', ');
+      return `<li>${item.title} - ${item.quantity} - ₦${itemTotal} ${extras ? `- Extras: ${extras}` : ''}</li>`;
     }).join('');  // Join the array to create an HTML list
 
     // Send confirmation email to the customer
@@ -83,10 +99,11 @@ export async function POST(req: Request, res: Response) {
         replacements: {
           customerName: `${user.firstName}`,
           orderItems: formattedOrderItems,
-          amount: existingCart?.total.toString(),
+          amount: totalAmount.toString(),
           deliveryFee: order?.deliveryFee.toString(),
-          total: order.total + order.deliveryFee,
-          estimatedDeliveryTime: "30 - 45 minutes",  // Can be customized dynamically
+          total: order.total,
+          estimatedDeliveryTime: "30 - 45 minutes", 
+          selectedRegion: body.selectedRegion
         },
       });
       console.log("Customer email sent successfully");
@@ -104,13 +121,14 @@ export async function POST(req: Request, res: Response) {
           customerFullName: `${user.firstName} ${user.lastName}`,
           orderNumber: body.referenceId,
           itemsOrdered: formattedOrderItems,
-          amount: existingCart?.total.toString(),
+          amount: totalAmount.toString(),
           deliveryFee: order?.deliveryFee.toString(),
           partnerFullName: `un-assigned`,
-          total: order.total + order.deliveryFee,
+          total: order.total,
           customerAddress: `${user.address}, ${user.lga}, ${user.state}`,
           customerPhone: user.phone,
           orderTimestamp: moment(order.createdAt).format("MMMM D, YYYY, h:mm a"),
+          selectedRegion: body.selectedRegion // Include selected region
         },
       });
       console.log("Admin email sent successfully");
@@ -118,26 +136,23 @@ export async function POST(req: Request, res: Response) {
       console.error("Error sending admin email:", error);
     }
 
-    // Step 12: Clear the cart after order is processed
+    // Clear the cart after order is processed
     existingCart.cartItems = [];
     existingCart.total = 0;
     await existingCart.save();
     console.log("Cart cleared after order");
 
-    //  Return a order and success response
-    // return NextResponse.json({ message: "Order placed successfully", success: true });
-    // return NextResponse.json({ order, message: "Order placed successfully", success: true });
+    // Return a order and success response
     return NextResponse.json({ order, message: "Order placed successfully", success: true }, { status: 201 });
 
   } catch (err) {
-    // Step 14: Handle and log any errors
+    // Handle and log any errors
     console.error("Error:", err);
     return NextResponse.json({ error: "An error occurred", err }, { status: 500 });
   } finally {
     console.log("Order processing complete");
   }
 }
-
 
 export async function GET(req: Request, res: Response) {
   try {
