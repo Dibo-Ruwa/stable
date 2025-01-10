@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { interceptor } from "@/axios.config";
 import { useRouter } from "next/navigation";
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { format } from "date-fns";
 
 export const LaundrySubscription = () => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -41,15 +42,21 @@ export const LaundrySubscription = () => {
           <div className="sub_list_items">
             <div className="sub_list_item">
               <IoCheckmarkSharp className="sub_list_item_icon" />
-              <p className="sub_list_item_text">Subscription Type: {plan.type}</p>
+              <p className="sub_list_item_text">
+                Subscription Type: {plan.type}
+              </p>
             </div>
             <div className="sub_list_item">
               <IoCheckmarkSharp className="sub_list_item_icon" />
-              <p className="sub_list_item_text">Start Date: {new Date(plan.start).toLocaleDateString()}</p>
+              <p className="sub_list_item_text">
+                Start Date: {format(new Date(plan.start), "MMMM do, yyyy")}
+              </p>
             </div>
             <div className="sub_list_item">
               <IoCheckmarkSharp className="sub_list_item_icon" />
-              <p className="sub_list_item_text">Due Date: {new Date(plan.due).toLocaleDateString()}</p>
+              <p className="sub_list_item_text">
+                Due Date: {format(new Date(plan.due), "MMMM do, yyyy")}
+              </p>
             </div>
           </div>
           <hr className="sub_line_divider" />
@@ -69,4 +76,3 @@ export const LaundrySubscription = () => {
     </div>
   );
 };
-

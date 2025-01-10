@@ -25,6 +25,8 @@ export interface RestSubPlansDataType {
   ViewSubDetailsLink: string;
 }
 
+
+
 const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/laundry to.png",

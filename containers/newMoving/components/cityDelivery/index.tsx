@@ -11,7 +11,7 @@ export default function CityDelivery() {
           <p>
             Our intra-city delivery services ensure your packages and documents are delivered swiftly and securely within the city, providing you with peace of mind and convenience.
           </p>
-          <Link href="/new-moving/request" className="vendor_signup">
+          <Link href="/moving/request" className="vendor_signup">
             Get Started
             <span className="get_started_icon">▶</span>
           </Link>

@@ -24,7 +24,7 @@ export default function OfficeMoving() {
           <p>
             Our specialized office equipment moving services ensure the safe and efficient relocation of your valuable office assets, minimizing downtime and ensuring a smooth transition.
           </p>
-          <Link href="/new-moving/request" className="vendor_signup">
+          <Link href="/moving/request" className="vendor_signup">
           Get Started
             <span className="get_started_icon">▶</span>
           </Link>

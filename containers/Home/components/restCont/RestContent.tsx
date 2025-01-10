@@ -1,4 +1,5 @@
 import "./restContent.css";
+import Link from "next/link";
 
 export default function Resturant() {
   return (
@@ -33,16 +34,21 @@ export default function Resturant() {
         <div className="resturant-text_container">
           <button type="button" className="resturant-btn_text">Food</button>
           <h4 className="rest-subtitle">
-            Over 100 food vendors are waiting for your order!
+            Over 100 menu items are waiting for your order!
           </h4>
           <p className="rest-des">
             Explore our mouthwatering menu featuring dishes from top
             restaurants. Each item lists preparation time, so you'll know when
             to expect your meal. Discover new favorites today!
           </p>
-          <a href="/restaurant" className="Check-Out_Vendors">
-            Check Out Vendors
-          </a>
+          <div className="action-buttons">
+            <Link href="/food" className="Check-Out_Vendors">
+              Check Out Menu
+            </Link>
+            <Link href="/food/subscription" className="Subscribe_Button">
+              Subscribe
+            </Link>
+          </div>
         </div>
       </div>
     </section>
