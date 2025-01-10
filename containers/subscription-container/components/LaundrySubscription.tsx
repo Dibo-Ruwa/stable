@@ -3,15 +3,28 @@ import { interceptor } from "@/axios.config";
 import { useRouter } from "next/navigation";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { format } from "date-fns";
+import LoaderComponent from "@/app/loading";
+
 
 export const LaundrySubscription = () => {
   const [subscriptions, setSubscriptions] = useState([]);
-  const router = useRouter();
-
-  const getSubscriptions = async () => {
-    const res = await interceptor.get("/subscriptions/all");
-    setSubscriptions(res.data.subscriptions);
-  };
+   const [isLoading, setIsLoading] = useState(true);
+   const router = useRouter();
+ 
+   const getSubscriptions = async () => {
+     try {
+       const res = await interceptor.get("/subscriptions/all");
+       const foodSubscriptions = res.data.subscriptions.filter(
+         (sub: any) => sub.type === "laundry"
+       );
+       setSubscriptions(foodSubscriptions);
+     } catch (error) {
+       console.error("Error fetching subscriptions:", error);
+     } finally {
+       setIsLoading(false);
+     }
+   };
+ 
 
   useEffect(() => {
     getSubscriptions();
@@ -20,6 +33,11 @@ export const LaundrySubscription = () => {
   const handleSubscriptionClick = (subscriptionId: string) => {
     router.push(`/profile/subscriptions/${subscriptionId}?type=laundry`);
   };
+
+
+  if (isLoading) {
+    return <LoaderComponent />;
+  }
 
   return (
     <div className="sub_cards">

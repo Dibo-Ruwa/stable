@@ -51,6 +51,7 @@ const MostSold: React.FC<MostSoldProps> = ({
       setAddedItems(itemIds);
     }
   }, []);
+  
 
   // Update addedItems when cartItems change
   useEffect(() => {
@@ -196,7 +197,7 @@ const MostSold: React.FC<MostSoldProps> = ({
       <section className="mostsold_container">
         <div className="mostsold-frame">
           {/* Moved search bar to the Custom booking file */}
-          {/* <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <div
               style={{
                 position: "relative",
@@ -235,7 +236,7 @@ const MostSold: React.FC<MostSoldProps> = ({
                 }}
               />
             </div>
-          </div> */}
+          </div>
           <div className="mostload">
             {loading ? ( // Show loading effect while fetching initial data
               <p

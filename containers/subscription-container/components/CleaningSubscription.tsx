@@ -3,16 +3,34 @@ import { interceptor } from "@/axios.config";
 import { useRouter } from "next/navigation";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { format } from "date-fns";
+import LoaderComponent from "@/app/loading";
+
 
 export const CleaningSubscription = () => {
 
     const [subscriptions, setSubscriptions] = useState([]);
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(true);
   
-    const getSubscriptions = async () => {
-      const res = await interceptor.get("/subscriptions/all");
-      setSubscriptions(res.data.subscriptions);
-    };
+    // const getSubscriptions = async () => {
+    //   const res = await interceptor.get("/subscriptions/all");
+    //   setSubscriptions(res.data.subscriptions);
+    // };
+
+     const getSubscriptions = async () => {
+        try {
+          const res = await interceptor.get("/subscriptions/all");
+          const foodSubscriptions = res.data.subscriptions.filter(
+            (sub: any) => sub.type === "cleaning"
+          );
+          setSubscriptions(foodSubscriptions);
+        } catch (error) {
+          console.error("Error fetching subscriptions:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+    
   
     useEffect(() => {
       getSubscriptions();
@@ -22,6 +40,10 @@ export const CleaningSubscription = () => {
       router.push(`/profile/subscriptions/${subscriptionId}?type=cleaning`);
     };
 
+    if (isLoading) {
+      return <LoaderComponent />;
+    }
+
   return (
      <div className="sub_cards">
          {subscriptions.map((plan: any, index) => (
@@ -29,7 +51,7 @@ export const CleaningSubscription = () => {
              <div className="sub_ITA">
                <div className="sub_image laundry_sub_image">
                  <img
-                   src="/laundry to.png"
+                   src="/clean.png"
                    alt="sub image"
                    className="sub_img laundry_sub_img"
                  />

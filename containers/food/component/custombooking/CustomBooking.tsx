@@ -1,6 +1,8 @@
+'use client'; // Ensures client-side rendering
+
 import React, { useState } from "react";
 import "./custombooking.css";
-import { CustomBookingModal } from "./CustomBookingModal";
+import { useRouter } from "next/navigation"; // Import for client-side navigation
 
 interface CustomBookingProps {
   searchQuery: string;
@@ -13,18 +15,14 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
   activeButton,
   setActiveButton,
   setSearchQuery,
-  searchQuery
+  searchQuery,
 }) => {
+  const router = useRouter(); // Initialize the router for client-side navigation
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleButtonClick = (value: string) => {
     setActiveButton(value);
-    if (value !== "all") {
-      setSearchQuery(value); // Only set search query if value is not "all"
-    } else {
-      setSearchQuery(''); // Only set search query if value is not "all"
-
-    }
+    setSearchQuery(value !== "all" ? value : "");
     console.log(value);
   };
 
@@ -64,50 +62,14 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
           ))}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                maxWidth: "450px",
-                padding: "1rem",
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Search here"
-                style={{
-                  height: "42px",
-                  flexShrink: 0,
-                  borderRadius: "4px",
-                  paddingLeft: "1rem",
-                  paddingRight: "2.5rem",
-                  border: "1px solid #ebebeb",
-                  backgroundColor: "#fcfcfc",
-                  outline: "none",
-                  width: "100%",
-                }}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <img
-                src="/images/search-normal.svg"
-                alt="search-normal"
-                style={{
-                  position: "absolute",
-                  right: "2rem",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  width: "20px",
-                  height: "20px",
-                }}
-              />
-            </div>
-          </div>
-        {/* <button type="button" className="custombooking-btn" onClick={openModal}>
-          Custom Booking
-        </button> */}
-        {/* <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} /> */}
+        {/* Navigate to /food/subscription */}
+        <button
+          type="button"
+          className="custombooking-btn"
+          onClick={() => router.push("/food/subscription")} // Client-side navigation
+        >
+          Subscription
+        </button>
       </div>
 
       <div className="flex justify-end"></div>
