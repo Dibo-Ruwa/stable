@@ -1,7 +1,7 @@
-import Moving from "@/containers/newMoving";
+import { Moving } from "@/containers/MovingPage/Moving";
 
 export const metadata = {
-  title: "Moving and Delivery Services",
+  title: "Moving",
 };
 
 const page = () => {

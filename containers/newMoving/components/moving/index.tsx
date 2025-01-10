@@ -23,7 +23,7 @@ export default function HomeMoving() {
           <p>
             Our home moving services ensure a hassle-free and efficient relocation of your household items, providing you with peace of mind and a smooth transition to your new home.
           </p>
-          <Link href="/new-moving/request" className="vendor_signup">
+          <Link href="/moving/request" className="vendor_signup">
           Get Started
             <span className="get_started_icon">▶</span>
           </Link>

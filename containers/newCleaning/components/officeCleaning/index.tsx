@@ -14,7 +14,7 @@ export default function OfficeCleaning() {
             office cleaning services, ensuring a healthy and productive
             environment.
           </p>
-          <Link href="/new-cleaning/request" className="vendor_signup">
+          <Link href="/cleaning/request" className="vendor_signup">
             Request a Quote
             <span className="get_started_icon">▶</span>
           </Link>

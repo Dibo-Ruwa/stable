@@ -1,4 +1,4 @@
-import Cleaning from "@/containers/newCleaning/index";
+import { Cleaning } from "@/containers/cleaning/Cleaning";
 
 export const metadata = {
   title: "Cleaning",
