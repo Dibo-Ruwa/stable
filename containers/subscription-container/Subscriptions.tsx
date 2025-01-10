@@ -5,7 +5,6 @@ import { LaundrySubscription } from "./components/LaundrySubscription";
 import { CleaningSubscription } from "./components/CleaningSubscription";
 import { FoodSubscription } from "./components/FoodSubscription";
 
-
 type TabType = "food" | "laundry" | "cleaning";
 
 export const Subscription = () => {

@@ -6,11 +6,16 @@ import { LiaAngleRightSolid } from "react-icons/lia";
 import { IconType } from "react-icons/lib";
 import { ViewSubscription } from "./ViewSubscription";
 import Link from "next/link";
+import PaymentButton from "@/component/paymentButton/SubButton";
+import { nanoid } from "nanoid";
+import useOrder from "@/hooks/useOrder";
+import NotificationModal from "@/component/NotificationModal";
 
 export interface RestSubPlansDataType {
   subImg: string;
   subType: string;
-  subAmount: string;
+  subAmount: number;
+  planCode: string;
   subItem: {
     tickIcon: IconType;
     subItemText: string;
@@ -19,15 +24,20 @@ export interface RestSubPlansDataType {
   ViewSubDetailsLink: string;
 }
 
+const FOOD_REG = 'PLN_w988l6ia7g7dfq6'
+const FOOD_ENT = 'PLN_pz6i6zhbcwvfdk7'
+const FOOD_GOL = 'PLN_f5nb851w9xpbtto' 
+
 const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subType: "Starter",
+    subAmount: 4900,
+    planCode: FOOD_REG,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "1 meal per week",
       },
       {
         tickIcon: IoCheckmarkSharp,
@@ -35,11 +45,15 @@ const RestSubPlansData: RestSubPlansDataType[] = [
       },
       {
         tickIcon: IoCheckmarkSharp,
+        subItemText: "Delivered once a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
         subItemText: "Standard plate",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Ideal for occasional treats",
       },
     ],
     subFeeText: "Service Fee:",
@@ -47,16 +61,13 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   },
   {
     subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subType: "Regular",
+    subAmount: 12600,
+    planCode: FOOD_REG,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
-      },
-      {
-        tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "2 meals per week",
       },
       {
         tickIcon: IoCheckmarkSharp,
@@ -64,7 +75,11 @@ const RestSubPlansData: RestSubPlansDataType[] = [
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Delivered once a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for weekend treats",
       },
     ],
     subFeeText: "Service Fee:",
@@ -72,24 +87,29 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   },
   {
     subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subType: "Enterprise",
+    subAmount: 43900,
+    planCode: FOOD_ENT,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "5 meals per week",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Standard plate + extra",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Weekdays Delivery",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Delivered 5 times a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Perfect for workweek meals",
       },
     ],
     subFeeText: "Service Fee:",
@@ -97,24 +117,29 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   },
   {
     subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subType: "Gold",
+    subAmount: 56400,
+    planCode: FOOD_GOL,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "7 meals per week",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Standard plate + extra",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Daily Delivery",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Delivered 7 times a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Perfect for everyday meals",
       },
     ],
     subFeeText: "Service Fee:",
@@ -129,6 +154,36 @@ export const RestSub = () => {
     useState<RestSubPlansDataType | null>(null);
   const visibleData = showAll ? RestSubPlansData : RestSubPlansData.slice(0, 2);
 
+  const {
+    isSubmitting,
+    isError,
+    isSuccess,
+    handleSubscriptionOrderSubmit,
+    showModal,
+    modalMessage,
+    modalErrorType,
+    openModal,
+    closeModal,
+  } = useOrder();
+
+  const referenceId = nanoid(8);
+
+  const onSuccess = (sub: any) => {
+    const subscription = {
+      plan: sub.subType,
+      type: "food",
+      isPaid: true,
+      total: sub.subAmount,
+    };
+
+    console.log(subscription);
+    handleSubscriptionOrderSubmit(referenceId, { subscription }, "recurring");
+  };
+
+  const onClose = () => {
+    console.log("closed");
+  };
+
   const handleSeeMoreClick = () => {
     setShowAll(!showAll);
   };
@@ -138,19 +193,10 @@ export const RestSub = () => {
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedSubscription(null);
-  };
-
   return (
     <div className="RestSub_container">
       <div className="customSub">
         <p className="customSub_Title">Subscription Plan</p>
-        <Link href="/custom-restaurant-subscriptions" className="restaurantSub">
-          <p className="restaurantSubText">Custom Subscription</p>
-          <LiaAngleRightSolid className="restaurantSubIcon" />
-        </Link>
       </div>
       <div className="Cust_sub_cards">
         {visibleData.map((plan: RestSubPlansDataType, index) => (
@@ -185,12 +231,17 @@ export const RestSub = () => {
               <p className="Cust_sub_amount_text SA_amount">{plan.subAmount}</p>
             </div>
             <hr className="Cust_sub_line_divider" />
-            <button
-              className="Cust_sub_btn"
-              onClick={() => handleViewDetailsClick(plan)}
-            >
-              {plan.ViewSubDetailsLink}
-            </button>
+            <PaymentButton
+              totalPrice={plan.subAmount}
+              openModal={openModal}
+              buttonText="Select Plan"
+              planCode={plan.planCode}
+              onSuccess={() => onSuccess(plan)}
+              onClose={onClose}
+              referenceId={referenceId}
+              subscriptionType={plan.subType}
+              className="sub_btn"
+            />
           </div>
         ))}
       </div>
@@ -199,11 +250,13 @@ export const RestSub = () => {
         <LiaAngleRightSolid className="SeeMore_SubIcon" />
       </button>
 
-      <ViewSubscription
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        subscriptionData={selectedSubscription}
-      />
+      {showModal && (
+        <NotificationModal
+          message={modalMessage}
+          errorType={modalErrorType}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };

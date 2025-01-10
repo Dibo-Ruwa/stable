@@ -54,9 +54,8 @@ p.sub_FLG_tabText.active {
 
 .sub_cards {
   display: flex;
-  align-items: center;
-  margin: 0 auto;
   width: 100%;
+  max-width: 300px;
   flex-wrap: wrap;
   gap: 1.2rem;
 }

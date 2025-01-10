@@ -57,7 +57,7 @@ const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
             className={styles.MobilerestaurantSubNav}
             onClick={handleSubClick}
           >
-            <p className={styles.MobilerestaurantSubText}>Subscription</p>
+            <p className={styles.MobilerestaurantSubText}>Explore Our Monthly Subscription</p>
             <LiaAngleRightSolid className={styles.MobilerestaurantSubIcon} />
           </button>
  {isSubOpen && (
@@ -67,7 +67,7 @@ const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
 )}
         </div>
         <div className={styles.MobilerestaurantOpeningTimePhoneNum}>
-          <p className={styles.MobilerestaurantOpeningDay}>Mon - Friday</p>
+          <p className={styles.MobilerestaurantOpeningDay}>Monday - Friday</p>
           <div className={styles.MobilerestaurantDot}></div>
           <p className={styles.MobilerestaurantOpeningTime}>8am - 5pm</p>
           <div className={styles.MobilerestaurantDot}></div>
@@ -75,7 +75,7 @@ const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
         </div>
         <div className={styles.MobilerestaurantLocation}>
           <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
-          <p className={styles.MobilerestaurantLocationText}>Ikeja, Lagos</p>
+          <p className={styles.MobilerestaurantLocationText}>Located in Ikeja, Lagos</p>
         </div>
         <button className={styles.MobilerestaurantReview}>Reviews</button>
       </div>
@@ -107,53 +107,40 @@ export const AboutRestaurant = () => {
           <div className={styles.aboutRestaurantContainer}>
             <div className={styles.NRSContent}>
               <div className={styles.NRRestaurant}>
-                <p className={styles.restaurantProfileName}>Flora Restaurant</p>
-                <div className={styles.restaurantRating}>
-                  <FaStar className={styles.restaurantRatingIcon} />
-                  <p className={styles.restaurantRatingNum}>4.5</p>
-                </div>
+                <p className={styles.restaurantProfileName}>Food Subscription</p>
               </div>
 
               <div className={styles.restaurantOpeningTimePhoneNum}>
                 <div className={styles.restaurantOpeningDay}>
                   <CiCalendar className={styles.restaurantOpeningDayIcon} />
                   <p className={styles.restaurantOpeningDayText}>
-                    Mon - Friday
+                    Operating Hours:
                   </p>
                 </div>
-
-                <div className={styles.restaurantDot}></div>
                 <div className={styles.restaurantOpeningTime}>
                   <CiClock2 className={styles.restaurantOpeningTimeIcon} />
-                  <p className={styles.restaurantOpeningTimeText}>8am - 5pm</p>
+                  <p className={styles.restaurantOpeningTimeText}>8am - 7pm</p>
                 </div>
 
                 <div className={styles.restaurantDot}></div>
                 <div className={styles.restaurantPhoneNum}>
                   <FiPhone className={styles.restaurantPhoneNumIcon} />
-                  <p className={styles.restaurantPhoneNumText}>0903 414 5971</p>
+                  <p className={styles.restaurantPhoneNumText}>08059303261</p>
                 </div>
               </div>
             </div>
-
-            <div className={styles.restaurantLocation}>
-              <SlLocationPin className={styles.restaurantLocationIcon} />
-              <p className={styles.restaurantLocationText}>Ikeja, Lagos</p>
-            </div>
             <div className={styles.restaurantDescription_DT}>
               <p className={styles.restaurantDescription}>
-                Our hassie-free Laundry service ensures that your clothes are
-                cleaned, folded, and delivered with care, so you can spend less
-                time on chores and more time doing what you love.
+                Enjoy our hassle-free monthly food plan, ensuring your meals are delivered with care. Spend less time on chores and more time savoring your food.
               </p>
               <p className={styles.restaurantDeliveryTime}>
-                30 - 40mins delivery time
+                Explore the available food items for your subscription or selection before committing. 
               </p>
             </div>
-            <button className={styles.restaurantReview}>
+            {/* <button className={styles.restaurantReview}>
               See Reviews
               <IoIosArrowRoundForward className={styles.restaurantReviewIcon} />
-            </button>
+            </button> */}
           </div>
         </div>
         <MobileAboutRestaurant />
