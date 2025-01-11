@@ -329,6 +329,7 @@ export const ServiceOrderDetails: React.FC<ServiceOrderDetailsProps> = ({
                 onSuccess={onSuccess}
                 onClose={onClose}
                 referenceId={referenceId}
+                disabled={isSubmitting}
               />
             </div>
           </PaymentSection>

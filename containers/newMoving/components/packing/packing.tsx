@@ -1,17 +1,17 @@
-"use client"; // If you’re on Next.js 13+ app router
+"use client";
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Link from "next/link";
 
-/* --- Styled Components --- */
-const HomeMovingContainer = styled.section`
+const PackingUnpackingContainer = styled.section`
   background: rgba(218, 250, 217, 0.16);
   margin-top: 5rem;
   margin-bottom: 5rem;
 `;
 
-const HomeMovingContent = styled.div`
+/* Reduced gap from 20px to 10px (or any smaller value you prefer) */
+const PackingUnpackingContent = styled.div`
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -19,26 +19,21 @@ const HomeMovingContent = styled.div`
   padding-top: 3rem;
 
   @media (min-width: 900px) {
-    flex-direction: row; 
+    flex-direction: row;
     justify-content: space-between;
   }
 `;
 
-// Image on the left
 const ImageWrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
-  @media (min-width: 900px) {
-    justify-content: flex-start;
-  }
 `;
 
-const HomeMovingImage = styled(Image)`
+const PackingUnpackingImage = styled(Image)`
   border-radius: 0.6rem;
   width: 100%;
   height: auto;
-  /* "Bigger" image example: set a max-width to control it */
   max-width: 700px;
 `;
 
@@ -55,8 +50,7 @@ const TextContainer = styled.div`
   }
 `;
 
-// A small button that acts like a "tag"
-const HomeMovingTag = styled.button`
+const PackingUnpackingTag = styled.button`
   font-size: 13px;
   background: #565656;
   color: #fefefe;
@@ -71,13 +65,13 @@ const HomeMovingTag = styled.button`
   border-radius: 60px;
   margin-bottom: 1rem;
   margin-top: 1rem;
-  
+
   @media (min-width: 900px) {
     padding: 8px 25px;
   }
 `;
 
-const HomeMovingSubtitle = styled.h4`
+const PackingUnpackingSubtitle = styled.h4`
   color: #2a2a2a;
   font-family: "Poppins", sans-serif;
   font-size: 25px;
@@ -89,7 +83,7 @@ const HomeMovingSubtitle = styled.h4`
   }
 `;
 
-const HomeMovingDescription = styled.p`
+const PackingUnpackingDescription = styled.p`
   color: #565656;
   font-family: "Poppins", sans-serif;
   font-size: 13px;
@@ -101,7 +95,7 @@ const HomeMovingDescription = styled.p`
   }
 `;
 
-const HomeMovingLink = styled(Link)`
+const PackingUnpackingLink = styled(Link)`
   color: #27a124;
   font-size: 17px;
   font-weight: 400;
@@ -123,35 +117,33 @@ const HomeMovingLink = styled(Link)`
   }
 `;
 
-/* --- Component Definition --- */
-export default function HomeMoving() {
+export default function PackingUnpacking() {
   return (
-    <HomeMovingContainer>
-      <HomeMovingContent>
-        {/* Image Left */}
+    <PackingUnpackingContainer>
+      <PackingUnpackingContent>
+       
+        <TextContainer>
+          <PackingUnpackingTag>Packing & Unpacking</PackingUnpackingTag>
+          <PackingUnpackingSubtitle>Stress-Free Packing</PackingUnpackingSubtitle>
+          <PackingUnpackingDescription>
+            Keep your belongings safe with our expert packing and unpacking 
+            services. We handle all the details so you can settle in quickly.
+          </PackingUnpackingDescription>
+          <PackingUnpackingLink href="/moving/request">
+            Get Started
+            <span className="get_started_icon">▶</span>
+          </PackingUnpackingLink>
+        </TextContainer>
+
         <ImageWrapper>
-          <HomeMovingImage
-            src="/images/fd2.png" // Replace with your bigger home-moving image
-            alt="Home moving"
+          <PackingUnpackingImage
+            src="/images/fd2.png"
+            alt="Packing & Unpacking"
             width={800}
             height={600}
           />
         </ImageWrapper>
-
-        {/* Text Right */}
-        <TextContainer>
-          <HomeMovingTag>Home Moving</HomeMovingTag>
-          <HomeMovingSubtitle>Hassle-Free Home Relocation</HomeMovingSubtitle>
-          <HomeMovingDescription>
-            Our home moving services ensure a smooth transition for your household items, 
-            giving you peace of mind and an easy move into your new home.
-          </HomeMovingDescription>
-          <HomeMovingLink href="/moving/request">
-            Get Started
-            <span className="get_started_icon">▶</span>
-          </HomeMovingLink>
-        </TextContainer>
-      </HomeMovingContent>
-    </HomeMovingContainer>
+      </PackingUnpackingContent>
+    </PackingUnpackingContainer>
   );
 }
