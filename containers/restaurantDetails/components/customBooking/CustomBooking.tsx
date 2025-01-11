@@ -61,7 +61,7 @@ export const CustomBooking: React.FC = () => {
 
   return (
     <div className="rest_custombooking_container">
-      <div className="rest_custombooking_frame">
+      {/* <div className="rest_custombooking_frame">
         <div className="rest_custombooking_search-min">
           <div className="rest_min-buttons">
             {["All", "30mins", "45mins", "1hr", "2hr"].map((label) => (
@@ -100,7 +100,7 @@ export const CustomBooking: React.FC = () => {
           Custom Booking
         </button>
         <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} />
-      </div>
+      </div> */}
       <MobileCustomBooking />
       <RestaurantMPDE activeButton={activeButton} searchQuery={searchQuery} />
     </div>

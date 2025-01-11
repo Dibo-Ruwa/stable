@@ -1,6 +1,252 @@
-.RestaurantMeal_container{
+.mostsold_container {
+  padding-bottom: 3rem;
+  background: #f8f8f8;
+}
+
+.mostsold-frame {
+  width: min(93%, 1440px);
+  margin: 0 auto;
+}
+
+p.mostsold_title {
+  color: var(--Ash-100, #8f8f8f);
+  font-family: Poppins;
+  font-size: 19.548px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 3rem;
+}
+
+.mostsold-cards {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  scroll-snap-type: x mandatory;
+  margin: 0 auto;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.mostsold-card {
+  width: 320px;
+  box-sizing: border-box;
+  background-color: #fff;
+  overflow-x: hidden;
+  border-radius: 16px;
+  text-decoration: none;
+  /* border: 2px solid black; */
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.mostsold-card_food-img {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 16px;
+  height: 200px; /* Fixed height */
+  overflow: hidden;
+}
+
+.mostsold-card_img {
+  width: 100%; /* Ensure the image takes the full width of its container */
+  height: 100%; /* Ensure the image takes the full height of its container */
+  object-fit: cover; /* Ensures the image covers the area without stretching */
+}
+
+.mostsold-card_content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex-grow: 1; /* Ensure the content area stretches to fill the card */
+}
+
+.mostsold-card_context {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 0.5rem; */
+}
+
+.mostsold-card_context-top {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+small.mostsold-card_rating {
+  color: #000000;
+}
+
+small.mostsold-card_title {
+  color: var(--Black-100, #2a2a2a);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+}
+
+.mostsold-card_timer-text {
+  color: #565656;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.mostsold-card_dot {
+  background: #4bb149;
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+}
+
+svg.mostsold-card_star {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  color: #ffc93f;
+}
+
+svg.mostsold-card_timer-icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #565656;
+}
+
+.mostsold-card_timer {
+  display: flex;
+  align-items: center;
+}
+
+small.mostsold-card_remender {
+  color: #565656;
+  font-family: Poppins;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0.5rem;
+}
+
+.mostsold-card_prize {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto; /* Push to the bottom of the card */
+  background: #f8f8f8;
+  padding: 0.5rem;
+  border-radius: 50px;
+}
+
+p.mostsold-card_prize-text {
+  color: var(--Soft-black, #565656);
+  font-family: Poppins;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.mostsold-card_prize-link {
+  display: flex;
+  width: 78px;
+  max-width: 88px;
+  /* padding: 6px 40px; */
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 100px;
+  background: var(--Green1, #27a124);
+  color: #fefefe;
+}
+
+/* Style for the disabled "Add to Cart" button */
+.mostsold-card_prize-link.added-to-cart {
+  background-color: #ccc; /* Gray background */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  opacity: 0.7; /* Reduce opacity */
+}
+
+/* Style for the disabled button (native disabled attribute) */
+.mostsold-card_prize-link:disabled {
+  background-color: #ccc; /* Gray background */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
+  opacity: 0.7; /* Reduce opacity */
+}
+
+.sale-imgs-container {
+  display: flex;
+  margin: 3rem auto;
+}
+
+img.mostsold-sale_img {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .mostsold-cards {
+    flex-wrap: wrap;
+  }
+
+  .mostsold-card {
+    flex: 1 1 11rem;
+  }
+
+  small.mostsold-card_title,
+  small.mostsold-card_rating {
+    font-size: 13px;
+  }
+
+  .mostsold-card_dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  svg.mostsold-card_star {
+    width: 12px;
+    height: 12px;
+  }
+
+  svg.mostsold-card_timer-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  a.mostsold-card_prize-link {
+    width: 100px;
+  }
+}
+.mostsold-card_prize-link:hover {
+  background: #1c871b;
+}
+
+.mostsold-card_prize-icon {
+  font-size: 1.2rem;
+}
+
+.RestaurantMeal_container {
   margin: 2rem 0;
 }
+
 .RestaurantMeal_Frame {
   display: flex;
   flex-direction: column;
@@ -8,6 +254,7 @@
   width: 100%;
   width: min(93%, 1444px);
 }
+
 .restaurant_Meal_filter_line {
   display: flex;
   flex-direction: column;
@@ -23,14 +270,17 @@
   cursor: pointer;
 }
 
-p.RestaurantMeal_realAmount, p.RestaurantMeal_N,
-p.RestaurantMeal_R_Num, p.RestaurantMeal_title_filter, p.RestaurantMeal_Liters, .RestaurantMeal_T_Time {
-font-family: 'Poppins', sans-serif;
+p.RestaurantMeal_realAmount,
+p.RestaurantMeal_N,
+p.RestaurantMeal_R_Num,
+p.RestaurantMeal_title_filter,
+p.RestaurantMeal_Liters,
+.RestaurantMeal_T_Time {
+  font-family: 'Poppins', sans-serif;
   font-style: normal;
   line-height: normal;
   color: #2a2a2a;
 }
-
 
 .MPDE_Container {
   display: flex;
@@ -41,7 +291,7 @@ font-family: 'Poppins', sans-serif;
 
 .MPDE_Tabs {
   display: flex;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .MPDE_Tab {
@@ -63,8 +313,6 @@ font-family: 'Poppins', sans-serif;
   color: #27a124;
 }
 
-
-
 .RestaurantMeal_cards {
   display: flex;
   align-items: center;
@@ -75,8 +323,8 @@ font-family: 'Poppins', sans-serif;
   margin: 0 auto;
 }
 
-.RestaurantMeal_card{
-     width: 32%;
+.RestaurantMeal_card {
+  width: 32%;
   scroll-snap-align: center;
   flex-shrink: 0;
   flex: 1 1 10rem;
@@ -141,7 +389,8 @@ font-family: 'Poppins', sans-serif;
 }
 
 p.RestaurantMeal_N,
-p.RestaurantMeal_R_Num, p.RestaurantMeal_T_Time {
+p.RestaurantMeal_R_Num,
+p.RestaurantMeal_T_Time {
   font-size: 13px;
   font-weight: 400;
 }
@@ -207,7 +456,6 @@ p.RestaurantMeal_Liters {
   gap: 1rem;
 }
 
-
 p.RestaurantMeal_realAmount {
   color: #2a2a2a;
   font-size: 16px;
@@ -234,7 +482,6 @@ p.RestaurantMeal_realAmount {
   align-items: center;
 }
 
-
 .Restsale-imgs-container {
   display: flex;
   margin: 3rem auto;
@@ -246,14 +493,13 @@ img.Restmostsold-sale_img {
   align-items: center;
 }
 
-
 .Mobile_RestaurantMeal_container {
   display: none;
 }
 
 @media screen and (max-width: 1178px) {
-
 }
+
 @media screen and (max-width: 768px) {
   .RestaurantMeal_Frame {
     display: none;
@@ -342,7 +588,7 @@ img.Restmostsold-sale_img {
   p.Mobile_RestaurantMeal_N,
   p.Mobile_RestaurantMeal_R_Num {
     color: #2a2a2a;
-   font-family: 'Poppins' sans-serif;
+    font-family: 'Poppins' sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -415,7 +661,7 @@ img.Restmostsold-sale_img {
 
   p.Mobile_RestaurantMeal_realAmount {
     color: #8f8f8f;
-   font-family: 'Poppins' sans-serif;
+    font-family: 'Poppins' sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -425,7 +671,7 @@ img.Restmostsold-sale_img {
 
   .Mobile_RestaurantMeal_discountAmount {
     color: #2a2a2a;
-  font-family: 'Poppins' sans-serif;
+    font-family: 'Poppins' sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -452,3 +698,7 @@ img.Restmostsold-sale_img {
     align-items: center;
   }
 }
+
+
+/* New update  */
+

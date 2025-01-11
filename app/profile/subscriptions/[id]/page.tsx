@@ -198,16 +198,22 @@ const SubscriptionPage = () => {
       <CardBody>
         <InfoTile>
           <span className="label">Plan</span>
-          <span className="value">{subscription.plan}</span>
+          <span className="value">
+            {subscription.plan.charAt(0).toUpperCase() +
+              subscription.plan.slice(1)}
+          </span>
         </InfoTile>
         <InfoTile>
           <span className="label">Type</span>
-          <span className="value">{subscription.type}</span>
+          <span className="value">
+            {subscription.type.charAt(0).toUpperCase() +
+              subscription.type.slice(1)}
+          </span>
         </InfoTile>
         <InfoTile>
           <span className="label">Start Date</span>
           <span className="value">
-             {format(new Date(subscription.start), "MMMM do, yyyy")}
+            {format(new Date(subscription.start), "MMMM do, yyyy")}
           </span>
         </InfoTile>
         <InfoTile>
@@ -225,8 +231,7 @@ const SubscriptionPage = () => {
       {!isPaid && (
         <PaymentSection>
           <div className="amount">
-            <FaMoneyBillWave />
-            ₦{subscription.total}
+            <FaMoneyBillWave />₦{subscription.total}
           </div>
           <button>Pay Now</button>
         </PaymentSection>
