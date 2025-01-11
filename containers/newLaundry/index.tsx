@@ -1,30 +1,51 @@
 "use client";
 import React from "react";
-import "./cleaning.css";
-import CleaningSection from "./components/CleaningSection";
+import "./laundry.css";
 import Newsletter from "../partnerWithUs/component/newsletter/Newsletter";
-import HomeLaundry from "./components/laundry";
-import OfficeCleaning from "./components/officeCleaning";
-import IndustrialCleaning  from "./components/industrialCleaning";
-import { ProductServicesLaundrying } from "../Laundry/components/product-service-laundrying/ProductServicesLaundrying";
+import RegularWashing from "./components/regularWashing";
+// import GentleWashing from "./components/gentleWashing";
+import SustainableDetergent from "./components/sustainableDetergent";
+import LaundrySubscription from "./components/laundrySubscription";
+import { ProductServicesLaundrying } from "./components/product-service-laundrying/ProductServicesLaundrying";
+import TestimonialCarousel from "@/component/testimonials/testimonial";
 
-const Laundry: React.FC = () => {
+const laundryTestimonials = [
+  {
+    text: "My clothes have never felt fresher. Quick and reliable service!",
+    name: "Aisha",
+    location: "Kano",
+  },
+  {
+    text: "Their eco-friendly detergent really helps with my allergies.",
+    name: "Peter",
+    location: "Kano",
+  },
+  {
+    text: "Pick-up and delivery was so smooth—saved me a ton of time!",
+    name: "Fatima",
+    location: "Kano",
+  },
+];
 
+const LaundryPage: React.FC = () => {
   return (
     <div className="partner-container">
       {/* Hero Section */}
-      <div className="Cleaning_hero_frame">
+      <div className="Laundry_hero_frame">
         <ProductServicesLaundrying />
       </div>
-        <HomeLaundry />
-        <OfficeCleaning />
-        <IndustrialCleaning />
-
-      {/* Newsletter */}
-      <Newsletter />
+      <RegularWashing />
+      <SustainableDetergent />
+      <LaundrySubscription />
+      <TestimonialCarousel
+        title="What Our Laundry Customers Say"
+        items={laundryTestimonials}
+      />
     </div>
   );
 };
 
-export default Laundry;
+export default LaundryPage;
+
+
 

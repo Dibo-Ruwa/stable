@@ -16,7 +16,14 @@ export const Laundry: React.FC = () => {
 
   return (
     <div className="Laundry_home-container">
-      <div className="Laundry_hero_frame">
+      <div className="Laundry_hero_frame"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+
+          }}
+      >
         <ProductServicesLaundrying />
       </div>
       <TopLaundries />

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./LeftMovingContainer.css"
-// import { RestSub } from './components/RestSub'
+import { RestSub } from './components/RestSub'
 import { OrdersFromRestaurant } from './components/OrdersFromRestaurant'
 import { CurrentMovingItems } from './components/currentMovingItems'
 

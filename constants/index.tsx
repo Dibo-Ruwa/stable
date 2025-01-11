@@ -9219,10 +9219,11 @@ export const ProductServiceLaundryData: ProductServiceLaundryType[] = [
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/image 157.png",
     foodText:
-      "Get your clothes washed and delivered to your door step within an hour.",
+      "Get your clothes washed and delivered to your door step.",
     map: "/images/Frame 2610169.png",
   },
 ];
+
 // ====== Cleaning data ====== //
 export interface ProductServiceCleaningType {
   _id?: number;
@@ -9245,10 +9246,11 @@ export const ProductServiceCleaningData: ProductServiceCleaningType[] = [
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/image 157.png",
     foodText:
-      "Get your clothes washed and delivered to your door step within an hour.",
+      "Relax in a spotless space with our swift and thorough cleaning services.",
     map: "/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg",
   },
 ];
+
 
 export interface TopLaundryType {
   _id?: number;
@@ -9752,7 +9754,7 @@ export const ProductServiceDeliveryAndMovingData: ProductServiceDeliveryAndMovin
       bike: "/images/Frame 2610192.png",
       foodImg: "/images/Frame 2610173.png",
       foodText:
-        "Get your clothes washed and delivered to your door step within an hour.",
+        "Seamless moving and swift deliveries; let us handle the heavy lifting.",
       map: "/images/map2.jpg",
     },
   ];
