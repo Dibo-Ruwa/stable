@@ -15,6 +15,7 @@ import {
   LogoImage,
   MenuList,
   MobileMenu,
+  Mobile,
   MobileMenuBackdrop,
   NavbarContainer,
   Toggle,
@@ -145,9 +146,51 @@ const Navbar = () => {
               <LogoImage src="/logo.png" fill={true} alt="logo" />
             </Link>
           </div>
-          <Toggle onClick={() => setToggle((prev) => !prev)}>
-            {toggle ? <VscClose /> : <HiBars3 />}
-          </Toggle>
+
+
+          <Mobile>
+          <div className="cart">
+          {cartItems.length >= 1 ? (
+                    <div className="badge">{cartItems.length}</div>
+                  ) : (
+                    <></>
+                  )}
+            {isCartDropdownOpen && (
+              <div ref={cartDropdownRef} className="CartDropdown2">
+                <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen} />{" "}
+                {/* Removed cartItems prop */}
+              </div>
+            )}
+            <div className="Cart_mobile">
+              {isCartDropdownOpen ? (
+                <div
+                  style={{
+                    textDecoration: "none",
+                    color: "var(--primary)",
+                  }}
+                >
+                  <p style={{ display: "none" }}>ggc</p>
+                  <FaBagShopping className="cart_icon" />
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  style={{
+                    textDecoration: "none",
+                    color: "var(--primary)",
+                  }}
+                  onClick={() => setIsCartDropdownOpen(true)}
+                >
+                  <FaBagShopping className="cart_icon" />
+                </button>
+              )}
+            </div>
+          </div>
+
+            <Toggle onClick={() => setToggle((prev) => !prev)}>
+              {toggle ? <VscClose /> : <HiBars3 />}
+            </Toggle>
+          </Mobile>
           <MenuList className="menu">
             {routes.map((link, index) => {
               return (
@@ -203,6 +246,7 @@ const Navbar = () => {
                         <Link
                           className="link"
                           href={link.path}
+                          
                           onClick={() =>
                             setToggle((prev) => (prev === true ? false : false))
                           }
@@ -322,7 +366,10 @@ const Navbar = () => {
 
                   {isCartDropdownOpen && (
                     <div ref={cartDropdownRef} className="CartDropdown">
-                      <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Removed cartItems prop */}
+                      <CartDropdown
+                        setIsCartDropdownOpen={setIsCartDropdownOpen}
+                      />{" "}
+                      {/* Removed cartItems prop */}
                     </div>
                   )}
                 </div>

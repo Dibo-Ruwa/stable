@@ -38,6 +38,10 @@ export const routes: Route[] = [
     name: "Contact Us",
     path: "/contact-us",
   },
+  {
+    name: "Partner with us",
+    path: "/partner",
+  },
 
   // {
   //   name: "Vendor",

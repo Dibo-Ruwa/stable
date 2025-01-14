@@ -19,6 +19,7 @@ const MobileView: React.FC = () => {
         style={{
           backgroundImage: `url(${selectedData?.bigImg})`,
           backgroundSize: "140% 100%",
+          // background: "contain",
           backgroundRepeat: "no-repeat",
         }}
       >
@@ -51,7 +52,7 @@ const MobileView: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="mob_loc">
+      {/* <div className="mob_loc">
         <div className="mob-loc-map">
           <div
             style={{
@@ -101,7 +102,7 @@ const MobileView: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -137,10 +137,10 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpe
                             textOverflow: 'ellipsis',
                           }}
                         className="CartTitle ">{item?.title}</p>
-                        <div className="CartRating_Content">
+                        {/* <div className="CartRating_Content">
                           <FaStar className="CartRating_Star" />
                           <p className="CartRating_number">4.5</p>
-                        </div>
+                        </div> */}
                       </div>
                       <div className="CartTime_Content">
                         <CiClock2 className="CartTime_Clock" />
@@ -149,7 +149,12 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpe
                     </div>
                   </div>
                   <div className="Cart_ODAmount">
-                    <small className="Cart_OD">Offers Delivery</small>
+                    {/* <small className="Cart_OD">Offers Delivery</small> */}
+                    <div className="CartRating_Content">
+                          <FaStar className="CartRating_Star" />
+                          <p className="CartRating_number">4.5</p>
+                        </div>
+
                     <p className="Cart_Amount">₦{item.totalPrice || item.price * Number(item?.quantity)}</p>
                   </div>
                 </div>
