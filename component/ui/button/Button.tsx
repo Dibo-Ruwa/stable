@@ -36,8 +36,9 @@ const ButtonContainer = styled(motion.button)<{
   }
 
   &.sub_btn {
-    background-color: var(--color2);
-    color: white;
+    background-color: rgba(183, 224, 182, 0.2);
+  border: 0.827px solid var(--green2, #4bb149);
+    color: black;
   }
 `;
 

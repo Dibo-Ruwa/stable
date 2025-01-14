@@ -107,12 +107,12 @@ export const CurrentMovingItems = () => {
     const { openModal, handleRequestPayment } = useOrder();
     const referenceId = nanoid(8);
 
-      useEffect(() => {
-        getQuotes(); 
-      }, []);
+    useEffect(() => {
+      getQuotes(); 
+    }, []);
 
-  const onSuccess = (id: string) => {
-    handleRequestPayment(referenceId, id);
+  const onSuccess = async (id: string) => {
+    await handleRequestPayment(referenceId, id);
     setTimeout(() => {
       getQuotes();
     }, 1500);
@@ -168,14 +168,17 @@ export const CurrentMovingItems = () => {
             {!request.isPaid && request.total && (
               <PaymentActions>
                 <div className="btn">
-                  <PaymentButton
+                <PaymentButton
                     totalPrice={request?.total}
                     openModal={openModal}
                     buttonText="Pay Now"
-                    color="primary"
+                    bgColor="rgba(183, 224, 182, 0.2)"
+                    color="black"
                     onSuccess={() => onSuccess(request._id)}
                     onClose={onClose}
                     referenceId={referenceId}
+                    disabled={false}
+                
                   />
                 </div>
               </PaymentActions>
