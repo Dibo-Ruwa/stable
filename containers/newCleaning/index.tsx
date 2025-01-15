@@ -8,6 +8,7 @@ import HomeCleaning from "./components/homeCleaning";
 import OfficeCleaning from "./components/officeCleaning";
 import IndustrialCleaning from "./components/industrialCleaning";
 import TestimonialCarousel from "@/component/testimonials/testimonial";
+import CleaningSubscription from "./components/cleaningSubscription";
 
 const cleaningTestimonials = [
   {
@@ -37,6 +38,7 @@ const CleaningPage: React.FC = () => {
       <HomeCleaning />
       <OfficeCleaning />
       <IndustrialCleaning />
+      <CleaningSubscription />
       <TestimonialCarousel
         title="What Our Customers Say"
         items={cleaningTestimonials }

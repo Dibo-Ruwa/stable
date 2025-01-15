@@ -82,39 +82,43 @@ export async function POST(req: Request, res: Response) {
 
     const timestamp = moment().format("YYYY-MM-DD HH:mm:ss");
 
-    // Send an email to the user
-    await sendEmail({
-      to: user.email,
-      subject: `Your Laundry Request`,
-      template: "userQuoteRequest",
-      replacements: {
-        firstName: user.firstName,
-        serviceType: data.type,
-        description: quoteText,
-        timestamp: timestamp,
-        turnaroundTime: data.estimatedReturn,
-        adminContact: "info@diboruwa.com",
-      },
-    });
+    // Send emails in a separate try-catch block
+    try {
+      await sendEmail({
+        to: user.email,
+        subject: `Your Laundry Request`,
+        template: "userQuoteRequest",
+        replacements: {
+          firstName: user.firstName,
+          serviceType: data.type,
+          description: quoteText,
+          timestamp: timestamp,
+          turnaroundTime: data.estimatedReturn,
+          adminContact: "info@diboruwa.com",
+        },
+      });
 
-    // Send an email to the admin
-    const formattedLaundryItems = formattedItems
-      .map((item: any) => `<li>${item.name} - ${item.quantity}</li>`)
-      .join("");
+      const formattedLaundryItems = formattedItems
+        .map((item: any) => `<li>${item.name} - ${item.quantity}</li>`)
+        .join("");
 
-    await sendEmail({
-      to: "ibrahim.saliman.zainab@gmail.com",
-      subject: `New Laundry Request from ${user.firstName} ${user.lastName}`,
-      template: "adminLaundyQuote",
-      replacements: {
-        adminName: "Admin",
-        userName: `${user.firstName} ${user.lastName}`,
-        userEmail: user.email,
-        userContact: user.phone,
-        userAddress: `${user.address}, ${user.lga},  ${user.state}`,
-        laundryItems: formattedLaundryItems,
-      },
-    });
+      await sendEmail({
+        to: "ibrahim.saliman.zainab@gmail.com",
+        subject: `New Laundry Request from ${user.firstName} ${user.lastName}`,
+        template: "adminLaundyQuote",
+        replacements: {
+          adminName: "Admin",
+          userName: `${user.firstName} ${user.lastName}`,
+          userEmail: user.email,
+          userContact: user.phone,
+          userAddress: `${user.address}, ${user.lga},  ${user.state}`,
+          laundryItems: formattedLaundryItems,
+        },
+      });
+    } catch (emailErr) {
+      console.error("Error sending email:", emailErr);
+      // Log the error but do not block the user
+    }
 
     return NextResponse.json(
       {

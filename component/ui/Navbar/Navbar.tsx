@@ -245,7 +245,7 @@ const Navbar = () => {
                   }}
                   className="link"
                 >
-                  Register
+                  Sign Up
                 </Link>
               </li>
             )}
@@ -258,7 +258,7 @@ const Navbar = () => {
                   }}
                   className="link"
                 >
-                  Login
+                  Sign In
                 </Link>
               </li>
             )}
@@ -304,7 +304,7 @@ const Navbar = () => {
                         color: "var(--primary)",
                       }}
                     >
-                      <p style={{ display: "none" }}>ggc</p>
+                      <p style={{ display: "none" }}></p>
                       <FaBagShopping className="cart_icon" />
                     </div>
                   ) : (

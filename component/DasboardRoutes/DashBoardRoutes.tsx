@@ -13,7 +13,7 @@ const DashboardRoutes = () => {
 
   if (status !== "loading") {
     if (!session || !session.user) {
-      router.push("/signin");
+      router.push("/sign-in");
     }
   }
 

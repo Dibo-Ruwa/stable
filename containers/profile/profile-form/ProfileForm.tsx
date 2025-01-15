@@ -160,7 +160,7 @@ export const ProfileForm = () => {
   return (
     <ProfileSettingContainer>
       <ProfileSettingTitle>Profile Settings</ProfileSettingTitle>
-      <MobileBackBtnSettings>
+      {/* <MobileBackBtnSettings>
         <MobileProfileSettingsBox>
           <MobileDropdownButton
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -185,7 +185,7 @@ export const ProfileForm = () => {
             </DropdownMenu>
           )}
         </MobileProfileSettingsBox>
-      </MobileBackBtnSettings>
+      </MobileBackBtnSettings> */}
 
       {activeTab === 0 && (
         <FormContainer onSubmit={handleSubmit}>

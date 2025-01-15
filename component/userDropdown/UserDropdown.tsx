@@ -16,7 +16,7 @@ const UserDropdown = () => {
     { name: "Profile", path: "/profile" },
     {
       name: "Dashboard",
-      path: session?.user?.role === "admin" ? "/admin" : "/profile/orders",
+      path: session?.user?.role === "admin" ? "/profile" : "/profile/orders",
     },
     { 
       name: "Sign Out", 

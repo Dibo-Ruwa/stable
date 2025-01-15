@@ -9,7 +9,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { FaMoneyBillWave } from "react-icons/fa";
 import useQuote from "@/hooks/useQuote";
 import useOrder from "@/hooks/useOrder";
-
+import Loader from "@/component/Loader";
 
 const Container = styled.div`
   padding: 20px;
@@ -102,14 +102,13 @@ interface MovingRequest {
 }
 
 export const CurrentMovingItems = () => {
+  const { quotes, getQuotes, loading } = useQuote(); // Destructure loading from useQuote
+  const { openModal, handleRequestPayment } = useOrder();
+  const referenceId = nanoid(8);
 
-    const { quotes, getQuotes } = useQuote();
-    const { openModal, handleRequestPayment } = useOrder();
-    const referenceId = nanoid(8);
-
-    useEffect(() => {
-      getQuotes(); 
-    }, []);
+  useEffect(() => {
+    getQuotes(); 
+  }, []);
 
   const onSuccess = async (id: string) => {
     await handleRequestPayment(referenceId, id);
@@ -124,6 +123,14 @@ export const CurrentMovingItems = () => {
 
   // Filter quotes to show only moving type requests
   const movingRequests = quotes?.filter(quote => quote.type === 'moving') || [];
+
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <Loader /> {/* Show loader when loading */}
+      </div>
+    );
+  }
 
   if (movingRequests.length === 0) {
     return (

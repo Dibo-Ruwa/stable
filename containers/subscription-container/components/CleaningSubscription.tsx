@@ -12,12 +12,7 @@ export const CleaningSubscription = () => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
   
-    // const getSubscriptions = async () => {
-    //   const res = await interceptor.get("/subscriptions/all");
-    //   setSubscriptions(res.data.subscriptions);
-    // };
-
-     const getSubscriptions = async () => {
+    const getSubscriptions = async () => {
         try {
           const res = await interceptor.get("/subscriptions/all");
           const foodSubscriptions = res.data.subscriptions.filter(
@@ -42,6 +37,10 @@ export const CleaningSubscription = () => {
 
     if (isLoading) {
       return <LoaderComponent />;
+    }
+
+    if (subscriptions.length === 0) {
+      return <p>No cleaning subscriptions available.</p>;
     }
 
   return (

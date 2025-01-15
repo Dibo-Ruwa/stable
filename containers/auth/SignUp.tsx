@@ -1,15 +1,27 @@
 "use client";
 
-import React, { useId, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiFacebookCircleFill } from "react-icons/ri";
 import { FaLockOpen } from "react-icons/fa6";
 import Link from "next/link";
-import { toast } from 'sonner';
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react"; // Import useSession
+import { toast } from "sonner";
 import Input from "@/components/ui/input/Input";
 import Button from "@/components/ui/button/Button";
 import SocialBtn from "@/components/ui/socialButton/SocialBtn";
-import { Container, FormWrapper, Title, Socials, Divider, Form, FormControl, Footer, ErrorMessage } from "./signup.styles";
+import {
+  Container,
+  FormWrapper,
+  Title,
+  Socials,
+  Divider,
+  Form,
+  FormControl,
+  Footer,
+  ErrorMessage,
+} from "./signup.styles";
 import useForm from "@/hooks/useForm";
 import useAuth from "@/hooks/useAuth";
 
@@ -25,11 +37,14 @@ export type SignupFormState = {
 };
 
 const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
+  const { data: session } = useSession(); // Access session data
+  const router = useRouter();
+
   const [formResponse, setFormResponse] = useState<{
     message: string;
     type: "error" | "success";
   } | null>(null);
-  
+
   const id = useId();
   const { signup, loading, error, modalMessage, modalErrorType, showModal } = useAuth();
 
@@ -40,13 +55,21 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
     password: "",
   };
 
+  // Redirect logged-in users to the home page
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
+
   const handleSubmit = async (formData: SignupFormState) => {
     try {
       await signup(formData);
       resetForm();
       toast.success("Account created successfully!");
     } catch (error: any) {
-      const errorMessage = error.response?.data || error.message || "An error occurred during registration";
+      const errorMessage =
+        error.response?.data || error.message || "An error occurred during registration";
 
       // Check for specific error messages
       if (errorMessage === "User already exists") {
@@ -62,12 +85,12 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
     }
   };
 
-  const { formData, errors, handleChange, resetForm } = useForm(initialState, (formData: SignupFormState) => {
+  const { formData, errors, handleChange, resetForm } = useForm(initialState, (formData) => {
     handleSubmit(formData).catch((error) => {
       console.error("Error during form submission:", error);
     });
   });
-  const isValid = Object.values(formData).every(value => value.trim() !== "");
+  const isValid = Object.values(formData).every((value) => value.trim() !== "");
 
   return (
     <Container $isModal={isModal}>
@@ -88,16 +111,12 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
           />
         </Socials>
         <Divider />
-        <Form onSubmit={(e) => {
-          e.preventDefault();
-          const formState = {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            email: formData.email,
-            password: formData.password,
-          };
-          handleSubmit(formState);
-        }}>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(formData);
+          }}
+        >
           <FormControl>
             <Input
               id={`firstName-${id}`}
@@ -148,7 +167,7 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
               error={errors.password}
             />
           </FormControl>
-          
+
           {(showModal || formResponse) && (
             <ErrorMessage $type={modalErrorType || formResponse?.type || "error"}>
               {modalMessage || formResponse?.message}
