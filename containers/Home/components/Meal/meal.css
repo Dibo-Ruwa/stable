@@ -47,7 +47,7 @@
   font-weight: 400;
   word-wrap: break-word;
 }
-.meal_card {
+.FOODMeal_card {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -57,7 +57,7 @@
   gap: 30px;
 }
 
-.meal_card .card {
+.FOODCard {
   width: 300px;
   /* flex: 1 1 15rem; */
   scroll-snap-align: center;
@@ -68,7 +68,7 @@
   border-radius: 16px;
 }
 
-.card-img {
+.FOODCard-img {
   width: 100%;
   overflow: hidden;
   border-radius: 16px;

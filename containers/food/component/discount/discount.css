@@ -1,6 +1,6 @@
 .discount-food_frame {
   width: min(93%, 1440px);
-  margin: 0 auto;
+  margin: 1rem auto 0;
   display: flex;
   justify-content: space-between;
   gap: 2rem;
@@ -9,6 +9,124 @@
 section.discount_container {
   padding: 1rem 0 3rem;
   background: #f8f8f8;
+}
+
+/* ============= Big Discount Card ============== */
+section.BigDiscountCard_Container {
+  display: flex;
+  border-radius: 0.625rem;
+  position: relative;
+  width: 49rem;
+  height: 25.5rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1313px) {
+  section.BigDiscountCard_Container {
+    width: 46rem;
+  }
+}
+
+.BigDiscountCard_LeftContainer {
+  width: 90%;
+  /* background: antiquewhite; */
+  position: relative;
+  z-index: 1;
+}
+
+.BigDiscountCard_DiscountTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.61rem;
+  /* padding: 1.69rem 0 0 3.87rem; */
+  width: 100%;
+  position: absolute;
+  left: 3rem;
+  top: 1.5rem;
+  z-index: 1;
+}
+
+.BigDiscountCard_DiscountTickText,
+.BigDiscountCard_DiscountLightText,
+.SmallDiscountCardBlack_DiscountTickText,
+.SmallDiscountCard_DiscountTickText,
+.SmallDiscountCardBlack_DiscountLightText,
+.SmallDiscountCard_DiscountLightText {
+  color: var(--Green1, #27a124);
+  font-family: "Red Rose", serif !important;
+  font-size: 2.6913rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.BigDiscountCard_DiscountLightText,
+.SmallDiscountCardBlack_DiscountLightText,
+.SmallDiscountCard_DiscountLightText {
+  font-size: 2.23213rem;
+  font-weight: 400;
+}
+
+.BigDiscountCard_DiscountRightImage {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.ImagePolygonSeven {
+  position: absolute;
+  width: 15rem;
+  top: 3rem;
+}
+
+img.PolygonSeven {
+  width: 20rem;
+}
+
+.ImagePolygonSix {
+  position: absolute;
+  width: 13rem;
+  top: 5rem;
+}
+
+img.PolygonSix {
+  width: 19rem;
+}
+
+.ImageSpecialOFFER {
+  position: absolute;
+  top: 13.9rem;
+  right: 4.9rem;
+  width: 21rem;
+  height: 13rem;
+}
+
+@media screen and (max-width: 1313px) {
+  .ImageSpecialOFFER {
+    right: 2.9rem;
+  }
+}
+
+img.SpecialOFFER {
+  width: 28rem;
+  height: 18rem;
+}
+
+.BigDiscountCard_CenterContainer {
+  display: flex;
+  align-items: center;
+  width: 33rem;
+  height: 17rem;
+  /* background: antiquewhite; */
+  position: relative;
+  right: 1rem;
+  top: 2rem;
+}
+
+img.IMageFood {
+  width: 30rem;
+  /* height: 24rem; */
 }
 
 .small_discount-card {
@@ -23,6 +141,105 @@ img.big_discount-card-img {
 
 img.small_discount-card-img {
   width: 100%;
+}
+
+img.SalesOff {
+  width: 31rem;
+}
+
+/* ============= Small Discount White Card ============== */
+section.SmallDiscountCard_Container {
+  position: relative;
+  display: flex;
+  background: #fefefe;
+  border-radius: 1.6rem;
+  padding: 2.5rem 1.2rem;
+  overflow: hidden;
+  width: 26.875rem;
+  height: 12.3125rem;
+}
+
+@media screen and (max-width: 1276px) {
+  section.SmallDiscountCard_Container {
+    width: 23.875rem;
+  }
+}
+
+.SmallDiscountCard_DiscountTickText {
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-size: 1.5rem;
+}
+
+.SmallDiscountCard_DiscountLightText {
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1276px) {
+  .SmallDiscountCard_DiscountLightText,
+  .SmallDiscountCard_DiscountTickText {
+    font-size: 1.2rem;
+  }
+}
+.ImageTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10rem;
+}
+
+.ImageBottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 13rem;
+}
+
+/* ============= Small Discount Black Card ============== */
+
+section.SmallDiscountCardBlack_Container {
+  position: relative;
+  display: flex;
+  background: #2a2a2a;
+  border-radius: 1.6rem;
+  padding: 2.5rem 1.2rem;
+  overflow: hidden;
+  width: 26.875rem;
+  height: 12.3125rem;
+}
+@media screen and (max-width: 1276px) {
+  section.SmallDiscountCardBlack_Container {
+    width: 23.875rem;
+  }
+}
+
+.SmallDiscountCardBlack_DiscountTickText {
+  color: var(--White, #fefefe);
+  font-size: 1.5rem;
+}
+
+.SmallDiscountCardBlack_DiscountLightText {
+  color: var(--White, #fefefe);
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1276px) {
+  .SmallDiscountCardBlack_DiscountLightText,
+  .SmallDiscountCardBlack_DiscountTickText {
+    font-size: 1.2rem;
+  }
+}
+
+.BlackImageTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.BlackImageBottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 @media only screen and (max-width: 768px) {
