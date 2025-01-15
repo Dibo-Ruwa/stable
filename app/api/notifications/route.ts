@@ -46,7 +46,11 @@ export async function GET(req: Request, res: Response) {
       return NextResponse.json({ message: "You are not logged in" });
     }
 
-    const notifications = await Notification.find({ user: session.user._id }).sort({ createdAt: -1 });
+    // Fetch notifications with all required fields
+    const notifications = await Notification.find({ user: session.user._id })
+      .select("user message read createdAt referenceId category type") // Explicitly select fields
+      .sort({ createdAt: -1 });
+
     console.log("Notifications retrieved successfully");
 
     return NextResponse.json({ notifications, success: true });
