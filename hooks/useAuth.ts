@@ -192,10 +192,11 @@ const useAuth = (): AuthHook => {
 
   const signout = async (): Promise<void> => {
     await signOut();
-    toast.success("Signout successful!", {
+    toast.success("Sign Out successful", {
       duration: 2000,
       position: "bottom-right",
     });
+    router.push("/sign-in");
   };
 
   return {

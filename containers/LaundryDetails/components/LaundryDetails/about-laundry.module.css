@@ -26,11 +26,12 @@
 
 .coverImg {
   width: 100%;
+  /* height: 350px; */
 }
 
 .restProfileImage {
   position: absolute;
-  top: 14rem;
+  top: 20rem;
   left: 1rem;
   width: 4.5rem;
 }
@@ -316,17 +317,21 @@
 
   .MobilecoverImage {
     width: 100%;
+    max-width: 100%;
     position: relative;
   }
 
   .MobilecoverImg {
     width: 100%;
+    max-width: 100%;
   }
 
   .MobilerestProfileImage {
     position: absolute;
-    top: 18rem;
+    top: 50%;
     left: 1rem;
+    width: 4.5rem;
+    transform: translateY(-50%);
   }
 
   .MobilerestProfileImg {
@@ -337,8 +342,9 @@
     flex-direction: column;
     padding: 1rem;
     width: 100%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     gap: 1rem;
+    margin-top: 30px;
   }
 
   .MobileNRSContent {
@@ -506,30 +512,33 @@
 
 @media screen and (max-width: 668px) {
   .MobilecoverImage {
-    width: 37rem;
+    max-width: 100%;
   }
 
   .MobilerestProfileImage {
-    top: 14rem;
+    top: 100%;
+    transform: translateY(-50%);
   }
 }
 
 @media screen and (max-width: 568px) {
   .MobilecoverImage {
-    width: 34rem;
+    max-width: 100%;
   }
 
   .MobilerestProfileImage {
-    top: 13rem;
+    top: 100%;
+    transform: translateY(-50%);
   }
 }
 
 @media screen and (max-width: 468px) {
   .MobilecoverImage {
-    width: 33rem;
+    max-width: 100%;
   }
 
   .MobilerestProfileImage {
-    top: 9rem;
+    top: 100%;
+    transform: translateY(-50%);
   }
 }

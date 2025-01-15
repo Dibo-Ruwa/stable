@@ -7,13 +7,16 @@ export default function Delivery() {
         <p className="sub_food">Courier</p>
         <div className="delivery-image">
           <img
-            src="/images/Frame 2610228 (1).png"
+            src="/images/bike_delivery.png"
             className="delivery_desktop-image"
-            alt="resturant guys"
+            alt="Delivery bike"
+            style={{
+              borderRadius: "10px",
+            }}
           />
           <div className="delivery_mobile-image">
             <img
-              src="/images/image 160.png"
+              src="/images/bike_delivery.png"
               className="delivery_img-main"
               alt="resturant guys"
             />

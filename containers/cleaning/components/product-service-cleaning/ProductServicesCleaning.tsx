@@ -112,10 +112,17 @@ export const ProductServicesCleaning: React.FC = () => {
                   Let us handle the dirty work while you enjoy life's fine
                   moment
                 </div>
-                <button type="button" className="Cleaning_get-started-btn">
+                {/* <button type="button" className="Cleaning_get-started-btn">
                   Book Now
                   <FaArrowRightLong className="Cleaning_get-started-btn-icon" />
-                </button>
+                </button> */}
+                <Link
+                  href="/cleaning/request"
+                  className="Cleaning_get-started-btn"
+                >
+                  Book Now
+                  <FaArrowRightLong className="Cleaning_get-started-btn-icon" />
+                </Link>
               </div>
             </div>
             {selectedVendor && (
@@ -157,21 +164,21 @@ export const ProductServicesCleaning: React.FC = () => {
                   </div>
                 </div>
               </div> */}
-              <div className="CleaningLocationAndTime">
+              {/* <div className="CleaningLocationAndTime">
                 <p className="CleaningTimeD">17 - Mon</p>
                 <p className="CleaningTimeD">2pm - Wed</p>
                 <div className="CleaningLocation">
                   <CiLocationOn className="CleaningLocationIcon" />
                   <p className="CleaningLocationText">Lagos</p>
                 </div>
-              </div>
+              </div> */}
               <div className="CleaningVisitLink">
                 <Link
                   // href={`/cleaning/${selectedVendor._id}`}
-                  href={``}
+                  href={`/cleaning/request`}
                   className="Cleaning_visit-link"
                 >
-                  <p className="Cleaning_visit-link_text">visit</p>
+                  <p className="Cleaning_visit-link_text">Get a Quote Today</p>
                   <FaArrowRightLong className="Cleaning_visit_link_icon" />
                 </Link>
               </div>

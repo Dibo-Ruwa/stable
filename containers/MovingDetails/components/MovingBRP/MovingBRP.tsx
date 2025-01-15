@@ -61,8 +61,8 @@ export const MovingBRP = () => {
       </div>
       <hr />
       {activeTab === "Booking" && <MovingBooking />}
-      {activeTab === "Reviews" && <MovingReviews />}
-      {activeTab === "Posts" && <MovingPost />}
+      {/* {activeTab === "Reviews" && <MovingReviews />}
+      {activeTab === "Posts" && <MovingPost />} */}
     </div>
   );
 };

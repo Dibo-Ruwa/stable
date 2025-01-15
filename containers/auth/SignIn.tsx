@@ -1,25 +1,24 @@
 "use client";
-import React, { useId, useState, useTransition } from "react";
+import React, { useEffect, useId, useState, useTransition } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { RiFacebookCircleFill } from "react-icons/ri";
 import { FaLockOpen } from "react-icons/fa6";
 import { BsShieldCheck, BsShieldExclamation } from "react-icons/bs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
-import { Alert } from "@mantine/core";
 import SocialBtn from "@/components/ui/socialButton/SocialBtn";
 import Input from "@/components/ui/input/Input";
 import Button from "@/components/ui/button/Button";
-import { 
-  Container, 
-  Divider, 
-  Footer, 
-  Form, 
-  FormControl, 
-  Socials, 
-  Title, 
+import {
+  Container,
+  Divider,
+  Footer,
+  Form,
+  FormControl,
+  Socials,
+  Title,
   Wrapper,
   ErrorMessage,
 } from "./signin.styles";
@@ -27,17 +26,26 @@ import {
 export type ISignInProps = {};
 
 const SignIn: React.FC<ISignInProps> = () => {
+  const { data: session } = useSession(); // Access session data
+  const router = useRouter();
+
   const [formResponse, setFormResponse] = useState<{
     message: string;
     type: "error" | "success";
   } | null>(null);
   const id = useId();
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // Redirect logged-in users to the home page
+  useEffect(() => {
+    if (session) {
+      router.push("/");
+    }
+  }, [session, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -110,7 +118,7 @@ const SignIn: React.FC<ISignInProps> = () => {
               label="Email"
               value={formData.email}
               onChange={handleChange}
-               placeHolder="example@jhon.com"
+              placeHolder="example@jhon.com"
             />
           </FormControl>
           <FormControl>
@@ -124,25 +132,7 @@ const SignIn: React.FC<ISignInProps> = () => {
               placeHolder="Enter your password"
               showPasswordMeter
             />
-            <Link href="/account-recovery">Forgot password?</Link>
           </FormControl>
-          {/* {formResponse && (
-            <Alert
-              variant="light"
-              color={formResponse.type === "error" ? "red" : "teal"}
-              withCloseButton
-              onClose={() => setFormResponse(null)}
-              // icon={
-              //   formResponse.type === "error" ? (
-              //     <BsShieldExclamation />
-              //   ) : (
-              //     <BsShieldCheck />
-              //   )
-              // }
-            >
-              {formResponse.message}
-            </Alert>
-          )} */}
 
           {formResponse && (
             <ErrorMessage $type={formResponse?.type}>
@@ -156,7 +146,6 @@ const SignIn: React.FC<ISignInProps> = () => {
             disabled={isPending}
             loading={isPending}
             color="var(--green-bg)"
-        
           />
         </Form>
         <Footer>

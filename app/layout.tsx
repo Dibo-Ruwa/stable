@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | Dibo Ruwa",
   },
   description:
-    "DiboRuwa - One-Stop App for Home Services | Food | Laundry | Cleaning | Moving | Groceries",
+    "DiboRuwa - One-Stop App for Home Services | Food | Groceries | Laundry | Cleaning | Moving",
   openGraph: {
     type: "website",
     locale: "en_NG",

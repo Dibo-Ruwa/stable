@@ -16,6 +16,7 @@ const OfficeMovingContent = styled.div`
   width: 90%;
   margin: 0 auto;
   padding-top: 3rem;
+  gap: 20px;
 
   @media (min-width: 900px) {
     flex-direction: row;
@@ -97,6 +98,7 @@ const OfficeMovingLink = styled(Link)`
   .get_started_icon {
     width: 15px;
     height: 15px;
+    margin-left: 0.5rem;
   }
 
   @media (min-width: 900px) {
@@ -116,7 +118,8 @@ const OfficeMovingImage = styled(Image)`
   border-radius: 0.6rem;
   width: 100%;
   height: auto;
-  max-width: 700px;
+  max-height: 600px;
+  max-width: 600px;
 `;
 
 export default function OfficeMoving() {
@@ -128,7 +131,7 @@ export default function OfficeMoving() {
         {/* Image right */}
         <ImageWrapper>
           <OfficeMovingImage
-            src="/images/fd2.png" // Replace with a bigger office-moving image
+            src="/images/office_packing.jpg" 
             alt="Office moving"
             width={800}
             height={600}
