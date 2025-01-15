@@ -54,25 +54,36 @@
   font-weight: 400;
   word-wrap: break-word;
 }
+
 .meal_card {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  scroll-snap-type: x mandatory;
-  margin: 0 auto;
   gap: 30px;
 }
 
 .meal_card .card {
-  width: 300px;
-  /* flex: 1 1 15rem; */
-  scroll-snap-align: center;
-  flex-shrink: 0;
+  flex: 1 1 calc(33.333% - 30px); /* 3 items for large screens with gaps accounted */
+  max-width: calc(33.333% - 30px);
   box-sizing: border-box;
   background-color: #fff;
-  overflow-x: hidden;
+  overflow: hidden;
   border-radius: 16px;
+}
+
+@media (max-width: 1024px) {
+  .meal_card .card {
+    flex: 1 1 calc(50% - 30px); /* 2 items for medium screens */
+    max-width: calc(50% - 30px);
+  }
+}
+
+@media (max-width: 768px) {
+  .meal_card .card {
+    flex: 1 1 calc(50% - 20px); /* 2 items for smaller screens */
+    max-width: calc(50% - 20px);
+  }
 }
 
 .card-img {
@@ -101,13 +112,21 @@
 .meal-dis {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 10px;
 }
 
 .meal-dis div > div {
   display: flex;
   justify-content: space-between;
   gap: 6px;
+}
+
+@media (max-width: 1024px) {
+  .meal-disTitle,
+  .meal-disNum,
+  .meal-disTime {
+    font-size: 0.79rem;
+  }
 }
 
 .groceries_circle {
@@ -191,6 +210,13 @@
     color: #565656;
     text-decoration: none;
     width: 92%;
+  }
+}
+
+@media (max-width: 500px) {
+  .meal_card .card {
+    flex: 1 1 calc(50% - 20px); /* 2 items for smaller screens */
+    max-width: calc(55% - 20px);
   }
 }
 
