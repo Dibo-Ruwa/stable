@@ -29,6 +29,16 @@ export const NavbarFrame = styled.div`
     height: 40px;
   }
 
+  .mobile-cart-toggle {
+    display: none;
+    align-items: center;
+    gap: 30px;
+
+    @media screen and (max-width: 768px) {
+      display: flex;
+    }
+  }
+
   .cart {
     width: 50px;
     height: 50px;
