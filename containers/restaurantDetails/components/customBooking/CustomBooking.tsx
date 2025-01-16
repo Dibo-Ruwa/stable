@@ -4,6 +4,7 @@ import "./custom-booking.css";
 import { RestaurantMeal } from "../restaurantMeals/RestaurantMeal";
 import { RestaurantMPDE } from "../restaurantMeals/RestaurantMPDE";
 import { CustomBookingModal } from "@/containers/food/component/custombooking/CustomBookingModal";
+import { GreenHJRDiscountSales, GreenHJRDiscountSalesData } from "../GreenHJRDiscountSales/GreenHJRDiscountSales";
 
 const MobileCustomBooking: React.FC = () => {
   const [activeButton, setActiveButton] = useState<string>("All");
@@ -102,6 +103,7 @@ export const CustomBooking: React.FC = () => {
         <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} />
       </div> */}
       <MobileCustomBooking />
+      <GreenHJRDiscountSales data={GreenHJRDiscountSalesData} />
       <RestaurantMPDE activeButton={activeButton} searchQuery={searchQuery} />
     </div>
   );

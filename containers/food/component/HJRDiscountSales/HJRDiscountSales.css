@@ -17,13 +17,13 @@
 }
 
 @media screen and (max-width: 1276px) {
-  section.HJRDiscountSales_Container {
+  section.HJRDiscountSales_Card {
     width: 23.875rem;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  section.HJRDiscountSales_Container {
+  section.HJRDiscountSales_Card {
     width: 20rem;
     height: 9rem;
   }
