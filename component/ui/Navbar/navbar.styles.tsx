@@ -41,6 +41,7 @@ export const NavbarFrame = styled.div`
     align-items: center;
     font-size: 20px;
     position: relative;
+    margin-right: 60px; /* Add margin to separate from the toggle button */
 
     .badge {
       width: 20px;
@@ -67,13 +68,26 @@ export const NavbarFrame = styled.div`
 
     .CartDropdown {
       position: absolute;
-      top: 1.6rem;
-      right: 13rem;
-      width: 29.5rem;
-      transform: translate(15rem, 2rem);
-      padding: 0.7rem 2rem 2rem;
+      top: 100%; // Position below the cart icon
+      right: 0; // Align to the right edge of the cart icon
+      width: 300px; // Adjust width to fit within the screen
+      padding: 1rem;
       background: #fefefe;
-      border-radius: 0.1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .CartDropdown_mobile {
+      position: absolute;
+      top: 100%; // Position below the cart icon
+      left: 0; // Align to the left edge of the cart icon
+      width: 100%; // Adjust width to fit within the screen
+      padding: 1rem;
+      background: #fefefe;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
     }
   }
 
@@ -190,12 +204,12 @@ export const MobileMenu = styled(motion.ul)`
   flex-direction: column;
   position: absolute;
   top: 10vh;
-  right: 20%;
+  right: 0; // Adjusted to fit within the screen
   border-radius: 10px;
   background-color: #fff;
   z-index: 50;
-  width: 20rem;
-  height: 70vh;
+  width: 100%; // Adjusted to fit within the screen
+  height: 80vh; /* Increased height to accommodate new elements */
   padding: 30px;
   list-style-type: none;
   backdrop-filter: blur(8px);
@@ -213,6 +227,75 @@ export const MobileMenu = styled(motion.ul)`
     color: #5b5959;
     font-size: 16px;
     letter-spacing: 1px;
+  }
+
+  .cart {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    gap: 10px;
+    background: rgba(39, 161, 36, 0.1);
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    position: relative;
+
+    .badge {
+      width: 20px;
+      height: 20px;
+      background: #27a124;
+      color: #fff;
+      position: absolute;
+      border-radius: 50%;
+      top: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .cart_icon {
+      display: flex;
+      width: 24px;
+      height: 24px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .CartDropdown_mobile {
+      position: absolute;
+      top: 100%; // Position below the cart icon
+      left: 0; // Align to the left edge of the cart icon
+      width: 320px; // Adjust width to fit within the screen
+      padding: 1rem;
+      background: #fefefe;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+  }
+
+  .SA_location {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .SA_location_icon {
+      width: 28px;
+      height: 28px;
+      color: var(--Red, #ef5a5a);
+    }
+
+    p.SA_location_text {
+      color: #000000;
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      line-height: normal;
+    }
   }
 `;
 

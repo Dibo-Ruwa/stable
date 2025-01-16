@@ -8,18 +8,44 @@ import { CiClock2 } from "react-icons/ci";
 import { PropertyCounter } from "@/component/CustomCounter/PropertyCounter";
 import Link from "next/link";
 import { Button } from "@/component/shared/Button";
-import "./CartDropdown.css";
-import { SelectCourier } from "./SelectCourier";
+import { SelectCourier } from "../SelectCourier";
 import { FoodDatas } from "@/utils/types/types";
 import { useRouter } from "next/navigation";
 import useCartStore from "@/store/useCart.store"; // Use the store instead of context
 import { Toast } from "@/lib/Toast"; // Import the Toast component
+import {
+  CartDropdownContainer,
+  CartDropdownCheckAndClear,
+  CartDropdownClear,
+  CartDropdownCards,
+  CartDropdownCard,
+  CartDropdownCardTop,
+  CartDropdownDetails,
+  CartDropdownDetailsImage,
+  CartTitleRatingAndTime,
+  CartTitleRating,
+  CartTitle,
+  CartRatingContent,
+  CartRatingStar,
+  CartRatingNumber,
+  CartTimeContent,
+  CartTimeClock,
+  CartTimeClockText,
+  CartODAmount,
+  CartOD,
+  CartAmount,
+  CartDropdownCardDown,
+  CartCheckboxStock,
+  CounterContainer,
+  CounterButton,
+  BtnCheckout,
+} from "./style";
 
 interface CartDropdownProps {
   setIsCartDropdownOpen: (isOpen: boolean) => void; // Correct function type
 }
 
-export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpen }) => {
+export const CartDropdownMobile: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpen }) => {
   const router = useRouter();
   const { cartItems, removeFromCart, updateQuantity, getCart } = useCartStore(); // Use the store's state and actions
 
@@ -110,93 +136,75 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpe
   }
 
   return (
-    <div className="CartDropdown_Container" ref={cartDropdownRef}>
+    <CartDropdownContainer ref={cartDropdownRef}>
       {!isCourierStep ? (
         <>
-          <div className="CartDropdown_checkAndClear">
+          <CartDropdownCheckAndClear>
             {/* Show "Remove" button only if at least one item is checked */}
             {checkedItems.size > 0 && (
-              <button
-                type="button"
-                onClick={handleRemoveItems}
-                className="CartDropdown_Clear"
-              >
+              <CartDropdownClear onClick={handleRemoveItems}>
                 Remove
-              </button>
+              </CartDropdownClear>
             )}
-          </div>
+          </CartDropdownCheckAndClear>
 
-          <div className="CartDropdown_Cards">
+          <CartDropdownCards>
             {cartItems?.map((item) => (
-              <div key={item._id} className="CartDropdown_Card">
-                <div className="CartDropdown_CardTop">
-                  <div className="CartDropdown_Details">
-                    <div
-                      style={{
-                        position: "relative",
-                      }}
-                    >
-                      <div className="CartDropdown_DetailsImage">
-                        <Image
-                          className="TheCartImage"
-                          src={item?.imageUrl}
-                          alt={item?.title}
-                          width={70}
-                          height={60}
-                        />
-                      </div>
-                    </div>
-                    <div className="CartTitleRatingANDTime">
-                      <div className="CartTitleRating">
-                        <p 
-                          style={{
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                          }}
-                        className="CartTitle ">{item?.title}</p>
-                        <div className="CartRating_Content">
-                          <FaStar className="CartRating_Star" />
-                          <p className="CartRating_number">4.5</p>
-                        </div>
-                      </div>
-                      <div className="CartTime_Content">
-                        <CiClock2 className="CartTime_Clock" />
-                        <p className="CartTime_ClockText">{item?.prep_time} {item.prep_time > '0' ? 'mins' : 'min'}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="Cart_ODAmount">
-                    <small className="Cart_OD">Offers Delivery</small>
-                    <p className="Cart_Amount">₦{item.totalPrice || item.price * Number(item?.quantity)}</p>
-                  </div>
-                </div>
-                <div className="CartDropdown_CardDown">
-                  <div className="Cart_CheckboxStock">
+              <CartDropdownCard key={item._id}>
+                <CartDropdownCardTop>
+                  <CartDropdownDetails>
+                    <CartDropdownDetailsImage>
+                      <Image
+                        className="TheCartImage"
+                        src={item?.imageUrl}
+                        alt={item?.title}
+                        width={70}
+                        height={60}
+                      />
+                    </CartDropdownDetailsImage>
+                    <CartTitleRatingAndTime>
+                      <CartTitleRating>
+                        <CartTitle>{item?.title}</CartTitle>
+                        <CartRatingContent>
+                          <CartRatingStar />
+                          <CartRatingNumber>4.5</CartRatingNumber>
+                        </CartRatingContent>
+                      </CartTitleRating>
+                      <CartTimeContent>
+                        <CartTimeClock />
+                        <CartTimeClockText>{item?.prep_time} {item.prep_time > '0' ? 'mins' : 'min'}</CartTimeClockText>
+                      </CartTimeContent>
+                    </CartTitleRatingAndTime>
+                  </CartDropdownDetails>
+                  <CartODAmount>
+                    <CartOD>Offers Delivery</CartOD>
+                    <CartAmount>₦{item.totalPrice || item.price * Number(item?.quantity)}</CartAmount>
+                  </CartODAmount>
+                </CartDropdownCardTop>
+                <CartDropdownCardDown>
+                  <CartCheckboxStock>
                     <Checkbox
                       checked={checkedItems.has(item._id)}
                       onChange={(isChecked) =>
                         handleCheckboxChange(item._id, isChecked)
                       }
                     />
-                  </div>
+                  </CartCheckboxStock>
                   <PropertyCounter
                     initialCount={item.quantity}
                     onCountChange={(newQuantity) =>
                       handleQuantityChange(item._id, newQuantity)
                     }
-                    buttonClass="counterButton"
-                    className="counterContainer"
+                    buttonClass={CounterButton}
+                    className={CounterContainer}
                   />
-                </div>
-              </div>
+                </CartDropdownCardDown>
+              </CartDropdownCard>
             ))}
-          </div>
-          <Button
-            text="Continue"
-            className="BtnCheckout"
-            onClick={handleCheckoutClick}
-          />
+          </CartDropdownCards>
+          <BtnCheckout onClick={handleCheckoutClick}>
+            Continue
+          </BtnCheckout>
         </>
       ) : (
         <SelectCourier onClose={handleCloseAll} onBack={handleModalClose} />
@@ -208,6 +216,6 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpe
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
-    </div>
+    </CartDropdownContainer>
   );
 };

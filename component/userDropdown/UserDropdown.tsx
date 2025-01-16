@@ -30,6 +30,8 @@ const UserDropdown = () => {
       <ServiceMenu
         trigger={<Avatar initials={initials} />}
         routes={menuItems}
+        dropdownClassName="userDropdownMenu" // Add a class for custom styling
+        toggle={() => {}} // Ensure toggle function is passed
       />
     </Container>
   );
