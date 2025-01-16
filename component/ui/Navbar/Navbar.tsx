@@ -149,47 +149,51 @@ const Navbar = () => {
               <LogoImage src="/logo.png" fill={true} alt="logo" />
             </Link>
           </div>
-          <div className="cart">
-            {cartItems.length >= 1 ? (
-              <div className="badge">{cartItems.length}</div>
-            ) : (
-              <></>
-            )}
-            {isCartDropdownOpen ? (
-              <div
-                style={{
-                  textDecoration: "none",
-                  color: "var(--primary)",
-                }}
-              >
-                <p style={{ display: "none" }}></p>
-                <FaBagShopping className="cart_icon" />
-              </div>
-            ) : (
-              <button
-                type="button"
-                style={{
-                  textDecoration: "none",
-                  color: "var(--primary)",
-                }}
-                onClick={() => {
-                  // setIsCartDropdownOpen(true);
-                  handleCheckoutClick()
-                }}
-              >
-                <FaBagShopping className="cart_icon" />
-              </button>
-            )}
+          <div className="mobile-cart-toggle">
+            {cartItems.length > 0 && (
+              <div className="cart">
+                {cartItems.length >= 1 ? (
+                  <div className="badge">{cartItems.length}</div>
+                ) : (
+                  <></>
+                )}
+                {isCartDropdownOpen ? (
+                  <div
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                  >
+                    <p style={{ display: "none" }}></p>
+                    <FaBagShopping className="cart_icon" />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                    onClick={() => {
+                      // setIsCartDropdownOpen(true);
+                      handleCheckoutClick()
+                    }}
+                  >
+                    <FaBagShopping className="cart_icon" />
+                  </button>
+                )}
 
-            {isCartDropdownOpen && (
-              <div ref={cartDropdownRef} className="CartDropdown">
-                <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Use mobile cart dropdown */}
+                {isCartDropdownOpen && (
+                  <div ref={cartDropdownRef} className="CartDropdown_mobile">
+                    <CartDropdownMobile setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Use mobile cart dropdown */}
+                  </div>
+                )}
               </div>
             )}
+            <Toggle onClick={() => setToggle((prev) => !prev)}>
+              {toggle ? <VscClose /> : <HiBars3 />}
+            </Toggle>
           </div>
-          <Toggle onClick={() => setToggle((prev) => !prev)}>
-            {toggle ? <VscClose /> : <HiBars3 />}
-          </Toggle>
           <MenuList className="menu">
             {routes.map((link, index) => {
               return (
@@ -351,6 +355,46 @@ const Navbar = () => {
             )}
 
             {session && <UserDropdown />}
+            {session && cartItems.length > 0 && (
+              <div className="cart">
+                {cartItems.length >= 1 ? (
+                  <div className="badge">{cartItems.length}</div>
+                ) : (
+                  <></>
+                )}
+                {isCartDropdownOpen ? (
+                  <div
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                  >
+                    <p style={{ display: "none" }}></p>
+                    <FaBagShopping className="cart_icon" />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                    onClick={() => {
+                      // setIsCartDropdownOpen(true);
+                      handleCheckoutClick()
+                    }}
+                  >
+                    <FaBagShopping className="cart_icon" />
+                  </button>
+                )}
+
+                {isCartDropdownOpen && (
+                  <div ref={cartDropdownRef} className="CartDropdown">
+                    <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Use mobile cart dropdown */}
+                  </div>
+                )}
+              </div>
+            )}
           </MenuList>
           {/* Render AuthModal based on state */}
 
