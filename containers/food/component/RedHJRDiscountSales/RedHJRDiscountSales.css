@@ -1,5 +1,5 @@
 /* ============= Small Discount Black Card ============== */
-.HJRDiscountSales_ContainerCards {
+.RedHJRDiscountSales_ContainerCards {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -8,12 +8,12 @@
   margin: 0.6rem auto;
 }
 
-.HJRDiscountSales_Card {
+.RedHJRDiscountSales_Card {
   position: relative;
   display: flex;
   background: #2a2a2a;
   border-radius: 1rem;
-  padding: 2.5rem 1.2rem;
+  /* padding: 2.5rem 1.2rem; */
   overflow: hidden;
   width: calc(33.333% - 1rem); /* Default width for 3 items per row */
   height: 10.3125rem;
@@ -21,94 +21,94 @@
 }
 
 @media screen and (max-width: 1276px) {
-  .HJRDiscountSales_Card {
+  .RedHJRDiscountSales_Card {
     width: calc(33.333% - 1rem); /* Adjust width for smaller screens */
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .HJRDiscountSales_Card {
+  .RedHJRDiscountSales_Card {
     width: calc(33.333% - 1rem); /* 3 items per row at 1024px */
     height: 9rem;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .HJRDiscountSales_Card {
+  .RedHJRDiscountSales_Card {
     width: calc(50% - 1rem); /* 2 items per row at 768px */
   }
 }
 
-.HJRDiscountSales_DiscountTitle {
+.RedHJRDiscountSales_DiscountTitle {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
   width: 50%;
-  position: absolute;
-  left: 3rem;
-  top: 1.5rem;
+  position: relative;
+  left: 2.4rem;
+  top: 1rem;
   z-index: 1;
 }
 
 @media screen and (max-width: 1024px) {
-  .HJRDiscountSales_DiscountTitle {
+  .RedHJRDiscountSales_DiscountTitle {
     left: 1.5rem;
     top: 1rem;
   }
 }
 
-.HJRDiscountSales_DiscountTickText {
+.RedHJRDiscountSales_DiscountTickText {
   color: var(--White, #fefefe);
   font-size: 1.3rem;
   font-weight: 700;
 }
 
-.HJRDiscountSales_DiscountLightText {
+.RedHJRDiscountSales_DiscountLightText {
   color: var(--White, #fefefe);
   font-size: 1.2rem;
   font-weight: 400;
 }
 
 @media screen and (max-width: 1276px) {
-  .HJRDiscountSales_DiscountLightText,
-  .HJRDiscountSales_DiscountTickText {
+  .RedHJRDiscountSales_DiscountLightText,
+  .RedHJRDiscountSales_DiscountTickText {
     font-size: 1.2rem;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .HJRDiscountSales_DiscountLightText,
-  .HJRDiscountSales_DiscountTickText {
+  .RedHJRDiscountSales_DiscountLightText,
+  .RedHJRDiscountSales_DiscountTickText {
     font-size: 1rem;
   }
 }
 
-.HJRDiscountSales_BlackImageTop {
-  position: absolute;
+.RedHJRDiscountSales_BlackImageTop {
+  position: relative;
   top: 0;
   right: 0;
 }
 
-img.HJRDiscountSales_BlackTopSpecialOfferImage {
+img.RedHJRDiscountSales_BlackTopSpecialOfferImage {
   width: 7rem;
 }
 
-.HJRDiscountSales_BlackImageBottom {
-  position: absolute;
+.RedHJRDiscountSales_BlackImageBottom {
+  position: relative;
   bottom: 0;
-  right: 1rem;
+  right: 0;
 }
 
-img.HJRDiscountSales_BlackBottomFoodImage {
+img.RedHJRDiscountSales_BlackBottomFoodImage {
   width: 14.5rem;
 }
 
 @media screen and (max-width: 1024px) {
-  .HJRDiscountSales_BlackImageTop {
+  .RedHJRDiscountSales_BlackImageTop {
     width: 7rem;
   }
 
-  .HJRDiscountSales_BlackImageBottom {
+  .RedHJRDiscountSales_BlackImageBottom {
     width: 12rem;
   }
 }

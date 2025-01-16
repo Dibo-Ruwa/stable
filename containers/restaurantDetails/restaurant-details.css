@@ -25,9 +25,12 @@
 }
 
 @media screen and (max-width: 768px) {
+  .indi_restCont {
+    margin: 0;
+  }
+
   .ACR_Cont {
-    width: 70%;
-    margin: 0 auto;
+    width: 100%;
   }
 }
 

@@ -3,12 +3,15 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .GreenHJRDiscountSales_Card {
   position: relative;
   display: flex;
   background: #27a124;
+  box-sizing: border-box;
+  flex: 1 1 calc(33.333% - 16px);
   border-radius: 1rem;
   padding: 2.5rem 1.2rem;
   overflow: hidden;
@@ -18,14 +21,26 @@
 
 @media screen and (max-width: 1276px) {
   .GreenHJRDiscountSales_Card {
-    width: 23.875rem;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .GreenHJRDiscountSales_Card {
+    flex: 1 1 calc(36.333% - 16px);
   }
 }
 
 @media screen and (max-width: 1024px) {
   .GreenHJRDiscountSales_Card {
-    width: 20rem;
     height: 9rem;
+    flex: 1 1 calc(50% - 16px);
+  }
+}
+
+@media (max-width: 768px) {
+  .GreenHJRDiscountSales_Card {
+    flex: 1 1 100%;
   }
 }
 
@@ -63,14 +78,13 @@
 @media screen and (max-width: 1276px) {
   .GreenHJRDiscountSales_DiscountLightText,
   .GreenHJRDiscountSales_DiscountTickText {
-    font-size: 1rem;
+    font-size: 0.89rem;
   }
 }
-
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1150px) {
   .GreenHJRDiscountSales_DiscountLightText,
   .GreenHJRDiscountSales_DiscountTickText {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -97,9 +111,5 @@ img.GreenHJRDiscountSales_BottomFoodImage {
 @media screen and (max-width: 1024px) {
   .GreenHJRDiscountSales_ImageTop {
     width: 7rem;
-  }
-
-  .GreenHJRDiscountSales_ImageBottom {
-    width: 12rem;
   }
 }

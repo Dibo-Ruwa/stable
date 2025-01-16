@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./GreenHJRDiscountSales.css";
 
 
@@ -102,6 +102,31 @@ interface GreenHJRDiscountSalesProps {
 export const GreenHJRDiscountSales: React.FC<GreenHJRDiscountSalesProps> = ({
   data,
 }) => {
+    // const [visibleData, setVisibleData] =
+    //   useState<GreenHJRDiscountSalesDataType[]>(data);
+
+    // useEffect(() => {
+    //   const handleResize = () => {
+    //     const screenWidth = window.innerWidth;
+
+    //     if (screenWidth <= 768) {
+    //       setVisibleData(data.slice(0, 1)); // Show only 1 item
+    //     } else if (screenWidth <= 1024) {
+    //       setVisibleData(data.slice(0, 2)); // Show only 2 items
+    //     } else {
+    //       setVisibleData(data); // Show all items
+    //     }
+    //   };
+
+    //   // Set initial visible data
+    //   handleResize();
+
+    //   // Add event listener for screen resize
+    //   window.addEventListener("resize", handleResize);
+
+    //   // Cleanup the event listener on component unmount
+    //   return () => window.removeEventListener("resize", handleResize);
+    // }, [data]);
   return (
     <section className="GreenHJRDiscountSales_ContainerCards">
       {data.map((item, index) => (

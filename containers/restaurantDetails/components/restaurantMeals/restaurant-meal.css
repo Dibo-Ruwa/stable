@@ -41,6 +41,13 @@ p.mostsold_title {
   flex-direction: column;
 }
 
+@media screen and (max-width: 1150px) {
+  .mostsold-card{
+     width: calc((100% - 60px) / 2);
+  }
+  
+}
+
 .mostsold-card_food-img {
   position: relative;
   display: flex;
