@@ -1,18 +1,18 @@
-import { BigDiscountCard } from "./BigDiscountCard";
+import { BigDiscountCard, BigDiscountCardData } from "./BigDiscountCard";
 import "./discount.css";
-import { SmallDiscountCardBlack } from "./SmallDiscountCardBlack";
-import { SmallDiscountCardWhite } from "./SmallDiscountCardWhite";
+import { SmallDiscountCardBlack, SmallDiscountCardBlackData } from "./SmallDiscountCardBlack";
+import { SmallDiscountCardWhite, SmallDiscountCardWhiteData } from "./SmallDiscountCardWhite";
 
 const Discount = () => {
   return (
     <section className="discount_container">
       <div className="discount-food_frame">
         <div className="big_discount-card">
-          <BigDiscountCard />
+          <BigDiscountCard data={BigDiscountCardData} />
         </div>
         <div className="small_discount-card">
-          <SmallDiscountCardWhite />
-          <SmallDiscountCardBlack />
+          <SmallDiscountCardWhite data={SmallDiscountCardWhiteData} />
+          <SmallDiscountCardBlack data={SmallDiscountCardBlackData} />
         </div>
       </div>
     </section>

@@ -317,3 +317,27 @@ export interface FoodData {
 }
 
 export type FoodDatas = FoodData[];
+
+
+// discount.types.ts
+export interface DiscountDetails {
+  tickText: string;
+  lightTexts: string[];
+}
+
+export interface ImageData {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className: string;
+}
+
+export interface BigDiscountCardDataType {
+  discountDetails: DiscountDetails;
+  images: {
+    leftContainer: ImageData[];
+    centerContainer: ImageData;
+    rightContainer: ImageData;
+  };
+}

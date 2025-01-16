@@ -3,6 +3,7 @@ import axios from "axios";
 import Discount from "./component/discount/Discount";
 import CustomBooking from "./component/custombooking/CustomBooking";
 import MostSold from "./component/mostsold/MostSold";
+import { HJRDiscountSales, HJRDiscountSalesData } from "./component/HJRDiscountSales/HJRDiscountSales";
 
 interface FoodProps {
   params: {
@@ -34,7 +35,7 @@ const Food: React.FC<FoodProps> = () => {
           activeButton={activeButton}
           // foodData={filteredFoodData} // Pass the filtered food data
         />
-      
+      <HJRDiscountSales data={HJRDiscountSalesData}/>
       {/* <MinsMeals searchQuery={searchQuery} activeButton={activeButton} /> */}
       {/* <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} /> */}
     </div>
