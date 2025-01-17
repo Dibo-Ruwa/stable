@@ -130,13 +130,13 @@
 @media (min-width: 900px) {
   .grooming-content {
     flex-direction: row-reverse;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     width: min(90%, 1440px);
   }
   .grooming_desktop-image {
     display: block;
-    width: 60rem;
+    width: 25rem;
   }
   .grooming-title,
   .sub_food {
