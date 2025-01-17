@@ -29,7 +29,7 @@ p.mostsold_title {
 }
 
 .mostsold-card {
-  width: calc((97% - 60px) / 4); /* Default: 3 items */
+  width: calc((96% - 60px) / 4); /* Default: 3 items */
   box-sizing: border-box;
   background-color: #fff;
   overflow-x: hidden;
@@ -77,7 +77,13 @@ p.mostsold_title {
   align-items: center;
 }
 
-small.mostsold-card_rating {
+.mostsold-card_rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+small.mostsold-card_ratingNum {
   color: #000000;
 }
 
@@ -207,11 +213,12 @@ img.mostsold-sale_img {
   }
 
   .mostsold-card {
-    width: calc((100% - 30px) / 2); /* 2 items */
+    width: calc((100% - 60px) / 3); /* 2 items */
   }
 
   small.mostsold-card_title,
-  small.mostsold-card_rating {
+  small.mostsold-card_ratingNum,
+  .mostsold-card_PrepTimer {
     font-size: 13px;
   }
 
@@ -241,8 +248,55 @@ img.mostsold-sale_img {
   }
 }
 
+@media (max-width: 598px) {
+  .mostsold-card_food-img {
+    height: 8rem;
+  }
+}
+
+@media (max-width: 568px) {
+  .mostsold-card_context {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  p.mostsold-card_prize-text {
+    font-size: 13px;
+  }
+
+  .mostsold-card_prize-link {
+    width: 47px;
+    padding: 6px;
+  }
+}
+
 @media (max-width: 500px) {
   .mostsold-card {
     width: calc((100% - 30px) / 2);
+  }
+}
+
+@media (max-width: 480px) {
+  .mostsold-card_food-img {
+    height: 6rem;
+  }
+
+  .mostsold-card_context-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mostsold-cards {
+    gap: 10px;
+  }
+
+  .mostsold-card {
+    width: calc((100% - 10px) / 2);
+  }
+}
+@media (max-width: 380px) {
+  .mostsold-card_food-img {
+    height: 4rem;
   }
 }

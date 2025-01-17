@@ -39,23 +39,29 @@
   }
 }
 
+@media screen and (max-width: 500px) {
+    .HJRDiscountSales_Card {
+        width: calc(100% - 0rem);
+    }
+}
+
 .HJRDiscountSales_DiscountTitle {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
   width: 50%;
   position: absolute;
-  left: 3rem;
+  left: 0.9rem;
   top: 1.5rem;
   z-index: 1;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .HJRDiscountSales_DiscountTitle {
     left: 1.5rem;
     top: 1rem;
   }
-}
+} */
 
 .HJRDiscountSales_DiscountTickText {
   color: var(--White, #fefefe);
@@ -105,10 +111,22 @@ img.HJRDiscountSales_BlackBottomFoodImage {
 
 @media screen and (max-width: 1024px) {
   .HJRDiscountSales_BlackImageTop {
-    width: 7rem;
+    width: 6.8rem;
   }
 
   .HJRDiscountSales_BlackImageBottom {
-    width: 12rem;
+    width: 10.8rem;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .HJRDiscountSales_BlackImageTop {
+      width: 5rem;
+  }
+      .HJRDiscountSales_BlackImageBottom {
+        width: 9rem;
+        right: 0;
+    }
+}
+
+

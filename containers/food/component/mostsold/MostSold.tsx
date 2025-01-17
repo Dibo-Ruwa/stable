@@ -12,7 +12,7 @@ import { debounce } from "lodash";
 import { MdOutlineTimer } from "react-icons/md";
 import toast from "react-hot-toast";
 import useCartStore from "@/store/useCart.store";
-import VendorModal from '@/component/modals/VendorModal';
+import VendorModal from "@/component/modals/VendorModal";
 
 interface MostSoldProps {
   searchQuery: string;
@@ -35,10 +35,10 @@ const MostSold: React.FC<MostSoldProps> = ({
   const [loadingMore, setLoadingMore] = useState(false); // Track loading state for infinite scroll
   const [hasMore, setHasMore] = useState(true); // Track if there's more data to load
   const { location } = useLocation(); // Get location from context
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const [vendorModal, setVendorModal] = useState({
     isOpen: false,
-    currentVendor: ''
+    currentVendor: "",
   });
 
   console.log(searchQuery);
@@ -51,7 +51,6 @@ const MostSold: React.FC<MostSoldProps> = ({
       setAddedItems(itemIds);
     }
   }, []);
-  
 
   // Update addedItems when cartItems change
   useEffect(() => {
@@ -155,21 +154,21 @@ const MostSold: React.FC<MostSoldProps> = ({
     router.push(`/food/checkout`);
   };
 
-  console.log("Cart items", cartItems)
+  console.log("Cart items", cartItems);
 
   const handleItemAddToCart = async (item: FoodData) => {
     try {
       const currentVendor = getCurrentVendor();
-      
+
       // Check if there's a current vendor and if it's different from the new item's vendor
       if (currentVendor && currentVendor !== item.vendor.name) {
         setVendorModal({
           isOpen: true,
-          currentVendor: currentVendor
+          currentVendor: currentVendor,
         });
         return;
       }
-  
+
       // Ensure extras is included in the item
       const itemWithExtras = {
         ...item,
@@ -180,15 +179,15 @@ const MostSold: React.FC<MostSoldProps> = ({
       await addToCartWithExtras(itemWithExtras, itemWithExtras.extras);
       setShowToast(true);
     } catch (error: any) {
-      console.error('Error adding item to cart:', error);
-      toast.error(error.message || 'Failed to add item to cart');
+      console.error("Error adding item to cart:", error);
+      toast.error(error.message || "Failed to add item to cart");
     }
   };
 
   const handleCloseVendorModal = () => {
     setVendorModal({
       isOpen: false,
-      currentVendor: ''
+      currentVendor: "",
     });
   };
 
@@ -286,8 +285,12 @@ const MostSold: React.FC<MostSoldProps> = ({
                               {item.title}
                             </small>
                             <div className="mostsold-card_dot"></div>
-                            <FaStar className="mostsold-card_star" />
-                            <small className="mostsold-card_rating">4.5</small>
+                            <div className="mostsold-card_rating">
+                              <FaStar className="mostsold-card_star" />
+                              <small className="mostsold-card_ratingNum">
+                                4.5
+                              </small>
+                            </div>
                           </div>
                           <div className="mostsold-card_timer">
                             <span
@@ -298,10 +301,14 @@ const MostSold: React.FC<MostSoldProps> = ({
                               }}
                             >
                               {" "}
-                              <MdOutlineTimer style={{ marginTop: "-2px" }} /> {item.prep_time}{" "}
-                              {item?.prep_time == "1" || item?.prep_time == "0"
-                                ? "min"
-                                : "mins"}
+                              <MdOutlineTimer style={{ marginTop: "-2px" }} />
+                              <p className="mostsold-card_PrepTimer">
+                                {item.prep_time}{" "}
+                                {item?.prep_time == "1" ||
+                                item?.prep_time == "0"
+                                  ? "min"
+                                  : "mins"}
+                              </p>
                             </span>
                           </div>
                         </div>
@@ -359,7 +366,7 @@ const MostSold: React.FC<MostSoldProps> = ({
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
-      <VendorModal 
+      <VendorModal
         isOpen={vendorModal.isOpen}
         onClose={handleCloseVendorModal}
         currentVendor={vendorModal.currentVendor}
