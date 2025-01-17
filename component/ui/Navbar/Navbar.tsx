@@ -369,7 +369,6 @@ const Navbar = () => {
                       <CartDropdown
                         setIsCartDropdownOpen={setIsCartDropdownOpen}
                       />{" "}
-                      {/* Removed cartItems prop */}
                     </div>
                   )}
                 </div>
