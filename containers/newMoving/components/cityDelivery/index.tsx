@@ -20,7 +20,7 @@ const CityDeliveryContent = styled.div`
   padding-top: 3rem;
   margin: 0 auto;
   width: 90%;
-  gap: 20px;
+  gap: 30px;
 
   @media (min-width: 900px) {
     flex-direction: row;
@@ -104,6 +104,7 @@ const CityDeliveryLink = styled(Link)`
   .get_started_icon {
     width: 15px;
     height: 15px;
+    margin-left: 0.5rem;
   }
 
   @media (min-width: 900px) {
@@ -160,26 +161,26 @@ const CityDelivery: React.FC = () => {
         {/* Multiple small images (right on larger screens) */}
         <CityDeliveryInnerImages>
           <CityDeliveryImage
-            src="/images/fd2.png"
-            alt="City delivery sample 1"
+            src="/images/bike_delivery.png"
+            alt="Delivery bike"
             width={400}
             height={400}
           />
           <CityDeliveryImage
-            src="/images/fd2.png"
-            alt="City delivery sample 2"
+            src="/images/paper_delivery.png"
+            alt="Delivery parcel"
             width={400}
             height={400}
           />
           <CityDeliveryImage
-            src="/images/fd2.png"
-            alt="City delivery sample 3"
+            src="/images/delivery_bus.png"
+            alt="Delivery bus"
             width={400}
             height={400}
           />
           <CityDeliveryImage
-            src="/images/fd2.png"
-            alt="City delivery sample 4"
+            src="/images/moving_quote.jpg"
+            alt="boxes"
             width={400}
             height={400}
           />

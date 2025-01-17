@@ -94,12 +94,12 @@ export const AboutMoving = () => {
           <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img
-                src="/images/fd2.png"
+                src="/images/bus_delivery.png"
                 alt=""
                 className={styles.coverImg}
                 style={{
                   width: "100%",
-                  height: "270px",
+                  height: "400px",
                   objectFit: "cover",
                   borderRadius: "10px",
                 }}
@@ -112,7 +112,7 @@ export const AboutMoving = () => {
               }}
             >
               <img
-                src="/images/fd3.png"
+                src="/images/bike_delivery.png"
                 alt=""
                 className={styles.restProfileImg}
                 style={{

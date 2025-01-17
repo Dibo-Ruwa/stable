@@ -185,7 +185,7 @@ export const sublinks = [
     title: "Company",
     links: [
       { name: "About Us", path: "/about-us" },
-      { name: "Subscriptions", path: "/subscriptions" },
+      // { name: "Subscriptions", path: "/subscriptions" },
       { name: "Partner With Us", path: "/partner" },
     ],
   },
@@ -193,24 +193,27 @@ export const sublinks = [
     title: "Services",
     links: [
       { name: "Food", path: "/food" },
+      { name: "Groceries", path: "/groceries" },
       { name: "Laundry", path: "/laundry" },
+      { name: "Cleaning", path: "/cleaning" },
       { name: "Moving", path: "/moving" },
-      { name: "Grooming", path: "/grooming" },
+      
     ],
   },
   {
     title: "Blog topic",
     links: [
-      { name: "Food", path: "/food" },
-      { name: "Laundry", path: "/laundry" },
-      { name: "Moving", path: "/moving" },
-      { name: "Grooming", path: "/grooming" },
+      { name: "Food", path: "https://blog.diboruwa.com/categories/food" },
+      { name: "Groceries", path: "https://blog.diboruwa.com/categories/groceries" },
+      { name: "Laundry", path: "https://blog.diboruwa.com/categories/laundry" },
+      { name: "Cleaning", path: "https://blog.diboruwa.com/categories/cleaning" },
+      { name: "Moving", path: "https://blog.diboruwa.com/categories/moving" },
     ],
   },
   {
     title: "Other",
     links: [
-      { name: "Blog", path: "/comingsoon" },
+      { name: "Blog", path: "https://blog.diboruwa.com" },
       { name: "Contact Us", path: "/contact-us" },
       { name: "Privacy Policy", path: "/privacy-policy" },
       { name: "Terms & Conditions", path: "/terms" },
@@ -8723,7 +8726,7 @@ export const Data = [
     _id: 1,
     tag: "Food",
     tagLink: "/food",
-    bigImg: "/images/food.png",
+    bigImg: "/images/food_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -8734,18 +8737,18 @@ export const Data = [
     _id: 2,
     tag: "Moving",
     tagLink: "/moving",
-    bigImg: "/images/moving.png",
+    bigImg: "/images/moving_image_hero.jpg",
     bike: "/images/Frame 2610192.png",
     foodImg: "/images/Frame 2610173.png",
     foodText:
       "Moving to a new building? No worries, courier is here to help you convey your properties.",
-    map: "/images/map2.jpg",
+    map: "/images/map1.jpg",
   },
   {
     _id: 3,
     tag: "Laundry",
     tagLink: "/laundry",
-    bigImg: "/images/laundry.png",
+    bigImg: "/images/laundry_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -8756,7 +8759,7 @@ export const Data = [
     _id: 4,
     tag: "Cleaning",
     tagLink: "/cleaning",
-    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg",
+    bigImg: "/images/cleaning_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -8767,7 +8770,7 @@ export const Data = [
     _id: 5,
     tag: "Groceries",
     tagLink: "/groceries",
-    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.23_d0e3a72a.jpg",
+    bigImg: "/images/Groceries_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -9219,7 +9222,7 @@ export const ProductServiceLaundryData: ProductServiceLaundryType[] = [
   {
     _id: 1,
     tag: "Laundry",
-    bigImg: "/images/laundry.png",
+    bigImg: "/images/laundry_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/image 157.png",
     foodText:
@@ -9246,7 +9249,7 @@ export const ProductServiceCleaningData: ProductServiceCleaningType[] = [
   {
     _id: 1,
     tag: "Cleaning",
-    bigImg: "/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg",
+    bigImg: "/images/cleaning_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/image 157.png",
     foodText:
@@ -9754,7 +9757,7 @@ export const ProductServiceDeliveryAndMovingData: ProductServiceDeliveryAndMovin
       _id: 1,
       tag1: "Food Delivery",
       tag2: "Moving",
-      bigImg: "/images/moving.png",
+      bigImg: "/images/moving_image_hero.jpg",
       bike: "/images/Frame 2610192.png",
       foodImg: "/images/Frame 2610173.png",
       foodText:

@@ -324,6 +324,7 @@ a.vendor_signup {
 .home_cleaning_main_image {
   width: 100%;
   border-radius: 0.6rem;
+  height: 400px;
 }
 
 .home_cleaning_inner_images {

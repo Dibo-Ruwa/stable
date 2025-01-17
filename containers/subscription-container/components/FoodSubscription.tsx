@@ -36,6 +36,10 @@ export const FoodSubscription = () => {
     return <LoaderComponent />;
   }
 
+  if (subscriptions.length === 0) {
+    return <p>No food subscriptions available.</p>;
+  }
+
   return (
     <div className="sub_cards">
       {subscriptions.map((plan: any, index) => (

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Checkbox } from "@/component/Checkbox/Checkbox";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
@@ -29,10 +29,27 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpe
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(true); // Track dropdown visibility
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set()); // Track checked items
   const [showToast, setShowToast] = useState(false); // State for toast visibility
+  const cartDropdownRef = useRef<HTMLDivElement>(null); // Ref for the dropdown container
 
   useEffect(() => {
     getCart(); // Fetch cart data on mount
   }, [getCart]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        cartDropdownRef.current &&
+        !cartDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [cartDropdownRef]);
 
   const handleModalClose = () => {
     setIsCourierStep(false); // Reset to CartDropdown
@@ -83,6 +100,7 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpe
             textAlign: "center",
             fontSize: "1.3rem",
             height: "70px",
+            width: "100%",
           }}
         >
           No item selected
@@ -92,7 +110,7 @@ export const CartDropdown: React.FC<CartDropdownProps> = ({ setIsCartDropdownOpe
   }
 
   return (
-    <div className="CartDropdown_Container">
+    <div className="CartDropdown_Container" ref={cartDropdownRef}>
       {!isCourierStep ? (
         <>
           <div className="CartDropdown_checkAndClear">

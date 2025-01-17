@@ -5,7 +5,7 @@ import Link from 'next/link'
 const food = [
   {
     link: "/",
-    img: "/images/fd1.png",
+    img: "/images/paper_delivery.png",
   },
   {
     link: "/",
@@ -13,7 +13,7 @@ const food = [
   },
   {
     link: "/",
-    img: "/images/fd3.png",
+    img: "/images/delivery_bus.png",
   },
   {
     link: "/",
