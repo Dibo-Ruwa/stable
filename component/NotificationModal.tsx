@@ -132,6 +132,9 @@ const ModalContent = styled.div<{ $errorType: "success" | "error" | "info" }>`
 
   .icon-container {
     margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     
     svg {
       width: 48px;

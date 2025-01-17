@@ -32,6 +32,7 @@ import Cookies from "js-cookie";
 import LocationModal from "@/component/newLocationModal/LocationModal";
 import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import { CartDropdown } from "@/containers/CartDropdown/CartDropdown";
+import { CartDropdownMobile } from "@/containers/CartDropdown/cartMobile";
 
 const Navbar = () => {
   const { data: session, status } = useSession({
@@ -108,16 +109,19 @@ const Navbar = () => {
     setTimeout(() => setShowToast(false), 3000);
   };
 
+  const handleCheckoutClick = () => {
+    setIsCartDropdownOpen(false);
+    router.push(`/food/checkout`); // Navigate to the item's page
+  }
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      setTimeout(() => {
-        if (
-          cartDropdownRef.current &&
-          !cartDropdownRef.current.contains(event.target as Node)
-        ) {
-          setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
-        }
-      }, 100); // Add a 100ms delay
+      if (
+        cartDropdownRef.current &&
+        !cartDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsCartDropdownOpen(false); // Close the dropdown if clicked outside
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -145,9 +149,51 @@ const Navbar = () => {
               <LogoImage src="/logo.png" fill={true} alt="logo" />
             </Link>
           </div>
-          <Toggle onClick={() => setToggle((prev) => !prev)}>
-            {toggle ? <VscClose /> : <HiBars3 />}
-          </Toggle>
+          <div className="mobile-cart-toggle">
+            {cartItems.length > 0 && (
+              <div className="cart">
+                {cartItems.length >= 1 ? (
+                  <div className="badge">{cartItems.length}</div>
+                ) : (
+                  <></>
+                )}
+                {isCartDropdownOpen ? (
+                  <div
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                  >
+                    <p style={{ display: "none" }}></p>
+                    <FaBagShopping className="cart_icon" />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                    onClick={() => {
+                      // setIsCartDropdownOpen(true);
+                      handleCheckoutClick()
+                    }}
+                  >
+                    <FaBagShopping className="cart_icon" />
+                  </button>
+                )}
+
+                {isCartDropdownOpen && (
+                  <div ref={cartDropdownRef} className="CartDropdown_mobile">
+                    <CartDropdownMobile setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Use mobile cart dropdown */}
+                  </div>
+                )}
+              </div>
+            )}
+            <Toggle onClick={() => setToggle((prev) => !prev)}>
+              {toggle ? <VscClose /> : <HiBars3 />}
+            </Toggle>
+          </div>
           <MenuList className="menu">
             {routes.map((link, index) => {
               return (
@@ -181,7 +227,7 @@ const Navbar = () => {
                 ></MobileMenuBackdrop>
                 <MobileMenu
                   initial={{ right: "-100%", opacity: 0 }}
-                  animate={{ right: "10%", opacity: 1 }}
+                  animate={{ right: "0%", opacity: 1 }} // Adjusted to fit within the screen
                   exit={{ right: "-100%", opacity: 0 }}
                   transition={{ duration: 0.6 }}
                 >
@@ -231,6 +277,26 @@ const Navbar = () => {
                       Partner with us
                     </Cta>
                   )}
+                  {session && (
+                    <div
+                      className="SA_location"
+                      aria-label="User location"
+                      onClick={openLocationModal}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <ImLocation className="SA_location_icon" />
+                      <p className="SA_location_text">
+                        {location?.state && location?.region ? (
+                          `${location?.state}, ${location?.region}`
+                        ) : (
+                          <span onClick={() => router.push("/")}>
+                            Reload to select your location
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  {session && <UserDropdown />}
                 </MobileMenu>
               </>
             )}
@@ -245,7 +311,7 @@ const Navbar = () => {
                   }}
                   className="link"
                 >
-                  Register
+                  Sign Up
                 </Link>
               </li>
             )}
@@ -258,7 +324,7 @@ const Navbar = () => {
                   }}
                   className="link"
                 >
-                  Login
+                  Sign In
                 </Link>
               </li>
             )}
@@ -289,44 +355,45 @@ const Navbar = () => {
             )}
 
             {session && <UserDropdown />}
-            {session && (
-              <>
-                <div className="cart">
-                  {cartItems.length >= 1 ? (
-                    <div className="badge">{cartItems.length}</div>
-                  ) : (
-                    <></>
-                  )}
-                  {isCartDropdownOpen ? (
-                    <div
-                      style={{
-                        textDecoration: "none",
-                        color: "var(--primary)",
-                      }}
-                    >
-                      <p style={{ display: "none" }}>ggc</p>
-                      <FaBagShopping className="cart_icon" />
-                    </div>
-                  ) : (
-                    <button
-                      type="button"
-                      style={{
-                        textDecoration: "none",
-                        color: "var(--primary)",
-                      }}
-                      onClick={() => setIsCartDropdownOpen(true)}
-                    >
-                      <FaBagShopping className="cart_icon" />
-                    </button>
-                  )}
+            {session && cartItems.length > 0 && (
+              <div className="cart">
+                {cartItems.length >= 1 ? (
+                  <div className="badge">{cartItems.length}</div>
+                ) : (
+                  <></>
+                )}
+                {isCartDropdownOpen ? (
+                  <div
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                  >
+                    <p style={{ display: "none" }}></p>
+                    <FaBagShopping className="cart_icon" />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    style={{
+                      textDecoration: "none",
+                      color: "var(--primary)",
+                    }}
+                    onClick={() => {
+                      // setIsCartDropdownOpen(true);
+                      handleCheckoutClick()
+                    }}
+                  >
+                    <FaBagShopping className="cart_icon" />
+                  </button>
+                )}
 
-                  {isCartDropdownOpen && (
-                    <div ref={cartDropdownRef} className="CartDropdown">
-                      <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Removed cartItems prop */}
-                    </div>
-                  )}
-                </div>
-              </>
+                {isCartDropdownOpen && (
+                  <div ref={cartDropdownRef} className="CartDropdown">
+                    <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Use mobile cart dropdown */}
+                  </div>
+                )}
+              </div>
             )}
           </MenuList>
           {/* Render AuthModal based on state */}

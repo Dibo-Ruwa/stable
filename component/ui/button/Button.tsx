@@ -34,6 +34,12 @@ const ButtonContainer = styled(motion.button)<{
   @media (max-width: 480px) {
     font-size: 0.75rem;
   }
+
+  &.sub_btn {
+    background-color: rgba(183, 224, 182, 0.2);
+  border: 0.827px solid var(--green2, #4bb149);
+    color: black;
+  }
 `;
 
 const getSize = (size?: "small" | "medium" | "large"): string => {

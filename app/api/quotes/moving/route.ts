@@ -77,39 +77,42 @@ export async function POST(req: Request, res: Response) {
     const timestamp = moment().format("YYYY-MM-DD HH:mm:ss");
     const turnaroundTime = moment().add(1, "day").format("YYYY-MM-DD HH:mm:ss");
 
+    // Send emails in a separate try-catch block
+    try {
+      await sendEmail({
+        to: user.email,
+        subject: "Your Moving Request",
+        template: "userMoveRequest",
+        replacements: {
+          firstName: user.firstName,
+          serviceType: data.type,
+          description: quoteText,
+          timestamp: timestamp,
+          turnaroundTime: turnaroundTime,
+          adminContact: "info@diboruwa.com",
+        },
+      });
 
-     // First, send an email to the user
-     await sendEmail({
-      to: user?.email,
-      subject: "Your Moving Request",
-      template: "userMoveRequest",
-      replacements: {
-        firstName: user.firstName,
-        serviceType: data.type,
-        description: quoteText,
-        timestamp: timestamp,
-        turnaroundTime: turnaroundTime,
-        adminContact: "info@diboruwa.com",
-      },
-    });
-
-    // After sending the email to the user, send the email to the admin
-    await sendEmail({
-      to: "ibrahim.saliman.zainab@gmail.com",
-      subject: `New Moving Request from ${user.firstName} ${user.lastName}`,
-      template: "adminMovingRequest",
-      replacements: {
-        customerName: `${user.firstName} ${user.lastName}`,
-        customerEmail: user.email,
-        customerPhone: user.phone,
-        itemsForMoving: quoteText,
-        currentAddress: data.currentLocation,
-        destinationAddress: data.deliveryLocation,
-        preferredDate: data.pickUpDate,
-        preferredTime: data.pickUpTime,
-        companyName: "Diboruwa",
-      },
-    });
+      await sendEmail({
+        to: "ibrahim.saliman.zainab@gmail.com",
+        subject: `New Moving Request from ${user.firstName} ${user.lastName}`,
+        template: "adminMovingRequest",
+        replacements: {
+          customerName: `${user.firstName} ${user.lastName}`,
+          customerEmail: user.email,
+          customerPhone: user.phone,
+          itemsForMoving: quoteText,
+          currentAddress: data.currentLocation,
+          destinationAddress: data.deliveryLocation,
+          preferredDate: data.pickUpDate,
+          preferredTime: data.pickUpTime,
+          companyName: "Diboruwa",
+        },
+      });
+    } catch (emailErr) {
+      console.error("Error sending email:", emailErr);
+      // Log the error but do not block the user
+    }
 
     return NextResponse.json(
       {

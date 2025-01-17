@@ -38,13 +38,13 @@ export default function Cleaning() {
             </a>
             <div className="laundry-service_img">
               <img
-                src="/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg"
+                src="/images/cleaning_sub.jpg"
                 className="service_img"
                 alt="resturant guys"
               />
 
               <img
-                src="/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg"
+                src="/images/cleaning_quote.jpg"
                 className="service_img"
                 alt="resturant guys"
               />
@@ -54,7 +54,7 @@ export default function Cleaning() {
                 alt="resturant guys"
               />
               <img
-                src="/images/WhatsApp Image 2024-12-04 at 15.15.22_a794ab6a.jpg"
+                src="/images/industrial_clean.jpg"
                 className="service_img"
                 alt="resturant guys"
               />

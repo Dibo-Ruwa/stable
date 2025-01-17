@@ -10,7 +10,9 @@ import axios from "axios";
 import { useLocation } from "@/context/LocationProvider";
 import { debounce } from "lodash";
 import { MdOutlineTimer } from "react-icons/md";
-import useCartStore from "@/store/useCart.store"; // Import the store
+import toast from "react-hot-toast";
+import useCartStore from "@/store/useCart.store";
+import VendorModal from '@/component/modals/VendorModal';
 
 interface MostSoldProps {
   searchQuery: string;
@@ -25,7 +27,8 @@ const MostSold: React.FC<MostSoldProps> = ({
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
   const { setSelectedItem } = useFoodItem();
-  const { cartItems, addToCartWithExtras } = useCartStore(); // Use the store's state and actions
+
+  const { cartItems, addToCartWithExtras, getCurrentVendor } = useCartStore(); // Use the store's state and actions
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
   const [addedItems, setAddedItems] = useState<Set<string>>(new Set());
@@ -33,7 +36,11 @@ const MostSold: React.FC<MostSoldProps> = ({
   const [loadingMore, setLoadingMore] = useState(false); // Track loading state for infinite scroll
   const [hasMore, setHasMore] = useState(true); // Track if there's more data to load
   const { location } = useLocation(); // Get location from context
-  const [loading, setLoading] = useState(true); // Track initial loading state
+  const [loading, setLoading] = useState(true); 
+  const [vendorModal, setVendorModal] = useState({
+    isOpen: false,
+    currentVendor: ''
+  });
 
   console.log(searchQuery);
   // Load added items from local storage on component mount
@@ -45,6 +52,7 @@ const MostSold: React.FC<MostSoldProps> = ({
       setAddedItems(itemIds);
     }
   }, []);
+  
 
   // Update addedItems when cartItems change
   useEffect(() => {
@@ -148,27 +156,49 @@ const MostSold: React.FC<MostSoldProps> = ({
     router.push(`/food/checkout`);
   };
 
+  console.log("Cart items", cartItems)
+
   const handleItemAddToCart = async (item: FoodData) => {
     try {
+
+      const currentVendor = getCurrentVendor();
+      
+      // Check if there's a current vendor and if it's different from the new item's vendor
+      if (currentVendor && currentVendor !== item.vendor.name) {
+        setVendorModal({
+          isOpen: true,
+          currentVendor: currentVendor
+        });
+        return;
+      }
+  
       // Ensure extras is included in the item
       const itemWithExtras = {
         ...item,
         extras: item.extras ?? [], // Initialize extras as an empty array if undefined
       };
-
+  
       // Add the item to the cart using the store's method
       await addToCartWithExtras(itemWithExtras, itemWithExtras.extras);
       setShowToast(true);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error adding item to cart:', error);
-      toast.error('Failed to add item to cart');
+      toast.error(error.message || 'Failed to add item to cart');
     }
+  };
+
+  const handleCloseVendorModal = () => {
+    setVendorModal({
+      isOpen: false,
+      currentVendor: ''
+    });
   };
 
   return (
     <div>
       <section className="mostsold_container">
         <div className="mostsold-frame">
+          {/* Moved search bar to the Custom booking file */}
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <div
               style={{
@@ -297,9 +327,10 @@ const MostSold: React.FC<MostSoldProps> = ({
                             onClick={() => handleItemAddToCart(item)}
                             type="button"
                             className={`mostsold-card_prize-link ${
-                              addedItems.has(item._id) ? "added-to-cart" : ""
+                              ""
+                              // addedItems.has(item._id) ? "added-to-cart" : ""
                             }`}
-                            disabled={addedItems.has(item._id)}
+                            // disabled={addedItems.has(item._id)}
                           >
                             <FaBagShopping className="mostsold-card_prize-icon" />
                           </button>
@@ -329,6 +360,11 @@ const MostSold: React.FC<MostSoldProps> = ({
         message="Item added to cart!"
         isVisible={showToast}
         onClose={() => setShowToast(false)}
+      />
+      <VendorModal 
+        isOpen={vendorModal.isOpen}
+        onClose={handleCloseVendorModal}
+        currentVendor={vendorModal.currentVendor}
       />
     </div>
   );

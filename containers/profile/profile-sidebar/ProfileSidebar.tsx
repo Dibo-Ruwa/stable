@@ -37,9 +37,10 @@ const ProfileSidebarContainer = styled.div<ProfileSidebarContainerProps>`
 
   @media (max-width: 768px) {
     width: 97%;
-    height: 95%;
+    height: 60vh;
     position: absolute;
-    top: 2rem;
+    background: #fff;
+    top: 0; // Adjust top to 0 to cover the entire height
     z-index: 2;
     transition: transform 0.3s ease-in-out;
     transform: ${({ isVisible }) =>
@@ -202,6 +203,25 @@ export const ProfileSidebar: React.FC = () => {
   const pathname = usePathname();
   const { session, userUpdate } = useAuth();
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".profile-sidebar-container") && !target.closest(".menu-icon")) {
+        setSidebarVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleTabClick = (href: string) => {
+    setSidebarVisible(false);
+    window.location.href = href; // Navigate to the selected tab
+  };
+
   console.log(session?.user);
 
   const firstName = session?.user?.firstName;
@@ -226,11 +246,11 @@ export const ProfileSidebar: React.FC = () => {
       label: "Orders",
       href: "/profile/orders",
     },
-    {
-      icon: <IoIosHeartEmpty />,
-      label: "Favorite",
-      href: "/profile/favorite",
-    },
+    // {
+    //   icon: <IoIosHeartEmpty />,
+    //   label: "Favorite",
+    //   href: "/profile/favorite",
+    // },
     {
       icon: <LiaAwardSolid />,
       label: "Subscriptions",
@@ -248,10 +268,10 @@ export const ProfileSidebar: React.FC = () => {
 
   return (
     <ProfileContainer>
-      <MenuIcon onClick={() => setSidebarVisible(!isSidebarVisible)} />
-      <ProfileSidebarContainer isVisible={isSidebarVisible}>
+      <MenuIcon className="menu-icon" onClick={() => setSidebarVisible(!isSidebarVisible)} />
+      <ProfileSidebarContainer className="profile-sidebar-container" isVisible={isSidebarVisible}>
         <CancelIcon onClick={() => setSidebarVisible(!isSidebarVisible)} />
-        <ProfileSidebarProfileLink href={profileInfo.href}>
+        <ProfileSidebarProfileLink href={profileInfo.href} onClick={() => handleTabClick(profileInfo.href)}>
           <ProfileSidebarPics>{profileInfo.icon}</ProfileSidebarPics>
           <ProfileSidebarName>
             <ProfileName>{profileInfo.name}</ProfileName>
@@ -265,6 +285,7 @@ export const ProfileSidebar: React.FC = () => {
               <ProfileSidebarItem
                 key={index}
                 active={activeItem === item.label}
+                onClick={() => handleTabClick(item.href)}
               >
                 <ProfileSidebarLink href={item.href} active={activeItem === item.label}>
                   <ProfileSidebarLeftIcon>{item.icon}</ProfileSidebarLeftIcon>

@@ -1,0 +1,251 @@
+/* ...existing code... */
+
+.home_laundry_container,
+.regular_washing_container,
+.gentle_washing_container,
+.sustainable_detergent_container,
+.laundry_subscription_container,
+.office_laundry_container,
+.industrial_laundry_container {
+  background: rgba(218, 250, 217, 0.16);
+}
+
+.home_laundry_content,
+.regular_washing_content,
+.gentle_washing_content,
+.sustainable_detergent_content,
+.laundry_subscription_content,
+.office_laundry_content,
+.industrial_laundry_content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 3rem;
+  margin: 0 auto;
+  width: 90%;
+  gap: 20px;
+}
+
+.home_laundry_image,
+.regular_washing_image,
+.gentle_washing_image,
+.sustainable_detergent_image,
+.laundry_subscription_image,
+.office_laundry_image,
+.industrial_laundry_image {
+  position: relative;
+}
+
+.home_laundry_main_image,
+.regular_washing_main_image,
+.gentle_washing_main_image,
+.sustainable_detergent_main_image,
+.laundry_subscription_main_image,
+.office_laundry_main_image,
+.industrial_laundry_main_image {
+  width: 100%;
+  border-radius: 0.6rem;
+}
+
+.home_laundry_inner_images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.home_laundry_text_container,
+.regular_washing_text_container,
+.gentle_washing_text_container,
+.sustainable_detergent_text_container,
+.laundry_subscription_text_container,
+.office_laundry_text_container,
+.industrial_laundry_text_container {
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.home_laundry_btn_text,
+.regular_washing_btn_text,
+.gentle_washing_btn_text,
+.sustainable_detergent_btn_text,
+.laundry_subscription_btn_text,
+.office_laundry_btn_text,
+.industrial_laundry_btn_text {
+  font-size: 13px;
+  background: #565656;
+  color: #fefefe;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  display: flex;
+  padding: 8px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 60px;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.home_laundry_subtitle,
+.regular_washing_subtitle,
+.gentle_washing_subtitle,
+.sustainable_detergent_subtitle,
+.laundry_subscription_subtitle,
+.office_laundry_subtitle,
+.industrial_laundry_subtitle {
+  color: #2a2a2a;
+  font-family: "Poppins", sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.home_laundry_description,
+.regular_washing_description,
+.gentle_washing_description,
+.sustainable_detergent_description,
+.laundry_subscription_description,
+.office_laundry_description,
+.industrial_laundry_description {
+  color: #565656;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.home_laundry_link,
+.regular_washing_link,
+.gentle_washing_link,
+.sustainable_detergent_link,
+.laundry_subscription_link,
+.office_laundry_link,
+.industrial_laundry_link {
+  color: #27a124;
+  font-size: 17px;
+  font-weight: 400;
+  display: flex;
+  margin-top: 2rem;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+  width: fit-content;
+}
+
+.get_started_icon {
+  width: 15px;
+  height: 15px;
+}
+
+@media (min-width: 900px) {
+  .home_laundry_content,
+  .regular_washing_content,
+  .gentle_washing_content,
+  .sustainable_detergent_content,
+  .laundry_subscription_content,
+  .office_laundry_content,
+  .industrial_laundry_content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .home_laundry_main_image,
+  .regular_washing_main_image,
+  .gentle_washing_main_image,
+  .sustainable_detergent_main_image,
+  .laundry_subscription_main_image,
+  .office_laundry_main_image,
+  .industrial_laundry_main_image {
+    width: 68rem;
+    height: 32rem;
+  }
+
+  .home_laundry_text_container,
+  .regular_washing_text_container,
+  .gentle_washing_text_container,
+  .sustainable_detergent_text_container,
+  .laundry_subscription_text_container,
+  .office_laundry_text_container,
+  .industrial_laundry_text_container {
+    margin-bottom: 2rem;
+    padding-bottom: 0rem;
+  }
+
+  .home_laundry_btn_text,
+  .regular_washing_btn_text,
+  .gentle_washing_btn_text,
+  .sustainable_detergent_btn_text,
+  .laundry_subscription_btn_text,
+  .office_laundry_btn_text,
+  .industrial_laundry_btn_text {
+    padding: 8px 25px;
+  }
+
+  .home_laundry_subtitle,
+  .regular_washing_subtitle,
+  .gentle_washing_subtitle,
+  .sustainable_detergent_subtitle,
+  .laundry_subscription_subtitle,
+  .office_laundry_subtitle,
+  .industrial_laundry_subtitle {
+    font-size: 20px;
+  }
+
+  .home_laundry_description,
+  .regular_washing_description,
+  .gentle_washing_description,
+  .sustainable_detergent_description,
+  .laundry_subscription_description,
+  .office_laundry_description,
+  .industrial_laundry_description {
+    font-size: 14px;
+  }
+
+  .home_laundry_link,
+  .regular_washing_link,
+  .gentle_washing_link,
+  .sustainable_detergent_link,
+  .laundry_subscription_link,
+  .office_laundry_link,
+  .industrial_laundry_link {
+    font-size: 15px;
+    display: inline-block;
+  }
+
+  .home_laundry_inner_images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin: -2rem 0 0;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1200px) {
+  .home_laundry_main_image,
+  .regular_washing_main_image,
+  .gentle_washing_main_image,
+  .sustainable_detergent_main_image,
+  .laundry_subscription_main_image,
+  .office_laundry_main_image,
+  .industrial_laundry_main_image {
+    width: 65rem;
+    height: 39rem;
+  }
+
+  .home_laundry_inner_images img {
+    width: 19rem;
+  }
+
+  .home_laundry_text_container,
+  .regular_washing_text_container,
+  .gentle_washing_text_container,
+  .sustainable_detergent_text_container,
+  .laundry_subscription_text_container,
+  .office_laundry_text_container,
+  .industrial_laundry_text_container {
+    margin-bottom: 12rem;
+  }
+}

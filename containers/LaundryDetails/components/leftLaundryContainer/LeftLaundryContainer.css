@@ -51,6 +51,19 @@
   }
 }
 
+.sub_btn{
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem auto;
+  padding: 5.791px 34.744px;
+  gap: 8.272px;
+  border-radius: 4px;
+  border: 0.827px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}
+
 .customSub {
   display: flex;
   justify-content: space-between;

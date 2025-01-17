@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import styled from "styled-components";
 import BackButton from "@/component/ui/BackButton/BackButton";
 import { DisplayFood } from "./containers/detailed-food-container/display-food/DisplayFood";
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
 import { AllCartsFood } from "./containers/detailed-food-container/display-food/AllCartsFood";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import useCartStore from "@/store/useCart.store";
+import { useFoodItem } from "@/context/FooItemProvider";
 
 // Styled components
 const FoodDetailsContainer = styled.section`
@@ -84,6 +84,16 @@ const FoodDetail: React.FC = () => {
   const [isCheckingCart, setIsCheckingCart] = useState(true);
   const { data: session } = useSession();
   const { cartItems, getCart } = useCartStore();
+  const { selectedItem } = useFoodItem();
+
+  // Add state to track if selected item is in cart
+  const isSelectedItemInCart = useMemo(() => {
+    if (!selectedItem || !cartItems.length) return false;
+    return cartItems.some(item => 
+      item._id === selectedItem._id || 
+      item.id === selectedItem._id
+    );
+  }, [cartItems, selectedItem]);
 
   // Add cart checking effect
   useEffect(() => {
@@ -126,7 +136,11 @@ const FoodDetail: React.FC = () => {
         </div>
         <DFCS>
           <DFCSFood>
-            {cartItems.length > 0 ? <AllCartsFood /> : <DisplayFood />}
+            {cartItems.length > 0 && isSelectedItemInCart ? (
+              <AllCartsFood />
+            ) : (
+              <DisplayFood />
+            )}
           </DFCSFood>
           <DFCSCheck>
             <ClearOut />

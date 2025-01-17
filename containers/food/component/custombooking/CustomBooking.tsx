@@ -1,8 +1,11 @@
+'use client'; // Ensures client-side rendering
+
 import React, { useState } from "react";
 import "./custombooking.css";
-import { CustomBookingModal } from "./CustomBookingModal";
+import { useRouter } from "next/navigation"; // Import for client-side navigation
 
 interface CustomBookingProps {
+  searchQuery: string;
   activeButton: string;
   setActiveButton: (label: string) => void;
   setSearchQuery: (label: string) => void;
@@ -12,17 +15,14 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
   activeButton,
   setActiveButton,
   setSearchQuery,
+  searchQuery,
 }) => {
+  const router = useRouter(); // Initialize the router for client-side navigation
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleButtonClick = (value: string) => {
     setActiveButton(value);
-    if (value !== "all") {
-      setSearchQuery(value); // Only set search query if value is not "all"
-    } else {
-      setSearchQuery(''); // Only set search query if value is not "all"
-
-    }
+    setSearchQuery(value !== "all" ? value : "");
     console.log(value);
   };
 
@@ -62,10 +62,14 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
           ))}
         </div>
 
-        <button type="button" className="custombooking-btn" onClick={openModal}>
-          Custom Booking
+        {/* Navigate to /food/subscription */}
+        <button
+          type="button"
+          className="custombooking-btn"
+          onClick={() => router.push("/food/subscription")} // Client-side navigation
+        >
+          Subscription
         </button>
-        <CustomBookingModal isOpen={isModalOpen} onClose={closeModal} />
       </div>
 
       <div className="flex justify-end"></div>
