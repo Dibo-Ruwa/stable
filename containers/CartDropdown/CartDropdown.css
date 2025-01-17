@@ -43,7 +43,7 @@
 }
 
 .CartDropdown_DetailsImage {
-  @apply relative flex bg-gray-400 h-[50px] object-cover justify-center  items-center gap-[8px] overflow-hidden rounded-[10px];
+  @apply relative flex bg-gray-400 h-[50px] w-[70px] object-cover justify-center  items-center gap-[8px] overflow-hidden rounded-[10px];
 }
 
 .CartDropdown_DetailsImage_dup {

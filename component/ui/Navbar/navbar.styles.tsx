@@ -78,6 +78,7 @@ export const NavbarFrame = styled.div`
 
     .CartDropdown {
       position: absolute;
+
       top: 100%; // Position below the cart icon
       right: 0; // Align to the right edge of the cart icon
       width: 300px; // Adjust width to fit within the screen
@@ -94,12 +95,27 @@ export const NavbarFrame = styled.div`
       left: 0; // Align to the left edge of the cart icon
       width: 100%; // Adjust width to fit within the screen
       padding: 1rem;
+
       background: #fefefe;
       border-radius: 0.5rem;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       z-index: 1000;
     }
+
+    .CartDropdown2 {
+      position: absolute;
+      top: 1.6rem;
+      right: 13rem;
+      // width: fit-content;
+      // max-width: 100%;
+      transform: translate(16rem, 2rem);
+      padding: 0.7rem 2rem 2rem;
+      // background: red;
+      background: #fefefe;
+      border-radius: 0.1rem;
+    }
   }
+ 
 
   .SA_location {
     display: flex;
@@ -129,20 +145,52 @@ export const LogoImage = styled(Image)`
   object-fit: contain;
 `;
 
+export const Mobile = styled.div`
+  display: none;
+  // gap: 12px;
+  color: #48db45;
+  cursor: pointer;
+  // position: relative;
+  z-index: 10;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    // background: red;
+    gap: 10px
+    // right: 1.5rem;
+  }
+
+   .Cart_mobile {
+    // background: red;
+    padding: 10px;
+    // background: rgba(39, 161, 36, 0.1);
+    border-radius: 100px;
+    color: #fff;
+    // position: relative;
+    // right: 1rem;
+
+  }
+`;
+
 export const Toggle = styled.div`
   display: none;
   font-size: 24px;
   color: #48db45;
   cursor: pointer;
-
+  
   z-index: 10;
-
+  
   @media screen and (max-width: 768px) {
     display: block;
-    position: absolute;
-    right: 2rem;
+    height: fit-content;
+    margin: auto;
+    // position: absolute;
+    // right: 1rem;
   }
 `;
+
+
 
 export const MenuList = styled(motion.ul as any)`
   display: flex;
@@ -163,7 +211,11 @@ export const MenuList = styled(motion.ul as any)`
     font-size: 14px;
     font-style: normal;
     line-height: normal;
-    letter-spacing: 1px;
+    l transition: color 0.3s ease; 
+
+    &:hover {
+      background: red; 
+    }
 
     &.dropdown {
       display: flex;

@@ -15,6 +15,7 @@ import {
   LogoImage,
   MenuList,
   MobileMenu,
+  Mobile,
   MobileMenuBackdrop,
   NavbarContainer,
   Toggle,
@@ -149,6 +150,8 @@ const Navbar = () => {
               <LogoImage src="/logo.png" fill={true} alt="logo" />
             </Link>
           </div>
+          
+   
           <div className="mobile-cart-toggle">
             {cartItems.length > 0 && (
               <div className="cart">
@@ -194,6 +197,7 @@ const Navbar = () => {
               {toggle ? <VscClose /> : <HiBars3 />}
             </Toggle>
           </div>
+
           <MenuList className="menu">
             {routes.map((link, index) => {
               return (
@@ -249,6 +253,7 @@ const Navbar = () => {
                         <Link
                           className="link"
                           href={link.path}
+                          
                           onClick={() =>
                             setToggle((prev) => (prev === true ? false : false))
                           }
@@ -394,6 +399,7 @@ const Navbar = () => {
                   </div>
                 )}
               </div>
+
             )}
           </MenuList>
           {/* Render AuthModal based on state */}

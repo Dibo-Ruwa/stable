@@ -61,10 +61,10 @@ export default function Meal(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="meal_card">
+          <div className="FOODMeal_card">
             {food.map((item) => (
-              <div key={item.id} className="card">
-                <div className="card-img">
+              <div key={item.id} className="FOODCard">
+                <div className="FOODCard-img">
                   <div
                     style={{
                       backgroundColor: "white",
@@ -101,9 +101,9 @@ export default function Meal(): JSX.Element {
                   <div className="meal-dis">
                     <div>
                       <div>
-                        <p>Fried Rice</p>
+                        <p className="FoodMeal-dis">Fried Rice</p>
                         <div className="meal-dot"></div>
-                        <p>4.5</p>
+                        <p className="FoodMeal-disNum">4.5</p>
                       </div>
                       <p
                         style={{
@@ -127,6 +127,7 @@ export default function Meal(): JSX.Element {
                           color: "#EF5A5A",
                           fontSize: ".9rem",
                         }}
+                        className="FoodTime"
                       >
                         Closed
                       </p>

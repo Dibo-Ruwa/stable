@@ -80,9 +80,9 @@ export default function Groceries() {
                   <div className="meal-dis">
                     <div>
                       <div>
-                        <p>Fried Rice</p>
+                        <p className="meal-disTitle">Fried Rice</p>
                         <div className="groceries_circle"></div>
-                        <p>4.5</p>
+                        <p className="meal-disNUm">4.5</p>
                       </div>
                       <p
                         style={{
@@ -106,6 +106,7 @@ export default function Groceries() {
                           color: "#EF5A5A",
                           fontSize: ".9rem",
                         }}
+                        className="meal-disTime"
                       >
                         Closed
                       </p>

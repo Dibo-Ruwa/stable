@@ -177,7 +177,7 @@ const MostSold: React.FC<MostSoldProps> = ({
         ...item,
         extras: item.extras ?? [], // Initialize extras as an empty array if undefined
       };
-  
+
       // Add the item to the cart using the store's method
       await addToCartWithExtras(itemWithExtras, itemWithExtras.extras);
       setShowToast(true);

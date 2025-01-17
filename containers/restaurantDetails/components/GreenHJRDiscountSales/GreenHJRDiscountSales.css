@@ -1,0 +1,115 @@
+/* ============= Small Discount Black Card ============== */
+.GreenHJRDiscountSales_ContainerCards {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.GreenHJRDiscountSales_Card {
+  position: relative;
+  display: flex;
+  background: #27a124;
+  box-sizing: border-box;
+  flex: 1 1 calc(33.333% - 16px);
+  border-radius: 1rem;
+  padding: 2.5rem 1.2rem;
+  overflow: hidden;
+  width: 100%;
+  height: 8.5rem;
+}
+
+@media screen and (max-width: 1276px) {
+  .GreenHJRDiscountSales_Card {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1150px) {
+  .GreenHJRDiscountSales_Card {
+    flex: 1 1 calc(36.333% - 16px);
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .GreenHJRDiscountSales_Card {
+    height: 9rem;
+    flex: 1 1 calc(50% - 16px);
+  }
+}
+
+@media (max-width: 768px) {
+  .GreenHJRDiscountSales_Card {
+    flex: 1 1 100%;
+  }
+}
+
+.GreenHJRDiscountSales_DiscountTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  /* padding: 1.69rem 0 0 3.87rem; */
+  width: 50%;
+  position: absolute;
+  left: 2rem;
+  top: 1rem;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .GreenHJRDiscountSales_DiscountTitle {
+    left: 1.5rem;
+    top: 1rem;
+  }
+}
+
+.GreenHJRDiscountSales_DiscountTickText {
+  color: var(--White, #fefefe);
+  font-size: 0.98rem;
+  font-weight: 400;
+}
+
+.GreenHJRDiscountSales_DiscountLightText {
+  color: var(--White, #fefefe);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 1276px) {
+  .GreenHJRDiscountSales_DiscountLightText,
+  .GreenHJRDiscountSales_DiscountTickText {
+    font-size: 0.89rem;
+  }
+}
+@media screen and (max-width: 1150px) {
+  .GreenHJRDiscountSales_DiscountLightText,
+  .GreenHJRDiscountSales_DiscountTickText {
+    font-size: 0.8rem;
+  }
+}
+
+.GreenHJRDiscountSales_ImageTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+img.GreenHJRDiscountSales_TopSpecialOfferImage {
+  width: 7rem;
+}
+
+.GreenHJRDiscountSales_ImageBottom {
+  position: absolute;
+  bottom: 0;
+  right: 0rem;
+}
+
+img.GreenHJRDiscountSales_BottomFoodImage {
+  width: 7rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .GreenHJRDiscountSales_ImageTop {
+    width: 7rem;
+  }
+}

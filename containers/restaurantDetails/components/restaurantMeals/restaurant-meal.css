@@ -29,7 +29,7 @@ p.mostsold_title {
 }
 
 .mostsold-card {
-  width: 320px;
+  width: calc((100% - 60px) / 3);
   box-sizing: border-box;
   background-color: #fff;
   overflow-x: hidden;
@@ -39,6 +39,13 @@ p.mostsold_title {
   cursor: pointer;
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 1150px) {
+  .mostsold-card{
+     width: calc((100% - 60px) / 2);
+  }
+  
 }
 
 .mostsold-card_food-img {
@@ -276,7 +283,7 @@ p.RestaurantMeal_R_Num,
 p.RestaurantMeal_title_filter,
 p.RestaurantMeal_Liters,
 .RestaurantMeal_T_Time {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: normal;
   line-height: normal;
   color: #2a2a2a;
@@ -299,7 +306,7 @@ p.RestaurantMeal_Liters,
 }
 
 .MPDE_TabText {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: "Poppins", sans-serif !important;
   font-size: 14px;
 }
 
@@ -517,7 +524,7 @@ img.Restmostsold-sale_img {
 
   p.Mobile_RestaurantMeal_title {
     color: #2a2a2a;
-    font-family: 'Poppins' sans-serif;
+    font-family: "Poppins" sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -588,7 +595,7 @@ img.Restmostsold-sale_img {
   p.Mobile_RestaurantMeal_N,
   p.Mobile_RestaurantMeal_R_Num {
     color: #2a2a2a;
-    font-family: 'Poppins' sans-serif;
+    font-family: "Poppins" sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -630,7 +637,7 @@ img.Restmostsold-sale_img {
 
   .Mobile_RestaurantMeal_Liters {
     color: #ef5a5a;
-    font-family: 'Poppins' sans-serif;
+    font-family: "Poppins" sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -661,7 +668,7 @@ img.Restmostsold-sale_img {
 
   p.Mobile_RestaurantMeal_realAmount {
     color: #8f8f8f;
-    font-family: 'Poppins' sans-serif;
+    font-family: "Poppins" sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -671,7 +678,7 @@ img.Restmostsold-sale_img {
 
   .Mobile_RestaurantMeal_discountAmount {
     color: #2a2a2a;
-    font-family: 'Poppins' sans-serif;
+    font-family: "Poppins" sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -699,6 +706,4 @@ img.Restmostsold-sale_img {
   }
 }
 
-
 /* New update  */
-

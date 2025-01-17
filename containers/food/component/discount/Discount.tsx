@@ -1,30 +1,21 @@
-import "./discount.css"
+import { BigDiscountCard, BigDiscountCardData } from "./BigDiscountCard";
+import "./discount.css";
+import { SmallDiscountCardBlack, SmallDiscountCardBlackData } from "./SmallDiscountCardBlack";
+import { SmallDiscountCardWhite, SmallDiscountCardWhiteData } from "./SmallDiscountCardWhite";
 
 const Discount = () => {
-    return (
-      <section className="discount_container">
-        <div className="discount-food_frame">
-          <div className="big_discount-card">
-            <img
-              src="/images/Frame 2610767.png"
-              alt=""
-              className="big_discount-card-img"
-            />
-          </div>
-          <div className="small_discount-card">
-            <img
-              src="/images/Component 113.png"
-              alt=""
-              className="small_discount-card-img"
-            />
-            <img
-              src="/images/Component 114.png"
-              alt=""
-              className="small_discount-card-img"
-            />
-          </div>
+  return (
+    <section className="discount_container">
+      <div className="discount-food_frame">
+        <div className="big_discount-card">
+          <BigDiscountCard data={BigDiscountCardData} />
         </div>
-      </section>
-    );
-}
+        <div className="small_discount-card">
+          <SmallDiscountCardWhite data={SmallDiscountCardWhiteData} />
+          <SmallDiscountCardBlack data={SmallDiscountCardBlackData} />
+        </div>
+      </div>
+    </section>
+  );
+};
 export default Discount;
