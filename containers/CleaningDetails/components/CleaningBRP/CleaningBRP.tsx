@@ -62,7 +62,7 @@ export const CleaningBRP = () => {
           )}
         </div> */}
       </div>
-      <hr />
+      <hr className="BookingReviewsPostsHRLine"/>
       {activeTab === "Booking" && <CleaningBook />}
       {/* {activeTab === "Reviews" && <MovingReviews />} */}
       {/* {activeTab === "Posts" && <MovingPost />} */}
