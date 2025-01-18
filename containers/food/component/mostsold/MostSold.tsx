@@ -159,7 +159,6 @@ const MostSold: React.FC<MostSoldProps> = ({
 
   const handleItemAddToCart = async (item: FoodData) => {
     try {
-
       const currentVendor = getCurrentVendor();
 
       // Check if there's a current vendor and if it's different from the new item's vendor
@@ -284,7 +283,7 @@ const MostSold: React.FC<MostSoldProps> = ({
                         >
                           <div className="mostsold-card_context-top">
                             <small className="mostsold-card_title">
-                              {item.title}
+                              {item.title?.slice(0, 10)}...
                             </small>
                             <div className="mostsold-card_dot"></div>
                             <div className="mostsold-card_rating">
@@ -294,6 +293,7 @@ const MostSold: React.FC<MostSoldProps> = ({
                               </small>
                             </div>
                           </div>
+
                           <div className="mostsold-card_timer">
                             <span
                               style={{
@@ -312,6 +312,34 @@ const MostSold: React.FC<MostSoldProps> = ({
                                   : "mins"}
                               </p>
                             </span>
+                          </div>
+
+                          <div className="Rating_TimerMObile">
+                            <div className="mostsold-card_ratingMobile">
+                              <FaStar className="mostsold-card_starMobile" />
+                              <small className="mostsold-card_ratingNumMobile">
+                                4.5
+                              </small>
+                            </div>
+                            <div className="mostsold-card_timerMobile">
+                              <span
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  alignItems: "center",
+                                }}
+                              >
+                                {" "}
+                                <MdOutlineTimer style={{ marginTop: "-2px" }} />
+                                <p className="mostsold-card_PrepTimerMobile">
+                                  {item.prep_time}{" "}
+                                  {item?.prep_time == "1" ||
+                                  item?.prep_time == "0"
+                                    ? "min"
+                                    : "mins"}
+                                </p>
+                              </span>
+                            </div>
                           </div>
                         </div>
                         <p

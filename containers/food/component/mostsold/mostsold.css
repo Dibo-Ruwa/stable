@@ -206,7 +206,9 @@ img.mostsold-sale_img {
   display: flex;
   align-items: center;
 }
-
+.Rating_TimerMObile{
+  display: none;
+}
 @media (max-width: 1024px) {
   .mostsold-cards {
     flex-wrap: wrap;
@@ -274,6 +276,36 @@ img.mostsold-sale_img {
 @media (max-width: 500px) {
   .mostsold-card {
     width: calc((100% - 30px) / 2);
+  }
+  .mostsold-card_dot {
+    display: none;
+  }
+
+  .mostsold-card_timer {
+    display: none;
+  }
+
+  .mostsold-card_rating {
+    display: none;
+  }
+
+  .Rating_TimerMObile {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+  }
+
+  .mostsold-card_ratingMobile {
+    display: flex;
+    align-items: center;
+  }
+
+  .mostsold-card_starMobile {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    color: #ffc93f;
   }
 }
 
