@@ -232,7 +232,7 @@
   .mob {
     position: relative;
     overflow-x: hidden;
-    height: 83vh;
+    height: 65vh;
     display: block;
   }
 
@@ -253,7 +253,7 @@
     background: rgba(255, 255, 255, 0.02);
     border-radius: 14px;
     border: 1px rgba(255, 255, 255, 0.1) solid;
-    backdrop-filter: blur(3.8px);
+    backdrop-filter: blur(18px);
   }
   .mob_cont {
     position: relative;
