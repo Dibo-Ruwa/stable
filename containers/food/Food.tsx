@@ -31,6 +31,7 @@ const Food: React.FC<FoodProps> = () => {
       />
       
         <MostSold
+        type="food"
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
           activeButton={activeButton}
