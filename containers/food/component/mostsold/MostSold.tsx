@@ -18,12 +18,14 @@ interface MostSoldProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   activeButton: string;
+  type: string
 }
 
 const MostSold: React.FC<MostSoldProps> = ({
   searchQuery,
   setSearchQuery,
   activeButton,
+  type,
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
   const { setSelectedItem } = useFoodItem();
@@ -73,6 +75,7 @@ const MostSold: React.FC<MostSoldProps> = ({
             page,
             limit: 20,
             search: searchQuery,
+            type: type
           },
         }
       );
@@ -104,16 +107,16 @@ const MostSold: React.FC<MostSoldProps> = ({
       setLoadingMore(false);
       setLoading(false); // Set loading to false after the first fetch
     }
-  }, [page, searchQuery, activeButton, loadingMore, hasMore, location]);
+  }, [page, searchQuery, activeButton, hasMore, location]);
 
   // Initial data fetch when the component mounts or searchQuery/activeButton changes
   useEffect(() => {
     setVisibleItems([]); // Clear existing data
     setPage(1); // Reset page
     setHasMore(true); // Reset hasMore
-    setLoading(true); // Set loading to true before fetching
+    setLoading(true); 
     fetchData(); // Fetch new data
-  }, [searchQuery, activeButton, location]); // Add activeButton to dependency array
+  }, [searchQuery, activeButton]); 
 
   // Debounce scroll event
   useEffect(() => {
@@ -129,7 +132,7 @@ const MostSold: React.FC<MostSoldProps> = ({
     const debouncedScroll = debounce(handleScroll, 200); // Debounce for 200ms
     window.addEventListener("scroll", debouncedScroll);
     return () => window.removeEventListener("scroll", debouncedScroll);
-  }, [searchQuery, loadingMore]);
+  }, [loadingMore, hasMore]);
 
   // Filter out duplicates based on _id
   const uniqueItems = useMemo(() => {
@@ -256,7 +259,6 @@ const MostSold: React.FC<MostSoldProps> = ({
                   fontSize: "30px",
                   fontWeight: 600,
                   marginTop: "20px",
-                  background: "#43e656",
                 }}
               >
                 No meal found on your current location
@@ -374,14 +376,14 @@ const MostSold: React.FC<MostSoldProps> = ({
                     </div>
                   ))}
                 </div>
+                {loadingMore && (
+                  <p style={{ textAlign: "center", marginTop: "20px" }}>
+                    Loading more meals...
+                  </p>
+                )}
               </>
             )}
           </div>
-          {loadingMore && (
-            <p style={{ textAlign: "center", marginTop: "20px" }}>
-              Loading more meals...
-            </p>
-          )}
           {/* {!hasMore && (
             <p style={{ textAlign: "center", marginTop: "20px" }}>
               No more meals to load.

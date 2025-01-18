@@ -1,18 +1,9 @@
 "use client";
-import "./component/groceries.css";
-// import ProductList from "@/component/ProductList/ProductList";
-import Discount from "./component/discount/Discount";
-import CustomBooking from "./component/custombooking/CustomBooking";
-import MostSold from "./component/mostsold/MostSold";
-import MinsMeals from "./component/30MinsMeals/MinsMeals";
-import FreeDelivery from "./component/freedelivery/FreeDelivery";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Discount from "../food/component/discount/Discount";
+import CustomBooking from "../food/component/custombooking/CustomBooking";
+import MostSold from "../food/component/mostsold/MostSold";
 
-const isBetween10amAnd6pm = () => {
-  const now = new Date();
-  const hours = now.getHours();
-  return hours >= 10 && hours < 18;
-};
 
 interface FoodProps {
   params: {
@@ -20,10 +11,13 @@ interface FoodProps {
   };
 }
 
+const url = process.env.NEXT_PUBLIC_ADMIN_URL;
+
 const Groceries: React.FC<FoodProps> = ({ params }) => {
   const { id } = params;
-   const [searchQuery, setSearchQuery] = useState<string>("");
-   const [activeButton, setActiveButton] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [activeButton, setActiveButton] = useState<string>("all");
+
 
   // const { modal, closeModal } = useCartStore();
 
@@ -34,14 +28,19 @@ const Groceries: React.FC<FoodProps> = ({ params }) => {
     <div className="food-container">
       <Discount />
       <CustomBooking
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
         activeButton={activeButton}
         setActiveButton={setActiveButton}
+        setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
       />
-      <MostSold id={id} searchQuery={searchQuery} activeButton={activeButton} />
-      <MinsMeals searchQuery={searchQuery} activeButton={activeButton} />
-      <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} />
+      
+        <MostSold
+        type="grocery"
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          activeButton={activeButton}
+          // foodData={filteredFoodData} // Pass the filtered food data
+        />
     </div>
   );
 };
