@@ -214,7 +214,7 @@ export const MenuList = styled(motion.ul as any)`
     l transition: color 0.3s ease; 
 
     &:hover {
-      background: red; 
+      // background: red; 
     }
 
     &.dropdown {
