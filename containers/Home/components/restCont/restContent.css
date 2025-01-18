@@ -89,7 +89,6 @@
   font-weight: 500;
   line-height: 1.4rem;
   text-decoration-line: underline;
-  display: none;
 }
 .rest-title-h1 {
   color: #7e7e7e;
@@ -231,7 +230,7 @@
   border: 1px solid #27a124;
   padding: 10px 20px;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #f8f8f8;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -241,3 +240,13 @@
   color: #fff;
 }
 
+@media (max-width: 768px) {
+.Check-Out_Vendors {
+  font-size: 16px;
+}
+
+.Subscribe_Button {
+  font-size: 16px;
+  padding: 6px 16px;
+}
+}

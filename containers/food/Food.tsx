@@ -36,8 +36,8 @@ const Food: React.FC<FoodProps> = () => {
           activeButton={activeButton}
           // foodData={filteredFoodData} // Pass the filtered food data
         />
-      <HJRDiscountSales data={HJRDiscountSalesData} />
-      <RedHJRDiscountSales data={RedHJRDiscountSalesData} />
+      {/* <HJRDiscountSales data={HJRDiscountSalesData} /> */}
+      {/* <RedHJRDiscountSales data={RedHJRDiscountSalesData} /> */}
       {/* <MinsMeals searchQuery={searchQuery} activeButton={activeButton} /> */}
       {/* <FreeDelivery searchQuery={searchQuery} activeButton={activeButton} /> */}
     </div>

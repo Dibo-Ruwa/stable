@@ -197,7 +197,6 @@
     justify-content: space-between;
     display: flex;
     display: none;
-
   }
 
   .map {
@@ -229,10 +228,11 @@
   .mobile-display {
     display: block;
   }
+
   .mob {
     position: relative;
     overflow-x: hidden;
-    height: 70dvh;
+    height: 83vh;
     display: block;
   }
 
@@ -253,7 +253,7 @@
     background: rgba(255, 255, 255, 0.02);
     border-radius: 14px;
     border: 1px rgba(255, 255, 255, 0.1) solid;
-    backdrop-filter: blur(13.8px);
+    backdrop-filter: blur(3.8px);
   }
   .mob_cont {
     position: relative;
@@ -286,16 +286,16 @@
 
   .highlight {
     color: #fcfcfc;
-    font-size: 1.3rem;
+    font-size: 0.9rem;
     font-weight: 500;
     width: 100%;
-    line-height: 30px;
+    line-height: 17px;
     background-color: transparent;
   }
 
   .description {
     color: #fcfcfc;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 300;
     width: 85%;
   }
@@ -308,5 +308,29 @@
 
   .get-started-btn {
     font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 500px) {
+    .tag-text {
+        font-size: 0.6rem;
+        padding: 1% 3%;
+    }
+
+  .highlight {
+    font-size: 0.79rem;
+    line-height: 15px;
+  }
+
+  .description {
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 1px;
+  }
+  .get-started-btn {
+    font-size: 0.79rem;
+    margin-top: 15px;
+    padding: 8px 12px;
   }
 }

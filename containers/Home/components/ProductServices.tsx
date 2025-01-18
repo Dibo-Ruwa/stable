@@ -21,6 +21,7 @@ const MobileView: React.FC = () => {
           backgroundSize: "140% 100%",
           // background: "contain",
           backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center"
         }}
       >
         <div className="mob_overlay">
