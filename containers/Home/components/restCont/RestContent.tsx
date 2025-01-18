@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Resturant() {
   return (
-    <section className="resturant_container" style={{ marginTop: "30px", marginBottom: "50px" }}>
+    <section className="resturant_container" style={{ paddingTop: "30px", paddingBottom: "50px" }}>
       <div className="hero_frame resturant-content">
         <div className="rest-title">
           <h1 className="rest-title-h1">Our Services</h1>
@@ -13,12 +13,12 @@ export default function Resturant() {
         </div>
         <p className="sub_food">Food</p>
         <div className="resturant-image">
-          <img
+          {/* <img
             src="/images/meal3.png"
             className="desktop-image"
             alt="resturant guys"
            
-          />
+          /> */}
           <div className="mobile-image">
             <img
               src="/images/image 159.png"
@@ -32,7 +32,7 @@ export default function Resturant() {
             />
           </div>
         </div>
-        <div className="resturant-text_container" style={{marginLeft: "40px"}}>
+        <div className="resturant-text_container">
           <button type="button" className="resturant-btn_text">Food</button>
           <h4 className="rest-subtitle">
             Over 100 menu items are waiting for your order!

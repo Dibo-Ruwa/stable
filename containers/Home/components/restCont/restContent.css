@@ -23,12 +23,14 @@
 .mobile-image {
   position: relative;
   margin: 0 auto;
+  /* max-height: 400px; */
+  overflow-y: hidden;
+  border-radius: 14px;
 }
 
 .mobile-img {
-  position: absolute;
-  top: 9.6rem;
-  right: -0.9rem;
+  margin-top: -1rem;
+  margin-left: auto;
 }
 
 .img-main {
@@ -36,7 +38,7 @@
 }
 
 .resturant-text_container {
-  margin-top: -4rem;
+  /* margin-top: -4rem; */
   padding-bottom: 2rem;
 }
 @media screen and (max-width: 399px) {
@@ -89,7 +91,6 @@
   font-weight: 500;
   line-height: 1.4rem;
   text-decoration-line: underline;
-  display: none;
 }
 .rest-title-h1 {
   color: #7e7e7e;
@@ -135,16 +136,18 @@
     margin: 0 auto;
   }
   .mobile-image {
-    display: none;
+    /* display: none; */
   }
 }
 
 /* Medium devices */
 @media (min-width: 768px) {
   .mobile-img {
-    top: 23.6rem;
-    right: -0.2rem;
-    width: 12rem;
+    max-width: 70px;
+    height: 90px;
+    /* background-color: #27a124; */
+    margin-top: -1rem;
+  margin-left: auto;
   }
 }
 
@@ -166,7 +169,7 @@
   }
 
   .mobile-image {
-    display: none;
+    /* display: none; */
   }
 
   .resturant-text_container {
@@ -231,7 +234,7 @@
   border: 1px solid #27a124;
   padding: 10px 20px;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #f8f8f8;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -241,3 +244,13 @@
   color: #fff;
 }
 
+@media (max-width: 768px) {
+.Check-Out_Vendors {
+  font-size: 16px;
+}
+
+.Subscribe_Button {
+  font-size: 16px;
+  padding: 6px 16px;
+}
+}

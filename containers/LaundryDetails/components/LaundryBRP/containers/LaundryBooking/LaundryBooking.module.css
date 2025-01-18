@@ -63,7 +63,7 @@
   background: #fff;
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .AddPropertyCards {
@@ -160,23 +160,38 @@
   gap: 1rem; /* Space between items */
 }
 
+@media screen and (max-width: 1195px) {
+  .LaundryItemsGroupCards {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (max-width: 1095px) {
+  .LaundryItemsGroupCards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .LaundryItemsGroupCards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .LaundryItemsGroupCards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 .LaundryItemsGroupCardItems {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   gap: 0.5rem;
-  text-align: center;
+  /* text-align: center; */
   padding: 1rem; /* Optional: Adjust spacing within each item */
   box-sizing: border-box; /* Ensures padding and borders are included in the item's size */
-}
-
-
-
-
-@media screen and (max-width: 1195px) {
-  .LaundryItemsGroupCards {
-    display: flex;
-  }
 }
 
 .LaundryItemsGroupCardItems {
@@ -188,7 +203,7 @@
 @media screen and (max-width: 568px) {
   .LaundryItemsGroupCardItems {
     width: 100%;
-    gap: 6rem;
+    gap: 1.5rem;
   }
 }
 
@@ -239,7 +254,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   background: #f8f8f8;
   outline: none;
   text-align: center;
@@ -487,7 +502,6 @@
   margin-top: 0.5rem;
   font-weight: 500;
 }
-
 
 @media screen and (max-width: 1024px) {
   .DateContain {

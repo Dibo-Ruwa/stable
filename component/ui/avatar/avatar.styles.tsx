@@ -5,13 +5,16 @@ import Image from "next/image";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 106px;
+  // width: 106px;
+  // max-width: 250px;
+
   height: 44px;
   border-radius: 50%;
   `;
 export const Initials = styled.div`
-  padding: 0.5rem;
-  width: 106px;
+  padding: 0.75rem;
+  min-width: 106px;
+  max-width: 180px;
   height: 44px;
   border-radius: 50px;
   display: flex;

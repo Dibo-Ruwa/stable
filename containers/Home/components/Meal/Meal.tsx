@@ -1,40 +1,64 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./meal.css";
 import Link from "next/link";
-import { IoIosHeartEmpty, IoIosHeart } from "react-icons/io";
+import { IoIosHeartEmpty } from "react-icons/io";
 import { FaBagShopping } from "react-icons/fa6";
 import { MdOutlineTimer } from "react-icons/md";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Button } from "@/component/shared/Button";
+import axios from "axios";
 
-const food = [
-  {
-    id: 21,
-    img: "/images/image113.png",
-  },
-  {
-    id: 45,
-    img: "/images/image113.png",
-  },
-  {
-    id: 56,
-    img: "/images/image113.png",
-  },
-  {
-    id: 34,
-    img: "/images/image113.png",
-  },
-];
-
-const prepTimes: string[] = ["30mins", "45mins", "1hr", "2hr"];
+// Define the type for a food item
+interface FoodItem {
+  _id: string;
+  imageUrl: string;
+  title: string;
+  prep_time: number;
+  price: number;
+}
 
 export default function Meal(): JSX.Element {
   const [activePrepTime, setActivePrepTime] = useState<string>("30mins");
+  const [food, setFood] = useState<FoodItem[]>([]); // Set the type for the food state
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products`,
+          {
+            params: {
+              page: 1,
+              limit: 20,
+            },
+          }
+        );
+
+        const newData = response.data?.data;
+        if (Array.isArray(newData)) {
+          setFood(newData.slice(0, 4)); // Only take the first 4 items
+        } else {
+          console.error("Invalid data format:", newData);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <p>Loading meals...</p>;
+  }
 
   return (
     <div>
-      <div className="meal" style={{ marginTop: 100 }}>
+      <div className="meal" >
         <div className="hero_frame">
           <div className="duration">
             <p
@@ -45,25 +69,10 @@ export default function Meal(): JSX.Element {
             >
               Meals
             </p>
-            <div className="prep-container">
-              <p>Prep time:</p>
-              <div className="prep-menu">
-                {prepTimes.map((time) => (
-                  <Button
-                    key={time}
-                    className={`prep-text ${
-                      activePrepTime === time ? "prep-text-active" : ""
-                    }`}
-                    text={time}
-                    onClick={() => setActivePrepTime(time)}
-                  />
-                ))}
-              </div>
-            </div>
           </div>
           <div className="FOODMeal_card">
             {food.map((item) => (
-              <div key={item.id} className="FOODCard">
+              <div key={item._id} className="FOODCard">
                 <div className="FOODCard-img">
                   <div
                     style={{
@@ -82,38 +91,21 @@ export default function Meal(): JSX.Element {
                         margin: "auto",
                       }}
                     />
-                    {/* <IoIosHeart 
-              style={{
-                color: '#4BB149', 
-                margin: 'auto',
-              }}
-            /> */}
                   </div>
                   <img
                     className=""
-                    // width={300}
-                    // height={100}
-                    src={item.img}
+                    src={item.imageUrl}
                     alt="Chef preparing food"
                   />
                 </div>
-                <Link href={`/food/${item.id}`}>
+                <Link href={`/food/${item._id}`}>
                   <div className="meal-dis">
                     <div>
                       <div>
-                        <p className="FoodMeal-dis">Fried Rice</p>
+                        <p className="FoodMeal-dis">{item.title}</p>
                         <div className="meal-dot"></div>
                         <p className="FoodMeal-disNum">4.5</p>
                       </div>
-                      <p
-                        style={{
-                          color: "#EF5A5A",
-                          fontSize: ".75rem",
-                          marginTop: 6,
-                        }}
-                      >
-                        10 Liters remaining
-                      </p>
                     </div>
                     <div
                       style={{
@@ -129,12 +121,12 @@ export default function Meal(): JSX.Element {
                         }}
                         className="FoodTime"
                       >
-                        Closed
+                        {item.prep_time} {item.prep_time === 1 ? "min" : "mins"}
                       </p>
                     </div>
                   </div>
                   <div className="price">
-                    <p>$40</p>
+                    <p>₦{item.price}</p>
                     <p
                       style={{
                         backgroundColor: "#4BB149",

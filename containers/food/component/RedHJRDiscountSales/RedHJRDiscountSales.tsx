@@ -42,7 +42,7 @@ export const RedHJRDiscountSalesData: RedHJRDiscountSalesDataType[] = [
         className: "RedHJRDiscountSales_BlackTopSpecialOfferImage",
       },
       bottomImage: {
-        src: "/images/image 206 1.png",
+        src: "/images/image 206 (1).png",
         alt: "Food Image",
         width: 281,
         height: 281,
@@ -72,7 +72,7 @@ export const RedHJRDiscountSalesData: RedHJRDiscountSalesDataType[] = [
         className: "RedHJRDiscountSales_BlackTopSpecialOfferImage",
       },
       bottomImage: {
-        src: "/images/image 206 1.png",
+        src: "/images/image 206 (1).png",
         alt: "Delicious Dish",
         width: 281,
         height: 281,
@@ -103,7 +103,7 @@ export const RedHJRDiscountSalesData: RedHJRDiscountSalesDataType[] = [
       },
 
       bottomImage: {
-        src: "/images/image 206 1.png",
+        src: "/images/image 206 (1).png",
         alt: "Tasty Meal",
         width: 281,
         height: 281,

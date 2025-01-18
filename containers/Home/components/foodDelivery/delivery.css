@@ -90,7 +90,7 @@
   font-weight: 500;
   line-height: 1.4rem;
   text-decoration-line: underline;
-  display: none;
+  /* display: none; */
 }
 .delivery-title-h1 {
   color: #7e7e7e;

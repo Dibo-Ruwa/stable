@@ -34,7 +34,7 @@ export const NavbarFrame = styled.div`
     align-items: center;
     gap: 30px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1000px) {
       display: flex;
     }
   }
@@ -181,7 +181,7 @@ export const Toggle = styled.div`
   
   z-index: 10;
   
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1000px) {
     display: block;
     height: fit-content;
     margin: auto;
@@ -214,7 +214,6 @@ export const MenuList = styled(motion.ul as any)`
     l transition: color 0.3s ease; 
 
     &:hover {
-      background: red; 
     }
 
     &.dropdown {
@@ -234,7 +233,7 @@ export const MenuList = styled(motion.ul as any)`
       }
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1000px) {
     display: none;
   }
 `;
