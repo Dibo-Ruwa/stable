@@ -27,6 +27,12 @@ const AddPropertyContainer = styled.div`
   align-items: center;
   padding: 20px;
 `;
+const FormContainer = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
 
 const AddPropertyCard = styled.div`
   border-radius: 5px;
@@ -83,7 +89,7 @@ const CounterValue = styled.span`
 `;
 
 const ImageUpload = styled.div`
-  width: 433px;
+  width: 100%;
   height: 105px;
   border-radius: 4px;
   border: 1px dashed rgba(0, 0, 0, 0.53);
@@ -248,7 +254,7 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
 
   return (
     <AddPropertyContainer>
-      <form>
+      <FormContainer>
         {items.map((item, index) => (
           <AddPropertyCard key={item.id}>
             {index !== 0 && (
@@ -307,7 +313,7 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
           <AddPropertyAddMoreIcon />
           <AddPropertyAddMoreText>Add More</AddPropertyAddMoreText>
         </AddPropertyAddMore>
-      </form>
+      </FormContainer>
     </AddPropertyContainer>
   );
 };

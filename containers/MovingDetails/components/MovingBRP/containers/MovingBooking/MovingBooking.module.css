@@ -5,7 +5,15 @@
   gap: 1rem;
   margin: 1rem 0;
 }
+.MovingItemTextQuest {
+  font-size: 0.9rem;
+}
 
+@media screen and (max-width: 768px) {
+  .MovingItemTextQuest {
+    padding-left: 0.59rem;
+  }
+}
 .AddPropertyContainer {
   width: 100%;
   margin: 0 auto;
@@ -67,6 +75,7 @@
 .CheckboxGroup {
   display: flex;
   gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .CheckboxLabel {
@@ -84,6 +93,23 @@
   cursor: pointer;
   accent-color: #27a124;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .MovingItemChoices {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 668px) {
+  span.CheckBoxTitle {
+    font-size: 0.8rem;
+  }
+
+  .CheckboxGroup {
+    gap: 1rem;
+  }
 }
 
 .CheckBoxInput:checked {
@@ -305,6 +331,13 @@
   gap: 1rem;
 }
 
+@media screen and (max-width: 768px) {
+  .ItemsDescriptionContainer {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
 .ItemsDescriptionText {
   color: #cccccc;
   font-size: 15px;
@@ -339,6 +372,17 @@
   width: 100%;
   align-items: center;
   gap: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .MovingScheduleCards {
+    flex-direction: column;
+  }
+
+  .MovingScheduleContainer {
+    width: 95%;
+    margin: 0 auto;
+  }
 }
 /* ====== Schedule Date ====== */
 .MovingScheduleDateCard {
@@ -453,9 +497,9 @@
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next line */
   justify-content: space-between;
-  gap: 1rem; 
-  max-height: 50vh; 
-  overflow-y: auto; 
+  gap: 1rem;
+  max-height: 50vh;
+  overflow-y: auto;
   padding: 15px 0;
 }
 
@@ -544,13 +588,13 @@
   background: rgba(183, 224, 182, 0.2);
 }
 
-.closeButton:hover{
-    background-color: #f44336;
+.closeButton:hover {
+  background-color: #f44336;
   color: #fff;
 }
 
-.confirmButton:hover{
- background-color: #27a124;
+.confirmButton:hover {
+  background-color: #27a124;
   color: #fff;
 }
 

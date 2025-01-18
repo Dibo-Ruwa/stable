@@ -27,25 +27,41 @@ const MobileAboutMoving = () => {
       <div className={styles.MobileCPImage}>
         <div className={styles.MobilecoverImage}>
           <img
-            src="/images/image 200.png"
+            src="/images/bus_delivery.png"
             alt=""
             className={styles.MobilecoverImg}
+            style={{
+              width: "100%",
+              height: "auto",
+              objectFit: "cover",
+              borderRadius: "10px",
+            }}
           />
         </div>
-        <div className={styles.MobilerestProfileImage}>
+        <div
+          className={styles.MobilerestProfileImage}
+          style={{
+            border: "1px solid rgb(25, 221, 84)",
+            borderRadius: "50%",
+          }}
+        >
           <img
-            src="/images/Ellipse 86.png"
+            src="/images/bike_delivery.png"
             alt=""
             className={styles.MobilerestProfileImg}
+            style={{
+              width: "4.5rem",
+              height: "70px",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
           />
         </div>
       </div>
       <div className={styles.MobileaboutRestaurantContainer}>
         <div className={styles.MobileNRSContent}>
           <div className={styles.MobileNRRestaurant}>
-            <p className={styles.MobilerestaurantProfileName}>
-              Moving Service
-            </p>
+            <p className={styles.MobilerestaurantProfileName}>Moving Service</p>
             <div className={styles.MobilerestaurantRating}>
               <FaStar className={styles.MobilerestaurantRatingIcon} />
               <p className={styles.MobilerestaurantRatingNum}>4.5</p>
@@ -99,7 +115,7 @@ export const AboutMoving = () => {
                 className={styles.coverImg}
                 style={{
                   width: "100%",
-                  height: "400px",
+                  height: "auto",
                   objectFit: "cover",
                   borderRadius: "10px",
                 }}
