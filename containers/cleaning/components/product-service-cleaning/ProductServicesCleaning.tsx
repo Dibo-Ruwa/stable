@@ -18,6 +18,7 @@ const MobileView: React.FC = () => {
 
   return (
     <div className="Cleaningmobile-display">
+<<<<<<< HEAD
       <div
         className="Cleaningmob"
         style={{
@@ -33,43 +34,63 @@ const MobileView: React.FC = () => {
                 Order from your favorite restaurant and get your meal delivered
                 to you in minutes.
               </div>
+=======
+    <div
+      className="Cleaningmob"
+      style={{
+        backgroundImage: `url(${selectedVendor?.bigImg})`,
+        backgroundSize: "140% 100%",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: 'right',
+      }}
+    >
+      <div className="Cleaningmob_overlay">
+        <div className="Cleaningmob-cont">
+          <div className="Cleaningtext-container">
+            <div className="Cleaningdescription">
+              Order from your favorite restaurant and get your meal delivered
+              to you in minutes.
+>>>>>>> 075b1be614e17b46938bff3d8190b349f321de0b
             </div>
           </div>
         </div>
-        <div className="CleaningMobilesearch_filter_box">
-          <input
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Search here"
-            className="CleaningMobilesearch_filter_input"
-          />
-          <RiSearch2Line className="CleaningMobilesearch_filter_icon" />
-        </div>
       </div>
-      <div className="Mobile_TopCleaning_container">
-        <div className="MobileTopCleaning_Frame_Container">
-          <p className="MobileTopCleaning_Text">Top Cleaning Near you.</p>
-          <div className="Mobile_TopCleaning_Images">
-            <img
-              src="/images/Rectangle 291.png"
-              alt="Top Cleaning Images"
-              className="Mobile_TopCleaning_Image"
-            />
-            <img
-              src="/images/Rectangle 293 (2).png"
-              alt="Top Cleaning Images"
-              className="Mobile_TopCleaning_Image"
-            />
-            <img
-              src="/images/Rectangle 294.png"
-              alt="Top Cleaning Images"
-              className="Mobile_TopCleaning_Image"
-            />
-          </div>
-        </div>
-      </div>
+      {/* <div className="CleaningMobilesearch_filter_box">
+        <input
+          type="search"
+          name="search"
+          id="search"
+          placeholder="Search here"
+          className="CleaningMobilesearch_filter_input"
+        />
+        <RiSearch2Line className="CleaningMobilesearch_filter_icon" />
+      </div> */}
     </div>
+  
+    {/* Comment out the following section */}
+    {/* <div className="Mobile_TopCleaning_container">
+      <div className="MobileTopCleaning_Frame_Container">
+        <p className="MobileTopCleaning_Text">Top Cleaning Near you.</p>
+        <div className="Mobile_TopCleaning_Images">
+          <img
+            src="/images/Rectangle 291.png"
+            alt="Top Cleaning Images"
+            className="Mobile_TopCleaning_Image"
+          />
+          <img
+            src="/images/Rectangle 293 (2).png"
+            alt="Top Cleaning Images"
+            className="Mobile_TopCleaning_Image"
+          />
+          <img
+            src="/images/Rectangle 294.png"
+            alt="Top Cleaning Images"
+            className="Mobile_TopCleaning_Image"
+          />
+        </div>
+      </div>
+    </div> */}
+  </div>
   );
 };
 

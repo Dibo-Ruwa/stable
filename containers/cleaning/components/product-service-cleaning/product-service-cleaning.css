@@ -338,9 +338,13 @@ p.CleaningLocationText {
 
   .Cleaningmob {
     position: relative;
-    overflow-x: hidden;
-    height: 70dvh;
-    display: block;
+    /* overflow-x: hidden; */
+    height: 55dvh;
+    width: 100dvw;
+    /* display: block; */
+    padding: 30px;
+    background-color: #27a124;
+
   }
 
   .Cleaningmob-image {
@@ -417,7 +421,7 @@ p.CleaningLocationText {
     width: 100%;
     padding: 1rem;
   }
-
+  
   .MobileTopCleaning_Frame_Container {
     display: flex;
     flex-direction: column;
@@ -440,6 +444,8 @@ p.CleaningLocationText {
 
   .Mobile_TopCleaning_Images {
     display: flex;
+    /* display: none; */
+
     align-items: center;
     gap: 1rem;
     justify-content: center;
