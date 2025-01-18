@@ -10,26 +10,28 @@ const AuthGuard = ({ children }: { children: React.ReactNode }) => {
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const publicRoutes = ["/dashboard", "/cart", "/profile"];
-    const privateRoutes = ["/signin", "/signup"];
+  // List of protected routes
+  const protectedRoutes = ["/dashboard", "/cart", "/profile", "/settings", "/orders"];
 
+  useEffect(() => {
     if (status !== "loading") {
       if (!session || !session.user) {
-        if (publicRoutes.includes(pathname)) {
-          router.push("/");
+        // Redirect to /signin if user is unauthenticated and on a protected route
+        if (protectedRoutes.some((route) => pathname.startsWith(route))) {
+          router.push("/sign-in");
         }
       } else if (session && session.user) {
-        if (privateRoutes.includes(pathname)) {
-          router.push("/dashboard");
+        // Redirect to /profile if user is authenticated and tries to access /signin or /signup
+        if (["/sign-in", "/sign-up"].includes(pathname)) {
+          router.push("/");
         }
       }
-      setIsLoading(false);
+      setIsLoading(false); // End loading state
     }
   }, [session, status, pathname, router]);
 
-  if (isLoading || (status === "loading" && pathname !== "/profile")) {
-    return <Loader />;
+  if (isLoading || status === "loading") {
+    return <Loader />; // Show a loader while checking the session
   }
 
   return <>{children}</>;

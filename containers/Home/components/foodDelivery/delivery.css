@@ -135,13 +135,13 @@
 @media (min-width: 900px) {
   .delivery-content {
     flex-direction: row-reverse;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     width: min(90%, 1440px);
   }
   .delivery_desktop-image {
     display: block;
-    width: 60rem;
+    width: 25rem;
   }
   .delivery-title,
   .sub_food {

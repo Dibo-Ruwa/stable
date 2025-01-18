@@ -1,15 +1,75 @@
 import React from "react";
 import { UserOrdersCard } from "../UserOrdersCard";
-import { ViewMoreBtn } from "../ViewMoreBtn";
 import { FaStore } from "react-icons/fa"; // Importing a vendor/store icon
 import "./user-food-orders.css";
+import styled from "styled-components";
+import Lottie from "lottie-react";
+import MovingAnimation from "./MovingAnimation.json";
+import Loader from "@/component/ui/loader/Loader";
 
 interface UserFoodOrdersProps {
   orders: any[];
+  loading: boolean;
 }
 
-export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders }) => {
+const EmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  min-height: 400px;
+
+  .animation-container {
+    width: 200px;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: #666;
+    font-size: 0.9rem;
+  }
+`;
+
+const LoadingState = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+
+  .animation-container {
+    width: 150px;
+  }
+`;
+
+export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders, loading }) => {
   console.log("UserFoodOrders", orders);
+
+  if (loading) {
+    return (
+      <LoadingState>
+        <Loader />
+      </LoadingState>
+    );
+  }
+
+  if (!orders || orders.length === 0) {
+    return (
+      <EmptyState>
+        <div className="animation-container">
+          <Lottie animationData={MovingAnimation} loop={true} />
+        </div>
+        <h3>No Food Orders</h3>
+        <p>You don't have any food orders at the moment</p>
+      </EmptyState>
+    );
+  }
 
   return (
     <div className="user_card_overflow">
@@ -18,15 +78,6 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders }) => {
           <div
             className="user_cards"
             key={order?._id}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              marginBottom: "10px",
-              padding: "10px",
-              borderBottom: "1px solid #e5e5e5",
-            }}
           >
             {/* Render Food Item */}
             {order?.orderItems && order.orderItems.length > 0 && (
@@ -82,20 +133,19 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders }) => {
               <UserOrdersCard
                 className="user_card"
                 id={order?.orderItems[0]?.vendor?._id}
-                type="vendor"
+                type={order?.type}
               >
-                 <div className="vendor_icon_container">
-                    {order?.orderItems[0]?.vendor?.imageUrl ? (
-                      <div className="card_image">
+                <div className="vendor_icon_container">
+                  {order?.orderItems[0]?.vendor?.imageUrl ? (
+                    <div className="card_image">
                       <img
-                       src={order?.orderItems[0]?.vendor?.imageUrl}
-                       alt={order?.orderItems[0]?.vendor?.name || "vendor"}
+                        src={order?.orderItems[0]?.vendor?.imageUrl}
+                        alt={order?.orderItems[0]?.vendor?.name || "vendor"}
                         className="card_img"
                       />
                     </div>
-                    ) : (
-                     
-                      <div className="card_image" style={{ background: "#fff" }}>
+                  ) : (
+                    <div className="card_image" style={{ background: "#fff" }}>
                       <FaStore className="card_img" style={{
                         height: "100%",
                         width: "100%",
@@ -103,29 +153,26 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders }) => {
                         borderRadius: "50%",
                         display: "flex",
                         justifyContent: "center",
-                        // color: "#90EE90",
                       }} />
                     </div>
-                    )}
-                  </div>
-                <div className="card_restcontent" >
-                  {/* Vendor Image or Icon */}
-                 
+                  )}
+                </div>
+                <div className="card_restcontent">
                   <p className="restaurant_name">
                     {order?.orderItems[0]?.vendor?.name || "Madam Restaurant PLC"}
                   </p>
                   <div className="rating_and_phone">
-                  <div className="The_rating">
+                    <div className="The_rating">
                       <span className="ratingStar_icon">⭐</span>
                       <p className="rating_num">
                         {order?.orderItems[0]?.vendor?.rating || "4.5"}
                       </p>
                     </div>
-                  <div className="location_text">
-                        {order?.orderItems[0]?.vendor?.branch[0]?.location?.city?.name},
-                        {" "}
-                        {order?.orderItems[0]?.vendor?.branch[0]?.location?.region?.name}
-                      </div>
+                    <div className="location_text">
+                      {order?.orderItems[0]?.vendor?.branch[0]?.location?.city?.name},
+                      {" "}
+                      {order?.orderItems[0]?.vendor?.branch[0]?.location?.region?.name}
+                    </div>
                   </div>
                 </div>
               </UserOrdersCard>

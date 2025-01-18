@@ -27,6 +27,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 }) => {
   const [visibleItems, setVisibleItems] = useState<FoodData[]>([]);
   const { setSelectedItem } = useFoodItem();
+
   const { cartItems, addToCartWithExtras, getCurrentVendor } = useCartStore(); // Use the store's state and actions
   const router = useRouter();
   const [showToast, setShowToast] = useState(false);
@@ -66,7 +67,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products?type=food`,
+        `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products`,
         {
           params: {
             page,
@@ -128,7 +129,7 @@ const MostSold: React.FC<MostSoldProps> = ({
     const debouncedScroll = debounce(handleScroll, 200); // Debounce for 200ms
     window.addEventListener("scroll", debouncedScroll);
     return () => window.removeEventListener("scroll", debouncedScroll);
-  }, [searchQuery, activeButton, loadingMore]);
+  }, [searchQuery, loadingMore]);
 
   // Filter out duplicates based on _id
   const uniqueItems = useMemo(() => {
@@ -158,6 +159,7 @@ const MostSold: React.FC<MostSoldProps> = ({
 
   const handleItemAddToCart = async (item: FoodData) => {
     try {
+
       const currentVendor = getCurrentVendor();
 
       // Check if there's a current vendor and if it's different from the new item's vendor

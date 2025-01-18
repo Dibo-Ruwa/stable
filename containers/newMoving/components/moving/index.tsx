@@ -17,6 +17,7 @@ const HomeMovingContent = styled.div`
   width: 90%;
   margin: 0 auto;
   padding-top: 3rem;
+  gap: 30px;
 
   @media (min-width: 900px) {
     flex-direction: row; 
@@ -40,6 +41,7 @@ const HomeMovingImage = styled(Image)`
   height: auto;
   /* "Bigger" image example: set a max-width to control it */
   max-width: 700px;
+  
 `;
 
 const TextContainer = styled.div`
@@ -115,6 +117,7 @@ const HomeMovingLink = styled(Link)`
   .get_started_icon {
     width: 15px;
     height: 15px;
+    margin-left: 0.5rem;
   }
 
   @media (min-width: 900px) {

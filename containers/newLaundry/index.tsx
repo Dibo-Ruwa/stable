@@ -38,7 +38,7 @@ const LaundryPage: React.FC = () => {
       <SustainableDetergent />
       <LaundrySubscription />
       <TestimonialCarousel
-        title="What Our Laundry Customers Say"
+        title="What Our Customers Say"
         items={laundryTestimonials}
       />
     </div>

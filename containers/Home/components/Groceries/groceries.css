@@ -64,8 +64,10 @@
 }
 
 .meal_card .card {
+
   flex: 1 1 calc(33.333% - 30px); /* 3 items for large screens with gaps accounted */
   max-width: calc(33.333% - 30px);
+
   box-sizing: border-box;
   background-color: #fff;
   overflow: hidden;
@@ -150,19 +152,6 @@
   width: 100%;
 }
 
-@media (max-width: 850px) {
-  .meal_card {
-    justify-content: center;
-  }
-  .meal_card .card {
-    width: 350px;
-  }
-}
-@media (max-width: 801px) {
-  .meal_card .card {
-    width: 100%;
-  }
-}
 @media (max-width: 650px) {
   .rest {
     padding: 20px 0;

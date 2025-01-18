@@ -10,13 +10,11 @@ type TabType = "food" | "services";
 
 const UserOrders = () => {
   const [activeTab, setActiveTab] = useState<TabType>("food"); // Initialize active tab to "food"
-  
-    const { orders, getOrders } = useOrder();
-  
-     useEffect(() => {
-        getOrders();
-      }, []);
-    
+  const { orders, getOrders, loading } = useOrder();
+
+  useEffect(() => {
+    getOrders();
+  }, []);
 
   useEffect(() => {
     // Store active tab in local storage
@@ -55,7 +53,9 @@ const UserOrders = () => {
           Services
         </p>
       </div>
-      {activeTab === "food" ? <UserFoodOrders orders={orders} /> : <UserServicesOrders/>}
+      <div className="user_card_overflow">
+        {activeTab === "food" ? <UserFoodOrders orders={orders} loading={loading} /> : <UserServicesOrders />}
+      </div>
     </div>
   );
 };

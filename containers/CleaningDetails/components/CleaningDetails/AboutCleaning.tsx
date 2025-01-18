@@ -90,17 +90,31 @@ export const AboutCleaning = () => {
     <>
       <div className={styles.AboutrestaurantContainer}>
         <div className={styles.restaurantFrame}>
-          <div className={styles.CPImage}>
+        <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img
-                src="/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg"
-                alt="Cleaning Service"
+                src="/images/cleaning_quote.jpg"
+                alt=""
                 className={styles.coverImg}
                 style={{
-                  height: "400px",
-                  width: "100%",
-                  objectFit: "cover",
                   borderRadius: "10px",
+                }}
+              />
+            </div>
+            <div className={styles.restProfileImage} style={{
+              border: "1px solid rgb(25, 221, 84)",
+              borderRadius: "50%",
+              width: "70px",
+            }}>
+              <img
+                src="/images/image_icon.jpg"
+                alt=""
+                className={styles.restProfileImg}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  objectFit: "cover",
                 }}
               />
             </div>

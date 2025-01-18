@@ -26,18 +26,29 @@ const MobileAboutLaundry = () => {
       <div className={styles.MobileCPImage}>
         <div className={styles.MobilecoverImage}>
           <img
-            src="/images/image 230.png"
+            src="/images/laundry_quote.jpg"
             alt=""
             className={styles.MobilecoverImg}
           />
         </div>
-        <div className={styles.MobilerestProfileImage}>
-          <img
-            src="/images/Ellipse 86.png"
-            alt=""
-            className={styles.MobilerestProfileImg}
-          />
-        </div>
+        <div className={styles.MobilerestProfileImage} 
+        style={{
+              border: "1px solid rgb(25, 221, 84)",
+              borderRadius: "50%",
+            }}>
+              <img
+                src="/the bag.png"
+                alt=""
+                className={styles.restProfileImg}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+               
+                }}
+              />
+            </div>
       </div>
       <div className={styles.MobileaboutRestaurantContainer}>
         <div className={styles.MobileNRSContent}>
@@ -51,10 +62,10 @@ const MobileAboutLaundry = () => {
             </div>
           </div>
         </div>
-        <div className={styles.MobilerestaurantLocation}>
+        {/* <div className={styles.MobilerestaurantLocation}>
           <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
           <p className={styles.MobilerestaurantLocationText}>Select Location</p>
-        </div>
+        </div> */}
         <div className={styles.MobilerestaurantOpeningTimePhoneNum}>
           <p className={styles.MobilerestaurantOpeningDay}>Operating Hours</p>
           <div className={styles.MobilerestaurantDot}></div>
@@ -64,8 +75,7 @@ const MobileAboutLaundry = () => {
         </div>
       </div>
       <div className={styles.OurLaundryServiceContainer}>
-        <p>Pricing</p>
-
+        {/* <p>Pricing</p> */}
         <div className={styles.OurLaundryServiceCards}>
           <div className={styles.OurLaundryServiceCard}>
             <div className={styles.OurLaundryServiceImage}>
@@ -141,9 +151,12 @@ export const AboutLaundry = () => {
           <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img
-                src="/images/image 200 (1).png"
+                src="/images/laundry_quote.jpg"
                 alt=""
                 className={styles.coverImg}
+                style={{
+                  borderRadius: "10px",
+                }}
               />
             </div>
             <div className={styles.restProfileImage} style={{

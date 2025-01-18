@@ -17,6 +17,7 @@ const PackingUnpackingContent = styled.div`
   width: 90%;
   margin: 0 auto;
   padding-top: 3rem;
+  gap: 30px;
 
   @media (min-width: 900px) {
     flex-direction: row;
@@ -33,7 +34,7 @@ const ImageWrapper = styled.div`
 const PackingUnpackingImage = styled(Image)`
   border-radius: 0.6rem;
   width: 100%;
-  height: auto;
+  height: 100%;
   max-width: 700px;
 `;
 
@@ -109,6 +110,7 @@ const PackingUnpackingLink = styled(Link)`
   .get_started_icon {
     width: 15px;
     height: 15px;
+    margin-left: 0.5rem;
   }
 
   @media (min-width: 900px) {
@@ -137,7 +139,7 @@ export default function PackingUnpacking() {
 
         <ImageWrapper>
           <PackingUnpackingImage
-            src="/images/fd2.png"
+            src="/images/moving_quote.jpg"
             alt="Packing & Unpacking"
             width={800}
             height={600}
