@@ -23,6 +23,7 @@ const MobileView: React.FC = () => {
           backgroundImage: `url(${selectedVendor?.bigImg})`,
           backgroundSize: "140% 100%",
           backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
         }}
       >
         <div className="Moving_mob_overlay">
@@ -34,7 +35,7 @@ const MobileView: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="Moving_Mobilesearch_filter_box">
+        {/* <div className="Moving_Mobilesearch_filter_box">
           <input
             type="search"
             name="search"
@@ -43,9 +44,9 @@ const MobileView: React.FC = () => {
             className="Moving_Mobilesearch_filter_input"
           />
           <RiSearch2Line className="Moving_Mobilesearch_filter_icon" />
-        </div>
+        </div> */}
       </div>
-      <div className="Mobile_TopMoving_container">
+      {/* <div className="Mobile_TopMoving_container">
         <div className="MobileTopMoving_Frame_Container">
           <p className="MobileTopMoving_Text">Top Courier Near you.</p>
           <div className="Mobile_TopMoving_Images">
@@ -66,7 +67,7 @@ const MobileView: React.FC = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

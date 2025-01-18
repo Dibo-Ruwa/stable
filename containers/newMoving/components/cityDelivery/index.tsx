@@ -120,6 +120,7 @@ const CityDeliveryInnerImages = styled.div`
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
+  flex-wrap: wrap;
 
   @media (min-width: 900px) {
     display: grid;
@@ -135,6 +136,10 @@ const CityDeliveryInnerImages = styled.div`
 const CityDeliveryImage = styled(Image)`
   border-radius: 0.6rem;
   /* Next.js <Image> is typically controlled by width/height props */
+
+  @media (max-width: 900px) {
+    width: calc((100% - 4rem) / 2);
+  }
 `;
 
 // ------ Component Definition ------ //
@@ -146,11 +151,13 @@ const CityDelivery: React.FC = () => {
         {/* Text Container (left on larger screens) */}
         <CityDeliveryTextContainer>
           <CityDeliveryButtonText>City Delivery</CityDeliveryButtonText>
-          <CityDeliverySubtitle>Fast & Reliable City Delivery</CityDeliverySubtitle>
+          <CityDeliverySubtitle>
+            Fast & Reliable City Delivery
+          </CityDeliverySubtitle>
           <CityDeliveryDescription>
             Whether it’s important documents or bulky packages, our swift city
-            delivery services keep you moving without the hassle. From pickup
-            to drop-off, we ensure efficiency and peace of mind.
+            delivery services keep you moving without the hassle. From pickup to
+            drop-off, we ensure efficiency and peace of mind.
           </CityDeliveryDescription>
           <CityDeliveryLink href="/moving/request">
             Get Started

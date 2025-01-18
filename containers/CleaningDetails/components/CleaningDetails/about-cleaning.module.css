@@ -60,7 +60,7 @@
 
 .restaurantProfileName {
   color: #2a2a2a;
-    font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-style: normal;
   line-height: normal;
@@ -88,7 +88,7 @@
 
 .restaurantRatingNum {
   color: #2a2a2a;
-   font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-style: normal;
   line-height: normal;
@@ -109,7 +109,7 @@
 .restaurantDescription,
 .restaurantDeliveryTime {
   color: #000000;
-   font-family: "Poppins", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 0.875rem;
   font-style: normal;
   line-height: normal;
@@ -292,7 +292,7 @@
   }
 
   .MobilecoverImage {
-    width: 29rem;
+    width: 100%;
     position: relative;
   }
 
@@ -302,12 +302,12 @@
 
   .MobilerestProfileImage {
     position: absolute;
-    top: 9rem;
+    bottom: -1.5rem;
     left: 1rem;
   }
 
-  .MobilerestProfileImg {
-  }
+  /* .MobilerestProfileImg {
+  } */
 
   .MobileaboutRestaurantContainer {
     display: flex;
@@ -322,6 +322,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
   }
 
   .MobileNRRestaurant {
@@ -356,7 +358,7 @@
 
   .MobilerestaurantRatingNum {
     color: #2a2a2a;
-      font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 1rem;
     font-style: normal;
     line-height: normal;
@@ -400,7 +402,7 @@
   .MobilerestaurantPhoneNum,
   .MobilerestaurantLocationText {
     color: #000000;
-     font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.875rem;
     font-style: normal;
     line-height: normal;
@@ -432,7 +434,7 @@
 
   .MobilerestaurantReview {
     color: #27a124;
-     font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.875rem;
     font-style: normal;
     line-height: normal;
@@ -467,30 +469,44 @@
 
 @media screen and (max-width: 668px) {
   .MobilecoverImage {
-    width: 37rem;
+    width: 100%;
   }
 
   .MobilerestProfileImage {
-    top: 11rem;
+    bottom: -1.5rem;
   }
 }
 
 @media screen and (max-width: 568px) {
   .MobilecoverImage {
-    width: 34rem;
+    width: 100%;
   }
 
   .MobilerestProfileImage {
-    top: 10rem;
+    bottom: -1.5rem;
   }
 }
 
 @media screen and (max-width: 468px) {
   .MobilecoverImage {
-    width: 33rem;
+    width: 100%;
   }
 
   .MobilerestProfileImage {
-    top: 9rem;
+    bottom: -1.5rem;
   }
 }
+
+@media screen and (max-width: 368px) {
+  .MobilerestaurantOpeningDay,
+  .MobilerestaurantOpeningTime,
+  .MobilerestaurantPhoneNum,
+  .MobilerestaurantLocationText {
+    font-size: 0.695rem;
+  }
+
+  .MobilerestaurantOpeningTimePhoneNum {
+    flex-wrap: wrap;
+  }
+}
+
