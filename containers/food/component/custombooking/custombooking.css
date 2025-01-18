@@ -26,6 +26,13 @@
   gap: 0.5rem;
   overflow-x: auto;
   width: 100%;
+  /* Default padding-bottom */
+  padding-bottom: 0;
+}
+
+.min-buttons.has-overflow {
+  /* Add padding-bottom only when overflow is detected */
+  padding-bottom: 30px;
 }
 
 button.min-button {

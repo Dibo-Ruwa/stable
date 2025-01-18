@@ -340,7 +340,7 @@ p.LaundryLocationText {
   .Laundrymob {
     position: relative;
     overflow-x: hidden;
-    height: 70dvh;
+    height: 60dvh;
     display: block;
   }
 

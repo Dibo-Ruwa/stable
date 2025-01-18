@@ -1,6 +1,6 @@
 'use client'; // Ensures client-side rendering
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./custombooking.css";
 import { useRouter } from "next/navigation"; // Import for client-side navigation
 
@@ -19,6 +19,31 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
 }) => {
   const router = useRouter(); // Initialize the router for client-side navigation
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [hasOverflow, setHasOverflow] = useState<boolean>(false);
+  const buttonsContainerRef = useRef<HTMLDivElement>(null);
+
+  // Check for overflow on mount and when the window is resized
+  useEffect(() => {
+    const checkOverflow = () => {
+      if (buttonsContainerRef.current) {
+        const hasHorizontalOverflow =
+          buttonsContainerRef.current.scrollWidth >
+          buttonsContainerRef.current.clientWidth;
+        setHasOverflow(hasHorizontalOverflow);
+      }
+    };
+
+    // Check overflow on mount
+    checkOverflow();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkOverflow);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("resize", checkOverflow);
+    };
+  }, []);
 
   const handleButtonClick = (value: string) => {
     setActiveButton(value);
@@ -48,7 +73,10 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
   return (
     <div className="custombooking_container">
       <div className="custombooking_frame">
-        <div className="min-buttons">
+        <div
+          ref={buttonsContainerRef}
+          className={`min-buttons ${hasOverflow ? "has-overflow" : ""}`}
+        >
           {foodCategories.map((category) => (
             <button
               key={category.value}

@@ -36,7 +36,7 @@ const MobileView: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="LaundryMobilesearch_filter_box">
+        {/* <div className="LaundryMobilesearch_filter_box">
           <input
             type="search"
             name="search"
@@ -45,7 +45,7 @@ const MobileView: React.FC = () => {
             className="LaundryMobilesearch_filter_input"
           />
           <RiSearch2Line className="LaundryMobilesearch_filter_icon" />
-        </div>
+        </div> */}
       </div>
       <div className="Mobile_TopLaundry_container">
         <div className="MobileTopLaundry_Frame_Container">
