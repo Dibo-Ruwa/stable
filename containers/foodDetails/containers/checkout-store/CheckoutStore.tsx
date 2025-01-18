@@ -11,6 +11,7 @@ import { Spinner } from "@nextui-org/react";
 import PaymentButton from "@/component/paymentButton/PayButton";
 import useOrder from "@/hooks/useOrder";
 import Loader from "@/component/ui/loader/Loader";
+import { FaTimes } from "react-icons/fa";
 
 const StoresContainer = styled.div`
   width: 100%;
@@ -73,7 +74,16 @@ const StoresContainer = styled.div`
   }
 `;
 
-export const CheckoutStore = () => {
+const CloseButton = styled(FaTimes)`
+  display: none;
+  @media (max-width: 900px) {
+    display: block;
+    cursor: pointer;
+    color: red;
+  }
+`;
+
+export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const [infoPass, setInfoPass] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [scheduledDelivery, setScheduledDelivery] = useState<{
@@ -168,6 +178,9 @@ export const CheckoutStore = () => {
 
   return (
     <StoresContainer>
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <CloseButton onClick={onClose} />
+      </div>
       <CartInfo
         subtotal={subtotal}
         deliveryFee={deliveryFee}
