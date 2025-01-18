@@ -56,7 +56,7 @@ const StyledSwiper = styled(Swiper)`
   /* Override pagination bullet styles */
   .swiper-pagination-bullet {
     background: #27a124; /* your brand green for the bullets */
-    opacity: 0.7;        /* slightly transparent */
+    opacity: 0.7; /* slightly transparent */
   }
   .swiper-pagination-bullet-active {
     background: #27a124; /* fully opaque for active bullet */
@@ -69,7 +69,6 @@ const TestimonialCard = styled.div`
   border-radius: 0.6rem;
   padding: 2rem;
   margin: 0 auto;
-
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
   text-align: left; /* Ensure text is left-aligned in the card */
 `;
@@ -127,11 +126,12 @@ export default function TestimonialCarousel({
           autoplay={{ delay: 3000 }}
           loop
           spaceBetween={30}
-          slidesPerView={3}
+          slidesPerView={1} // Default to 1 slide on mobile
           breakpoints={{
-            600: { slidesPerView: 1 },
-            900: { slidesPerView: 2 },
-            1200: { slidesPerView: 3 },
+            // Adjust slidesPerView for different screen sizes
+            600: { slidesPerView: 1 }, // 1 slide on screens >= 600px
+            900: { slidesPerView: 2 }, // 2 slides on screens >= 900px
+            1200: { slidesPerView: 3 }, // 3 slides on screens >= 1200px
           }}
         >
           {items.map((testimonial, index) => (

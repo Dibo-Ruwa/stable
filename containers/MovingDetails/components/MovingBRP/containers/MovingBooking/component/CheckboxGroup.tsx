@@ -1,5 +1,5 @@
-'use client';
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 import styles from "../MovingBooking.module.css";
 
 type CheckboxOption = {
@@ -23,7 +23,9 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ onChange }) => {
 
   const handleCategoryChange = (value: string) => {
     setSelectedCategories((prev) =>
-      prev.includes(value) ? prev.filter((cat) => cat !== value) : [...prev, value]
+      prev.includes(value)
+        ? prev.filter((cat) => cat !== value)
+        : [...prev, value]
     );
   };
 
@@ -46,7 +48,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ onChange }) => {
             checked={selectedCategories.includes(option.value)}
             onChange={() => handleCategoryChange(option.value)}
           />
-          {option.label}
+          <span className="CheckBoxTitle" style={{ fontSize: "0.7rem" }}>{option.label}</span>
         </label>
       ))}
     </div>

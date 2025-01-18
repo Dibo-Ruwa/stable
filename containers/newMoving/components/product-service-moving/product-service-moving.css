@@ -238,12 +238,13 @@
 
   .Moving_mobile-display {
     display: block;
+    margin-top: 4rem;
   }
 
   .Moving_mob {
     position: relative;
     overflow-x: hidden;
-    height: 70dvh;
+    height: 55dvh;
     display: block;
   }
 

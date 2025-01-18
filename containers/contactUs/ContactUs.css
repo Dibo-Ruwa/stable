@@ -2,6 +2,7 @@
   width: 100%;
   background: #fefefe;
 }
+
 .Contact_Us_Container {
   display: flex;
   flex-direction: column;
@@ -9,6 +10,13 @@
   align-items: center;
   margin: 6rem auto;
   width: 90%;
+}
+
+@media screen and (max-width: 600px) {
+  .Contact_Us_Container {
+    margin: 4rem auto;
+    width: 100%;
+  }
 }
 
 .Contact_Us_header {
@@ -125,13 +133,13 @@ p.lmeo_black_Text {
 @media screen and (max-width: 800px) {
   .smsMap_Container {
     flex-direction: column;
+    width: 95%;
   }
 }
 
 form.smsMessage_Container {
   display: flex;
   flex-direction: column;
-  width: 80%;
   border-radius: 10px;
   background: rgba(247, 247, 247, 0.58);
   padding: 2.5rem;
@@ -141,6 +149,7 @@ form.smsMessage_Container {
 @media screen and (max-width: 800px) {
   form.smsMessage_Container {
     width: 100%;
+    padding: 2.5rem 1rem;
   }
 }
 
@@ -192,7 +201,7 @@ button.button.smsMessage_Btn {
 
 .mapLocation_img {
   height: 100%;
-  width: 50vw;
+  width: 100%;
 }
 
 /* ======== FAQs ========= */
@@ -201,6 +210,14 @@ button.button.smsMessage_Btn {
   margin: 0 auto;
   padding: 20px;
   display: block;
+}
+
+@media screen and (max-width: 800px) {
+  .faq-container {
+    width: 100%;
+    padding: 20px;
+    display: block;
+  }
 }
 
 .faq-title {
@@ -216,35 +233,39 @@ button.button.smsMessage_Btn {
   padding: 0;
   margin: 0;
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
   flex-wrap: wrap;
+  gap: 20px; 
 }
 
 .faq-item {
-  margin-bottom: 10px;
+  flex: 1 1 calc(50% - 10px); /* 50% width minus half the gap */
   border-radius: 5px;
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-direction: column;
-  width: 40%;
-  flex: 1 1 14rem;
+  padding: 10px 0; /* Optional: Add padding */
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+/* Media query for screens below 600px */
+@media screen and (max-width: 600px) {
+  .faq-item {
+    flex: 1 1 100%; /* Full width for 1 item per row */
+  }
 }
 
 .faq-question {
   width: 100%;
   color: #333;
   font-size: 1rem;
-  padding: 10px 15px;
+  padding: 10px 10px;
   text-align: left;
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 5px;
 }
 
 .faq-question.active {
@@ -261,6 +282,9 @@ button.button.smsMessage_Btn {
   color: #555;
   width: 100%;
   animation: fadeIn 0.3s ease;
+  background-color: #f1f1f1; 
+  border-radius: 5px;
+  margin-top: 10px;
 }
 
 @keyframes fadeIn {
