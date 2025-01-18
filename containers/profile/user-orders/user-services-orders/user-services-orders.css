@@ -1,13 +1,14 @@
-.card_active_container {
+/* .card_active_container {
   display: flex;
   align-items: center;
   gap: 0.9rem;
-}
+} */
 
 .card_active_container {
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 30px;
 }
 
 button.services_btn {

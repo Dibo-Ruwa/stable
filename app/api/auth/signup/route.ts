@@ -43,10 +43,6 @@ export async function POST(req: Request, res: Response) {
     // Generate activation link
     const activationLink = generateToken(user._id);
 
-    // // Debugging logs
-    // console.log("Sending email to:", email);
-    // console.log("Activation link:", activationLink);
-
     // Send activation email
     await sendEmail({
       to: email,

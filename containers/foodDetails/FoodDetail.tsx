@@ -5,7 +5,6 @@ import BackButton from "@/component/ui/BackButton/BackButton";
 import { DisplayFood } from "./containers/detailed-food-container/display-food/DisplayFood";
 import { CheckoutStore } from "./containers/checkout-store/CheckoutStore";
 import { AllCartsFood } from "./containers/detailed-food-container/display-food/AllCartsFood";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import useCartStore from "@/store/useCart.store";
 import { useFoodItem } from "@/context/FooItemProvider";

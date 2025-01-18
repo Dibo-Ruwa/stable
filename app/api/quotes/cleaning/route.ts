@@ -55,7 +55,6 @@ export async function POST(req: Request, res: Response) {
       quantity: item.quantity,
       image: item.image || null,
       video: item.video || null,
-      
     }));
 
     // Create new request
@@ -83,26 +82,26 @@ export async function POST(req: Request, res: Response) {
     const timestamp = moment().format("YYYY-MM-DD HH:mm:ss");
     const turnaroundTime = moment().add(1, "day").format("YYYY-MM-DD HH:mm:ss");
 
-     // First, send an email to the user
-    await sendEmail({
-      to: user.email,
-      subject: `Your Cleaning Request`,
-      template: "userQuoteRequest",
-      replacements: {
-        firstName: user.firstName,
-        serviceType: "cleaning",
-        description: quoteText,
-        timestamp: timestamp,
-        turnaroundTime: turnaroundTime,
-        adminContact: "info@diboruwa.com",
-      },
-    });
+    // Send emails in a separate try-catch block
+    try {
+      await sendEmail({
+        to: user.email,
+        subject: `Your Cleaning Request`,
+        template: "userQuoteRequest",
+        replacements: {
+          firstName: user.firstName,
+          serviceType: "cleaning",
+          description: quoteText,
+          timestamp: timestamp,
+          turnaroundTime: turnaroundTime,
+          adminContact: "info@diboruwa.com",
+        },
+      });
 
-    // After sending the email to the user, send the email to the admin
       const formattedCleaningItems = formattedItems
         .map((item: any) => `<li>${item.name} - ${item.quantity}</li>`)
         .join("");
-        
+
       await sendEmail({
         to: "ibrahim.saliman.zainab@gmail.com",
         subject: `New Cleaning Request from ${user.firstName} ${user.lastName}`,
@@ -116,7 +115,10 @@ export async function POST(req: Request, res: Response) {
           homeCleaningAreas: formattedCleaningItems,
         },
       });
-      
+    } catch (emailErr) {
+      console.error("Error sending email:", emailErr);
+      // Log the error but do not block the user
+    }
 
     return NextResponse.json(
       {

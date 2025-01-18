@@ -26,17 +26,10 @@ export async function GET(
 
     await user.save();
 
-    // await sendEmail(
-    //   user.email,
-    //   "Welcome",
-    //   OnboardingTemplate({
-    //     customerName: user.firstName,
-    //   })
-    // );
-
+    // Add the email sending logic here
     await sendEmail({
       to: user?.email,
-      subject: "Welcome to Diboruw",
+      subject: "Welcome to Diboruwa",
       template: "onboarding", 
       replacements: {
         customerName: user?.firstName,

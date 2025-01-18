@@ -4,6 +4,7 @@ import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, ReactNode } from "react";
+import "./serviceMenu.css"; // Import the CSS file
 
 interface Routes {
   trigger?: string | ReactNode;
@@ -42,11 +43,11 @@ const ServiceMenu: FC<Routes> = ({ trigger, routes, toggle }) => {
             {trigger}
           </NavigationMenu.Trigger>
           <NavigationMenu.Content
-            className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight"
+            className="data-[motion=from-start]:animate-enterFromLeft data-[motion=from-end]:animate-enterFromRight data-[motion=to-start]:animate-exitToLeft data-[motion=to-end]:animate-exitToRight serviceMenuContent"
             style={{
               position: "absolute",
               top: "110%",
-              left: "-4rem",
+              left: "-4rem", // Default for desktop
               borderRadius: "12px",
               background: "#fff",
               padding: "15px",

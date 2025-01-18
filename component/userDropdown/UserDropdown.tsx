@@ -16,7 +16,7 @@ const UserDropdown = () => {
     { name: "Profile", path: "/profile" },
     {
       name: "Dashboard",
-      path: session?.user?.role === "admin" ? "/admin" : "/profile/orders",
+      path: session?.user?.role === "admin" ? "/profile" : "/profile/orders",
     },
     { 
       name: "Sign Out", 
@@ -30,6 +30,8 @@ const UserDropdown = () => {
       <ServiceMenu
         trigger={<Avatar initials={initials} />}
         routes={menuItems}
+        dropdownClassName="userDropdownMenu" // Add a class for custom styling
+        toggle={() => {}} // Ensure toggle function is passed
       />
     </Container>
   );

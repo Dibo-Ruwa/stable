@@ -34,7 +34,7 @@ export default function Meal(): JSX.Element {
 
   return (
     <div>
-      <div className=" meal">
+      <div className="meal" style={{ marginTop: 100 }}>
         <div className="hero_frame">
           <div className="duration">
             <p

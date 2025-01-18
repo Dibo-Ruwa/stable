@@ -5,7 +5,6 @@ import { IoCheckmarkSharp } from "react-icons/io5";
 import { format } from "date-fns";
 import LoaderComponent from "@/app/loading";
 
-
 export const LaundrySubscription = () => {
   const [subscriptions, setSubscriptions] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +36,10 @@ export const LaundrySubscription = () => {
 
   if (isLoading) {
     return <LoaderComponent />;
+  }
+
+  if (subscriptions.length === 0) {
+    return <p>No laundry subscriptions available.</p>;
   }
 
   return (

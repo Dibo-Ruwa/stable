@@ -35,9 +35,10 @@ export const Container = styled(motion.button)<{
         return "none";
     }
   }};
+
   background: ${({ color, variant, disabled, loading }) => {
     if (disabled || loading) {
-      return "var(--disabled-green)";
+      return "#cccccc";
     }
     if (variant === "filled") {
       return color ? color : "var(--green-bg)";
