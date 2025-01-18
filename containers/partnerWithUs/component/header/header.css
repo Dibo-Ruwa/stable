@@ -135,6 +135,6 @@ img.partner_header-img {
   img.partner_header-img {
     width: 120%;
     margin-top: 1rem;
-    margin-left: -4rem;
+    /* margin-left: -4rem; */
   }
 }

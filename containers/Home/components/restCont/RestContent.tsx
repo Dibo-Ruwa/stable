@@ -21,7 +21,7 @@ export default function Resturant() {
           /> */}
           <div className="mobile-image">
             <img
-              src="/images/image 159.png"
+              src="/images/meal3.png"
               className="img-main"
               alt="resturant guys"
             />

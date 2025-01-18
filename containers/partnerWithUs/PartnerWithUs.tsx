@@ -12,7 +12,7 @@ export default function PartnerWithUs() {
         <Header />
       </div>
       <WhyUs />
-      <Newsletter />
+      {/* <Newsletter /> */}
     </div>
   );
 }
