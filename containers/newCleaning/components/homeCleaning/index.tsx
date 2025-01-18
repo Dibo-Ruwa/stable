@@ -9,8 +9,8 @@ import Link from "next/link";
 // Outer container with your greenish background
 const HomeCleaningContainer = styled.section`
   background: rgba(218, 250, 217, 0.16);
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   padding: 3rem 1rem;
 `;
 

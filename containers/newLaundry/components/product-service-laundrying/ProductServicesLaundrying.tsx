@@ -47,7 +47,7 @@ const MobileView: React.FC = () => {
           <RiSearch2Line className="LaundryMobilesearch_filter_icon" />
         </div> */}
       </div>
-      <div className="Mobile_TopLaundry_container">
+      {/* <div className="Mobile_TopLaundry_container">
         <div className="MobileTopLaundry_Frame_Container">
           <p className="MobileTopLaundry_Text">Top Laundry Near you.</p>
           <div className="Mobile_TopLaundry_Images">
@@ -68,7 +68,7 @@ const MobileView: React.FC = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
