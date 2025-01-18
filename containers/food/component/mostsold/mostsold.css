@@ -206,7 +206,7 @@ img.mostsold-sale_img {
   display: flex;
   align-items: center;
 }
-.Rating_TimerMObile{
+.Rating_TimerMObile {
   display: none;
 }
 @media (max-width: 1024px) {
@@ -257,10 +257,15 @@ img.mostsold-sale_img {
 }
 
 @media (max-width: 568px) {
+  .mostsold-card_content {
+    padding: 0.6rem 1rem;
+    gap: 0.3rem;
+  }
+
   .mostsold-card_context {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.6rem;
+    gap: 0.4rem;
   }
 
   p.mostsold-card_prize-text {
@@ -277,6 +282,12 @@ img.mostsold-sale_img {
   .mostsold-card {
     width: calc((100% - 30px) / 2);
   }
+
+  .mostsold-card_content {
+    padding: 0.6rem 1rem;
+    gap: 0.3rem;
+  }
+
   .mostsold-card_dot {
     display: none;
   }
@@ -294,11 +305,14 @@ img.mostsold-sale_img {
     align-items: center;
     gap: 0.6rem;
     width: 100%;
+    justify-content: space-between;
   }
 
   .mostsold-card_ratingMobile {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .mostsold-card_starMobile {
@@ -311,7 +325,7 @@ img.mostsold-sale_img {
 
 @media (max-width: 480px) {
   .mostsold-card_food-img {
-    height: 6rem;
+    height: 9rem;
   }
 
   .mostsold-card_context-top {
@@ -329,6 +343,6 @@ img.mostsold-sale_img {
 }
 @media (max-width: 380px) {
   .mostsold-card_food-img {
-    height: 4rem;
+    height: 8rem;
   }
 }
