@@ -321,6 +321,10 @@ img.mostsold-sale_img {
     flex-shrink: 0;
     color: #ffc93f;
   }
+
+  .card_PrepTimerMobile {
+    font-size: 0.78rem;
+  }
 }
 
 @media (max-width: 480px) {
