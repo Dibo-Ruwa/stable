@@ -30,8 +30,9 @@ const MobileView: React.FC = () => {
           <div className="Laundrymob-cont">
             <div className="Laundrytext-container">
               <div className="Laundrydescription">
-                Order from your favorite restaurant and get your meal delivered
-                to you in minutes.
+              Discover Effortless Laundry Clean clothes, zero hassle.
+              <br/>
+              Let us take care of your laundry while you focus on what matters most.
               </div>
             </div>
           </div>

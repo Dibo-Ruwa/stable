@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import "./groceries.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,29 +7,57 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import { FaBagShopping } from "react-icons/fa6";
 import { MdOutlineTimer } from "react-icons/md";
 import { RiArrowRightSLine } from "react-icons/ri";
+import axios from "axios";
 
-const food = [
-  {
-    id: 111,
-    img: "/images/WhatsApp Image 2024-12-04 at 15.15.27_8744cdd7.jpg",
-  },
-  {
-    id: 221,
-    img: "/images/WhatsApp Image 2024-12-04 at 15.15.25_47c0ca4c.jpg",
-  },
-  {
-    id: 331,
-    img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_c10fd95d.jpg",
-  },
-  {
-    id: 441,
-    img: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f2bd62bd.jpg",
-  },
-];
+// Define the type for a food item
+interface FoodItem {
+  _id: string;
+  imageUrl: string;
+  title: string;
+  prep_time: number;
+  price: number;
+}
+
 export default function Groceries() {
+  const [food, setFood] = useState<FoodItem[]>([]); // Set the type for the food state
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/productstype=grocery`,
+          {
+            params: {
+              page: 1,
+              limit: 20,
+            },
+          }
+        );
+
+        const newData = response.data?.data;
+        if (Array.isArray(newData)) {
+          setFood(newData.slice(0, 4)); // Only take the first 4 items
+        } else {
+          console.error("Invalid data format:", newData);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <p>Loading groceries...</p>;
+  }
+
   return (
     <div>
-      <div className=" meal">
+      <div className="meal">
         <div className="hero_frame">
           <div className="duration">
             <p
@@ -42,7 +71,7 @@ export default function Groceries() {
           </div>
           <div className="meal_card">
             {food.map((item) => (
-              <div key={item.id} className="card">
+              <div key={item._id} className="card">
                 <div className="card-img">
                   <div
                     style={{
@@ -61,26 +90,20 @@ export default function Groceries() {
                         margin: "auto",
                       }}
                     />
-                    {/* <IoIosHeart 
-              style={{
-                color: '#4BB149', 
-                margin: 'auto',
-              }}
-            /> */}
                   </div>
                   <Image
                     className=""
-                    src={item.img}
+                    src={item.imageUrl}
                     alt="Chef preparing food"
                     width={250}
                     height={150}
                   />
                 </div>
-                <Link href={`/groceries/${item.id}`}>
+                <Link href={`/groceries/${item._id}`}>
                   <div className="meal-dis">
                     <div>
                       <div>
-                        <p className="meal-disTitle">Fried Rice</p>
+                        <p className="meal-disTitle">{item.title}</p>
                         <div className="groceries_circle"></div>
                         <p className="meal-disNUm">4.5</p>
                       </div>
@@ -108,12 +131,12 @@ export default function Groceries() {
                         }}
                         className="meal-disTime"
                       >
-                        Closed
+                        {item.prep_time} {item.prep_time === 1 ? "min" : "mins"}
                       </p>
                     </div>
                   </div>
                   <div className="price">
-                    <p>$40</p>
+                    <p>₦{item.price}</p>
                     <p
                       style={{
                         backgroundColor: "#4BB149",
