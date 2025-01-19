@@ -30,14 +30,13 @@ const MobileView: React.FC = () => {
           <div className="Cleaningmob-cont">
             <div className="Cleaningtext-container">
               <div className="Cleaningdescription">
-                Order from your favorite restaurant and get your meal delivered
-                to you in minutes.
+                Let us handle the dirty work while you enjoy life's fine moment
               </div>
             </div>
-          {/* </div> */}
+            {/* </div> */}
+          </div>
         </div>
-      </div>
-      {/* <div className="CleaningMobilesearch_filter_box">
+        {/* <div className="CleaningMobilesearch_filter_box">
         <input
           type="search"
           name="search"
@@ -47,10 +46,10 @@ const MobileView: React.FC = () => {
         />
         <RiSearch2Line className="CleaningMobilesearch_filter_icon" />
       </div> */}
-    </div>
-  
-    {/* Comment out the following section */}
-    {/* <div className="Mobile_TopCleaning_container">
+      </div>
+
+      {/* Comment out the following section */}
+      {/* <div className="Mobile_TopCleaning_container">
       <div className="MobileTopCleaning_Frame_Container">
         <p className="MobileTopCleaning_Text">Top Cleaning Near you.</p>
         <div className="Mobile_TopCleaning_Images">
@@ -72,7 +71,7 @@ const MobileView: React.FC = () => {
         </div>
       </div>
     </div> */}
-  </div>
+    </div>
   );
 };
 
