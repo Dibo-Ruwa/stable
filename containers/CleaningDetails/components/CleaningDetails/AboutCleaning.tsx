@@ -104,7 +104,8 @@ export const AboutCleaning = () => {
             <div className={styles.restProfileImage} style={{
               border: "1px solid rgb(25, 221, 84)",
               borderRadius: "50%",
-              width: "70px",
+              width: "4rem",
+              height: "4rem",
             }}>
               <img
                 src="/images/image_icon.jpg"

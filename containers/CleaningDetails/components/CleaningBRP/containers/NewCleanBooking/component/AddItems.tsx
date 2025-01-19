@@ -16,7 +16,7 @@ interface Item {
   name: string;
   quantity: number;
   image: string | null;
-  video: string | null; 
+  video: string | null;
 }
 
 interface AddItemProps {
@@ -136,11 +136,19 @@ const AddPropertyAddMoreIcon = styled(AiOutlinePlus)`
   font-size: 24px;
   margin-right: 8px;
   color: green;
+
+  @media (max-width: 768px) {
+  font-size: 20px;
+  }
 `;
 
 const AddPropertyAddMoreText = styled.p`
   font-size: 16px;
   color: green;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const CounterContainer = styled.div`
@@ -153,6 +161,18 @@ const MediaContainer = styled.div`
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+`;
+
+const ImageContainer = styled.div`
+  width: 100%;
+`;
+
+const VideoContainer = styled.div`
+  width: 100%;
 `;
 
 const VideoUpload = styled(ImageUpload)`
@@ -179,7 +199,7 @@ const VideoIcon = styled(BiVideoPlus)`
   height: 24px;
 `;
 
-const UploadProgessContainer = styled.div` 
+const UploadProgessContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -204,14 +224,16 @@ const ProgressBar = styled.div<{ progress: number }>`
   }
 `;
 
-
 export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
   const [items, setItems] = useState<Item[]>([
     { id: 1, name: "", quantity: 0, image: null, video: null },
   ]);
-  const [imageUploadProgress, setImageUploadProgress] = useState<{ [id: number]: number }>({});
-  const [videoUploadProgress, setVideoUploadProgress] = useState<{ [id: number]: number }>({});
-
+  const [imageUploadProgress, setImageUploadProgress] = useState<{
+    [id: number]: number;
+  }>({});
+  const [videoUploadProgress, setVideoUploadProgress] = useState<{
+    [id: number]: number;
+  }>({});
 
   useEffect(() => {
     onItemsChange(items); // Notify parent component whenever items are updated
@@ -254,7 +276,7 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
           : item
       )
     );
-  };  
+  };
 
   const validateVideo = async (file: File): Promise<boolean> => {
     const maxSize = 50 * 1024 * 1024; // 50MB in bytes
@@ -264,8 +286,8 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
     }
 
     // Create video element to check duration
-    const video = document.createElement('video');
-    video.preload = 'metadata';
+    const video = document.createElement("video");
+    video.preload = "metadata";
 
     return new Promise((resolve) => {
       video.onloadedmetadata = () => {
@@ -280,13 +302,18 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
     });
   };
 
-
   const uploadImage = async (id: number, file: File) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET || "");
-    formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "");
-  
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_UPLOAD_PRESET || ""
+    );
+    formData.append(
+      "cloud_name",
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || ""
+    );
+
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
@@ -294,13 +321,15 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
         {
           onUploadProgress: (progressEvent) => {
             if (progressEvent.total) {
-              const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+              const progress = Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              );
               setImageUploadProgress((prev) => ({ ...prev, [id]: progress }));
             }
           },
         }
       );
-  
+
       handleInputChange(id, "image", response.data.secure_url);
       setImageUploadProgress((prev) => ({ ...prev, [id]: 0 })); // Reset progress
     } catch (error) {
@@ -309,17 +338,23 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
       setImageUploadProgress((prev) => ({ ...prev, [id]: 0 })); // Reset progress
     }
   };
-  
+
   const uploadVideo = async (id: number, file: File) => {
     const isValid = await validateVideo(file);
     if (!isValid) return;
-  
+
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", process.env.NEXT_PUBLIC_UPLOAD_PRESET || "");
-    formData.append("cloud_name", process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "");
+    formData.append(
+      "upload_preset",
+      process.env.NEXT_PUBLIC_UPLOAD_PRESET || ""
+    );
+    formData.append(
+      "cloud_name",
+      process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || ""
+    );
     formData.append("resource_type", "video");
-  
+
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/video/upload`,
@@ -327,13 +362,15 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
         {
           onUploadProgress: (progressEvent) => {
             if (progressEvent.total) {
-              const progress = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+              const progress = Math.round(
+                (progressEvent.loaded / progressEvent.total) * 100
+              );
               setVideoUploadProgress((prev) => ({ ...prev, [id]: progress }));
             }
           },
         }
       );
-  
+
       handleInputChange(id, "video", response.data.secure_url);
       setVideoUploadProgress((prev) => ({ ...prev, [id]: 0 })); // Reset progress
     } catch (error) {
@@ -342,8 +379,6 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
       setVideoUploadProgress((prev) => ({ ...prev, [id]: 0 })); // Reset progress
     }
   };
-  
-  
 
   return (
     <AddPropertyContainer>
@@ -376,7 +411,7 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
               </CounterWrapper>
             </CounterContainer>
             <MediaContainer>
-              <div>
+              <ImageContainer>
                 <Label>Image (optional)</Label>
                 <ImageUpload
                   onClick={() => {
@@ -392,21 +427,19 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
                 >
                   {item.image ? (
                     <img src={item.image} alt="Uploaded" />
-                  ) : (
-                    imageUploadProgress[item.id] && imageUploadProgress[item.id] > 0 ? (
-                      <UploadProgessContainer>
+                  ) : imageUploadProgress[item.id] &&
+                    imageUploadProgress[item.id] > 0 ? (
+                    <UploadProgessContainer>
                       <p> Uploading... </p>
                       <ProgressBar progress={imageUploadProgress[item.id]} />
                     </UploadProgessContainer>
-                      
-                    ) : <AddImageIcon />
-                    
+                  ) : (
+                    <AddImageIcon />
                   )}
                 </ImageUpload>
-                
-              </div>
+              </ImageContainer>
 
-              <div>
+              <VideoContainer>
                 <Label>Video (optional)</Label>
                 <VideoUpload
                   onClick={() => {
@@ -422,24 +455,20 @@ export const AddItem: React.FC<AddItemProps> = ({ onItemsChange }) => {
                 >
                   {item.video ? (
                     <video src={item.video} controls />
+                  ) : videoUploadProgress[item.id] &&
+                    videoUploadProgress[item.id] > 0 ? (
+                    <UploadProgessContainer>
+                      <p> Uploading... </p>
+                      <ProgressBar progress={videoUploadProgress[item.id]} />
+                    </UploadProgessContainer>
                   ) : (
-                    videoUploadProgress[item.id] && videoUploadProgress[item.id] > 0 ? (
-                      <UploadProgessContainer>
-                        <p> Uploading... </p>
-                        <ProgressBar progress={videoUploadProgress[item.id]} />
-                      </UploadProgessContainer>
-
-                    )
-                  :
-                  <>
-                  <VideoIcon />
-                  <span className="video-size-limit">Max: 1 min, 50MB</span>
-                  </>
-                  
+                    <>
+                      <VideoIcon />
+                      <span className="video-size-limit">Max: 1 min, 50MB</span>
+                    </>
                   )}
                 </VideoUpload>
-                
-              </div>
+              </VideoContainer>
             </MediaContainer>
           </AddPropertyCard>
         ))}
