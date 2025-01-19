@@ -142,12 +142,41 @@ const CityDeliveryImage = styled(Image)`
   }
 `;
 
+const CityDeliveryImageDesktop = styled(Image)`
+  border-radius: 0.6rem;
+  /* Next.js <Image> is typically controlled by width/height props */
+
+  @media (max-width: 900px) {
+  display: none;
+    width: calc((100% - 4rem) / 2);
+  }
+`;
+
+const TopCityDeliveryImage = styled(CityDeliveryImage)`
+display: none;
+  @media (max-width: 900px) {
+  display: block;
+    width: 800px; /* Increase width for top image on mobile */
+    height: 400px; /* Increase height for top image on mobile */
+  }
+`;
+
 // ------ Component Definition ------ //
 
 const CityDelivery: React.FC = () => {
   return (
     <CityDeliveryContainer>
       <CityDeliveryContent>
+        {/* Multiple small images (bike image first on mobile) */}
+        <CityDeliveryInnerImages>
+          <TopCityDeliveryImage
+            src="/images/delivery_bus.png"
+            alt="Delivery bike"
+            width={400}
+            height={400}
+          />
+        </CityDeliveryInnerImages>
+
         {/* Text Container (left on larger screens) */}
         <CityDeliveryTextContainer>
           <CityDeliveryButtonText>City Delivery</CityDeliveryButtonText>
@@ -165,14 +194,8 @@ const CityDelivery: React.FC = () => {
           </CityDeliveryLink>
         </CityDeliveryTextContainer>
 
-        {/* Multiple small images (right on larger screens) */}
+        {/* Remaining images (right on larger screens) */}
         <CityDeliveryInnerImages>
-          <CityDeliveryImage
-            src="/images/bike_delivery.png"
-            alt="Delivery bike"
-            width={400}
-            height={400}
-          />
           <CityDeliveryImage
             src="/images/paper_delivery.png"
             alt="Delivery parcel"
@@ -180,6 +203,12 @@ const CityDelivery: React.FC = () => {
             height={400}
           />
           <CityDeliveryImage
+            src="/images/bike_delivery.png"
+            alt="Delivery bus"
+            width={400}
+            height={400}
+          />
+           <CityDeliveryImageDesktop
             src="/images/delivery_bus.png"
             alt="Delivery bus"
             width={400}

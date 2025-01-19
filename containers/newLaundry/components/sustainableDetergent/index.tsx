@@ -109,6 +109,25 @@ const EcoFriendlyLaundryImage = styled(Image)`
   width: 100%;
   height: 300px;
   object-fit: cover;
+
+  @media (max-width: 900px) {
+    width: calc((100% - 4rem) / 2);
+  }
+`;
+
+const EcoFriendlyLaundryImageDesktop = styled(EcoFriendlyLaundryImage)`
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const TopEcoFriendlyLaundryImage = styled(EcoFriendlyLaundryImage)`
+  display: none;
+  @media (max-width: 900px) {
+    display: block;
+    width: 800px; /* Increase width for top image on mobile */
+    height: 400px; /* Reduce height for top image on mobile */
+  }
 `;
 
 // ------ Component Definition ------ //
@@ -117,6 +136,16 @@ const EcoFriendlyLaundry: React.FC = () => {
   return (
     <EcoFriendlyLaundryContainer>
       <EcoFriendlyLaundryContent>
+        {/* Multiple small images (first image on top for mobile) */}
+        <EcoFriendlyLaundryInnerImages>
+          <TopEcoFriendlyLaundryImage
+            src="/images/laundry_machine.jpg"
+            alt="High-efficiency laundry machines"
+            width={400}
+            height={300}
+          />
+        </EcoFriendlyLaundryInnerImages>
+
         <EcoFriendlyLaundryTextContainer>
           <EcoFriendlyLaundryButtonText>
             Eco-Friendly Laundry
@@ -139,12 +168,6 @@ const EcoFriendlyLaundry: React.FC = () => {
 
         <EcoFriendlyLaundryInnerImages>
           <EcoFriendlyLaundryImage
-            src="/images/laundry_machine.jpg"
-            alt="High-efficiency laundry machines"
-            width={400}
-            height={300}
-          />
-          <EcoFriendlyLaundryImage
             src="/images/eco.jpg"
             alt="Biodegradable detergents"
             width={400}
@@ -153,6 +176,12 @@ const EcoFriendlyLaundry: React.FC = () => {
           <EcoFriendlyLaundryImage
             src="/images/dan-gold-aJN-jjFLyCU-unsplash.jpg"
             alt="Fresh laundry with minimal environmental impact"
+            width={400}
+            height={300}
+          />
+          <EcoFriendlyLaundryImageDesktop
+            src="/images/laundry_machine.jpg"
+            alt="High-efficiency laundry machines"
             width={400}
             height={300}
           />
