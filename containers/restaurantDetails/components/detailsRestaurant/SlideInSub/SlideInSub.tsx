@@ -9,6 +9,8 @@ import useOrder from "@/hooks/useOrder";
 import NotificationModal from "@/component/NotificationModal";
 import PaymentButton from "@/component/paymentButton/SubButton";
 import "./SlideInSub.css";
+import { IoClose } from "react-icons/io5";
+
 
 export interface SlideInSubDataType {
   subImg: string;
@@ -193,6 +195,8 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
           <p className="SlideInSub_restaurantSubText">Custom Subscription</p>
           <LiaAngleRightSolid className="SlideInSub_restaurantSubIcon" />
         </button> */}
+                <IoClose onClick={onClose} style={{ cursor: 'pointer' }} />
+        
       </div>
       <div className="SlideInSub_Cust_sub_cards">
         {visibleData.map((plan: SlideInSubDataType, index) => (
