@@ -18,7 +18,6 @@ const MobileView: React.FC = () => {
 
   return (
     <div className="Cleaningmobile-display">
-<<<<<<< HEAD
       <div
         className="Cleaningmob"
         style={{
@@ -34,25 +33,8 @@ const MobileView: React.FC = () => {
                 Order from your favorite restaurant and get your meal delivered
                 to you in minutes.
               </div>
-=======
-    <div
-      className="Cleaningmob"
-      style={{
-        backgroundImage: `url(${selectedVendor?.bigImg})`,
-        backgroundSize: "140% 100%",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: 'right',
-      }}
-    >
-      <div className="Cleaningmob_overlay">
-        <div className="Cleaningmob-cont">
-          <div className="Cleaningtext-container">
-            <div className="Cleaningdescription">
-              Order from your favorite restaurant and get your meal delivered
-              to you in minutes.
->>>>>>> 075b1be614e17b46938bff3d8190b349f321de0b
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </div>
       {/* <div className="CleaningMobilesearch_filter_box">
