@@ -8,6 +8,7 @@ import { AllCartsFood } from "./containers/detailed-food-container/display-food/
 import { useSession } from "next-auth/react";
 import useCartStore from "@/store/useCart.store";
 import { useFoodItem } from "@/context/FooItemProvider";
+import { FaShoppingCart, FaTimes } from "react-icons/fa";
 
 // Styled components
 const FoodDetailsContainer = styled.section`
@@ -44,7 +45,7 @@ const DFCSFood = styled.div`
   }
 `;
 
-const DFCSCheck = styled.div`
+const DFCSCheck = styled.div<{ showCart: boolean }>`
   flex-basis: 30%;
 
   @media (max-width: 900px) {
@@ -54,6 +55,7 @@ const DFCSCheck = styled.div`
     height: fit-content;
     top: 100px;
     right: 0;
+    display: ${({ showCart }) => (showCart ? "block" : "none")};
   }
 `;
 
@@ -80,8 +82,23 @@ const Loader = styled.div`
   color: #888;
 `;
 
+const ToggleCartButton = styled.button`
+  display: none;
+  @media (max-width: 900px) {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: #4bb149;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+`;
+
 const FoodDetail: React.FC = () => {
   const [isCheckingCart, setIsCheckingCart] = useState(true);
+  const [showCart, setShowCart] = useState(true); // Set to true by default
   const { data: session } = useSession();
   const { cartItems, getCart } = useCartStore();
   const { selectedItem } = useFoodItem();
@@ -134,6 +151,9 @@ const FoodDetail: React.FC = () => {
         <div className="btn">
           <BackButton />
         </div>
+        <ToggleCartButton onClick={() => setShowCart(!showCart)}>
+          {showCart ? <FaTimes /> : <FaShoppingCart />}
+        </ToggleCartButton>
         <DFCS>
           <DFCSFood>
             {cartItems.length > 0 && isSelectedItemInCart ? (
@@ -142,9 +162,9 @@ const FoodDetail: React.FC = () => {
               <DisplayFood />
             )}
           </DFCSFood>
-          <DFCSCheck>
+          <DFCSCheck showCart={showCart}>
             <ClearOut />
-            <CheckoutStore />
+            <CheckoutStore onClose={() => setShowCart(false)} />
           </DFCSCheck>
         </DFCS>
       </FoodDetailsFrame>

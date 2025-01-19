@@ -24,7 +24,7 @@ const LaundryStep = () => {
               <div className="LaundryStep_get_started_text_div">
                 <small className="LaundryStep_get_started_icon_div">
                   {" "}
-                  Sign Up
+                  Join Us
                 </small>
                 <p className="LaundryStep_get_started_icon_div">
                   Register your laundry service and provide necessary details.
@@ -86,8 +86,8 @@ const LaundryStep = () => {
               </div>
             </div>
           </div>
-          <Link href="/sign-up" className="vendor_signup">
-            Sign Up
+          <Link href="https://admin.diboruwa.com/sign-in" className="vendor_signup">
+             Join Us
             <FaArrowRight className="get_started_icon" />
           </Link>
         </div>
