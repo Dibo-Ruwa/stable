@@ -33,9 +33,11 @@ const OfficeCleaningContent = styled.div`
 const OfficeCleaningTextContainer = styled.div`
   flex: 1;
   text-align: center;
+  order: 2; /* Ensure text comes second on mobile */
 
   @media (min-width: 900px) {
     text-align: left;
+    order: 1; /* Ensure text comes first on desktop */
   }
 `;
 
@@ -115,9 +117,11 @@ const OfficeCleaningImageWrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  order: 1; /* Ensure image comes first on mobile */
 
   @media (min-width: 900px) {
     justify-content: flex-end;
+    order: 2; /* Ensure image comes second on desktop */
   }
 `;
 
@@ -135,6 +139,16 @@ export default function OfficeCleaning() {
   return (
     <OfficeCleaningContainer>
       <OfficeCleaningContent>
+        {/* Image Section */}
+        <OfficeCleaningImageWrapper>
+          <OfficeCleaningImage
+            src="/images/office_cleaning.jpg"
+            alt="Professional office cleaning service"
+            width={500}
+            height={500}
+          />
+        </OfficeCleaningImageWrapper>
+
         {/* Text Section */}
         <OfficeCleaningTextContainer>
           <OfficeCleaningButton>Office Cleaning</OfficeCleaningButton>
@@ -152,16 +166,6 @@ export default function OfficeCleaning() {
             <span className="get_started_icon">▶</span>
           </OfficeCleaningLink>
         </OfficeCleaningTextContainer>
-
-        {/* Image Section */}
-        <OfficeCleaningImageWrapper>
-          <OfficeCleaningImage
-            src="/images/office_cleaning.jpg"
-            alt="Professional office cleaning service"
-            width={500}
-            height={500}
-          />
-        </OfficeCleaningImageWrapper>
       </OfficeCleaningContent>
     </OfficeCleaningContainer>
   );

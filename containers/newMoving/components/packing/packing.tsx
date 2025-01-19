@@ -29,6 +29,12 @@ const ImageWrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  order: 1; /* Ensure image comes first on mobile */
+
+  @media (min-width: 900px) {
+    justify-content: flex-end;
+    order: 2; /* Ensure image comes second on desktop */
+  }
 `;
 
 const PackingUnpackingImage = styled(Image)`
@@ -43,11 +49,13 @@ const TextContainer = styled.div`
   margin-top: 1rem;
   padding-bottom: 2rem;
   text-align: center;
+  order: 2; /* Ensure text comes second on mobile */
 
   @media (min-width: 900px) {
     margin-bottom: 2rem;
     padding-bottom: 0;
     text-align: left;
+    order: 1; /* Ensure text comes first on desktop */
   }
 `;
 
@@ -123,7 +131,15 @@ export default function PackingUnpacking() {
   return (
     <PackingUnpackingContainer>
       <PackingUnpackingContent>
-       
+        <ImageWrapper>
+          <PackingUnpackingImage
+            src="/images/moving_quote.jpg"
+            alt="Packing & Unpacking"
+            width={800}
+            height={600}
+          />
+        </ImageWrapper>
+
         <TextContainer>
           <PackingUnpackingTag>Packing & Unpacking</PackingUnpackingTag>
           <PackingUnpackingSubtitle>Stress-Free Packing</PackingUnpackingSubtitle>
@@ -136,15 +152,6 @@ export default function PackingUnpacking() {
             <span className="get_started_icon">▶</span>
           </PackingUnpackingLink>
         </TextContainer>
-
-        <ImageWrapper>
-          <PackingUnpackingImage
-            src="/images/moving_quote.jpg"
-            alt="Packing & Unpacking"
-            width={800}
-            height={600}
-          />
-        </ImageWrapper>
       </PackingUnpackingContent>
     </PackingUnpackingContainer>
   );

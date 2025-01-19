@@ -25,14 +25,16 @@ export interface RestSubPlansDataType {
   ViewSubDetailsLink: string;
 }
 
-
+const RegulaPlan = process.env.NEXT_PUBLIC_LAUNDRY_REG || "";
+const ProfessionalPlan = process.env.NEXT_PUBLIC_LAUNDRY_PRO || "";
+const FamilyPlan = process.env.NEXT_PUBLIC_LAUNDRY_FAM || "";
 
 const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/laundry to.png",
-    subType: "Student",
-    subAmount: 6990,
-    planCode: "PLN_jjx1iqwxol2hch4a",
+    subType: "Regular",
+    subAmount: 8900,
+    planCode: RegulaPlan,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
@@ -61,8 +63,8 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/laundry to.png",
     subType: "Professional",
-    subAmount: 12900,
-    planCode: "PLN_jd0nwcnhvifs0no",
+    subAmount: 15900,
+    planCode: ProfessionalPlan,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
@@ -95,8 +97,8 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/laundry to.png",
     subType: "Family",
-    subAmount: 22400,
-    planCode: "PLN_d3km1qswvj8nbot",
+    subAmount: 37500,
+    planCode: FamilyPlan,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
