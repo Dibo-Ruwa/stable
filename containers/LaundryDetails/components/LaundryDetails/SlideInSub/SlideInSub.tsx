@@ -15,6 +15,8 @@ export interface SlideInSubDataType {
   subType: string;
   subAmount: number;
   planCode: string;
+  subAmount: number;
+  planCode: string;
   subItem: {
     tickIcon: IconType;
     subItemText: string;
@@ -22,8 +24,10 @@ export interface SlideInSubDataType {
   subFeeText: string;
   ViewSubDetailsLink: string;
 }
+}
 
 interface SlideInSubProps {
+  onClose: () => void;
   onClose: () => void;
 }
 
@@ -83,6 +87,7 @@ const SlideInSubData: SlideInSubDataType[] = [
   },
 ];
 
+export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
 export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   const [showAll, setShowAll] = useState(false);
   const visibleData = showAll ? SlideInSubData : SlideInSubData.slice(0, 2);

@@ -397,12 +397,13 @@
   }
 
   .activeSub {
-    transform: translateX(0); /* Bring into view */
+    transform: translateX(6rem); /* Bring into view */
     opacity: 1; /* Fully visible */
-    width: 75%;
+    width: 60%;
     position: absolute;
     z-index: 1;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    margin-top: 3rem;
   }
 
   .hiddenSub {
