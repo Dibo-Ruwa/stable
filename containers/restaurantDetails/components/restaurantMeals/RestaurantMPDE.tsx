@@ -219,10 +219,7 @@ export const RestaurantMPDE: React.FC<RestaurantMPDEProps> = ({
           No meal found
         </p>
       ) : (
-        <div
-          className="mostsold-cards"
-         
-        >
+        <div className="mostsold-cards">
           {uniqueItems.map((item) => (
             <div key={item._id} className="mostsold-card">
               <div
@@ -241,10 +238,14 @@ export const RestaurantMPDE: React.FC<RestaurantMPDEProps> = ({
                   className="mostsold-card_context"
                 >
                   <div className="mostsold-card_context-top">
-                    <small className="mostsold-card_title">{item.title}</small>
+                    <small className="mostsold-card_title">
+                      {item.title?.slice(0, 10)}...
+                    </small>
                     <div className="mostsold-card_dot"></div>
-                    <FaStar className="mostsold-card_star" />
-                    <small className="mostsold-card_rating">4.5</small>
+                    <div className="mostsold-card_rating">
+                      <FaStar className="mostsold-card_star" />
+                      <small className="mostsold-card_ratingNum">4.5</small>
+                    </div>
                   </div>
                   <div className="mostsold-card_timer">
                     <span
@@ -255,12 +256,41 @@ export const RestaurantMPDE: React.FC<RestaurantMPDEProps> = ({
                       }}
                     >
                       {" "}
-                      <MdOutlineTimer style={{ marginTop: "-2px" }} />{" "}
-                      {item.prep_time}{" "}
-                      {item?.prep_time == "1" || item?.prep_time == "0"
-                        ? "min"
-                        : "mins"}
+                      <MdOutlineTimer style={{ marginTop: "-2px" }} />
+                      <p className="mostsold-card_PrepTimer">
+                        {item.prep_time}{" "}
+                        {item?.prep_time == "1" || item?.prep_time == "0"
+                          ? "min"
+                          : "mins"}
+                      </p>
                     </span>
+                  </div>
+
+                  <div className="Rating_TimerMObile">
+                    <div className="mostsold-card_ratingMobile">
+                      <FaStar className="mostsold-card_starMobile" />
+                      <small className="mostsold-card_ratingNumMobile">
+                        4.5
+                      </small>
+                    </div>
+                    <div className="mostsold-card_timerMobile">
+                      <span
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        {" "}
+                        <MdOutlineTimer style={{ marginTop: "-2px" }} />
+                        <p className="mostsold-card_PrepTimerMobile">
+                          {item.prep_time}{" "}
+                          {item?.prep_time == "1" || item?.prep_time == "0"
+                            ? "min"
+                            : "mins"}
+                        </p>
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <p

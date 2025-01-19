@@ -27,7 +27,7 @@ export default function Meal(): JSX.Element {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products`,
+          `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products?type=food`,
           {
             params: {
               page: 1,

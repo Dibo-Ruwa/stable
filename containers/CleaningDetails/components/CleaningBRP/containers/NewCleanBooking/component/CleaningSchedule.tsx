@@ -42,7 +42,9 @@ export const CleaningSchedule: React.FC<MovingScheduleProps> = ({
         <ScheduleDate
           date={selectedDate} // Controlled date state
           label="Date"
+          className={styles.CleaningScheduleDate}
           onDateChange={handlePickupDateChange}
+          InputClassName={styles.CleaningScheduleDateInput}
         />
         <ScheduleTime
           time={selectedTime} // Controlled time state
