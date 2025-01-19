@@ -23,7 +23,7 @@ p.mostsold_title {
   width: 100%;
   flex-wrap: wrap;
   scroll-snap-type: x mandatory;
-  margin: 0 auto;
+  margin: 1rem auto;
   gap: 30px;
   /* justify-content: space-between; */
 }
@@ -46,7 +46,7 @@ p.mostsold_title {
   flex-direction: column;
   align-items: center;
   border-radius: 16px;
-  height: 200px; /* Fixed height */
+  height: 160px; /* Fixed height */
   overflow: hidden;
 }
 
@@ -90,7 +90,7 @@ small.mostsold-card_ratingNum {
 small.mostsold-card_title {
   color: var(--Black-100, #2a2a2a);
   font-family: Poppins;
-  font-size: 16px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -138,6 +138,10 @@ svg.mostsold-card_timer-icon {
   align-items: center;
 }
 
+p.mostsold-card_PrepTimer {
+  font-size: 13px;
+}
+
 small.mostsold-card_remender {
   color: #565656;
   font-family: Poppins;
@@ -161,7 +165,7 @@ small.mostsold-card_remender {
 p.mostsold-card_prize-text {
   color: var(--Soft-black, #565656);
   font-family: Poppins;
-  font-size: 20px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -169,10 +173,9 @@ p.mostsold-card_prize-text {
 
 .mostsold-card_prize-link {
   display: flex;
-  width: 78px;
+  width: 40%;
   max-width: 88px;
-  /* padding: 6px 40px; */
-  padding: 10px;
+  padding: 7px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -216,9 +219,12 @@ img.mostsold-sale_img {
   }
 
   .mostsold-card {
-    width: calc((100% - 2rem) / 3);
+    width: calc((100% - 2rem) / 2);
   }
 
+  .mostsold-card_food-img {
+    height: 150px;
+  }
   small.mostsold-card_title,
   small.mostsold-card_ratingNum,
   .mostsold-card_PrepTimer {
@@ -323,8 +329,8 @@ img.mostsold-sale_img {
     color: #ffc93f;
   }
 
-  p.card_PrepTimerMobile {
-    font-size: 0.78rem;
+  p.mostsold-card_PrepTimerMobile {
+    font-size: 13px;
   }
 }
 

@@ -181,7 +181,7 @@
   } */
 
   .restProfileImage {
-    top: -2rem;
+    bottom: -2rem;
   }
 
   .NRSContent {
@@ -206,7 +206,7 @@
 
 @media screen and (max-width: 820px) {
   .restProfileImage {
-   width: 3.5rem;
+    width: 3.5rem;
   }
 }
 
@@ -267,6 +267,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    gap: inherit;
   }
 
   .MobileNRRestaurant {
@@ -420,6 +421,15 @@
   .MobilecoverImage {
     width: 100%;
   }
+
+  .MobilerestaurantSubText {
+    font-size: 0.75rem;
+  }
+
+  .restaurantLocationIcon {
+    width: 15px;
+    height: 15px;
+  }
 }
 
 @media screen and (max-width: 468px) {
@@ -438,5 +448,10 @@
 
   .MobilerestaurantOpeningTimePhoneNum {
     flex-wrap: wrap;
+  }
+
+  .restaurantLocationIcon {
+    width: 15px;
+    height: 15px;
   }
 }
