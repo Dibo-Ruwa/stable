@@ -27,70 +27,128 @@ interface SlideInSubProps {
   onClose: () => void;
 }
 
-const FOOD_REG = 'PLN_w988l6ia7g7dfq6';
-const FOOD_ENT = 'PLN_pz6i6zhbcwvfdk7';
-const FOOD_GOL = 'PLN_f5nb851w9xpbtto';
+const FOOD_STA = process.env.NEXT_PUBLIC_FOOD_STA || "" 
+const FOOD_REG = process.env.NEXT_PUBLIC_FOOD_REG || "" 
+const FOOD_ENT = process.env.NEXT_PUBLIC_FOOD_ENT || "" 
+const FOOD_GOL = process.env.NEXT_PUBLIC_FOOD_GOL || "" 
 
 const SlideInSubData: SlideInSubDataType[] = [
   {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Starter",
-    subAmount: 4900,
-    planCode: FOOD_REG,
-    subItem: [
-      { tickIcon: IoCheckmarkSharp, subItemText: "1 meal per week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Weekly delivery" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Delivered once a week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Standard plate" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Ideal for occasional treats" },
-    ],
-    subFeeText: "Service Fee:",
-    ViewSubDetailsLink: "View",
-  },
-  {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Regular",
-    subAmount: 12600,
-    planCode: FOOD_REG,
-    subItem: [
-      { tickIcon: IoCheckmarkSharp, subItemText: "2 meals per week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Standard plate" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Delivered once a week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Ideal for weekend treats" },
-    ],
-    subFeeText: "Service Fee:",
-    ViewSubDetailsLink: "View",
-  },
-  {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Enterprise",
-    subAmount: 43900,
-    planCode: FOOD_ENT,
-    subItem: [
-      { tickIcon: IoCheckmarkSharp, subItemText: "5 meals per week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Standard plate + extra" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Weekdays Delivery" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Delivered 5 times a week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Perfect for workweek meals" },
-    ],
-    subFeeText: "Service Fee:",
-    ViewSubDetailsLink: "View",
-  },
-  {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Gold",
-    subAmount: 56400,
-    planCode: FOOD_GOL,
-    subItem: [
-      { tickIcon: IoCheckmarkSharp, subItemText: "7 meals per week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Standard plate + extra" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Daily Delivery" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Delivered 7 times a week" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Perfect for everyday meals" },
-    ],
-    subFeeText: "Service Fee:",
-    ViewSubDetailsLink: "View",
-  },
+     subImg: "/images/Rectangle 194.png",
+     subType: "Starter",
+     subAmount: 12900,
+     planCode: FOOD_STA,
+     subItem: [
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "1 meal per week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Weekly delivery",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Delivered once a week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Standard plate",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Ideal for occasional treats",
+       },
+     ],
+     subFeeText: "Service Fee:",
+     ViewSubDetailsLink: "View",
+   },
+   {
+     subImg: "/images/Rectangle 194.png",
+     subType: "Regular",
+     subAmount: 12600,
+     planCode: FOOD_REG,
+     subItem: [
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "2 meals per week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Standard plate",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Delivered once a week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Ideal for weekend treats",
+       },
+     ],
+     subFeeText: "Service Fee:",
+     ViewSubDetailsLink: "View",
+   },
+   {
+     subImg: "/images/Rectangle 194.png",
+     subType: "Enterprise",
+     subAmount: 60900,
+     planCode: FOOD_ENT,
+     subItem: [
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "5 meals per week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Standard plate + extra",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Weekdays Delivery",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Delivered 5 times a week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Perfect for workweek meals",
+       },
+     ],
+     subFeeText: "Service Fee:",
+     ViewSubDetailsLink: "View",
+   },
+   {
+     subImg: "/images/Rectangle 194.png",
+     subType: "Gold",
+     subAmount: 103500,
+     planCode: FOOD_GOL,
+     subItem: [
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "7 meals per week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Standard plate + extra",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Daily Delivery",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Delivered 7 times a week",
+       },
+       {
+         tickIcon: IoCheckmarkSharp,
+         subItemText: "Perfect for everyday meals",
+       },
+     ],
+     subFeeText: "Service Fee:",
+     ViewSubDetailsLink: "View",
+   },
 ];
 
 export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
@@ -128,13 +186,13 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="SlideInSub_container">
+    <div className="SlideInSub_container" style={{ zIndex: 100, width: "93vw", marginLeft: "-100px" }}>
       <div className="SlideInSub_customSub">
         <p className="SlideInSub_customSub_Title">Subscription Plan</p>
-        <button className="SlideInSub_restaurantSub">
+        {/* <button className="SlideInSub_restaurantSub">
           <p className="SlideInSub_restaurantSubText">Custom Subscription</p>
           <LiaAngleRightSolid className="SlideInSub_restaurantSubIcon" />
-        </button>
+        </button> */}
       </div>
       <div className="SlideInSub_Cust_sub_cards">
         {visibleData.map((plan: SlideInSubDataType, index) => (

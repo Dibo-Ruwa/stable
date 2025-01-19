@@ -24,16 +24,17 @@ export interface RestSubPlansDataType {
   ViewSubDetailsLink: string;
 }
 
-const FOOD_REG = 'PLN_w988l6ia7g7dfq6'
-const FOOD_ENT = 'PLN_pz6i6zhbcwvfdk7'
-const FOOD_GOL = 'PLN_f5nb851w9xpbtto' 
+const FOOD_STA = process.env.NEXT_PUBLIC_FOOD_STA || "" 
+const FOOD_REG = process.env.NEXT_PUBLIC_FOOD_REG || "" 
+const FOOD_ENT = process.env.NEXT_PUBLIC_FOOD_ENT || "" 
+const FOOD_GOL = process.env.NEXT_PUBLIC_FOOD_GOL || "" 
 
 const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/images/Rectangle 194.png",
     subType: "Starter",
-    subAmount: 4900,
-    planCode: FOOD_REG,
+    subAmount: 12900,
+    planCode: FOOD_STA,
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
@@ -88,7 +89,7 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/images/Rectangle 194.png",
     subType: "Enterprise",
-    subAmount: 43900,
+    subAmount: 60900,
     planCode: FOOD_ENT,
     subItem: [
       {
@@ -118,7 +119,7 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/images/Rectangle 194.png",
     subType: "Gold",
-    subAmount: 56400,
+    subAmount: 103500,
     planCode: FOOD_GOL,
     subItem: [
       {

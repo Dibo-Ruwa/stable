@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { IconType } from "react-icons/lib";
 import { nanoid } from "nanoid";
@@ -30,7 +31,6 @@ interface SlideInSubProps {
 const PUBLIC_CLEANING_STA = process.env.NEXT_PUBLIC_CLEANING_STA || ""
 const PUBLIC_CLEANING_PRE = process.env.NEXT_PUBLIC_CLEANING_PRE ||  ""
 const PUBLIC_CLEANING_DEE = process.env.NEXT_PUBLIC_CLEANING_DEE || ""
-
 
 const SlideInSubData: SlideInSubDataType[] = [
   {
@@ -121,13 +121,16 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="SlideInSub_container">
+    <div className="SlideInSub_container"
+    style={{ zIndex: 100, width: "98vw", marginLeft: "-70px" }}
+    >
       <div className="SlideInSub_customSub">
         <p className="SlideInSub_customSub_Title">Subscription Plan</p>
-        <button className="SlideInSub_restaurantSub">
+        {/* <button className="SlideInSub_restaurantSub">
           <p className="SlideInSub_restaurantSubText">Custom Subscription</p>
           <LiaAngleRightSolid className="SlideInSub_restaurantSubIcon" />
-        </button>
+        </button> */}
+        <IoClose onClick={onClose} style={{ cursor: 'pointer' }} />
       </div>
       <div className="SlideInSub_Cust_sub_cards">
         {visibleData.map((plan: SlideInSubDataType, index) => (
@@ -138,6 +141,9 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
                   src={plan.subImg}
                   alt="sub image"
                   className="SlideInSub_Cust_sub_img"
+                  style={{
+                    height: '70px', width: '70px', borderRadius: '50%', objectFit: 'cover',
+                  }}
                 />
               </div>
               <div className="SlideInSub_Cust_sub_TA">

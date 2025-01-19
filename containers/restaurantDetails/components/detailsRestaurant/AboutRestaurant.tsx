@@ -36,7 +36,7 @@ const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
         </div>
         <div className={styles.MobilerestProfileImage}>
           <img
-            src="/images/Ellipse 86.png"
+            src="/images/Ellipse 92.png"
             alt=""
             className={styles.MobilerestProfileImg}
           />
@@ -46,18 +46,18 @@ const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
         <div className={styles.MobileNRSContent}>
           <div className={styles.MobileNRRestaurant}>
             <p className={styles.MobilerestaurantProfileName}>
-              Flora Restaurant
+              Food Subscription
             </p>
-            <div className={styles.MobilerestaurantRating}>
+            {/* <div className={styles.MobilerestaurantRating}>
               <FaStar className={styles.MobilerestaurantRatingIcon} />
               <p className={styles.MobilerestaurantRatingNum}>4.5</p>
-            </div>
+            </div> */}
           </div>
           <button
             className={styles.MobilerestaurantSubNav}
             onClick={handleSubClick}
           >
-            <p className={styles.MobilerestaurantSubText}>Explore Our Monthly Subscription</p>
+            <p className={styles.MobilerestaurantSubText}>Explore Our Monthly Subscriptions</p>
             <LiaAngleRightSolid className={styles.MobilerestaurantSubIcon} />
           </button>
  {isSubOpen && (
@@ -67,17 +67,17 @@ const [isSubOpen, setIsSubOpen] = useState<boolean>(false);
 )}
         </div>
         <div className={styles.MobilerestaurantOpeningTimePhoneNum}>
-          <p className={styles.MobilerestaurantOpeningDay}>Monday - Friday</p>
+          <p className={styles.MobilerestaurantOpeningDay}> Operating Hours:</p>
           <div className={styles.MobilerestaurantDot}></div>
-          <p className={styles.MobilerestaurantOpeningTime}>8am - 5pm</p>
+          <p className={styles.MobilerestaurantOpeningTime}>8am - 8pm</p>
           <div className={styles.MobilerestaurantDot}></div>
-          <p className={styles.MobilerestaurantPhoneNum}>0903 414 5971</p>
+          <p className={styles.MobilerestaurantPhoneNum}>08059303261</p>
         </div>
-        <div className={styles.MobilerestaurantLocation}>
-          <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
-          <p className={styles.MobilerestaurantLocationText}>Located in Ikeja, Lagos</p>
-        </div>
-        <button className={styles.MobilerestaurantReview}>Reviews</button>
+        <div className={styles.restaurantDescription_DT} style={{ marginBottom: `-30px` }}>
+              <p className={styles.restaurantDeliveryTime}>
+                Explore the available food items for your subscription or selection before committing. 
+              </p>
+            </div>
       </div>
     </div>
   );
