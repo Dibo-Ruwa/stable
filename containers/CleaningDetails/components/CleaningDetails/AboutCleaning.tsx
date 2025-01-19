@@ -32,11 +32,35 @@ const MobileAboutCleaning = () => {
             className={styles.MobilecoverImg}
           />
         </div>
-        <div className={styles.MobilerestProfileImage}>
+        <div className={styles.MobilecoverImage}>
           <img
-            src="/images/Ellipse 86.png"
+            src="/images/cleaning_quote.jpg"
+            alt=""
+            className={styles.MobilecoverImg}
+            style={{
+              borderRadius: "10px",
+            }}
+          />
+        </div>
+        <div
+          className={styles.MobilerestProfileImage}
+          style={{
+            border: "1px solid rgb(25, 221, 84)",
+            borderRadius: "50%",
+            width: "4rem",
+            height: "4rem",
+          }}
+        >
+          <img
+            src="/images/image_icon.jpg"
             alt=""
             className={styles.MobilerestProfileImg}
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
           />
         </div>
       </div>
