@@ -496,7 +496,7 @@
   }
 
   .activeSub {
-    transform: translateX(0); /* Bring into view */
+    transform: translateX(6rem); /* Bring into view */
     opacity: 1; /* Fully visible */
     width: 75%;
     position: absolute;

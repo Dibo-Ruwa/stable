@@ -1,124 +1,136 @@
 "use client";
 
+import Link from "next/link";
 import React, { useState } from "react";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { IconType } from "react-icons/lib";
+import { nanoid } from "nanoid";
+import useOrder from "@/hooks/useOrder";
+import NotificationModal from "@/component/NotificationModal";
+import LoaderComponent from "@/app/loading";
+import PaymentButton from "@/component/paymentButton/SubButton";
 import "./SlideInSub.css";
 
-export interface SlideInSubDataType {
+export interface RestSubPlansDataType {
   subImg: string;
   subType: string;
-  subAmount: string;
+  subAmount: number;
+  planCode: string;
   subItem: {
     tickIcon: IconType;
     subItemText: string;
   }[];
   subFeeText: string;
   ViewSubDetailsLink: string;
-};
-
-interface SlideInSubProps {
-  onClose: () => void
 }
 
+interface SlideInSubProps {
+  onClose: () => void;
+}
 
-const SlideInSubData: SlideInSubDataType[] = [
+const RestSubPlansData: RestSubPlansDataType[] = [
   {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subImg: "/laundry to.png",
+    subType: "Student",
+    subAmount: 6990,
+    planCode: "PLN_jjx1iqwxol2hch4a",
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Approx 20 items in a bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Gentle washing for delicate fabrics",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Stain treatment",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Picked up once a month",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for individual",
       },
     ],
     subFeeText: "Service Fee:",
     ViewSubDetailsLink: "View",
   },
   {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subImg: "/laundry to.png",
+    subType: "Professional",
+    subAmount: 12900,
+    planCode: "PLN_jd0nwcnhvifs0no",
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Free Diboruwa Laundry Bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Approx 44 items in a bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Gentle washing for delicate fabrics",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Stain treatment",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "2 pickups/month (22 items each)",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for family of two",
       },
     ],
     subFeeText: "Service Fee:",
     ViewSubDetailsLink: "View",
   },
   {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
+    subImg: "/laundry to.png",
+    subType: "Family",
+    subAmount: 22400,
+    planCode: "PLN_d3km1qswvj8nbot",
     subItem: [
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Dibo Ruwa Laundry Bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Approx 100 items in a bag",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Gentle washing for delicate fabrics",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
-      },
-    ],
-    subFeeText: "Service Fee:",
-    ViewSubDetailsLink: "View",
-  },
-  {
-    subImg: "/images/Rectangle 194.png",
-    subType: "Weekly Plan",
-    subAmount: "$40,000",
-    subItem: [
-      {
-        tickIcon: IoCheckmarkSharp,
-        subItemText: "2 meal per week",
+        subItemText: "Stain treatment",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Weekly delivery",
+        subItemText: "Quick-dry service",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Standard plate",
+        subItemText: "Emergencies",
       },
       {
         tickIcon: IoCheckmarkSharp,
-        subItemText: "Delivery",
+        subItemText: "Max 4 pickups/month (25 items each)",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for family of four",
       },
     ],
     subFeeText: "Service Fee:",
@@ -126,77 +138,157 @@ const SlideInSubData: SlideInSubDataType[] = [
   },
 ];
 
-export const SlideInSub: React.FC<SlideInSubProps> = ({onClose}) => {
+export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   const [showAll, setShowAll] = useState(false);
-  const visibleData = showAll ? SlideInSubData : SlideInSubData.slice(0, 2);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [selectedSubscription, setSelectedSubscription] =
+    useState<RestSubPlansDataType | null>(null);
+  const visibleData = showAll ? RestSubPlansData : RestSubPlansData.slice(0, 2);
+
+  const {
+    isSubmitting,
+    isError,
+    isSuccess,
+    handleSubscriptionOrderSubmit,
+    showModal,
+    modalMessage,
+    modalErrorType,
+    openModal,
+    closeModal,
+  } = useOrder();
+
+  const referenceId = nanoid(8);
+
+  const onSuccess = (sub: any) => {
+    const subscription = {
+      plan: sub.subType,
+      type: "laundry",
+      isPaid: true,
+      total: sub.subAmount,
+    };
+
+    console.log(subscription);
+    handleSubscriptionOrderSubmit(referenceId, { subscription }, "recurring");
+  };
+
+  // Show loader while data is loading
+  //  if (isSubmitting) {
+  //   return <LoaderComponent />;
+  // }
 
   const handleSeeMoreClick = () => {
     setShowAll(!showAll);
   };
 
+  const handleViewDetailsClick = (subscription: RestSubPlansDataType) => {
+    setSelectedSubscription(subscription);
+    setIsModalOpen(true);
+  };
+
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  //   setSelectedSubscription(null);
+  // };
+
   return (
-    <div className="SlideInSub_container">
-      <div className="SlideInSub_customSub">
-        <p className="SlideInSub_customSub_Title">Subscription Plan</p>
-        <button className="SlideInSub_restaurantSub">
-          <p className="SlideInSub_restaurantSubText">Custom Subscription</p>
-          <LiaAngleRightSolid className="SlideInSub_restaurantSubIcon" />
-        </button>
+    <div className="RestSub_container">
+      <div className="customSub">
+        <p className="customSub_Title">Subscription Plan</p>
+        {/* <Link href="/custom-laundry-subscriptions" className="restaurantSub">
+          <p className="restaurantSubText">Custom Subscription</p>
+          <LiaAngleRightSolid className="restaurantSubIcon" />
+        </Link> */}
       </div>
-      <div className="SlideInSub_Cust_sub_cards">
-        {visibleData.map((plan: SlideInSubDataType, index) => (
-          <div className="SlideInSub_Cust_sub_card" key={index}>
-            <div className="SlideInSub_Cust_sub_ITA">
-              <div className="CSlideInSub_ust_sub_image">
+      <div className="Cust_sub_cards">
+        {visibleData.map((plan: RestSubPlansDataType, index) => (
+          <div className="Cust_sub_card" key={index}>
+            <div className="Cust_sub_ITA">
+              <div className="Cust_sub_image">
                 <img
-                  src={plan.subImg}
+                  src={plan?.subImg}
                   alt="sub image"
-                  className="SlideInSub_Cust_sub_img"
+                  className="Cust_sub_img"
+                  style={{
+                    height: "50px",
+                    width: "50px",
+                  }}
                 />
               </div>
-              <div className="SlideInSub_Cust_sub_TA">
-                <p className="SlideInSub_Cust_sub_type_text">{plan.subType}</p>
-                <p className="SlideInSub_Cust_sub_amount_text">
-                  {plan.subAmount}
-                </p>
+              <div className="Cust_sub_TA">
+                <p className="Cust_sub_type_text">{plan.subType}</p>
+                <p className="Cust_sub_amount_text">{plan.subAmount}</p>
               </div>
             </div>
-            <hr className="SlideInSub_Cust_sub_line_divider" />
-            <div className="SlideInSub_Cust_sub_list_items">
+            <hr className="Cust_sub_line_divider" />
+            <div className="Cust_sub_list_items">
               {plan.subItem.map((item, itemIndex) => (
-                <div className="SlideInSub_Cust_sub_list_item" key={itemIndex}>
+                <div className="Cust_sub_list_item" key={itemIndex}>
                   {React.createElement(item.tickIcon, {
-                    className: "SlideInSub_Cust_sub_list_item_icon",
+                    className: "Cust_sub_list_item_icon",
                   })}
-                  <p className="SlideInSub_Cust_sub_list_item_text">
-                    {item.subItemText}
-                  </p>
+                  <p className="Cust_sub_list_item_text">{item.subItemText}</p>
                 </div>
               ))}
             </div>
-            <hr className="SlideInSub_Cust_sub_line_divider" />
-            <div className="SlideInSub_Cust_sub_SA">
-              <p className="SlideInSub_Cust_sub_SA_text">{plan.subFeeText}</p>
-              <p className="SlideInSub_Cust_sub_amount_text SA_amount">
-                {plan.subAmount}
-              </p>
+            <hr className="Cust_sub_line_divider" />
+            <div className="Cust_sub_SA">
+              <p className="Cust_sub_SA_text">{plan.subFeeText}</p>
+              <p className="Cust_sub_amount_text SA_amount">{plan.subAmount}</p>
             </div>
-            <hr className="SlideInSub_Cust_sub_line_divider" />
-            <button className="SlideInSub_Cust_sub_btn">
+            <hr className="Cust_sub_line_divider" />
+            {/* <button
+              className="Cust_sub_btn"
+              onClick={() => handleViewDetailsClick(plan)}
+            >
               {plan.ViewSubDetailsLink}
-            </button>
+            </button> */}
+            <PaymentButton
+              totalPrice={plan.subAmount}
+              openModal={openModal}
+              buttonText="Select Plan"
+              planCode={plan.planCode}
+              onSuccess={() => onSuccess(plan)}
+              onClose={onClose}
+              referenceId={referenceId}
+              subscriptionType={plan.subType}
+              className="sub_btn"
+            />
           </div>
         ))}
       </div>
       <div className="SlideInSub_SeeMore_close">
-        <button className="SlideInSub_Close_SubText" onClick={onClose}>Close</button>
-        <button className="SlideInSub_SeeMore_Sub" onClick={handleSeeMoreClick}>
+        <button
+          type="button"
+          className="SlideInSub_Close_SubText"
+          onClick={onClose}
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          className="SlideInSub_SeeMore_Sub"
+          onClick={handleSeeMoreClick}
+        >
           <p className="SlideInSub_SeeMore_SubText">
             {showAll ? "See Less" : "See More"}
           </p>
           <LiaAngleRightSolid className="SlideInSub_SeeMore_SubIcon" />
         </button>
       </div>
+
+      {/* <ViewSubscription
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        subscriptionData={selectedSubscription}
+      /> */}
+
+      {showModal && (
+        <NotificationModal
+          message={modalMessage}
+          errorType={modalErrorType}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 };
