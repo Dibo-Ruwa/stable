@@ -11,6 +11,12 @@ img.laundry_img-content {
   height: 24rem;
 }
 
+.laundry_img_update{
+  width: 100%;
+  height: 39.3rem;
+
+}
+
 .laundry_img {
   position: relative;
   width: 100%;
@@ -164,8 +170,17 @@ span.LaundryStep_cicle {
 }
 
 @media only screen and (max-width: 400px) {
-  img.laundry_img-content {
-    width: 20rem;
+  .laundry_img {
+    justify-content: center; /* Center the image */
+  }
+
+  img.laundry_img_update {
+    width: 90%; 
+    height: 90%;
+  }
+
+  img.laundry_img_mobile{
+    display: none;
   }
 
   .laundry_overlay-img {
@@ -375,3 +390,9 @@ span.LaundryStep_cicle {
     left: 18.4rem;
   }
 }
+
+/* @media only screen and (min-width: 768px) {
+  .laundry_img-transparent {
+    width: 100%;
+  }
+} */

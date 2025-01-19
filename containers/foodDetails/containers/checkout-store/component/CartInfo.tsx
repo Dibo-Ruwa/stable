@@ -185,7 +185,7 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
           return (
             <React.Fragment key={item._id}>
               <div className="CartDropdown_Card">
-                <div className="CartDropdown_CardTop">
+                <div className="CartDropdown_CardTop" >
                   <div className="CartDropdown_Details">
                     <div style={{ position: "relative" }}>
                       <div className="CartDropdown_DetailsImage">

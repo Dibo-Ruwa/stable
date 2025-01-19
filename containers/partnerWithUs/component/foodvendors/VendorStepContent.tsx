@@ -20,7 +20,7 @@ const VendorStepContent = () => {
             </div>
           </div>
           <div className="Foodvendor_get_started_text_div">
-            <small className="Foodvendor_get_started_icon_div"> Sign Up</small>
+            <small className="Foodvendor_get_started_icon_div">Join Us</small>
             <p className="Foodvendor_get_started_icon_div">
               Create your account and provider basic information.
             </p>
@@ -81,8 +81,8 @@ const VendorStepContent = () => {
           </div>
         </div>
       </div>
-      <Link href="/sign-up" className="vendor_signup">
-        Sign Up
+      <Link href="https://admin.diboruwa.com/sign-in" className="vendor_signup">
+        Join Us
          <FaArrowRight className="get_started_icon" />
       </Link>
 
