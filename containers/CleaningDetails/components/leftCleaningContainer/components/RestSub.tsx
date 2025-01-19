@@ -24,9 +24,9 @@ export interface RestSubPlansDataType {
   ViewSubDetailsLink: string;
 }
 
-const PUBLIC_CLEANING_STA =  'PLN_fw9vc36viohwk6l'
-const PUBLIC_CLEANING_PRE =  'PLN_b361yykypop2gfz'
-const PUBLIC_CLEANING_DEE = 'PLN_jsbrun8t72zsbiu'
+const PUBLIC_CLEANING_STA = process.env.NEXT_PUBLIC_CLEANING_STA || ""
+const PUBLIC_CLEANING_PRE = process.env.NEXT_PUBLIC_CLEANING_PRE ||  ""
+const PUBLIC_CLEANING_DEE = process.env.NEXT_PUBLIC_CLEANING_DEE || ""
 
 const RestSubPlansData: RestSubPlansDataType[] = [
   {
@@ -49,7 +49,7 @@ const RestSubPlansData: RestSubPlansDataType[] = [
   {
     subImg: "/clean.png",
     subType: "Premium",
-    subAmount: 36950,
+    subAmount: 36900,
     planCode: PUBLIC_CLEANING_PRE,
     subItem: [
       { tickIcon: IoCheckmarkSharp, subItemText: "2 Bedrooms" },

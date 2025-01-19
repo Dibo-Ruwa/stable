@@ -31,9 +31,11 @@ const SubscriptionImageWrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  order: 1; /* Ensure image comes first on mobile */
 
   @media (min-width: 900px) {
-    justify-content: flex-start;
+    justify-content: flex-end;
+    order: 2; /* Ensure image comes second on desktop */
   }
 `;
 
@@ -48,10 +50,12 @@ const SubscriptionTextContainer = styled.div`
   flex: 1;
   margin-top: 2rem;
   text-align: center;
+  order: 2; /* Ensure text comes second on mobile */
 
   @media (min-width: 900px) {
     margin-top: 0;
     text-align: left;
+    order: 1; /* Ensure text comes first on desktop */
   }
 `;
 
@@ -127,8 +131,16 @@ export default function CleaningSubscription() {
   return (
     <CleaningSubscriptionContainer>
       <CleaningSubscriptionContent>
-        
-      <SubscriptionTextContainer>
+        <SubscriptionImageWrapper>
+          <SubscriptionImage
+            src="/images/cleaning_sub.jpg"
+            alt="Convenient cleaning subscription service"
+            width={500}
+            height={500}
+          />
+        </SubscriptionImageWrapper>
+
+        <SubscriptionTextContainer>
           <SubscriptionButton>Cleaning Subscription</SubscriptionButton>
           <SubscriptionSubtitle>Effortless Cleaning, Every Month</SubscriptionSubtitle>
           <SubscriptionDescription>
@@ -140,16 +152,6 @@ export default function CleaningSubscription() {
             <span className="get_started_icon">▶</span>
           </SubscriptionLink>
         </SubscriptionTextContainer>
-
-        <SubscriptionImageWrapper>
-          <SubscriptionImage
-            src="/images/cleaning_sub.jpg"
-            alt="Convenient cleaning subscription service"
-            width={500}
-            height={500}
-          />
-        </SubscriptionImageWrapper>
-
       </CleaningSubscriptionContent>
     </CleaningSubscriptionContainer>
   );
