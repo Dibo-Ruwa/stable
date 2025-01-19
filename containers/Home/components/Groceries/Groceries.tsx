@@ -1,6 +1,10 @@
+// Groceries
+
 "use client";
 import React, { useState, useEffect } from "react";
 import "./groceries.css";
+import "../Meal/meal.css";
+
 import Link from "next/link";
 import Image from "next/image";
 import { IoIosHeartEmpty } from "react-icons/io";
@@ -8,6 +12,10 @@ import { FaBagShopping } from "react-icons/fa6";
 import { MdOutlineTimer } from "react-icons/md";
 import { RiArrowRightSLine } from "react-icons/ri";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { FoodData } from "@/utils/types/types";
+import { useFoodItem } from "@/context/FooItemProvider";
+
 
 // Define the type for a food item
 interface FoodItem {
@@ -19,14 +27,19 @@ interface FoodItem {
 }
 
 export default function Groceries() {
+  const { setSelectedItem } = useFoodItem();
+  const router = useRouter();
+
+  const [activePrepTime, setActivePrepTime] = useState<string>("30mins");
   const [food, setFood] = useState<FoodItem[]>([]); // Set the type for the food state
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/productstype=grocery`,
+          `${process.env.NEXT_PUBLIC_ADMIN_URL}/api/products?type=grocery`,
           {
             params: {
               page: 1,
@@ -51,6 +64,18 @@ export default function Groceries() {
     fetchData();
   }, []);
 
+  const handleItemClick = (item: FoodData) => {
+    setSelectedItem(item);
+    console.log(item);
+    // Check if the item's _id is in the cartItems
+    // const isItemInCart = cartItems.some(
+    //   (cartItem) => cartItem._id === item._id
+    // );
+
+    // Navigate to the checkout page
+    router.push(`/food/checkout`);
+  };
+
   if (loading) {
     return <p>Loading groceries...</p>;
   }
@@ -69,90 +94,66 @@ export default function Groceries() {
               Groceries
             </p>
           </div>
-          <div className="meal_card">
+          <div className="FOODMeal_card">
             {food.map((item) => (
-              <div key={item._id} className="card">
-                <div className="card-img">
+              <div key={item?._id} className="FOODCard">
+              <div className="FOODCard-img">
+           
+                <img
+                  className=""
+                  src={item.imageUrl}
+                  alt="Chef preparing food"
+                />
+              </div>
+              <div style={{ 
+                marginTop: "1rem",
+                backgroundColor: "#fff",
+
+              }} >
+                <div className="meal-dis">
+                  <div>
+                    <div>
+                      <p className="FoodMeal-dis">{item.title}</p>
+                      <div className="meal-dot"></div>
+                      <p className="FoodMeal-disNum">4.5</p>
+                    </div>
+                  </div>
                   <div
                     style={{
-                      backgroundColor: "white",
-                      padding: "6px",
-                      borderRadius: "20px",
-                      position: "absolute",
-                      left: 14,
-                      top: 14,
                       display: "flex",
+                      gap: 3,
                     }}
                   >
-                    <IoIosHeartEmpty
-                      style={{
-                        color: "#4BB149",
-                        margin: "auto",
-                      }}
-                    />
-                  </div>
-                  <Image
-                    className=""
-                    src={item.imageUrl}
-                    alt="Chef preparing food"
-                    width={250}
-                    height={150}
-                  />
-                </div>
-                <Link href={`/groceries/${item._id}`}>
-                  <div className="meal-dis">
-                    <div>
-                      <div>
-                        <p className="meal-disTitle">{item.title}</p>
-                        <div className="groceries_circle"></div>
-                        <p className="meal-disNUm">4.5</p>
-                      </div>
-                      <p
-                        style={{
-                          color: "#EF5A5A",
-                          fontSize: ".75rem",
-                          marginTop: 6,
-                        }}
-                      >
-                        10 Liters remaining
-                      </p>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: 3,
-                      }}
-                    >
-                      <MdOutlineTimer />
-                      <p
-                        style={{
-                          color: "#EF5A5A",
-                          fontSize: ".9rem",
-                        }}
-                        className="meal-disTime"
-                      >
-                        {item.prep_time} {item.prep_time === 1 ? "min" : "mins"}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="price">
-                    <p>₦{item.price}</p>
+                    <MdOutlineTimer />
                     <p
                       style={{
-                        backgroundColor: "#4BB149",
-                        padding: "4px 20px",
-                        borderRadius: "20px",
+                        color: "#EF5A5A",
+                        fontSize: ".9rem",
                       }}
+                      className="FoodTime"
                     >
-                      <FaBagShopping
-                        style={{
-                          color: "white",
-                        }}
-                      />
+                      {item.prep_time} {item.prep_time === 1 ? "min" : "mins"}
                     </p>
                   </div>
-                </Link>
+                </div>
+                <div className="price">
+                  <p>₦{item.price}</p>
+                  <p
+                    style={{
+                      backgroundColor: "#4BB149",
+                      padding: "4px 20px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <FaBagShopping
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                  </p>
+                </div>
               </div>
+            </div>
             ))}
           </div>
 

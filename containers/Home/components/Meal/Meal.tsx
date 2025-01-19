@@ -8,6 +8,10 @@ import { MdOutlineTimer } from "react-icons/md";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { Button } from "@/component/shared/Button";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { FoodData } from "@/utils/types/types";
+import { useFoodItem } from "@/context/FooItemProvider";
+
 
 // Define the type for a food item
 interface FoodItem {
@@ -19,6 +23,9 @@ interface FoodItem {
 }
 
 export default function Meal(): JSX.Element {
+  const { setSelectedItem } = useFoodItem();
+  const router = useRouter();
+
   const [activePrepTime, setActivePrepTime] = useState<string>("30mins");
   const [food, setFood] = useState<FoodItem[]>([]); // Set the type for the food state
   const [loading, setLoading] = useState(true);
@@ -52,6 +59,19 @@ export default function Meal(): JSX.Element {
     fetchData();
   }, []);
 
+  const handleItemClick = (item: FoodData) => {
+    setSelectedItem(item);
+    console.log(item);
+    // Check if the item's _id is in the cartItems
+    // const isItemInCart = cartItems.some(
+    //   (cartItem) => cartItem._id === item._id
+    // );
+
+    // Navigate to the checkout page
+    router.push(`/food/checkout`);
+  };
+
+
   if (loading) {
     return <p>Loading meals...</p>;
   }
@@ -72,77 +92,64 @@ export default function Meal(): JSX.Element {
           </div>
           <div className="FOODMeal_card">
             {food.map((item) => (
-              <div key={item._id} className="FOODCard">
-                <div className="FOODCard-img">
+              <div key={item?._id} className="FOODCard">
+              <div className="FOODCard-img">
+           
+                <img
+                  className=""
+                  src={item.imageUrl}
+                  alt="Chef preparing food"
+                />
+              </div>
+              <div style={{ 
+                marginTop: "1rem",
+                backgroundColor: "#fff",
+
+              }} >
+                <div className="meal-dis">
+                  <div>
+                    <div>
+                      <p className="FoodMeal-dis">{item.title}</p>
+                      <div className="meal-dot"></div>
+                      <p className="FoodMeal-disNum">4.5</p>
+                    </div>
+                  </div>
                   <div
                     style={{
-                      backgroundColor: "white",
-                      padding: "6px",
-                      borderRadius: "20px",
-                      position: "absolute",
-                      left: 14,
-                      top: 14,
                       display: "flex",
+                      gap: 3,
                     }}
                   >
-                    <IoIosHeartEmpty
-                      style={{
-                        color: "#4BB149",
-                        margin: "auto",
-                      }}
-                    />
-                  </div>
-                  <img
-                    className=""
-                    src={item.imageUrl}
-                    alt="Chef preparing food"
-                  />
-                </div>
-                <Link href={`/food/${item._id}`}>
-                  <div className="meal-dis">
-                    <div>
-                      <div>
-                        <p className="FoodMeal-dis">{item.title}</p>
-                        <div className="meal-dot"></div>
-                        <p className="FoodMeal-disNum">4.5</p>
-                      </div>
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: 3,
-                      }}
-                    >
-                      <MdOutlineTimer />
-                      <p
-                        style={{
-                          color: "#EF5A5A",
-                          fontSize: ".9rem",
-                        }}
-                        className="FoodTime"
-                      >
-                        {item.prep_time} {item.prep_time === 1 ? "min" : "mins"}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="price">
-                    <p>₦{item.price}</p>
+                    <MdOutlineTimer />
                     <p
                       style={{
-                        backgroundColor: "#4BB149",
-                        padding: "4px 20px",
-                        borderRadius: "20px",
+                        color: "#EF5A5A",
+                        fontSize: ".9rem",
                       }}
+                      className="FoodTime"
                     >
-                      <FaBagShopping
-                        style={{
-                          color: "white",
-                        }}
-                      />
+                      {item.prep_time} {item.prep_time === 1 ? "min" : "mins"}
                     </p>
                   </div>
-                </Link>
+                </div>
+                <div className="price">
+                  <p>₦{item.price}</p>
+                  <p
+                    style={{
+                      backgroundColor: "#4BB149",
+                      padding: "4px 20px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <FaBagShopping
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                  </p>
+                </div>
               </div>
+            </div>
             ))}
           </div>
 
