@@ -26,7 +26,7 @@
 
 .restProfileImage {
   position: absolute;
-  top: 20rem;
+  bottom: -2rem;
   left: 1rem;
   width: 4.5rem;
 }
@@ -227,13 +227,13 @@
 }
 
 @media screen and (max-width: 1178px) {
-  .coverImage {
+  /* .coverImage {
     width: 100%;
-  }
+  } */
 
-  .restProfileImage {
+  /* .restProfileImage {
     top: 9rem;
-  }
+  } */
 
   .NRSContent {
     flex-direction: column;
@@ -243,14 +243,14 @@
 
 @media screen and (max-width: 1024px) {
   .restProfileImage {
-    top: 8rem;
+    /* top: 8rem; */
     width: 4.5rem;
   }
 }
 
 @media screen and (max-width: 920px) {
   .restProfileImage {
-    top: 7rem;
+    /* top: 7rem; */
     width: 4.5rem;
   }
 }
@@ -264,7 +264,7 @@
 
 @media screen and (max-width: 769px) {
   .restProfileImage {
-    top: 4rem;
+    /* top: 4rem; */
     width: 3.5rem;
   }
 }

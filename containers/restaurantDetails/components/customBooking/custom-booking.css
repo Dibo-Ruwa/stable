@@ -118,7 +118,7 @@ display: none;
 
   .mobile_custombooking_container {
   padding-bottom: 3rem;
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 

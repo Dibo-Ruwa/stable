@@ -23,29 +23,21 @@ p.mostsold_title {
   width: 100%;
   flex-wrap: wrap;
   scroll-snap-type: x mandatory;
-  margin: 0 auto;
+  margin: 1rem auto;
   gap: 30px;
-  margin-top: 30px;
+  /* justify-content: space-between; */
 }
 
 .mostsold-card {
-  width: calc((100% - 60px) / 3);
+  width: calc((100% - 60px) / 3); /* Default: 3 items */
   box-sizing: border-box;
   background-color: #fff;
   overflow-x: hidden;
   border-radius: 16px;
   text-decoration: none;
-  /* border: 2px solid black; */
   cursor: pointer;
   display: flex;
   flex-direction: column;
-}
-
-@media screen and (max-width: 1150px) {
-  .mostsold-card{
-     width: calc((100% - 60px) / 2);
-  }
-  
 }
 
 .mostsold-card_food-img {
@@ -54,7 +46,7 @@ p.mostsold_title {
   flex-direction: column;
   align-items: center;
   border-radius: 16px;
-  height: 200px; /* Fixed height */
+  height: 160px; /* Fixed height */
   overflow: hidden;
 }
 
@@ -85,14 +77,20 @@ p.mostsold_title {
   align-items: center;
 }
 
-small.mostsold-card_rating {
+.mostsold-card_rating {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+small.mostsold-card_ratingNum {
   color: #000000;
 }
 
 small.mostsold-card_title {
   color: var(--Black-100, #2a2a2a);
   font-family: Poppins;
-  font-size: 16px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -140,6 +138,10 @@ svg.mostsold-card_timer-icon {
   align-items: center;
 }
 
+p.mostsold-card_PrepTimer {
+  font-size: 13px;
+}
+
 small.mostsold-card_remender {
   color: #565656;
   font-family: Poppins;
@@ -163,7 +165,7 @@ small.mostsold-card_remender {
 p.mostsold-card_prize-text {
   color: var(--Soft-black, #565656);
   font-family: Poppins;
-  font-size: 20px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -171,10 +173,9 @@ p.mostsold-card_prize-text {
 
 .mostsold-card_prize-link {
   display: flex;
-  width: 78px;
+  width: 40%;
   max-width: 88px;
-  /* padding: 6px 40px; */
-  padding: 10px;
+  padding: 7px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -208,18 +209,25 @@ img.mostsold-sale_img {
   display: flex;
   align-items: center;
 }
-
+.Rating_TimerMObile {
+  display: none;
+}
 @media (max-width: 1024px) {
   .mostsold-cards {
     flex-wrap: wrap;
+    gap: 13px;
   }
 
   .mostsold-card {
-    flex: 1 1 11rem;
+    width: calc((100% - 2rem) / 2);
   }
 
+  .mostsold-card_food-img {
+    height: 150px;
+  }
   small.mostsold-card_title,
-  small.mostsold-card_rating {
+  small.mostsold-card_ratingNum,
+  .mostsold-card_PrepTimer {
     font-size: 13px;
   }
 
@@ -242,12 +250,112 @@ img.mostsold-sale_img {
     width: 100px;
   }
 }
-.mostsold-card_prize-link:hover {
-  background: #1c871b;
+
+@media (max-width: 768px) {
+  .mostsold-card {
+    width: calc((100% - 30px) / 2); /* Still 2 items */
+  }
 }
 
-.mostsold-card_prize-icon {
-  font-size: 1.2rem;
+@media (max-width: 598px) {
+  .mostsold-card_food-img {
+    height: 8rem;
+  }
+}
+
+@media (max-width: 568px) {
+  .mostsold-card_content {
+    padding: 0.6rem 1rem;
+    gap: 0.3rem;
+  }
+
+  .mostsold-card_context {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  p.mostsold-card_prize-text {
+    font-size: 13px;
+  }
+
+  .mostsold-card_prize-link {
+    width: 47px;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 500px) {
+  .mostsold-card {
+    width: calc((100% - 30px) / 2);
+  }
+
+  .mostsold-card_content {
+    padding: 0.6rem 1rem;
+    gap: 0.3rem;
+  }
+
+  .mostsold-card_dot {
+    display: none;
+  }
+
+  .mostsold-card_timer {
+    display: none;
+  }
+
+  .mostsold-card_rating {
+    display: none;
+  }
+
+  .Rating_TimerMObile {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .mostsold-card_ratingMobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .mostsold-card_starMobile {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    color: #ffc93f;
+  }
+
+  p.mostsold-card_PrepTimerMobile {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mostsold-card_food-img {
+    height: 9rem;
+  }
+
+  .mostsold-card_context-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mostsold-cards {
+    gap: 10px;
+  }
+
+  .mostsold-card {
+    width: calc((100% - 10px) / 2);
+  }
+}
+@media (max-width: 380px) {
+  .mostsold-card_food-img {
+    height: 8rem;
+  }
 }
 
 .RestaurantMeal_container {
@@ -296,28 +404,62 @@ p.RestaurantMeal_Liters,
   margin: 2rem auto;
 }
 
+@media (max-width: 768px) {
+  .MPDE_Container {
+    width: 95%;
+  }
+}
+
 .MPDE_Tabs {
   display: flex;
-  gap: 2rem;
+  gap: 0.6rem;
+  overflow-x: auto;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;
 }
 
 .MPDE_Tab {
+  flex-shrink: 0; /* Prevent tabs from shrinking too small */
   cursor: pointer;
+  text-align: center;
+  padding: inherit;
 }
 
 .MPDE_TabText {
   font-family: "Poppins", sans-serif !important;
-  font-size: 14px;
+  font-size: 14px; /* Standard font size */
+  color: #000; /* Default text color */
 }
 
 .MPDE_ActiveTabLine {
   height: 0.3rem;
   border-radius: 2rem 2rem 0 0;
   background: #27a124;
+  margin-top: 0.5rem; /* Space between text and active line */
 }
 
-.active .MPDE_TabText {
+.Active .MPDE_TabText {
   color: #27a124;
+}
+
+/* Add styling for scrollbar */
+.MPDE_Tabs::-webkit-scrollbar {
+  height: 6px; /* Height of the horizontal scrollbar */
+}
+
+.MPDE_Tabs::-webkit-scrollbar-thumb {
+  background: #ccc; /* Color of the scrollbar thumb */
+  border-radius: 4px;
+}
+
+.MPDE_Tabs::-webkit-scrollbar-thumb:hover {
+  background: #888; /* Darker color on hover */
+}
+
+.MPDE_Tabs::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
 }
 
 .RestaurantMeal_cards {

@@ -27,16 +27,33 @@ const MobileAboutCleaning = () => {
       <div className={styles.MobileCPImage}>
         <div className={styles.MobilecoverImage}>
           <img
-            src="/images/image 200.png"
+            src="/images/cleaning_quote.jpg"
             alt=""
             className={styles.MobilecoverImg}
+            style={{
+              borderRadius: "10px",
+            }}
           />
         </div>
-        <div className={styles.MobilerestProfileImage}>
+        <div
+          className={styles.MobilerestProfileImage}
+          style={{
+            border: "1px solid rgb(25, 221, 84)",
+            borderRadius: "50%",
+            width: "4rem",
+            height: "4rem",
+          }}
+        >
           <img
-            src="/images/Ellipse 86.png"
+            src="/images/image_icon.jpg"
             alt=""
             className={styles.MobilerestProfileImg}
+            style={{
+              width: "100%",
+              height: "100%",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
           />
         </div>
       </div>
@@ -90,7 +107,7 @@ export const AboutCleaning = () => {
     <>
       <div className={styles.AboutrestaurantContainer}>
         <div className={styles.restaurantFrame}>
-        <div className={styles.CPImage}>
+          <div className={styles.CPImage}>
             <div className={styles.coverImage}>
               <img
                 src="/images/cleaning_quote.jpg"
@@ -101,11 +118,15 @@ export const AboutCleaning = () => {
                 }}
               />
             </div>
-            <div className={styles.restProfileImage} style={{
-              border: "1px solid rgb(25, 221, 84)",
-              borderRadius: "50%",
-              width: "70px",
-            }}>
+            <div
+              className={styles.restProfileImage}
+              style={{
+                border: "1px solid rgb(25, 221, 84)",
+                borderRadius: "50%",
+                width: "4rem",
+                height: "4rem",
+              }}
+            >
               <img
                 src="/images/image_icon.jpg"
                 alt=""
@@ -134,9 +155,7 @@ export const AboutCleaning = () => {
               <div className={styles.restaurantOpeningTimePhoneNum}>
                 <div className={styles.restaurantOpeningDay}>
                   <CiCalendar className={styles.restaurantOpeningDayIcon} />
-                  <p className={styles.restaurantOpeningDayText}>
-                    Mon - Sun
-                  </p>
+                  <p className={styles.restaurantOpeningDayText}>Mon - Sun</p>
                 </div>
 
                 <div className={styles.restaurantDot}></div>
@@ -159,9 +178,10 @@ export const AboutCleaning = () => {
             </div> */}
             <div className={styles.restaurantDescription_DT}>
               <p className={styles.restaurantDescription}>
-                Experience professional cleaning services that transform your space. 
-                Our expert cleaners deliver thorough and reliable cleaning solutions, 
-                letting you enjoy a spotless environment without the hassle.
+                Experience professional cleaning services that transform your
+                space. Our expert cleaners deliver thorough and reliable
+                cleaning solutions, letting you enjoy a spotless environment
+                without the hassle.
               </p>
             </div>
             <div className={styles.OurLaundryServiceContainer}>
@@ -216,7 +236,6 @@ export const AboutCleaning = () => {
                         objectFit: "cover",
                         borderRadius: "10px",
                       }}
-                      
                     />
                   </div>
                   <p className={styles.OurLaundryServiceCardText}>
