@@ -177,48 +177,77 @@ export default function Meal(): JSX.Element {
             <p style={{ fontSize: "1.3rem", color: "black" }}>Meals</p>
           </div>
           <div className="FOODMeal_card">
-            {food.map((item) => (
-              <div key={item?._id} className="FOODCard">
-                <div
+          {food.map((item) => (
+              <div key={item?._id} 
+              style={{
+                cursor:"pointer",
+              }}
+              className="FOODCard">
+              <div 
                   onClick={() => handleItemClick(item)}
-                  className="FOODCard-img"
-                >
-                  <img src={item?.imageUrl} alt="Chef preparing food" />
-                </div>
-                <div style={{ marginTop: "1rem", backgroundColor: "#fff" }}>
-                  <div
-                    className="meal-dis"
+              
+              className="FOODCard-img">
+           
+                <img
+                  className=""
+                  src={item.imageUrl}
+                  alt="Chef preparing food"
+                />
+              </div>
+              <div style={{ 
+                marginTop: "1rem",
+                backgroundColor: "#fff",
+
+              }} >
+                <div 
                     onClick={() => handleItemClick(item)}
-                  >
+
+                className="meal-dis">
+                  <div>
                     <div>
-                      <p className="FoodMeal-dis">{item?.title}</p>
+                      <p className="FoodMeal-dis">{item.title}</p>
                       <div className="meal-dot"></div>
                       <p className="FoodMeal-disNum">4.5</p>
                     </div>
-                    <div style={{ display: "flex", gap: 3 }}>
-                      <MdOutlineTimer />
-                      <p style={{ color: "#EF5A5A", fontSize: ".9rem" }}>
-                        {item?.prep_time} {item?.prep_time === "1" ? "min" : "mins"}
-                      </p>
-                    </div>
                   </div>
-                  <p>₦{item.price}</p>
-
-                  <div className="price">
-                    <p>₦{item.price}</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: 3,
+                    }}
+                  >
+                    <MdOutlineTimer />
                     <p
-                      onClick={() => handleItemAddToCart(item)}
                       style={{
-                        backgroundColor: "#4BB149",
-                        padding: "4px 20px",
-                        borderRadius: "20px",
+                        color: "#EF5A5A",
+                        fontSize: ".9rem",
                       }}
+                      className="FoodTime"
                     >
-                      <FaBagShopping style={{ color: "white" }} />
+                      {item.prep_time} {item.prep_time === '1' ? "min" : "mins"}
                     </p>
                   </div>
                 </div>
+                <div className="price">
+                  <p>₦{item.price}</p>
+                  <p
+                    style={{
+                      backgroundColor: "#4BB149",
+                      padding: "4px 20px",
+                      borderRadius: "20px",
+                    }}
+                    onClick={() => handleItemAddToCart(item)}
+
+                  >
+                    <FaBagShopping
+                      style={{
+                        color: "white",
+                      }}
+                    />
+                  </p>
+                </div>
               </div>
+            </div>
             ))}
           </div>
 
