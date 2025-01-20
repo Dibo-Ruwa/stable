@@ -13,26 +13,78 @@ import { MdOutlineTimer } from "react-icons/md";
 import { RiArrowRightSLine } from "react-icons/ri";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { FoodData } from "@/utils/types/types";
+// import { FoodData } from "@/utils/types/types";
 import { useFoodItem } from "@/context/FooItemProvider";
+import { Extra } from "@/utils/types/types"; // Import the Extra type
+import useCartStore from "@/store/useCart.store";
+import toast from "react-hot-toast";
 
 
 // Define the type for a food item
-interface FoodItem {
+export interface FoodItem {
   _id: string;
-  imageUrl: string;
   title: string;
-  prep_time: number;
+  prep_time: string;
+  categories: string[];
   price: number;
+  totalPrice?: number;
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    name: string;
+    owner: string;
+    branch: {
+      location: {
+        city: {
+          _id: string;
+          name: string;
+        };
+        region: {
+          _id: string;
+          name: string;
+        };
+      };
+      _id: string;
+      deliveries: {
+        region: {
+          _id: string;
+          name: string;
+        };
+        price: number;
+        _id: string;
+      }[];
+    }[];
+    operations: {
+      day: string;
+      openingHour: string;
+      closingHour: string;
+      _id: string;
+    }[];
+  };
+  discount: number;
+  extras: Extra[];
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  __v: number;
+  id: string;
+  quantity?: number;
 }
 
 export default function Groceries() {
   const { setSelectedItem } = useFoodItem();
+  const { cartItems, addToCartWithExtras, getCurrentVendor } = useCartStore();
+
   const router = useRouter();
 
   const [activePrepTime, setActivePrepTime] = useState<string>("30mins");
-  const [food, setFood] = useState<FoodItem[]>([]); // Set the type for the food state
+  const [food, setFood] = useState<FoodItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [vendorModal, setVendorModal] = useState({
+    isOpen: false,
+    currentVendor: "",
+  });
+  const [showToast, setShowToast] = useState(false);
 
 
   useEffect(() => {
@@ -50,7 +102,23 @@ export default function Groceries() {
 
         const newData = response.data?.data;
         if (Array.isArray(newData)) {
-          setFood(newData.slice(0, 4)); // Only take the first 4 items
+          const transformedData = newData.map((item: any) => ({
+            _id: item._id,
+            title: item.title,
+            prep_time: item.prep_time,
+            categories: item.categories,
+            price: item.price,
+            imageUrl: item.imageUrl,
+            vendor: item.vendor,
+            discount: item.discount,
+            extras: item.extras || [],
+            createdAt: item.createdAt,
+            updatedAt: item.updatedAt,
+            slug: item.slug,
+            __v: item.__v,
+            id: item.id,
+          }));
+          setFood(transformedData.slice(0, 4));
         } else {
           console.error("Invalid data format:", newData);
         }
@@ -64,16 +132,42 @@ export default function Groceries() {
     fetchData();
   }, []);
 
-  const handleItemClick = (item: FoodData) => {
+  const handleItemClick = (item: FoodItem) => {
     setSelectedItem(item);
     console.log(item);
-    // Check if the item's _id is in the cartItems
-    // const isItemInCart = cartItems.some(
-    //   (cartItem) => cartItem._id === item._id
-    // );
-
-    // Navigate to the checkout page
     router.push(`/food/checkout`);
+  };
+
+  const handleItemAddToCart = async (item: FoodItem) => {
+    try {
+      const currentVendor = getCurrentVendor();
+
+      if (currentVendor && currentVendor !== item.vendor.name) {
+        setVendorModal({
+          isOpen: true,
+          currentVendor: currentVendor,
+        });
+        return;
+      }
+
+      const itemWithExtras = {
+        ...item,
+        extras: item.extras ?? [],
+      };
+
+      await addToCartWithExtras(itemWithExtras, itemWithExtras.extras);
+      setShowToast(true);
+    } catch (error: any) {
+      console.error("Error adding item to cart:", error);
+      toast.error(error.message || "Failed to add item to cart");
+    }
+  };
+
+  const handleCloseVendorModal = () => {
+    setVendorModal({
+      isOpen: false,
+      currentVendor: "",
+    });
   };
 
   if (loading) {
@@ -96,8 +190,15 @@ export default function Groceries() {
           </div>
           <div className="FOODMeal_card">
             {food.map((item) => (
-              <div key={item?._id} className="FOODCard">
-              <div className="FOODCard-img">
+              <div key={item?._id} 
+              style={{
+                cursor:"pointer",
+              }}
+              className="FOODCard">
+              <div 
+                  onClick={() => handleItemClick(item)}
+              
+              className="FOODCard-img">
            
                 <img
                   className=""
@@ -110,7 +211,10 @@ export default function Groceries() {
                 backgroundColor: "#fff",
 
               }} >
-                <div className="meal-dis">
+                <div 
+                    onClick={() => handleItemClick(item)}
+
+                className="meal-dis">
                   <div>
                     <div>
                       <p className="FoodMeal-dis">{item.title}</p>
@@ -132,7 +236,7 @@ export default function Groceries() {
                       }}
                       className="FoodTime"
                     >
-                      {item.prep_time} {item.prep_time === 1 ? "min" : "mins"}
+                      {item.prep_time} {item.prep_time === '1' ? "min" : "mins"}
                     </p>
                   </div>
                 </div>
@@ -144,6 +248,8 @@ export default function Groceries() {
                       padding: "4px 20px",
                       borderRadius: "20px",
                     }}
+                    onClick={() => handleItemAddToCart(item)}
+
                   >
                     <FaBagShopping
                       style={{

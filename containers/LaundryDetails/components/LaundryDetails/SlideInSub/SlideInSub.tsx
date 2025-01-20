@@ -24,7 +24,9 @@ export interface SlideInSubDataType {
 }
 
 interface SlideInSubProps {
+
   onClose: () => void;
+
 }
 
 
@@ -39,11 +41,26 @@ const SlideInSubData: SlideInSubDataType[] = [
     subAmount: 8900,
     planCode: RegulaPlan,
     subItem: [
-      { tickIcon: IoCheckmarkSharp, subItemText: "Approx 20 items in a bag" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Gentle washing for delicate fabrics" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Stain treatment" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Picked up once a month" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Ideal for individual" },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Approx 20 items in a bag",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Gentle washing for delicate fabrics",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Stain treatment",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Picked up once a month",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for individual",
+      },
     ],
     subFeeText: "Service Fee:",
     ViewSubDetailsLink: "View",
@@ -54,12 +71,30 @@ const SlideInSubData: SlideInSubDataType[] = [
     subAmount: 15900,
     planCode: ProfessionalPlan,
     subItem: [
-      { tickIcon: IoCheckmarkSharp, subItemText: "Free Diboruwa Laundry Bag" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Approx 44 items in a bag" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Gentle washing for delicate fabrics" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Stain treatment" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "2 pickups/month (22 items each)" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Ideal for family of two" },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Free Diboruwa Laundry Bag",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Approx 44 items in a bag",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Gentle washing for delicate fabrics",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Stain treatment",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "2 pickups/month (22 items each)",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for family of two",
+      },
     ],
     subFeeText: "Service Fee:",
     ViewSubDetailsLink: "View",
@@ -70,14 +105,38 @@ const SlideInSubData: SlideInSubDataType[] = [
     subAmount: 37500,
     planCode: FamilyPlan,
     subItem: [
-      { tickIcon: IoCheckmarkSharp, subItemText: "Dibo Ruwa Laundry Bag" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Approx 100 items in a bag" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Gentle washing for delicate fabrics" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Stain treatment" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Quick-dry service" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Emergencies" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Max 4 pickups/month (25 items each)" },
-      { tickIcon: IoCheckmarkSharp, subItemText: "Ideal for family of four" },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Dibo Ruwa Laundry Bag",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Approx 100 items in a bag",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Gentle washing for delicate fabrics",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Stain treatment",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Quick-dry service",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Emergencies",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Max 4 pickups/month (25 items each)",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for family of four",
+      },
     ],
     subFeeText: "Service Fee:",
     ViewSubDetailsLink: "View",
@@ -125,6 +184,7 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
     }}
     >
       <div className="SlideInSub_customSub">
+
         <p className="SlideInSub_customSub_Title">Subscription Plan</p>
         {/* <button className="SlideInSub_restaurantSub">
           <p className="SlideInSub_restaurantSubText">Custom Subscription</p>
@@ -177,7 +237,7 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
               buttonText="Select Plan"
               planCode={plan.planCode}
               onSuccess={() => onSuccess(plan)}
-              onClose={onClose}
+              onClose={onClose} // Pass the onClose prop here
               referenceId={referenceId}
               subscriptionType={plan.subType}
               className="sub_btn"
