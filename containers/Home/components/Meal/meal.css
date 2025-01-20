@@ -1,207 +1,119 @@
 .title {
   text-align: center;
   margin-bottom: 20px;
-  margin-top: -20px;.title {
-  text-align: center;
-  margin-bottom: 20px;
   margin-top: -20px;
-  font-size: 1rem;
-}
-
-.meal-duration {
-  display: flex;
-  justify-content: space-between;
-  margin: 40px auto;
-  /* background-color: red; */
-  width: 92%;
-}
-
-.prep-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
-  height: fit-content;
-}
-
-.prep-menu {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.prep-text-active {
-  background: #4bb149;
-  color: #fefefe;
-  border: none;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  border-radius: 59.74px;
-  word-wrap: break-word;
-  font-size: 14px;
-  padding: 6px 14px;
-}
-.prep-text {
-  font-size: 14px;
-  padding: 6px 14px;
-  border-radius: 59.74px;
-  border: 0.6px #2a2a2a solid;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  word-wrap: break-word;
-}
-
-.FOODMeal_card {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-}
-
-.FOODCard {
-  width: calc(24.33% - 20px); /* 3 items on large screens */
-  flex-shrink: 0;
-  box-sizing: border-box;
-  background-color: #fff;
-  border-radius: 16px;
-}
-
-@media (max-width: 1024px) {
-  .FOODCard {
-    width: calc(50% - 20px); /* 2 items on medium screens */
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: -20px;
+    font-size: 1rem;
   }
-}
 
-@media (max-width: 768px) {
-  .FOODCard {
-    width: calc(50% - 20px); /* Keep 2 items on smaller screens */
+  .meal-duration {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px auto;
+    /* background-color: red; */
+    width: 92%;
   }
-}
 
-@media (max-width: 500px) {
-  .FOODCard {
-            width: calc(50% - 20px) /* 1 item on small screens */
+  .prep-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    height: fit-content;
   }
-}
 
-.FOODCard-img {
-  /* width: 100%;
+  .prep-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .prep-text-active {
+    background: #4bb149;
+    color: #fefefe;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    border-radius: 59.74px;
+    word-wrap: break-word;
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+  .prep-text {
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 59.74px;
+    border: 0.6px #2a2a2a solid;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
+
+  .FOODMeal_card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .FOODCard {
+    width: calc(24.33% - 20px); /* 3 items on large screens */
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 16px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1024px) {
+    .FOODCard {
+      width: calc(50% - 20px); /* 2 items on medium screens */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .FOODCard {
+      width: calc(50% - 20px); /* Keep 2 items on smaller screens */
+    }
+  }
+
+  @media (max-width: 500px) {
+    .FOODCard {
+      width: calc(50% - 20px); /* 1 item on small screens */
+    }
+  }
+
+  .FOODCard-img {
+    /* width: 100%;
   height: 200px;
   overflow: hidden; 
   border-radius: 16px;
   position: relative; */
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 16px;
-  height: 200px; /* Fixed height */
-  overflow: hidden;
-}
-
-.FOODCard-img img {
-  /* width: 100%;  */
-  /* height: 100%;  */
-  object-fit: cover; 
-}
-
-
-
-.meal_card .card img {
-  width: 100%;
-  height: 100%;
-}
-
-.wish {
-  z-index: 1;
-}
-
-.meal_card .card a {
-  display: flex;
-  flex-direction: column;
-  margin: 12px auto;
-  color: #565656;
-  text-decoration: none;
-  width: 92%;
-}
-.meal-dis {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.meal-dis div > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-}
-
-.meal-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #4bb149;
-  margin: auto;
-  margin-top: 0.6rem;
-}
-
-
-.price {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 12px;
-  margin: 6px 8px 16px;
-
-  color: #565656;
-  background-color: #f6f6f6;
-  border-radius: 20px;
-  text-decoration: none;
-  width: 100%;
-}
-
-@media (max-width: 850px) {
-  .meal_card {
-    justify-content: center;
-  }
-  .meal_card .card {
-    width: 350px;
-  }
-}
-
-@media (max-width: 801px) {
-  .meal_card .card {
-    width: 100%;
-  }
-}
-@media (max-width: 650px) {
-  .meal {
-    width: 90%;
-    padding: 40px 0;
-    color: #565656;
-  }
-
-  .meal_card {
+    position: relative;
     display: flex;
-    width: 90%;
-    scroll-snap-type: x mandatory;
-    margin: 0 auto;
-    gap: 20px;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 16px;
+    height: 200px; /* Fixed height */
+    overflow: hidden;
   }
 
-  .meal_card .card {
-    scroll-snap-align: center;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    background-color: #fff;
-    overflow-x: hidden;
-    border-radius: 6px;
+  .FOODCard-img img {
+    /* width: 100%;  */
+    /* height: 100%;  */
+    object-fit: cover;
   }
 
   .meal_card .card img {
-    border-radius: 0px;
-    /* width: 250px;
-    height: 150px; */
+    width: 100%;
+    height: 100%;
+  }
+
+  .wish {
+    z-index: 1;
   }
 
   .meal_card .card a {
@@ -212,33 +124,120 @@
     text-decoration: none;
     width: 92%;
   }
-}
-
-@media (max-width: 450px) {
-  .meal_card .card {
-    scroll-snap-align: center;
-    flex-shrink: 0;
-    box-sizing: border-box;
-    background-color: #fff;
-    overflow-x: hidden;
-    border-radius: 6px;
-  }
-
-  .meal_card .card img {
-    border-radius: 0px;
-    /* width: 200px;
-    height: 130px; */
-  }
-
-  .meal_card .card a {
+  .meal-dis {
     display: flex;
-    flex-direction: column;
-    margin: 0px auto;
-    color: #565656;
-    text-decoration: none;
-    width: 92%;
+    justify-content: space-between;
+    padding: 10px;
   }
-}
+
+  .meal-dis div > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .meal-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #4bb149;
+    margin: auto;
+    margin-top: 0.6rem;
+  }
+
+  .price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    margin: 6px 8px 16px;
+
+    color: #565656;
+    background-color: #f6f6f6;
+    border-radius: 20px;
+    text-decoration: none;
+    width: 100%;
+  }
+
+  @media (max-width: 850px) {
+    .meal_card {
+      justify-content: center;
+    }
+    .meal_card .card {
+      width: 350px;
+    }
+  }
+
+  @media (max-width: 801px) {
+    .meal_card .card {
+      width: 100%;
+    }
+  }
+  @media (max-width: 650px) {
+    .meal {
+      width: 90%;
+      padding: 40px 0;
+      color: #565656;
+    }
+
+    .meal_card {
+      display: flex;
+      width: 90%;
+      scroll-snap-type: x mandatory;
+      margin: 0 auto;
+      gap: 20px;
+    }
+
+    .meal_card .card {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      background-color: #fff;
+      overflow-x: hidden;
+      border-radius: 6px;
+    }
+
+    .meal_card .card img {
+      border-radius: 0px;
+      /* width: 250px;
+    height: 150px; */
+    }
+
+    .meal_card .card a {
+      display: flex;
+      flex-direction: column;
+      margin: 12px auto;
+      color: #565656;
+      text-decoration: none;
+      width: 92%;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .meal_card .card {
+      scroll-snap-align: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      background-color: #fff;
+      overflow-x: hidden;
+      border-radius: 6px;
+    }
+
+    .meal_card .card img {
+      border-radius: 0px;
+      /* width: 200px;
+    height: 130px; */
+    }
+
+    .meal_card .card a {
+      display: flex;
+      flex-direction: column;
+      margin: 0px auto;
+      color: #565656;
+      text-decoration: none;
+      width: 92%;
+    }
+  }
 
   font-size: 1rem;
 }
@@ -299,8 +298,6 @@
   box-sizing: border-box;
   background-color: #fff;
   border-radius: 16px;
-
-  height: 300px; /* Fixed height */
   overflow: hidden;
 }
 
@@ -318,7 +315,7 @@
 
 @media (max-width: 500px) {
   .FOODCard {
-            width: calc(50% - 20px) /* 1 item on small screens */
+    width: calc(50% - 20px); /* 1 item on small screens */
   }
 }
 
@@ -332,11 +329,30 @@
 }
 
 .FOODCard-img img {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
+
+
+@media (max-width: 598px) {
+  .FOODCard-img {
+    height: 8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .FOODCard-img {
+    height: 8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .FOODCard-img {
+    height: 8rem;
+  }
+}
 
 .meal_card .card img {
   width: 100%;
@@ -376,14 +392,13 @@
   margin-top: 0.6rem;
 }
 
-
 .price {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
   margin: 6px 8px 16px;
-  
+
   color: #565656;
   background-color: #f6f6f6;
   border-radius: 20px;

@@ -25,12 +25,14 @@ export interface SlideInSubDataType {
 }
 
 interface SlideInSubProps {
+
   onClose: () => void;
 }
 
 const PUBLIC_CLEANING_STA = process.env.NEXT_PUBLIC_CLEANING_STA || ""
 const PUBLIC_CLEANING_PRE = process.env.NEXT_PUBLIC_CLEANING_PRE ||  ""
 const PUBLIC_CLEANING_DEE = process.env.NEXT_PUBLIC_CLEANING_DEE || ""
+
 
 const SlideInSubData: SlideInSubDataType[] = [
   {
@@ -107,7 +109,7 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   const onSuccess = (sub: any) => {
     const subscription = {
       plan: sub.subType,
-      type: "meal",
+      type: "cleaning",
       isPaid: true,
       total: sub.subAmount,
     };
@@ -180,7 +182,7 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
               buttonText="Select Plan"
               planCode={plan.planCode}
               onSuccess={() => onSuccess(plan)}
-              onClose={onClose}
+              onClose={onClose} // Pass the onClose prop here
               referenceId={referenceId}
               subscriptionType={plan.subType}
               className="sub_btn"

@@ -208,7 +208,6 @@ export interface Extra {
   discount?: number;
   slug: string;
   id: string;
-  // quantity?: number; 
 }
 
 // Remove ExtraWithQuantity interface
@@ -266,10 +265,10 @@ export interface ProductData {
   quantity?: number; // Optional
 }
 
-export interface FoodData {
+export interface FoodItem {
   _id: string;
   title: string;
-  prep_time: string;
+  prep_time: string; // Changed from number to string to match FoodData
   categories: string[];
   price: number;
   totalPrice?: number; // Optional
@@ -307,7 +306,7 @@ export interface FoodData {
     }[];
   };
   discount: number;
-  extras: Extra[]; // Updated to use the `Extra` interface
+  extras: Extra[]; // Assuming `Extra` is defined elsewhere
   createdAt: string;
   updatedAt: string;
   slug: string;
