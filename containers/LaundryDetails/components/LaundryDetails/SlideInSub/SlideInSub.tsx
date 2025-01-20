@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { IoCheckmarkSharp } from "react-icons/io5";
+import { IoCheckmarkSharp, IoClose } from "react-icons/io5";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { IconType } from "react-icons/lib";
 import { nanoid } from "nanoid";
@@ -24,8 +24,11 @@ export interface SlideInSubDataType {
 }
 
 interface SlideInSubProps {
-  onClose: () => void; // Ensure onClose is passed as a prop
+
+  onClose: () => void;
+
 }
+
 
 const RegulaPlan = process.env.NEXT_PUBLIC_LAUNDRY_REG || "";
 const ProfessionalPlan = process.env.NEXT_PUBLIC_LAUNDRY_PRO || "";
@@ -175,13 +178,19 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="SlideInSub_container">
+    <div className="SlideInSub_container"
+    style={{ 
+      zIndex: 100, width: "95vw", marginLeft: "-85px" 
+    }}
+    >
       <div className="SlideInSub_customSub">
-        <p className="SlideInSub_customSub_Title">Subscription Planssssss</p>
-        <button className="SlideInSub_restaurantSub">
+
+        <p className="SlideInSub_customSub_Title">Subscription Plan</p>
+        {/* <button className="SlideInSub_restaurantSub">
           <p className="SlideInSub_restaurantSubText">Custom Subscription</p>
           <LiaAngleRightSolid className="SlideInSub_restaurantSubIcon" />
-        </button>
+        </button> */}
+        <IoClose onClick={onClose} style={{ cursor: 'pointer' }} />
       </div>
       <div className="SlideInSub_Cust_sub_cards">
         {visibleData.map((plan: SlideInSubDataType, index) => (

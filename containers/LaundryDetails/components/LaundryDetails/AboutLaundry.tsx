@@ -71,7 +71,7 @@ const MobileAboutLaundry = () => {
           <div className={styles.MobilerestaurantDot}></div>
           <p className={styles.MobilerestaurantOpeningTime}>8am - 8pm</p>
           <div className={styles.MobilerestaurantDot}></div>
-          <p className={styles.MobilerestaurantPhoneNum}>0903 414 5971</p>
+          <p className={styles.MobilerestaurantPhoneNum}>08059303261</p>
         </div>
       </div>
       <div className={styles.OurLaundryServiceContainer}>

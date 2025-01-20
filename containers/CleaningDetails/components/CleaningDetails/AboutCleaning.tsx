@@ -90,13 +90,8 @@ const MobileAboutCleaning = () => {
           <div className={styles.MobilerestaurantDot}></div>
           <p className={styles.MobilerestaurantOpeningTime}>7am - 6pm</p>
           <div className={styles.MobilerestaurantDot}></div>
-          <p className={styles.MobilerestaurantPhoneNum}>Contact Support</p>
+          <p className={styles.MobilerestaurantPhoneNum}>08059303261</p>
         </div>
-        <div className={styles.MobilerestaurantLocation}>
-          <SlLocationPin className={styles.MobilerestaurantLocationIcon} />
-          <p className={styles.MobilerestaurantLocationText}>Ikeja, Lagos</p>
-        </div>
-        <button className={styles.MobilerestaurantReview}>Reviews</button>
       </div>
     </div>
   );
