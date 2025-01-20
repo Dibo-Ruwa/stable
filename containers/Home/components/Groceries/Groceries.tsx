@@ -18,6 +18,8 @@ import { useFoodItem } from "@/context/FooItemProvider";
 import { Extra } from "@/utils/types/types"; // Import the Extra type
 import useCartStore from "@/store/useCart.store";
 import toast from "react-hot-toast";
+import { Toast } from "@/lib/Toast";
+import VendorModal from "@/component/modals/VendorModal";
 
 
 // Define the type for a food item
@@ -162,7 +164,6 @@ export default function Groceries() {
       toast.error(error.message || "Failed to add item to cart");
     }
   };
-
   const handleCloseVendorModal = () => {
     setVendorModal({
       isOpen: false,
@@ -285,6 +286,16 @@ export default function Groceries() {
           </Link>
         </div>
       </div>
+      <Toast
+        message="Item added to cart!"
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
+      <VendorModal
+        isOpen={vendorModal.isOpen}
+        onClose={handleCloseVendorModal}
+        currentVendor={vendorModal.currentVendor}
+      />
     </div>
   );
 }

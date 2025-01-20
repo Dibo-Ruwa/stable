@@ -14,15 +14,6 @@ export const JoinUs = () => {
         </div>
       </div>
       <div className="JoinUs_content">
-        <div className="JoinUs_image">
-          <Image
-            src="/images/Join.png"
-            alt=""
-            width={571}
-            height={377}
-            className="Join_img"
-          />
-        </div>
         <div className="JoinUs_description_CTA">
           <p className="JoinUs_des">
             Are you passionate about making a difference? We're looking for
@@ -34,11 +25,20 @@ export const JoinUs = () => {
             we'd love to hear from you.
           </p>
           <Link
-            href="https://admin.diboruwa.com/sign-in"
+            href="mailto:info@diboruwa.com"
             className="JoinUs_CTA"
           >
             Apply Now
           </Link>
+        </div>
+        <div className="JoinUs_image">
+          <Image
+            src="/images/Join.png"
+            alt=""
+            width={571}
+            height={377}
+            className="Join_img"
+          />
         </div>
       </div>
     </section>

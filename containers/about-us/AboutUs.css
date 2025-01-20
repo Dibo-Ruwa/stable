@@ -532,6 +532,35 @@ span.JoinUs_Line {
 
 .JoinUs_content {
   display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .JoinUs_content {
+    flex-direction: row-reverse;
+  }
+}
+
+.JoinUs_image {
+  order: 0;
+}
+
+.JoinUs_description_CTA {
+  order: 1;
+}
+
+@media (max-width: 767px) {
+  .JoinUs_image {
+    order: -1;
+  }
+
+  .JoinUs_description_CTA {
+    order: 0;
+  }
+}
+
+.JoinUs_content {
+  display: flex;
   align-items: center;
   width: 100%;
   justify-content: center;

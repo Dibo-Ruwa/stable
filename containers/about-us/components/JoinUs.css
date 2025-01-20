@@ -1,0 +1,20 @@
+.JoinUs_content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .JoinUs_content {
+    flex-direction: row;
+  }
+}
+
+.JoinUs_image {
+  order: 0;
+}
+
+@media (max-width: 767px) {
+  .JoinUs_image {
+    order: -1;
+  }
+}
