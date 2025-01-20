@@ -19,7 +19,7 @@ export default function LaundryService() {
           />
           <div className="laundry_mobile-image">
             <img
-              src="/images/image 161.png"
+              src="/images/laundry_machine.jpg"
               className="laundry_img-main"
               alt="Laundry guys"
             />

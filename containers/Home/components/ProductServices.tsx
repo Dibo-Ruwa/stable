@@ -48,7 +48,9 @@ const MobileView: React.FC = () => {
                 One platform, endless convenience. Simplify your life with our
                 intuitive solution for all your needs.
               </div>
-              <button className="get-started-btn">Get Started</button>
+              <Link href={selectedData?.tagLink || "#"}>
+                <button className="get-started-btn">Get Started</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -151,7 +153,9 @@ const ProductServices: React.FC<ProductServicesProps> = ({
                 One platform, endless convenience. Simplify your life with our
                 intuitive solution for all your needs.
               </div>
-              <button className="get-started-btn">Get Started</button>
+              <Link href={selectedItem?.tagLink || "#"}>
+                <button className="get-started-btn">Get Started</button>
+              </Link>
             </div>
           </div>
           {selectedItem && (

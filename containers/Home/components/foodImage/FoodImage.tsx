@@ -32,7 +32,7 @@ export default function FoodImage() {
                 color: 'black',
               }}
             >
-              Food delivery & moving
+              Moving and Percel Delivery
             </p>
             
           </div>
