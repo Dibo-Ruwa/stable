@@ -74,6 +74,7 @@ export const SchDeliveryOpl: React.FC<SchDeliveryOplProps> = ({ onScheduleChange
         date={pickupDate}
         label="Date"
         onDateChange={handleDateChange}
+        InputClassName="checkOutInputDate"
       />
       <StyledScheduleTime
         time={pickupTime}
