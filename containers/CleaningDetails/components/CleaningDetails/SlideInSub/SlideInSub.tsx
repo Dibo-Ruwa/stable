@@ -15,8 +15,6 @@ export interface SlideInSubDataType {
   subType: string;
   subAmount: number;
   planCode: string;
-  subAmount: number;
-  planCode: string;
   subItem: {
     tickIcon: IconType;
     subItemText: string;
@@ -24,24 +22,17 @@ export interface SlideInSubDataType {
   subFeeText: string;
   ViewSubDetailsLink: string;
 }
-}
 
 interface SlideInSubProps {
-  onClose: () => void;
-  onClose: () => void;
+  onClose: () => void; // Ensure onClose is passed as a prop
 }
 
-const PUBLIC_CLEANING_STA = process.env.NEXT_PUBLIC_CLEANING_STA || ""
-const PUBLIC_CLEANING_PRE = process.env.NEXT_PUBLIC_CLEANING_PRE ||  ""
-const PUBLIC_CLEANING_DEE = process.env.NEXT_PUBLIC_CLEANING_DEE || ""
-
+const PUBLIC_CLEANING_STA = process.env.NEXT_PUBLIC_CLEANING_STA || "";
+const PUBLIC_CLEANING_PRE = process.env.NEXT_PUBLIC_CLEANING_PRE || "";
+const PUBLIC_CLEANING_DEE = process.env.NEXT_PUBLIC_CLEANING_DEE || "";
 
 const SlideInSubData: SlideInSubDataType[] = [
   {
-    subImg: "/clean.png",
-    subType: "Standard",
-    subAmount: 24900,
-    planCode: PUBLIC_CLEANING_STA,
     subImg: "/clean.png",
     subType: "Standard",
     subAmount: 24900,
@@ -76,10 +67,6 @@ const SlideInSubData: SlideInSubDataType[] = [
     ViewSubDetailsLink: "View",
   },
   {
-    subImg: "/clean.png",
-    subType: "Deep",
-    subAmount: 45900,
-    planCode: PUBLIC_CLEANING_DEE,
     subImg: "/clean.png",
     subType: "Deep",
     subAmount: 45900,
@@ -119,7 +106,7 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   const onSuccess = (sub: any) => {
     const subscription = {
       plan: sub.subType,
-      type: "meal",
+      type: "cleaning",
       isPaid: true,
       total: sub.subAmount,
     };
@@ -186,7 +173,7 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
               buttonText="Select Plan"
               planCode={plan.planCode}
               onSuccess={() => onSuccess(plan)}
-              onClose={onClose}
+              onClose={onClose} // Pass the onClose prop here
               referenceId={referenceId}
               subscriptionType={plan.subType}
               className="sub_btn"
