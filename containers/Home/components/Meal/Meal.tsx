@@ -199,13 +199,13 @@ export default function Meal(): JSX.Element {
                 backgroundColor: "#fff",
 
               }} >
-                <div 
+                <div
                     onClick={() => handleItemClick(item)}
 
                 className="meal-dis">
                   <div>
                     <div>
-                      <p className="FoodMeal-dis">{item.title}</p>
+                      <p className="FoodMeal-dis">{item.title.slice(0, 10)}...</p>
                       <div className="meal-dot"></div>
                       <p className="FoodMeal-disNum">4.5</p>
                     </div>
@@ -220,7 +220,7 @@ export default function Meal(): JSX.Element {
                     <p
                       style={{
                         color: "#EF5A5A",
-                        fontSize: ".9rem",
+                        fontSize: "0.79rem",
                       }}
                       className="FoodTime"
                     >
