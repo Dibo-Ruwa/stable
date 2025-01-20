@@ -19,7 +19,7 @@ export const AboutHeader = () => {
           <p className="AboutHeader_Title">
             DIBORUWA is your go-to solution for{" "}
             <span className="AboutHeader_ChangingText">
-              Moving{" "}
+              Your Daily Essential Services{" "}
               <Image
                 src="/images/image 15.png"
                 alt="moving"
@@ -53,7 +53,7 @@ export const AboutHeader = () => {
           className="Ellipse_top"
         />
         <Image
-          src="/images/Rectangle 26.png"
+          src="/images/about_us.png"
           alt=""
           width={783.371}
           height={633}

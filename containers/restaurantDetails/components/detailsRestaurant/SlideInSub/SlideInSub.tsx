@@ -11,7 +11,6 @@ import PaymentButton from "@/component/paymentButton/SubButton";
 import "./SlideInSub.css";
 import { IoClose } from "react-icons/io5";
 
-
 export interface SlideInSubDataType {
   subImg: string;
   subType: string;
@@ -29,128 +28,128 @@ interface SlideInSubProps {
   onClose: () => void;
 }
 
-const FOOD_STA = process.env.NEXT_PUBLIC_FOOD_STA || "" 
-const FOOD_REG = process.env.NEXT_PUBLIC_FOOD_REG || "" 
-const FOOD_ENT = process.env.NEXT_PUBLIC_FOOD_ENT || "" 
-const FOOD_GOL = process.env.NEXT_PUBLIC_FOOD_GOL || "" 
+const FOOD_STA = process.env.NEXT_PUBLIC_FOOD_STA || "";
+const FOOD_REG = process.env.NEXT_PUBLIC_FOOD_REG || "";
+const FOOD_ENT = process.env.NEXT_PUBLIC_FOOD_ENT || "";
+const FOOD_GOL = process.env.NEXT_PUBLIC_FOOD_GOL || "";
 
 const SlideInSubData: SlideInSubDataType[] = [
   {
-     subImg: "/images/Rectangle 194.png",
-     subType: "Starter",
-     subAmount: 12900,
-     planCode: FOOD_STA,
-     subItem: [
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "1 meal per week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Weekly delivery",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Delivered once a week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Standard plate",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Ideal for occasional treats",
-       },
-     ],
-     subFeeText: "Service Fee:",
-     ViewSubDetailsLink: "View",
-   },
-   {
-     subImg: "/images/Rectangle 194.png",
-     subType: "Regular",
-     subAmount: 12600,
-     planCode: FOOD_REG,
-     subItem: [
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "2 meals per week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Standard plate",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Delivered once a week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Ideal for weekend treats",
-       },
-     ],
-     subFeeText: "Service Fee:",
-     ViewSubDetailsLink: "View",
-   },
-   {
-     subImg: "/images/Rectangle 194.png",
-     subType: "Enterprise",
-     subAmount: 60900,
-     planCode: FOOD_ENT,
-     subItem: [
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "5 meals per week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Standard plate + extra",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Weekdays Delivery",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Delivered 5 times a week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Perfect for workweek meals",
-       },
-     ],
-     subFeeText: "Service Fee:",
-     ViewSubDetailsLink: "View",
-   },
-   {
-     subImg: "/images/Rectangle 194.png",
-     subType: "Gold",
-     subAmount: 103500,
-     planCode: FOOD_GOL,
-     subItem: [
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "7 meals per week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Standard plate + extra",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Daily Delivery",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Delivered 7 times a week",
-       },
-       {
-         tickIcon: IoCheckmarkSharp,
-         subItemText: "Perfect for everyday meals",
-       },
-     ],
-     subFeeText: "Service Fee:",
-     ViewSubDetailsLink: "View",
-   },
+    subImg: "/images/Rectangle 194.png",
+    subType: "Starter",
+    subAmount: 12900,
+    planCode: FOOD_STA,
+    subItem: [
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "1 meal per week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Weekly delivery",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Delivered once a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Standard plate",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for occasional treats",
+      },
+    ],
+    subFeeText: "Service Fee:",
+    ViewSubDetailsLink: "View",
+  },
+  {
+    subImg: "/images/Rectangle 194.png",
+    subType: "Regular",
+    subAmount: 12600,
+    planCode: FOOD_REG,
+    subItem: [
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "2 meals per week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Standard plate",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Delivered once a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Ideal for weekend treats",
+      },
+    ],
+    subFeeText: "Service Fee:",
+    ViewSubDetailsLink: "View",
+  },
+  {
+    subImg: "/images/Rectangle 194.png",
+    subType: "Enterprise",
+    subAmount: 60900,
+    planCode: FOOD_ENT,
+    subItem: [
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "5 meals per week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Standard plate + extra",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Weekdays Delivery",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Delivered 5 times a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Perfect for workweek meals",
+      },
+    ],
+    subFeeText: "Service Fee:",
+    ViewSubDetailsLink: "View",
+  },
+  {
+    subImg: "/images/Rectangle 194.png",
+    subType: "Gold",
+    subAmount: 103500,
+    planCode: FOOD_GOL,
+    subItem: [
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "7 meals per week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Standard plate + extra",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Daily Delivery",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Delivered 7 times a week",
+      },
+      {
+        tickIcon: IoCheckmarkSharp,
+        subItemText: "Perfect for everyday meals",
+      },
+    ],
+    subFeeText: "Service Fee:",
+    ViewSubDetailsLink: "View",
+  },
 ];
 
 export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
@@ -188,15 +187,17 @@ export const SlideInSub: React.FC<SlideInSubProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="SlideInSub_container" style={{ zIndex: 100, width: "93vw", marginLeft: "-100px" }}>
+    <div
+      className="SlideInSub_container"
+      style={{ zIndex: 100, width: "93vw", marginLeft: "-100px" }}
+    >
       <div className="SlideInSub_customSub">
         <p className="SlideInSub_customSub_Title">Subscription Plan</p>
         {/* <button className="SlideInSub_restaurantSub">
           <p className="SlideInSub_restaurantSubText">Custom Subscription</p>
           <LiaAngleRightSolid className="SlideInSub_restaurantSubIcon" />
         </button> */}
-                <IoClose onClick={onClose} style={{ cursor: 'pointer' }} />
-        
+        <IoClose onClick={onClose} style={{ cursor: "pointer" }} />
       </div>
       <div className="SlideInSub_Cust_sub_cards">
         {visibleData.map((plan: SlideInSubDataType, index) => (

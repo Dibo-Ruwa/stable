@@ -8741,7 +8741,7 @@ export const Data = [
     bike: "/images/Frame 2610192.png",
     foodImg: "/images/Frame 2610173.png",
     foodText:
-      "Moving to a new building? No worries, courier is here to help you convey your properties.",
+      "Wants to move or deliver an Item? No worries, courier is here to help you convey your properties.",
     map: "/images/map1.jpg",
   },
   {
@@ -8763,7 +8763,7 @@ export const Data = [
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
-      " Order from your favorite restaurant and get your meal delivered in minutes.",
+      "Get professional cleaning services for your home or office space with just a few clicks.",
     map: "/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg",
   },
   {
@@ -8774,7 +8774,7 @@ export const Data = [
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
-      "Book a barber for home service to get a nice haircut at your own pace.",
+      "Order your groceries and household essentials for quick delivery to your doorstep.",
     map: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f86e40d7.jpg",
   },
 ];
