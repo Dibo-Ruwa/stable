@@ -30,7 +30,7 @@ const MobileView: React.FC = () => {
           <div className="Laundrymob-cont">
             <div className="Laundrytext-container">
               <div className="Laundrydescription">
-              Discover Effortless Laundry Clean clothes, zero hassle.
+              Discover Effortless Laundry - Clean clothes, Zero hassle.
               <br/>
               Let us take care of your laundry while you focus on what matters most.
               </div>
@@ -104,7 +104,7 @@ export const ProductServicesLaundrying: React.FC = () => {
               <div className="Laundry_text-container">
                 <p className="Laundry_highlight">Discover Effortless Laundry</p>
                 <p className="Laundry_highlight2">
-                  Clean clothes, zero hassle
+                  Clean clothes, Zero hassle
                 </p>
                 <div className="laundry_description">
                 Let us take care of your laundry while you focus on what matters most.
