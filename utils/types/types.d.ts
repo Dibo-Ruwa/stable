@@ -340,3 +340,31 @@ export interface BigDiscountCardDataType {
     rightContainer: ImageData;
   };
 }
+
+
+export interface ImageData {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className: string;
+}
+
+export interface SmallDiscountCardBlackDataType {
+  discountDetails: DiscountDetails;
+  images: {
+    topImage: ImageData;
+    bottomImage: ImageData;
+  };
+}
+
+export interface SmallDiscountCardWhiteDataType {
+  discountDetails: {
+    tickText: string;
+    lightTexts: string[];
+  };
+  images: {
+    topImage: ImageData;
+    bottomImage: ImageData;
+  };
+}
