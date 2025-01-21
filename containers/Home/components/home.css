@@ -253,7 +253,7 @@
     background: rgba(255, 255, 255, 0.01);
     border-radius: 14px;
     border: 1px rgba(255, 255, 255, 0.01) solid;
-    backdrop-filter: blur(88px);
+    backdrop-filter: blur(100px);
   }
   .mob_cont {
     position: relative;

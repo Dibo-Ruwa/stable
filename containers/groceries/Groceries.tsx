@@ -1,8 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Discount from "../food/component/discount/Discount";
+// import Discount from "../food/component/discount/Discount";
 import CustomBooking from "../food/component/custombooking/CustomBooking";
 import MostSold from "../food/component/mostsold/MostSold";
+import Discount from "./component/discount/Discount";
 
 
 interface FoodProps {

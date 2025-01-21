@@ -18,10 +18,10 @@ const MobileView: React.FC = () => {
         className="mob"
         style={{
           backgroundImage: `url(${selectedData?.bigImg})`,
-          backgroundSize: "140% 100%",
+          backgroundSize: "cover",
           // background: "contain",
           backgroundRepeat: "no-repeat",
-          backgroundPosition: "right center"
+          backgroundPosition: "center"
         }}
       >
         <div className="mob_overlay">
