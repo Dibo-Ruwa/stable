@@ -79,8 +79,8 @@ export const BigDiscountCard: React.FC<BigDiscountCardProps> = ({
         <Image
           src={rightContainer}
           alt="RightImage"
-          width={340}
-          height={340}
+          width={140}
+          height={140}
           className="SalesOff"
         />
       </div>
