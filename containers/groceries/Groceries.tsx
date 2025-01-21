@@ -27,12 +27,12 @@ const Groceries: React.FC<FoodProps> = ({ params }) => {
   return (
     <div className="food-container">
       <Discount />
-      <CustomBooking
+      {/* <CustomBooking
         activeButton={activeButton}
         setActiveButton={setActiveButton}
         setSearchQuery={setSearchQuery}
         searchQuery={searchQuery}
-      />
+      /> */}
       
         <MostSold
         type="grocery"

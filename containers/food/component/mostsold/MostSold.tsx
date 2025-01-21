@@ -241,7 +241,7 @@ const MostSold: React.FC<MostSoldProps> = ({
             </div>
           </div>
           <div className="mostload">
-            {loading ? ( // Show loading effect while fetching initial data
+            {loading ? (
               <p
                 style={{
                   textAlign: "center",
@@ -250,7 +250,7 @@ const MostSold: React.FC<MostSoldProps> = ({
                   marginTop: "20px",
                 }}
               >
-                Loading meals...
+               {type ==="grocery" ? "Loading groceries..." : "Loading meals..." }
               </p>
             ) : uniqueItems.length === 0 ? ( // Show "No meal found" only after loading is complete
               <p
@@ -261,7 +261,9 @@ const MostSold: React.FC<MostSoldProps> = ({
                   marginTop: "20px",
                 }}
               >
-                No meal found on your current location
+                
+               {type ==="grocery" ? "No product found on your current location" : "No meal found on your current location" }
+
               </p>
             ) : (
               <>
@@ -285,7 +287,7 @@ const MostSold: React.FC<MostSoldProps> = ({
                         >
                           <div className="mostsold-card_context-top">
                             <small className="mostsold-card_title">
-                              {item.title?.slice(0, 10)}...
+                              {item.title?.length > 20 ? `${item.title.slice(0, 20)}...` : item.title}
                             </small>
                             <div className="mostsold-card_dot"></div>
                             <div className="mostsold-card_rating">
