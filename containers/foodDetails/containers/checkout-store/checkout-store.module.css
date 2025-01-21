@@ -15,20 +15,20 @@
   /* position: absolute; */
   right: 10px;
   top: 0;
-  
 }
 @media screen and (max-width: 900px) {
   .stores_container {
     width: 100%;
     /* max-width: 302px; */
     display: none;
-    
   }
 }
 
-.request_container {
+/* .request_container {
+} */
+.checkOutInputDate {
+  background: #f7f7f7 !important;
 }
-
 .store_owner_box {
   display: inline-flex;
   flex-direction: column;

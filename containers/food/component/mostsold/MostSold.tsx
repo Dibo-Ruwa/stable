@@ -348,7 +348,7 @@ const MostSold: React.FC<MostSoldProps> = ({
                         </div>
                         <p
                           style={{
-                            fontSize: "14px",
+                            fontSize: "13px",
                             color: "#8F8F8F",
                           }}
                           onClick={() => handleItemClick(item)}
