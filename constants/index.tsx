@@ -8715,6 +8715,7 @@ export interface DataItem {
   foodImg?: string;
   bike?: string;
   title?: string;
+  tagLink?: any;
 }
 
 export interface Category {
