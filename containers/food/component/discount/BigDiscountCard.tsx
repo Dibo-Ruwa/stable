@@ -3,52 +3,6 @@ import "./discount.css";
 import Image from "next/image";
 import { BigDiscountCardDataType } from "@/utils/types/types";
 
-export const BigDiscountCardData: BigDiscountCardDataType = {
-  discountDetails: {
-    tickText: "Discount Sale",
-    lightTexts: ["50%", "Shop Now"],
-  },
-  images: {
-    leftContainer: [
-      {
-        src: "/images/Polygon 7.png",
-        alt: "Polygon 7",
-        width: 100,
-        height: 50,
-        className: "PolygonSeven",
-      },
-      {
-        src: "/images/Polygon 6.png",
-        alt: "Polygon 6",
-        width: 100,
-        height: 50,
-        className: "PolygonSix",
-      },
-      {
-        src: "/images/specialOffer.png",
-        alt: "Special Offer",
-        width: 100,
-        height: 50,
-        className: "SpecialOFFER",
-      },
-    ],
-    centerContainer: {
-      src: "/images/image 220.png",
-      alt: "Food",
-      width: 448,
-      height: 672,
-      className: "IMageFood",
-    },
-    rightContainer: {
-      src: "/images/image 214.png",
-      alt: "Sales 50% off",
-      width: 340,
-      height: 340,
-      className: "SalesOff",
-    },
-  },
-};
-
 interface BigDiscountCardProps {
   data: BigDiscountCardDataType;
 }
