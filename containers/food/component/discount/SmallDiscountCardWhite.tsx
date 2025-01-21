@@ -1,52 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import "./discount.css";
-
-export interface SmallDiscountCardWhiteDataType {
-  discountDetails: {
-    tickText: string;
-    lightTexts: string[];
-  };
-  images: {
-    topImage: {
-      src: string;
-      alt: string;
-      width: number;
-      height: number;
-      className: string;
-    };
-    bottomImage: {
-      src: string;
-      alt: string;
-      width: number;
-      height: number;
-      className: string;
-    };
-  };
-}
-
-export const SmallDiscountCardWhiteData: SmallDiscountCardWhiteDataType = {
-  discountDetails: {
-    tickText: "Discount Sale",
-    lightTexts: ["50%", "Hot Jollof Rice"],
-  },
-  images: {
-    topImage: {
-      src: "/images/image 216.png",
-      alt: "Special Offer",
-      width: 176,
-      height: 176,
-      className: "TopSpecialOfferImage",
-    },
-    bottomImage: {
-      src: "/images/image 206 (1).png",
-      alt: "Food Image",
-      width: 281,
-      height: 281,
-      className: "BottomFoodImage",
-    },
-  },
-};
+import { SmallDiscountCardWhiteDataType } from "@/utils/types/types";
 
 
 interface SmallDiscountCardWhiteProps {

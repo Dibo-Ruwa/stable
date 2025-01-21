@@ -1,50 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import "./discount.css";
+import { SmallDiscountCardBlackDataType } from "@/utils/types/types";
 
-export interface DiscountDetails {
-  tickText: string;
-  lightTexts: string[];
-}
-
-export interface ImageData {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  className: string;
-}
-
-export interface SmallDiscountCardBlackDataType {
-  discountDetails: DiscountDetails;
-  images: {
-    topImage: ImageData;
-    bottomImage: ImageData;
-  };
-}
-
-export const SmallDiscountCardBlackData: SmallDiscountCardBlackDataType = {
-  discountDetails: {
-    tickText: "Discount Sale",
-    lightTexts: ["50%", "Hot Jollof Rice"],
-  },
-  images: {
-    topImage: {
-      src: "/images/image 214 (2).png",
-      alt: "Special Offer",
-      width: 176,
-      height: 176,
-      className: "BlackTopSpecialOfferImage",
-    },
-    bottomImage: {
-      src: "/images/image 221.png",
-      alt: "Food Image",
-      width: 281,
-      height: 281,
-      className: "BlackBottomFoodImage",
-    },
-  },
-};
 
 interface SmallDiscountCardBlackProps {
   data: SmallDiscountCardBlackDataType;
