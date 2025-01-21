@@ -114,7 +114,7 @@ export const AboutHeader = () => {
           className="Ellipse_top"
         />
         <Image
-          src="/images/Rectangle 26.png"
+          src="/images/about_us.png"
           alt=""
           width={783.371}
           height={633}
