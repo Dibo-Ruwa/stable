@@ -4,7 +4,7 @@ import { Container } from "./userDropdown.styles";
 import { useSession } from "next-auth/react";
 import useAuth from "@/hooks/useAuth";
 
-const UserDropdown = () => {
+const UserDropdown = ({ toggle }) => {
   const { data: session } = useSession({ required: false });
   const { signout } = useAuth();
 
@@ -31,7 +31,7 @@ const UserDropdown = () => {
         trigger={<Avatar initials={initials} />}
         routes={menuItems}
         dropdownClassName="userDropdownMenu" // Add a class for custom styling
-        toggle={() => {}} // Ensure toggle function is passed
+        toggle={toggle} // Ensure toggle function is passed
       />
     </Container>
   );

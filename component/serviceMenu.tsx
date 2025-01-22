@@ -88,6 +88,7 @@ const ServiceMenu: FC<Routes> = ({ trigger, routes, toggle }) => {
                     }
                     onClick={() => {
                       link.name === "Sign Out" ? signOut() : "";
+                      toggle && toggle(); // Ensure toggle function is called
                     }}
                   >
                     {link?.icon && (
