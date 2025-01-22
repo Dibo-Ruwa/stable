@@ -12,7 +12,7 @@ export const FAQs: React.FC = () => {
     {
       id: 1,
       question: "How do I order food?",
-      answer: "Simply click the 'Order Now' button and select your desired meal from our menu.",
+      answer: "Select your desired meal or product from our menu or grocery items, add them to your cart, provide your location, and place your order.",
     },
     {
       id: 2,
