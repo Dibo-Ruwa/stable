@@ -301,7 +301,7 @@ const Navbar = () => {
                       </p>
                     </div>
                   )}
-                  {session && <UserDropdown />}
+                  {session && <UserDropdown toggle={() => setToggle(false)} />}
                 </MobileMenu>
               </>
             )}
@@ -359,7 +359,7 @@ const Navbar = () => {
               </div>
             )}
 
-            {session && <UserDropdown />}
+            {session && <UserDropdown toggle={() => setToggle(false)} />}
             {session && cartItems.length > 0 && (
               <div className="cart">
                 {cartItems.length >= 1 ? (
