@@ -94,7 +94,7 @@ const SignIn: React.FC<ISignInProps> = () => {
     <Container>
       <Wrapper>
         <Title>Login</Title>
-        <Socials>
+        {/* <Socials>
           <SocialBtn
             icon={<FcGoogle />}
             text="Login with Google (Coming Soon)"
@@ -107,8 +107,8 @@ const SignIn: React.FC<ISignInProps> = () => {
             onPress={() => {}}
             disabled
           />
-        </Socials>
-        <Divider />
+        </Socials> */}
+        {/* <Divider /> */}
         <Form onSubmit={handleSubmit}>
           <FormControl>
             <Input
