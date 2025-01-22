@@ -29,7 +29,7 @@ export const FormWrapper = styled.div<StyledProps>`
   position: relative;
   
   @media screen and (max-width: 768px) {
-    width: ${({ $isModal }) => $isModal ? '100%' : '80%'};
+    width: ${({ $isModal }) => $isModal ? '100%' : '95%'};
   }
   
   @media screen and (max-width: 568px) {

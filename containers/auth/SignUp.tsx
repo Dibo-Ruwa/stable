@@ -96,7 +96,7 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
     <Container $isModal={isModal}>
       <FormWrapper $isModal={isModal}>
         <Title>Sign Up</Title>
-        <Socials>
+        {/* <Socials>
           <SocialBtn
             icon={<FcGoogle />}
             text="Sign Up with Google"
@@ -109,8 +109,8 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
             onPress={() => alert("Facebook sign up coming soon")}
             disabled
           />
-        </Socials>
-        <Divider />
+        </Socials> */}
+        {/* <Divider /> */}
         <Form
           onSubmit={(e) => {
             e.preventDefault();
