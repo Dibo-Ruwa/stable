@@ -103,9 +103,9 @@ export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem, carts
             </div>
           </div>
           <p className={styles.food_des}>
-            Explore our mouthwatering menu featuring dishes from top restaurants.
-            Each item lists preparation time, so you'll know when to expect your
-            meal.
+          Explore our mouthwatering menu and grocery products featuring items from top vendors.
+            Each item lists preparation or delivery time, so you'll know when to expect your
+            order.
           </p>
           <div className={styles.ofd_lr}>
             {/* <div className={styles.ofd}>Offers Free Delivery</div> */}

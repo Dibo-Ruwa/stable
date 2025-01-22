@@ -98,7 +98,7 @@ const ToggleCartButton = styled.button`
 
 const FoodDetail: React.FC = () => {
   const [isCheckingCart, setIsCheckingCart] = useState(true);
-  const [showCart, setShowCart] = useState(true); // Set to true by default
+  const [showCart, setShowCart] = useState(false); // Set to false by default
   const { data: session } = useSession();
   const { cartItems, getCart } = useCartStore();
   const { selectedItem } = useFoodItem();
@@ -122,6 +122,10 @@ const FoodDetail: React.FC = () => {
 
       try {
         await getCart();
+        // Open checkout by default on mobile if there are items in the cart
+        if (cartItems.length > 0) {
+          setShowCart(true);
+        }
       } catch (error) {
         console.error('Error checking cart:', error);
       } finally {
@@ -130,7 +134,14 @@ const FoodDetail: React.FC = () => {
     };
 
     checkCart();
-  }, [session, getCart]);
+  }, [session, getCart, cartItems.length]);
+
+  // Close checkout when cart is empty
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      setShowCart(false);
+    }
+  }, [cartItems.length]);
 
   if (isCheckingCart) {
     return (
@@ -151,9 +162,11 @@ const FoodDetail: React.FC = () => {
         <div className="btn">
           <BackButton />
         </div>
-        <ToggleCartButton onClick={() => setShowCart(!showCart)}>
-          {showCart ? <FaTimes /> : <FaShoppingCart />}
-        </ToggleCartButton>
+        {cartItems.length > 0 && (
+          <ToggleCartButton onClick={() => setShowCart(!showCart)}>
+            {showCart ? <FaTimes /> : <FaShoppingCart />}
+          </ToggleCartButton>
+        )}
         <DFCS>
           <DFCSFood>
             {cartItems.length > 0 && isSelectedItemInCart ? (

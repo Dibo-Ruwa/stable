@@ -13,7 +13,7 @@ export const LMEO = () => {
           <p className="lmeo_Text">Location</p>
         </div>
         <p className="lmeo_black_Text">
-          No 57 uk street, off 1246 clement road
+         Suite 4, Right Wing, SUG Secretariat, Bayero University Kano
         </p>
       </div>
 
@@ -22,7 +22,7 @@ export const LMEO = () => {
           <FiPhone className="lmeo_Icon" />
           <p className="lmeo_Text">Mobile</p>
         </div>
-        <p className="lmeo_black_Text">+2347945689231, +2347945689231</p>
+        <p className="lmeo_black_Text">+2348059303261, +2348038156896</p>
       </div>
 
       <div className="LMEO_Content">
@@ -30,7 +30,7 @@ export const LMEO = () => {
           <CiMail className="lmeo_Icon" />
           <p className="lmeo_Text">Email</p>
         </div>
-        <p className="lmeo_black_Text">Chikeziekelvin24@gmail.com</p>
+        <p className="lmeo_black_Text">info@diboruwa.com</p>
       </div>
 
       <div className="LMEO_Content">
