@@ -1,4 +1,5 @@
 import "./laundryservice.css";
+
 import LaundryStep from "./LaundryStep";
 const LaundryService = () => {
   return (
@@ -7,18 +8,10 @@ const LaundryService = () => {
         <div className="laundry-img-text">
           <div className="laundry_img">
             <img
-              src="/images/Rectangle 321.png"
-              className="laundry_img-content"
+              src="/images/laundry_partner.png"
+              className="laundry_img_update"
               alt=""
             />
-
-            <div className="laundry_overlay-img">
-              <img
-                src="/images/component 79.png"
-                className="laundry_overlay-img_content"
-                alt=""
-              />
-            </div>
           </div>
           <LaundryStep />
         </div>

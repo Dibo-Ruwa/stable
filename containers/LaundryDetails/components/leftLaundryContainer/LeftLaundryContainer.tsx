@@ -7,7 +7,7 @@ export const LeftLaundryContainer = () => {
   return (
     <div className="LeftLaundryContainer">
       <RestSub />
-      <LaundryPricing />
+      {/* <LaundryPricing /> */}
       <BookingsFromLaundry />
     </div>
   );

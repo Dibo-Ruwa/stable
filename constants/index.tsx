@@ -1,8 +1,6 @@
 import { assets } from "@/public/assets";
-import josh from "@/public/Joshua.jpeg";
-import  j from "@/publicYakubu.jpg"
 // Base URL
-const baseURL: string = "https://diboruwa.com";
+// const baseURL: string = "https://diboruwa.com";
 
 // Route configuration
 export interface Route {
@@ -12,7 +10,6 @@ export interface Route {
   subroutes?: {
     name: string;
     path: string;
-    icon: string;
   }[];
 }
 
@@ -24,24 +21,12 @@ export const routes: Route[] = [
   {
     name: "Services",
     path: "/services",
-    icon: "🛠️",
     subroutes: [
-      { name: "Laundry", path: "/laundry", icon: assets.soap },
-      { name: "Food", path: "/food", icon: assets.food },
-      { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
-      { name: "Moving", path: "/moving", icon: assets.scooter },
-    ],
-  },
-
-  {
-    name: "Vendor",
-    path: "/",
-    icon: "🛠️",
-    subroutes: [
-      { name: "Laundry", path: "/laundry", icon: assets.soap },
-      { name: "Food", path: "/food", icon: assets.food },
-      { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
-      { name: "Moving", path: "/moving", icon: assets.scooter },
+      { name: "Laundry", path: "/laundry" },
+      { name: "Food", path: "/food" },
+      { name: "Cleaning", path: "/cleaning" },
+      { name: "Moving", path: "/moving" },
+      { name: "Groceries", path: "/groceries" },
     ],
   },
 
@@ -53,6 +38,22 @@ export const routes: Route[] = [
     name: "Contact Us",
     path: "/contact-us",
   },
+  {
+    name: "Partner with us",
+    path: "/partner",
+  },
+
+  // {
+  //   name: "Vendor",
+  //   path: "/",
+  //   icon: "🛠️",
+  //   subroutes: [
+  //     { name: "Laundry", path: "/laundry", icon: assets.soap },
+  //     { name: "Food", path: "/food", icon: assets.food },
+  //     { name: "Cleaning", path: "cleaning", icon: assets.cleaningImg },
+  //     { name: "Moving", path: "/moving", icon: assets.scooter },
+  //   ],
+  // },
 ];
 export const HWW = [
   {
@@ -183,8 +184,8 @@ export const sublinks = [
   {
     title: "Company",
     links: [
-      { name: "About Us", path: "/aboutus" },
-      { name: "Subscriptions", path: "/subscriptions" },
+      { name: "About Us", path: "/about-us" },
+      // { name: "Subscriptions", path: "/subscriptions" },
       { name: "Partner With Us", path: "/partner" },
     ],
   },
@@ -192,25 +193,28 @@ export const sublinks = [
     title: "Services",
     links: [
       { name: "Food", path: "/food" },
+      { name: "Groceries", path: "/groceries" },
       { name: "Laundry", path: "/laundry" },
+      { name: "Cleaning", path: "/cleaning" },
       { name: "Moving", path: "/moving" },
-      { name: "Grooming", path: "/grooming" },
+      
     ],
   },
   {
     title: "Blog topic",
     links: [
-      { name: "Food", path: "/food" },
-      { name: "Laundry", path: "/laundry" },
-      { name: "Moving", path: "/moving" },
-      { name: "Grooming", path: "/grooming" },
+      { name: "Food", path: "https://blog.diboruwa.com/categories/food" },
+      { name: "Groceries", path: "https://blog.diboruwa.com/categories/groceries" },
+      { name: "Laundry", path: "https://blog.diboruwa.com/categories/laundry" },
+      { name: "Cleaning", path: "https://blog.diboruwa.com/categories/cleaning" },
+      { name: "Moving", path: "https://blog.diboruwa.com/categories/moving" },
     ],
   },
   {
     title: "Other",
     links: [
-      // { name: "Blog", path: "/comingsoon" },
-      // { name: "Contact Us", path: "/comingsoon" },
+      { name: "Blog", path: "https://blog.diboruwa.com" },
+      { name: "Contact Us", path: "/contact-us" },
       { name: "Privacy Policy", path: "/privacy-policy" },
       { name: "Terms & Conditions", path: "/terms" },
     ],
@@ -698,10 +702,10 @@ export const teamMembers = [
     name: "Okorie Joshua",
     role: "Operations",
     imageUrl:
-      "https://res.cloudinary.com/zeeson-info-tech-and-innovations/image/upload/v1700948246/dbr33_rbtgb5.png",
+    "https://res.cloudinary.com/zeeson-info-tech-and-innovations/image/upload/v1700948246/dbr33_rbtgb5.png",
   },
-  // Add more team members as needed
 ];
+  // Add more team members as needed
 
 export interface Product {
   id: number | string;
@@ -8711,6 +8715,7 @@ export interface DataItem {
   foodImg?: string;
   bike?: string;
   title?: string;
+  tagLink?: any;
 }
 
 export interface Category {
@@ -8721,27 +8726,30 @@ export const Data = [
   {
     _id: 1,
     tag: "Food",
-    bigImg: "/images/food.png",
+    tagLink: "/food",
+    bigImg: "/images/food_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
       " Order from your favorite restaurant and get your meal delivered in minutes.",
-    map: "/images/map.png",
+    map: "/images/Rectangle 248 (11).png",
   },
   {
     _id: 2,
     tag: "Moving",
-    bigImg: "/images/moving.png",
+    tagLink: "/moving",
+    bigImg: "/images/moving_image_hero.jpg",
     bike: "/images/Frame 2610192.png",
     foodImg: "/images/Frame 2610173.png",
     foodText:
-      "Moving to a new building? No worries, courier is here to help you convey your properties.",
-    map: "/images/map.png",
+      "Wants to move or deliver an Item? No worries, courier is here to help you convey your properties.",
+    map: "/images/map1.jpg",
   },
   {
     _id: 3,
     tag: "Laundry",
-    bigImg: "/images/laundry.png",
+    tagLink: "/laundry",
+    bigImg: "/images/laundry_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
@@ -8751,22 +8759,24 @@ export const Data = [
   {
     _id: 4,
     tag: "Cleaning",
-    bigImg: "/images/laundry.png",
+    tagLink: "/cleaning",
+    bigImg: "/images/cleaning_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
-      " Order from your favorite restaurant and get your meal delivered in minutes.",
-    map: "/images/map.png",
+      "Get professional cleaning services for your home or office space with just a few clicks.",
+    map: "/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg",
   },
   {
     _id: 5,
     tag: "Groceries",
-    bigImg: "/images/food.png",
+    tagLink: "/groceries",
+    bigImg: "/images/Groceries_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText:
-      "Book a barber for home service to get a nice haircut at your own pace.",
-    map: "/images/Frame 2610169 (1).png",
+      "Order your groceries and household essentials for quick delivery to your doorstep.",
+    map: "/images/WhatsApp Image 2024-12-04 at 15.15.23_f86e40d7.jpg",
   },
 ];
 
@@ -8778,25 +8788,25 @@ export const TopResturant: Category[] = [
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${2}`,
         image: "/images/resturant.png",
         _id: 2,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${3}`,
         image: "/images/Rectangle 248 (4).png",
         _id: 3,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${4}`,
         image: "/images/Rectangle 248 (2).png",
         _id: 4,
       },
       {
         tag: "Food",
-        link: "/",
+        link: `/restaurant${5}`,
         image: "/images/Rectangle 248 (3).png",
         _id: 5,
       },
@@ -8841,25 +8851,25 @@ export const TopResturant: Category[] = [
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry1.png",
         _id: 12,
       },
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry2.png",
         _id: 13,
       },
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry3.png",
         _id: 14,
       },
       {
         tag: "Laundry",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry4.png",
         _id: 15,
       },
     ],
@@ -8872,25 +8882,25 @@ export const TopResturant: Category[] = [
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry1.png",
         _id: 17,
       },
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry2.png",
         _id: 18,
       },
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry3.png",
         _id: 19,
       },
       {
         tag: "Cleaning",
         link: "/",
-        image: "/images/Rectangle 248 (9).png",
+        image: "/images/laundry4.png",
         _id: 20,
       },
     ],
@@ -8949,7 +8959,7 @@ export const ProductServiceVendorData: ProductServiceVendorType[] = [
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/Frame 2610173 (1).png",
     foodText: " We are here to serve you better",
-    map: "/images/map.png",
+    map: "/images/Rectangle 248 (11).png",
   },
 ];
 
@@ -9067,7 +9077,7 @@ export const OtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9083,7 +9093,7 @@ export const OtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9099,7 +9109,7 @@ export const OtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "2.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9115,7 +9125,7 @@ export const OtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "3.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9132,7 +9142,7 @@ export const MobileOtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (16).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9149,7 +9159,7 @@ export const MobileOtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (13).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9166,7 +9176,7 @@ export const MobileOtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (14).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "2.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9183,7 +9193,7 @@ export const MobileOtherFoodResturant: OtherFoodResturantType[] = [
     image: "/images/Rectangle 248 (15).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "3.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9213,14 +9223,42 @@ export const ProductServiceLaundryData: ProductServiceLaundryType[] = [
   {
     _id: 1,
     tag: "Laundry",
-    bigImg: "/images/laundry.png",
+    bigImg: "/images/laundry_hero.jpg",
     bike: "/images/Frame 2610175.png",
     foodImg: "/images/image 157.png",
     foodText:
-      "Get your clothes washed and delivered to your door step within an hour.",
+      "Get your clothes washed and delivered to your door step.",
     map: "/images/Frame 2610169.png",
   },
 ];
+
+// ====== Cleaning data ====== //
+export interface ProductServiceCleaningType {
+  _id?: number;
+  tag?: string;
+  link?: string;
+  image?: string;
+  bigImg?: string;
+  foodText?: string;
+  map?: string;
+  foodImg?: string;
+  bike?: string;
+  title?: string;
+}
+
+export const ProductServiceCleaningData: ProductServiceCleaningType[] = [
+  {
+    _id: 1,
+    tag: "Cleaning",
+    bigImg: "/images/cleaning_hero.jpg",
+    bike: "/images/Frame 2610175.png",
+    foodImg: "/images/image 157.png",
+    foodText:
+      "Relax in a spotless space with our swift and thorough cleaning services.",
+    map: "/images/WhatsApp Image 2024-12-04 at 15.15.27_9bbac718.jpg",
+  },
+];
+
 
 export interface TopLaundryType {
   _id?: number;
@@ -9333,7 +9371,7 @@ export const OtherLaundryRoom: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "5.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9349,7 +9387,7 @@ export const OtherLaundryRoom: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9365,7 +9403,7 @@ export const OtherLaundryRoom: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "3.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9381,7 +9419,7 @@ export const OtherLaundryRoom: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9398,7 +9436,7 @@ export const MobileOtherLaundry: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (16).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9415,7 +9453,7 @@ export const MobileOtherLaundry: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (13).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "3.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9432,7 +9470,7 @@ export const MobileOtherLaundry: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (14).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "2.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9449,7 +9487,7 @@ export const MobileOtherLaundry: OtherLaundryType[] = [
     image: "/images/Rectangle 248 (15).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "5.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9460,7 +9498,244 @@ export const MobileOtherLaundry: OtherLaundryType[] = [
     arrowIcon: FaArrowRightLong,
   },
 ];
+export interface TopCleaningType {
+  _id?: number;
+  tag?: string;
+  title?: string;
+  image?: string;
+  smallTitle?: string;
+  starIcon?: IconType;
+  rating?: string;
+  reviewsText?: string;
+  reviewsNum?: string;
+  locationIcon?: IconType;
+  locationText?: string;
+  timeNum?: string;
+  vistLink?: string;
+  arrowIcon?: IconType;
+}
 
+export interface OtherCleaningType {
+  _id?: number;
+  tag?: string;
+  title?: string;
+  image?: string;
+  smallTitle?: string;
+  starIcon?: IconType;
+  rating?: string;
+  reviewsText?: string;
+  reviewsNum?: string;
+  locationIcon?: IconType;
+  locationText?: string;
+  timeNum?: string;
+  openTime?: string;
+  vistLink?: string;
+  arrowIcon?: IconType;
+}
+
+export const TopCleaning: TopCleaningType[] = [
+  {
+    title: "Top Cleaning Near You",
+  },
+  {
+    _id: 381753,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (16).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 231134,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (13).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 945332,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (14).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 127664,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (15).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.5",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+];
+
+export const OtherCleaningRoom: OtherCleaningType[] = [
+  {
+    _id: 387653,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 231196,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "5.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 225332,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "3.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 497664,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (9).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+];
+export const MobileOtherCleaning: OtherCleaningType[] = [
+  {
+    _id: 387653,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (16).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "Closed",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 231196,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (13).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "4.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "Open",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 225332,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (14).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "3.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "closed",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+
+  {
+    _id: 497664,
+    tag: "Cleaning",
+    image: "/images/Rectangle 248 (15).png",
+    smallTitle: "WE HAVE MOVED",
+    starIcon: FaStar,
+    rating: "5.0",
+    reviewsText: "Reviews",
+    reviewsNum: "100",
+    locationIcon: GrLocation,
+    locationText: "Ikeja, Lagos",
+    timeNum: "9am - 10pm",
+    openTime: "Open",
+    vistLink: "/",
+    arrowIcon: FaArrowRightLong,
+  },
+];
 
 // ====== FoodDelivery and Moving Data ====== //
 export interface ProductServiceDeliveryAndMovingType {
@@ -9483,12 +9758,12 @@ export const ProductServiceDeliveryAndMovingData: ProductServiceDeliveryAndMovin
       _id: 1,
       tag1: "Food Delivery",
       tag2: "Moving",
-      bigImg: "/images/moving.png",
+      bigImg: "/images/moving_image_hero.jpg",
       bike: "/images/Frame 2610192.png",
       foodImg: "/images/Frame 2610173.png",
       foodText:
-        "Get your clothes washed and delivered to your door step within an hour.",
-        map: "/images/map.png",
+        "Seamless moving and swift deliveries; let us handle the heavy lifting.",
+      map: "/images/map2.jpg",
     },
   ];
 
@@ -9535,7 +9810,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
   },
   {
     _id: 381753,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (16).png",
     smallTitle: "WE HAVE MOVED",
@@ -9552,7 +9827,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 
   {
     _id: 231134,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (13).png",
     smallTitle: "WE HAVE MOVED",
@@ -9569,7 +9844,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 
   {
     _id: 945332,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (14).png",
     smallTitle: "WE HAVE MOVED",
@@ -9586,7 +9861,7 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 
   {
     _id: 127664,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (15).png",
     smallTitle: "WE HAVE MOVED",
@@ -9605,12 +9880,12 @@ export const TopDeliveryAndMoving: TopDeliveryAndMovingType[] = [
 export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
   {
     _id: 387653,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9622,12 +9897,12 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 231196,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9639,12 +9914,12 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 225332,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "3.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9656,12 +9931,12 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 497664,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (9).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "5.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9674,12 +9949,12 @@ export const OtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
   {
     _id: 387653,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (16).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9692,12 +9967,12 @@ export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 231196,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (13).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "4.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9710,12 +9985,12 @@ export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 225332,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (14).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "3.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -9728,12 +10003,12 @@ export const MobileOtherDeliveryAndMoving: OtherDeliveryAndMovingType[] = [
 
   {
     _id: 497664,
-        tag1: "Food Delivery",
+    tag1: "Food Delivery",
     tag2: "Moving",
     image: "/images/Rectangle 248 (15).png",
     smallTitle: "WE HAVE MOVED",
     starIcon: FaStar,
-    rating: "4.5",
+    rating: "5.0",
     reviewsText: "Reviews",
     reviewsNum: "100",
     locationIcon: GrLocation,
@@ -10072,7 +10347,7 @@ export const FoodVendor = [
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "45mins",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10082,11 +10357,11 @@ export const FoodVendor = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Chicken and Cheese",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "1hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10096,7 +10371,7 @@ export const FoodVendor = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Jollof Rice",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
@@ -10110,7 +10385,7 @@ export const FoodVendor = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Meat Stew",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
@@ -10142,7 +10417,7 @@ export const FoodVendor = [
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "45mins",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10152,11 +10427,11 @@ export const FoodVendor = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Fish Stew",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "1hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10170,7 +10445,7 @@ export const FoodVendor = [
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "2hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10188,7 +10463,7 @@ export const MinsMealsData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "party jollof Rice",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
@@ -10206,7 +10481,7 @@ export const MinsMealsData = [
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "45mins",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10216,11 +10491,11 @@ export const MinsMealsData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Meat Stew",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "1hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10234,7 +10509,7 @@ export const MinsMealsData = [
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "2hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10244,11 +10519,11 @@ export const MinsMealsData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Jollof Rice",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "45mins",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10258,11 +10533,11 @@ export const MinsMealsData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Cheese",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "2hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10272,7 +10547,7 @@ export const MinsMealsData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Fried Meat",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
@@ -10290,7 +10565,7 @@ export const MinsMealsData = [
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "1hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10322,7 +10597,7 @@ export const FreeDeliveryData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Jollof Rice",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
@@ -10336,11 +10611,11 @@ export const FreeDeliveryData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "White Rice",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "1hr",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10350,11 +10625,11 @@ export const FreeDeliveryData = [
         img: "/images/Rectangle 248 (10).png",
         prizeLink: "/cart",
         favoriteIcon: MdFavoriteBorder,
-        smallTitle: "Fried Rice",
+        smallTitle: "Fish Stew",
         starIcon: FaStar,
         rating: "4.5",
         timeIcon: IoMdStopwatch,
-        timeText: "30mins",
+        timeText: "45mins",
         remenderText: "10 liters remaining",
         prizeText: "$40",
         prizeIcon: FaBagShopping,
@@ -10536,11 +10811,12 @@ export interface OrderedFoodDataType {
   restaurantRatingNum?: string;
   restPhoneIcon?: IconType;
   restaurantPhoneNum?: string;
+  type: "cart" | "service";
 }
 
 export const FoodOrdered1: OrderedFoodDataType[] = [
   {
-    _id: 1222344,
+    _id: 1,
     foodImg: "/images/Frame 2610552.png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
@@ -10550,30 +10826,35 @@ export const FoodOrdered1: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "cart",
   },
   {
-    _id: 1344,
+    _id: 2,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
+
   },
   {
-    _id: 1344,
+    _id: 3,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
+
   },
 ];
 
 export const FoodOrdered2: OrderedFoodDataType[] = [
   {
-    _id: 1221044,
+    _id: 12,
     foodImg: "/images/Frame 2610552.png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
@@ -10583,29 +10864,33 @@ export const FoodOrdered2: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "cart",
+
   },
   {
-    _id: 1321,
+    _id: 13,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
   {
-    _id: 1321,
+    _id: 14,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
 ];
 export const FoodOrdered3: OrderedFoodDataType[] = [
   {
-    _id: 1245344,
+    _id: 21,
     foodImg: "/images/Frame 2610552.png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
@@ -10615,25 +10900,29 @@ export const FoodOrdered3: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "cart",
+
   },
 
   {
-    _id: 1432,
+    _id: 22,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
   {
-    _id: 1432,
+    _id: 23,
     restaurantImg: "/images/Rectangle 249 (3).png",
     restaurantTitle: "Madam Restaurant PLC",
     restaurantRatingIcon: FaStar,
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
 ];
 
@@ -10649,6 +10938,7 @@ export const FoodOrdered4: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "cart",
   },
 
   {
@@ -10659,6 +10949,7 @@ export const FoodOrdered4: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
   {
     _id: 1309,
@@ -10668,6 +10959,7 @@ export const FoodOrdered4: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
 ];
 
@@ -10683,6 +10975,7 @@ export const FoodOrdered5: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "cart",
   },
 
   {
@@ -10693,6 +10986,7 @@ export const FoodOrdered5: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
   {
     _id: 1021,
@@ -10702,6 +10996,7 @@ export const FoodOrdered5: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
 ];
 export const FoodOrdered6: OrderedFoodDataType[] = [
@@ -10716,6 +11011,7 @@ export const FoodOrdered6: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "cart",
   },
 
   {
@@ -10726,6 +11022,7 @@ export const FoodOrdered6: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
   {
     _id: 1332,
@@ -10735,6 +11032,7 @@ export const FoodOrdered6: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
 ];
 export const FoodOrdered7: OrderedFoodDataType[] = [
@@ -10749,6 +11047,7 @@ export const FoodOrdered7: OrderedFoodDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "cart",
   },
   {
     _id: 9045,
@@ -10758,6 +11057,7 @@ export const FoodOrdered7: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
   {
     _id: 9045,
@@ -10767,6 +11067,7 @@ export const FoodOrdered7: OrderedFoodDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "cart",
   },
 ];
 
@@ -10791,12 +11092,36 @@ export interface OrderedServicesDataType {
   ownerName?: string;
   ownerPhoneIcon?: IconType;
   ownersPhoneNum?: string;
+  type: string;
 }
 
-export const OrderedServicesData1: OrderedServicesDataType[] = [
-  {
-    _id: 1222344,
-    foodImg: "/images/Frame 2610552.png",
+export interface NewOrderedServicesDataType {
+  _id: number;
+  foodImg?: string;
+  foodTitle?: string;
+  foodAmount?: string;
+  ratingIcon?: IconType;
+  ratingNum?: string;
+  timmIcon?: IconType;
+  timeText?: string;
+  deliveryText?: string;
+  amountInUsd?: string;
+  restaurantImg?: string;
+  restaurantTitle?: string;
+  restaurantRatingIcon?: IconType;
+  restaurantRatingNum?: string;
+  restPhoneIcon?: IconType;
+  restaurantPhoneNum?: string;
+  ownerImg?: string;
+  ownerName?: string;
+  ownerPhoneIcon?: IconType;
+  ownersPhoneNum?: string;
+  type: string;
+}
+
+export const OrderedServicesData: OrderedServicesDataType =   {
+    _id: 1000,
+    foodImg: "/images/Frame 2610552 (1).png",
     foodTitle: "Jollof Rice",
     foodAmount: "+3",
     ratingIcon: FaStar,
@@ -10805,6 +11130,23 @@ export const OrderedServicesData1: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+  }
+
+
+export const OrderedServicesData1: OrderedServicesDataType[] = [
+  {
+    _id: 1222344,
+    foodImg: "/images/Frame 2610552 (1).png",
+    foodTitle: "Jollof Rice",
+    foodAmount: "+3",
+    ratingIcon: FaStar,
+    ratingNum: "4.5",
+    timmIcon: IoMdStopwatch,
+    timeText: "30mins",
+    deliveryText: "offer Delivery",
+    amountInUsd: "$40,000",
+    type: "service",
   },
   {
     _id: 9015,
@@ -10814,6 +11156,7 @@ export const OrderedServicesData1: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
   },
   {
     _id: 1344,
@@ -10821,6 +11164,7 @@ export const OrderedServicesData1: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
   },
 ];
 export const OrderedServicesData2: OrderedServicesDataType[] = [
@@ -10835,6 +11179,8 @@ export const OrderedServicesData2: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
   {
     _id: 3245,
@@ -10844,6 +11190,8 @@ export const OrderedServicesData2: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1321,
@@ -10851,6 +11199,8 @@ export const OrderedServicesData2: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData3: OrderedServicesDataType[] = [
@@ -10865,6 +11215,8 @@ export const OrderedServicesData3: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
   {
     _id: 9215,
@@ -10874,6 +11226,8 @@ export const OrderedServicesData3: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1432,
@@ -10881,6 +11235,8 @@ export const OrderedServicesData3: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData4: OrderedServicesDataType[] = [
@@ -10895,6 +11251,8 @@ export const OrderedServicesData4: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
 
   {
@@ -10905,6 +11263,8 @@ export const OrderedServicesData4: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1309,
@@ -10912,6 +11272,8 @@ export const OrderedServicesData4: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData5: OrderedServicesDataType[] = [
@@ -10926,6 +11288,8 @@ export const OrderedServicesData5: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
+
   },
 
   {
@@ -10936,6 +11300,8 @@ export const OrderedServicesData5: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
   {
     _id: 1021,
@@ -10943,6 +11309,8 @@ export const OrderedServicesData5: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
+
   },
 ];
 export const OrderedServicesData6: OrderedServicesDataType[] = [
@@ -10957,6 +11325,7 @@ export const OrderedServicesData6: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
   },
   {
     _id: 9332,
@@ -10966,6 +11335,7 @@ export const OrderedServicesData6: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
   },
 
   {
@@ -10974,6 +11344,7 @@ export const OrderedServicesData6: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
   },
 ];
 export const OrderedServicesData7: OrderedServicesDataType[] = [
@@ -10988,6 +11359,7 @@ export const OrderedServicesData7: OrderedServicesDataType[] = [
     timeText: "30mins",
     deliveryText: "offer Delivery",
     amountInUsd: "$40,000",
+    type: "service",
   },
   {
     _id: 9010,
@@ -10997,6 +11369,7 @@ export const OrderedServicesData7: OrderedServicesDataType[] = [
     restaurantRatingNum: "4.5",
     restPhoneIcon: LuPhone,
     restaurantPhoneNum: "0903 414 5971",
+    type: "service",
   },
 
   {
@@ -11005,6 +11378,7 @@ export const OrderedServicesData7: OrderedServicesDataType[] = [
     ownerName: "James Peter",
     ownerPhoneIcon: LuPhone,
     ownersPhoneNum: "0903 414 5971",
+    type: "service",
   },
 ];
 export interface FavouriteFoodDataType {
@@ -11684,11 +12058,11 @@ export const MobileRestaurantFood: MobileRestaurantFoodType[] = [
     img: "/images/Rectangle 248 (12).png",
     prizeLink: "/cart",
     favoriteIcon: MdFavoriteBorder,
-    smallTitle: "Fried Rice",
+    smallTitle: "Meat Stew",
     starIcon: FaStar,
     rating: "4.5",
     timeIcon: IoMdStopwatch,
-    timeText: "30mins",
+    timeText: "1hr",
     remenderText: "10 liters remaining",
     prizeText: "$40",
     prizeIcon: FaBagShopping,
@@ -11698,11 +12072,11 @@ export const MobileRestaurantFood: MobileRestaurantFoodType[] = [
     img: "/images/Rectangle 248 (12).png",
     prizeLink: "/cart",
     favoriteIcon: MdFavoriteBorder,
-    smallTitle: "Fried Rice",
+    smallTitle: "Jollof Rice",
     starIcon: FaStar,
     rating: "4.5",
     timeIcon: IoMdStopwatch,
-    timeText: "30mins",
+    timeText: "45mins",
     remenderText: "10 liters remaining",
     prizeText: "$40",
     prizeIcon: FaBagShopping,
@@ -11712,7 +12086,7 @@ export const MobileRestaurantFood: MobileRestaurantFoodType[] = [
 export const RestaurantFood: MobileRestaurantFoodType[] = [
   {
     id: "123",
-    img: "/images/Rectangle 248 (11).png",
+    img: "/images/meal.png",
     prizeLink: "/cart",
     favoriteIcon: MdFavoriteBorder,
     smallTitle: "Fried Rice",
@@ -11726,28 +12100,28 @@ export const RestaurantFood: MobileRestaurantFoodType[] = [
   },
   {
     id: "456",
-    img: "/images/Rectangle 248 (11).png",
+    img: "/images/meal1.png",
     prizeLink: "/cart",
     favoriteIcon: MdFavoriteBorder,
-    smallTitle: "Fried Rice",
+    smallTitle: "Meat Stew",
     starIcon: FaStar,
     rating: "4.5",
     timeIcon: IoMdStopwatch,
-    timeText: "30mins",
+    timeText: "45mins",
     remenderText: "20 liters remaining",
     prizeText: "$40",
     prizeIcon: FaBagShopping,
   },
   {
     id: "789",
-    img: "/images/Rectangle 248 (11).png",
+    img: "/images/meal2.png",
     prizeLink: "/cart",
     favoriteIcon: MdFavoriteBorder,
-    smallTitle: "Fried Rice",
+    smallTitle: "Jollof Rice",
     starIcon: FaStar,
     rating: "4.5",
     timeIcon: IoMdStopwatch,
-    timeText: "30mins",
+    timeText: "1hr",
     remenderText: "20 liters remaining",
     prizeText: "$40",
     prizeIcon: FaBagShopping,

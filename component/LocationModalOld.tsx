@@ -1,72 +1,24 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import axios from "axios";
 import Dropdown from "./ui/Dropdown";
-import { FaMapMarkerAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaCheckCircle } from "react-icons/fa";
 import Cookies from "js-cookie";
-
-// Styled components
-const ModalWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 200;
-`;
-
-const ModalContent = styled.div`
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  border: 1px solid var(--primary);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-`;
-
-const Header = styled.header`
-  text-align: center;
-  margin-bottom: 20px;
-
-  h2 {
-    font-size: 30px;
-    margin-bottom: 30px;
-  }
-
-  p {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
-  .small {
-    font-size: 14px;
-    margin-bottom: 30px;
-  }
-`;
-
-const FormControl = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-`;
-
-const SubmitButton = styled.div`
-  width: max-content;
-  padding: 10px 14px;
-  border-radius: 8px;
-  outline: none;
-  border: none;
-  margin-top: 20px;
-  margin-left: auto;
-  background: var(--primary);
-  color: #fff;
-  cursor: pointer;
-`;
+import { useLocation } from "@/context/LocationProvider";
+import {
+  ModalWrapper,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  CloseButton,
+  LoadingMessage,
+  ErrorMessage,
+  DropdownWrapper,
+  SubmitButton,
+  FormControl,
+  Toast,
+} from "./newLocationModal/location.style";
 
 interface CityData {
   _id: string;
@@ -74,102 +26,257 @@ interface CityData {
   regions: { _id: string; name: string }[];
 }
 
-const LocationModal: React.FC = () => {
-  const [showModal, setShowModal] = useState<boolean>(false);
+const LocationModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({
+  isOpen,
+  onClose,
+}) => {
+  const { setLocation } = useLocation();
+
+  const [showModal, setShowModal] = useState<boolean>(true);
   const [selectedState, setSelectedState] = useState<string | null>(null);
   const [selectedRegion, setSelectedRegion] = useState<string>("");
   const [availableRegions, setAvailableRegions] = useState<string[]>([]);
-  const [statesAndRegions, setStatesAndRegions] = useState<{ [key: string]: string[] }>({});
+  const [availableStates, setAvailableStates] = useState<string[]>([]);
+  const [statesAndRegions, setStatesAndRegions] = useState<{
+    [key: string]: string[];
+  }>({});
   const [companyName] = useState<string>("diboruwa");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [showToast, setShowToast] = useState(false);
 
   const url = process.env.NEXT_PUBLIC_ADMIN_URL;
-console.log(url)
+
   useEffect(() => {
     const fetchStatesAndRegions = async () => {
+      setIsLoading(true);
+      setError(null);
+
       try {
-        const response = await axios.get(`${url}/api/locations`);
-        const cityData: CityData[] = response.data.cities;
+        const apiUrl = `${url}/api/locations`;
 
-        const formattedData: { [key: string]: string[] } = {};
-
-        cityData.forEach(city => {
-          formattedData[city.name] = city.regions.map(region => region.name);
+        const response = await axios({
+          method: "GET",
+          url: apiUrl,
+          // timeout: 90000,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          validateStatus: (status) => status === 200,
         });
 
-        setStatesAndRegions(formattedData);
+        if (!response.data) {
+          throw new Error("No data received from server");
+        }
+
+        const { cities } = response.data;
+
+        if (!Array.isArray(cities)) {
+          throw new Error("Invalid data format: cities is not an array");
+        }
+
+        const statesRegionsMap: { [key: string]: string[] } = {};
+        const states: string[] = [];
+
+        cities.forEach((city: CityData) => {
+          if (city?.name && Array.isArray(city?.regions)) {
+            states.push(city.name);
+            statesRegionsMap[city.name] = city.regions
+              .filter((region) => region && region.name)
+              .map((region) => region.name);
+          }
+        });
+
+        if (states.length === 0) {
+          throw new Error("No valid cities found in response");
+        }
+
+        setAvailableStates(states);
+        setStatesAndRegions(statesRegionsMap);
       } catch (error) {
-        console.error("Error fetching state and region data:", error);
+        console.error("Location fetch error:", error);
+        if (axios.isAxiosError(error)) {
+          const errorMessage =
+            error.response?.data?.message ||
+            error.message ||
+            "Failed to fetch locations";
+          setError(errorMessage);
+          console.error("Axios error details:", {
+            message: error.message,
+            response: error.response?.data,
+            status: error.response?.status,
+            config: {
+              url: error.config?.url,
+              method: error.config?.method,
+            },
+          });
+        } else {
+          setError("An unexpected error occurred");
+          console.error("Non-Axios error:", error);
+        }
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchStatesAndRegions();
   }, [url]);
 
-  const handleStateSelect = (selectedOption: string | null) => {
-    setSelectedState(selectedOption);
-    if (selectedOption) {
-      setAvailableRegions(statesAndRegions[selectedOption] || []);
-    } else {
-      setAvailableRegions([]);
-    }
-    setSelectedRegion("");
+  useEffect(() => {
+    const checkModalVisibility = () => {
+      const locationData = Cookies.get(`${companyName}_location`);
+      const lastModalShown = Cookies.get(`${companyName}_modal_timestamp`);
+      setShowModal(false);
+
+      if (locationData) {
+        // If location is already set, check the timestamp
+        setShowModal(false);
+
+        if (lastModalShown) {
+          const lastShownTime = new Date(lastModalShown).getTime();
+          const currentTime = new Date().getTime();
+          const hoursSinceLastShown =
+            (currentTime - lastShownTime) / (1000 * 60 * 60);
+
+          // Only show modal if more than 24 hours have passed
+          setShowModal(hoursSinceLastShown >= 24);
+        }
+      } else {
+        setShowModal(true);
+      }
+    };
+
+    checkModalVisibility();
+  }, [companyName]);
+
+  const handleStateSelect = (state: string) => {
+    setSelectedState(state || null);
+    setAvailableRegions(statesAndRegions[state] || []);
   };
 
-  const handleRegionSelect = (selectedOption: string) => {
-    setSelectedRegion(selectedOption.toLowerCase());
+  const handleRegionSelect = (region: string) => {
+    setSelectedRegion(region || "");
   };
 
   const handleModalClose = () => {
     if (selectedState && selectedRegion) {
-      Cookies.set(`${companyName}_hasVisited`, "true", { expires: 1 });
-      Cookies.set(`${companyName}_selectedState`, selectedState, { expires: 1 });
-      Cookies.set(`${companyName}_selectedRegion`, selectedRegion, { expires: 1 });
+      Cookies.set("hasVisited", "true", { expires: 1 }); // Set to expire in 24 hours
     }
     setShowModal(false);
   };
 
-  useEffect(() => {
-    const hasVisited = Cookies.get(`${companyName}_hasVisited`);
+  // const handleSubmit = () => {
+  //   if (selectedState && selectedRegion) {
+  //     // Save location to cookies
+  //     Cookies.set(
+  //       `${companyName}_location`,
+  //       JSON.stringify({
+  //         state: selectedState,
+  //         region: selectedRegion,
+  //       }),
+  //       { expires: 1 }
+  //     );
 
-    if (!hasVisited) {
-      setShowModal(true);
+  //     // Save timestamp to cookies
+  //     Cookies.set(`${companyName}_modal_timestamp`, new Date().toISOString(), {
+  //       expires: 1,
+  //     });
+
+  //     // Close modal immediately
+  //     setShowModal(false);
+
+  //     // Show success toast
+  //     setShowToast(true);
+
+  //     // Hide toast after 3 seconds
+  //     setTimeout(() => {
+  //       setShowToast(false);
+  //     }, 3000);
+  //   }
+  // };
+
+  const handleSubmit = () => {
+    if (selectedState && selectedRegion) {
+      // Update context
+      setLocation(selectedState, selectedRegion);
+
+      // Save timestamp to cookies
+      Cookies.set(`${companyName}_modal_timestamp`, new Date().toISOString(), {
+        expires: 1,
+      });
+
+      // Close modal
+      setShowModal(false);
+
+      // Show success toast
+      setShowToast(true);
+
+      // Hide toast after 3 seconds
+      setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
     }
-  }, [companyName]);
+  };
 
   return (
     <>
       {showModal && (
         <ModalWrapper>
           <ModalContent>
-            <Header>
-              <FaMapMarkerAlt size={70} style={{ 
-                marginBottom: "40px",
-                margin: 'auto',
-
-               }} color="green" />
+            <ModalHeader>
+              <FaMapMarkerAlt size={70} color="#2ecc71" />
               <h2>Set your Delivery location</h2>
-              <p>Hello! DiboRuwa currently provides services in key cities across Nigeria.</p>
+              <p>
+                Hello! We currently provide services in key cities across
+                Nigeria
+              </p>
               <small className="small">
-                Delivery options and fees may vary based on your location.
+                Delivery options and fees may vary based on your location
               </small>
-            </Header>
-
-            <FormControl>
-              <Dropdown
-                placeholder="Select city"
-                options={Object.keys(statesAndRegions)}
-                onSelect={handleStateSelect}
-              />
-              <Dropdown
-                placeholder="Select region"
-                options={availableRegions}
-                onSelect={handleRegionSelect}
-              />
-            </FormControl>
-
-            <SubmitButton onClick={handleModalClose}>Submit</SubmitButton>
+              <CloseButton onClick={handleModalClose}>✖</CloseButton>
+            </ModalHeader>
+            <ModalBody>
+              {error && <ErrorMessage>{error}</ErrorMessage>}
+              {isLoading ? (
+                <LoadingMessage>Loading locations...</LoadingMessage>
+              ) : (
+                <FormControl>
+                  <DropdownWrapper>
+                    <Dropdown
+                      placeholder="Select your state"
+                      options={availableStates}
+                      onSelect={handleStateSelect}
+                      value={selectedState || ""}
+                    />
+                  </DropdownWrapper>
+                  <DropdownWrapper>
+                    <Dropdown
+                      placeholder="Select your region"
+                      options={availableRegions}
+                      onSelect={handleRegionSelect}
+                      value={selectedRegion}
+                      disabled={!selectedState}
+                    />
+                  </DropdownWrapper>
+                </FormControl>
+              )}
+              <SubmitButton
+                onClick={handleSubmit}
+                disabled={!selectedState || !selectedRegion}
+              >
+                Confirm Location
+              </SubmitButton>
+            </ModalBody>
           </ModalContent>
         </ModalWrapper>
+      )}
+
+      {showToast && (
+        <Toast $isVisible={showToast}>
+          <FaCheckCircle />
+          Location successfully updated!
+        </Toast>
       )}
     </>
   );

@@ -1,3 +1,6 @@
+.CustomRestaurantSub_section {
+  background: #f8f8f8;
+}
 .CustomRestaurantSub_container {
   width: 90%;
   margin: 0 auto;
@@ -26,9 +29,10 @@
 .CustomRestaurantSub_contentTitle {
   color: var(--Ash-100, #8f8f8f);
   text-align: center;
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 2rem;
 }

@@ -125,7 +125,7 @@ svg.other_restaurant_top_rated_loction_icon {
   color: #565656;
   background-color: #f6f6f6;
   border-radius: 10px;
-  border: transparent;
+  border: 1px solid transparent;
   text-decoration: none;
 }
 
@@ -317,7 +317,7 @@ svg.Mobileother_restaurant_top_rated_loction_icon {
   color: #565656;
   background-color: #f6f6f6;
   border-radius: 10px;
-  border: transparent;
+  border: 1px solid transparent;
   text-decoration: none;
 }
 

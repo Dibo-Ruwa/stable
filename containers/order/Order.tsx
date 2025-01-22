@@ -5,7 +5,7 @@ import { Order } from "@/utils/types/types";
 import useOrder from "@/hooks/useOrder";
 import Loader from "@/component/ui/loader/Loader";
 // import { BackBtn } from "../profile/profile.styles";
-import {BackButton} from "@/component/ui/BackButton/BackButton";
+import BackButton from "@/component/ui/BackButton/BackButton";
 import moment from "moment";
 
 // Styled Components

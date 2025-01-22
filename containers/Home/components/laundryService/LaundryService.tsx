@@ -10,13 +10,16 @@ export default function LaundryService() {
         {/* <p className="laundry_sub_food">Courier</p> */}
         <div className="laundry_resturant-image">
           <img
-            src="/images/image 159 (1).png"
+            src="/images/laundry_machine.jpg"
             className="laundry_desktop-image"
             alt="Laundry guys"
+            style={{
+              borderRadius: "10px",
+            }}
           />
           <div className="laundry_mobile-image">
             <img
-              src="/images/image 161.png"
+              src="/images/laundry_machine.jpg"
               className="laundry_img-main"
               alt="Laundry guys"
             />
@@ -53,7 +56,7 @@ export default function LaundryService() {
               alt="resturant guys"
             />
             <img
-              src="/images/Rectangle 250.png"
+              src="/images/laundry_iron.png"
               className="service_img"
               alt="resturant guys"
             />

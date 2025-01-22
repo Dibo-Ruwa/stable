@@ -17,6 +17,7 @@
   padding: 0.5rem 0.7rem;
   background: #ebebeb;
   border-radius: 3px;
+  flex-wrap: wrap; /* Added for responsiveness */
 }
 
 p.sub_FLG_tabText,
@@ -52,11 +53,21 @@ p.sub_FLG_tabText.active {
   color: #27a124;
 }
 
+/* Media query for responsiveness */
+@media (max-width: 600px) {
+  .sub_FLG_tab {
+    justify-content: center;
+  }
+  p.sub_FLG_tabText {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+  }
+}
+
 .sub_cards {
   display: flex;
-  align-items: center;
-  margin: 0 auto;
   width: 100%;
+  max-width: 300px;
   flex-wrap: wrap;
   gap: 1.2rem;
 }
@@ -147,4 +158,11 @@ p.SA_amount {
   border-radius: 4px;
   border: 0.827px solid var(--green2, #4bb149);
   background: rgba(183, 224, 182, 0.2);
+}
+
+/* Styles for empty state */
+p {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
 }

@@ -24,6 +24,14 @@
   }
 }
 
+
+@media screen and (max-width: 600px) {
+  
+  .RequestConfirmationContent {
+    flex-direction: column;
+  }
+}
+
 .RequestConfirmationTitleDaysPicked {
   display: flex;
   flex-direction: column;
@@ -40,7 +48,7 @@
 
 .RequestConfirmationTextGreen {
   color: var(--Green1, #27a124);
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -49,7 +57,7 @@
 
 .RequestConfirmationTextBlack {
   color: var(--Ash-100, #8f8f8f);
-  font-family: Poppins;
+    font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

@@ -1,5 +1,7 @@
+import { FaArrowRight } from "react-icons/fa";
 import "./foodvendors.css";
 import { IoIosCheckmark } from "react-icons/io";
+import Link from "next/link";
 const VendorStepContent = () => {
   return (
     <div className="vendor_text-content">
@@ -18,7 +20,7 @@ const VendorStepContent = () => {
             </div>
           </div>
           <div className="Foodvendor_get_started_text_div">
-            <small className="Foodvendor_get_started_icon_div"> Sign Up</small>
+            <small className="Foodvendor_get_started_icon_div">Join Us</small>
             <p className="Foodvendor_get_started_icon_div">
               Create your account and provider basic information.
             </p>
@@ -79,9 +81,10 @@ const VendorStepContent = () => {
           </div>
         </div>
       </div>
-      <a href="/" className="vendor_signup">
-        Sign Up
-      </a>
+      <Link href="https://admin.diboruwa.com/sign-in" className="vendor_signup">
+        Join Us
+         <FaArrowRight className="get_started_icon" />
+      </Link>
 
       <div className="vendor_img-transparent">
         <img

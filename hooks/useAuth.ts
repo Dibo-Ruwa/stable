@@ -90,7 +90,7 @@ const useAuth = (): AuthHook => {
 
       openModal("success", res.data.message);
       setTimeout(() => {
-        router.push("/signin");
+        router.push("/sign-in");
       }, 3000);
     } catch (error: any) {
       // console.log(error.response.data);
@@ -112,7 +112,7 @@ const useAuth = (): AuthHook => {
 
       openModal("success", res.data.message);
       setTimeout(() => {
-        router.push("/signin");
+        router.push("/sign-in");
       }, 3000);
     } catch (error: any) {
       // console.log(error.response.data);
@@ -132,7 +132,7 @@ const useAuth = (): AuthHook => {
         password: formData.password,
       });
 
-      toast.loading("Submiing credentials..", {
+      toast.loading("Submiting credentials..", {
         duration: 1000,
       });
 
@@ -192,10 +192,11 @@ const useAuth = (): AuthHook => {
 
   const signout = async (): Promise<void> => {
     await signOut();
-    toast.success("Signout successful!", {
+    toast.success("Sign Out successful", {
       duration: 2000,
       position: "bottom-right",
     });
+    router.push("/sign-in");
   };
 
   return {

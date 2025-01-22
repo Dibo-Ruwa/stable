@@ -35,9 +35,16 @@
 }
 
 .delivery-text_container {
-  margin-top: -4rem;
+  /* margin-top: -4rem; */
   padding-bottom: 2rem;
 }
+
+@media screen and (max-width: 399px) {
+  .delivery-text_container {
+    margin-top: 0;
+  }
+}
+
 .delivery-btn_text {
   font-size: 13px;
   background: #565656;
@@ -83,7 +90,7 @@
   font-weight: 500;
   line-height: 1.4rem;
   text-decoration-line: underline;
-  display: none;
+  /* display: none; */
 }
 .delivery-title-h1 {
   color: #7e7e7e;

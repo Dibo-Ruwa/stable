@@ -2,11 +2,10 @@
 import React, { useState, useEffect } from "react";
 import './subscription-card.css'
 import { LaundrySubscription } from "./components/LaundrySubscription";
-import { GroomingSubscription } from "./components/GroomingSubscription";
+import { CleaningSubscription } from "./components/CleaningSubscription";
 import { FoodSubscription } from "./components/FoodSubscription";
 
-
-type TabType = "food" | "laundry" | "grooming";
+type TabType = "food" | "laundry" | "cleaning";
 
 export const Subscription = () => {
   const [activeTab, setActiveTab] = useState<TabType>("food"); // Initialize active tab to "food"
@@ -47,16 +46,16 @@ export const Subscription = () => {
         </p>
         <p
           className={`sub_FLG_tabText ${
-            activeTab === "grooming" ? "active" : ""
+            activeTab === "cleaning" ? "active" : ""
           }`}
-          onClick={() => handleTabChange("grooming")}
+          onClick={() => handleTabChange("cleaning")}
         >
-          Grooming
+          Cleaning
         </p>
       </div>
       {activeTab === "food" && <FoodSubscription />}
       {activeTab === "laundry" && <LaundrySubscription />}
-      {activeTab === "grooming" && <GroomingSubscription />}
+      {activeTab === "cleaning" && <CleaningSubscription />}
     </div>
   );
 };

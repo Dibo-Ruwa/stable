@@ -1,0 +1,40 @@
+.BookingReviewsPostsContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.BookingReviewsPostsTabs {
+  display: flex;
+  gap: 4rem;
+}
+
+.BookingReviewsPostsTab {
+  cursor: pointer;
+}
+
+.BookingReviewsPostsTabText {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+}
+
+.BookingReviewsPostsActiveTabLine {
+  height: 0.3rem;
+  border-radius: 2rem 2rem 0 0;
+  background: #27a124;
+}
+
+.active .BookingReviewsPostsTabText {
+  color: #27a124;
+}
+
+@media screen and (max-width: 768px) {
+  .BookingReviewsPostsTabs {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .BookingReviewsPostsHRLine {
+    width: 95%;
+    margin: 0 auto;
+  }
+}

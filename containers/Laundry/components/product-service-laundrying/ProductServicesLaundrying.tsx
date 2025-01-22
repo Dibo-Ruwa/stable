@@ -136,7 +136,7 @@ export const ProductServicesLaundrying: React.FC = () => {
               alt={selectedVendor.tag}
             />
             <div className="LaundryHero_Name">
-              <div className="LaundryPro-name">
+              {/* <div className="LaundryPro-name">
                 <img
                   className="LaundryPro-img"
                   src={selectedVendor.foodImg}
@@ -155,7 +155,7 @@ export const ProductServicesLaundrying: React.FC = () => {
                     <p className="Laundry_RatingNum">4.5</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="LaundryLocationAndTime">
                 <p className="LaundryTimeD">17 - Mon</p>
                 <p className="LaundryTimeD">2pm - Wed</p>

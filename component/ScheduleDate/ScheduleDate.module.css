@@ -6,6 +6,7 @@
   width: 100%;
   background: #ffffff;
   border-radius: 8px;
+  position: relative;
   padding: 1rem;
   cursor: pointer;
 }
@@ -16,22 +17,28 @@
   justify-content: space-between;
   gap: 0.7rem;
   width: 100%;
+  cursor: pointer;
 }
 .MovingScheduleDateFrame {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  width: 100%;
   gap: 0.7rem;
+  cursor: pointer;
 }
 
 .MovingScheduleDateIcon {
   width: 25px;
-  height: 25px;
+  height: 35px;
+  color: var(--Ash-100, #8f8f8f);
+  cursor: pointer;
 }
 
 .MovingScheduleDate {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  cursor: pointer;
 }
 
 .MovingScheduleDateText,
@@ -39,11 +46,16 @@
   font-size: 13px;
   font-weight: 500;
   color: #2c2c2c;
+  width: 100%;
 }
 
 .MovingScheduleDateText {
   font-size: 12px;
   color: #cccccc;
+}
+.MovingScheduleDateInput {
+  width: 100%;
+  background: #f7f7f7;
 }
 
 .MovingScheduleDateDetails {
@@ -54,4 +66,18 @@
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
   font-size: 0.9rem;
   color: #666;
+  position: absolute;
+  top: 4.4rem;
+  width: 100%;
+  z-index: 1;
+}
+/* ========================= Date Range Picker ============================== */
+
+/* Example Custom Styling */
+.rdrDay.rdrDaySelected {
+  background-color: #4caf50;
+  color: #fff;
+}
+.rdrDayHovered {
+  background-color: #e8f5e9;
 }

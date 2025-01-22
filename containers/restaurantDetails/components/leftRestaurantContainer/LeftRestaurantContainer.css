@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  width: 100%;
   width: min(93%, 1444px);
 }
 
@@ -19,6 +18,7 @@
     0px 29px 29px 0px rgba(158, 158, 158, 0.05),
     0px 7px 16px 0px rgba(158, 158, 158, 0.05);
   border-radius: 10px;
+  
 }
 
 .customSub {
@@ -71,24 +71,44 @@ p.Cust_SA_amount,
 
 .Cust_sub_cards {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   margin: 0 auto;
   width: 100%;
-  flex-wrap: wrap;
   gap: 1.2rem;
 }
 
 .Cust_sub_card {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc((50% - 0.6rem)); /* Default for larger screens */
   border-radius: 5px;
   box-shadow: 0px 184px 51px 0px rgba(158, 158, 158, 0),
     0px 118px 47px 0px rgba(158, 158, 158, 0.01),
     0px 66px 40px 0px rgba(158, 158, 158, 0.05),
     0px 29px 29px 0px rgba(158, 158, 158, 0.05),
     0px 7px 16px 0px rgba(158, 158, 158, 0.05);
-  flex: 1 1 12rem;
+}
+
+@media (max-width: 1024px) {
+  .Cust_sub_card {
+    width: calc(
+      (100% - 0.8rem)
+    ); /* Slightly adjust spacing for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .Cust_sub_card {
+    width: 100%; /* Full-width for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .Cust_sub_card {
+    width: 100%; /* Full-width for smaller mobile screens */
+    margin-bottom: 1rem; /* Add spacing between cards */
+  }
 }
 
 .Cust_sub_ITA {
@@ -594,6 +614,103 @@ p.Cust_SA_amount {
 .payButton {
   display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 0.8rem auto;
+  padding: 5.791px 34.744px;
+  gap: 8.272px;
+  border-radius: 4px;
+  border: 0.827px solid var(--green2, #4bb149);
+  background: rgba(183, 224, 182, 0.2);
+}
+
+.sub_cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+  gap: 1.2rem;
+}
+
+.sub_card {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 0.6rem);
+  border-radius: 5px;
+  box-shadow: 0px 184px 51px 0px rgba(158, 158, 158, 0),
+    0px 118px 47px 0px rgba(158, 158, 158, 0.01),
+    0px 66px 40px 0px rgba(158, 158, 158, 0.05),
+    0px 29px 29px 0px rgba(158, 158, 158, 0.05),
+    0px 7px 16px 0px rgba(158, 158, 158, 0.05);
+}
+
+.sub_ITA {
+  display: flex;
+  gap: 0.7rem;
+  width: 100%;
+  padding: 0.8rem 0.8rem 0;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.sub_TA {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+p.sub_type_text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+p.sub_amount_text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.sub_list_items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  width: 100%;
+}
+
+.sub_list_item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+p.sub_list_item_text {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.sub_SA {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.8rem;
+}
+
+p.sub_SA_text {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+p.SA_amount {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.sub_btn {
+  display: flex;
+  width: 90%;
   align-items: center;
   justify-content: center;
   margin: 0.8rem auto;

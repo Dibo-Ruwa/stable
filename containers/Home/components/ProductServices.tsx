@@ -2,6 +2,8 @@
 import "./home.css";
 import React, { useState } from "react";
 import { Data, DataItem } from "@/constants/index";
+import Link from "next/link";
+import { Button } from "@/component/shared/Button";
 
 const MobileView: React.FC = () => {
   const [selectedTag, setSelectedTag] = useState<string>("Food");
@@ -16,8 +18,10 @@ const MobileView: React.FC = () => {
         className="mob"
         style={{
           backgroundImage: `url(${selectedData?.bigImg})`,
-          backgroundSize: "140% 100%",
+          backgroundSize: "cover",
+          // background: "contain",
           backgroundRepeat: "no-repeat",
+          backgroundPosition: "center"
         }}
       >
         <div className="mob_overlay">
@@ -44,24 +48,30 @@ const MobileView: React.FC = () => {
                 One platform, endless convenience. Simplify your life with our
                 intuitive solution for all your needs.
               </div>
-              <button className="get-started-btn">Get Started</button>
+              <Link href={selectedData?.tagLink || "#"}>
+                <button className="get-started-btn">Get Started</button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      <div className="mob_loc">
+      {/* <div className="mob_loc">
         <div className="mob-loc-map">
           <div
             style={{
               width: "90%",
-              height: "100px",
+              height: "100%",
               paddingTop: "10px",
               paddingBottom: "10px",
               borderRadius: 50,
-              margin: "8px auto",
-              overflow: "hidden",
-              background:
-                "linear-gradient(0deg, #E6E6E6 0%, #E6E6E6 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%)",
+              // margin: "8px auto",
+              // overflow: "hidden",
+              // background:
+              //   "linear-gradient(0deg, #E6E6E6 0%, #E6E6E6 100%), linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              margin: "auto",
             }}
           >
             <div
@@ -74,7 +84,7 @@ const MobileView: React.FC = () => {
               }}
             >
               <img
-                style={{ width: "100%", height: 30 }}
+                style={{ width: "100%" }}
                 src={selectedData?.bike}
                 alt="Bike"
               />
@@ -88,14 +98,14 @@ const MobileView: React.FC = () => {
               }}
             >
               <img
-                style={{ width: "100%", height: "30%" }}
+                style={{ width: "100%" }}
                 src={selectedData?.map}
                 alt="Map"
               />
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -119,120 +129,70 @@ const ProductServices: React.FC<ProductServicesProps> = ({
   return (
     <>
       <div className="hero_cont">
-        <div className="hero_prod">
-          <div className="prod">
-            <div className="prod-cont">
-              <div className="tags-container">
-                {Data.map((tagItem) => (
-                  <button
-                    key={tagItem._id}
-                    className={`tag-text ${
-                      tagItem.tag === selectedTag ? "tag-text-active" : ""
-                    }`}
-                    onClick={() => setSelectedTag(tagItem.tag)}
-                  >
-                    {tagItem.tag}
-                  </button>
-                ))}
+      <div className="hero_prod">
+        <div className="prod">
+          <div className="prod-cont">
+            <div className="tags-container">
+              {Data.map((tagItem) => (
+                <Link
+                  href={tagItem.tagLink}
+                  key={tagItem._id}
+                  className={`tag-text ${
+                    tagItem.tag === selectedTag ? "tag-text-active" : ""
+                  }`}
+                  onClick={() => setSelectedTag(tagItem.tag)}
+                >
+                  {tagItem.tag}
+                </Link>
+              ))}
+            </div>
+            <div className="text-container">
+              <p className="highlight">Your Ultimate Solution for</p>
+              <p className="highlight2">Modern Lifestyle Needs</p>
+              <div className="description">
+                One platform, endless convenience. Simplify your life with our
+                intuitive solution for all your needs.
               </div>
-              <div className="text-container">
-                <p className="highlight">Your Ultimate Solution for</p>
-                <p className="highlight2">Modern Lifestyle Needs</p>
-                <div className="description">
-                  One platform, endless convenience. Simplify your life with our
-                  intuitive solution for all your needs.
-                </div>
+              <Link href={selectedItem?.tagLink || "#"}>
                 <button className="get-started-btn">Get Started</button>
+              </Link>
+            </div>
+          </div>
+          {selectedItem && (
+            <div className="image">
+              <img src={selectedItem.bigImg} alt={selectedItem.tag} />
+              <div className="overlay">
+                <div className="footer-text">{selectedItem.foodText}</div>
               </div>
             </div>
-            {selectedItem && (
-              <div className="image">
-                <img src={selectedItem.bigImg} alt={selectedItem.tag} />
-                <div className="overlay">
-                  <div className="footer-text">{selectedItem.foodText}</div>
-                </div>
-              </div>
-            )}
+          )}
+        </div>
+        </div>
+        
+      {selectedItem && (
+        <div className="hero_map ">
+          <img className="map" src={selectedItem.map} alt={selectedItem.tag} />
+          <div className="pro-logo">
+            {/* <div className="pro-name">
+              <img
+                className="pro-img"
+                src={selectedItem.foodImg}
+                alt={selectedItem.tag}
+              />
+            </div> */}
+            <div className="b-l">
+              <img
+                className="bike"
+                src={selectedItem.bike}
+                alt={selectedItem.tag}
+              />
+            </div>
           </div>
         </div>
-
-        {selectedItem && (
-          <div className="hero_map">
-            <img
-              className="map"
-              src={selectedItem.map}
-              alt={selectedItem.tag}
-            />
-            <div className="pro-logo">
-              <div className="pro-name">
-                <img
-                  className="pro-img"
-                  src={selectedItem.foodImg}
-                  alt={selectedItem.tag}
-                />
-              </div>
-              <div className="b-l">
-                <img
-                  className="bike"
-                  src={selectedItem.bike}
-                  alt={selectedItem.tag}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-        <MobileView />
+      )}
+      <MobileView />
       </div>
     </>
   );
 };
 export default ProductServices;
-// {
-//  <div className="container">
-// <div>
-
-// </div>
-// <div className="tags-container">
-//   <div className="tag tag-food">
-//   <div className="tag-text">Food</div>
-//   </div>
-//   <div className="tag tag-courier">
-//     <div className="tag-text">Courier</div>
-//   </div>
-//   <div className="tag tag-laundry">
-//     <div className="tag-text">Laundry</div>
-//   </div>
-//   <div className="tag tag-grooming">
-//     <div className="tag-text">Grooming</div>
-//   </div>
-// </div>
-// <img
-//   className="image"
-//   src="https://via.placeholder.com/449x276"
-//   alt="Chef preparing food"
-// />
-// <div className="text-container">
-//   <div className="highlight">
-//     Your Ultimate Solution for Modern Lifestyle Needs
-//   </div>
-//   <div className="description">
-//     One platform, endless convenience. Simplify your life with our
-//     intuitive solution for all your needs.
-//   </div>
-// </div>
-// <div className="get-started-btn">
-//   <div className="get-started-text">Get Started</div>
-//   <div className="arrow-container">
-//     <div className="arrow">
-//       <div className="arrow-part arrow-part-1"></div>
-//       <div className="arrow-part arrow-part-2"></div>
-//     </div>
-//   </div>
-// </div>
-// <div className="overlay" />
-// <div className="footer-text">
-//   Order from your favorite restaurant and get your meal delivered in
-//   minutes.
-// </div>
-// </div>
-// }

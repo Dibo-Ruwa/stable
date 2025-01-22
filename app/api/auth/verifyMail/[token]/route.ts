@@ -3,9 +3,9 @@ import { onBoarding } from "@/emails/mails";
 import { verifyMailToken } from "@/templates/authTemplates";
 import { closeDB, connectDB } from "@/utils/db";
 import User from "@/utils/models/Users";
-import sendEmail, { resend } from "@/utils/resend";
-import { sendMail } from "@/utils/sendMail";
+// import sendEmail, { resend } from "@/utils/resend";
 import { NextResponse } from "next/server";
+import sendEmail from "@/utils/sendSmtpMail";
 
 export async function GET(
   req: Request,
@@ -26,18 +26,18 @@ export async function GET(
 
     await user.save();
 
-   
-
-    await sendEmail(
-      user.email,
-      "Welcome",
-      OnboardingTemplate({
-        customerName: user.firstName,
-      })
-    );
+    // Add the email sending logic here
+    await sendEmail({
+      to: user?.email,
+      subject: "Welcome to Diboruwa",
+      template: "onboarding", 
+      replacements: {
+        customerName: user?.firstName,
+      },
+    });
 
     return NextResponse.json(
-      { success: true, message: "Account activated Successfully!!!" },
+      { success: true, message: "Account activated successfully" },
       { status: 200 }
     );
   } catch (err) {
@@ -47,6 +47,8 @@ export async function GET(
       { status: 500 }
     );
   } finally {
-    await closeDB();
+    // await closeDB();
+    console.log("Final")
+    
   }
 }

@@ -15,50 +15,10 @@ import { OtherRestaurant3 } from "./components/other-restaurant/OtherRestaurant3
 import { OtherRestaurant4 } from "./components/other-restaurant/OtherRestaurant4";
 import { MobileOtherRestaurant } from "./components/other-restaurant/MobileOtherRestaurnt";
 
-type ServiceName =
-  | "Laundry chores."
-  | "Cleaning duties"
-  | "Cooking responsibilities"
-  | "Moving/Packing stress";
-
-const serviceTextColorMapping: Record<ServiceName, string> = {
-  "Laundry chores.": "#3277a8",
-  "Cleaning duties": "#e67300",
-  "Cooking responsibilities": "#a67c00",
-  "Moving/Packing stress": "#800080",
-};
 
 export const Restaurant: React.FC = () => {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  const serviceOptions: string[] = useMemo(
-    () => [
-      "Laundry chores.",
-      "Cleaning duties",
-      "Cooking responsibilities",
-      "Moving/Packing stress",
-    ],
-    []
-  );
-
-  const [currentService, setCurrentService] = useState<ServiceName>(
-    serviceOptions[0] as ServiceName
-  );
-  const [serviceIndex, setServiceIndex] = useState(0);
-
-  const currentServiceTextColor =
-    serviceTextColorMapping[currentService] || "defaultTextColor";
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const nextIndex = (serviceIndex + 1) % serviceOptions.length;
-      setServiceIndex(nextIndex);
-      setCurrentService(serviceOptions[nextIndex] as ServiceName);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [serviceIndex, serviceOptions]);
+  const [selectedRating, setSelectedRating] = useState<string>("All");
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   return (
     <div className="home-container">
@@ -66,15 +26,65 @@ export const Restaurant: React.FC = () => {
         <ProductServicesFoodVendor />
       </div>
       <TopRestaurants />
-      <SearchFilter />
+      <SearchFilter
+        setSelectedRating={setSelectedRating}
+        setSearchQuery={setSearchQuery}
+      />
       <MobileOtherRestaurant />
       <div className="OtherRestaurants_container">
-      <OtherRestaurant1 />
-      <OtherRestaurant2 />
-      <OtherRestaurant3 />
-      <OtherRestaurant4 />
-    </div>
+        <OtherRestaurant1 selectedRating={selectedRating} searchQuery={searchQuery} />
+        <OtherRestaurant2 selectedRating={selectedRating} searchQuery={searchQuery} />
+        <OtherRestaurant3 selectedRating={selectedRating} searchQuery={searchQuery} />
+        <OtherRestaurant4 selectedRating={selectedRating} searchQuery={searchQuery} />
+      </div>
       <Newsletter />
     </div>
   );
 };
+
+
+
+// type ServiceName =
+//   | "Laundry chores."
+//   | "Cleaning duties"
+//   | "Cooking responsibilities"
+//   | "Moving/Packing stress";
+
+// const serviceTextColorMapping: Record<ServiceName, string> = {
+//   "Laundry chores.": "#3277a8",
+//   "Cleaning duties": "#e67300",
+//   "Cooking responsibilities": "#a67c00",
+//   "Moving/Packing stress": "#800080",
+// };
+
+
+ // const { data: session } = useSession();
+  // const router = useRouter();
+
+  // const serviceOptions: string[] = useMemo(
+  //   () => [
+  //     "Laundry chores.",
+  //     "Cleaning duties",
+  //     "Cooking responsibilities",
+  //     "Moving/Packing stress",
+  //   ],
+  //   []
+  // );
+
+  // const [currentService, setCurrentService] = useState<ServiceName>(
+  //   serviceOptions[0] as ServiceName
+  // );
+  // const [serviceIndex, setServiceIndex] = useState(0);
+
+  // const currentServiceTextColor =
+  //   serviceTextColorMapping[currentService] || "defaultTextColor";
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     const nextIndex = (serviceIndex + 1) % serviceOptions.length;
+  //     setServiceIndex(nextIndex);
+  //     setCurrentService(serviceOptions[nextIndex] as ServiceName);
+  //   }, 3000);
+
+  //   return () => clearInterval(interval);
+  // }, [serviceIndex, serviceOptions]);

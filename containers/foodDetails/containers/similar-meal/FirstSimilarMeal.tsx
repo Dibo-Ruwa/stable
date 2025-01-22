@@ -1,6 +1,6 @@
 import React from "react";
-import Link from "next/link";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 import { FoodDiscountSale, FirstSimilarMealData } from "@/constants/index";
 import {
@@ -28,6 +28,8 @@ interface FirstSimilarMealProps {
 }
 
 export const FirstSimilarMeal: React.FC<FirstSimilarMealProps> = ({ id }) => {
+  const router = useRouter();
+  
   return (
     <MostSoldContainer>
       <MostSoldFrame>
@@ -40,16 +42,28 @@ export const FirstSimilarMeal: React.FC<FirstSimilarMealProps> = ({ id }) => {
             const TimeIcon = item.timeIcon;
             const PrizeIcon = item.prizeIcon;
             return (
-              <MostSoldCard key={item.id}>
+              <div
+                style={{
+                  scrollSnapAlign: 'center', // Corrected property name
+                  boxSizing: 'border-box',
+                  backgroundColor: '#fff',
+                  overflowX: 'hidden',
+                  borderRadius: '16px',
+                  textDecoration: 'none',
+                  cursor: 'pointer', // Added cursor pointer
+                }}
+                onClick={() => router.push(`/food/${item.id}`)}
+                key={item.id}
+              >
                 <div style={{position: 'relative'}}>
-                  <MostSoldCardLinkDiv href={`/food/${item.id}`} key={item.id}>
+                  <MostSoldCardLinkDiv  key={item.id}>
                     <MostSoldCardImg
                       src={item.img}
                       alt={item.smallTitle}
                     />
                   </MostSoldCardLinkDiv>
                   <div>
-                    <FavoriteIcon 
+                    <FavoriteIcon
                       style={{
                         color: '#27A124',
                         background: 'white',
@@ -58,21 +72,21 @@ export const FirstSimilarMeal: React.FC<FirstSimilarMealProps> = ({ id }) => {
                         position: 'absolute',
                         top: 4,
                         left: 3,
+                        cursor: 'pointer', // Added cursor pointer
                       }}
-
                       size={40}
                     />
                   </div>
                 </div>
                 <MostSoldCardContent>
                   <MostSoldCardContext>
-                    <div>
+                    <div className="title_dot_starIconText">
                       <MostSoldCardTitle>{item.smallTitle}</MostSoldCardTitle>
                       <MostSoldCardDot />
-                      <StarIcon />
+                      <StarIcon className="star_Icon" />
                       <small>{item.rating}</small>
                     </div>
-                    <div>
+                    <div className="Time_IconText">
                       <TimeIcon />
                       <div>{item.timeText}</div>
                     </div>
@@ -80,22 +94,22 @@ export const FirstSimilarMeal: React.FC<FirstSimilarMealProps> = ({ id }) => {
                   <MostSoldCardPrize>
                     <MostSoldCardPrizeText>{item.prizeText}</MostSoldCardPrizeText>
                     <MostSoldCardReminder>{item.remenderText}</MostSoldCardReminder>
-                    <MostSoldCardPrizeLink href={item.prizeLink}>
+                    <MostSoldCardPrizeLink >
                       <PrizeIcon />
                     </MostSoldCardPrizeLink>
                   </MostSoldCardPrize>
                 </MostSoldCardContent>
-              </MostSoldCard>
+              </div>
             );
           })}
         </MostSoldCards>
-        <SaleImgsContainer>
+        {/* <SaleImgsContainer>
           {FoodDiscountSale.map((item, index) => (
             <div key={index}>
               <MostSoldSaleImg src={item.img} alt={item.alt} />
             </div>
           ))}
-        </SaleImgsContainer>
+        </SaleImgsContainer> */}
       </MostSoldFrame>
     </MostSoldContainer>
   );

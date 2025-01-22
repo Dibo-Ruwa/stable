@@ -3,8 +3,12 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
 
-  width: min(93%, 1444px);
+@media screen and (max-width: 1198px) {
+  .restaurantFrame {
+    width: 100%;
+  }
 }
 .CPImage {
   width: 100%;
@@ -16,17 +20,18 @@
 }
 
 .coverImage {
-  width: 55vw;
+  width: 100%;
   position: relative;
 }
 
 .coverImg {
   width: 100%;
+  /* height: 350px; */
 }
 
 .restProfileImage {
   position: absolute;
-  top: 14rem;
+  bottom: -2rem;
   left: 1rem;
   width: 4.5rem;
 }
@@ -38,7 +43,7 @@
 .aboutRestaurantContainer {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 0 1rem;
   width: 100%;
   margin: 0 auto;
   margin-top: 1.5rem;
@@ -92,7 +97,7 @@
   font-size: 1rem;
   font-style: normal;
   line-height: normal;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 .restaurantOpeningTimePhoneNum {
@@ -108,7 +113,7 @@
 .restaurantLocationText,
 .restaurantDescription,
 .restaurantDeliveryTime {
-  color: #000000;
+  color: #2a2a2a;
   font-family: Poppins;
   font-size: 0.875rem;
   font-style: normal;
@@ -139,11 +144,23 @@
   color: #2a2a2a;
 }
 
+.restaurantLocationText {
+  color: #2a2a2a;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .restaurantDescription_DT {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin-top: 0.7rem;
+}
+
+.restaurantDescription {
+  color: #565656;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .restaurantDeliveryTime {
@@ -182,6 +199,13 @@
   flex-direction: column;
   gap: 1rem;
   border-radius: 0.7rem;
+  margin-top: 1rem;
+}
+
+.OurLaundryServiceContainerTitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #565656;
 }
 
 .OurLaundryServiceCards {
@@ -191,6 +215,7 @@
   gap: 1rem;
   border-radius: 8px;
   width: 100%;
+  flex-wrap: wrap;
   background: #ffffff;
 }
 
@@ -200,8 +225,22 @@
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
-  width: 100%;
+  width: 23%;
 }
+
+
+@media screen and (max-width: 600px) {
+  .OurLaundryServiceCards {
+    gap: 0;
+  justify-content: space-between;
+    width: 100%;
+  }
+  .OurLaundryServiceCard {
+    display: flex;
+    width: 47%;
+  }
+  }
+
 
 .OurLaundryServiceImage {
   background: #f8f8f8;
@@ -232,7 +271,7 @@
   }
 
   .restProfileImage {
-    top: 9rem;
+    bottom:-2rem;
   }
 
   .NRSContent {
@@ -243,28 +282,28 @@
 
 @media screen and (max-width: 1024px) {
   .restProfileImage {
-    top: 8rem;
+     bottom:-2rem;
     width: 4.5rem;
   }
 }
 
 @media screen and (max-width: 920px) {
   .restProfileImage {
-    top: 7rem;
+     bottom:-2rem;
     width: 4.5rem;
   }
 }
 
 @media screen and (max-width: 820px) {
   .restProfileImage {
-    top: 6rem;
+     bottom:-2rem;
     width: 3.5rem;
   }
 }
 
 @media screen and (max-width: 769px) {
   .restProfileImage {
-    top: 4rem;
+     bottom:-2rem;
     width: 3.5rem;
   }
 }
@@ -292,30 +331,35 @@
   }
 
   .MobilecoverImage {
-    width: 29rem;
+    width: 100%;
+    max-width: 100%;
     position: relative;
   }
 
   .MobilecoverImg {
     width: 100%;
+    max-width: 100%;
   }
 
   .MobilerestProfileImage {
     position: absolute;
-    top: 9rem;
+    bottom: -3.5rem;
     left: 1rem;
+    width: 4.5rem;
+    transform: translateY(-50%);
   }
 
-  .MobilerestProfileImg {
-  }
+  /* .MobilerestProfileImg {
+  } */
 
   .MobileaboutRestaurantContainer {
     display: flex;
     flex-direction: column;
     padding: 1rem;
     width: 100%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     gap: 1rem;
+    margin-top: 30px;
   }
 
   .MobileNRSContent {
@@ -392,6 +436,7 @@
     display: flex;
     gap: 0.8rem;
     align-items: center;
+    flex-wrap: wrap;
     width: 100%;
   }
 
@@ -430,6 +475,22 @@
     color: #2a2a2a;
   }
 
+  .MobSubPlan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: 1.5rem auto;
+  }
+  .MobSubPlanText {
+    color: var(--Black-100, #2a2a2a);
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
   .MobilerestaurantReview {
     color: #27a124;
     font-family: Poppins;
@@ -451,7 +512,7 @@
   }
 
   .activeSub {
-    transform: translateX(0); /* Bring into view */
+    transform: translateX(6rem); /* Bring into view */
     opacity: 1; /* Fully visible */
     width: 75%;
     position: absolute;
@@ -467,30 +528,33 @@
 
 @media screen and (max-width: 668px) {
   .MobilecoverImage {
-    width: 37rem;
+    max-width: 100%;
   }
 
-  .MobilerestProfileImage {
-    top: 11rem;
-  }
+  /* .MobilerestProfileImage {
+    top: 100%;
+    transform: translateY(-50%);
+  } */
 }
 
 @media screen and (max-width: 568px) {
   .MobilecoverImage {
-    width: 34rem;
+    max-width: 100%;
   }
 
-  .MobilerestProfileImage {
-    top: 10rem;
-  }
+  /* .MobilerestProfileImage {
+    top: 100%;
+    transform: translateY(-50%);
+  } */
 }
 
 @media screen and (max-width: 468px) {
   .MobilecoverImage {
-    width: 33rem;
+    max-width: 100%;
   }
 
-  .MobilerestProfileImage {
-    top: 9rem;
-  }
+  /* .MobilerestProfileImage {
+    top: 100%;
+    transform: translateY(-50%);
+  } */
 }

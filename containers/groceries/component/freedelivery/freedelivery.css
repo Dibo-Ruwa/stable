@@ -20,9 +20,8 @@ p.freedelivery_title {
 .freedelivery-cards {
   display: flex;
   justify-content: center;
-  width: 100%;
-  overflow-x: scroll;
   flex-wrap: wrap;
+  width: 100%;
   scroll-snap-type: x mandatory;
   margin: 0 auto;
   gap: 30px;
@@ -31,9 +30,9 @@ p.freedelivery_title {
 .freedelivery-card {
   width: 100%;
   scroll-snap-align: center;
-  flex: 1 1 15rem;
   box-sizing: border-box;
   background-color: #fff;
+  flex: 1 1 15rem;
   overflow-x: hidden;
   border-radius: 16px;
 }

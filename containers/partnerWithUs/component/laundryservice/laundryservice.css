@@ -1,6 +1,6 @@
 .laundry_width {
-  width: min(93%, 1440px);
-  margin: 5rem auto;
+  width: min(100%, 1444px);
+  margin: auto;
   position: relative;
 }
 
@@ -11,8 +11,18 @@ img.laundry_img-content {
   height: 24rem;
 }
 
+.laundry_img_update{
+  width: 100%;
+  height: 39.3rem;
+
+}
+
 .laundry_img {
   position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 li.laundry_text-li {
@@ -43,10 +53,18 @@ a.laundry_signup {
   color: #27a124;
   font-size: 17px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4rem;
   display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
   margin-top: 2rem;
+}
+
+.get_started_icon {
+  width: 15px;
+  height: 15px;
 }
 
 .laundry_img-transparent {
@@ -121,16 +139,18 @@ small.LaundryStep_get_started_icon_div {
 }
 
 p.LaundryStep_get_started_icon_div {
-  color: #5e5e5e;
+  color: #2a2a2a;
   font-size: 14px;
   font-family: "Poppins";
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .LaundryStep-content {
   background: transparent;
   padding: 0;
   position: relative;
+  margin: 0 auto;
+  width: 93%;
   margin-top: 4rem;
 }
 
@@ -139,6 +159,7 @@ ul.LaundryStep-ul {
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
+  gap: 0.7rem;
 }
 
 span.LaundryStep_cicle {
@@ -149,14 +170,23 @@ span.LaundryStep_cicle {
 }
 
 @media only screen and (max-width: 400px) {
-  img.laundry_img-content {
-    width: 20rem;
+  .laundry_img {
+    justify-content: center; /* Center the image */
+  }
+
+  img.laundry_img_update {
+    width: 90%; 
+    height: 90%;
+  }
+
+  img.laundry_img_mobile{
+    display: none;
   }
 
   .laundry_overlay-img {
     position: absolute;
-    top: 10rem;
-    right: 0;
+    top: 15rem;
+    right: 8rem;
   }
 
   img.laundry_overlay-img_content {
@@ -164,9 +194,18 @@ span.LaundryStep_cicle {
   }
 }
 
+@media only screen and (max-width: 355px) {
+  img.laundry_img-content {
+    width: 17rem;
+    height: 17rem;
+  }
+  .laundry_overlay-img {
+    top: 8rem;
+  }
+}
+
 @media only screen and (min-width: 540px) {
   img.laundry_img-content {
-    margin: 0 auto;
     width: 25rem;
     height: 23rem;
   }
@@ -181,6 +220,7 @@ span.LaundryStep_cicle {
   img.laundry_img-content {
     width: 40rem;
     height: 30rem;
+    margin: 0;
   }
 
   .laundry_overlay-img {
@@ -198,16 +238,31 @@ span.LaundryStep_cicle {
     width: 100%;
     height: 100%;
   }
+  .laundry_img-text_Frame {
+    background: rgba(178, 161, 145, 0.14);
+    margin-left: 3rem;
+    padding: 2rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+  .LaundryStep-content {
+    background: transparent;
+    padding: 0;
+    position: relative;
+    margin-top: 4rem;
+  }
 
   .laundry_img-text {
-    width: 100%;
-    background: #b2a19124;
+    /* width: 60vh; */
+    position: relative;
+    z-index: -0;
   }
+
   .laundry-img-text {
     position: relative;
     display: flex;
     flex-direction: row-reverse;
     margin: 6rem auto 0;
+    justify-content: center;
   }
 
   .laundry_overlay-img {
@@ -223,6 +278,10 @@ span.LaundryStep_cicle {
   .laundry_text-content {
     margin: 2rem 0 0;
     position: relative;
+  }
+
+  ul.LaundryStep-ul {
+    margin-left: 3rem;
   }
 
   li.laundry_text-li {
@@ -253,6 +312,10 @@ span.LaundryStep_cicle {
     background: #e9e9e929;
   }
 
+  .laundry_img-text {
+    /* width: 50vh; */
+  }
+
   .laundry_img-transparent {
     left: 14.7rem;
   }
@@ -276,9 +339,9 @@ span.LaundryStep_cicle {
     background: none;
   }
 
-  .laundry_img {
+  /* .laundry_img {
     width: 100%;
-  }
+  } */
 
   .laundry_img-transparent {
     left: 14.6rem;
@@ -286,6 +349,10 @@ span.LaundryStep_cicle {
 
   .laundry_overlay-img {
     top: 11rem;
+  }
+
+  .laundry_img-text {
+    /* width: 75vh; */
   }
 
   .LaundryStep_get_started_content {
@@ -296,11 +363,15 @@ span.LaundryStep_cicle {
 
   img.laundry_img-content {
     width: 100%;
-    height: 33rem;
+    height: 39.3rem;
   }
 }
 
 @media only screen and (min-width: 1200px) {
+  .laundry_img-text {
+    width: 40rem;
+  }
+
   .laundry_img-transparent {
     left: 17.78rem;
   }
@@ -319,3 +390,9 @@ span.LaundryStep_cicle {
     left: 18.4rem;
   }
 }
+
+/* @media only screen and (min-width: 768px) {
+  .laundry_img-transparent {
+    width: 100%;
+  }
+} */

@@ -1,3 +1,7 @@
+.MovingDetails_container{
+  background: #f8f8f8;
+}
+
 .Moving_head {
   width: 93%;
   margin: 0 auto;
@@ -20,7 +24,7 @@
 
 @media screen and (max-width: 768px) {
   .Moving_Cont {
-    width: 70%;
+    width: 100%;
     margin: 0 auto;
   }
 

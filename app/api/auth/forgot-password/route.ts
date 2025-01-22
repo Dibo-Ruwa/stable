@@ -1,14 +1,16 @@
 import { NextResponse } from "next/server";
-import { hash } from "bcrypt";
+import { hash } from "bcryptjs";
 import User from "@/utils/models/Users";
 import { connectDB, closeDB } from "@/utils/db";
 import { Cart } from "@/utils/models/Cart";
 import { generateToken } from "@/templates/authTemplates";
 import ActivateAccount from "@/emails/ActivateAccount";
-import sendEmail from "@/utils/resend";
+// import sendEmail from "@/utils/resend";
+import sendEmail from "@/utils/sendSmtpMail";
 import { PasswordRecoveryEmail } from "@/emails";
 import { PasswordRecorvery } from "@/emails/mails";
 import { sendMail } from "@/utils/sendMail";
+
 
 export async function POST(req: Request, res: Response) {
   try {
@@ -26,7 +28,7 @@ export async function POST(req: Request, res: Response) {
 
     if (!userExists) {
       return new Response(
-        "No user found, Try entering the correct email address",
+        "No user found. Please enter the correct email address.",
         { status: 400 }
       );
     }
@@ -37,18 +39,29 @@ export async function POST(req: Request, res: Response) {
 
     const baseUrl = process.env.BASE_URL;
 
-    await sendEmail(
-      userExists.email,
-      "Reset Password!!!",
-      PasswordRecoveryEmail({
-        userName: userExists.firstName,
+    // await sendEmail(
+    //   userExists.email,
+    //   "Reset Password",
+    //   PasswordRecoveryEmail({
+    //     userName: userExists.firstName,
+    //     passwordResetLink: `${baseUrl}/reset-password?token=${resetToken}`,
+    //   })
+    // );
+
+    await sendEmail({
+      to: userExists.email,
+      subject: "Reset Password",
+      template: "passwordReset",  // The HTML template you want to use
+      replacements: {
+        userName: userExists?.firstName,
         passwordResetLink: `${baseUrl}/reset-password?token=${resetToken}`,
-      })
-    );
+
+      },
+    });
 
     return NextResponse.json(
       {
-        message: "An email has been sent to reset your password",
+        message: "An email has been sent to verify your account.",
         resetToken,
         success: true,
       },
@@ -57,6 +70,8 @@ export async function POST(req: Request, res: Response) {
   } catch (err) {
     return NextResponse.json(err);
   } finally {
-    await closeDB();
+    // await closeDB();
+    console.log("Final")
+
   }
 }

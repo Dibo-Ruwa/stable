@@ -5,7 +5,7 @@ import Link from 'next/link'
 const food = [
   {
     link: "/",
-    img: "/images/fd1.png",
+    img: "/images/paper_delivery.png",
   },
   {
     link: "/",
@@ -13,11 +13,7 @@ const food = [
   },
   {
     link: "/",
-    img: "/images/fd3.png",
-  },
-  {
-    link: "/",
-    img: "/images/fd4.png",
+    img: "/images/delivery_bus.png",
   },
   {
     link: "/",
@@ -36,7 +32,7 @@ export default function FoodImage() {
                 color: 'black',
               }}
             >
-              Food delivery & moving
+              Moving and Percel Delivery
             </p>
             
           </div>

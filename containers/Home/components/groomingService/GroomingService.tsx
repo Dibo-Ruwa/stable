@@ -8,13 +8,13 @@ export default function GroomingService() {
         <p className="sub_food">Groceries</p>
         <div className="grooming-image">
           <img
-            src="/images/Frame 2610228 (2).png"
+            src="/images/grocery-bags.png"
             className="grooming_desktop-image"
             alt="resturant guys"
           />
           <div className="grooming_mobile-image">
             <img
-              src="/images/image 160 (1).png"
+              src="/images/grocery-bags.png"
               className="grooming_img-main"
               alt="resturant guys"
             />
@@ -29,9 +29,8 @@ export default function GroomingService() {
           <button className="grooming-btn_text">Groceries</button>
           <h4 className="grooming-subtitle">Groceries Service</h4>
           <p className="grooming-des">
-            Ransforming your look has never been easier. Skip the trip to the
-            barbershop and indulge in the luxury of professional grooming right
-            in the comfort of your own home.
+            Experience the convenience of our groceries service. We provide fresh, high-quality products delivered straight to your door, 
+            ensuring you have everything you need without the hassle of going to the store.
           </p>
           <Link href="/groceries" className="Check-Out_Vendors">
             Order Now

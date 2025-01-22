@@ -5,13 +5,11 @@ import { connectDB, closeDB } from "@/utils/db";
 import { Cart } from "@/utils/models/Cart";
 import { generateToken } from "@/templates/authTemplates";
 import ActivateAccount from "@/emails/ActivateAccount";
-import sendEmail from "@/utils/resend";
+// import sendEmail from "@/utils/resend";
+import sendEmail from "@/utils/sendSmtpMail";
 import { sendMail } from "@/utils/sendMail";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/helpers/authOptions";
-import { AdminHomeCleaningQuoteRequest,
-  AdminLaundryQuoteRequest,
-  UserQuoteRequestConfirmation,} from "@/emails";
 import moment from "moment";
 import { Request } from "@/utils/models/Requests";
 
@@ -19,7 +17,7 @@ import { Request } from "@/utils/models/Requests";
 type Item = {
   name: string;
   id: number;
-  amount: number;
+  quantity: number;
 };
 
 export async function GET(req: Request, res: Response) {
@@ -47,7 +45,9 @@ export async function GET(req: Request, res: Response) {
     console.log(err);
     return NextResponse.json(err);
   } finally {
-    await closeDB();
+    // await closeDB();
+    console.log("Final")
+
   }
 }
 
@@ -93,45 +93,63 @@ export async function POST(req: Request, res: Response) {
 
     await newRequest.save();
 
-    await sendEmail(
-      user.email,
-      "New Quote",
-      UserQuoteRequestConfirmation({
+    const serviceType = data.type === "laundry" ? "Laundry" : data.type === "cleaning" ? "Cleaning" : ""
+
+    await sendEmail({
+      to: user.email,
+      subject: `Your New ${serviceType} Quote`,
+      template: "userQuoteRequest",
+      replacements: {
         firstName: user.firstName,
-        serviceType: data.type,
+        serviceType: serviceType,
         description: quoteText,
         timestamp: timestamp,
         turnaroundTime: turnaroundTime,
         adminContact: "info@diboruwa.com",
-      })
-    );
+      },
+    });
+
 
     if (data.type === "laundry") {
-      await sendEmail(
-        "ibrahim.saliman.zainab@gmail.com",
-        "Request Confirmation",
-        AdminLaundryQuoteRequest({
+    
+      const formattedLaundryItems = data.quote
+      .map((item: any) => `<li>${item.name} - ${item.amount}</li>`)
+      .join("");
+
+      await sendEmail({
+        to: "ibrahim.saliman.zainab@gmail.com",
+        subject: `${serviceType} Quote Confirmation`,
+        template: "adminLaundyQuote",
+        replacements: {
           adminName: "Ibrahim",
           userName: `${user.firstName} ${user.lastName}`,
           userEmail: user.email,
           userContact: user.phone,
           userAddress: `${user.address}, ${user.lga},  ${user.state}`,
-          laundryItems: data.quote,
-        })
-      );
+          // laundryItems: data.quote,
+          laundryItems: formattedLaundryItems,
+        },
+      });
+
     } else if (data.type === "cleaning") {
-      await sendEmail(
-        "ibrahim.saliman.zainab@gmail.com",
-        "New Quote",
-        AdminHomeCleaningQuoteRequest({
+  
+      const formattedCleaningItems = data.quote
+        .map((item: any) => `<li>${item.name} - ${item.amount}</li>`)
+        .join("");
+        
+      await sendEmail({
+        to: "ibrahim.saliman.zainab@gmail.com",
+        subject: `${serviceType} Quote Confirmation`,
+        template: "adminHomeCleaningQuote",
+        replacements: {
           adminName: "Ibrahim",
           userName: `${user.firstName} ${user.lastName}`,
           userEmail: user.email,
           userContact: user.phone,
           userAddress: `${user.address}, ${user.lga},  ${user.state}`,
-          homeCleaningAreas: data.quote,
-        })
-      );
+          homeCleaningAreas: formattedCleaningItems,
+        },
+      });
     }
 
     return NextResponse.json(

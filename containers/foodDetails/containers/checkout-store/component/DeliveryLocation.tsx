@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { CiEdit } from "react-icons/ci";
+import { TfiAngleDown } from "react-icons/tfi";
 
 const LocationContainer = styled.div`
   width: 100%;
-  height: 162.776px;
+  height: fit-content;
   border-radius: 11.304px;
   padding: 1rem;
   background: #f7f7f7;
@@ -28,72 +28,102 @@ const LocationDleText = styled.p`
   line-height: 27.129px;
 `;
 
-const LocationIeIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 9.043px;
-  cursor: pointer;
-`;
-
-const LocationEditIcon = styled(CiEdit)`
-  width: 21.558px;
-  height: 21.558px;
-  flex-shrink: 0;
-  color: #27a124;
-`;
-
-const LocationEditIconText = styled.div`
-  color: var(--Green1, #27a124);
-  font-family: Poppins;
-  font-size: 15.825px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-`;
-
-const LocationDleTextAddress = styled.p`
-  color: var(--disabled-color, #767575);
-  font-family: Poppins;
-  font-size: 15.825px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-bottom: 1rem;
-`;
-
-const LocationDleAddressTextarea = styled.textarea`
+const RegionBtn = styled.div`
+  background: #ebebeb;
   width: 100%;
-  height: 57.342px;
-  border: none;
-  outline: none;
-  resize: none;
-  background: #f7f7f7;
-  color: var(--primary-color-2-black-50, #3f3f3f);
-  font-family: Poppins;
-  font-size: 15.825px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 27.129px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 0.7rem;
+  color: #959595;
+  cursor: pointer;
+  position: relative;
 `;
 
-export const DeliveryLocation = () => {
+const Dropdown = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+  z-index: 10;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+`;
+
+const DropdownItem = styled.div`
+  padding: 0.5rem 1rem;
+  color: #3f3f3f;
+  cursor: pointer;
+
+  &:hover {
+    background: #f7f7f7;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-family: Poppins;
+  font-size: 14px;
+  margin-top: 8px;
+`;
+
+interface DeliveryLocationProps {
+  regions: { name: string; price: number }[];
+  onRegionSelect: (region: string | null) => void;
+  error: string | null;
+  onErrorClear: () => void;
+}
+
+export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({
+  regions,
+  onRegionSelect,
+  error,
+  onErrorClear,
+}) => {
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const handleRegionSelect = (region: string) => {
+    setSelectedRegion(region);
+    onRegionSelect(region); // Pass selected region to parent
+    onErrorClear(); // Clear error when a region is selected
+    setDropdownOpen(false);
+  };
+
   return (
     <LocationContainer>
       <LocationDle>
         <LocationDleText>Delivery location</LocationDleText>
-        <LocationIeIcon>
-          <LocationEditIcon />
-          <LocationEditIconText>Edit</LocationEditIconText>
-        </LocationIeIcon>
       </LocationDle>
-      <LocationDleTextAddress>Address</LocationDleTextAddress>
-      <LocationDleAddressTextarea
-        name="message"
-        rows={4}
-        cols={20}
-        placeholder="No 24 Eberechi street, umuahia, Eberechi street, umuahia, Abia state."
-      ></LocationDleAddressTextarea>
+
+      <RegionBtn onClick={() => setDropdownOpen(!dropdownOpen)}>
+        {selectedRegion || "Select region"}
+        <TfiAngleDown />
+
+        {dropdownOpen && (
+          <Dropdown>
+            {regions?.length > 0 ? (
+              regions?.map((region, index) => (
+                <DropdownItem
+                  key={index}
+                  onClick={() => handleRegionSelect(region.name)}
+                >
+                  {region.name} (₦{region.price})
+                </DropdownItem>
+              ))
+            ) : (
+              <DropdownItem>No regions available</DropdownItem>
+            )}
+          </Dropdown>
+        )}
+      </RegionBtn>
+
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </LocationContainer>
   );
 };

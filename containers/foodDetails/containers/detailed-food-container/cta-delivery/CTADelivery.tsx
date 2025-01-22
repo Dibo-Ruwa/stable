@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { HiMinus } from "react-icons/hi2";
-import styled from 'styled-components';
+import styled from "styled-components";
+import { useCartItems } from "@/context/CartItems"; // Import the cart context
+import { FoodData } from "@/utils/types/types"; // Import the FoodData type
 
 // Styled components
 const CTADeliveryContainer = styled.div`
@@ -14,11 +16,11 @@ const CTADeliveryContainer = styled.div`
   margin: 2rem 0 12.375rem;
   padding: 0.5rem 1rem 0.5rem 4rem;
 
-   @media (max-width: 900px) {
+  @media (max-width: 900px) {
     padding: 0.5rem 1rem 0.5rem 1rem;
   }
 
-   @media (max-width: 400px) {
+  @media (max-width: 400px) {
     padding: 1rem 0.3rem;
     flex-direction: column;
     gap: 16px;
@@ -32,15 +34,28 @@ const IncDec = styled.div`
   gap: 3rem;
   color: #ffffff;
 
-   @media (max-width: 900px) {
-      gap: 1rem;
+  @media (max-width: 900px) {
+    gap: 1rem;
   }
 `;
 
-const CTADeliveryIcon = styled.div`
+const CTADeliveryIcon = styled.button`
   width: 28px;
   height: 28px;
   flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 24px;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 `;
 
 const CTADeliveryNum = styled.div`
@@ -58,14 +73,15 @@ const CTADeliveryBtns = styled.div`
   align-items: center;
   gap: 80px;
 
-   @media (max-width: 900px) {
-      gap: 30px;
+  @media (max-width: 900px) {
+    gap: 30px;
   }
 `;
 
-const CTADeliveryPickUp = styled.button`
+const CTADeliveryButton = styled.button<{ isActive: boolean }>`
   border: none;
-  background: transparent;
+  background: ${(props) =>
+    props.isActive ? "var(--Green1, #27a124)" : "transparent"};
   cursor: pointer;
   outline: none;
   color: var(--White, #fefefe);
@@ -74,41 +90,78 @@ const CTADeliveryPickUp = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-`;
-
-const CTADeliveryDelivery = styled.button`
-  display: flex;
-  height: 45px;
-  padding: 8px 60px;
-  justify-content: center;
-  align-items: center;
+  padding: 0.8rem 3rem;
   border-radius: 8px;
-  border: none;
-  background: var(--Green1, #27a124);
-  color: var(--White, #fefefe);
-  font-family: Poppins;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+  transition: background 0.3s ease;
 
-   @media (max-width: 900px) {
-       height: 45px;
-      padding: 8px 35px;
+  &:hover {
+    background: ${(props) =>
+      props.isActive ? "var(--Green1, #27a124)" : "#555555"};
   }
 `;
 
-export const CTADelivery = () => {
+interface CTADeliveryProps {
+  selectedItem: FoodData; // Pass the current item as a prop
+}
+
+export const CTADelivery: React.FC<CTADeliveryProps> = ({ selectedItem }) => {
+  const [selectedOption, setSelectedOption] = useState<"pickup" | "delivery">(
+    "delivery"
+  );
+
+  const { addToCart, updateItemQuantity, cartItems } = useCartItems(); // Use the cart context
+
+  // Find the selected item in the cart to get its quantity
+  const cartItem = cartItems.find((item) => item._id === selectedItem._id);
+  const itemQuantity = cartItem?.quantity ?? 0; // Default to 0 if quantity is undefined
+
+  // Handle increment
+  const increment = () => {
+    const newQuantity = itemQuantity + 1;
+
+    if (cartItem) {
+      // If the item is already in the cart, update its quantity
+      updateItemQuantity(selectedItem._id, newQuantity);
+    } else {
+      // If the item is not in the cart, add it with the new quantity
+      addToCart(selectedItem, newQuantity);
+    }
+  };
+
+  // Handle decrement
+  const decrement = () => {
+    if (itemQuantity > 0) {
+      const newQuantity = itemQuantity - 1;
+
+      if (cartItem) {
+        // If the item is in the cart, update its quantity
+        updateItemQuantity(selectedItem._id, newQuantity);
+      }
+    }
+  };
+
+  const handleOptionSelect = (option: "pickup" | "delivery") => {
+    setSelectedOption(option);
+  };
+
   return (
     <CTADeliveryContainer>
       <IncDec>
-        <CTADeliveryIcon as={HiMinus} />
-        <CTADeliveryNum>0</CTADeliveryNum>
-        <CTADeliveryIcon as={MdAdd} />
+        <CTADeliveryIcon onClick={decrement} disabled={itemQuantity === 0}>
+          <HiMinus />
+        </CTADeliveryIcon>
+        <CTADeliveryNum>{itemQuantity}</CTADeliveryNum>
+        <CTADeliveryIcon onClick={increment}>
+          <MdAdd />
+        </CTADeliveryIcon>
       </IncDec>
       <CTADeliveryBtns>
-        <CTADeliveryPickUp>Pick up</CTADeliveryPickUp>
-        <CTADeliveryDelivery>Delivery</CTADeliveryDelivery>
+        <CTADeliveryButton
+          isActive={selectedOption === "delivery"}
+          onClick={() => handleOptionSelect("delivery")}
+        >
+          Delivery
+        </CTADeliveryButton>
       </CTADeliveryBtns>
     </CTADeliveryContainer>
   );

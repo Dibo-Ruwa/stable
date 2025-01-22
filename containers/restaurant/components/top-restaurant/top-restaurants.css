@@ -68,7 +68,7 @@ small.reviews,
 small.reviews,
 span.location-text,
 span.time {
-  font-family: "Poppins";
+    font-family: "Poppins", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -131,7 +131,7 @@ span.time {
   color: #565656;
   background-color: #f6f6f6;
   border-radius: 10px;
-  border: transparent;
+  border: 1px solid transparent;
   text-decoration: none;
 }
 
@@ -218,11 +218,6 @@ span.time {
   }
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 973b0ca9ad28bcfd36546cd330a110cc03015dbd
 .card {
   flex: 1 1 100%; /* Default to full width for mobile and tablets */
 }

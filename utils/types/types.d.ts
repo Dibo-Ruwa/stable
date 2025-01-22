@@ -37,17 +37,21 @@ export type LoginUserParams = {
 };
 
 export interface Product {
-  id: string | number ;
+  id: string | number;
   title: string;
   prep_time: string;
   opening_time: string;
   categories: string[];
   slug: string;
   price: number;
-  imageURL: string;
-  vendor: string;
+  imageUrl: string; // Changed from imageURL to imageUrl
+  vendor: {
+    _id: string;
+    name: string;
+  };
   discount?: number;
-  extras?: Extra[]; // Nested extras property within Product
+  extras?: Extra[];
+  quantity?: number;
 }
 
 export interface Subscription {
@@ -76,19 +80,30 @@ export type Modal = {
   type: "success" | "error";
 };
 
+export interface ExtraInfo {
+  _id: string;
+  title: string;
+  price: number;
+  quantity: number;
+}
+
 export type CartState = {
   modal: Modal;
   cartItems: CartItem[];
   subscriptions: Subscription[];
   getCart: () => void;
+  getCurrentVendor: () => string | null;
   getSubscriptions: () => void;
   addSubscription: (item: Subscription) => void;
   removeSubscription: (itemId: string | undefined) => void;
-  addToCart: (item: Product) => void;
+  addToCart: (item: FoodData) => void;
+  addToCartWithExtras: (item: FoodData, extras: Extra[]) => void;
   removeFromCart: (itemId: string) => void;
-  updateQuantity: (id: string, action: "increase" | "decrease") => void;
+  // updateQuantity: (id: string, action: "increase" | "decrease", extraId?: string) => void;
+  updateQuantity: (itemId: string, action: string, extraId?: string, extraInfo?: ExtraInfo) => Promise<void>;
   clearCart: () => void;
   closeModal: () => void;
+  updateExtraQuantity: (itemId: string, extraId: string, newQuantity: number) => Promise<void>;
 };
 
 export interface Order {
@@ -104,4 +119,252 @@ export interface Order {
   user: UserType;
   createdAt: Date;
   updatedAt: Date;
+}
+
+
+export interface MovingItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+}
+
+export interface CleaningItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+  video: string | null;
+}
+
+
+export interface LaundryItemType {
+  id: number;
+  name: string;
+  quantity: number;
+  image: string | null;
+}
+
+export interface FoodData {
+  _id: string;
+  title: string;
+  prep_time: string;
+  categories: string[];
+  price: number;
+  totalPrice?: number;
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    name: string;
+    owner: string;
+    branch: {
+      location: {
+        city: {
+          _id: string;
+          name: string;
+        };
+        region: {
+          _id: string;
+          name: string;
+        };
+      };
+      _id: string;
+      deliveries: {
+        region: {
+          _id: string;
+          name: string;
+        };
+        price: number;
+        _id: string;
+      }[];
+    }[];
+    operations: {
+      day: string;
+      openingHour: string;
+      closingHour: string;
+      _id: string;
+    }[];
+  };
+  discount: number;
+  extras: Extra[];
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  __v: number;
+  id: string;
+  quantity?: number;
+}
+
+export interface Extra {
+  quantity: number;
+  _id: string;
+  title: string;
+  prep_time: string;
+  categories: string[];
+  price: number;
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    name: string;
+  };
+  discount?: number;
+  slug: string;
+  id: string;
+}
+
+// Remove ExtraWithQuantity interface
+// export interface ExtraWithQuantity extends Extra {
+//   quantity: number;
+// }
+
+export interface ProductData {
+  _id: string;
+  title: string;
+  prep_time: string;
+  categories: string[];
+  price: number;
+  totalPrice?: number; // Optional
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    name: string;
+    owner: string;
+    branch: {
+      location: {
+        city: {
+          _id: string;
+          name: string;
+        };
+        region: {
+          _id: string;
+          name: string;
+        };
+      };
+      _id: string;
+      deliveries: {
+        region: {
+          _id: string;
+          name: string;
+        };
+        price: number;
+        _id: string;
+      }[];
+    }[];
+    operations: {
+      day: string;
+      openingHour: string;
+      closingHour: string;
+      _id: string;
+    }[];
+  };
+  discount: number;
+  extras: Extra[]; // Updated to use the `Extra` interface
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  __v: number;
+  id: string;
+  quantity?: number; // Optional
+}
+
+export interface FoodItem {
+  _id: string;
+  title: string;
+  prep_time: string; // Changed from number to string to match FoodData
+  categories: string[];
+  price: number;
+  totalPrice?: number; // Optional
+  imageUrl: string;
+  vendor: {
+    _id: string;
+    branch: {
+      location: {
+        city: {
+          _id: string;
+          name: string;
+        };
+        region: {
+          _id: string;
+          name: string;
+        };
+      };
+      _id: string;
+      deliveries: {
+        region: {
+          _id: string;
+          name: string;
+        };
+        price: number;
+        _id: string;
+      }[];
+    }[];
+    operations: {
+      day: string;
+      openingHour: string;
+      closingHour: string;
+      _id: string;
+    }[];
+  };
+  discount: number;
+  extras: Extra[]; // Assuming `Extra` is defined elsewhere
+  createdAt: string;
+  updatedAt: string;
+  slug: string;
+  __v: number;
+  id: string;
+  quantity?: number; // Optional
+}
+
+export type FoodDatas = FoodData[];
+
+
+// discount.types.ts
+export interface DiscountDetails {
+  tickText: string;
+  lightTexts: string[];
+}
+
+export interface ImageData {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className: string;
+}
+
+export interface BigDiscountCardDataType {
+  discountDetails: DiscountDetails;
+  images: {
+    leftContainer: ImageData[];
+    centerContainer: ImageData;
+    rightContainer: ImageData;
+  };
+}
+
+
+export interface ImageData {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  className: string;
+}
+
+export interface SmallDiscountCardBlackDataType {
+  discountDetails: DiscountDetails;
+  images: {
+    topImage: ImageData;
+    bottomImage: ImageData;
+  };
+}
+
+export interface SmallDiscountCardWhiteDataType {
+  discountDetails: {
+    tickText: string;
+    lightTexts: string[];
+  };
+  images: {
+    topImage: ImageData;
+    bottomImage: ImageData;
+  };
 }

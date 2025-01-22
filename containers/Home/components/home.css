@@ -15,7 +15,8 @@
 
 .hero_cont {
   display: flex;
-  padding: 30px 0;
+  padding: 0 0 30px;
+  gap: 1rem;
   /* margin-top: 40px; */
   justify-content: space-between;
 }
@@ -27,6 +28,9 @@
 .hero_map {
   background-color: #fff;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 
 .prod {
@@ -80,6 +84,7 @@
   width: 600px;
   height: 350px;
   position: relative;
+  border-radius: 0.9rem;
 }
 .text-container {
   margin-top: 20px;
@@ -112,13 +117,13 @@
 }
 
 .description {
-    color: #2a2a2a;
-    font-size: 16px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    width: 370px;
-    line-height: 1.5;
-    margin-top: 10px;
+  color: #2a2a2a;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  width: 370px;
+  line-height: 1.5;
+  margin-top: 10px;
 }
 
 .get-started-btn {
@@ -151,8 +156,9 @@
 }
 
 .map {
-  width: 100%;
-  height: 180px;
+  width: 20rem;
+  height: 14rem;
+  border-radius: 0.7rem;
 }
 
 .pro-name {
@@ -190,6 +196,7 @@
   .hero_map {
     justify-content: space-between;
     display: flex;
+    display: none;
   }
 
   .map {
@@ -221,10 +228,11 @@
   .mobile-display {
     display: block;
   }
+
   .mob {
     position: relative;
     overflow-x: hidden;
-    height: 70dvh;
+    height: 65vh;
     display: block;
   }
 
@@ -242,10 +250,10 @@
     right: 0;
     bottom: 0.5rem;
     position: absolute;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.01);
     border-radius: 14px;
-    border: 1px rgba(255, 255, 255, 0.1) solid;
-    backdrop-filter: blur(13.8px);
+    border: 1px rgba(255, 255, 255, 0.01) solid;
+    backdrop-filter: blur(100px);
   }
   .mob_cont {
     position: relative;
@@ -278,16 +286,16 @@
 
   .highlight {
     color: #fcfcfc;
-    font-size: 1.3rem;
+    font-size: 0.9rem;
     font-weight: 500;
     width: 100%;
-    line-height: 30px;
+    line-height: 17px;
     background-color: transparent;
   }
 
   .description {
     color: #fcfcfc;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 300;
     width: 85%;
   }
@@ -300,5 +308,29 @@
 
   .get-started-btn {
     font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 500px) {
+    .tag-text {
+        font-size: 0.6rem;
+        padding: 1% 3%;
+    }
+
+  .highlight {
+    font-size: 0.79rem;
+    line-height: 15px;
+  }
+
+  .description {
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 1px;
+  }
+  .get-started-btn {
+    font-size: 0.79rem;
+    margin-top: 15px;
+    padding: 8px 12px;
   }
 }

@@ -1,9 +1,9 @@
-.restaurantFrame{
+.restaurantFrame {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  
+
   width: min(93%, 1444px);
 }
 .CPImage {
@@ -26,7 +26,7 @@
 
 .restProfileImage {
   position: absolute;
-  top: 14rem;
+  bottom: -2rem;
   left: 1rem;
   width: 4.5rem;
 }
@@ -105,7 +105,9 @@
 .restaurantOpeningDayText,
 .restaurantOpeningTimeText,
 .restaurantPhoneNumText,
-.restaurantLocationText, .restaurantDescription, .restaurantDeliveryTime {
+.restaurantLocationText,
+.restaurantDescription,
+.restaurantDeliveryTime {
   color: #000000;
   font-family: Poppins;
   font-size: 0.875rem;
@@ -137,92 +139,89 @@
   color: #2a2a2a;
 }
 
-.restaurantDescription_DT{
-display: flex;
-flex-direction: column;
-gap: 2rem;
-margin-top: 0.7rem;
+.restaurantDescription_DT {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 0.7rem;
 }
 
-
-.restaurantDeliveryTime{
+.restaurantDeliveryTime {
   font-weight: 600;
   font-size: 1rem;
 }
 
-  .restaurantReview {
-    color: #27a124;
-    font-family: Poppins;
-    font-size: 0.875rem;
-    font-style: normal;
-    line-height: normal;
-    font-weight: 400;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 0.6rem;
-    border: none;
-    outline: none;
-    background: transparent;
-  }
+.restaurantReview {
+  color: #27a124;
+  font-family: Poppins;
+  font-size: 0.875rem;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.6rem;
+  border: none;
+  outline: none;
+  background: transparent;
+}
 
-  .restaurantReviewIcon{
-    width: 1.5rem;
-    height: 1.5rem;
-  }
+.restaurantReviewIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
 .MobilerestaurantContainer {
   display: none;
 }
 
 @media screen and (max-width: 1178px) {
-.coverImage {
-  width: 100%;
-}
+  /* .coverImage {
+    width: 100%;
+  } */
 
- .restProfileImage {
+  /* .restProfileImage {
     top: 9rem;
-  }
+  } */
 
   .NRSContent {
     flex-direction: column;
     gap: 1rem;
   }
-
 }
 
 @media screen and (max-width: 1024px) {
- .restProfileImage {
-    top: 8rem;
+  .restProfileImage {
+    /* top: 8rem; */
     width: 4.5rem;
   }
 }
 
 @media screen and (max-width: 920px) {
- .restProfileImage {
-    top: 7rem;
+  .restProfileImage {
+    /* top: 7rem; */
     width: 4.5rem;
   }
 }
 
 @media screen and (max-width: 820px) {
- .restProfileImage {
-    top: 6rem;
-    width: 3.5rem;
+  .restProfileImage {
+    /* top: 6rem; */
+    width: 4.5rem;
   }
 }
 
 @media screen and (max-width: 769px) {
- .restProfileImage {
-    top: 4rem;
-    width: 3.5rem;
+  .restProfileImage {
+    /* top: 4rem; */
+    width: 4.5rem;
   }
 }
 
 @media screen and (max-width: 768px) {
   .restaurantFrame {
-  display: none;
-
-}
+    display: none;
+  }
 
   .MobilerestaurantContainer {
     width: 100%;
@@ -242,7 +241,7 @@ margin-top: 0.7rem;
   }
 
   .MobilecoverImage {
-    width: 29rem;
+    width: 100%;
     position: relative;
   }
 
@@ -252,12 +251,12 @@ margin-top: 0.7rem;
 
   .MobilerestProfileImage {
     position: absolute;
-    top: 9rem;
+    bottom: -1.5rem;
     left: 1rem;
   }
 
-  .MobilerestProfileImg {
-  }
+  /* .MobilerestProfileImg {
+  } */
 
   .MobileaboutRestaurantContainer {
     display: flex;
@@ -272,6 +271,8 @@ margin-top: 0.7rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
   }
 
   .MobileNRRestaurant {
@@ -399,7 +400,7 @@ margin-top: 0.7rem;
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform: translateX(200%);
   }
-  
+
   .activeSub {
     transform: translateX(0); /* Bring into view */
     opacity: 1; /* Fully visible */
@@ -408,40 +409,52 @@ margin-top: 0.7rem;
     z-index: 1;
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
-  
+
   .hiddenSub {
     transform: translateX(200%);
     transition: transform 0.3s ease, opacity 0.3s ease;
   }
-
 }
 
 @media screen and (max-width: 668px) {
- .MobilecoverImage {
-    width: 37rem;
+  .MobilecoverImage {
+    width: 100%;
   }
 
-  .MobilerestProfileImage {
+  /* .MobilerestProfileImage {
     top: 11rem;
-  }
+  } */
 }
 
 @media screen and (max-width: 568px) {
- .MobilecoverImage {
-    width: 34rem;
+  .MobilecoverImage {
+    width: 100%;
   }
 
-  .MobilerestProfileImage {
+  /* .MobilerestProfileImage {
     top: 10rem;
-  }
+  } */
 }
 
 @media screen and (max-width: 468px) {
- .MobilecoverImage {
-    width: 33rem;
+  .MobilecoverImage {
+    width: 100%;
   }
 
-  .MobilerestProfileImage {
+  /* .MobilerestProfileImage {
     top: 9rem;
+  } */
+}
+
+@media screen and (max-width: 368px) {
+  .MobilerestaurantOpeningDay,
+  .MobilerestaurantOpeningTime,
+  .MobilerestaurantPhoneNum,
+  .MobilerestaurantLocationText {
+    font-size: 0.695rem;
+  }
+
+  .MobilerestaurantOpeningTimePhoneNum {
+    flex-wrap: wrap;
   }
 }

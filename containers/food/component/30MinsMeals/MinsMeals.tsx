@@ -3,13 +3,27 @@ import "./minsmeal.css";
 import { DiscountSale, MinsMealsData } from "@/constants";
 import Link from "next/link";
 
-const MinsMeals: React.FC = () => {
+interface MinsMealsProps {
+  searchQuery: string;
+  activeButton: string;
+}
+
+const MinsMeals: React.FC<MinsMealsProps> = ({ searchQuery, activeButton }) => {
+  // Filter items based on searchQuery and activeButton
+  const filteredItems = MinsMealsData[0].items.filter((item) => {
+    const matchesSearch = item.smallTitle
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesTime =
+      activeButton === "All" || item.timeText === activeButton;
+    return matchesSearch && matchesTime;
+  });
   return (
     <section className="minsmeal_container">
       <div className="minsmeal-frame">
         <p className="minsmeal_title">{MinsMealsData[0].title}</p>
         <div className="minsmeal-cards">
-          {MinsMealsData[0].items.map((item, index) => {
+          {filteredItems.map((item) => {
             const FavoriteIcon = item.favoriteIcon;
             const StarIcon = item.starIcon;
             const TimeIcon = item.timeIcon;
@@ -54,12 +68,12 @@ const MinsMeals: React.FC = () => {
                   </small>
                   <div className="minsmeal-card_prize">
                     <p className="minsmeal-card_prize-text">{item.prizeText}</p>
-                    <Link
-                      href={item.prizeLink}
+                    <button
+                      type='button'
                       className="minsmeal-card_prize-link"
                     >
                       <PrizeIcon className="minsmeal-card_prize-icon" />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </Link>

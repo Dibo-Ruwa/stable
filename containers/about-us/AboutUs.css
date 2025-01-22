@@ -1,0 +1,658 @@
+.AboutUs_Container {
+  background: #fefefe;
+  position: relative;
+}
+
+.AboutHeader_Container {
+  width: 90%;
+  display: flex;
+  gap: 5rem;
+  margin: 7rem auto;
+  justify-content: center;
+  position: relative;
+}
+
+.Header_LeftContainer {
+  position: relative;
+}
+
+img.Dibo_ellipse_Logo {
+  width: 174.48px;
+  height: 45.91px;
+}
+
+p.AboutHeader_Title {
+  color: #282828;
+  width: 77%;
+  font-family: Roboto;
+  font-size: 2.56rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 54.58px;
+  display: ruby;
+  margin-bottom: 0.79rem;
+}
+
+span.AboutHeader_ChangingText {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #243266;
+}
+
+img.AboutHeader_ChangingImage {
+  width: 34.121px;
+  height: 34.121px;
+}
+
+p.AboutHeader_Description {
+  color: #000;
+  font-family: Roboto;
+  font-size: 19.255px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28.883px;
+  letter-spacing: 0.181px;
+}
+
+.AboutHeader_AbsoluteImage {
+  position: absolute;
+  top: -0.4rem;
+  right: 3rem;
+}
+
+img.AboutHeader_AtomImg {
+  width: 456px;
+  height: 456px;
+}
+
+.Header_RightContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+img.Ellipse_top {
+  position: absolute;
+  top: 0rem;
+  width: 6rem;
+  left: -1rem;
+}
+
+img.People_Image {
+  width: 50rem;
+  height: 30rem;
+}
+
+img.Ellipse_bottom {
+  position: absolute;
+  bottom: 1.7rem;
+  right: 0rem;
+  width: 7rem;
+}
+
+.AboutHeader_ChangingText .fade-in {
+  display: inline-block;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@media screen and (max-width: 1168px) {
+  .AboutHeader_AbsoluteImage {
+    right: 0rem;
+    top: 0.5rem;
+  }
+
+  img.AboutHeader_AtomImg {
+    width: 25rem;
+    height: 25rem;
+  }
+
+  img.Ellipse_top {
+    top: 0rem;
+    left: -2rem;
+    width: 5.5rem;
+  }
+
+  img.People_Image {
+    width: 46rem;
+    height: 23rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: 0.6rem;
+    width: 6rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  img.Dibo_ellipse_Logo {
+    width: 135.48px;
+    height: 35.91px;
+  }
+
+  p.AboutHeader_Title {
+    font-size: 1.9rem;
+    line-height: 40px;
+  }
+
+  img.AboutHeader_ChangingImage {
+    width: 27px;
+    height: 27px;
+  }
+
+  p.AboutHeader_Description {
+    font-size: 16.255px;
+    line-height: 21.883px;
+  }
+}
+
+@media screen and (max-width: 868px) {
+  img.AboutHeader_AtomImg {
+    width: 20rem;
+    height: 20rem;
+  }
+
+  img.Ellipse_top {
+    width: 4.79rem;
+  }
+
+  img.People_Image {
+    width: 48rem;
+    height: 19rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: -0.5rem;
+    width: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .AboutHeader_Container {
+    flex-direction: column;
+  }
+  img.People_Image {
+    width: 27rem;
+    height: 19rem;
+    margin: auto;
+  }
+
+  img.Ellipse_top {
+    width: 3.79rem;
+    left: 6.7rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: 1.2rem;
+    width: 4.5rem;
+    right: 6rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .AboutHeader_Container {
+    width: 96%;
+  }
+
+  .AboutHeader_AbsoluteImage {
+    right: 1rem;
+  }
+
+  img.People_Image {
+    width: 100%;
+    height: 100%;
+  }
+
+  img.Ellipse_top {
+    left: 0.7rem;
+  }
+
+  img.Ellipse_bottom {
+    bottom: 2.5rem;
+    right: 0rem;
+  }
+}
+
+/* ============= What Set us Apart ============= */
+section.wsa_Container {
+  width: 90%;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+h3.wsa_Title {
+  color: #282828;
+  font-family: Roboto;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 62.58px;
+}
+
+.wsa_Cards {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.wsa_Card {
+  margin-bottom: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.wsa_Card_image {
+  margin-bottom: 1rem;
+}
+
+img.wsa_Img {
+  width: 100%;
+  height: 100%;
+}
+
+p.wsa_card_Des {
+  color: var(--Black-90, #1b1b1b);
+  font-family: Roboto;
+  font-size: 0.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+span.wsa_card_TickDes {
+  font-weight: 600;
+}
+
+@media screen and (max-width: 1024px) {
+  p.wsa_card_Des {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .wsa_Cards {
+    flex-direction: column;
+  }
+
+  p.wsa_card_Des {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  section.wsa_Container {
+    width: 96%;
+  }
+}
+
+/* ======================== Our Teams ======================== */
+
+section.OurTeam_Container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.OurTeam_title_icon {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 15rem;
+  margin-bottom: 2.5rem;
+}
+
+p.OurTeam_Title {
+  color: #282828;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 52px;
+}
+
+.OurTeam_Icon-Line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  align-items: center;
+}
+
+svg.OurTeam_Icon {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+span.OurTeam_Line {
+  width: 1.5rem;
+  height: 2px;
+  background: #000000;
+}
+
+.TeamsCards_Container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  /* grid-template-columns: 1fr 1fr; */
+  gap: 2rem;
+  width: 100%;
+  background-color: #000;
+}
+
+.OurTeams_Cards {
+  /* background-color: red; */
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 0rem;
+}
+
+/* Base card styles */
+.OurTeam_Card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+  height: 20rem;
+  /* margin-top: auto; */
+}
+
+/* Card variations */
+.Green_Card {
+  margin-top: auto;
+  border-radius: 16px;
+
+  background: #67e164;
+  height: 20rem;
+}
+
+.Blue_Card {
+border-radius: 16px;
+margin-top: auto;
+  background: #51cbea;
+  height: 17rem;
+}
+
+.Purple_Card {
+  margin-top: auto;
+  border-radius: 16px;
+
+  background: #b5a0ff;
+  height: 20rem;
+}
+
+.periwinkleBlue_Card {
+  margin-top: auto;
+border-radius: 16px;
+  background: #7d7fff;
+  height: 16rem;
+}
+
+/* Card image container */
+.OurTeam_CardImage {
+  height: auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Card images */
+.OurTeam_Card_img {
+  width: 70%;
+  margin: 0 auto;
+  /* height: 15rem; */
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Name and skill section */
+.Teams_Name_skill {
+  position: absolute;
+  bottom: 0;
+  border-radius: 4.315px;
+  background: linear-gradient(180deg, rgba(21, 21, 21, 0) 0%, #151515 100%);
+  width: 100%;
+  padding: 0.7rem;
+}
+
+/* Text styles */
+.Teams_Name,
+.Teams_Skills {
+  color: #fdfdfd;
+  font-family: Roboto;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24.476px;
+  margin: 0;
+}
+
+@media screen and (max-width: 1186px) {
+  .OurTeams_Cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .OurTeam_CardImage {
+    width: 100%;
+    left: 0rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+ 
+  .OurTeam_CardImage {
+    width: 100%;
+    left: 0rem;
+  }
+}
+@media screen and (max-width: 900px) {
+  .OurTeams_Cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+ 
+  .TeamsCards_Container {
+    grid-template-columns: 1fr;
+  }
+
+  .LPPB_Card {
+    flex-direction: row-reverse;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .OurTeams_Cards {
+    grid-template-columns: 1fr;
+  }
+  section.OurTeam_Container {
+    width: 96%;
+  }
+}
+
+/* =============== Join Us Card ==================== */
+
+section.JoinUs_Container {
+  width: 90%;
+  margin: 3rem auto;
+}
+
+.JoinUs_title_icon {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 15rem;
+  margin-bottom: 2.5rem;
+}
+
+p.JoinUs_Title {
+  color: #282828;
+  font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 52px;
+}
+
+.JoinUs_Icon-Line {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  align-items: center;
+}
+
+svg.JoinUs_Icon {
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+span.JoinUs_Line {
+  width: 1.5rem;
+  height: 2px;
+  background: #000000;
+}
+
+.JoinUs_content {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .JoinUs_content {
+    flex-direction: row-reverse;
+  }
+}
+
+.JoinUs_image {
+  order: 0;
+}
+
+.JoinUs_description_CTA {
+  order: 1;
+}
+
+@media (max-width: 767px) {
+  .JoinUs_image {
+    order: -1;
+  }
+
+  .JoinUs_description_CTA {
+    order: 0;
+  }
+}
+
+.JoinUs_content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.JoinUs_image {
+  width: 100rem;
+  height: auto;
+}
+
+img.Join_img {
+  width: 100%;
+  height: auto;
+}
+
+.JoinUs_description_CTA {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+p.JoinUs_des {
+  width: 35rem;
+  color: var(--Black-70, #454545);
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+a.JoinUs_CTA {
+  color: var(--White-90, #fcfcfc);
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+
+  display: flex;
+  width: 150px;
+  height: 42px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--Green-150, #27a124);
+}
+
+@media screen and (max-width: 1024px) {
+  p.JoinUs_des {
+    width: 100%;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  p.JoinUs_des {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .JoinUs_content {
+    flex-direction: column;
+  }
+
+  .JoinUs_image {
+    width: 100%;
+    height: auto;
+  }
+
+  img.Join_img {
+    width: 100%;
+    height: auto;
+  }
+
+  p.JoinUs_des {
+    width: 100%;
+  }
+
+  button.button.JoinUs_CTA {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  section.JoinUs_Container {
+    width: 96%;
+  }
+}

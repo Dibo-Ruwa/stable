@@ -1,0 +1,195 @@
+/* ============= Small Discount Black Card ============== */
+.RedHJRDiscountSales_ContainerCards {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Allows the cards to wrap to the next line */
+  width: min(93%, 1444px);
+  margin: 0.6rem auto;
+}
+
+.RedHJRDiscountSales_Card {
+  position: relative;
+  display: flex;
+  background: #979797;
+  border-radius: 1rem;
+  overflow: hidden;
+  width: calc(33.333% - 1rem); /* Default width for 3 items per row */
+  height: 10.3125rem;
+  box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+@media screen and (max-width: 1276px) {
+  .RedHJRDiscountSales_Card {
+    width: calc(33.333% - 1rem); /* Adjust width for smaller screens */
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .RedHJRDiscountSales_Card {
+    width: calc(33.333% - 1rem); /* 3 items per row at 1024px */
+    height: 9rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .RedHJRDiscountSales_Card {
+    width: calc(50% - 1rem); /* 2 items per row at 768px */
+  }
+}
+@media screen and (max-width: 500px) {
+  .RedHJRDiscountSales_Card {
+    width: calc(100% - 0rem); /* 2 items per row at 768px */
+  }
+}
+
+.RedHJRDiscountSales_DiscountTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  position: relative;
+  left: 0.9rem;
+  top: 1rem;
+  z-index: 1;
+}
+
+/* @media screen and (max-width: 1024px) {
+  .RedHJRDiscountSales_DiscountTitle {
+    left: 1.5rem;
+    top: 1rem;
+  }
+} */
+
+.RedHJRDiscountSales_DiscountTickText {
+  color: var(--White, #ff5050);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.RedHJRDiscountSales_DiscountLightText {
+  color: var(--White, #ff5050);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 1276px) {
+  .RedHJRDiscountSales_DiscountLightText,
+  .RedHJRDiscountSales_DiscountTickText {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .RedHJRDiscountSales_DiscountLightText,
+  .RedHJRDiscountSales_DiscountTickText {
+    font-size: 1rem;
+  }
+}
+
+.RedHJRDiscountSales_CenterContainer {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 10rem;
+}
+
+@media screen and (max-width: 1124px) {
+  .RedHJRDiscountSales_CenterContainer {
+  left: 8rem;
+}
+}
+
+
+.RedHJRDiscountSales_BlackImageTop {
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+img.RedHJRDiscountSales_BlackTopSpecialOfferImage {
+  width: 7rem;
+}
+
+.RedHJRDiscountSales_BlackImageBottom {
+  position: relative;
+  bottom: 2.6rem;
+  right: 0.6rem;
+  width: 10rem;
+}
+
+img.RedHJRDiscountSales_BlackBottomFoodImage {
+  width: 14.5rem;
+}
+
+.RedHJRDiscountSales_RightBlackImageTop {
+    position: absolute;
+    right: 0;
+    width: 6.5rem;
+}
+
+@media screen and (max-width: 1124px) {
+.RedHJRDiscountSales_RightBlackImageTop {
+    width: 5.5rem;
+}
+}
+
+
+@media screen and (max-width: 1024px) {
+  .RedHJRDiscountSales_BlackImageTop {
+    width: 6rem;
+  }
+
+  .RedHJRDiscountSales_BlackImageBottom {
+    width: 9rem;
+    bottom: 2.5rem;
+  }
+
+  .RedHJRDiscountSales_RightBlackImageTop {
+    position: absolute;
+    right: 0;
+    width: 4.8rem;
+  }
+}
+
+@media screen and (max-width: 540px) {
+    .RedHJRDiscountSales_CenterContainer {
+        left: 6rem;
+    }
+    
+        .RedHJRDiscountSales_BlackImageTop {
+        width: 5rem;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+  .RedHJRDiscountSales_BlackImageTop {
+    width: 6rem;
+  }
+  .RedHJRDiscountSales_CenterContainer {
+    position: absolute;
+    left: 8rem;
+  }
+
+  .RedHJRDiscountSales_BlackImageBottom {
+    width: 9rem;
+    bottom: 2.6rem;
+    right: 1rem;
+  }
+
+  .RedHJRDiscountSales_RightBlackImageTop {
+    position: absolute;
+    right: 0;
+    width: 7rem;
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .RedHJRDiscountSales_BlackImageBottom {
+    bottom: 2.5rem;
+  }
+  .RedHJRDiscountSales_RightBlackImageTop {
+    width: 5rem;
+  }
+}

@@ -7,24 +7,52 @@ const requestSchema = new Schema(
       enum: ["laundry", "cleaning", "moving"],
       required: true,
     },
+    categories: [
+      {
+        type: String,
+      },
+    ], // Added to handle selected categories
     items: [
       {
         name: {
           type: String,
           required: true,
         },
-        amount: {
-          type: Number,
+        quantity: {
+          type: Number, // Renamed from `amount` to `quantity`
           required: true,
+        },
+        image: {
+          type: String, // Optional image for items
+        },
+        video: {
+          type: String, // Optional video for cleaning items
         },
       },
     ],
+    currentLocation: {
+      type: String, // For `moving` only
+    },
+    deliveryLocation: {
+      type: String, // For `moving` or `laundry`/`cleaning` if required
+    },
+    pickUpDate: {
+      type: Date, // Pickup date for the request
+    },
+    pickUpTime: {
+      type: String, // Pickup time for the request
+    },
+    estimatedReturn: {
+      type: String, // Pickup time for the request
+    },
+    description: {
+      type: String, // Additional description for the request
+    },
     total: {
       type: Number,
     },
     from: {
       type: String,
-      required: true,
     },
     to: {
       type: String,
@@ -42,7 +70,7 @@ const requestSchema = new Schema(
       ref: "User",
     },
     deliveryFee: {
-      type: Number, 
+      type: Number,
     },
     user: {
       type: mongoose.Types.ObjectId,
@@ -66,6 +94,5 @@ const requestSchema = new Schema(
   },
   { timestamps: true }
 );
-
 
 export const Request = models.Request || model("Request", requestSchema);

@@ -1,21 +1,44 @@
 import React from "react";
 import "./freedelivery.css";
 import { FreeDeliveryData } from "@/constants/index";
+import Link from "next/link"
 
-const FreeDelivery: React.FC = () => {
+interface FreeDeliveryProps {
+  searchQuery: string;
+  activeButton: string;
+}
+
+const FreeDelivery: React.FC<FreeDeliveryProps> = ({
+  searchQuery,
+  activeButton,
+}) => {
+
+   const filteredItems = FreeDeliveryData[0].items.filter((item) => {
+     const matchesSearch = item.smallTitle
+       .toLowerCase()
+       .includes(searchQuery.toLowerCase());
+     const matchesTime =
+       activeButton === "All" || item.timeText === activeButton;
+     return matchesSearch && matchesTime;
+   });
+  
   return (
     <section className="freedelivery_container">
       <div className="freedelivery-frame">
         <p className="freedelivery_title">{FreeDeliveryData[0].title}</p>
         <div className="freedelivery-cards">
-          {FreeDeliveryData[0].items.map((item, index) => {
+          {filteredItems.map((item) => {
             // Destructure the Icon components from the item
             const FavoriteIcon = item.favoriteIcon;
             const StarIcon = item.starIcon;
             const TimeIcon = item.timeIcon;
             const PrizeIcon = item.prizeIcon;
             return (
-              <div key={index} className="freedelivery-card">
+              <Link
+                href={`/food/${item.id}`}
+                key={item.id}
+                className="freedelivery-card"
+              >
                 <div className="freedelivery-card_food-img">
                   <img
                     src={item.img}
@@ -52,15 +75,15 @@ const FreeDelivery: React.FC = () => {
                     <p className="freedelivery-card_prize-text">
                       {item.prizeText}
                     </p>
-                    <a
-                      href={item.prizeLink}
+                    <button
+                      type='button'
                       className="freedelivery-card_prize-link"
                     >
                       <PrizeIcon className="freedelivery-card_prize-icon" />
-                    </a>
+                    </button>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

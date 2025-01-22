@@ -3,7 +3,6 @@
 }
 
 .rest_custombooking_frame {
-  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -11,8 +10,7 @@
   gap: 2rem;
   padding: 1rem;
   background: #fff;
-  
-  width: min(93%, 1444px);
+  width: min(97%, 1444px);
 }
 
 .rest_custombooking_search-min {
@@ -120,7 +118,7 @@ display: none;
 
   .mobile_custombooking_container {
   padding-bottom: 3rem;
-  display: flex;
+  display: none;
   flex-direction: column;
 }
 

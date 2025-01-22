@@ -7,13 +7,16 @@ export default function Delivery() {
         <p className="sub_food">Courier</p>
         <div className="delivery-image">
           <img
-            src="/images/Frame 2610228 (1).png"
+            src="/images/bike_delivery.png"
             className="delivery_desktop-image"
-            alt="resturant guys"
+            alt="Delivery bike"
+            style={{
+              borderRadius: "10px",
+            }}
           />
           <div className="delivery_mobile-image">
             <img
-              src="/images/image 160.png"
+              src="/images/bike_delivery.png"
               className="delivery_img-main"
               alt="resturant guys"
             />
@@ -25,10 +28,10 @@ export default function Delivery() {
           </div>
         </div>
         <div className="delivery-text_container">
-          <button className="delivery-btn_text">Courier</button>
-          <h4 className="delivery-subtitle">Food delivery & Moving</h4>
+          <button className="delivery-btn_text">Moving</button>
+          <h4 className="delivery-subtitle">Moving and Percel Delivery</h4>
           <p className="delivery-des">
-            Need to move or deliver food? We've got the wheels and the expertise
+            Need to move or deliver item? We've got the wheels and the expertise
             to make it happen seamlessly. Count on us for reliable
             transportation solutions tailored to your needs.
           </p>

@@ -8,6 +8,7 @@ import useCartStore from "@/store/useCart.store";
 import { toast } from "react-hot-toast";
 import { User } from "next-auth";
 import { useRouter } from "next/navigation";
+import Notification from "@/utils/models/Notifications";
 
 interface CartOrderData {
   cartItems: CartItem[];
@@ -24,6 +25,9 @@ const useOrder = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false); // New state for redirection
+  const [loading, setLoading] = useState(true); // Add loading state
+
   const { data: session } = useSession();
 
   const [modalMessage, setModalMessage] = useState("");
@@ -49,16 +53,35 @@ const useOrder = () => {
 
   const router = useRouter();
 
+    // Function to check if a user has an active subscription of the same type
+    const checkActiveSubscription = async (subscriptionType: string) => {
+      try {
+        const { data } = await axios.get(`/api/subscriptions/check?type=${subscriptionType}`);
+        if (data?.hasActiveSubscription) {
+          return true;
+        }
+        return false;
+      } catch (error) {
+        console.error("Error checking active subscription", error);
+        return false; // Assume no subscription on error
+      }
+    };
+    
+
   const getOrders = () => {
     setIsSubmitting(true);
+    setLoading(true); // Set loading to true when fetching orders
     // Fetch orders
     axios.get("/api/order").then((response) => {
       setOrders(response.data.orders);
       setIsSubmitting(false);
+      setLoading(false); // Set loading to false after fetching orders
+    }).catch(() => {
+      setLoading(false); // Set loading to false in case of error
     });
   };
 
-  const handleCartOrderSubmit = async (referenceId: string, amount: number, deliveryFee: number) => {
+  const handleCartOrderSubmit = async (referenceId: string, amount: number, deliveryFee: number, selectedRegion: string) => {
     setIsSubmitting(true);
     setIsError(false);
     setIsSuccess(false);
@@ -67,23 +90,34 @@ const useOrder = () => {
       const { data } = await axios.post("/api/order/cart", {
         referenceId,
         deliveryFee,
-        amount
+        amount,
+        selectedRegion
       });
       console.log(data)
-      toast.loading("Cart order is being proccessed", {
+      toast.loading("Cart order is being processed", {
         duration: 2000,
       });
 
+      // Call the notification API to create a notification
+      await axios.post("/api/notifications", {
+        message: `Your cart order with reference ID ${referenceId} has been placed successfully.`,
+        referenceId: data.order?._id,
+        category: "order",
+        type: data.order.type
+      });
+
+      setIsSuccess(true);
+      setIsRedirecting(true); // Set redirecting state to true immediately
+
       setTimeout(() => {
         useCartStore.getState().getCart();
-
-        setIsSuccess(true);
         toast.success("Cart order submitted successfully!");
+        router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
       }, 500);
-      router.push(`/dashboard/orders/${data.order?._id}`);
+
     } catch (error) {
       setIsError(true);
-      toast.error("Error submitting cart order."); // Show error toast
+      toast.error("Error submitting cart order.");
     } finally {
       setIsSubmitting(false);
     }
@@ -111,17 +145,26 @@ const useOrder = () => {
           }
         );
 
-        toast.loading("Subcription order is being proccessed", {
+        toast.loading("Subscription order is being processed", {
           duration: 2000,
+        });
+
+        // Call the notification API to create a notification
+        await axios.post("/api/notifications", {
+          message: `Your subscription order with reference ID ${referenceId} has been placed successfully.`,
+          referenceId: data.order?._id,
+          category: "subscription",
+          type: data.order?.type
         });
 
         setTimeout(() => {
           useCartStore.getState().getSubscriptions();
 
           setIsSuccess(true);
-          toast.success("Subscription order submitted successfully!");
+          toast.success("Subscription received successfully");
+          setIsRedirecting(true); // Set redirecting state to true
+          router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
         }, 500);
-        router.push(`/dashboard/orders/${data.order?._id}`);
       } else {
         const { subscription } = subscriptionOrderData;
 
@@ -130,18 +173,27 @@ const useOrder = () => {
           subscription,
         });
 
-        toast.loading("Subcription order is being proccessed", {
+        toast.loading("Subscription is being processed", {
           duration: 2000,
+        });
+
+        // Call the notification API to create a notification
+        await axios.post("/api/notifications", {
+          message: `Your subscription order with reference ID ${referenceId} has been placed successfully.`,
+          referenceId: data.subscription?._id,
+          category: "subscription",
+          type: data.subscription?.type
         });
 
         setTimeout(() => {
           useCartStore.getState().getSubscriptions();
 
           setIsSuccess(true);
-          openModal("success", "Subscription order submitted successfully!");
-          toast.success("Subscription order submitted successfully!");
+          openModal("success", "Subscription received successfully");
+          toast.success("Subscription received successfully");
+          setIsRedirecting(true); // Set redirecting state to true
+          router.push(`/profile/subscriptions/${data.subscription?._id}?type=${data.subscription?.type}`);
         }, 500);
-        router.push(`/dashboard/subscriptions/${data.subscription?._id}`);
       }
     } catch (error) {
       setIsError(true);
@@ -150,32 +202,21 @@ const useOrder = () => {
       setIsSubmitting(false);
     }
   };
-  const handleRequestPayment = async (
-    referenceId: string,
-    requestId: any,
 
-  ) => {
+  const handleRequestPayment = async (referenceId: string, requestId: string) => {
     setIsSubmitting(true);
-    setIsError(false);
-    setIsSuccess(false);
-
     try {
       const { data } = await axios.put(`/api/quotes/${requestId}`, {
         referenceId,
       });
 
-      toast.loading("Payment is being proccessed", {
-        duration: 2000,
-      });
-
-      setTimeout(() => {
-        useCartStore.getState().getSubscriptions();
-        setIsSuccess(true);
-        toast.success("Payment submitted successfully!");
-      }, 500);
+      if (data.success) {
+        toast.success("Payment successful!");
+        // Force reload to show updated status
+        window.location.reload();
+      }
     } catch (error) {
-      setIsError(true);
-      toast.error("Error submitting Payment."); // Show error toast
+      toast.error("Payment processing failed");
     } finally {
       setIsSubmitting(false);
     }
@@ -203,13 +244,16 @@ const useOrder = () => {
     isSubmitting,
     isError,
     isSuccess,
+    isRedirecting, // Return redirecting state
     orders,
     order,
     getOrders,
     getOrderById,
     handleCartOrderSubmit,
     handleSubscriptionOrderSubmit,
-    handleRequestPayment
+    handleRequestPayment,
+    checkActiveSubscription,
+    loading, // Return loading state
   };
 };
 

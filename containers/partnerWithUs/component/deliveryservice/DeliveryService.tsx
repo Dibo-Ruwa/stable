@@ -7,7 +7,7 @@ const DeliveryService = () => {
         <div className="deliveryservice-img-text">
           <div className="deliveryservice_img">
             <img
-              src="/images/Rectangle 318.png"
+              src="/images/moving_partner.png"
               className="deliveryservice_img-content"
               alt=""
             />

@@ -15,11 +15,18 @@ const CheckoutBtn = styled.button`
   border-radius: 4.522px;
   border: 1.13px solid var(--green2, #4bb149);
   background: rgba(183, 224, 182, 0.2);
+  opacity: ${(props) => (props.disabled ? 0.5 : 1)};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 `;
 
-export const CheckoutButton = () => {
+interface CheckoutButtonProps {
+  onClick: () => void;
+  disabled: boolean;
+}
+
+export const CheckoutButton: React.FC<CheckoutButtonProps> = ({ onClick, disabled }) => {
   return (
-    <CheckoutBtn>
+    <CheckoutBtn onClick={onClick} disabled={disabled}>
       Check Out
     </CheckoutBtn>
   );

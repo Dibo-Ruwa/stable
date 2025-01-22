@@ -1,6 +1,7 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { usePathname, useSearchParams } from "next/navigation";
 import { BsPersonCircle } from "react-icons/bs";
 import { LiaAngleRightSolid } from "react-icons/lia";
 import { IoPersonOutline } from "react-icons/io5";
@@ -10,6 +11,8 @@ import { LiaAwardSolid } from "react-icons/lia";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { MdRestaurantMenu } from "react-icons/md";
+import useAuth from "@/hooks/useAuth";
+
 
 interface MenuItem {
   icon: JSX.Element;
@@ -34,9 +37,10 @@ const ProfileSidebarContainer = styled.div<ProfileSidebarContainerProps>`
 
   @media (max-width: 768px) {
     width: 97%;
-    height: 95%;
+    height: 60vh;
     position: absolute;
-    top: 2rem;
+    background: #fff;
+    top: 0; // Adjust top to 0 to cover the entire height
     z-index: 2;
     transition: transform 0.3s ease-in-out;
     transform: ${({ isVisible }) =>
@@ -196,13 +200,39 @@ const ProfileSidebarRightIcon = styled(LiaAngleRightSolid)<{ active: boolean }>`
 
 export const ProfileSidebar: React.FC = () => {
   const [isSidebarVisible, setSidebarVisible] = useState(false);
-  const [activeItem, setActiveItem] = useState<string>("Profile Settings");
+  const pathname = usePathname();
+  const { session, userUpdate } = useAuth();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".profile-sidebar-container") && !target.closest(".menu-icon")) {
+        setSidebarVisible(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleTabClick = (href: string) => {
+    setSidebarVisible(false);
+    window.location.href = href; // Navigate to the selected tab
+  };
+
+  console.log(session?.user);
+
+  const firstName = session?.user?.firstName;
+  const lastName = session?.user?.lastName;
+  const email = session?.user?.email;
 
   const profileInfo = {
     icon: <ProfileIcon />,
-    name: "Kelivin Chikezie",
-    email: "chikeziekelivin@gmial.com",
-    href: "/profile"
+    name: `${firstName} ${lastName}`,
+    email: email,
+    href: "/profile",
   };
 
   const menuItems: MenuItem[] = [
@@ -211,25 +241,21 @@ export const ProfileSidebar: React.FC = () => {
       label: "Profile Settings",
       href: "/profile/profile-settings",
     },
-
     {
       icon: <HiOutlineCube />,
       label: "Orders",
-      href: "/profile/or-ders",
+      href: "/profile/orders",
     },
-
-    {
-      icon: <IoIosHeartEmpty />,
-      label: "Favorite",
-      href: "/profile/favorite",
-    },
-
+    // {
+    //   icon: <IoIosHeartEmpty />,
+    //   label: "Favorite",
+    //   href: "/profile/favorite",
+    // },
     {
       icon: <LiaAwardSolid />,
       label: "Subscriptions",
       href: "/profile/subscriptions",
     },
-
     {
       icon: <HiOutlineEnvelope />,
       label: "Notifications",
@@ -237,18 +263,15 @@ export const ProfileSidebar: React.FC = () => {
     },
   ];
 
-  const handleItemClick = (label: string) => {
-    setActiveItem(label);
-  };
+  // Determine the active item dynamically based on the current pathname
+  const activeItem = menuItems.find((item) => pathname.startsWith(item.href))?.label || "";
 
   return (
     <ProfileContainer>
-      <MenuIcon onClick={() => setSidebarVisible(!isSidebarVisible)} />
-      <ProfileSidebarContainer isVisible={isSidebarVisible}>
+      <MenuIcon className="menu-icon" onClick={() => setSidebarVisible(!isSidebarVisible)} />
+      <ProfileSidebarContainer className="profile-sidebar-container" isVisible={isSidebarVisible}>
         <CancelIcon onClick={() => setSidebarVisible(!isSidebarVisible)} />
-        <ProfileSidebarProfileLink
-        href={profileInfo.href}
-        >
+        <ProfileSidebarProfileLink href={profileInfo.href} onClick={() => handleTabClick(profileInfo.href)}>
           <ProfileSidebarPics>{profileInfo.icon}</ProfileSidebarPics>
           <ProfileSidebarName>
             <ProfileName>{profileInfo.name}</ProfileName>
@@ -262,12 +285,9 @@ export const ProfileSidebar: React.FC = () => {
               <ProfileSidebarItem
                 key={index}
                 active={activeItem === item.label}
-                onClick={() => handleItemClick(item.label)}
+                onClick={() => handleTabClick(item.href)}
               >
-                <ProfileSidebarLink
-                  href={item.href}
-                  active={activeItem === item.label}
-                >
+                <ProfileSidebarLink href={item.href} active={activeItem === item.label}>
                   <ProfileSidebarLeftIcon>{item.icon}</ProfileSidebarLeftIcon>
                   <ProfileSidebarLinkName active={activeItem === item.label}>
                     {item.label}

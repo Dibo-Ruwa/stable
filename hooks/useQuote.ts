@@ -5,21 +5,27 @@ import { toast } from "react-hot-toast";
 import { interceptor } from "@/axios.config";
 import { useRouter } from "next/navigation";
 
-// Define the Quote type
+// Define the updated Quote type
 export interface Quote {
   _id: string;
   type: string;
-  items: { name: string; amount: number }[];
-  total: number | undefined;
-  from: string;
-  to: string | undefined;
-  date: Date;
+  categories: string[];
+  items: { name: string; quantity: number; image: string | null, video: string | null }[];
+  currentLocation?: string;
+  deliveryLocation?: string;
+  pickUpDate?: string;
+  pickUpTime?: string;
+  description?: string;
+  total?: number;
+  from?: string;
+  to?: string;
+  date: string;
   user: string;
   createdAt: Date;
   updatedAt: Date;
-  status: string; // Add the 'status' field
-  paymentId: string | undefined; // Add the 'refId' field
-  isPaid: boolean; // Add the 'isPaid' field
+  status: 'processing' | 'delivered' | 'pending';
+  paymentId?: string;
+  isPaid: boolean;
 }
 
 interface QuoteHook {
@@ -44,86 +50,66 @@ interface QuoteHook {
 }
 
 const useQuote = (): QuoteHook => {
-  const { data: session, status, update } = useSession();
+  const { data: session, status } = useSession();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const [quotes, setQuotes] = useState<Quote[] | []>([]);
+  const [quotes, setQuotes] = useState<Quote[]>([]);
   const [quote, setQuote] = useState<Quote | null>(null);
   const [modalMessage, setModalMessage] = useState("");
-  const [modalErrorType, setModalErrorType] = useState<
-    "success" | "error" | "info"
-  >("success");
+  const [modalErrorType, setModalErrorType] = useState<"success" | "error" | "info">("success");
   const [showModal, setShowModal] = useState(false);
 
-  const openModal = (
-    errorType: "success" | "error" | "info",
-    errorMessage: string
-  ) => {
+  const router = useRouter();
+
+  const openModal = (errorType: "success" | "error" | "info", errorMessage: string) => {
     setModalMessage(errorMessage);
     setModalErrorType(errorType);
     setShowModal(true);
   };
 
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
-  const router = useRouter();
+  const closeModal = () => setShowModal(false);
 
   const getQuotes = async () => {
     setLoading(true);
-
     try {
-      // Fetch quotes using axios
       const response = await interceptor.get(`/quotes`);
       setQuotes(response.data.quotes);
-
-      setLoading(false);
-    } catch (error) {
+    } catch {
       setError("Error fetching quotes");
+    } finally {
       setLoading(false);
     }
   };
 
   const getQuoteById = async (quoteId: string) => {
     setLoading(true);
-
     try {
-      // Fetch quotes using axios
       const response = await interceptor.get(`/quotes/${quoteId}`);
       setQuote(response.data.quote);
-      setLoading(false);
-    } catch (error) {
+    } catch {
       setError("Error fetching quotes");
+    } finally {
       setLoading(false);
     }
   };
 
   const payQuote = async (referenceId: string, amount: number) => {
     setLoading(true);
-
     try {
-      // Send payment request using axios
-      const response = await interceptor.post(`quotes/pay`, {
-        referenceId,
-        amount,
-      });
-      // Handle the payment response, e.g., show a success message
+      await interceptor.post(`/quotes/pay`, { referenceId, amount });
       openModal("success", "Payment successful");
-      setLoading(false);
-    } catch (error) {
+    } catch {
       setError("Error processing payment");
+    } finally {
       setLoading(false);
     }
   };
 
   const handleQuote = async (data: any): Promise<void> => {
     setLoading(true);
-
     try {
-      // Perform signup logic using axios
-
+      console.log("Sending data to API:", data);
       if (
         session?.user.phone &&
         session?.user.address &&
@@ -131,33 +117,83 @@ const useQuote = (): QuoteHook => {
         session?.user.lga
       ) {
         if (data.type === "moving") {
-          const res = await interceptor.post(`/quotes/moving`, { data });
-          setLoading(false);
-          setError(null);
-          openModal("success", "Submitted successfully!!!");
+          const res = await interceptor.post(`/quotes/moving`, {
+            data: {
+              type: data.type,
+              categories: data.categories,
+              items: data.items,
+              currentLocation: data.currentLocation,
+              deliveryLocation: data.deliveryLocation,
+              pickUpDate: data.pickUpDate,
+              pickUpTime: data.pickUpTime,
+              description: data.description,
+            },
+          });
+          openModal("success", "Submitted successfully!");
+          router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
+        } else if (data.type === "cleaning") {
+          const res = await interceptor.post(`/quotes/cleaning`, { data: {
+              type: data.type,
+              categories: data.categories,
+              items: data.items,
+              currentLocation: data.currentLocation,
+              pickUpDate: data.pickUpDate,
+              pickUpTime: data.pickUpTime,
+              description: data.description,
+            },
+         });
+          openModal("success", "Submitted successfully!");
+          router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
 
-          setTimeout(() => {
-            router.push(`/dashboard/requests/${res.data.quote._id}`);
-          }, 2000);
-        } else {
-         const res = await interceptor.post(`/quotes`, { data });
-          setLoading(false);
-          setError(null);
-          openModal("success", "Submitted successfully!!!");
-          setTimeout(() => {
-            router.push(`/dashboard/requests/${res.data.quote._id}`);
-          }, 2000);
+        } else if(data.type === "laundry"){
+          const res = await interceptor.post(`/quotes/laundry`, { data: {
+              type: data.type,
+              categories: data.categories,
+              items: data.items,
+              currentLocation: data.currentLocation,
+              pickUpDate: data.pickUpDate,
+              pickUpTime: data.pickUpTime,
+              estimatedReturn: data.estimatedReturn,
+              description: data.description,
+            }, 
+          });
+          openModal("success", "Submitted successfully!");
+          router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
         }
+
       } else {
-        openModal && openModal("info", "Please complete your profile.");
+        openModal("info", "Please complete your profile.");
       }
     } catch (error: any) {
-      // console.log(error.response.data);
-      setLoading(false);
       setError(error.message);
-      openModal("error", error.response.data);
+      openModal("error", error.response?.data || "An error occurred");
+    } finally {
+      setLoading(false);
     }
   };
+
+  // const handleQuote = async (data: any): Promise<void> => {
+  //   setLoading(true);
+  //   try {
+  //     if (
+  //       session?.user.phone &&
+  //       session?.user.address &&
+  //       session?.user.state &&
+  //       session?.user.lga
+  //     ) {
+  //       const res = await interceptor.post(`/quotes/${data.type}`, { type: data.type, data });
+  //       toast.success("Submitted successfully!");
+  //       router.push(`/profile/orders/${res.data.quote._id}?type=${res.data.quote.type}`);
+  //     } else {
+  //       toast.error("Please complete your profile.");
+  //     }
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //     toast.error(error.response?.data || "An error occurred");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return {
     showModal,

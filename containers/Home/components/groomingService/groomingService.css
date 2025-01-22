@@ -17,6 +17,7 @@
 
 .grooming_desktop-image {
   display: none;
+  border-radius: 1rem;
 }
 
 .grooming_mobile-image {
@@ -32,10 +33,10 @@
 
 .grooming_img-main {
   width: 100%;
+  border-radius: 1rem;
 }
 
 .grooming-text_container {
-  margin-top: -4rem;
   padding-bottom: 2rem;
 }
 .grooming-btn_text {
@@ -83,7 +84,6 @@
   font-weight: 500;
   line-height: 1.4rem;
   text-decoration-line: underline;
-  display: none;
 }
 .rest-title-h1 {
   color: #7e7e7e;
@@ -175,6 +175,6 @@
   }
 
   .grooming-text_container {
-    margin-bottom: 10rem;
+    margin-bottom: 0rem;
   }
 }

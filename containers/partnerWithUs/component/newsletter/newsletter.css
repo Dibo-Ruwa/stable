@@ -21,6 +21,7 @@
   align-items: center;
   margin: 0 auto;
   gap: 2rem;
+  width: 100%;
 }
 
 p.newsletter-text {
@@ -34,7 +35,7 @@ p.newsletter-text {
 }
 
 input.newsletter_input {
-  display: inline-flex;
+  display: flex;
   padding: 14px 221px 9px 15px;
   align-items: center;
   border-radius: 4px;
@@ -44,7 +45,7 @@ input.newsletter_input {
 }
 
 button.newsletter-btn {
-  display: inline-flex;
+  display: flex;
   padding: 14px 25px 13px 25px;
   justify-content: center;
   align-items: center;
@@ -54,6 +55,12 @@ button.newsletter-btn {
   color: #fff;
   cursor: pointer;
   margin-left: -1rem;
+}
+
+@media screen and (max-width: 399px) {
+  .button.newsletter-btn {
+    padding: 11px 12px 10px 11px;
+  }
 }
 
 .newsletter-box {
@@ -73,15 +80,15 @@ button.newsletter-btn {
   transition: opacity 0.3s ease-in-out;
 }
 
-.to-top-icon{
+.to-top-icon {
   font-size: 24px;
-    background-color: #f8f8f8;
-    color: #a8a8a8;
-    padding: 0.2rem 0.2rem;
-    border-radius: 50%;
-    cursor: pointer;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
-    transition: opacity 0.3s ease-in-out;
+  background-color: #f8f8f8;
+  color: #a8a8a8;
+  padding: 0.2rem 0.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease-in-out;
 }
 
 @media only screen and (max-width: 768px) {
@@ -95,5 +102,19 @@ button.newsletter-btn {
 
   input.newsletter_input {
     padding: 1rem 6rem 1rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  input.newsletter_input {
+    padding: 0.7rem;
+  }
+
+  input.newsletter_input::placeholder {
+    font-size: 0.8rem;
+  }
+
+  button.newsletter-btn {
+    font-size: 0.8rem;
   }
 }

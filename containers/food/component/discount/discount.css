@@ -1,14 +1,201 @@
 .discount-food_frame {
   width: min(93%, 1440px);
-  margin: 0 auto;
+  margin: 1rem auto 0;
   display: flex;
   justify-content: space-between;
   gap: 2rem;
 }
 
+@media screen and (max-width: 876px) {
+  .discount-food_frame {
+    flex-direction: column;
+  }
+}
+
 section.discount_container {
   padding: 1rem 0 3rem;
   background: #f8f8f8;
+}
+
+/* ============= Big Discount Card ============== */
+section.BigDiscountCard_Container {
+  display: flex;
+  border-radius: 0.625rem;
+  position: relative;
+  width: 100%;
+  height: 25.5rem;
+  background: #fff;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1313px) {
+  section.BigDiscountCard_Container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  section.BigDiscountCard_Container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  section.BigDiscountCard_Container {
+    width: 100%;
+    height: 19.4rem;
+  }
+}
+
+.BigDiscountCard_LeftContainer {
+  width: 90%;
+  /* background: antiquewhite; */
+  position: relative;
+  z-index: 1;
+}
+
+.BigDiscountCard_DiscountTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.61rem;
+  /* padding: 1.69rem 0 0 3.87rem; */
+  width: 100%;
+  position: absolute;
+  left: 3rem;
+  top: 1.5rem;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .BigDiscountCard_DiscountTitle {
+    width: 17rem;
+  }
+}
+
+.BigDiscountCard_DiscountTickText,
+.BigDiscountCard_DiscountLightText,
+.SmallDiscountCardBlack_DiscountTickText,
+.SmallDiscountCard_DiscountTickText,
+.SmallDiscountCardBlack_DiscountLightText,
+.SmallDiscountCard_DiscountLightText {
+  color: var(--Green1, #27a124);
+  font-family: "Red Rose", serif !important;
+  font-size: 2.6913rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+@media screen and (max-width: 1024px) {
+  .BigDiscountCard_DiscountTickText {
+    font-size: 1.8rem;
+  }
+}
+
+.BigDiscountCard_DiscountLightText,
+.SmallDiscountCardBlack_DiscountLightText,
+.SmallDiscountCard_DiscountLightText {
+  font-size: 2.23213rem;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 1024px) {
+  .BigDiscountCard_DiscountLightText {
+    font-size: 1.6rem;
+  }
+}
+
+.BigDiscountCard_DiscountRightImage {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.ImagePolygonSeven {
+  position: absolute;
+  width: 15rem;
+  top: 3rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .ImagePolygonSeven {
+    width: 15rem;
+    top: -2rem;
+  }
+}
+
+img.PolygonSeven {
+  width: 20rem;
+}
+
+.ImagePolygonSix {
+  position: absolute;
+  width: 13rem;
+  top: 5rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .ImagePolygonSix {
+    width: 16rem;
+    top: -2rem;
+  }
+}
+
+img.PolygonSix {
+  width: 19rem;
+}
+
+.ImageSpecialOFFER {
+  position: absolute;
+  top: 13.9rem;
+  left: -6rem;
+  width: 21rem;
+  height: 13rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .ImageSpecialOFFER {
+    top: 8.9rem;
+    left: -5.7rem;
+    width: 20rem;
+    height: 10rem;
+  }
+}
+
+img.SpecialOFFER {
+  width: 28rem;
+  height: 18rem;
+}
+
+@media screen and (max-width: 1024px) {
+  img.SpecialOFFER {
+    width: 20rem;
+    height: 16rem;
+  }
+}
+
+.BigDiscountCard_CenterContainer {
+  display: flex;
+  align-items: center;
+  width: 33rem;
+  height: 17rem;
+  /* background: antiquewhite; */
+  position: relative;
+  right: 1rem;
+  top: 2rem;
+}
+
+@media screen and (max-width: 500px) {
+  .BigDiscountCard_CenterContainer {
+    right: -1rem;
+    width: 40rem;
+    top: 0rem;
+  }
+}
+
+img.IMageFood {
+  width: 30rem;
+  /* height: 24rem; */
 }
 
 .small_discount-card {
@@ -25,6 +212,198 @@ img.small_discount-card-img {
   width: 100%;
 }
 
+img.SalesOff {
+  width: 31rem;
+}
+
+/* ============= Small Discount White Card ============== */
+section.SmallDiscountCard_Container {
+  position: relative;
+  display: flex;
+  background: #fefefe;
+  border-radius: 1.6rem;
+  padding: 2.5rem 1.2rem;
+  overflow: hidden;
+  width: 26.875rem;
+  height: 12.3125rem;
+}
+
+@media screen and (max-width: 1276px) {
+  section.SmallDiscountCard_Container {
+    width: 23.875rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  section.SmallDiscountCard_Container {
+    width: 20rem;
+    height: 9rem;
+  }
+}
+
+.SmallDiscountCard_DiscountTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.61rem;
+  /* padding: 1.69rem 0 0 3.87rem; */
+  width: 50%;
+  position: absolute;
+  left: 3rem;
+  top: 1.5rem;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .SmallDiscountCard_DiscountTitle {
+    left: 1.5rem;
+    top: 1rem;
+  }
+}
+
+.SmallDiscountCard_DiscountTickText {
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-size: 1.5rem;
+}
+
+.SmallDiscountCard_DiscountLightText {
+  color: var(--primary-color-2-black-50, #3f3f3f);
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1276px) {
+  .SmallDiscountCard_DiscountLightText,
+  .SmallDiscountCard_DiscountTickText {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .SmallDiscountCard_DiscountLightText,
+  .SmallDiscountCard_DiscountTickText {
+    font-size: 1rem;
+  }
+}
+
+.ImageTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10rem;
+}
+
+.ImageBottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 13rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .ImageTop {
+    width: 7rem;
+  }
+
+  .ImageBottom {
+    width: 10rem;
+  }
+}
+
+/* ============= Small Discount Black Card ============== */
+
+section.SmallDiscountCardBlack_Container {
+  position: relative;
+  display: flex;
+  background: #2a2a2a;
+  border-radius: 1.6rem;
+  padding: 2.5rem 1.2rem;
+  overflow: hidden;
+  width: 26.875rem;
+  height: 12.3125rem;
+}
+@media screen and (max-width: 1276px) {
+  section.SmallDiscountCardBlack_Container {
+    width: 23.875rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  section.SmallDiscountCardBlack_Container {
+    width: 20rem;
+    height: 9rem;
+  }
+}
+
+.SmallDiscountCardBlack_DiscountTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.61rem;
+  /* padding: 1.69rem 0 0 3.87rem; */
+  width: 50%;
+  position: absolute;
+  left: 3rem;
+  top: 1.5rem;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1024px) {
+  .SmallDiscountCardBlack_DiscountTitle {
+    left: 1.5rem;
+    top: 1rem;
+  }
+}
+
+.SmallDiscountCardBlack_DiscountTickText {
+  color: var(--White, #fefefe);
+  font-size: 1.5rem;
+}
+
+.SmallDiscountCardBlack_DiscountLightText {
+  color: var(--White, #fefefe);
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 1276px) {
+  .SmallDiscountCardBlack_DiscountLightText,
+  .SmallDiscountCardBlack_DiscountTickText {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .SmallDiscountCardBlack_DiscountLightText,
+  .SmallDiscountCardBlack_DiscountTickText {
+    font-size: 1rem;
+  }
+}
+
+.BlackImageTop {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.BlackImageBottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .BlackImageTop {
+    width: 7rem;
+  }
+
+  .BlackImageBottom {
+    width: 12rem;
+  }
+}
+
+@media screen and (max-width: 876px) {
+  .small_discount-card {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .discount-food_frame {
     width: min(92%, 1440px);
@@ -37,4 +416,109 @@ img.small_discount-card-img {
   section.discount_container {
     padding: 1rem 0 1rem;
   }
+}
+
+
+.BigDiscountCard_RightContainer {
+    position: relative;
+    z-index: 1;
+}
+
+@media only screen and (max-width: 455px) {
+    section.BigDiscountCard_Container {
+        width: 100%;
+        height: 12.4rem;
+    }
+
+        .BigDiscountCard_DiscountTitle {
+        width: 13rem;
+            left: 2rem;
+    top: 1.2rem;
+    }
+
+        .BigDiscountCard_DiscountTickText {
+        font-size: 1.4rem;
+    }
+
+        .BigDiscountCard_DiscountLightText {
+        font-size: 1.2rem;
+    }
+    .ImagePolygonSeven {
+        width: 8rem;
+        top: 1.7rem;
+    }
+        .ImagePolygonSix {
+        width: 7rem;
+        top: 2rem;
+    }
+
+        .ImageSpecialOFFER {
+        top: 7.1rem;
+        left: -3.4rem;
+        width: 12rem;
+        height: 10rem;
+    }
+
+        img.SpecialOFFER {
+        height: 8rem;
+    }
+
+        .BigDiscountCard_CenterContainer {
+      ight: -1.5rem;
+        width: 28rem;
+        top: -2rem;
+    }
+
+    img.SalesOff {
+    width: 17rem;
+}
+}
+@media only screen and (max-width: 355px) {
+    section.BigDiscountCard_Container {
+        width: 100%;
+        height: 12.4rem;
+    }
+
+        .BigDiscountCard_DiscountTitle {
+        width: 13rem;
+            left: 2rem;
+    top: 1.2rem;
+    }
+
+        .BigDiscountCard_DiscountTickText {
+        font-size: 1.4rem;
+    }
+
+        .BigDiscountCard_DiscountLightText {
+        font-size: 1.2rem;
+    }
+    .ImagePolygonSeven {
+        width: 8rem;
+        top: 1.7rem;
+    }
+        .ImagePolygonSix {
+        width: 7rem;
+        top: 2rem;
+    }
+
+        .ImageSpecialOFFER {
+        top: 7.1rem;
+        left: -3.4rem;
+        width: 12rem;
+        height: 10rem;
+    }
+
+        img.SpecialOFFER {
+        height: 8rem;
+    }
+
+        .BigDiscountCard_CenterContainer {
+      ight: -1.5rem;
+        width: 28rem;
+        top: -2rem;
+    }
+
+    img.SalesOff {
+    width: 17rem;
+}
 }

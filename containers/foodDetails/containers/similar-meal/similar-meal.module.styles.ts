@@ -54,7 +54,7 @@ export const MostSoldCard = styled.div`
   text-decoration: none;
 `;
 
-export const MostSoldCardLinkDiv = styled(Link)`
+export const MostSoldCardLinkDiv = styled.div`
   width: 100%;
   scroll-snap-align: center;
   box-sizing: border-box;
@@ -89,6 +89,38 @@ export const MostSoldCardContext = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
+
+  .title_dot_starIconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .Time_IconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+ .star_Icon {
+    color: #ffc93f;
+  }
+
+  .sTitle_dot_starIconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sTime_IconText {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+ .sStar_Icon {
+    color: #ffc93f;
+  }
 `;
 
 export const MostSoldCardTitle = styled.small`
@@ -137,7 +169,7 @@ export const MostSoldCardReminder = styled.small`
   font-weight: 400;
 `;
 
-export const MostSoldCardPrizeLink = styled.a`
+export const MostSoldCardPrizeLink = styled.div`
   display: inline-flex;
   padding: 8.324px;
   justify-content: center;

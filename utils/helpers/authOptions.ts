@@ -2,13 +2,15 @@ import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { closeDB, connectDB } from "@/utils/db";
 import User from "@/utils/models/Users";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import { UserType } from "../types/types";
 import { NextResponse } from "next/server";
 import { sendMail } from "../sendMail";
 import { generateToken } from "@/templates/authTemplates";
 import ActivateAccount from "@/emails/ActivateAccount";
-import sendEmail from "../resend";
+// import sendEmail from "../resend";
+import sendEmail from "@/utils/sendSmtpMail"; 
+
 import { activateAccnt } from "@/emails/mails";
 
 export const authOptions: NextAuthOptions = {
@@ -50,16 +52,29 @@ export const authOptions: NextAuthOptions = {
           const activationLink = generateToken(user._id);
           const baseUrl = process.env.BASE_URL;
 
-          await sendEmail(
-            user.email,
-            "Activate Account",
-            ActivateAccount({
-              customerName: user.firstName,
-              activationLink: `${baseUrl}/verifyMail/${activationLink}`,
-            })
-          );
-          throw new Error("please check your mail for a verification link");
+          // await sendEmail(
+          //   user.email,
+          //   "Activate Account",
+          //   ActivateAccount({
+          //     customerName: user.firstName,
+          //     activationLink: `${baseUrl}/verifyMail/${activationLink}`,
+          //   })
+          // );
+          await sendEmail({
+            to: user?.email,
+            subject: "Activate Your Account",
+            template: "signup",  // The HTML template you want to use
+            replacements: {
+              customerName: user?.firstName,
+              activationLink: `${baseUrl}/verifyMail/${activationLink}`,  // Dynamic data for the email
+            },
+          });
+          throw new Error("Please check your mail for a verification link");
         }
+
+        // Send activation email
+    
+
 
         await closeDB();
         return user;

@@ -1,15 +1,15 @@
-import { Laundry } from "@/containers/Laundry/Laundry";
+import Laundry from "@/containers/newLaundry";
 
 export const metadata = {
   title: "Laundry",
 };
 
-const Page = () => {
+const page = () => {
   return (
     <div>
       <Laundry />
     </div>
   );
-}
+};
 
-export default Page;
+export default page;

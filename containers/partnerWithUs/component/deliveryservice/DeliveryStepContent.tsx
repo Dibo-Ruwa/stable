@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { FaArrowRight } from "react-icons/fa";
 import { IoIosCheckmark } from "react-icons/io";
 
 const DeliveryStepContent = () => {
@@ -22,7 +24,7 @@ const DeliveryStepContent = () => {
           <div className="DeliveryStepContent_get_started_text_div">
             <small className="DeliveryStepContent_get_started_icon_div">
               {" "}
-              Sign Up
+              Join Us
             </small>
             <p className="DeliveryStepContent_get_started_icon_div">
               Register your moving service and provide necessary details.
@@ -84,9 +86,10 @@ const DeliveryStepContent = () => {
           </div>
         </div>
       </div>
-      <a href="/" className="vendor_signup">
-        Sign Up
-      </a>
+      <Link href="https://admin.diboruwa.com/sign-in" className="deliveryservice_signup">
+        Join Us
+        <FaArrowRight className="get_started_icon" />
+      </Link>
       <div className="deliveryservice_img-transparent">
         <img
           src="/images/Ellipse 109.png"
