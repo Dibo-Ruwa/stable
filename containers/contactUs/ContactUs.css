@@ -73,6 +73,7 @@ p.Contact_Us_SubTitle {
   .LMEO_container {
     flex-direction: column;
     gap: 1rem;
+    width: 100%;
   }
 }
 
@@ -81,11 +82,13 @@ p.Contact_Us_SubTitle {
   flex-direction: column;
   gap: 0.5rem;
   flex: 1 1 10rem;
+  align-items: center;
+  text-align: center;
 }
 
 @media screen and (max-width: 538px) {
-  .LMEO_content {
-    flex: 1 1 2rem;
+  .LMEO_Content {
+    flex: 1 1 100%;
   }
 }
 
@@ -93,6 +96,7 @@ p.Contact_Us_SubTitle {
   display: flex;
   align-items: center;
   gap: 0.3rem;
+  justify-content: center;
 }
 
 svg.lmeo_Icon {
@@ -128,6 +132,9 @@ p.lmeo_black_Text {
   gap: 1.5rem;
   margin: 1rem auto;
   width: 88%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 800px) {
@@ -144,6 +151,7 @@ form.smsMessage_Container {
   background: rgba(247, 247, 247, 0.58);
   padding: 2.5rem;
   justify-content: center;
+  flex: 1 1 300px;
 }
 
 @media screen and (max-width: 800px) {
@@ -199,9 +207,24 @@ button.button.smsMessage_Btn {
   width: 6rem;
 }
 
+.mapLocation_image {
+  flex: 1 1 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .mapLocation_img {
   height: 100%;
   width: 100%;
+  border-radius: 10px;
+}
+
+.mapLocation_iframe {
+  width: 100%;
+  height: 600px;
+  border-radius: 10px;
+  border: none;
 }
 
 /* ======== FAQs ========= */
