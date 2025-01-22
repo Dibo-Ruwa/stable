@@ -52,7 +52,7 @@ export const FAQs: React.FC = () => {
     {
       id: 9,
       question: "How do I contact customer support?",
-      answer: "You can reach our customer support team via the 'Contact Us' section on our website.",
+      answer: "You can reach our customer support team via the 'Contact Us' page on our website.",
     },
     {
       id: 10,
