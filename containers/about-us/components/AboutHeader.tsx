@@ -91,7 +91,7 @@ export const AboutHeader = () => {
             </AnimatePresence>
           </p>
           <p className="AboutHeader_Description">
-            we've been committed to simplifying your life by offering a range of
+            We are committed to simplifying your life by offering a range of
             high-quality, convenient services.
           </p>
         </div>

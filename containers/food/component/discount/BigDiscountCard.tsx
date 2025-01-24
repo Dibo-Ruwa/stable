@@ -1,6 +1,8 @@
 import React from "react";
 import "./discount.css";
 import Image from "next/image";
+import DynamicSaleSVG from "@/component/discountSvg"; // Adjust the path as necessary
+
 
 interface BigDiscountCardProps {
   leftImg1: string;
