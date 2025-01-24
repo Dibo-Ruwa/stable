@@ -17,7 +17,7 @@ const Discount = () => {
             leftImg2="/images/Polygon 6.png"
             leftImg3="/images/specialOffer.png"
             centerContainer="/images/groc1.jpeg"
-            rightContainer="/images/image 214.png"
+            rightContainer="/images/image 216.png"
             discountDetails={{
               tickText: "Enjoy",
               lightTexts: ["20%", "Discount on all Fruits and Vegetables"],
@@ -40,11 +40,11 @@ const Discount = () => {
                   className: "TopSpecialOfferImage",
                 },
                 bottomImage: {
-                  src: "/images/image 206 (1).png",
+                  src: "/images/grocery_discount.png",
                   alt: "Food Image",
-                  width: 281,
-                  height: 281,
-                  className: "BottomFoodImage",
+                  width: 151,
+                  height: 151,
+                  className: "BottomFoodImage bottom_food_image",
                 },
               },
             }}
@@ -64,10 +64,10 @@ const Discount = () => {
                   className: "TopSpecialOfferImage",
                 },
                 bottomImage: {
-                  src: "/images/image 206 (1).png",
+                  src: "/images/grocery_discount.png",
                   alt: "Food Image",
-                  width: 281,
-                  height: 281,
+                  width: 150,
+                  height: 150,
                   className: "BottomFoodImage",
                 },
               },

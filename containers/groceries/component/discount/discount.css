@@ -134,6 +134,10 @@ img.PolygonSeven {
   top: 5rem;
 }
 
+.bottom_food_image{
+  margin-left: 50px !important;
+}
+
 @media screen and (max-width: 1024px) {
   .ImagePolygonSix {
     width: 16rem;
@@ -417,3 +421,5 @@ section.SmallDiscountCardBlack_Container {
     padding: 1rem 0 1rem;
   }
 }
+
+

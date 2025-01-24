@@ -43,7 +43,7 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
     if (foodDetails?.extras) {
       const initializedExtras = foodDetails.extras.map((extra) => ({
         ...extra,
-        quantity: extra.quantity || 0,
+        quantity: 0, // Initialize quantity to 0
       }));
       setExtras(initializedExtras);
     }
@@ -81,7 +81,7 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
         price: extraDetails.price,
         imageUrl: extraDetails.imageUrl,
         prep_time: extraDetails.prep_time,
-        quantity: (extraDetails.quantity || 0) + 1
+        quantity: extraDetails.quantity + 1 // Increment quantity by 1
       };
 
       await updateQuantity(foodDetails._id, "increase", extraId, extraInfo);
@@ -90,7 +90,7 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
       setExtras(prevExtras =>
         prevExtras.map(e =>
           e._id === extraId
-            ? { ...e, quantity: (e.quantity || 0) + 1 }
+            ? { ...e, quantity: extraDetails.quantity + 1 } // Use extraDetails.quantity
             : e
         )
       );
@@ -116,7 +116,7 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
       setExtras(prevExtras =>
         prevExtras.map(e =>
           e._id === extraId
-            ? { ...e, quantity: Math.max(0, (e.quantity || 0) - 1) }
+            ? { ...e, quantity: extra.quantity - 1 } // Use extra.quantity
             : e
         )
       );
@@ -185,7 +185,7 @@ export const AdditionBtnCart: React.FC<CartDropdownProps> = ({
                   >
                     <HiMinus />
                   </button>
-                  <div className={styles.countNum}>{item.quantity || 0}</div>
+                  <div className={styles.countNum}>{item.quantity}</div>
                   <button
                     className={styles.counterButton}
                     onClick={() => incrementExtra(item._id)}
