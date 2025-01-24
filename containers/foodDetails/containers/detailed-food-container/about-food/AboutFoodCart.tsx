@@ -7,6 +7,8 @@ import { FoodData } from "@/utils/types/types";
 import { CTADelivery } from "../cta-delivery/CTADelivery";
 import { useCartItems } from "@/context/CartItems"; // Import the cart context
 import { AdditionBtnCart } from "./AdditionBtnCart";
+import Loader from "@/component/ui/loader/Loader";
+
 
 interface CartDropdownProps {
   selectedItem: FoodData | null; // Allow null
@@ -70,7 +72,7 @@ export const AboutFoodCart: React.FC<CartDropdownProps> = ({ selectedItem, carts
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {

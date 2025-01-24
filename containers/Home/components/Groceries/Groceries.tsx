@@ -20,6 +20,7 @@ import useCartStore from "@/store/useCart.store";
 import toast from "react-hot-toast";
 import { Toast } from "@/lib/Toast";
 import VendorModal from "@/component/modals/VendorModal";
+import Loader from "@/component/ui/loader/Loader";
 
 
 // Define the type for a food item
@@ -172,7 +173,7 @@ export default function Groceries() {
   };
 
   if (loading) {
-    return <p>Loading groceries...</p>;
+    return <Loader />;
   }
 
   return (

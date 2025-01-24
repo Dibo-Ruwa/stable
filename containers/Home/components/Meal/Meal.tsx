@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { Toast } from "@/lib/Toast";
 import VendorModal from "@/component/modals/VendorModal";
 import { Extra } from "@/utils/types/types"; // Import the Extra type
+import Loader from "@/component/ui/loader/Loader";
 
 // Define the type for a food item
 export interface FoodItem {
@@ -166,7 +167,7 @@ export default function Meal(): JSX.Element {
   };
 
   if (loading) {
-    return <p>Loading meals...</p>;
+    return <Loader />;
   }
 
   return (
