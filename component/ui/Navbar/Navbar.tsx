@@ -173,9 +173,8 @@ const Navbar = () => {
                 }
               : {
                   background: "transparent", // Default background
-                borderBottom: "none", // Remove border when not scrolled
-                 backdropFilter: "contrast(0.9)",
-                  
+                  borderBottom: "none", // Remove border when not scrolled
+                  backdropFilter: "contrast(0.7)",
                 }
             : {}
         }
