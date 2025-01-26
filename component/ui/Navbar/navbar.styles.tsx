@@ -23,6 +23,19 @@ export const NavbarFrame = styled.div`
   margin: 0.3rem auto;
   gap: 20px;
 
+  .LogoAndToggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .LogoAndToggle {
+      width: 100%;
+    }
+  }
+
   .logo {
     position: relative;
     width: 100px;
@@ -115,7 +128,6 @@ export const NavbarFrame = styled.div`
       border-radius: 0.1rem;
     }
   }
- 
 
   .SA_location {
     display: flex;
@@ -157,11 +169,11 @@ export const Mobile = styled.div`
     display: flex;
     justify-content: center;
     // background: red;
-    gap: 10px
+    gap: 10px;
     // right: 1.5rem;
   }
 
-   .Cart_mobile {
+  .Cart_mobile {
     // background: red;
     padding: 10px;
     // background: rgba(39, 161, 36, 0.1);
@@ -169,7 +181,6 @@ export const Mobile = styled.div`
     color: #fff;
     // position: relative;
     // right: 1rem;
-
   }
 `;
 
@@ -178,19 +189,17 @@ export const Toggle = styled.div`
   font-size: 24px;
   color: #48db45;
   cursor: pointer;
-  
+
   z-index: 10;
-  
+
   @media screen and (max-width: 1000px) {
     display: block;
     height: fit-content;
-    margin: auto;
+    // margin: auto;
     // position: absolute;
     // right: 1rem;
   }
 `;
-
-
 
 export const MenuList = styled(motion.ul as any)`
   display: flex;
@@ -255,22 +264,25 @@ export const MobileMenuBackdrop = styled(motion.div as any)`
   height: 100vh;
   padding: 16px;
   font-size: 16px;
-  background: var(--primary-20);
-  backdrop-filter: blur(5px);
+  // background: var(--primary-20);
+  // backdrop-filter: blur(5px);
   z-index: 20;
 `;
 
 export const MobileMenu = styled(motion.ul)`
+  transform-origin: top;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: 10vh;
-  right: 0; // Adjusted to fit within the screen
+  right: 0;
+  left: 0;
   border-radius: 10px;
   background-color: #fff;
   z-index: 50;
-  width: 100%; // Adjusted to fit within the screen
-  height: 80vh; /* Increased height to accommodate new elements */
+  width: 94%;
+  height: 80vh;
+  margin: 0 auto;
   padding: 30px;
   list-style-type: none;
   backdrop-filter: blur(8px);
