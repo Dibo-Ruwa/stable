@@ -12,6 +12,7 @@ import PaymentButton from "@/component/paymentButton/PayButton";
 import useOrder from "@/hooks/useOrder";
 import Loader from "@/component/ui/loader/Loader";
 import { FaTimes } from "react-icons/fa";
+import { SuccessModal } from "./SuccessModal";
 
 const StoresContainer = styled.div`
   width: 100%;
@@ -93,11 +94,17 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     date: "dd/mm/yyyy",
     time: "8:00 AM",
   });
+
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { isSubmitting, isError, isSuccess, isRedirecting, handleCartOrderSubmit } = useOrder();
-
+  const {
+    showSuccessModal,
+    setShowSuccessModal,
+    orderId,
+    handleCartOrderSubmit,
+    isRedirecting,
+  } = useOrder(); // Only declare it once
   const { cartItems, getCart } = useCartStore();
   const referenceId = nanoid(8);
 
@@ -126,8 +133,8 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
 
   // Calculate delivery fee based on selection
   const baseDeliveryFee = selectedRegion
-    ? deliveryRegions.find((region) => region.name === selectedRegion)?.price ||
-      0
+    ? deliveryRegions.find((region: any) => region.name === selectedRegion)
+        ?.price || 0
     : 0;
   const additionalFee = Math.floor((cartItems.length - 1) / 2) * 100;
   const deliveryFee = baseDeliveryFee + additionalFee;
@@ -135,7 +142,10 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   // Calculate subtotal and total price including extras
   const subtotal = cartItems.reduce((acc, item) => {
     const itemTotal = item.price * item.quantity;
-    const extrasTotal = item.extras.reduce((extraAcc, extra) => extraAcc + (extra.price * extra.quantity), 0);
+    const extrasTotal = item.extras.reduce(
+      (extraAcc, extra) => extraAcc + extra.price * extra.quantity,
+      0
+    );
     return acc + itemTotal + extrasTotal;
   }, 0);
 
@@ -146,7 +156,12 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       setLocationError("Please select a delivery location.");
       return;
     }
-    await handleCartOrderSubmit(referenceId, totalPrice, deliveryFee, selectedRegion);
+    await handleCartOrderSubmit(
+      referenceId,
+      totalPrice,
+      deliveryFee,
+      selectedRegion
+    );
     setIsLoading(true);
   };
 
@@ -178,7 +193,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
 
   return (
     <StoresContainer>
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <CloseButton onClick={onClose} />
       </div>
       <CartInfo
@@ -202,11 +217,17 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
         onSuccess={onSuccess}
         onClose={() => console.log("Payment closed")}
         referenceId={referenceId}
-        className={`checkout-button ${!selectedRegion || cartItems.length === 0 ? 'disabled' : ''}`}
+        className={`checkout-button ${
+          !selectedRegion || cartItems.length === 0 ? "disabled" : ""
+        }`}
         disabled={!selectedRegion || cartItems.length === 0}
       />
 
-      
+      <SuccessModal
+        show={showSuccessModal}
+        handleClose={() => setShowSuccessModal(false)}
+        orderId={orderId}
+      />
     </StoresContainer>
   );
 };
