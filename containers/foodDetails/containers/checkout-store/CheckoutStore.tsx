@@ -205,6 +205,8 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
         className={`checkout-button ${!selectedRegion || cartItems.length === 0 ? 'disabled' : ''}`}
         disabled={!selectedRegion || cartItems.length === 0}
       />
+
+      
     </StoresContainer>
   );
 };
