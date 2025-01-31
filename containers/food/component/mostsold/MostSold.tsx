@@ -13,6 +13,8 @@ import { MdOutlineTimer } from "react-icons/md";
 import toast from "react-hot-toast";
 import useCartStore from "@/store/useCart.store";
 import VendorModal from "@/component/modals/VendorModal";
+import { useSession } from "next-auth/react";
+import { AuthPromptModal } from '@/components/ui/AuthPromptModal/AuthPromptModal';
 
 interface MostSoldProps {
   searchQuery: string;
@@ -43,6 +45,8 @@ const MostSold: React.FC<MostSoldProps> = ({
     isOpen: false,
     currentVendor: "",
   });
+  const { data: session } = useSession();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   console.log(searchQuery);
   // Load added items from local storage on component mount
@@ -161,6 +165,11 @@ const MostSold: React.FC<MostSoldProps> = ({
   console.log("Cart items", cartItems);
 
   const handleItemAddToCart = async (item: FoodData) => {
+    if (!session) {
+      setShowAuthModal(true);
+      return;
+    }
+
     try {
       const currentVendor = getCurrentVendor();
 
@@ -186,6 +195,11 @@ const MostSold: React.FC<MostSoldProps> = ({
       console.error("Error adding item to cart:", error);
       toast.error(error.message || "Failed to add item to cart");
     }
+  };
+
+  const handleSignIn = () => {
+    setShowAuthModal(false);
+    router.push('/sign-in');
   };
 
   const handleCloseVendorModal = () => {
@@ -401,11 +415,18 @@ const MostSold: React.FC<MostSoldProps> = ({
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
+      
       <VendorModal
         isOpen={vendorModal.isOpen}
         onClose={handleCloseVendorModal}
         currentVendor={vendorModal.currentVendor}
       />
+      {showAuthModal && (
+        <AuthPromptModal 
+          onClose={() => setShowAuthModal(false)}
+          onSignIn={handleSignIn}
+        />
+      )}
     </div>
   );
 };
