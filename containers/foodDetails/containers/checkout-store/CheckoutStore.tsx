@@ -21,7 +21,7 @@ const StoresContainer = styled.div`
   flex-shrink: 0;
   border-radius: 10px;
   background: var(--White, #fefefe);
-  box-shadow: 0px 184px 51px 0px rgba(158, 158, 158, 0),
+  box-shadow: 0px 184px 51px 0px rgba(17, 7, 7, 0),
     0px 118px 47px 0px rgba(158, 158, 158, 0.01),
     0px 66px 40px 0px rgba(158, 158, 158, 0.05),
     0px 29px 29px 0px rgba(158, 158, 158, 0.05),

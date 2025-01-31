@@ -200,25 +200,26 @@ const MostSold: React.FC<MostSoldProps> = ({
       <section className="mostsold_container">
         <div className="mostsold-frame">
           {/* Moved search bar to the Custom booking file */}
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div style={{ display: "flex", justifyContent: "center", paddingBottom: "1.5rem" }}>
             <div
               style={{
                 position: "relative",
                 width: "100%",
-                maxWidth: "450px",
+                maxWidth: "550px",
                 padding: "1rem",
+                
               }}
             >
               <input
                 type="text"
-                placeholder="Search here"
+                placeholder="Search here..."
                 style={{
-                  height: "42px",
+                  height: "52px",
                   flexShrink: 0,
                   borderRadius: "4px",
                   paddingLeft: "1rem",
                   paddingRight: "2.5rem",
-                  border: "1px solid #ebebeb",
+                  border: "2px solid #27a124",
                   backgroundColor: "#fcfcfc",
                   outline: "none",
                   width: "100%",
