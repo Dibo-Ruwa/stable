@@ -15,6 +15,8 @@ import { useSession } from "next-auth/react";
 import { AuthPromptModal } from '@/components/ui/AuthPromptModal/AuthPromptModal';
 import { useRouter } from 'next/navigation';
 import VendorModal from '@/component/modals/VendorModal';
+import Loader from "@/component/ui/loader/Loader";
+
 
 interface CartDropdownProps {
   selectedItem: FoodData | null; // Allow null
@@ -238,7 +240,7 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
