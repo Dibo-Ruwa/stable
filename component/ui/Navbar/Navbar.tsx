@@ -282,25 +282,23 @@ const Navbar = () => {
                       Partner with us
                     </Cta>
                   )}
-                  {session && (
-                    <div
-                      className="SA_location"
-                      aria-label="User location"
-                      onClick={openLocationModal}
-                      style={{ cursor: "pointer" }}
-                    >
-                      <ImLocation className="SA_location_icon" />
-                      <p className="SA_location_text">
-                        {location?.state && location?.region ? (
-                          `${location?.state}, ${location?.region}`
-                        ) : (
-                          <span onClick={() => router.push("/")}>
-                            Reload to select your location
-                          </span>
-                        )}
-                      </p>
-                    </div>
-                  )}
+                  <div
+                    className="SA_location"
+                    aria-label="User location"
+                    onClick={openLocationModal}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <ImLocation className="SA_location_icon" />
+                    <p className="SA_location_text">
+                      {location?.state && location?.region ? (
+                        `${location?.state}, ${location?.region}`
+                      ) : (
+                        <span onClick={() => router.push("/")}>
+                          Reload to select your location
+                        </span>
+                      )}
+                    </p>
+                  </div>
                   {session && <UserDropdown toggle={() => setToggle(false)} />}
                 </MobileMenu>
               </>
@@ -339,25 +337,23 @@ const Navbar = () => {
               </Cta>
             )}
 
-            {session && (
-              <div
-                className="SA_location"
-                aria-label="User location"
-                onClick={openLocationModal}
-                style={{ cursor: "pointer" }}
-              >
-                <ImLocation className="SA_location_icon" />
-                <p className="SA_location_text">
-                  {location?.state && location?.region ? (
-                    `${location?.state}, ${location?.region}`
-                  ) : (
-                    <span onClick={() => router.push("/")}>
-                      Reload to select your location
-                    </span>
-                  )}
-                </p>
-              </div>
-            )}
+            <div
+              className="SA_location"
+              aria-label="User location"
+              onClick={openLocationModal}
+              style={{ cursor: "pointer" }}
+            >
+              <ImLocation className="SA_location_icon" />
+              <p className="SA_location_text">
+                {location?.state && location?.region ? (
+                  `${location?.state}, ${location?.region}`
+                ) : (
+                  <span onClick={() => router.push("/")}>
+                    Reload to select your location
+                  </span>
+                )}
+              </p>
+            </div>
 
             {session && <UserDropdown toggle={() => setToggle(false)} />}
             {session && cartItems.length > 0 && (
