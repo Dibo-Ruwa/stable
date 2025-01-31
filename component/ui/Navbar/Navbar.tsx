@@ -46,12 +46,41 @@ const Navbar = () => {
   const [showToast, setShowToast] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const [authModal, setAuthModal] = useState<"signup" | "signin" | null>(null);
   const switchModal = (type: "signup" | "signin") => setAuthModal(type);
   const [companyName] = useState<string>("diboruwa");
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false);
   const cartDropdownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    // Check if screen is mobile
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust the width as needed for mobile screens
+    };
+
+    // Set initial state and add event listener
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    // Detect scroll
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50); // Change the value (50px) as needed
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     getCart(); // Fetch cart data on mount
@@ -113,7 +142,7 @@ const Navbar = () => {
   const handleCheckoutClick = () => {
     setIsCartDropdownOpen(false);
     router.push(`/food/checkout`); // Navigate to the item's page
-  }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -135,23 +164,38 @@ const Navbar = () => {
     <>
       <NavbarContainer
         style={
-          isScrolled
-            ? {
-                backdropFilter: "blur(20px)",
-                background: "rgb(255, 255, 255)",
-                borderBottom: "1px solid var(--primary-20)",
-              }
+          isMobile
+            ? isScrolled
+              ? {
+                  backdropFilter: "blur(20px)",
+                  background: "rgb(255, 255, 255)",
+                  borderBottom: "1px solid var(--primary-20)",
+                }
+              : {
+                  background: "transparent", // Default background
+                  borderBottom: "none", // Remove border when not scrolled
+                  backdropFilter: "contrast(0.7)",
+                }
             : {}
         }
       >
         <NavbarFrame>
-          <div className="logo">
-            <Link href="/" passHref>
-              <LogoImage src="/logo.png" fill={true} alt="logo" />
-            </Link>
+          <div className="LogoAndToggle">
+            <div className="logo">
+              <Link href="/" passHref>
+                <LogoImage src="/logo.png" fill={true} alt="logo" />
+              </Link>
+            </div>
+            <Toggle
+              onClick={() => setToggle((prev) => !prev)}
+              style={{
+                color: isScrolled ? "#000000" : "#ffffff",
+              }}
+            >
+              {toggle ? <VscClose /> : <HiBars3 />}
+            </Toggle>
           </div>
-          
-   
+
           <div className="mobile-cart-toggle">
             {cartItems.length > 0 && (
               <div className="cart">
@@ -179,7 +223,7 @@ const Navbar = () => {
                     }}
                     onClick={() => {
                       // setIsCartDropdownOpen(true);
-                      handleCheckoutClick()
+                      handleCheckoutClick();
                     }}
                   >
                     <FaBagShopping className="cart_icon" />
@@ -188,14 +232,14 @@ const Navbar = () => {
 
                 {isCartDropdownOpen && (
                   <div ref={cartDropdownRef} className="CartDropdown_mobile">
-                    <CartDropdownMobile setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Use mobile cart dropdown */}
+                    <CartDropdownMobile
+                      setIsCartDropdownOpen={setIsCartDropdownOpen}
+                    />{" "}
+                    {/* Use mobile cart dropdown */}
                   </div>
                 )}
               </div>
             )}
-            <Toggle onClick={() => setToggle((prev) => !prev)}>
-              {toggle ? <VscClose /> : <HiBars3 />}
-            </Toggle>
           </div>
 
           <MenuList className="menu">
@@ -219,6 +263,7 @@ const Navbar = () => {
               );
             })}
           </MenuList>
+
           <AnimatePresence>
             {toggle && (
               <>
@@ -230,10 +275,23 @@ const Navbar = () => {
                   onClick={() => setToggle((prev) => !prev)}
                 ></MobileMenuBackdrop>
                 <MobileMenu
-                  initial={{ right: "-100%", opacity: 0 }}
-                  animate={{ right: "0%", opacity: 1 }} // Adjusted to fit within the screen
-                  exit={{ right: "-100%", opacity: 0 }}
-                  transition={{ duration: 0.6 }}
+                  initial={{ scaleY: 0, opacity: 0, originY: 0 }}
+                  animate={{ scaleY: 1, opacity: 1, originY: 0 }}
+                  exit={{ scaleY: 0, opacity: 0, originY: 0 }}
+                  transition={{
+                    scaleY: {
+                      type: "spring",
+                      stiffness: 150, // Controls speed and bounce for folding down
+                      damping: 12, // Bounce effect when opening
+                    },
+                    opacity: { duration: 0.6 }, // Smooth opacity transition
+                    exit: {
+                      duration: 1.2, // Slower folding-up effect
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 18, // Bounce effect when closing
+                    },
+                  }}
                 >
                   {routes.map((link, index) => (
                     <li key={index}>
@@ -253,7 +311,6 @@ const Navbar = () => {
                         <Link
                           className="link"
                           href={link.path}
-                          
                           onClick={() =>
                             setToggle((prev) => (prev === true ? false : false))
                           }
@@ -382,7 +439,7 @@ const Navbar = () => {
                     }}
                     onClick={() => {
                       // setIsCartDropdownOpen(true);
-                      handleCheckoutClick()
+                      handleCheckoutClick();
                     }}
                   >
                     <FaBagShopping className="cart_icon" />
@@ -391,11 +448,13 @@ const Navbar = () => {
 
                 {isCartDropdownOpen && (
                   <div ref={cartDropdownRef} className="CartDropdown">
-                    <CartDropdown setIsCartDropdownOpen={setIsCartDropdownOpen}/> {/* Use mobile cart dropdown */}
+                    <CartDropdown
+                      setIsCartDropdownOpen={setIsCartDropdownOpen}
+                    />{" "}
+                    {/* Use mobile cart dropdown */}
                   </div>
                 )}
               </div>
-
             )}
           </MenuList>
           {/* Render AuthModal based on state */}

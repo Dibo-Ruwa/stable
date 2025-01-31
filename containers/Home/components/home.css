@@ -232,8 +232,9 @@
   .mob {
     position: relative;
     overflow-x: hidden;
-    height: 65vh;
+    height: 31rem;
     display: block;
+    bottom: 3rem;
   }
 
   .mob-image {
