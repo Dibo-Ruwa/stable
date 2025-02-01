@@ -60,12 +60,13 @@ const CancelButton = styled.button`
   cursor: pointer;
 `;
 
-export const SuccessModal: React.FC<SuccessModalProps> = ({
+export const SuccessModal: React.FC<
+SuccessModalProps> = ({
   show,
   handleClose,
   
 }) => {
-  if (!show) return null; // Don't render the modal if it's not shown
+  // if (!show) return null; // Don't render the modal if it's not shown
 
   const { orderProp } = useOrder();
   return (

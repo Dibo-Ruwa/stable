@@ -98,14 +98,8 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const {
-    showSuccessModal,
-    setShowSuccessModal,
-    orderId,
-    handleCartOrderSubmit,
-    isRedirecting,
-    orderProp
-  } = useOrder(); // Only declare it once
+  const { showSuccessModal, setShowSuccessModal, handleCartOrderSubmit } =
+    useOrder();
   const { cartItems, getCart } = useCartStore();
   const referenceId = nanoid(8);
 
@@ -192,6 +186,13 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     );
   }
 
+  if (!isLoading && cartItems.length === 0) {
+    return (
+      <StoresContainer className="flex justify-center items-center">
+        <p>No cart orders available.</p>
+      </StoresContainer>
+    );
+  }
   return (
     <StoresContainer>
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -224,10 +225,22 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
         disabled={!selectedRegion || cartItems.length === 0}
       />
 
-      <SuccessModal
-        show={showSuccessModal}
-        handleClose={() => setShowSuccessModal(false)}        
-      />
+      {/* New Button to Show Success Modal */}
+      {/* <button
+        type="button"
+        onClick={() => setShowSuccessModal(true)}
+        className="checkout-button"
+        style={{ marginTop: "1rem" }}
+      >
+        Show Success Modal
+      </button> */}
+
+      {showSuccessModal && (
+        <SuccessModal
+          show={showSuccessModal}
+          handleClose={() => setShowSuccessModal(false)}
+        />
+      )}
     </StoresContainer>
   );
 };

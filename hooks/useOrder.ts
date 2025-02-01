@@ -32,8 +32,8 @@ const useOrder = () => {
   // New state for success modal
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [orderProp, setOrderProp] = useState({
-    id:"", 
-    type: ''
+    id: "",
+    type: "",
   });
 
   const { data: session } = useSession();
@@ -125,19 +125,28 @@ const useOrder = () => {
         type: data.order.type,
       });
 
-
       setOrderProp({
         id: data.order?._id,
-        type: data.order?.type
+        type: data.order?.type,
       });
+
+      // Optionally, you can still refresh the cart
+      useCartStore.getState().getCart();
+      toast.success("Cart order submitted successfully!");
 
       setIsSuccess(true);
       setShowSuccessModal(true); // Show the success modal
       setOrderId(data.order?._id); // Set the order ID for the modal
 
-      // Optionally, you can still refresh the cart
-      useCartStore.getState().getCart();
-      toast.success("Cart order submitted successfully!");
+      useEffect(() => {
+        console.log("showSuccessModal:", showSuccessModal);
+      }, [showSuccessModal]);
+
+      setTimeout(() => {
+        router.push(
+          `/profile/orders/${data.order?._id}?type=${data.order?.type}`
+        );
+      }, 2000); // Redirect after 2 seconds
 
       // setTimeout(() => {
       //   useCartStore.getState().getCart();
