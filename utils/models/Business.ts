@@ -2,6 +2,7 @@ import mongoose, { Schema, model, models } from "mongoose";
 
 const businessSchema = new Schema({
   name: { type: String, required: true },
+  phone: { type: String },
   owner: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
   branch: [{
     location: {
@@ -21,3 +22,4 @@ const businessSchema = new Schema({
 }, { timestamps: true });
 
 export const Business = models.Business || model("Business", businessSchema);
+

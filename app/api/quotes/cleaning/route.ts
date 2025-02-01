@@ -103,7 +103,8 @@ export async function POST(req: Request, res: Response) {
         .join("");
 
       await sendEmail({
-        to: "ibrahim.saliman.zainab@gmail.com",
+        // to: "ibrahim.saliman.zainab@gmail.com",
+        to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
         subject: `New Cleaning Request from ${user.firstName} ${user.lastName}`,
         template: "adminHomeCleaningQuote",
         replacements: {
