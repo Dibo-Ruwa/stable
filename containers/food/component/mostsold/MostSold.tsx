@@ -13,6 +13,8 @@ import { MdOutlineTimer } from "react-icons/md";
 import toast from "react-hot-toast";
 import useCartStore from "@/store/useCart.store";
 import VendorModal from "@/component/modals/VendorModal";
+import { useSession } from "next-auth/react";
+import { AuthPromptModal } from '@/components/ui/AuthPromptModal/AuthPromptModal';
 
 interface MostSoldProps {
   searchQuery: string;
@@ -43,6 +45,8 @@ const MostSold: React.FC<MostSoldProps> = ({
     isOpen: false,
     currentVendor: "",
   });
+  const { data: session } = useSession();
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   console.log(searchQuery);
   // Load added items from local storage on component mount
@@ -161,6 +165,11 @@ const MostSold: React.FC<MostSoldProps> = ({
   console.log("Cart items", cartItems);
 
   const handleItemAddToCart = async (item: FoodData) => {
+    if (!session) {
+      setShowAuthModal(true);
+      return;
+    }
+
     try {
       const currentVendor = getCurrentVendor();
 
@@ -188,6 +197,11 @@ const MostSold: React.FC<MostSoldProps> = ({
     }
   };
 
+  const handleSignIn = () => {
+    setShowAuthModal(false);
+    router.push('/sign-in');
+  };
+
   const handleCloseVendorModal = () => {
     setVendorModal({
       isOpen: false,
@@ -200,25 +214,26 @@ const MostSold: React.FC<MostSoldProps> = ({
       <section className="mostsold_container">
         <div className="mostsold-frame">
           {/* Moved search bar to the Custom booking file */}
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div style={{ display: "flex", justifyContent: "center", paddingBottom: "1.5rem" }}>
             <div
               style={{
                 position: "relative",
                 width: "100%",
-                maxWidth: "450px",
+                maxWidth: "550px",
                 padding: "1rem",
+                
               }}
             >
               <input
                 type="text"
-                placeholder="Search here"
+                placeholder="Search here..."
                 style={{
-                  height: "42px",
+                  height: "52px",
                   flexShrink: 0,
                   borderRadius: "4px",
                   paddingLeft: "1rem",
                   paddingRight: "2.5rem",
-                  border: "1px solid #ebebeb",
+                  border: "2px solid #27a124",
                   backgroundColor: "#fcfcfc",
                   outline: "none",
                   width: "100%",
@@ -400,11 +415,18 @@ const MostSold: React.FC<MostSoldProps> = ({
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
+      
       <VendorModal
         isOpen={vendorModal.isOpen}
         onClose={handleCloseVendorModal}
         currentVendor={vendorModal.currentVendor}
       />
+      {showAuthModal && (
+        <AuthPromptModal 
+          onClose={() => setShowAuthModal(false)}
+          onSignIn={handleSignIn}
+        />
+      )}
     </div>
   );
 };

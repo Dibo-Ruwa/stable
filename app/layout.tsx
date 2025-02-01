@@ -42,13 +42,12 @@ export default function RootLayout({
       </head>
       <body suppressHydrationWarning>
         <Providers>
-      {/* <LocationModal /> */}
           <Navbar />
           {authModal}
 
           <main className="main_container">{children}</main>
-          {/* <Analytics /> */}
-          {/* <SpeedInsights /> */}
+          <Analytics />
+          <SpeedInsights />
           <Footer />
           <GlobalStyles />
         </Providers>

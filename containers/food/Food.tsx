@@ -19,7 +19,6 @@ const Food: React.FC<FoodProps> = () => {
   const [activeButton, setActiveButton] = useState<string>("all");
 
 
-
   return (
     <div className="food-container">
       <Discount />
