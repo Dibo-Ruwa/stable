@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import useOrder from "@/hooks/useOrder";
 
 interface SuccessModalProps {
   show: boolean;
   handleClose: () => void;
-  orderId: string | null;
 }
 
 const ModalOverlay = styled.div`
@@ -63,10 +63,11 @@ const CancelButton = styled.button`
 export const SuccessModal: React.FC<SuccessModalProps> = ({
   show,
   handleClose,
-  orderId,
+  
 }) => {
   if (!show) return null; // Don't render the modal if it's not shown
 
+  const { orderProp } = useOrder();
   return (
     <ModalOverlay>
       <ModalContainer>
@@ -76,7 +77,9 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
         </ModalHeader>
               <ModalBody>
           Your order has been placed successfully!
-          <Link href={`/profile/orders/${orderId}`}>View order details</Link>.
+          <Link href={`/profile/orders/${orderProp.id}?type=${orderProp.type}`}>View order details</Link>.
+          {/* <Link href={`/profile/orders/${orderId}?type=${orderProp.type}`}>View order details</Link>. */}
+
         </ModalBody>
         <ModalFooter>
           <CancelButton onClick={handleClose}>Cancel</CancelButton>

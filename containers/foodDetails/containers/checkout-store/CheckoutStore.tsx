@@ -104,6 +104,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     orderId,
     handleCartOrderSubmit,
     isRedirecting,
+    orderProp
   } = useOrder(); // Only declare it once
   const { cartItems, getCart } = useCartStore();
   const referenceId = nanoid(8);
@@ -225,8 +226,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
 
       <SuccessModal
         show={showSuccessModal}
-        handleClose={() => setShowSuccessModal(false)}
-        orderId={orderId}
+        handleClose={() => setShowSuccessModal(false)}        
       />
     </StoresContainer>
   );

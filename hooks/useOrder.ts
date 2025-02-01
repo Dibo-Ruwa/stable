@@ -31,6 +31,10 @@ const useOrder = () => {
 
   // New state for success modal
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [orderProp, setOrderProp] = useState({
+    id:"", 
+    type: ''
+  });
 
   const { data: session } = useSession();
 
@@ -121,6 +125,12 @@ const useOrder = () => {
         type: data.order.type,
       });
 
+
+      setOrderProp({
+        id: data.order?._id,
+        type: data.order?.type
+      });
+
       setIsSuccess(true);
       setShowSuccessModal(true); // Show the success modal
       setOrderId(data.order?._id); // Set the order ID for the modal
@@ -133,7 +143,7 @@ const useOrder = () => {
       //   useCartStore.getState().getCart();
       //   toast.success("Cart order submitted successfully!");
       //   router.push(
-      //     `/profile/orders/${data.order?._id}?type=${data.order?.type}`
+      //     `/profile/orders/${data.order?._id}?type=${çç`
       //   );
       // }, 500);
     } catch (error) {
@@ -282,6 +292,7 @@ const useOrder = () => {
     getOrders,
     getOrderById,
     handleCartOrderSubmit,
+    orderProp,
     handleSubscriptionOrderSubmit,
     handleRequestPayment,
     checkActiveSubscription,
