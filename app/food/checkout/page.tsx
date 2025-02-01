@@ -5,7 +5,6 @@ export const metadata = {
   title: "Food Details",
 };
 
-
 const page: React.FC = () => {
   return (
     <div>

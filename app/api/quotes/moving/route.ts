@@ -94,7 +94,8 @@ export async function POST(req: Request, res: Response) {
       });
 
       await sendEmail({
-        to: "ibrahim.saliman.zainab@gmail.com",
+        // to: "ibrahim.saliman.zainab@gmail.com",
+        to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
         subject: `New Moving Request from ${user.firstName} ${user.lastName}`,
         template: "adminMovingRequest",
         replacements: {

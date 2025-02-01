@@ -156,6 +156,7 @@ export interface FoodData {
   vendor: {
     _id: string;
     name: string;
+    phone: string;
     owner: string;
     branch: {
       location: {
@@ -228,6 +229,7 @@ export interface ProductData {
   vendor: {
     _id: string;
     name: string;
+    phone: string;
     owner: string;
     branch: {
       location: {
