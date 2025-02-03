@@ -2,11 +2,12 @@ import { closeDB, connectDB } from "@/utils/db";
 import { Cart } from "@/utils/models/Cart";
 import { Order } from "@/utils/models/Order";
 import User from "@/utils/models/Users";
-import sendEmail from "@/utils/sendSmtpMail"; 
+import sendEmail from "@/utils/sendSmtpMail";
 import moment from "moment";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "@/utils/helpers/authOptions";
+import { sendWhatsAppNotification } from "@/utils/services/whatsapp";
 
 interface CartItem {
   title: string;
@@ -58,14 +59,17 @@ export async function POST(req: Request, res: Response) {
     // Calculate the total amount including extras
     const totalAmount = existingCart.cartItems.reduce((acc, item) => {
       const itemTotal = item.price * item.quantity;
-      const extrasTotal = item.extras.reduce((extraAcc, extra) => extraAcc + (extra.price * extra.quantity), 0);
+      const extrasTotal = item.extras.reduce(
+        (extraAcc, extra) => extraAcc + extra.price * extra.quantity,
+        0
+      );
       return acc + itemTotal + extrasTotal;
     }, 0);
 
     // Create a new order object with all required fields
     const order = new Order({
       orderItems: existingCart.cartItems,
-      type: "cart", 
+      type: "cart",
       email: user.email,
       phone: user.phone,
       address: user.address,
@@ -73,22 +77,82 @@ export async function POST(req: Request, res: Response) {
       user,
       deliveryFee: body.deliveryFee,
       paymentId: body.referenceId,
-      selectedRegion: body.selectedRegion // Include selected region
+      selectedRegion: body.selectedRegion, // Include selected region
     });
 
     // Save the new order to the database
     await order.save();
     console.log("Order saved successfully", order);
 
+    // After saving the order, send notifications to vendors
+    for (const item of existingCart.cartItems) {
+      if (item.vendor?.phone) {
+        const vendorMessage = `
+New order received!
+Item: ${item.title}
+Quantity: ${item.quantity}
+Customer: ${user.firstName} ${user.lastName}
+Contact: ${user.phone}
+Delivery to: ${body.selectedRegion}
+${
+  item.extras?.length
+    ? `Extras: ${item.extras
+        .map((e) => `${e.title} (x${e.quantity})`)
+        .join(", ")}`
+    : ""
+}
+Total: ₦${
+          item.price * item.quantity +
+          (item.extras?.reduce((acc, e) => acc + e.price * e.quantity, 0) || 0)
+        }
+`;
+
+        try {
+          const whatsappResult = await sendWhatsAppNotification(
+            item.vendor.phone,
+            vendorMessage
+          );
+          if (whatsappResult.status === "error") {
+            console.log(
+              `WhatsApp notification failed for vendor ${item.vendor.name}:`,
+              whatsappResult.error
+            );
+          } else {
+            console.log(
+              `WhatsApp notification sent to vendor: ${item.vendor.name}`
+            );
+          }
+        } catch (error) {
+          // Just log the error and continue
+          console.error(
+            `Failed to send WhatsApp notification to vendor: ${item.vendor.name}`,
+            error
+          );
+        }
+      }
+    }
+
     // Format the order items for the email template
-    const formattedOrderItems = existingCart.cartItems.map((item: CartItem) => {
-      const itemTotal = item.price * item.quantity;
-      const extras = item.extras.map(extra => `${extra.title} (x${extra.quantity}) - ₦${extra.price * extra.quantity}`).join(', ');
-      return `<li>${item.title} - ${item.quantity} - ₦${itemTotal} ${extras ? `- Extras: ${extras}` : ''}</li>`;
-    }).join('');  // Join the array to create an HTML list
+    const formattedOrderItems = existingCart.cartItems
+      .map((item: CartItem) => {
+        const itemTotal = item.price * item.quantity;
+        const extras = item.extras
+          .map(
+            (extra) =>
+              `${extra.title} (x${extra.quantity}) - ₦${
+                extra.price * extra.quantity
+              }`
+          )
+          .join(", ");
+        return `<li>${item.title} - ${item.quantity} - ₦${itemTotal} ${
+          extras ? `- Extras: ${extras}` : ""
+        }</li>`;
+      })
+      .join(""); // Join the array to create an HTML list
 
     // Send confirmation email to the customer
-    const emailTemplateName = order.type === "cart" ? "cartFoodOrder" : "sessionFoodOrder";
+    const emailTemplateName =
+      order.type === "cart" ? "cartFoodOrder" : "sessionFoodOrder";
 
     try {
       console.log("Attempting to send customer email...");
@@ -102,8 +166,8 @@ export async function POST(req: Request, res: Response) {
           amount: totalAmount.toString(),
           deliveryFee: order?.deliveryFee.toString(),
           total: order.total,
-          estimatedDeliveryTime: "30 - 45 minutes", 
-          selectedRegion: body.selectedRegion
+          estimatedDeliveryTime: "30 - 45 minutes",
+          selectedRegion: body.selectedRegion,
         },
       });
       console.log("Customer email sent successfully");
@@ -113,8 +177,12 @@ export async function POST(req: Request, res: Response) {
 
     try {
       console.log("Attempting to send admin email...");
+      // Get unique vendor names from cart items
+      const vendorNames = [...new Set(existingCart.cartItems.map(item => item.vendor.name))];
+      const partnersString = vendorNames.join(', ');
+
       await sendEmail({
-        to: "ibrahim.saliman.zainab@gmail.com",
+        to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
         subject: "New Order Notification",
         template: "adminOrderNotify",
         replacements: {
@@ -123,15 +191,17 @@ export async function POST(req: Request, res: Response) {
           itemsOrdered: formattedOrderItems,
           amount: totalAmount.toString(),
           deliveryFee: order?.deliveryFee.toString(),
-          partnerFullName: `un-assigned`,
+          partnerFullName: partnersString, // Use vendor names instead of "un-assigned"
           total: order.total,
           customerAddress: `${user.address}, ${user.lga}, ${user.state}`,
           customerPhone: user.phone,
-          orderTimestamp: moment(order.createdAt).format("MMMM D, YYYY, h:mm a"),
-          selectedRegion: body.selectedRegion // Include selected region
+          orderTimestamp: moment(order.createdAt).format(
+            "MMMM D, YYYY, h:mm a"
+          ),
+          selectedRegion: body.selectedRegion, // Include selected region
         },
       });
-      console.log("Admin email sent successfully");
+      console.log("Admin email sent successfully to multiple recipients");
     } catch (error) {
       console.error("Error sending admin email:", error);
     }
@@ -143,12 +213,17 @@ export async function POST(req: Request, res: Response) {
     console.log("Cart cleared after order");
 
     // Return a order and success response
-    return NextResponse.json({ order, message: "Order placed successfully", success: true }, { status: 201 });
-
+    return NextResponse.json(
+      { order, message: "Order placed successfully", success: true },
+      { status: 201 }
+    );
   } catch (err) {
     // Handle and log any errors
     console.error("Error:", err);
-    return NextResponse.json({ error: "An error occurred", err }, { status: 500 });
+    return NextResponse.json(
+      { error: "An error occurred", err },
+      { status: 500 }
+    );
   } finally {
     console.log("Order processing complete");
   }
