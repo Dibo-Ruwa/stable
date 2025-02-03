@@ -48,7 +48,8 @@ const ModalBody = styled.div`
 
 const ModalFooter = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 const CancelButton = styled.button`
@@ -60,11 +61,18 @@ const CancelButton = styled.button`
   cursor: pointer;
 `;
 
-export const SuccessModal: React.FC<
-SuccessModalProps> = ({
+const ViewButton = styled.a`
+  background-color: #27a124; /* Green color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+`;
+
+export const SuccessModal: React.FC<SuccessModalProps> = ({
   show,
   handleClose,
-  
 }) => {
   // if (!show) return null; // Don't render the modal if it's not shown
 
@@ -76,14 +84,17 @@ SuccessModalProps> = ({
           <h2>Order Submitted Successfully</h2>
           <CloseButton onClick={handleClose}>×</CloseButton>
         </ModalHeader>
-              <ModalBody>
+        <ModalBody>
           Your order has been placed successfully!
-          <Link href={`/profile/orders/${orderProp.id}?type=${orderProp.type}`}>View order details</Link>.
           {/* <Link href={`/profile/orders/${orderId}?type=${orderProp.type}`}>View order details</Link>. */}
-
         </ModalBody>
         <ModalFooter>
-          <CancelButton onClick={handleClose}>Cancel</CancelButton>
+          <ViewButton
+            href={`/profile/orders/${orderProp.id}?type=${orderProp.type}`}
+          >
+            View order
+          </ViewButton>
+          .<CancelButton onClick={handleClose}>Cancel</CancelButton>
         </ModalFooter>
       </ModalContainer>
     </ModalOverlay>
