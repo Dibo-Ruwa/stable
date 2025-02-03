@@ -226,14 +226,14 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       />
 
       {/* New Button to Show Success Modal */}
-      <button
+      {/* <button
         type="button"
         onClick={() => setShowSuccessModal(true)}
         className="checkout-button"
         style={{ marginTop: "1rem" }}
       >
         Show Success Modal
-      </button>
+      </button> */}
 
       {showSuccessModal && (
         <SuccessModal
