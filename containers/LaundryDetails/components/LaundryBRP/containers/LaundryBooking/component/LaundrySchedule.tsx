@@ -27,12 +27,8 @@ export const LaundrySchedule: React.FC<LaundryScheduleProps> = ({
     if (pickUpDate) {
       const pickupDate = new Date(pickUpDate);
 
-      // Determine the number of additional days for return
-      let additionalDays = 2; // Minimum 2 days
-      if (totalLaundryItems > 10) {
-        additionalDays += Math.ceil((totalLaundryItems - 10) / 10);
-      }
-      additionalDays = Math.min(additionalDays, 7); // Cap at 7 days
+      // Determine if it's more than 10 items
+      const additionalDays = totalLaundryItems >= 10 ? 7 : 3;
 
       const returnDate = new Date(pickupDate);
       returnDate.setDate(pickupDate.getDate() + additionalDays);
@@ -48,7 +44,7 @@ export const LaundrySchedule: React.FC<LaundryScheduleProps> = ({
       )}, 5:00 PM`;
 
       setEstimatedReturn(formattedReturnDate);
-      onEstimatedReturnChange(formattedReturnDate); // Update parent with estimated return
+      onEstimatedReturnChange(formattedReturnDate);
     }
   }, [pickUpDate, totalLaundryItems, onEstimatedReturnChange]);
 
@@ -82,7 +78,7 @@ export const LaundrySchedule: React.FC<LaundryScheduleProps> = ({
           />
         </div>
         {pickUpDate && (
-          <p className={styles.EstimatedReturnText}>{estimatedReturn}</p>
+          <p>Estimated return: <span className={styles.EstimatedReturnText}>  {estimatedReturn} </span></p>
         )}
       </div>
     </div>
