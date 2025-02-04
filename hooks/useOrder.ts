@@ -105,6 +105,7 @@ const useOrder = () => {
     setIsError(false);
     setIsSuccess(false);
 
+
     try {
       const { data } = await axios.post("/api/order/cart", {
         referenceId,
@@ -112,11 +113,16 @@ const useOrder = () => {
         amount,
         selectedRegion,
       });
-      console.log(data);
       toast.loading("Cart order is being processed", {
         duration: 2000,
       });
+      console.log(data);
 
+      localStorage.setItem('orderProps', JSON.stringify({
+        id: data.order?._id,
+        type: data.order?.type,
+    }));
+      // console.log(data)
       // Call the notification API to create a notification
       await axios.post("/api/notifications", {
         message: `Your cart order with reference ID ${referenceId} has been placed successfully.`,
@@ -125,10 +131,8 @@ const useOrder = () => {
         type: data.order.type,
       });
 
-      setOrderProp({
-        id: data.order?._id,
-        type: data.order?.type,
-      });
+     
+
 
       // Optionally, you can still refresh the cart
       // useCartStore.getState().getCart();

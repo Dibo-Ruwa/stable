@@ -97,8 +97,10 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
 
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-  const { showSuccessModal, setShowSuccessModal, handleCartOrderSubmit } =
+
+  const { orderProp, handleCartOrderSubmit } =
     useOrder();
   const { cartItems, getCart } = useCartStore();
   const referenceId = nanoid(8);
@@ -155,7 +157,6 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       setLocationError("Please select a delivery location.");
       return;
     }
-    setIsLoading(true);
 
     await handleCartOrderSubmit(
       referenceId,
@@ -163,9 +164,9 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       deliveryFee,
       selectedRegion
     );
-    setIsLoading(false);
-    setShowSuccessModal(true)
+    // setIsLoading(false);
          console.log('done')
+         console.log(orderProp)
   };
 
   const handleCheckout = () => {
@@ -186,69 +187,86 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     // Proceed with checkout...
   };
 
-  if (isLoading) {
-    return (
-      <StoresContainer className="flex justify-center items-center">
-        <Loader />
-      </StoresContainer>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <StoresContainer className="flex justify-center items-center">
+  //       <Loader />
+  //     </StoresContainer>
+  //   );
+  // }
 
-  if (!isLoading && cartItems.length === 0) {
-    return (
-      <StoresContainer className="flex justify-center items-center">
-        <p>No cart orders available.</p>
-      </StoresContainer>
-    );
-  }
+  // if (!isLoading && cartItems.length === 0) {
+  //   return (
+  //     <StoresContainer className="flex justify-center items-center">
+  //       <p>No cart orders available.</p>
+  //     </StoresContainer>
+  //   );
+  // }
   return (
     <StoresContainer>
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <CloseButton onClick={onClose} />
-      </div>
-      <CartInfo
-        subtotal={subtotal}
-        deliveryFee={deliveryFee}
-        total={totalPrice}
-      />
-      <InfoPass onInfoPassChange={setInfoPass} />
-      <DeliveryLocation
-        regions={deliveryRegions}
-        onRegionSelect={setSelectedRegion}
-        error={locationError}
-        onErrorClear={() => setLocationError(null)}
-      />
-      <SchDeliveryOpl onScheduleChange={setScheduledDelivery} />
-      <PaymentButton
-        totalPrice={totalPrice}
-        openModal={(type, message) => console.log(type, message)}
-        buttonText="Check Out"
-        color="primary"
-        onSuccess={onSuccess}
-        onClose={() => console.log("Payment closed")}
-        referenceId={referenceId}
-        className={`checkout-button ${
-          !selectedRegion || cartItems.length === 0 ? "disabled" : ""
-        }`}
-        disabled={!selectedRegion || cartItems.length === 0}
-      />
+      {isLoading ? (
+        <Loader />
 
-      {/* New Button to Show Success Modal */}
-      {/* <button
-        type="button"
-        onClick={() => setShowSuccessModal(true)}
-        className="checkout-button"
-        style={{ marginTop: "1rem" }}
-      >
-        Show Success Modal
-      </button> */}
+      ):(
+        <>
+        {(!isLoading && cartItems.length === 0) ? (
+        <p>No cart orders available.</p>
 
-      {showSuccessModal && (
-        <SuccessModal
-          show={showSuccessModal}
-          handleClose={() => setShowSuccessModal(false)}
-        />
-      )}
+        ) : (
+          <>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <CloseButton onClick={onClose} />
+          </div>
+          <CartInfo
+            subtotal={subtotal}
+            deliveryFee={deliveryFee}
+            total={totalPrice}
+          />
+          <InfoPass onInfoPassChange={setInfoPass} />
+          <DeliveryLocation
+            regions={deliveryRegions}
+            onRegionSelect={setSelectedRegion}
+            error={locationError}
+            onErrorClear={() => setLocationError(null)}
+          />
+          <SchDeliveryOpl onScheduleChange={setScheduledDelivery} />
+          <PaymentButton
+            totalPrice={totalPrice}
+            openModal={(type, message) => console.log(type, message)}
+            buttonText="Check Out"
+            color="primary"
+            onSuccess={onSuccess}
+    setShowSuccessModal={setShowSuccessModal}
+            onClose={() => console.log("Payment closed")}
+            referenceId={referenceId}
+            className={`checkout-button ${
+              !selectedRegion || cartItems.length === 0 ? "disabled" : ""
+            }`}
+            disabled={!selectedRegion || cartItems.length === 0}
+          />
+    
+          {/* New Button to Show Success Modal */}
+          {/* <button
+            type="button"
+            onClick={() => setShowSuccessModal(true)}
+            className="checkout-button"
+            style={{ marginTop: "1rem" }}
+          >
+            Show Success Modal
+          </button> */}
+    
+          </>
+        )}
+     
+        </>
+     ) }
+    
+     {showSuccessModal && (
+       <SuccessModal
+         show={showSuccessModal}
+         handleClose={() => setShowSuccessModal(false)}
+       />
+     )}
     </StoresContainer>
   );
 };

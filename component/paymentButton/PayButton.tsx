@@ -18,6 +18,7 @@ interface PaymentButtonProps {
   onSuccess: () => Promise<void>;
   onClose: () => void;
   disabled: boolean;
+  setShowSuccessModal: (value: boolean) => void; // Updated type
   className?: string; // New prop for custom styling
 }
 
@@ -28,6 +29,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
   openModal,
   color,
   onSuccess,
+  setShowSuccessModal,
   onClose,
   referenceId,
   disabled,
@@ -73,7 +75,10 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
 
       paymentFn(
         () => {
-          onSuccess();
+          // onSuccess();
+          onSuccess().then(() => {
+            setShowSuccessModal(true); // Call setShowSuccessModal to show the success modal
+          });
           setIsProcessing(false);
         },
         () => {

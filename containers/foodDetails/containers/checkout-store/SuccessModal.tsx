@@ -1,12 +1,9 @@
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useOrder from "@/hooks/useOrder";
 
-interface SuccessModalProps {
-  show: boolean;
-  handleClose: () => void;
-}
+
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -53,9 +50,9 @@ const ModalFooter = styled.div`
 `;
 
 const CancelButton = styled.button`
-  background-color: #f44336; /* Red color */
-  color: white;
-  border: none;
+  background-color: #fff; /* Red color */
+  color: #27a124;
+  border: 2px solid #27a124;
   border-radius: 4px;
   padding: 10px 15px;
   cursor: pointer;
@@ -70,14 +67,33 @@ const ViewButton = styled.a`
   cursor: pointer;
 `;
 
+interface SuccessModalProps {
+  show: boolean;
+  handleClose: () => void;
+}
+
+// Add an interface for the order props
+interface OrderProps {
+  id?: string;
+  type?: string;
+}
+
 export const SuccessModal: React.FC<SuccessModalProps> = ({
   show,
   handleClose,
 }) => {
   // if (!show) return null; // Don't render the modal if it's not shown
 
-  const { orderProp } = useOrder();
-  console.log(orderProp)
+  const [orderProps, setOrderProps] = useState<OrderProps>({});
+ 
+
+  useEffect(() => {
+    const storedOrder = localStorage.getItem('orderProps');
+    if (storedOrder) {
+      setOrderProps(JSON.parse(storedOrder));
+    }
+  }, [show]); 
+
   return (
     <ModalOverlay>
       <ModalContainer>
@@ -90,8 +106,8 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({
           {/* <Link href={`/profile/orders/${orderId}?type=${orderProp.type}`}>View order details</Link>. */}
         </ModalBody>
         <ModalFooter>
-          <ViewButton
-            href={`/profile/orders/${orderProp.id}?type=${orderProp.type}`}
+        <ViewButton
+            href={`/profile/orders/${orderProps?.id}?type=${orderProps?.type}`}
           >
             View order
           </ViewButton>
