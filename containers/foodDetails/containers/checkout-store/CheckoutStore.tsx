@@ -186,8 +186,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     // Proceed with checkout...
   };
 
-  // if (isLoading || isRedirecting) {
-    if (isLoading ) {
+  if (isLoading) {
     return (
       <StoresContainer className="flex justify-center items-center">
         <Loader />
