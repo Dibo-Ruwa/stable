@@ -69,6 +69,7 @@ SuccessModalProps> = ({
   // if (!show) return null; // Don't render the modal if it's not shown
 
   const { orderProp } = useOrder();
+  console.log(orderProp)
   return (
     <ModalOverlay>
       <ModalContainer>

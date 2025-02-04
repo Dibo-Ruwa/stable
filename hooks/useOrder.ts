@@ -131,26 +131,27 @@ const useOrder = () => {
       });
 
       // Optionally, you can still refresh the cart
-      useCartStore.getState().getCart();
-      toast.success("Cart order submitted successfully!");
+      // useCartStore.getState().getCart();
+      // toast.success("Cart order submitted successfully!");
 
+      useCartStore.getState().getCart();
+      setTimeout(() => {
+          toast.success("Cart order submitted successfully!");
+        // router.push(
+        //   `/profile/orders/${data.order?._id}?type=${data.order?.type}`
+        // );
+      }, 2000); 
+      
       setIsSuccess(true);
-      setShowSuccessModal(true); // Show the success modal
+      // setShowSuccessModal(true); // Show the success modal
       setOrderId(data.order?._id); // Set the order ID for the modal
 
-      useEffect(() => {
-        console.log("showSuccessModal:", showSuccessModal);
-      }, [showSuccessModal]);
+      // useEffect(() => {
+      //   console.log("showSuccessModal:", showSuccessModal);
+      // }, [showSuccessModal]);
 
-      setTimeout(() => {
-        router.push(
-          `/profile/orders/${data.order?._id}?type=${data.order?.type}`
-        );
-      }, 2000); // Redirect after 2 seconds
 
       // setTimeout(() => {
-      //   useCartStore.getState().getCart();
-      //   toast.success("Cart order submitted successfully!");
       //   router.push(
       //     `/profile/orders/${data.order?._id}?type=${çç`
       //   );

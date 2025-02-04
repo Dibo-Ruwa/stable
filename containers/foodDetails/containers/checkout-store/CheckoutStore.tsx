@@ -107,13 +107,17 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   useEffect(() => {
     const loadCart = async () => {
       try {
-        setIsLoading(true);
-        await getCart();
+        // setIsLoading(true);
+        // await getCart();
+         getCart();
+         
       } catch (error) {
         console.error("Failed to load cart:", error);
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
       }
+      setIsLoading(false);
+
     };
 
     loadCart();
@@ -151,13 +155,17 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       setLocationError("Please select a delivery location.");
       return;
     }
+    setIsLoading(true);
+
     await handleCartOrderSubmit(
       referenceId,
       totalPrice,
       deliveryFee,
       selectedRegion
     );
-    setIsLoading(true);
+    setIsLoading(false);
+    setShowSuccessModal(true)
+         console.log('done')
   };
 
   const handleCheckout = () => {
@@ -178,7 +186,8 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     // Proceed with checkout...
   };
 
-  if (isLoading || isRedirecting) {
+  // if (isLoading || isRedirecting) {
+    if (isLoading ) {
     return (
       <StoresContainer className="flex justify-center items-center">
         <Loader />
