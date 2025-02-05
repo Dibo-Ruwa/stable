@@ -25,8 +25,16 @@ const useOrder = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [orderId, setOrderId] = useState<string | null>(null);
   const [isRedirecting, setIsRedirecting] = useState(false); // New state for redirection
   const [loading, setLoading] = useState(true); // Add loading state
+
+  // New state for success modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [orderProp, setOrderProp] = useState({
+    id: "",
+    type: "",
+  });
 
   const { data: session } = useSession();
 
@@ -38,10 +46,12 @@ const useOrder = () => {
 
   const openModal = (
     errorType: "success" | "error" | "info",
-    errorMessage: string
+    errorMessage: string,
+    id: string
   ) => {
     setModalMessage(errorMessage);
     setModalErrorType(errorType);
+    setOrderId(id);
     setShowModal(true);
 
     console.log(showModal);
@@ -53,68 +63,103 @@ const useOrder = () => {
 
   const router = useRouter();
 
-    // Function to check if a user has an active subscription of the same type
-    const checkActiveSubscription = async (subscriptionType: string) => {
-      try {
-        const { data } = await axios.get(`/api/subscriptions/check?type=${subscriptionType}`);
-        if (data?.hasActiveSubscription) {
-          return true;
-        }
-        return false;
-      } catch (error) {
-        console.error("Error checking active subscription", error);
-        return false; // Assume no subscription on error
+  // Function to check if a user has an active subscription of the same type
+  const checkActiveSubscription = async (subscriptionType: string) => {
+    try {
+      const { data } = await axios.get(
+        `/api/subscriptions/check?type=${subscriptionType}`
+      );
+      if (data?.hasActiveSubscription) {
+        return true;
       }
-    };
-    
+      return false;
+    } catch (error) {
+      console.error("Error checking active subscription", error);
+      return false; // Assume no subscription on error
+    }
+  };
 
   const getOrders = () => {
     setIsSubmitting(true);
     setLoading(true); // Set loading to true when fetching orders
     // Fetch orders
-    axios.get("/api/order").then((response) => {
-      setOrders(response.data.orders);
-      setIsSubmitting(false);
-      setLoading(false); // Set loading to false after fetching orders
-    }).catch(() => {
-      setLoading(false); // Set loading to false in case of error
-    });
+    axios
+      .get("/api/order")
+      .then((response) => {
+        setOrders(response.data.orders);
+        setIsSubmitting(false);
+        setLoading(false); // Set loading to false after fetching orders
+      })
+      .catch(() => {
+        setLoading(false); // Set loading to false in case of error
+      });
   };
 
-  const handleCartOrderSubmit = async (referenceId: string, amount: number, deliveryFee: number, selectedRegion: string) => {
+  const handleCartOrderSubmit = async (
+    referenceId: string,
+    amount: number,
+    deliveryFee: number,
+    selectedRegion: string
+  ) => {
     setIsSubmitting(true);
     setIsError(false);
     setIsSuccess(false);
+
 
     try {
       const { data } = await axios.post("/api/order/cart", {
         referenceId,
         deliveryFee,
         amount,
-        selectedRegion
+        selectedRegion,
       });
-      console.log(data)
       toast.loading("Cart order is being processed", {
         duration: 2000,
       });
+      console.log(data);
 
+      localStorage.setItem('orderProps', JSON.stringify({
+        id: data.order?._id,
+        type: data.order?.type,
+    }));
+      // console.log(data)
       // Call the notification API to create a notification
       await axios.post("/api/notifications", {
         message: `Your cart order with reference ID ${referenceId} has been placed successfully.`,
         referenceId: data.order?._id,
         category: "order",
-        type: data.order.type
+        type: data.order.type,
       });
 
-      setIsSuccess(true);
-      setIsRedirecting(true); // Set redirecting state to true immediately
+     
 
+
+      // Optionally, you can still refresh the cart
+      // useCartStore.getState().getCart();
+      // toast.success("Cart order submitted successfully!");
+
+      useCartStore.getState().getCart();
       setTimeout(() => {
-        useCartStore.getState().getCart();
-        toast.success("Cart order submitted successfully!");
-        router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
-      }, 500);
+          toast.success("Cart order submitted successfully!");
+        // router.push(
+        //   `/profile/orders/${data.order?._id}?type=${data.order?.type}`
+        // );
+      }, 2000); 
+      
+      setIsSuccess(true);
+      // setShowSuccessModal(true); // Show the success modal
+      setOrderId(data.order?._id); // Set the order ID for the modal
 
+      // useEffect(() => {
+      //   console.log("showSuccessModal:", showSuccessModal);
+      // }, [showSuccessModal]);
+
+
+      // setTimeout(() => {
+      //   router.push(
+      //     `/profile/orders/${data.order?._id}?type=${çç`
+      //   );
+      // }, 500);
     } catch (error) {
       setIsError(true);
       toast.error("Error submitting cart order.");
@@ -154,7 +199,7 @@ const useOrder = () => {
           message: `Your subscription order with reference ID ${referenceId} has been placed successfully.`,
           referenceId: data.order?._id,
           category: "subscription",
-          type: data.order?.type
+          type: data.order?.type,
         });
 
         setTimeout(() => {
@@ -163,7 +208,9 @@ const useOrder = () => {
           setIsSuccess(true);
           toast.success("Subscription received successfully");
           setIsRedirecting(true); // Set redirecting state to true
-          router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
+          router.push(
+            `/profile/orders/${data.order?._id}?type=${data.order?.type}`
+          );
         }, 500);
       } else {
         const { subscription } = subscriptionOrderData;
@@ -182,17 +229,23 @@ const useOrder = () => {
           message: `Your subscription order with reference ID ${referenceId} has been placed successfully.`,
           referenceId: data.subscription?._id,
           category: "subscription",
-          type: data.subscription?.type
+          type: data.subscription?.type,
         });
 
         setTimeout(() => {
           useCartStore.getState().getSubscriptions();
 
           setIsSuccess(true);
-          openModal("success", "Subscription received successfully");
+          openModal(
+            "success",
+            "Subscription received successfully",
+            data.subscription?._id
+          );
           toast.success("Subscription received successfully");
           setIsRedirecting(true); // Set redirecting state to true
-          router.push(`/profile/subscriptions/${data.subscription?._id}?type=${data.subscription?.type}`);
+          router.push(
+            `/profile/subscriptions/${data.subscription?._id}?type=${data.subscription?.type}`
+          );
         }, 500);
       }
     } catch (error) {
@@ -203,7 +256,10 @@ const useOrder = () => {
     }
   };
 
-  const handleRequestPayment = async (referenceId: string, requestId: string) => {
+  const handleRequestPayment = async (
+    referenceId: string,
+    requestId: string
+  ) => {
     setIsSubmitting(true);
     try {
       const { data } = await axios.put(`/api/quotes/${requestId}`, {
@@ -250,10 +306,16 @@ const useOrder = () => {
     getOrders,
     getOrderById,
     handleCartOrderSubmit,
+    orderProp,
     handleSubscriptionOrderSubmit,
     handleRequestPayment,
     checkActiveSubscription,
     loading, // Return loading state
+
+    // Return the state and setter for the success modal
+    showSuccessModal,
+    setShowSuccessModal,
+    orderId,
   };
 };
 
