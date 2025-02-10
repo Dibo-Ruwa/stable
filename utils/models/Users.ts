@@ -40,7 +40,12 @@ const userSchema = new Schema({
     required: true,
     default: false,
   },
-
+  referralCode: {  // Changed from referralUsed to referralCode
+    type: String,
+    trim: true,
+    uppercase: true,
+    default: null
+  },
   accountNo: {
     type: String,
   },
@@ -50,7 +55,6 @@ const userSchema = new Schema({
   bankName: {
     type: String,
   },
-
   password: {
     type: String,
     required: true,
