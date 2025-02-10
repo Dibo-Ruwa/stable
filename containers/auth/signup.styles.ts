@@ -13,9 +13,15 @@ export const Container = styled.div<StyledProps>`
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
-    padding: 20px;
+    min-height: 100vh;
+    border-radius: 10px;
     width: 100%;
+    padding: 0; // Remove padding on mobile
+    
+    @media screen and (min-width: 769px) {
+      padding: 20px;
+      height: 100vh;
+    }
   `}
 `;
 
@@ -26,15 +32,15 @@ export const FormWrapper = styled.div<StyledProps>`
   border-radius: 30px;
   background: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
   
   @media screen and (max-width: 768px) {
-    width: ${({ $isModal }) => $isModal ? '100%' : '95%'};
-  }
-  
-  @media screen and (max-width: 568px) {
     width: 100%;
-    border-radius: 20px;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -42,9 +48,11 @@ export const Title = styled.h3`
   font-size: 45px;
   font-weight: 300;
   text-align: center;
-  margin-bottom: 20px;
-  @media screen and (max-width: 568px) {
-    font-size: 35px;
+  margin: 10px 0 10px; // Reduced bottom margin from 20px to 10px
+  
+  @media screen and (max-width: 768px) {
+    font-size: 30px;
+    margin: 10px 0 10px; // Consistent spacing on mobile
   }
 `;
 
@@ -78,17 +86,29 @@ export const Divider = styled.div`
 `;
 
 export const Form = styled.form`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
+  flex: 1;
+  margin-top: 0; // Remove any top margin
+  
+  @media screen and (max-width: 768px) {
+    justify-content: center; // Center content vertically
+  }
 `;
 
 export const FormControl = styled.div`
   display: grid;
   gap: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  
+  @media screen and (max-width: 768px) {
+    gap: 12px;
+    margin-bottom: 15px;
+  }
 `;
 
-export const ErrorMessage = styled.div<StyledProps>`
+export const ErrorMessage = styled.div<{ $type?: 'error' | 'success' }>`
   padding: 12px;
   border-radius: 8px;
   font-size: 14px;
@@ -99,11 +119,7 @@ export const ErrorMessage = styled.div<StyledProps>`
     $type === "error" ? "rgba(255, 0, 0, 0.1)" :
     "rgba(0, 149, 255, 0.1)"
   };
-  color: ${({ $type }) => 
-    $type === "success" ? "rgb(0, 200, 83)" :
-    $type === "error" ? "rgb(255, 0, 0)" :
-    "rgb(0, 149, 255)"
-  };
+  color: ${({ $type }) => ($type === 'success' ? '#4caf50' : '#f44336')};
   border: 1px solid ${({ $type }) => 
     $type === "success" ? "rgba(0, 200, 83, 0.2)" :
     $type === "error" ? "rgba(255, 0, 0, 0.2)" :
@@ -148,11 +164,17 @@ export const Footer = styled.div`
   font-size: 12px;
   margin-top: 15px;
 
+  @media screen and (max-width: 768px) {
+    margin-top: -15px; // Negative margin to pull it up
+    padding-bottom: 20px; // Add some bottom padding
+    position: relative; // Add positioning context
+  }
+
   a {
     font-size: 12px;
     width: max-content;
     color: var(--green-bg);
-    margin-left: auto;
+    margin-left: 5px;
   }
 `;
 
