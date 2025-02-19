@@ -24,6 +24,7 @@ import {
 } from "./signup.styles";
 import useForm from "@/hooks/useForm";
 import useAuth from "@/hooks/useAuth";
+import useReferral from '@/hooks/useReferral';
 
 export type ISignupProps = {
   isModal?: boolean;
@@ -34,6 +35,7 @@ export type SignupFormState = {
   lastName: string;
   email: string;
   password: string;
+  referralCode?: string; 
 };
 
 const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
@@ -53,7 +55,10 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
     lastName: "",
     email: "",
     password: "",
+    referralCode: "",  // Add this
   };
+
+  const [referralError, setReferralError] = useState<string>("");
 
   // Redirect logged-in users to the home page
   useEffect(() => {
@@ -64,24 +69,32 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
 
   const handleSubmit = async (formData: SignupFormState) => {
     try {
-      await signup(formData);
-      resetForm();
-      toast.success("Account created successfully!");
-    } catch (error: any) {
-      const errorMessage =
-        error.response?.data || error.message || "An error occurred during registration";
-
-      // Check for specific error messages
-      if (errorMessage === "User already exists") {
-        toast.error("User already exists. Please enter another email address or sign in.");
-      } else {
-        toast.error(errorMessage);
+      setReferralError(""); // Clear previous errors
+      
+      if (formData.referralCode) {
+        const { verifyReferralCode } = useReferral();
+        try {
+          await verifyReferralCode(formData.referralCode);
+        } catch (error: any) {
+          setReferralError(error.message);
+          return;
+        }
       }
 
+      const response = await signup(formData);
+      resetForm();
+      setFormResponse({
+        message: "Account created successfully! Please check your email for verification.",
+        type: "success"
+      });
+      toast.success("Account created successfully!");
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.error || error.message;
       setFormResponse({
         message: errorMessage,
-        type: "error",
+        type: "error"
       });
+      toast.error(errorMessage);
     }
   };
 
@@ -90,7 +103,10 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
       console.error("Error during form submission:", error);
     });
   });
-  const isValid = Object.values(formData).every((value) => value.trim() !== "");
+
+  const isValid = ["firstName", "lastName", "email", "password"].every(
+    (field) => formData[field as keyof Omit<SignupFormState, 'referralCode'>].trim() !== ""
+  );
 
   return (
     <Container $isModal={isModal}>
@@ -166,10 +182,25 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
               onChange={(e) => handleChange(e, "password")}
               error={errors.password}
             />
+            <Input
+              id={`referralCode-${id}`}
+              icon={<FaLockOpen />}
+              placeHolder="Enter referral code (optional)"
+              label="Referral Code"
+              name="referralCode"
+              type="text"
+              fullWidth
+              value={formData.referralCode}
+              onChange={(e) => {
+                handleChange(e, "referralCode");
+                setReferralError(""); // Clear error when user types
+              }}
+              error={referralError || errors.referralCode}
+            />
           </FormControl>
 
           {(showModal || formResponse) && (
-            <ErrorMessage $type={modalErrorType || formResponse?.type || "error"}>
+            <ErrorMessage $type={formResponse?.type} style={{marginTop: "10px"}}>
               {modalMessage || formResponse?.message}
             </ErrorMessage>
           )}
@@ -183,7 +214,7 @@ const SignUp: React.FC<ISignupProps> = ({ isModal }) => {
           />
         </Form>
 
-        <Footer>
+        <Footer >
           <p>
             Already have an account? <Link href="/sign-in">Sign In</Link>
           </p>

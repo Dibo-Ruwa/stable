@@ -13,13 +13,42 @@ export async function POST(req: Request, res: Response) {
     if (!req.body) return NextResponse.json({ error: "Data is missing" }, { status: 400 });
 
     const body = await req.json();
-    const { email, password, firstName } = body;
+    const { email, password, firstName, referralCode } = body;
 
     // Check if user already exists
     const userExists = await User.findOne({ email });
 
     if (userExists) {
       return new Response("User already exists. Please enter another email address or sign in.", { status: 400 });
+    }
+
+    // If referral code provided, verify it with admin API
+    if (referralCode) {
+      try {
+        // This call will now increment the counter
+        const response = await fetch(`${process.env.NEXT_PUBLIC_ADMIN_URL}/api/referrals`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            referralCode,
+            userId: body._id // Add user ID for tracking
+          })
+        });
+
+        const referralData = await response.json();
+        
+        if (!referralData.success) {
+          return NextResponse.json({ 
+            error: "Invalid referral code, please verify or leave empty" 
+          }, { status: 400 });
+        }
+        
+        body.promoterId = referralData.referal.promoter;
+      } catch (error: any) {
+        return NextResponse.json({ 
+          error: "Invalid referral code, please verify or leave empty" 
+        }, { status: 400 });
+      }
     }
 
     // Hash password
@@ -29,6 +58,7 @@ export async function POST(req: Request, res: Response) {
     const user = new User({
       ...body,
       password: hashedPassword,
+      referralCode: referralCode || null  // This now matches the schema field name
     });
 
     // Save the new user model to database
@@ -65,9 +95,12 @@ export async function POST(req: Request, res: Response) {
       { status: 201 }
     );
   } catch (err) {
-    console.error("Error sending email:", err);
-    return NextResponse.json(err);
+    console.error("Error during signup:", err);
+    return NextResponse.json(
+      { error: "An error occurred during registration" }, 
+      { status: 500 }
+    );
   } finally {
-    console.log("Final");
+    await closeDB();
   }
 }
