@@ -125,6 +125,8 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const { cartItems, getCart, coupon } = useCartStore();
   const referenceId = nanoid(8);
 
+  console.log(locationError);
+
   // Fetch cart data on mount
   useEffect(() => {
     const loadCart = async () => {
