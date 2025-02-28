@@ -53,9 +53,21 @@
                                         <td style="padding: 8px; font-weight: bold; color: #121212;">Total Amount</td>
                                         <td style="padding: 8px; font-weight: bold; color: #121212;">₦{{total}}</td>
                                     </tr>
-                                   
+                                    <tr>
+                                        <td style="padding: 8px; color: #121212;">Coupon Discount</td>
+                                        <td style="padding: 8px; color: #121212;">{{couponApplied}}</td>
+                                    </tr>
                                 </tbody>
                             </table>
+
+                            <!-- Order Details -->
+                            <h3 style="color: #121212; font-size: 18px; margin-bottom: 10px;">Order Details:</h3>
+                            <p style="color: #121212; line-height: 1.6;">
+                                <strong>Order Type:</strong> {{orderType}}
+                            </p>
+                            <p style="color: #121212; line-height: 1.6;">
+                                <strong>Scheduled For:</strong> {{scheduledDelivery}}
+                            </p>
 
                             <!-- Delivery Information -->
                             <h3 style="color: #121212; font-size: 18px; margin-bottom: 10px;">Delivery Information:</h3>

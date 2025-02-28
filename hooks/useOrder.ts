@@ -19,6 +19,34 @@ interface SubscriptionOrderData {
   subscription: any;
 }
 
+interface OrderData {
+  referenceId: string;
+  amount: number;
+  deliveryFee: number;
+  selectedRegion: string;
+  orderType: 'instant' | 'pre-order';
+  scheduledDelivery?: {
+    date: string;
+    time: string;
+  };
+}
+
+interface OrderSubmitData {
+  orderType: 'instant' | 'pre-order';
+  scheduledDelivery?: {
+    date: string;
+    time: string;
+  } | null;
+  deliveryMethod: 'delivery' | 'pickup';
+  infoPass: string;
+  couponInfo?: {
+    code: string;
+    discount: number;
+    couponId: string;
+    mode: string;
+  } | null;
+}
+
 const useOrder = () => {
   const [orders, setOrders] = useState([]);
   const [order, setOrder] = useState<Order | null>(null);
@@ -81,39 +109,74 @@ const useOrder = () => {
     });
   };
 
-  const handleCartOrderSubmit = async (referenceId: string, amount: number, deliveryFee: number, selectedRegion: string) => {
+  const handleCartOrderSubmit = async (
+    referenceId: string, 
+    amount: number, 
+    deliveryFee: number, 
+    selectedRegion: string,
+    orderData: {
+      orderType: 'instant' | 'pre-order';
+      scheduledDelivery?: { date: string; time: string } | null;
+      deliveryMethod: 'delivery' | 'pickup';
+      infoPass: string;
+      couponInfo?: {
+        code: string;
+        discount: number;
+        couponId: string;
+        mode: string;
+      } | null;
+    }
+  ) => {
     setIsSubmitting(true);
     setIsError(false);
     setIsSuccess(false);
 
     try {
+      console.log('Order submission data:', {
+        referenceId,
+        amount,
+        deliveryFee,
+        selectedRegion,
+        ...orderData
+      });
+
       const { data } = await axios.post("/api/order/cart", {
         referenceId,
-        deliveryFee,
         amount,
-        selectedRegion
+        deliveryFee,
+        selectedRegion,
+        ...orderData // Pass all order data including coupon
       });
-      console.log(data)
+
       toast.loading("Cart order is being processed", {
         duration: 2000,
       });
 
-      // Call the notification API to create a notification
+      // Create notification with order type info
       await axios.post("/api/notifications", {
-        message: `Your cart order with reference ID ${referenceId} has been placed successfully.`,
+        message: `Your ${orderData.orderType} order with reference ID ${referenceId} has been placed successfully.${
+          orderData.orderType === 'pre-order' 
+            ? ` Scheduled for ${orderData.scheduledDelivery?.date} at ${orderData.scheduledDelivery?.time}.` 
+            : ''
+        }`,
         referenceId: data.order?._id,
         category: "order",
         type: data.order.type
       });
 
-      setIsSuccess(true);
-      setIsRedirecting(true); // Set redirecting state to true immediately
-
-      setTimeout(() => {
-        useCartStore.getState().getCart();
-        toast.success("Cart order submitted successfully!");
-        router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
-      }, 500);
+      if (data.success) {
+        // Clear cart immediately after successful order
+        await useCartStore.getState().clearCart();
+        toast.success("Order placed successfully!");
+        
+        // Then proceed with other success actions
+        setIsSuccess(true);
+        setIsRedirecting(true);
+        
+        setTimeout(() => {
+          router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
+        }, 500);
+      }
 
     } catch (error) {
       setIsError(true);

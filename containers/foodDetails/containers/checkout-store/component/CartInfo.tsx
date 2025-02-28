@@ -64,13 +64,37 @@ const AccountTotalAmount = styled.p`
   line-height: 27.129px;
 `;
 
-interface CartDropdownProps {
+interface CartInfoProps {
   subtotal: number;
   deliveryFee: number;
+  deliveryDiscount: number;
+  itemDiscount: number;
   total: number;
+  orderType: 'instant' | 'pre-order';
+  scheduledDelivery?: {
+    date: string;
+    time: string;
+  };
 }
 
-export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, total }) => {
+interface StyledContainerProps {
+  $isVisible?: boolean; // Changed from showCart to $isVisible and added $ prefix
+}
+
+const StyledContainer = styled.div<StyledContainerProps>`
+  // ...existing styles...
+  display: ${props => props.$isVisible ? 'block' : 'none'};
+`;
+
+export const CartInfo: React.FC<CartInfoProps> = ({ 
+  subtotal, 
+  deliveryFee, 
+  deliveryDiscount,
+  itemDiscount,
+  total,
+  orderType,
+  scheduledDelivery
+}) => {
   const { cartItems, removeFromCart, updateQuantity } = useCartStore();
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set()); // Track checked items
   const [showToast, setShowToast] = useState(false); // State for toast visibility
@@ -143,6 +167,11 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
     }
   };
 
+  // Helper function to check if date is selected
+  const isValidScheduledDate = (date: string) => {
+    return date && date !== "dd/mm/yyyy";
+  };
+
   if (cartItems?.length === 0) {
     return (
       <div>
@@ -162,7 +191,7 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
   console.log(cartItems, "cartItems");
 
   return (
-    <div className="CartDropdown_Container">
+    <StyledContainer $isVisible={true}>
       <div className="CartDropdown_checkAndClear">
         <StoreOwnerName>Carts</StoreOwnerName>
 
@@ -337,18 +366,56 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
             ₦{subtotal.toLocaleString()}
           </AccountSubTotalAmount>
         </AccountContent>
-        <AccountContent>
-          <AccountSubTotalText>Delivery</AccountSubTotalText>
-          <AccountSubTotalAmount>
-            ₦{deliveryFee.toLocaleString()}
-          </AccountSubTotalAmount>
-        </AccountContent>
+        {deliveryFee > 0 && (
+          <>
+            <AccountContent>
+              <AccountSubTotalText>Delivery Fee</AccountSubTotalText>
+              <AccountSubTotalAmount>₦{deliveryFee.toLocaleString()}</AccountSubTotalAmount>
+            </AccountContent>
+            {deliveryDiscount > 0 && (
+              <AccountContent>
+                <AccountSubTotalText>Delivery Discount</AccountSubTotalText>
+                <AccountSubTotalAmount style={{ color: '#27a124' }}>
+                  -₦{deliveryDiscount.toLocaleString()}
+                </AccountSubTotalAmount>
+              </AccountContent>
+            )}
+          </>
+        )}
+        {itemDiscount > 0 && (
+          <AccountContent>
+            <AccountSubTotalText>Item Discount</AccountSubTotalText>
+            <AccountSubTotalAmount style={{ color: '#27a124' }}>
+              -₦{itemDiscount.toLocaleString()}
+            </AccountSubTotalAmount>
+          </AccountContent>
+        )}
         <AccountContent>
           <AccountSubTotalText>Total</AccountSubTotalText>
           <AccountTotalAmount>
             ₦{total.toLocaleString()}
           </AccountTotalAmount>
         </AccountContent>
+
+        {/* Add Order Type Info */}
+        <AccountContent>
+          <AccountSubTotalText>Order Type</AccountSubTotalText>
+          <AccountSubTotalAmount>
+            {orderType === 'pre-order' ? 'Pre-Order' : 'Instant Order'}
+          </AccountSubTotalAmount>
+        </AccountContent>
+
+        {/* Show Scheduled Delivery if pre-order */}
+        {orderType === 'pre-order' && (
+          <AccountContent>
+            <AccountSubTotalText>Scheduled For</AccountSubTotalText>
+            <AccountSubTotalAmount>
+              {scheduledDelivery && isValidScheduledDate(scheduledDelivery.date) 
+                ? `${scheduledDelivery.date} at ${scheduledDelivery.time}`
+                : 'Not selected yet'}
+            </AccountSubTotalAmount>
+          </AccountContent>
+        )}
       </AccountBox>
 
       {/* Toast for removing items from cart */}
@@ -357,6 +424,6 @@ export const CartInfo: React.FC<CartDropdownProps> = ({ subtotal, deliveryFee, t
         isVisible={showToast}
         onClose={() => setShowToast(false)}
       />
-    </div>
+    </StyledContainer>
   );
 };

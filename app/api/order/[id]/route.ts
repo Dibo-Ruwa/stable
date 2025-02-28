@@ -9,17 +9,18 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   req: Request,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
-    const id = params.id;
+    const { id } = await context.params;
 
-    if (!id)
+    if (!id) {
       return NextResponse.json(
-        { error: "Item ID  is missing" },
+        { error: "Order ID is missing" },
         { status: 400 }
       );
+    }
 
     const session = await getServerSession(authOptions);
     if (!session) {
@@ -38,7 +39,7 @@ export async function GET(
 
     return NextResponse.json({ order: order, success: true }, { status: 200 });
   } catch (err) {
-  return NextResponse.json({ error: "An error occurred" }, { status: 500 });
+    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
   } finally {
     await closeDB();
   }

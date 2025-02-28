@@ -14,9 +14,9 @@ export async function PUT(
     await connectDB();
     const body = await req.json();
     const id = params.id;
-    const { action, extraId, extraDetails } = body;
+    const { action, extraId, extraDetails, orderType, scheduledDelivery } = body;
     
-    console.log('PUT request body:', { id, action, extraId, extraDetails });
+    console.log('PUT request body:', { id, action, extraId, extraDetails, orderType, scheduledDelivery });
 
     // Validation checks
     if (!id || !action) {
@@ -132,6 +132,15 @@ export async function PUT(
       existingCartItem.total = existingCartItem.price * existingCartItem.quantity;
     }
 
+    // Handle order type and scheduled delivery updates if provided
+    if (orderType) {
+      existingCart.orderType = orderType;
+    }
+    
+    if (scheduledDelivery) {
+      existingCart.scheduledDelivery = scheduledDelivery;
+    }
+
     // Update cart total
     existingCart.total = existingCart.cartItems.reduce((total: number, item: CartItem) => {
       const itemExtrasTotal = item.extras?.reduce((acc: number, extra: any) => 
@@ -149,7 +158,13 @@ export async function PUT(
     });
 
     return NextResponse.json(
-      { cart: populatedCart, success: true, prep_time: populatedCart.prep_time },
+      { 
+        cart: populatedCart,
+        success: true,
+        orderType: populatedCart.orderType,
+        scheduledDelivery: populatedCart.scheduledDelivery,
+        coupon: populatedCart.coupon
+      },
       { status: 200 }
     );
   } catch (error) {

@@ -18,11 +18,8 @@ const url = process.env.NEXT_PUBLIC_ADMIN_URL;
 const Food: React.FC<FoodProps> = () => {
   const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [activeButton, setActiveButton] = useState<string>(
-    searchParams.get("category") || "all"
-  );
+  const [activeButton, setActiveButton] = useState<string>("all");
 
-  // Add effect to update active button when URL changes
   useEffect(() => {
     const category = searchParams.get("category");
     if (category) {

@@ -26,12 +26,36 @@ const cartSchema = new Schema({
   deliveryFee: { type: Number, default: 0 },
   total: { type: Number, default: 0 },
   selectedRegion: { type: String },
+  orderType: {
+    type: String,
+    enum: ['instant', 'pre-order'],
+    default: 'instant'
+  },
   scheduledDelivery: {
     date: { type: String },
     time: { type: String }
   },
+  coupon: {
+    code: String,
+    discount: Number,
+    couponId: Schema.Types.ObjectId,
+    mode: {
+      type: String,
+      enum: ['general', 'vendor', 'product', 'contest', 'delivery']
+    }
+  },
   additionalInfo: { type: String },
   user: { type: mongoose.Types.ObjectId, ref: "User", required: true }
 }, { timestamps: true });
+
+// Add transform to handle empty coupon
+cartSchema.set('toJSON', {
+  transform: function(doc, ret) {
+    if (!ret.coupon || Object.keys(ret.coupon).length === 0) {
+      delete ret.coupon;
+    }
+    return ret;
+  }
+});
 
 export const Cart = models.Cart || model("Cart", cartSchema);
