@@ -120,7 +120,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
   const [orderType, setOrderType] = useState<'instant' | 'pre-order'>('instant');
-
+  const [isRedirecting, setIsRedirecting] = useState(false); // Add this line
 
   const { cartItems, getCart, coupon } = useCartStore();
   const referenceId = nanoid(8);
@@ -195,40 +195,47 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const finalTotal = subtotal - itemDiscount + Math.max(0, finalDeliveryFee);
 
   const onSuccess = async () => {
-    if (!selectedRegion && deliveryMethod === 'delivery') {
-      setLocationError("Please select a delivery location.");
-      return;
+    try {
+      setIsRedirecting(true); // Set before starting payment process
+      if (!selectedRegion && deliveryMethod === 'delivery') {
+        setLocationError("Please select a delivery location.");
+        return;
+      }
+  
+      // Include coupon in the order data
+      const orderSubmitData = {
+        orderType,
+        scheduledDelivery: orderType === 'pre-order' ? scheduledDelivery : null,
+        deliveryMethod,
+        infoPass,
+        couponInfo: coupon ? {
+          code: coupon.code,
+          discount: coupon.discount,
+          couponId: coupon.couponId,
+          mode: coupon.mode
+        } : null
+      };
+  
+      console.log('Submitting order with data:', {
+        referenceId,
+        finalTotal,
+        finalDeliveryFee,
+        selectedRegion,
+        ...orderSubmitData
+      });
+  
+      await handleCartOrderSubmit(
+        referenceId, 
+        finalTotal, 
+        finalDeliveryFee, 
+        selectedRegion,
+        orderSubmitData
+      );
+    } catch (error) {
+      console.error('Payment error:', error);
+    } finally {
+      setIsRedirecting(false); // Reset after completion/error
     }
-
-    // Include coupon in the order data
-    const orderSubmitData = {
-      orderType,
-      scheduledDelivery: orderType === 'pre-order' ? scheduledDelivery : null,
-      deliveryMethod,
-      infoPass,
-      couponInfo: coupon ? {
-        code: coupon.code,
-        discount: coupon.discount,
-        couponId: coupon.couponId,
-        mode: coupon.mode
-      } : null
-    };
-
-    console.log('Submitting order with data:', {
-      referenceId,
-      finalTotal,
-      finalDeliveryFee,
-      selectedRegion,
-      ...orderSubmitData
-    });
-
-    await handleCartOrderSubmit(
-      referenceId, 
-      finalTotal, 
-      finalDeliveryFee, 
-      selectedRegion,
-      orderSubmitData
-    );
   };
 
   const handleCheckout = () => {
@@ -257,6 +264,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     setLocationError(null);
   };
 
+  // Update the loading check to include isRedirecting
   if (isLoading || isRedirecting) {
     return (
       <StoresContainer className="flex justify-center items-center">
