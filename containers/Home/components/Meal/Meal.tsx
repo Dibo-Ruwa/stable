@@ -63,6 +63,7 @@ export interface FoodItem {
   createdAt: string;
   updatedAt: string;
   slug: string;
+  isOutOfStock: boolean;
   __v: number;
   id: string;
   quantity?: number;
@@ -98,23 +99,28 @@ export default function Meal(): JSX.Element {
 
         const newData = response.data?.data;
         if (Array.isArray(newData)) {
-          const transformedData = newData.map((item: any) => ({
-            _id: item._id,
-            title: item.title,
-            prep_time: item.prep_time,
-            categories: item.categories,
-            price: item.price,
-            imageUrl: item.imageUrl,
-            vendor: item.vendor,
-            discount: item.discount,
-            extras: item.extras || [],
-            createdAt: item.createdAt,
-            updatedAt: item.updatedAt,
-            slug: item.slug,
-            __v: item.__v,
-            id: item.id,
-          }));
-          setFood(transformedData.slice(0, 4));
+          const transformedData = newData
+            .filter(item => !item.isOutOfStock)  // First filter out of stock items
+            .map((item: any) => ({
+              _id: item._id,
+              title: item.title,
+              prep_time: item.prep_time,
+              categories: item.categories,
+              price: item.price,
+              imageUrl: item.imageUrl,
+              vendor: item.vendor,
+              discount: item.discount,
+              extras: item.extras || [],
+              createdAt: item.createdAt,
+              updatedAt: item.updatedAt,
+              slug: item.slug,
+              isOutOfStock: item.isOutOfStock || false,
+              __v: item.__v,
+              id: item.id,
+            }))
+            .slice(0, 4);  // Then take first 4 items from in-stock items
+          
+          setFood(transformedData);
         } else {
           console.error("Invalid data format:", newData);
         }

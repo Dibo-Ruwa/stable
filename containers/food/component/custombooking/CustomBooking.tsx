@@ -48,7 +48,13 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
   const handleButtonClick = (value: string) => {
     setActiveButton(value);
     setSearchQuery(value !== "all" ? value : "");
-    console.log(value);
+    
+    // Update URL without full page reload
+    if (value === "all") {
+      router.push("/food", { scroll: false });
+    } else {
+      router.push(`/food?category=${value}`, { scroll: false });
+    }
   };
 
   const openModal = () => {
@@ -59,15 +65,15 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
     setIsModalOpen(false);
   };
 
-  // Define the food categories
+  // Update the food categories to include breakfast
   const foodCategories = [
     { value: "all", label: "All" },
+    { value: "breakfast", label: "Breakfast" },
     { value: "swallow", label: "Swallow" },
     { value: "drinks", label: "Drinks" },
     { value: "meat", label: "Protein" },
     { value: "Rice and Grain", label: "Rice and Grain" },
     { value: "snacks", label: "Snacks and Fries" },
-    { value: "extras", label: "Extras" },
   ];
 
   return (
@@ -94,7 +100,7 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
         <button
           type="button"
           className="custombooking-btn"
-          onClick={() => router.push("/food/subscription")} // Client-side navigation
+          onClick={() => router.push("/food/subscription")}
         >
           Subscription
         </button>

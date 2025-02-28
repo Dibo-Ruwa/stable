@@ -3,6 +3,7 @@ import { CiClock2 } from "react-icons/ci";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import styles from "./ScheduleTime.module.css";
 import { TimePicker } from "./TimePicker";
+import { getOneHourFromNow } from "@/utils/helpers/dateTime";
 
 interface ScheduleTimeProps {
   time: string;
@@ -16,7 +17,7 @@ interface ScheduleTimeProps {
 }
 
 export const ScheduleTime: React.FC<ScheduleTimeProps> = ({
-  time,
+  time = getOneHourFromNow(), // Set default time
   className,
   label,
   iconClass,

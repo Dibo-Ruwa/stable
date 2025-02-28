@@ -104,6 +104,14 @@ export type CartState = {
   clearCart: () => void;
   closeModal: () => void;
   updateExtraQuantity: (itemId: string, extraId: string, newQuantity: number) => Promise<void>;
+  coupon: {
+    code: string;
+    discount: number;
+    couponId: string | null;
+    error: string | null;
+  };
+  applyCoupon: (code: string) => Promise<void>;
+  removeCoupon: () => void;
 };
 
 export interface Order {
@@ -153,6 +161,7 @@ export interface FoodData {
   price: number;
   totalPrice?: number;
   imageUrl: string;
+  isOutOfStock: boolean;
   vendor: {
     _id: string;
     name: string;

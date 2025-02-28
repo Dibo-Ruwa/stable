@@ -9,7 +9,6 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import {
   CartItem,
-  CartState,
   Product,
   Subscription,
   ProductData,
@@ -31,6 +30,52 @@ import {
 } from "@/utils/services/subscriptions";
 import { toast } from "react-hot-toast";
 import { useModal } from "@/hooks/useModal";
+import { useSession } from "next-auth/react";
+
+interface Modal {
+  isOpen: boolean;
+  message: string;
+  type: string;
+}
+
+interface CartState {
+  modal: Modal;
+  cartItems: CartItem[];
+  subscriptions: Subscription[];
+  coupon: {
+    code: string;
+    discount: number;
+    couponId: string | null;
+    error: string | null;
+    mode?: 'general' | 'vendor' | 'product' | 'contest' | 'delivery';
+  };
+  deliveryInfo: {
+    region: string | null;
+    fee: number | null;
+  };
+  orderType: 'instant' | 'pre-order';
+  scheduledDelivery: {
+    date: string;
+    time: string;
+  } | null;
+  getCart: () => Promise<void>;
+  getSubscriptions: () => Promise<void>;
+  addSubscription: (subscription: any) => Promise<void>;
+  removeSubscription: (id: string) => Promise<void>;
+  getCurrentVendor: () => string | null;
+  addToCart: (productObj: FoodData) => Promise<void>;
+  addToCartWithExtras: (productObj: FoodData, extras: Extra[]) => Promise<void>;
+  removeFromCart: (id: string) => Promise<void>;
+  updateQuantity: (id: string, action: string, extraId?: string, extraInfo?: ExtraInfo) => Promise<void>;
+  updateExtraQuantity: (itemId: string, extraId: string, newQuantity: number) => Promise<void>;
+  clearCart: () => Promise<void>;
+  applyCoupon: (code: string, userId: string) => Promise<void>; // Add userId parameter
+  removeCoupon: () => void;
+  closeModal: () => void;
+  calculateTotalWithExtras: (cartItems: CartItem[]) => number;
+  setOrderType: (type: 'instant' | 'pre-order') => void;
+  setScheduledDelivery: (schedule: { date: string; time: string } | null) => void;
+}
 
 const useCartStore = create<CartState>()((set, get) => ({
   modal: {
@@ -40,6 +85,18 @@ const useCartStore = create<CartState>()((set, get) => ({
   },
   cartItems: [],
   subscriptions: [],
+  coupon: {
+    code: "",
+    discount: 0,
+    couponId: null,
+    error: null
+  },
+  deliveryInfo: {
+    region: null,
+    fee: null
+  },
+  orderType: 'instant',
+  scheduledDelivery: null,
   getCart: async () => {
     try {
       const response = await getCartAPI(); // Call the API function to fetch the cart
@@ -311,27 +368,113 @@ const useCartStore = create<CartState>()((set, get) => ({
   },
   clearCart: async () => {
     try {
-      toast.loading("Clearing cart...", {
-        duration: 1000,
-        position: "top-center",
-      });
-      const response = await clearCartAPI();
-
+      await clearCartAPI(); // Call API to clear cart in database
+      
+      // Reset all cart state
       set({
-        cartItems: response.data.cart.cartItems,
-        subscriptions: response.data.subscriptions,
+        cartItems: [],
+        total: 0,
+        orderType: 'instant',
+        scheduledDelivery: null,
+        coupon: {
+          code: "",
+          discount: 0,
+          couponId: null,
+          error: null
+        },
+        deliveryInfo: {
+          region: null,
+          fee: null
+        }
       });
 
-      toast.success("Cart cleared successfully", {
-        duration: 1000,
-        position: "top-center",
-      });
+      toast.success("Cart cleared successfully");
     } catch (error) {
-      console.log(error);
+      console.error('Failed to clear cart:', error);
+      toast.error("Failed to clear cart");
     }
+  },
+  calculateTotalWithExtras: (cartItems: CartItem[]) => {
+    return cartItems.reduce((total, item) => {
+      const itemTotal = item.price * item.quantity;
+      const extrasTotal = item.extras?.reduce((acc, extra) => 
+        acc + (extra.price * (extra.quantity || 0)), 0) || 0;
+      return total + itemTotal + extrasTotal;
+    }, 0);
+  },
+  applyCoupon: async (code: string) => {
+    try {
+      const { cartItems } = get();
+
+      const response = await fetch('/api/coupon/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code,
+          cartTotal: get().calculateTotalWithExtras(cartItems),
+          cartItems,
+          deliveryFee: get().deliveryInfo.fee || 0,
+          isDelivery: true
+        })
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        set({ 
+          coupon: {
+            code: "",
+            discount: 0,
+            couponId: null,
+            error: data.error
+          }
+        });
+        throw new Error(data.error);
+      }
+
+      set({ 
+        coupon: {
+          code: data.data.code,
+          discount: data.data.discount,
+          couponId: data.data.couponId,
+          mode: data.data.mode,
+          error: null
+        }
+      });
+
+      return data;
+    } catch (error: any) {
+      const errorMessage = error.message || 'Failed to validate coupon';
+      set({ 
+        coupon: {
+          ...get().coupon,
+          error: errorMessage
+        }
+      });
+      throw new Error(errorMessage);
+    }
+  },
+
+  removeCoupon: () => {
+    set({ coupon: null });
   },
   closeModal: () => {
     set((state) => ({ modal: { ...state.modal, isOpen: false } }));
+  },
+  setOrderType: (type: 'instant' | 'pre-order') => {
+    set((state) => ({
+      ...state,
+      orderType: type,
+      // Reset scheduled delivery if switching to instant
+      scheduledDelivery: type === 'instant' ? null : state.scheduledDelivery
+    }));
+  },
+
+  setScheduledDelivery: (schedule: { date: string; time: string } | null) => {
+    set((state) => ({
+      ...state,
+      scheduledDelivery: schedule
+    }));
   },
 }));
 

@@ -196,6 +196,50 @@ p.mostsold-card_prize-text {
   opacity: 0.7; /* Reduce opacity */
 }
 
+/* Out of stock styles */
+.mostsold-card.out-of-stock .mostsold-card_food-img {
+  position: relative;
+}
+
+.out-of-stock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.out-of-stock-overlay span {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+}
+
+.mostsold-card_prize-link.out-of-stock {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.mostsold-card.out-of-stock {
+  opacity: 0.8;
+  cursor: not-allowed;
+  pointer-events: none; /* Disable all interactions */
+}
+
+/* But enable pointer events specifically for the overlay to show it's disabled */
+.mostsold-card.out-of-stock .out-of-stock-overlay {
+  pointer-events: all;
+  cursor: not-allowed;
+}
+
 .sale-imgs-container {
   display: flex;
   margin: 3rem auto;
@@ -275,6 +319,11 @@ img.mostsold-sale_img {
   .mostsold-card_prize-link {
     width: 47px;
     padding: 6px;
+  }
+
+  .out-of-stock-overlay span {
+    font-size: 1rem;
+    padding: 6px 12px;
   }
 }
 

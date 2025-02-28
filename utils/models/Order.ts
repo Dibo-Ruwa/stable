@@ -22,9 +22,20 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
+    baseDeliveryFee: {
+      type: Number,
+      required: true,
+      default: 0
+    },
+    finalDeliveryFee: {
+      type: Number,
+      required: true,
+      default: 0
+    },
     deliveryFee: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     },
     total: {
       type: Number,
@@ -58,8 +69,39 @@ const orderSchema = new Schema(
       type: String,
       required: true,
     },
+    orderType: {
+      type: String,
+      enum: ['instant', 'pre-order'],
+      default: 'instant'
+    },
+    scheduledDelivery: {
+      date: { type: String },
+      time: { type: String }
+    },
+    coupon: {
+      code: String,
+      discount: Number,
+      couponId: Schema.Types.ObjectId,
+      mode: {
+        type: String,
+        enum: ['general', 'vendor', 'product', 'contest', 'delivery']
+      },
+      _id: false // Prevent Mongoose from adding _id to subdocument
+    },
   },
-  { timestamps: true }
+  { 
+    timestamps: true,
+    strict: false,
+    toJSON: { 
+      transform: function(doc, ret) {
+        // Remove coupon field if it's empty or undefined
+        if (!ret.coupon || Object.keys(ret.coupon).length === 0) {
+          delete ret.coupon;
+        }
+        return ret;
+      }
+    }
+  }
 );
 
 export const Order = models.Order || model("Order", orderSchema);

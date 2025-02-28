@@ -5,6 +5,7 @@ import CustomBooking from "./component/custombooking/CustomBooking";
 import MostSold from "./component/mostsold/MostSold";
 import { HJRDiscountSales, HJRDiscountSalesData } from "./component/HJRDiscountSales/HJRDiscountSales";
 import { RedHJRDiscountSales, RedHJRDiscountSalesData } from "./component/RedHJRDiscountSales/RedHJRDiscountSales";
+import { useSearchParams } from 'next/navigation';
 
 interface FoodProps {
   params: {
@@ -15,9 +16,20 @@ interface FoodProps {
 const url = process.env.NEXT_PUBLIC_ADMIN_URL;
 
 const Food: React.FC<FoodProps> = () => {
+  const searchParams = useSearchParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [activeButton, setActiveButton] = useState<string>("all");
 
+  useEffect(() => {
+    const category = searchParams.get("category");
+    if (category) {
+      setActiveButton(category);
+      setSearchQuery(category);
+    } else {
+      setActiveButton("all");
+      setSearchQuery("");
+    }
+  }, [searchParams]);
 
   return (
     <div className="food-container">

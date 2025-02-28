@@ -12,7 +12,12 @@ import PaymentButton from "@/component/paymentButton/PayButton";
 import useOrder from "@/hooks/useOrder";
 import Loader from "@/component/ui/loader/Loader";
 import { FaTimes } from "react-icons/fa";
+<<<<<<< HEAD
+import { DeliveryMethod } from './component/DeliveryMethod';
+import { CouponInput } from "./component/CouponInput";
+=======
 import { SuccessModal } from "./SuccessModal";
+>>>>>>> 5a3cf28321490eb18d19496dc4f2ab68652b4507
 
 const StoresContainer = styled.div`
   width: 100%;
@@ -84,6 +89,26 @@ const CloseButton = styled(FaTimes)`
   }
 `;
 
+const OrderTypeSelector = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+`;
+
+const OrderTypeButton = styled.button<{ isSelected: boolean }>`
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid #4bb149;
+  background: ${props => props.isSelected ? 'rgba(183, 224, 182, 0.2)' : 'transparent'};
+  color: ${props => props.isSelected ? '#4bb149' : '#666'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(183, 224, 182, 0.1);
+  }
+`;
+
 export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const [infoPass, setInfoPass] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -97,22 +122,34 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
 
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
+  const [orderType, setOrderType] = useState<'instant' | 'pre-order'>('instant');
 
 
-  const { orderProp, handleCartOrderSubmit } =
-    useOrder();
-  const { cartItems, getCart } = useCartStore();
+  const { cartItems, getCart, coupon } = useCartStore();
   const referenceId = nanoid(8);
 
   // Fetch cart data on mount
   useEffect(() => {
     const loadCart = async () => {
       try {
-        // setIsLoading(true);
-        // await getCart();
-         getCart();
-         
+        setIsLoading(true);
+        await getCart();
+        // Add debug logs
+        const currentCart = {
+          items: cartItems,
+          orderType,
+          scheduledDelivery,
+          deliveryMethod,
+          selectedRegion,
+          coupon,
+          subtotal,
+          deliveryFee: baseDeliveryFee,
+          deliveryDiscount,
+          itemDiscount,
+          finalTotal
+        };
+        console.log('Current Cart State:', currentCart);
       } catch (error) {
         console.error("Failed to load cart:", error);
       } finally {
@@ -132,68 +169,105 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       price: delivery.price,
     })) || [];
 
-  // Calculate delivery fee based on selection
-  const baseDeliveryFee = selectedRegion
-    ? deliveryRegions.find((region: any) => region.name === selectedRegion)
-        ?.price || 0
-    : 0;
-  const additionalFee = Math.floor((cartItems.length - 1) / 2) * 100;
-  const deliveryFee = baseDeliveryFee + additionalFee;
+  // Get pickup allowed status from the first cart item
+  const isPickupAllowed = cartItems[0]?.vendor?.allowPickup || false;
 
-  // Calculate subtotal and total price including extras
+  // Calculate subtotal without delivery fee
   const subtotal = cartItems.reduce((acc, item) => {
     const itemTotal = item.price * item.quantity;
-    const extrasTotal = item.extras.reduce(
-      (extraAcc, extra) => extraAcc + extra.price * extra.quantity,
-      0
-    );
+    const extrasTotal = item.extras.reduce((extraAcc, extra) => 
+      extraAcc + (extra.price * extra.quantity), 0);
     return acc + itemTotal + extrasTotal;
   }, 0);
 
-  const totalPrice = subtotal + deliveryFee;
+  // Calculate delivery discount if coupon is delivery mode
+  const deliveryDiscount = coupon?.mode === 'delivery' ? coupon.discount : 0;
+
+  // Calculate item discount if coupon is not delivery mode
+  const itemDiscount = coupon && coupon.mode !== 'delivery' ? coupon.discount : 0;
+
+  // Calculate final totals
+  const baseDeliveryFee = deliveryMethod === 'delivery' ? (
+    selectedRegion ? 
+    deliveryRegions.find(r => r.name === selectedRegion)?.price || 0 : 0
+  ) : 0;
+
+  // Apply delivery discount if applicable
+  const finalDeliveryFee = baseDeliveryFee - deliveryDiscount;
+  
+  // Calculate final total
+  const finalTotal = subtotal - itemDiscount + Math.max(0, finalDeliveryFee);
 
   const onSuccess = async () => {
-    if (!selectedRegion) {
+    if (!selectedRegion && deliveryMethod === 'delivery') {
       setLocationError("Please select a delivery location.");
       return;
     }
 
-    await handleCartOrderSubmit(
+    // Include coupon in the order data
+    const orderSubmitData = {
+      orderType,
+      scheduledDelivery: orderType === 'pre-order' ? scheduledDelivery : null,
+      deliveryMethod,
+      infoPass,
+      couponInfo: coupon ? {
+        code: coupon.code,
+        discount: coupon.discount,
+        couponId: coupon.couponId,
+        mode: coupon.mode
+      } : null
+    };
+
+    console.log('Submitting order with data:', {
       referenceId,
-      totalPrice,
-      deliveryFee,
-      selectedRegion
+      finalTotal,
+      finalDeliveryFee,
+      selectedRegion,
+      ...orderSubmitData
+    });
+
+    await handleCartOrderSubmit(
+      referenceId, 
+      finalTotal, 
+      finalDeliveryFee, 
+      selectedRegion,
+      orderSubmitData
     );
-    // setIsLoading(false);
-         console.log('done')
-         console.log(orderProp)
   };
 
   const handleCheckout = () => {
-    if (!selectedRegion) {
+    if (deliveryMethod === 'delivery' && !selectedRegion) {
       setLocationError("Please select a delivery location.");
       return;
     }
 
     const checkoutData = {
       cartItems,
-      deliveryFee,
-      selectedRegion,
-      scheduledDelivery,
+      deliveryMethod,
+      deliveryFee: finalDeliveryFee,
+      selectedRegion: deliveryMethod === 'pickup' ? null : selectedRegion,
+      scheduledDelivery: orderType === 'pre-order' ? scheduledDelivery : null,
+      orderType,
       infoPass,
+      coupon // Make sure coupon data is included
     };
 
     console.log("Checkout Data:", checkoutData);
     // Proceed with checkout...
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <StoresContainer className="flex justify-center items-center">
-  //       <Loader />
-  //     </StoresContainer>
-  //   );
-  // }
+  const handleRegionSelect = (region: string) => {
+    setSelectedRegion(region);
+    setLocationError(null);
+  };
+
+  if (isLoading || isRedirecting) {
+    return (
+      <StoresContainer className="flex justify-center items-center">
+        <Loader />
+      </StoresContainer>
+    );
+  }
 
   // if (!isLoading && cartItems.length === 0) {
   //   return (
@@ -204,69 +278,65 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   // }
   return (
     <StoresContainer>
-      {isLoading ? (
-        <Loader />
-
-      ):(
-        <>
-        {(!isLoading && cartItems.length === 0) ? (
-        <p>No cart orders available.</p>
-
-        ) : (
-          <>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <CloseButton onClick={onClose} />
-          </div>
-          <CartInfo
-            subtotal={subtotal}
-            deliveryFee={deliveryFee}
-            total={totalPrice}
-          />
-          <InfoPass onInfoPassChange={setInfoPass} />
-          <DeliveryLocation
-            regions={deliveryRegions}
-            onRegionSelect={setSelectedRegion}
-            error={locationError}
-            onErrorClear={() => setLocationError(null)}
-          />
-          <SchDeliveryOpl onScheduleChange={setScheduledDelivery} />
-          <PaymentButton
-            totalPrice={totalPrice}
-            openModal={(type, message) => console.log(type, message)}
-            buttonText="Check Out"
-            color="primary"
-            onSuccess={onSuccess}
-    setShowSuccessModal={setShowSuccessModal}
-            onClose={() => console.log("Payment closed")}
-            referenceId={referenceId}
-            className={`checkout-button ${
-              !selectedRegion || cartItems.length === 0 ? "disabled" : ""
-            }`}
-            disabled={!selectedRegion || cartItems.length === 0}
-          />
-    
-          {/* New Button to Show Success Modal */}
-          {/* <button
-            type="button"
-            onClick={() => setShowSuccessModal(true)}
-            className="checkout-button"
-            style={{ marginTop: "1rem" }}
-          >
-            Show Success Modal
-          </button> */}
-    
-          </>
-        )}
-     
-        </>
-     ) }
-    
-     {showSuccessModal && (
-       <SuccessModal
-         show={showSuccessModal}
-         handleClose={() => setShowSuccessModal(false)}
-       />
-     )}
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <CloseButton onClick={onClose} />
+      </div>
+      <CartInfo
+        subtotal={subtotal}
+        deliveryFee={baseDeliveryFee}
+        deliveryDiscount={deliveryDiscount}
+        itemDiscount={itemDiscount}
+        total={finalTotal}
+        couponDiscount={coupon?.discount || 0}
+        orderType={orderType} // Add this prop
+        scheduledDelivery={orderType === 'pre-order' ? scheduledDelivery : undefined} // Add this prop
+      />
+      <InfoPass onInfoPassChange={setInfoPass} />
+      <OrderTypeSelector>
+        <OrderTypeButton
+          isSelected={orderType === 'instant'}
+          onClick={() => setOrderType('instant')}
+        >
+          Instant Order
+        </OrderTypeButton>
+        <OrderTypeButton
+          isSelected={orderType === 'pre-order'}
+          onClick={() => setOrderType('pre-order')}
+        >
+          Pre-Order
+        </OrderTypeButton>
+      </OrderTypeSelector>
+      <DeliveryMethod 
+        isPickupAllowed={isPickupAllowed}
+        selectedMethod={deliveryMethod}
+        onMethodSelect={setDeliveryMethod}
+      />
+      {deliveryMethod === 'delivery' && (
+        <DeliveryLocation
+          regions={deliveryRegions}
+          onRegionSelect={handleRegionSelect}
+          error={locationError}
+          onErrorClear={() => setLocationError(null)}
+        />
+      )}
+      <CouponInput />
+      {orderType === 'pre-order' && (
+        <SchDeliveryOpl onScheduleChange={setScheduledDelivery} />
+      )}
+      <PaymentButton
+        totalPrice={finalTotal}
+        openModal={(type, message) => console.log(type, message)}
+        buttonText="Check Out"
+        color="primary"
+        onSuccess={onSuccess}
+        onClose={() => console.log("Payment closed")}
+        referenceId={referenceId}
+        className={`checkout-button ${
+          (deliveryMethod === 'delivery' && !selectedRegion) || 
+          cartItems.length === 0 ? 'disabled' : ''
+        }`}
+        disabled={(deliveryMethod === 'delivery' && !selectedRegion) || cartItems.length === 0}
+      />
     </StoresContainer>
   );
 };

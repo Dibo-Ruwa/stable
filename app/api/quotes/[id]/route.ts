@@ -51,10 +51,19 @@ export async function GET(
   }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, context: { params: Promise<{ id: string }> }) {
   try {
     await connectDB();
-    const requestId = params.id;
+    const { id } = await context.params;
+
+    if (!id) {
+      return NextResponse.json(
+        { error: "Quote ID is missing" },
+        { status: 400 }
+      );
+    }
+
+    const requestId = id;
     const { referenceId } = await req.json();
 
     if (!requestId || !referenceId) {
