@@ -12,8 +12,12 @@ import PaymentButton from "@/component/paymentButton/PayButton";
 import useOrder from "@/hooks/useOrder";
 import Loader from "@/component/ui/loader/Loader";
 import { FaTimes } from "react-icons/fa";
+<<<<<<< HEAD
 import { DeliveryMethod } from './component/DeliveryMethod';
 import { CouponInput } from "./component/CouponInput";
+=======
+import { SuccessModal } from "./SuccessModal";
+>>>>>>> 5a3cf28321490eb18d19496dc4f2ab68652b4507
 
 const StoresContainer = styled.div`
   width: 100%;
@@ -115,12 +119,12 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     date: "dd/mm/yyyy",
     time: "8:00 AM",
   });
+
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
   const [orderType, setOrderType] = useState<'instant' | 'pre-order'>('instant');
 
-  const { isSubmitting, isError, isSuccess, isRedirecting, handleCartOrderSubmit } = useOrder();
 
   const { cartItems, getCart, coupon } = useCartStore();
   const referenceId = nanoid(8);
@@ -149,8 +153,10 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       } catch (error) {
         console.error("Failed to load cart:", error);
       } finally {
-        setIsLoading(false);
+        // setIsLoading(false);
       }
+      setIsLoading(false);
+
     };
 
     loadCart();
@@ -263,6 +269,13 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     );
   }
 
+  // if (!isLoading && cartItems.length === 0) {
+  //   return (
+  //     <StoresContainer className="flex justify-center items-center">
+  //       <p>No cart orders available.</p>
+  //     </StoresContainer>
+  //   );
+  // }
   return (
     <StoresContainer>
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
