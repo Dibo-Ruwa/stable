@@ -12,12 +12,8 @@ import PaymentButton from "@/component/paymentButton/PayButton";
 import useOrder from "@/hooks/useOrder";
 import Loader from "@/component/ui/loader/Loader";
 import { FaTimes } from "react-icons/fa";
-<<<<<<< HEAD
 import { DeliveryMethod } from './component/DeliveryMethod';
 import { CouponInput } from "./component/CouponInput";
-=======
-import { SuccessModal } from "./SuccessModal";
->>>>>>> 5a3cf28321490eb18d19496dc4f2ab68652b4507
 
 const StoresContainer = styled.div`
   width: 100%;
