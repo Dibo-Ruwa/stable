@@ -23,7 +23,14 @@ export const useCart = () => {
     );
   };
 
-  const { cartItems, getCart } = useCartStore();
+  const { 
+    cartItems, 
+    getCart,
+    orderType,
+    scheduledDelivery,
+    coupon
+  } = useCartStore();
+
   const { totalQuantities, subtotal, totalExtras } = calculateCartTotals(cartItems);
 
   useEffect(() => {
@@ -45,17 +52,33 @@ export const useCart = () => {
     vendor: item.vendor
   }));
 
-  // Get cart meta information
+  // Updated cart meta information to include new fields
   const cartMeta = {
     subtotal,
-    deliveryFee: 0, // Will be calculated based on region selection
+    deliveryFee: 0,
     totalExtras,
     selectedRegion: null,
-    scheduledDelivery: {
+    orderType,
+    scheduledDelivery: scheduledDelivery || {
       date: "",
       time: ""
     },
+    couponInfo: coupon ? {
+      code: coupon.code,
+      discount: coupon.discount,
+      mode: coupon.mode
+    } : null,
     additionalInfo: ""
+  };
+
+  // Add helper functions for pre-order validation
+  const isPreOrderValid = () => {
+    if (orderType === 'pre-order' && scheduledDelivery) {
+      const scheduledDate = new Date(`${scheduledDelivery.date} ${scheduledDelivery.time}`);
+      const now = new Date();
+      return scheduledDate > now;
+    }
+    return true;
   };
 
   return { 
@@ -63,6 +86,9 @@ export const useCart = () => {
     cartMeta,
     totalQuantities, 
     cartItems,
-    hasItems: cartItems.length > 0
+    hasItems: cartItems.length > 0,
+    isPreOrderValid,
+    orderType,
+    scheduledDelivery
   };
 };

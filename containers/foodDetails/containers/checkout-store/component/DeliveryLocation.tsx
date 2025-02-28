@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { TfiAngleDown } from "react-icons/tfi";
+import useCartStore from "@/store/useCart.store";
 
 const LocationContainer = styled.div`
   width: 100%;
@@ -85,14 +86,24 @@ export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({
   error,
   onErrorClear,
 }) => {
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { deliveryInfo } = useCartStore(); // Using the store hook correctly
 
   const handleRegionSelect = (region: string) => {
-    setSelectedRegion(region);
-    onRegionSelect(region); // Pass selected region to parent
-    onErrorClear(); // Clear error when a region is selected
-    setDropdownOpen(false);
+    const selectedRegionData = regions.find(r => r.name === region);
+    if (selectedRegionData) {
+      // Update cart store state directly with the store method
+      useCartStore.setState(state => ({
+        ...state,
+        deliveryInfo: {
+          region: region,
+          fee: selectedRegionData.price
+        }
+      }));
+      
+      onRegionSelect(region);
+      setDropdownOpen(false);
+    }
   };
 
   return (
@@ -102,7 +113,7 @@ export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({
       </LocationDle>
 
       <RegionBtn onClick={() => setDropdownOpen(!dropdownOpen)}>
-        {selectedRegion || "Select region"}
+        {deliveryInfo.region || "Select region"}
         <TfiAngleDown />
 
         {dropdownOpen && (

@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "@/utils/helpers/authOptions";
 import { sendWhatsAppNotification } from "@/utils/services/whatsapp";
+import { updateCouponUsage } from "@/utils/helpers/updateCouponUsage";
 
 interface CartItem {
   title: string;
@@ -22,6 +23,25 @@ interface Extra {
   quantity: number;
 }
 
+// Add validation utilities at the top of the file
+const validateScheduledDelivery = (scheduledDelivery: { date: string; time: string }) => {
+  const now = new Date();
+  const selectedDateTime = new Date(`${scheduledDelivery.date} ${scheduledDelivery.time}`);
+  
+  // Check if time is at least 1 hour in future
+  const hoursDiff = (selectedDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
+  if (hoursDiff < 1) {
+    throw new Error("Pre-orders must be scheduled at least 1 hour in advance");
+  }
+  
+  // Check if date is not more than 30 days in advance
+  const thirtyDaysFromNow = new Date();
+  thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+  if (selectedDateTime > thirtyDaysFromNow) {
+    throw new Error("Orders cannot be scheduled more than 30 days in advance");
+  }
+};
+
 export async function POST(req: Request, res: Response) {
   try {
     // Connect to the database
@@ -34,6 +54,7 @@ export async function POST(req: Request, res: Response) {
     }
 
     const body = await req.json();
+    console.log('Received order data:', body); // Debug log
 
     // Get the user session
     const session = await getServerSession(authOptions);
@@ -56,6 +77,25 @@ export async function POST(req: Request, res: Response) {
       return NextResponse.json({ error: "Cart not found" }, { status: 400 });
     }
 
+    // Validate scheduled delivery for pre-orders
+    if (existingCart.orderType === 'pre-order') {
+      if (!existingCart.scheduledDelivery?.date || !existingCart.scheduledDelivery?.time) {
+        return NextResponse.json(
+          { error: "Scheduled delivery date and time are required for pre-orders" },
+          { status: 400 }
+        );
+      }
+      
+      try {
+        validateScheduledDelivery(existingCart.scheduledDelivery);
+      } catch (error) {
+        return NextResponse.json(
+          { error: error instanceof Error ? error.message : "Invalid delivery schedule" },
+          { status: 400 }
+        );
+      }
+    }
+
     // Calculate the total amount including extras
     const totalAmount = existingCart.cartItems.reduce((acc, item) => {
       const itemTotal = item.price * item.quantity;
@@ -66,45 +106,106 @@ export async function POST(req: Request, res: Response) {
       return acc + itemTotal + extrasTotal;
     }, 0);
 
-    // Create a new order object with all required fields
-    const order = new Order({
+    // Log the cart data for debugging
+    console.log('Cart data:', {
+      existingCart: existingCart,
+      coupon: existingCart.coupon
+    });
+
+    // Calculate fees and discounts
+    const baseDeliveryFee = body.deliveryFee || 0;
+    const deliveryDiscount = existingCart.coupon?.mode === 'delivery' ? existingCart.coupon.discount : 0;
+    const finalDeliveryFee = Math.max(0, baseDeliveryFee - deliveryDiscount);
+    const itemDiscount = existingCart.coupon?.mode !== 'delivery' ? existingCart.coupon?.discount || 0 : 0;
+
+    // Create order data with explicit coupon handling
+    const orderData = {
       orderItems: existingCart.cartItems,
       type: "cart",
       email: user.email,
       phone: user.phone,
       address: user.address,
-      total: totalAmount + body.deliveryFee,
-      user,
-      deliveryFee: body.deliveryFee,
+      total: totalAmount - itemDiscount + finalDeliveryFee,
+      user: user._id,
+      baseDeliveryFee: baseDeliveryFee, // Add original delivery fee
+      deliveryFee: finalDeliveryFee, // Add discounted delivery fee
       paymentId: body.referenceId,
-      selectedRegion: body.selectedRegion, // Include selected region
-    });
+      selectedRegion: body.selectedRegion,
+      orderType: body.orderType || 'instant',
+      scheduledDelivery: body.scheduledDelivery || null,
+      deliveryMethod: body.deliveryMethod,
+      infoPass: body.infoPass,
+      coupon: body.couponInfo || existingCart.coupon || null
+    };
 
-    // Save the new order to the database
-    await order.save();
-    console.log("Order saved successfully", order);
+    // Ensure coupon data is complete
+    if (orderData.coupon) {
+      orderData.coupon = {
+        code: orderData.coupon.code,
+        discount: orderData.coupon.discount,
+        couponId: orderData.coupon.couponId,
+        mode: orderData.coupon.mode
+      };
+    }
+
+    // Remove coupon if it's null or empty
+    if (!orderData.coupon || Object.keys(orderData.coupon).length === 0) {
+      delete orderData.coupon;
+    }
+
+    console.log('Order data being saved:', orderData);
+
+    const order = new Order(orderData);
+
+    try {
+      await order.save();
+      console.log("Order saved successfully", order);
+
+      // Update coupon usage if a coupon was used
+      if (order.coupon?.couponId) {
+        try {
+          await updateCouponUsage({
+            couponId: order.coupon.couponId,
+            userId: user._id,
+            orderId: order._id,
+            orderTotal: totalAmount,
+            discountAmount: order.coupon.discount
+          });
+          console.log('Coupon usage updated successfully');
+        } catch (error) {
+          console.error('Failed to update coupon usage:', error);
+          // Don't fail the order if coupon update fails
+        }
+      }
+
+    } catch (saveError) {
+      console.error("Order save error:", {
+        error: saveError,
+        data: orderData,
+        cart: existingCart
+      });
+      return NextResponse.json(
+        { error: "Failed to save order", details: saveError.message },
+        { status: 400 }
+      );
+    }
 
     // After saving the order, send notifications to vendors
     for (const item of existingCart.cartItems) {
       if (item.vendor?.phone) {
         const vendorMessage = `
-New order received!
+New ${order.orderType.toUpperCase()} order received!
 Item: ${item.title}
 Quantity: ${item.quantity}
 Customer: ${user.firstName} ${user.lastName}
 Contact: ${user.phone}
 Delivery to: ${body.selectedRegion}
-${
-  item.extras?.length
-    ? `Extras: ${item.extras
-        .map((e) => `${e.title} (x${e.quantity})`)
-        .join(", ")}`
-    : ""
-}
-Total: ₦${
-          item.price * item.quantity +
-          (item.extras?.reduce((acc, e) => acc + e.price * e.quantity, 0) || 0)
-        }
+${order.orderType === 'pre-order' ? `
+Scheduled for: ${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}` : ''}
+${item.extras?.length ? 
+  `Extras: ${item.extras.map((e) => `${e.title} (x${e.quantity})`).join(", ")}` : 
+  ""}
+Total: ₦${item.price * item.quantity + (item.extras?.reduce((acc, e) => acc + e.price * e.quantity, 0) || 0)}
 `;
 
         try {
@@ -150,13 +251,13 @@ Total: ₦${
       })
       .join(""); // Join the array to create an HTML list
 
-    // Send confirmation email to the customer
+    // Update email templates with discount information
     const emailTemplateName =
       order.type === "cart" ? "cartFoodOrder" : "sessionFoodOrder";
 
     try {
       console.log("Attempting to send customer email...");
-      await sendEmail({
+      const emailData = {
         to: user.email,
         subject: "Order Confirmed",
         template: emailTemplateName,
@@ -164,23 +265,43 @@ Total: ₦${
           customerName: `${user.firstName}`,
           orderItems: formattedOrderItems,
           amount: totalAmount.toString(),
-          deliveryFee: order?.deliveryFee.toString(),
+          baseDeliveryFee: baseDeliveryFee.toString(),
+          deliveryFee: finalDeliveryFee.toString(),
+          deliveryDiscount: deliveryDiscount.toString(),
+          itemDiscount: itemDiscount.toString(),
           total: order.total,
-          estimatedDeliveryTime: "30 - 45 minutes",
+          estimatedDeliveryTime: order.orderType === 'pre-order' 
+            ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
+            : "30 - 45 minutes",
           selectedRegion: body.selectedRegion,
+          orderType: order.orderType.toUpperCase(),
+          scheduledDelivery: order.orderType === 'pre-order' 
+            ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
+            : 'Not Applicable',
+          couponApplied: existingCart.coupon ? 
+            `Yes - ${existingCart.coupon.code} (${existingCart.coupon.mode} - ₦${existingCart.coupon.discount} off)` : 
+            'No coupon applied',
+          couponDetails: existingCart.coupon ? 
+            `${existingCart.coupon.code} (${existingCart.coupon.mode}) - ₦${existingCart.coupon.discount} off` : 
+            'No coupon applied'
         },
-      });
+      };
+
+      console.log("Email data prepared:", emailData); // Add this log
+      await sendEmail(emailData);
       console.log("Customer email sent successfully");
     } catch (error) {
       console.error("Error sending customer email:", error);
     }
 
-    try {
-      console.log("Attempting to send admin email...");
-      // Get unique vendor names from cart items
-      const vendorNames = [...new Set(existingCart.cartItems.map(item => item.vendor.name))];
-      const partnersString = vendorNames.join(', ');
+    // Create vendors string from cart items
+    const vendorNames = existingCart.cartItems
+      .map(item => item.vendor?.name)
+      .filter(Boolean)
+      .join(', ');
 
+    // Send admin email with proper error handling
+    try {
       await sendEmail({
         to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
         subject: "New Order Notification",
@@ -191,32 +312,61 @@ Total: ₦${
           itemsOrdered: formattedOrderItems,
           amount: totalAmount.toString(),
           deliveryFee: order?.deliveryFee.toString(),
-          partnerFullName: partnersString, // Use vendor names instead of "un-assigned"
+          partnerFullName: vendorNames || 'Not assigned', // Fixed: Use vendor names
           total: order.total,
           customerAddress: `${user.address}, ${user.lga}, ${user.state}`,
           customerPhone: user.phone,
           orderTimestamp: moment(order.createdAt).format(
             "MMMM D, YYYY, h:mm a"
           ),
-          selectedRegion: body.selectedRegion, // Include selected region
+          selectedRegion: body.selectedRegion,
+          orderType: order.orderType.toUpperCase(),
+          scheduledDelivery: order.orderType === 'pre-order' 
+            ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
+            : 'Not Applicable',
+          couponDetails: order.coupon && order.coupon.code ? 
+            `₦${order.coupon.discount} off (${order.coupon.code}${order.coupon.mode ? ` - ${order.coupon.mode}` : ''})` : 
+            'No coupon applied'
         },
       });
       console.log("Admin email sent successfully to multiple recipients");
-    } catch (error) {
-      console.error("Error sending admin email:", error);
+    } catch (emailError) {
+      console.error("Failed to send admin email:", emailError);
+      // Don't throw error, just log it and continue
     }
 
-    // Clear the cart after order is processed
-    existingCart.cartItems = [];
-    existingCart.total = 0;
-    await existingCart.save();
-    console.log("Cart cleared after order");
+    // Clear the cart after successful order processing
+    const cartUpdateResult = await Cart.findOneAndUpdate(
+      { user: user._id },
+      {
+        $set: {
+          cartItems: [],
+          total: 0,
+          orderType: 'instant',
+          scheduledDelivery: null,
+          coupon: null,
+          deliveryInfo: { region: null, fee: null }
+        }
+      },
+      { new: true }
+    );
 
-    // Return a order and success response
+    if (!cartUpdateResult) {
+      console.error("Failed to clear cart after order");
+    } else {
+      console.log("Cart cleared successfully after order");
+    }
+
     return NextResponse.json(
-      { order, message: "Order placed successfully", success: true },
+      { 
+        order, 
+        message: "Order placed successfully", 
+        success: true,
+        cartCleared: !!cartUpdateResult 
+      },
       { status: 201 }
     );
+
   } catch (err) {
     // Handle and log any errors
     console.error("Error:", err);

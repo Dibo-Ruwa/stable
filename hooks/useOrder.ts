@@ -19,14 +19,50 @@ interface SubscriptionOrderData {
   subscription: any;
 }
 
+interface OrderData {
+  referenceId: string;
+  amount: number;
+  deliveryFee: number;
+  selectedRegion: string;
+  orderType: 'instant' | 'pre-order';
+  scheduledDelivery?: {
+    date: string;
+    time: string;
+  };
+}
+
+interface OrderSubmitData {
+  orderType: 'instant' | 'pre-order';
+  scheduledDelivery?: {
+    date: string;
+    time: string;
+  } | null;
+  deliveryMethod: 'delivery' | 'pickup';
+  infoPass: string;
+  couponInfo?: {
+    code: string;
+    discount: number;
+    couponId: string;
+    mode: string;
+  } | null;
+}
+
 const useOrder = () => {
   const [orders, setOrders] = useState([]);
   const [order, setOrder] = useState<Order | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [orderId, setOrderId] = useState<string | null>(null);
   const [isRedirecting, setIsRedirecting] = useState(false); // New state for redirection
   const [loading, setLoading] = useState(true); // Add loading state
+
+  // New state for success modal
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [orderProp, setOrderProp] = useState({
+    id: "",
+    type: "",
+  });
 
   const { data: session } = useSession();
 
@@ -38,10 +74,12 @@ const useOrder = () => {
 
   const openModal = (
     errorType: "success" | "error" | "info",
-    errorMessage: string
+    errorMessage: string,
+    id: string
   ) => {
     setModalMessage(errorMessage);
     setModalErrorType(errorType);
+    setOrderId(id);
     setShowModal(true);
 
     console.log(showModal);
@@ -53,68 +91,119 @@ const useOrder = () => {
 
   const router = useRouter();
 
-    // Function to check if a user has an active subscription of the same type
-    const checkActiveSubscription = async (subscriptionType: string) => {
-      try {
-        const { data } = await axios.get(`/api/subscriptions/check?type=${subscriptionType}`);
-        if (data?.hasActiveSubscription) {
-          return true;
-        }
-        return false;
-      } catch (error) {
-        console.error("Error checking active subscription", error);
-        return false; // Assume no subscription on error
+  // Function to check if a user has an active subscription of the same type
+  const checkActiveSubscription = async (subscriptionType: string) => {
+    try {
+      const { data } = await axios.get(
+        `/api/subscriptions/check?type=${subscriptionType}`
+      );
+      if (data?.hasActiveSubscription) {
+        return true;
       }
-    };
-    
+      return false;
+    } catch (error) {
+      console.error("Error checking active subscription", error);
+      return false; // Assume no subscription on error
+    }
+  };
 
   const getOrders = () => {
     setIsSubmitting(true);
     setLoading(true); // Set loading to true when fetching orders
     // Fetch orders
-    axios.get("/api/order").then((response) => {
-      setOrders(response.data.orders);
-      setIsSubmitting(false);
-      setLoading(false); // Set loading to false after fetching orders
-    }).catch(() => {
-      setLoading(false); // Set loading to false in case of error
-    });
+    axios
+      .get("/api/order")
+      .then((response) => {
+        setOrders(response.data.orders);
+        setIsSubmitting(false);
+        setLoading(false); // Set loading to false after fetching orders
+      })
+      .catch(() => {
+        setLoading(false); // Set loading to false in case of error
+      });
   };
 
-  const handleCartOrderSubmit = async (referenceId: string, amount: number, deliveryFee: number, selectedRegion: string) => {
+  const handleCartOrderSubmit = async (
+    referenceId: string, 
+    amount: number, 
+    deliveryFee: number, 
+    selectedRegion: string,
+    orderData: {
+      orderType: 'instant' | 'pre-order';
+      scheduledDelivery?: { date: string; time: string } | null;
+      deliveryMethod: 'delivery' | 'pickup';
+      infoPass: string;
+      couponInfo?: {
+        code: string;
+        discount: number;
+        couponId: string;
+        mode: string;
+      } | null;
+    }
+  ) => {
     setIsSubmitting(true);
     setIsError(false);
     setIsSuccess(false);
 
+
     try {
+      console.log('Order submission data:', {
+        referenceId,
+        amount,
+        deliveryFee,
+        selectedRegion,
+        ...orderData
+      });
+
       const { data } = await axios.post("/api/order/cart", {
         referenceId,
-        deliveryFee,
         amount,
-        selectedRegion
+        deliveryFee,
+        selectedRegion,
+        ...orderData // Pass all order data including coupon
       });
-      console.log(data)
+
       toast.loading("Cart order is being processed", {
         duration: 2000,
       });
+      console.log(data);
 
-      // Call the notification API to create a notification
+      // Create notification with order type info
       await axios.post("/api/notifications", {
-        message: `Your cart order with reference ID ${referenceId} has been placed successfully.`,
+        message: `Your ${orderData.orderType} order with reference ID ${referenceId} has been placed successfully.${
+          orderData.orderType === 'pre-order' 
+            ? ` Scheduled for ${orderData.scheduledDelivery?.date} at ${orderData.scheduledDelivery?.time}.` 
+            : ''
+        }`,
         referenceId: data.order?._id,
         category: "order",
-        type: data.order.type
+        type: data.order.type,
       });
 
-      setIsSuccess(true);
-      setIsRedirecting(true); // Set redirecting state to true immediately
+      if (data.success) {
+        // Clear cart immediately after successful order
+        await useCartStore.getState().clearCart();
+        toast.success("Order placed successfully!");
+        
+        // Then proceed with other success actions
+        setIsSuccess(true);
+        setIsRedirecting(true);
+        
+        setTimeout(() => {
+          router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
+        }, 500);
+      }
 
-      setTimeout(() => {
-        useCartStore.getState().getCart();
-        toast.success("Cart order submitted successfully!");
-        router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
-      }, 500);
+      // useEffect(() => {
+      //   console.log("showSuccessModal:", showSuccessModal);
+      // }, [showSuccessModal]);
 
+
+      // setTimeout(() => {
+      //   router.push(
+      //     `/profile/orders/${data.order?._id}?type=${çç`
+      //   );
+      // }, 500);
     } catch (error) {
       setIsError(true);
       toast.error("Error submitting cart order.");
@@ -154,7 +243,7 @@ const useOrder = () => {
           message: `Your subscription order with reference ID ${referenceId} has been placed successfully.`,
           referenceId: data.order?._id,
           category: "subscription",
-          type: data.order?.type
+          type: data.order?.type,
         });
 
         setTimeout(() => {
@@ -163,7 +252,9 @@ const useOrder = () => {
           setIsSuccess(true);
           toast.success("Subscription received successfully");
           setIsRedirecting(true); // Set redirecting state to true
-          router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
+          router.push(
+            `/profile/orders/${data.order?._id}?type=${data.order?.type}`
+          );
         }, 500);
       } else {
         const { subscription } = subscriptionOrderData;
@@ -182,17 +273,23 @@ const useOrder = () => {
           message: `Your subscription order with reference ID ${referenceId} has been placed successfully.`,
           referenceId: data.subscription?._id,
           category: "subscription",
-          type: data.subscription?.type
+          type: data.subscription?.type,
         });
 
         setTimeout(() => {
           useCartStore.getState().getSubscriptions();
 
           setIsSuccess(true);
-          openModal("success", "Subscription received successfully");
+          openModal(
+            "success",
+            "Subscription received successfully",
+            data.subscription?._id
+          );
           toast.success("Subscription received successfully");
           setIsRedirecting(true); // Set redirecting state to true
-          router.push(`/profile/subscriptions/${data.subscription?._id}?type=${data.subscription?.type}`);
+          router.push(
+            `/profile/subscriptions/${data.subscription?._id}?type=${data.subscription?.type}`
+          );
         }, 500);
       }
     } catch (error) {
@@ -203,7 +300,10 @@ const useOrder = () => {
     }
   };
 
-  const handleRequestPayment = async (referenceId: string, requestId: string) => {
+  const handleRequestPayment = async (
+    referenceId: string,
+    requestId: string
+  ) => {
     setIsSubmitting(true);
     try {
       const { data } = await axios.put(`/api/quotes/${requestId}`, {
@@ -250,10 +350,16 @@ const useOrder = () => {
     getOrders,
     getOrderById,
     handleCartOrderSubmit,
+    orderProp,
     handleSubscriptionOrderSubmit,
     handleRequestPayment,
     checkActiveSubscription,
     loading, // Return loading state
+
+    // Return the state and setter for the success modal
+    showSuccessModal,
+    setShowSuccessModal,
+    orderId,
   };
 };
 

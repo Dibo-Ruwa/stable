@@ -22,7 +22,6 @@ import { Toast } from "@/lib/Toast";
 import VendorModal from "@/component/modals/VendorModal";
 import Loader from "@/component/ui/loader/Loader";
 
-
 // Define the type for a food item
 export interface FoodItem {
   _id: string;
@@ -72,6 +71,7 @@ export interface FoodItem {
   __v: number;
   id: string;
   quantity?: number;
+  isOutOfStock: boolean;
 }
 
 export default function Groceries() {
@@ -89,7 +89,6 @@ export default function Groceries() {
   });
   const [showToast, setShowToast] = useState(false);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -105,23 +104,28 @@ export default function Groceries() {
 
         const newData = response.data?.data;
         if (Array.isArray(newData)) {
-          const transformedData = newData.map((item: any) => ({
-            _id: item._id,
-            title: item.title,
-            prep_time: item.prep_time,
-            categories: item.categories,
-            price: item.price,
-            imageUrl: item.imageUrl,
-            vendor: item.vendor,
-            discount: item.discount,
-            extras: item.extras || [],
-            createdAt: item.createdAt,
-            updatedAt: item.updatedAt,
-            slug: item.slug,
-            __v: item.__v,
-            id: item.id,
-          }));
-          setFood(transformedData.slice(0, 4));
+          const transformedData = newData
+            .filter((item) => !item.isOutOfStock) // First filter out of stock items
+            .map((item: any) => ({
+              _id: item._id,
+              title: item.title,
+              prep_time: item.prep_time,
+              categories: item.categories,
+              price: item.price,
+              imageUrl: item.imageUrl,
+              vendor: item.vendor,
+              discount: item.discount,
+              extras: item.extras || [],
+              createdAt: item.createdAt,
+              updatedAt: item.updatedAt,
+              slug: item.slug,
+              isOutOfStock: item.isOutOfStock || false,
+              __v: item.__v,
+              id: item.id,
+            }))
+            .slice(0, 4); // Then take first 4 items from in-stock items
+
+          setFood(transformedData);
         } else {
           console.error("Invalid data format:", newData);
         }
@@ -192,76 +196,67 @@ export default function Groceries() {
           </div>
           <div className="FOODMeal_card">
             {food.map((item) => (
-              <div key={item?._id} 
-              style={{
-                cursor:"pointer",
-              }}
-              className="FOODCard">
-              <div 
-                  onClick={() => handleItemClick(item)}
-              
-              className="FOODCard-img">
-           
-                <img
-                  className=""
-                  src={item.imageUrl}
-                  alt="Chef preparing food"
-                />
-              </div>
-              <div style={{ 
-                marginTop: "1rem",
-                backgroundColor: "#fff",
-
-              }} >
-                <div 
-                    onClick={() => handleItemClick(item)}
-
-                className="meal-dis">
-                  <div>
+              <div
+                key={item?._id}
+                style={{
+                  cursor: "pointer",
+                }}
+                className="FOODCard"
+              >
+                <div onClick={() => handleItemClick(item)} className="FOODCard-img">
+                  <img className="" src={item.imageUrl} alt="Chef preparing food" />
+                </div>
+                <div
+                  style={{
+                    marginTop: "1rem",
+                    backgroundColor: "#fff",
+                  }}
+                >
+                  <div onClick={() => handleItemClick(item)} className="meal-dis">
                     <div>
-                      <p className="FoodMeal-dis">{item.title}</p>
-                      <div className="meal-dot"></div>
-                      <p className="FoodMeal-disNum">4.5</p>
+                      <div>
+                        <p className="FoodMeal-dis">{item.title}</p>
+                        <div className="meal-dot"></div>
+                        <p className="FoodMeal-disNum">4.5</p>
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: 3,
+                      }}
+                    >
+                      <MdOutlineTimer />
+                      <p
+                        style={{
+                          color: "#EF5A5A",
+                          fontSize: ".9rem",
+                        }}
+                        className="FoodTime"
+                      >
+                        {item.prep_time} {item.prep_time === "1" ? "min" : "mins"}
+                      </p>
                     </div>
                   </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 3,
-                    }}
-                  >
-                    <MdOutlineTimer />
+                  <div className="price">
+                    <p>₦{item.price}</p>
                     <p
                       style={{
-                        color: "#EF5A5A",
-                        fontSize: ".9rem",
+                        backgroundColor: "#4BB149",
+                        padding: "4px 20px",
+                        borderRadius: "20px",
                       }}
-                      className="FoodTime"
+                      onClick={() => handleItemAddToCart(item)}
                     >
-                      {item.prep_time} {item.prep_time === '1' ? "min" : "mins"}
+                      <FaBagShopping
+                        style={{
+                          color: "white",
+                        }}
+                      />
                     </p>
                   </div>
                 </div>
-                <div className="price">
-                  <p>₦{item.price}</p>
-                  <p
-                    style={{
-                      backgroundColor: "#4BB149",
-                      padding: "4px 20px",
-                      borderRadius: "20px",
-                    }}
-                    onClick={() => handleItemAddToCart(item)}
-
-                  >
-                    <FaBagShopping
-                      style={{
-                        color: "white",
-                      }}
-                    />
-                  </p>
-                </div>
               </div>
-            </div>
             ))}
           </div>
 

@@ -51,6 +51,23 @@ const LoadingState = styled.div`
 export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders, loading }) => {
   console.log("UserFoodOrders", orders);
 
+  // Helper function to safely get vendor location
+  const getVendorLocation = (order: any) => {
+    const vendor = order?.orderItems[0]?.vendor;
+    const branch = vendor?.branch?.[0];
+    const city = branch?.location?.city?.name || '';
+    const region = branch?.location?.region?.name || '';
+
+    if (city && region) {
+      return `${city}, ${region}`;
+    } else if (city) {
+      return city;
+    } else if (region) {
+      return region;
+    }
+    return 'Location not available';
+  };
+
   if (loading) {
     return (
       <LoadingState>
@@ -80,7 +97,7 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders, loading 
             key={order?._id}
           >
             {/* Render Food Item */}
-            {order?.orderItems && order.orderItems.length > 0 && (
+            {order?.orderItems?.[0] && (
               <UserOrdersCard
                 className="user_card"
                 id={order?._id}
@@ -88,8 +105,8 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders, loading 
               >
                 <div className="card_image">
                   <img
-                    src={order?.orderItems[0]?.imageUrl}
-                    alt={order?.orderItems[0]?.title || "food image"}
+                    src={order.orderItems[0].imageUrl || '/default-food-image.png'}
+                    alt={order.orderItems[0].title || "food image"}
                     className="card_img"
                   />
                 </div>
@@ -132,15 +149,15 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders, loading 
             {order?.orderItems[0]?.vendor && (
               <UserOrdersCard
                 className="user_card"
-                id={order?.orderItems[0]?.vendor?._id}
-                type={order?.type}
+                id={order.orderItems[0].vendor._id}
+                type={order.type}
               >
                 <div className="vendor_icon_container">
-                  {order?.orderItems[0]?.vendor?.imageUrl ? (
+                  {order.orderItems[0].vendor.imageUrl ? (
                     <div className="card_image">
                       <img
-                        src={order?.orderItems[0]?.vendor?.imageUrl}
-                        alt={order?.orderItems[0]?.vendor?.name || "vendor"}
+                        src={order.orderItems[0].vendor.imageUrl}
+                        alt={order.orderItems[0].vendor.name || "vendor"}
                         className="card_img"
                       />
                     </div>
@@ -159,7 +176,7 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders, loading 
                 </div>
                 <div className="card_restcontent">
                   <p className="restaurant_name">
-                    {order?.orderItems[0]?.vendor?.name || "Madam Restaurant PLC"}
+                    {order.orderItems[0].vendor.name || "Restaurant Name Unavailable"}
                   </p>
                   <div className="rating_and_phone">
                     <div className="The_rating">
@@ -169,9 +186,7 @@ export const UserFoodOrders: React.FC<UserFoodOrdersProps> = ({ orders, loading 
                       </p>
                     </div>
                     <div className="location_text">
-                      {order?.orderItems[0]?.vendor?.branch[0]?.location?.city?.name},
-                      {" "}
-                      {order?.orderItems[0]?.vendor?.branch[0]?.location?.region?.name}
+                      {getVendorLocation(order)}
                     </div>
                   </div>
                 </div>

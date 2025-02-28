@@ -79,7 +79,8 @@ const MostSold: React.FC<MostSoldProps> = ({
             page,
             limit: 20,
             search: searchQuery,
-            type: type
+            type: type,
+            category: activeButton !== "all" ? activeButton : undefined // Add category parameter
           },
         }
       );
@@ -111,7 +112,7 @@ const MostSold: React.FC<MostSoldProps> = ({
       setLoadingMore(false);
       setLoading(false); // Set loading to false after the first fetch
     }
-  }, [page, searchQuery, activeButton, hasMore, location]);
+  }, [page, searchQuery, activeButton, hasMore, location, type]);
 
   // Initial data fetch when the component mounts or searchQuery/activeButton changes
   useEffect(() => {
@@ -151,13 +152,12 @@ const MostSold: React.FC<MostSoldProps> = ({
   }, [visibleItems]);
 
   const handleItemClick = (item: FoodData) => {
+    if (item.isOutOfStock) {
+      toast.error("This item is currently out of stock");
+      return;
+    }
+    
     setSelectedItem(item);
-    console.log(item);
-    // Check if the item's _id is in the cartItems
-    const isItemInCart = cartItems.some(
-      (cartItem) => cartItem._id === item._id
-    );
-
     // Navigate to the checkout page
     router.push(`/food/checkout`);
   };
@@ -165,6 +165,11 @@ const MostSold: React.FC<MostSoldProps> = ({
   console.log("Cart items", cartItems);
 
   const handleItemAddToCart = async (item: FoodData) => {
+    if (item.isOutOfStock) {
+      toast.error("This item is currently out of stock");
+      return;
+    }
+
     if (!session) {
       setShowAuthModal(true);
       return;
@@ -284,7 +289,7 @@ const MostSold: React.FC<MostSoldProps> = ({
               <>
                 <div className="mostsold-cards">
                   {uniqueItems.map((item) => (
-                    <div key={item._id} className="mostsold-card">
+                    <div key={item._id} className={`mostsold-card ${item.isOutOfStock ? 'out-of-stock' : ''}`}>
                       <div
                         onClick={() => handleItemClick(item)}
                         className="mostsold-card_food-img"
@@ -294,6 +299,11 @@ const MostSold: React.FC<MostSoldProps> = ({
                           alt={item.title}
                           className="mostsold-card_img"
                         />
+                        {item.isOutOfStock && (
+                          <div className="out-of-stock-overlay">
+                            <span>Out of Stock</span>
+                          </div>
+                        )}
                       </div>
                       <div className="mostsold-card_content">
                         <div
@@ -381,10 +391,9 @@ const MostSold: React.FC<MostSoldProps> = ({
                             onClick={() => handleItemAddToCart(item)}
                             type="button"
                             className={`mostsold-card_prize-link ${
-                              ""
-                              // addedItems.has(item._id) ? "added-to-cart" : ""
+                              item.isOutOfStock ? "out-of-stock" : ""
                             }`}
-                            // disabled={addedItems.has(item._id)}
+                            disabled={item.isOutOfStock}
                           >
                             <FaBagShopping className="mostsold-card_prize-icon" />
                           </button>

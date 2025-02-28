@@ -49,11 +49,11 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
     setActiveButton(value);
     setSearchQuery(value !== "all" ? value : "");
     
-    // Add category to URL query parameters
+    // Update URL without full page reload
     if (value === "all") {
-      router.push("/food"); // Reset to base URL
+      router.push("/food", { scroll: false });
     } else {
-      router.push(`/food?category=${value}`);
+      router.push(`/food?category=${value}`, { scroll: false });
     }
   };
 
@@ -100,7 +100,7 @@ const CustomBooking: React.FC<CustomBookingProps> = ({
         <button
           type="button"
           className="custombooking-btn"
-          onClick={() => router.push("/food/subscription")} // Client-side navigation
+          onClick={() => router.push("/food/subscription")}
         >
           Subscription
         </button>

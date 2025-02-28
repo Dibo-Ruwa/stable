@@ -50,7 +50,10 @@ export async function POST(req: Request, res: Response) {
         user: user._id,
         cartItems: [cartItem],
         subtotal: body.price,
-        total: body.price
+        total: body.price,
+        orderType: 'instant', // Set default order type
+        scheduledDelivery: null,
+        coupon: null
       });
 
       await cart.save();
@@ -84,7 +87,13 @@ export async function POST(req: Request, res: Response) {
     });
 
     return NextResponse.json(
-      { cart: populatedCart, success: true },
+      { 
+        cart: populatedCart,
+        success: true,
+        orderType: populatedCart.orderType,
+        scheduledDelivery: populatedCart.scheduledDelivery,
+        coupon: populatedCart.coupon
+      },
       { status: 201 }
     );
   } catch (err) {
@@ -132,6 +141,42 @@ export async function GET(req: Request, res: Response) {
   }
 }
 
+export async function PUT(req: Request, res: Response) {
+  try {
+    await connectDB();
+    const body = await req.json();
+    
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+
+    const existingCart = await Cart.findOne({ user: session.user._id });
+    if (!existingCart) {
+      return NextResponse.json({ error: "Cart not found" }, { status: 404 });
+    }
+
+    // Handle order type update
+    if (body.orderType) {
+      existingCart.orderType = body.orderType;
+    }
+
+    // Handle scheduled delivery update
+    if (body.scheduledDelivery) {
+      existingCart.scheduledDelivery = body.scheduledDelivery;
+    }
+
+    await existingCart.save();
+
+    return NextResponse.json({ cart: existingCart, success: true }, { status: 200 });
+  } catch (error) {
+    console.error('Cart PUT error:', error);
+    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
+  } finally {
+    await closeDB();
+  }
+}
+
 export async function DELETE(req: Request, res: Response) {
   try {
     await connectDB();
@@ -155,6 +200,9 @@ export async function DELETE(req: Request, res: Response) {
     }
     cart.cartItems = [];
     cart.total = 0;
+    cart.orderType = 'instant';
+    cart.scheduledDelivery = null;
+    cart.coupon = null;
 
     await cart.save();
 
