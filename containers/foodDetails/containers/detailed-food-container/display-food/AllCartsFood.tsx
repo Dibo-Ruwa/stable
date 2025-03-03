@@ -147,8 +147,10 @@ export const AllCartsFood = () => {
       categories: item.categories,
       price: item.price,
       imageUrl: item.imageUrl,
+      isOutOfStock: false,
       vendor: {
         ...item.vendor,
+        allowPickup: item?.vendor?.allowPickup ?? false,
         owner: "",
         branch: [],
         operations: []

@@ -108,7 +108,6 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
     try {
       setIsAdding(true);
       
-      // Check for current vendor
       const currentVendor = getCurrentVendor();
       if (currentVendor && currentVendor !== selectedItem.vendor.name) {
         setVendorModal({
@@ -119,16 +118,12 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
         return;
       }
 
-      // Format the product for cart according to the new structure
+      // Format the product for cart with allowPickup flag
       const cartProduct: FoodData = {
-        _id: selectedItem._id,
-        title: selectedItem.title,
-        price: selectedItem.price,
-        imageUrl: selectedItem.imageUrl || "/placeholder.png", // Ensure imageUrl is used
-        prep_time: selectedItem.prep_time || "",
-        categories: selectedItem.categories || [],
-        slug: selectedItem.slug,
+        ...selectedItem,
         vendor: {
+          ...selectedItem.vendor,
+          allowPickup: selectedItem?.vendor?.allowPickup ?? false, // Use the allowPickup from API response
           _id: selectedItem.vendor._id,
           name: selectedItem.vendor.name,
           owner: selectedItem.vendor.owner,
@@ -153,32 +148,22 @@ export const AboutFood: React.FC<CartDropdownProps> = ({ selectedItem }) => {
               _id: delivery._id
             }))
           })),
-          operations: selectedItem.vendor.operations.map(operation => ({
-            day: operation.day,
-            openingHour: operation.openingHour,
-            closingHour: operation.closingHour,
-            _id: operation._id
-          }))
-        },
-        discount: selectedItem.discount || 0,
-        extras: selectedItem.extras || [],
-        createdAt: selectedItem.createdAt,
-        updatedAt: selectedItem.updatedAt,
-        __v: selectedItem.__v,
-        id: selectedItem.id,
-        quantity: selectedItem.quantity
+          operations: selectedItem.vendor.operations
+        }
       };
 
       console.log("Cart data before adding:", cartProduct, extrasQuantities);
 
-      const extras = Object.keys(extrasQuantities).map(extraId => {
-        const extra = selectedItem.extras.find(extra => extra._id === extraId);
-        if (!extra) return null;
-        return {
-          ...extra,
-          quantity: extrasQuantities[extraId]
-        };
-      }).filter(extra => extra !== null) as Extra[];
+      const extras = Object.keys(extrasQuantities)
+        .map(extraId => {
+          const extra = selectedItem.extras.find(extra => extra._id === extraId);
+          if (!extra) return null;
+          return {
+            ...extra,
+            quantity: extrasQuantities[extraId]
+          };
+        })
+        .filter(extra => extra !== null && extra.quantity > 0) as Extra[];
 
       await addToCartWithExtras(cartProduct, extras);
 
