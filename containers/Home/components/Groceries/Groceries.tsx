@@ -35,6 +35,7 @@ export interface FoodItem {
     _id: string;
     name: string;
     owner: string;
+    allowPickup?: boolean; // Add this line
     branch: {
       location: {
         city: {
@@ -113,7 +114,10 @@ export default function Groceries() {
               categories: item.categories,
               price: item.price,
               imageUrl: item.imageUrl,
-              vendor: item.vendor,
+              vendor: {
+                ...item.vendor,
+                allowPickup: item.vendor.allowPickup ?? false 
+              },
               discount: item.discount,
               extras: item.extras || [],
               createdAt: item.createdAt,
@@ -123,7 +127,7 @@ export default function Groceries() {
               __v: item.__v,
               id: item.id,
             }))
-            .slice(0, 4); // Then take first 4 items from in-stock items
+            .slice(0, 4); 
 
           setFood(transformedData);
         } else {

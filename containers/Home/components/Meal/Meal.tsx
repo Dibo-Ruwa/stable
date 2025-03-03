@@ -30,6 +30,7 @@ export interface FoodItem {
     _id: string;
     name: string;
     owner: string;
+    allowPickup?: boolean; // Add this line
     branch: {
       location: {
         city: {
@@ -108,7 +109,10 @@ export default function Meal(): JSX.Element {
               categories: item.categories,
               price: item.price,
               imageUrl: item.imageUrl,
-              vendor: item.vendor,
+              vendor: {
+                ...item.vendor,
+                allowPickup: item.vendor.allowPickup ?? false // Add this line
+              },
               discount: item.discount,
               extras: item.extras || [],
               createdAt: item.createdAt,
