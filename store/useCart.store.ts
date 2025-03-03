@@ -58,6 +58,7 @@ interface CartState {
     date: string;
     time: string;
   } | null;
+  total: number; // Add this line
   getCart: () => Promise<void>;
   getSubscriptions: () => Promise<void>;
   addSubscription: (subscription: any) => Promise<void>;
@@ -97,6 +98,7 @@ const useCartStore = create<CartState>()((set, get) => ({
   },
   orderType: 'instant',
   scheduledDelivery: null,
+  total: 0, // Add initial total value
   getCart: async () => {
     try {
       const response = await getCartAPI(); // Call the API function to fetch the cart
@@ -204,10 +206,20 @@ const useCartStore = create<CartState>()((set, get) => ({
         throw new Error(`You can only order from one vendor at a time. Please clear your cart or complete your order from ${currentVendor} first.`);
       }
 
+      // Ensure vendor data is properly structured
       const normalizedProduct = {
         ...productObj,
-        imageUrl: productObj.imageUrl || "/placeholder.png", // Ensure imageUrl is used
-        prep_time: productObj.prep_time // Ensure prep_time is included
+        imageUrl: productObj.imageUrl || "/placeholder.png",
+        prep_time: productObj.prep_time,
+        vendor: {
+          _id: productObj.vendor._id,
+          name: productObj.vendor.name,
+          phone: productObj.vendor.phone,
+          owner: productObj.vendor.owner,
+          allowPickup: productObj.vendor.allowPickup,
+          branch: productObj.vendor.branch,
+          operations: productObj.vendor.operations
+        }
       };
 
       const response = await addCartItemAPI(normalizedProduct);
@@ -254,10 +266,19 @@ const useCartStore = create<CartState>()((set, get) => ({
         ...productObj,
         imageUrl: productObj.imageUrl || "/placeholder.png", // Ensure imageUrl is used
         prep_time: productObj.prep_time, // Ensure prep_time is included
-        extras: extras.filter(extra => extra.quantity > 0) // Only include extras with quantity > 0
+        extras: extras.filter(extra => extra.quantity > 0), // Only include extras with quantity > 0
+        vendor: {
+          _id: productObj.vendor._id,
+          name: productObj.vendor.name,
+          phone: productObj.vendor.phone,
+          owner: productObj.vendor.owner,
+          allowPickup: productObj.vendor.allowPickup, // Ensure this is preserved
+          branch: productObj.vendor.branch,
+          operations: productObj.vendor.operations
+        }
       };
 
-      console.log("Cart data before adding:", normalizedProduct);
+      console.log("Adding to cart with vendor data:", normalizedProduct.vendor);
 
       const response = await addCartItemAPI(normalizedProduct);
       
@@ -456,7 +477,14 @@ const useCartStore = create<CartState>()((set, get) => ({
   },
 
   removeCoupon: () => {
-    set({ coupon: null });
+    set({ 
+      coupon: {
+        code: "",
+        discount: 0,
+        couponId: null,
+        error: null
+      }
+    });
   },
   closeModal: () => {
     set((state) => ({ modal: { ...state.modal, isOpen: false } }));

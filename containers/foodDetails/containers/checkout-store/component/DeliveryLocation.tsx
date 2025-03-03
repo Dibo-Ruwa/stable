@@ -78,6 +78,7 @@ interface DeliveryLocationProps {
   onRegionSelect: (region: string | null) => void;
   error: string | null;
   onErrorClear: () => void;
+  deliveryMethod: 'delivery' | 'pickup';  // Add this prop
 }
 
 export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({
@@ -85,9 +86,24 @@ export const DeliveryLocation: React.FC<DeliveryLocationProps> = ({
   onRegionSelect,
   error,
   onErrorClear,
+  deliveryMethod,  // Add this prop
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const { deliveryInfo } = useCartStore(); // Using the store hook correctly
+  const { deliveryInfo, setDeliveryInfo } = useCartStore(); // Using the store hook
+
+  // Reset delivery info when switching to pickup
+  React.useEffect(() => {
+    if (deliveryMethod === 'pickup') {
+      useCartStore.setState(state => ({
+        ...state,
+        deliveryInfo: {
+          region: null,
+          fee: 0
+        }
+      }));
+      onRegionSelect(null);
+    }
+  }, [deliveryMethod, onRegionSelect]);
 
   const handleRegionSelect = (region: string) => {
     const selectedRegionData = regions.find(r => r.name === region);

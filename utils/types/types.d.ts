@@ -72,6 +72,30 @@ export type CartItem = Product & {
   _id?: string;
   quantity: number;
   total: number;
+  vendor: {
+    _id: string;
+    name: string;
+    phone: string;
+    owner: string;
+    allowPickup: boolean;  // Add allowPickup
+    branch: Array<{
+      location: {
+        city: { _id: string; name: string; };
+        region: { _id: string; name: string; };
+      };
+      deliveries: Array<{
+        region: { _id: string; name: string; };
+        price: number;
+        _id: string;
+      }>;
+    }>;
+    operations: Array<{
+      day: string;
+      openingHour: string;
+      closingHour: string;
+      _id: string;
+    }>;
+  };
 };
 
 export type Modal = {
@@ -167,6 +191,7 @@ export interface FoodData {
     name: string;
     phone: string;
     owner: string;
+    allowPickup: boolean; 
     branch: {
       location: {
         city: {

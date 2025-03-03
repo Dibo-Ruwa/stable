@@ -106,6 +106,8 @@ const OrderTypeButton = styled.button<{ isSelected: boolean }>`
 `;
 
 export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
+  // Add isRedirecting state
+  const [isRedirecting, setIsRedirecting] = useState(false);
   const [infoPass, setInfoPass] = useState<string>("");
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [scheduledDelivery, setScheduledDelivery] = useState<{
@@ -120,12 +122,10 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
   const [orderType, setOrderType] = useState<'instant' | 'pre-order'>('instant');
-  const [isRedirecting, setIsRedirecting] = useState(false); // Add this line
+
 
   const { cartItems, getCart, coupon } = useCartStore();
   const referenceId = nanoid(8);
-
-  console.log(locationError);
 
   // Fetch cart data on mount
   useEffect(() => {
@@ -167,8 +167,18 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       price: delivery.price,
     })) || [];
 
-  // Get pickup allowed status from the first cart item
-  const isPickupAllowed = cartItems[0]?.vendor?.allowPickup || false;
+  // Get pickup allowed status and log it for debugging
+  const isPickupAllowed = (() => {
+    const allowPickup = cartItems[0]?.vendor?.allowPickup;
+    console.log('Vendor allowPickup status:', allowPickup);
+    return allowPickup || false;
+  })();
+
+  // Add debug logging for cart items
+  useEffect(() => {
+    console.log('Current cart items:', cartItems);
+    console.log('First item vendor:', cartItems[0]?.vendor);
+  }, [cartItems]);
 
   // Calculate subtotal without delivery fee
   const subtotal = cartItems.reduce((acc, item) => {
@@ -198,12 +208,12 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
 
   const onSuccess = async () => {
     try {
-      setIsRedirecting(true); // Set before starting payment process
+      setIsRedirecting(true);  // Set redirecting state when payment starts
       if (!selectedRegion && deliveryMethod === 'delivery') {
         setLocationError("Please select a delivery location.");
         return;
       }
-  
+
       // Include coupon in the order data
       const orderSubmitData = {
         orderType,
@@ -217,7 +227,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
           mode: coupon.mode
         } : null
       };
-  
+
       console.log('Submitting order with data:', {
         referenceId,
         finalTotal,
@@ -225,7 +235,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
         selectedRegion,
         ...orderSubmitData
       });
-  
+
       await handleCartOrderSubmit(
         referenceId, 
         finalTotal, 
@@ -236,7 +246,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     } catch (error) {
       console.error('Payment error:', error);
     } finally {
-      setIsRedirecting(false); // Reset after completion/error
+      setIsRedirecting(false);  // Reset redirecting state when done
     }
   };
 
@@ -266,7 +276,25 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     setLocationError(null);
   };
 
-  // Update the loading check to include isRedirecting
+  const handleMethodChange = (method: 'delivery' | 'pickup') => {
+    setDeliveryMethod(method);
+    if (method === 'pickup') {
+      setSelectedRegion(null);
+      setLocationError(null);
+      // Reset delivery info in cart store
+      useCartStore.setState(state => ({
+        ...state,
+        deliveryInfo: {
+          region: null,
+          fee: 0
+        }
+      }));
+    }
+  };
+
+  const isFormValid = deliveryMethod === 'pickup' || 
+    (deliveryMethod === 'delivery' && selectedRegion);
+
   if (isLoading || isRedirecting) {
     return (
       <StoresContainer className="flex justify-center items-center">
@@ -315,7 +343,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
       <DeliveryMethod 
         isPickupAllowed={isPickupAllowed}
         selectedMethod={deliveryMethod}
-        onMethodSelect={setDeliveryMethod}
+        onMethodSelect={handleMethodChange}  // Use the new handler
       />
       {deliveryMethod === 'delivery' && (
         <DeliveryLocation
@@ -323,6 +351,7 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
           onRegionSelect={handleRegionSelect}
           error={locationError}
           onErrorClear={() => setLocationError(null)}
+          deliveryMethod={deliveryMethod}  // Pass the delivery method
         />
       )}
       <CouponInput />
@@ -338,10 +367,9 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
         onClose={() => console.log("Payment closed")}
         referenceId={referenceId}
         className={`checkout-button ${
-          (deliveryMethod === 'delivery' && !selectedRegion) || 
-          cartItems.length === 0 ? 'disabled' : ''
+          !isFormValid || cartItems.length === 0 ? 'disabled' : ''
         }`}
-        disabled={(deliveryMethod === 'delivery' && !selectedRegion) || cartItems.length === 0}
+        disabled={!isFormValid || cartItems.length === 0}
       />
     </StoresContainer>
   );
