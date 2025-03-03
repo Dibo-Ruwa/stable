@@ -187,14 +187,18 @@ const MostSold: React.FC<MostSoldProps> = ({
         return;
       }
 
-      // Ensure extras is included in the item
-      const itemWithExtras = {
+      // Ensure vendor data includes allowPickup
+      const normalizedItem = {
         ...item,
-        extras: item.extras ?? [], // Initialize extras as an empty array if undefined
+        extras: item.extras ?? [],
+        vendor: {
+          ...item.vendor,
+          allowPickup: item.vendor.allowPickup ?? false // Ensure allowPickup is included
+        }
       };
 
       // Add the item to the cart using the store's method
-      await addToCartWithExtras(itemWithExtras, itemWithExtras.extras);
+      await addToCartWithExtras(normalizedItem, normalizedItem.extras);
       setShowToast(true);
     } catch (error: any) {
       console.error("Error adding item to cart:", error);

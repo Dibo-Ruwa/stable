@@ -100,7 +100,12 @@ export const SchDeliveryOpl: React.FC<SchDeliveryOplProps> = ({ onScheduleChange
   }, [selectedDate, selectedTime, onScheduleChange]);
 
   const handleTimeSelect = (time: string) => {
-    setSelectedTime(time);
+    const selectedDateTime = new Date(`${selectedDate} ${time}`);
+    
+    if (validateScheduledTime(selectedDateTime)) {
+      setSelectedTime(time);
+      onScheduleChange({ date: selectedDate, time });
+    }
   };
 
   const handleDateChange = (date: string) => {
@@ -125,8 +130,10 @@ export const SchDeliveryOpl: React.FC<SchDeliveryOplProps> = ({ onScheduleChange
         InputClassName="checkOutInputDate"
       />
       <ScheduleTime 
-        selectedTime={selectedTime}
-        onTimeSelect={handleTimeSelect}
+        time={selectedTime}
+        label="Time"
+        onTimeChange={handleTimeSelect}
+        IconClassName="SchdeliveryIcAn"
       />
     </Container>
   );

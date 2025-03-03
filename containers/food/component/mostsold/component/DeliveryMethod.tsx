@@ -18,11 +18,6 @@ const Title = styled.p`
   margin-bottom: 1rem;
 `;
 
-const Options = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
 const SelectWrapper = styled.div`
   position: relative;
   width: 100%;
@@ -52,6 +47,11 @@ const Select = styled.select`
     outline: none;
     box-shadow: 0 0 0 2px rgba(75, 177, 73, 0.2);
   }
+
+  option {
+    color: #333;
+    background: white;
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -60,7 +60,7 @@ const ButtonGroup = styled.div`
   width: 100%;
 `;
 
-const MethodButton = styled.button<{ isSelected: boolean }>`
+const Button = styled.button<{ isSelected: boolean }>`
   padding: 0.8rem 1.5rem;
   border-radius: 4px;
   border: 1px solid #4bb149;
@@ -80,32 +80,36 @@ export const DeliveryMethod: React.FC<DeliveryMethodProps> = ({
   selectedMethod,
   onMethodSelect
 }) => {
-  if (!isPickupAllowed) {
-    // When pickup is not allowed, show just the delivery button
+  if (isPickupAllowed) {
     return (
       <Container>
         <Title>Delivery Method</Title>
-        <ButtonGroup>
-          <MethodButton isSelected={true}>Delivery</MethodButton>
-        </ButtonGroup>
+        <SelectWrapper>
+          <Select 
+            value={selectedMethod}
+            onChange={(e) => onMethodSelect(e.target.value as 'delivery' | 'pickup')}
+          >
+            <option value="delivery">Delivery</option>
+            <option value="pickup">Pick Up</option>
+          </Select>
+          <FaAngleDown className="icon" />
+        </SelectWrapper>
       </Container>
     );
   }
 
-  // When pickup is allowed, show dropdown with both options
+  // When pickup is not allowed, show just the delivery button
   return (
     <Container>
       <Title>Delivery Method</Title>
-      <SelectWrapper>
-        <Select 
-          value={selectedMethod}
-          onChange={(e) => onMethodSelect(e.target.value as 'delivery' | 'pickup')}
+      <ButtonGroup>
+        <Button
+          isSelected={selectedMethod === 'delivery'}
+          onClick={() => onMethodSelect('delivery')}
         >
-          <option value="delivery">Delivery</option>
-          <option value="pickup">Pick Up</option>
-        </Select>
-        <FaAngleDown className="icon" />
-      </SelectWrapper>
+          Delivery
+        </Button>
+      </ButtonGroup>
     </Container>
   );
 };
