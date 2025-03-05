@@ -106,7 +106,7 @@ export default function Groceries() {
         const newData = response.data?.data;
         if (Array.isArray(newData)) {
           const transformedData = newData
-            .filter((item) => !item.isOutOfStock) // First filter out of stock items
+            .filter((item) => !item.isOutOfStock)
             .map((item: any) => ({
               _id: item._id,
               title: item.title,
