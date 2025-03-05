@@ -281,8 +281,17 @@ Total: ₦${
     const emailTemplateName =
       order.type === "cart" ? "cartFoodOrder" : "sessionFoodOrder";
 
+    // Helper function to format coupon text consistently
+    const formatCouponText = (coupon: any) => {
+      if (!coupon || !coupon.code) return '';
+      return `${coupon.code} - ₦${coupon.discount} off${coupon.mode ? ` (${coupon.mode})` : ''}`;
+    };
+
     try {
-      console.log("Attempting to send customer email...");
+      // Prepare coupon text once for both emails
+      const couponText = formatCouponText(existingCart.coupon);
+
+      // Customer email
       const emailData = {
         to: user.email,
         subject: "Order Confirmed",
@@ -310,34 +319,17 @@ Total: ₦${
             order.orderType === "pre-order"
               ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
               : "Not Applicable",
-          couponApplied: existingCart.coupon
-            ? `Yes - ${existingCart.coupon.code} (${existingCart.coupon.mode} - ₦${existingCart.coupon.discount} off)`
-            : "No coupon applied",
-          couponDetails: existingCart.coupon
-            ? `${existingCart.coupon.code} (${existingCart.coupon.mode}) - ₦${existingCart.coupon.discount} off`
-            : "No coupon applied",
+          couponText: couponText || '-', // Use dash if no coupon
         },
       };
 
       console.log("Email data prepared:", emailData); // Add this log
       await sendEmail(emailData);
       console.log("Customer email sent successfully");
-    } catch (error) {
-      console.error("Error sending customer email:", error);
-    }
 
-    // Create vendors string from cart items
-    const vendorNames = existingCart.cartItems
-      .map((item) => item.vendor?.name)
-      .filter(Boolean)
-      .join(", ");
-
-    // Send admin email with proper error handling
-    try {
+      // Admin email
       await sendEmail({
-        to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(
-          ", "
-        ),
+        to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
         subject: "New Order Notification",
         template: "adminOrderNotify",
         replacements: {
@@ -345,37 +337,33 @@ Total: ₦${
           orderNumber: body.referenceId,
           itemsOrdered: formattedOrderItems,
           amount: totalAmount.toString(),
-          deliveryFee: order?.deliveryFee.toString(),
-          partnerFullName: vendorNames || "Not assigned", // Fixed: Use vendor names
+          deliveryFee: order?.deliveryFee?.toString() || "0",
+          partnerFullName: vendorNames || "Not assigned",
           total: order.total,
-          customerAddress: `${user.address}, ${user.lga}, ${user.state}`,
+          customerAddress: `${user.address || ''}, ${user.lga || ''}, ${user.state || ''}`,
           customerPhone: user.phone,
-          orderTimestamp: moment(order.createdAt).format(
-            "MMMM D, YYYY, h:mm a"
-          ),
-          deliveryMethod: order.deliveryMethod.toUpperCase(), // Add this line
-          selectedRegion:
-            order.deliveryMethod === "pickup"
-              ? "Pickup at vendor location"
-              : body.selectedRegion,
-          orderType: order.orderType.toUpperCase(),
-          scheduledDelivery:
-            order.orderType === "pre-order"
-              ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
-              : "Not Applicable",
-          couponDetails:
-            order.coupon && order.coupon.code
-              ? `₦${order.coupon.discount} off (${order.coupon.code}${
-                  order.coupon.mode ? ` - ${order.coupon.mode}` : ""
-                })`
-              : "No coupon applied",
+          orderTimestamp: moment(order.createdAt).format("MMMM D, YYYY, h:mm a"),
+          deliveryMethod: order.deliveryMethod?.toUpperCase() || 'N/A',
+          selectedRegion: order.deliveryMethod === "pickup" 
+            ? "Pickup at vendor location" 
+            : (body.selectedRegion || 'N/A'),
+          orderType: order.orderType?.toUpperCase() || 'INSTANT',
+          scheduledDelivery: order.orderType === "pre-order" 
+            ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
+            : null,
+          couponText: couponText || '-', // Use dash if no coupon
         },
       });
       console.log("Admin email sent successfully to multiple recipients");
     } catch (emailError) {
-      console.error("Failed to send admin email:", emailError);
-      // Don't throw error, just log it and continue
+      console.error("Failed to send emails:", emailError);
     }
+
+    // Create vendors string from cart items
+    const vendorNames = existingCart.cartItems
+      .map((item) => item.vendor?.name)
+      .filter(Boolean)
+      .join(", ");
 
     // Clear the cart after successful order processing
     const cartUpdateResult = await Cart.findOneAndUpdate(
