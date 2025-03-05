@@ -65,9 +65,25 @@ const orderSchema = new Schema(
       ref: "User",
       required: true,
     },
+    deliveryMethod: {
+      type: String,
+      enum: ['delivery', 'pickup'],
+      required: true
+    },
     selectedRegion: {
       type: String,
-      required: true,
+      required: function(this: any) {
+        return this.deliveryMethod === 'delivery';
+      }
+    },
+    pickupLocation: {
+      type: String,
+      required: function(this: any) {
+        return this.deliveryMethod === 'pickup';
+      },
+      default: function(this: any) {
+        return this.deliveryMethod === 'pickup' ? 'Vendor Location' : undefined;
+      }
     },
     orderType: {
       type: String,
