@@ -281,17 +281,8 @@ Total: ₦${
     const emailTemplateName =
       order.type === "cart" ? "cartFoodOrder" : "sessionFoodOrder";
 
-    // Helper function to format coupon text consistently
-    const formatCouponText = (coupon: any) => {
-      if (!coupon || !coupon.code) return '';
-      return `${coupon.code} - ₦${coupon.discount} off${coupon.mode ? ` (${coupon.mode})` : ''}`;
-    };
-
     try {
-      // Prepare coupon text once for both emails
-      const couponText = formatCouponText(existingCart.coupon);
-
-      // Customer email
+      console.log("Attempting to send customer email...");
       const emailData = {
         to: user.email,
         subject: "Order Confirmed",
@@ -319,15 +310,30 @@ Total: ₦${
             order.orderType === "pre-order"
               ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
               : "Not Applicable",
-          couponText: couponText || '-', // Use dash if no coupon
+          couponApplied: order.coupon && order.coupon.code
+            ? `Yes - ${order.coupon.code} (${order.coupon.mode} - ₦${order.coupon.discount} off)`
+            : "No coupon applied",
+            couponDetails: order.coupon && order.coupon.code
+            ? `${order.coupon.code} - ₦${order.coupon.discount} off ${order.coupon.mode ? `(${order.coupon.mode})` : ''}`
+            : null
         },
       };
 
       console.log("Email data prepared:", emailData); // Add this log
       await sendEmail(emailData);
       console.log("Customer email sent successfully");
+    } catch (error) {
+      console.error("Error sending customer email:", error);
+    }
 
-      // Admin email
+    // Create vendors string from cart items
+    const vendorNames = existingCart.cartItems
+      .map((item) => item.vendor?.name)
+      .filter(Boolean)
+      .join(", ");
+
+    // Send admin email with proper error handling
+    try {
       await sendEmail({
         to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
         subject: "New Order Notification",
@@ -351,19 +357,16 @@ Total: ₦${
           scheduledDelivery: order.orderType === "pre-order" 
             ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
             : null,
-          couponText: couponText || '-', // Use dash if no coupon
+          couponDetails: order.coupon && order.coupon.code
+            ? `${order.coupon.code} - ₦${order.coupon.discount} off ${order.coupon.mode ? `(${order.coupon.mode})` : ''}`
+            : null,
         },
       });
       console.log("Admin email sent successfully to multiple recipients");
     } catch (emailError) {
-      console.error("Failed to send emails:", emailError);
+      console.error("Failed to send admin email:", emailError);
+      // Don't throw error, just log it and continue
     }
-
-    // Create vendors string from cart items
-    const vendorNames = existingCart.cartItems
-      .map((item) => item.vendor?.name)
-      .filter(Boolean)
-      .join(", ");
 
     // Clear the cart after successful order processing
     const cartUpdateResult = await Cart.findOneAndUpdate(
