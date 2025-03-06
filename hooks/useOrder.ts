@@ -128,26 +128,14 @@ const useOrder = () => {
     amount: number, 
     deliveryFee: number, 
     selectedRegion: string,
-    orderData: {
-      orderType: 'instant' | 'pre-order';
-      scheduledDelivery?: { date: string; time: string } | null;
-      deliveryMethod: 'delivery' | 'pickup';
-      infoPass: string;
-      couponInfo?: {
-        code: string;
-        discount: number;
-        couponId: string;
-        mode: string;
-      } | null;
-    }
+    orderData: OrderSubmitData
   ) => {
     setIsSubmitting(true);
     setIsError(false);
     setIsSuccess(false);
 
-
     try {
-      console.log('Order submission data:', {
+      const { data } = await axios.post("/api/order/cart", {
         referenceId,
         amount,
         deliveryFee,
@@ -155,58 +143,35 @@ const useOrder = () => {
         ...orderData
       });
 
-      const { data } = await axios.post("/api/order/cart", {
-        referenceId,
-        amount,
-        deliveryFee,
-        selectedRegion,
-        ...orderData // Pass all order data including coupon
-      });
+      if (!data.success || !data.order?._id) {
+        throw new Error('Order creation failed');
+      }
 
-      toast.loading("Cart order is being processed", {
-        duration: 2000,
-      });
-      console.log(data);
-
-      // Create notification with order type info
+      // Create notification
       await axios.post("/api/notifications", {
         message: `Your ${orderData.orderType} order with reference ID ${referenceId} has been placed successfully.${
           orderData.orderType === 'pre-order' 
             ? ` Scheduled for ${orderData.scheduledDelivery?.date} at ${orderData.scheduledDelivery?.time}.` 
             : ''
         }`,
-        referenceId: data.order?._id,
+        referenceId: data.order._id,
         category: "order",
         type: data.order.type,
       });
 
-      if (data.success) {
-        // Clear cart immediately after successful order
-        await useCartStore.getState().clearCart();
-        toast.success("Order placed successfully!");
-        
-        // Then proceed with other success actions
-        setIsSuccess(true);
-        setIsRedirecting(true);
-        
-        setTimeout(() => {
-          router.push(`/profile/orders/${data.order?._id}?type=${data.order?.type}`);
-        }, 500);
-      }
+      // Clear cart and show success message
+      await useCartStore.getState().clearCart();
+      toast.success("Order placed successfully!");
+      
+      setIsSuccess(true);
+      setIsRedirecting(true);
 
-      // useEffect(() => {
-      //   console.log("showSuccessModal:", showSuccessModal);
-      // }, [showSuccessModal]);
-
-
-      // setTimeout(() => {
-      //   router.push(
-      //     `/profile/orders/${data.order?._id}?type=${çç`
-      //   );
-      // }, 500);
+      // Return the order data
+      return data;
     } catch (error) {
       setIsError(true);
       toast.error("Error submitting cart order.");
+      throw error;
     } finally {
       setIsSubmitting(false);
     }

@@ -99,24 +99,30 @@ export const SchDeliveryOpl: React.FC<SchDeliveryOplProps> = ({ onScheduleChange
     });
   }, [selectedDate, selectedTime, onScheduleChange]);
 
-  const handleTimeSelect = (time: string) => {
-    const selectedDateTime = new Date(`${selectedDate} ${time}`);
+  const handleDateChange = (date: string) => {
+    if (!date || date === "dd/mm/yyyy") {
+      toast.error("Please select a valid date");
+      return;
+    }
     
+    const selectedDateTime = new Date(`${date} ${selectedTime}`);
+    if (validateScheduledTime(selectedDateTime)) {
+      setSelectedDate(date);
+      onScheduleChange({ date, time: selectedTime });
+    }
+  };
+
+  const handleTimeSelect = (time: string) => {
+    if (!selectedDate || selectedDate === "dd/mm/yyyy") {
+      toast.error("Please select a date first");
+      return;
+    }
+
+    const selectedDateTime = new Date(`${selectedDate} ${time}`);
     if (validateScheduledTime(selectedDateTime)) {
       setSelectedTime(time);
       onScheduleChange({ date: selectedDate, time });
     }
-  };
-
-  const handleDateChange = (date: string) => {
-    const selectedDateTime = new Date(`${date} ${selectedTime}`);
-    
-    if (!validateScheduledTime(selectedDateTime)) {
-      return;
-    }
-    
-    setSelectedDate(date);
-    onScheduleChange({ date, time: selectedTime });
   };
 
   return (
@@ -134,6 +140,7 @@ export const SchDeliveryOpl: React.FC<SchDeliveryOplProps> = ({ onScheduleChange
         label="Time"
         onTimeChange={handleTimeSelect}
         IconClassName="SchdeliveryIcAn"
+        disabled={!selectedDate || selectedDate === "dd/mm/yyyy"}
       />
     </Container>
   );

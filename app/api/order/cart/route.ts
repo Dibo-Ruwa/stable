@@ -24,16 +24,22 @@ interface Extra {
 }
 
 // Add validation utilities at the top of the file
-const validateScheduledDelivery = (scheduledDelivery: { date: string; time: string }) => {
+const validateScheduledDelivery = (scheduledDelivery: {
+  date: string;
+  time: string;
+}) => {
   const now = new Date();
-  const selectedDateTime = new Date(`${scheduledDelivery.date} ${scheduledDelivery.time}`);
-  
+  const selectedDateTime = new Date(
+    `${scheduledDelivery.date} ${scheduledDelivery.time}`
+  );
+
   // Check if time is at least 1 hour in future
-  const hoursDiff = (selectedDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
+  const hoursDiff =
+    (selectedDateTime.getTime() - now.getTime()) / (1000 * 60 * 60);
   if (hoursDiff < 1) {
     throw new Error("Pre-orders must be scheduled at least 1 hour in advance");
   }
-  
+
   // Check if date is not more than 30 days in advance
   const thirtyDaysFromNow = new Date();
   thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
@@ -54,7 +60,7 @@ export async function POST(req: Request, res: Response) {
     }
 
     const body = await req.json();
-    console.log('Received order data:', body); // Debug log
+    console.log("Received order data:", body); // Debug log
 
     // Get the user session
     const session = await getServerSession(authOptions);
@@ -78,19 +84,30 @@ export async function POST(req: Request, res: Response) {
     }
 
     // Validate scheduled delivery for pre-orders
-    if (existingCart.orderType === 'pre-order') {
-      if (!existingCart.scheduledDelivery?.date || !existingCart.scheduledDelivery?.time) {
+    if (existingCart.orderType === "pre-order") {
+      if (
+        !existingCart.scheduledDelivery?.date ||
+        !existingCart.scheduledDelivery?.time
+      ) {
         return NextResponse.json(
-          { error: "Scheduled delivery date and time are required for pre-orders" },
+          {
+            error:
+              "Scheduled delivery date and time are required for pre-orders",
+          },
           { status: 400 }
         );
       }
-      
+
       try {
         validateScheduledDelivery(existingCart.scheduledDelivery);
       } catch (error) {
         return NextResponse.json(
-          { error: error instanceof Error ? error.message : "Invalid delivery schedule" },
+          {
+            error:
+              error instanceof Error
+                ? error.message
+                : "Invalid delivery schedule",
+          },
           { status: 400 }
         );
       }
@@ -107,18 +124,24 @@ export async function POST(req: Request, res: Response) {
     }, 0);
 
     // Log the cart data for debugging
-    console.log('Cart data:', {
+    console.log("Cart data:", {
       existingCart: existingCart,
-      coupon: existingCart.coupon
+      coupon: existingCart.coupon,
     });
 
     // Calculate fees and discounts
     const baseDeliveryFee = body.deliveryFee || 0;
-    const deliveryDiscount = existingCart.coupon?.mode === 'delivery' ? existingCart.coupon.discount : 0;
+    const deliveryDiscount =
+      existingCart.coupon?.mode === "delivery"
+        ? existingCart.coupon.discount
+        : 0;
     const finalDeliveryFee = Math.max(0, baseDeliveryFee - deliveryDiscount);
-    const itemDiscount = existingCart.coupon?.mode !== 'delivery' ? existingCart.coupon?.discount || 0 : 0;
+    const itemDiscount =
+      existingCart.coupon?.mode !== "delivery"
+        ? existingCart.coupon?.discount || 0
+        : 0;
 
-    // Create order data with explicit coupon handling
+    // Create order data with proper handling for pickup/delivery
     const orderData = {
       orderItems: existingCart.cartItems,
       type: "cart",
@@ -127,33 +150,26 @@ export async function POST(req: Request, res: Response) {
       address: user.address,
       total: totalAmount - itemDiscount + finalDeliveryFee,
       user: user._id,
-      baseDeliveryFee: baseDeliveryFee, // Add original delivery fee
-      deliveryFee: finalDeliveryFee, // Add discounted delivery fee
+      baseDeliveryFee: baseDeliveryFee,
+      deliveryFee: finalDeliveryFee,
       paymentId: body.referenceId,
-      selectedRegion: body.selectedRegion,
+      deliveryMethod: body.deliveryMethod,
+      selectedRegion: body.deliveryMethod === 'pickup' ? 'Vendor Location' : body.selectedRegion,
+      pickupLocation: body.deliveryMethod === 'pickup' ? 'Vendor Location' : undefined,
       orderType: body.orderType || 'instant',
       scheduledDelivery: body.scheduledDelivery || null,
-      deliveryMethod: body.deliveryMethod,
       infoPass: body.infoPass,
-      coupon: body.couponInfo || existingCart.coupon || null
+      coupon: body.couponInfo && Object.keys(body.couponInfo).length > 0 ? body.couponInfo : null
     };
 
-    // Ensure coupon data is complete
-    if (orderData.coupon) {
-      orderData.coupon = {
-        code: orderData.coupon.code,
-        discount: orderData.coupon.discount,
-        couponId: orderData.coupon.couponId,
-        mode: orderData.coupon.mode
-      };
-    }
+    // Remove undefined or empty values
+    Object.keys(orderData).forEach(key => {
+      if (orderData[key] === undefined || orderData[key] === null) {
+        delete orderData[key];
+      }
+    });
 
-    // Remove coupon if it's null or empty
-    if (!orderData.coupon || Object.keys(orderData.coupon).length === 0) {
-      delete orderData.coupon;
-    }
-
-    console.log('Order data being saved:', orderData);
+    console.log("Order data being saved:", orderData);
 
     const order = new Order(orderData);
 
@@ -169,20 +185,19 @@ export async function POST(req: Request, res: Response) {
             userId: user._id,
             orderId: order._id,
             orderTotal: totalAmount,
-            discountAmount: order.coupon.discount
+            discountAmount: order.coupon.discount,
           });
-          console.log('Coupon usage updated successfully');
+          console.log("Coupon usage updated successfully");
         } catch (error) {
-          console.error('Failed to update coupon usage:', error);
+          console.error("Failed to update coupon usage:", error);
           // Don't fail the order if coupon update fails
         }
       }
-
     } catch (saveError) {
       console.error("Order save error:", {
         error: saveError,
         data: orderData,
-        cart: existingCart
+        cart: existingCart,
       });
       return NextResponse.json(
         { error: "Failed to save order", details: saveError.message },
@@ -200,12 +215,23 @@ Quantity: ${item.quantity}
 Customer: ${user.firstName} ${user.lastName}
 Contact: ${user.phone}
 Delivery to: ${body.selectedRegion}
-${order.orderType === 'pre-order' ? `
-Scheduled for: ${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}` : ''}
-${item.extras?.length ? 
-  `Extras: ${item.extras.map((e) => `${e.title} (x${e.quantity})`).join(", ")}` : 
-  ""}
-Total: ₦${item.price * item.quantity + (item.extras?.reduce((acc, e) => acc + e.price * e.quantity, 0) || 0)}
+${
+  order.orderType === "pre-order"
+    ? `
+Scheduled for: ${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
+    : ""
+}
+${
+  item.extras?.length
+    ? `Extras: ${item.extras
+        .map((e) => `${e.title} (x${e.quantity})`)
+        .join(", ")}`
+    : ""
+}
+Total: ₦${
+          item.price * item.quantity +
+          (item.extras?.reduce((acc, e) => acc + e.price * e.quantity, 0) || 0)
+        }
 `;
 
         try {
@@ -270,20 +296,26 @@ Total: ₦${item.price * item.quantity + (item.extras?.reduce((acc, e) => acc + 
           deliveryDiscount: deliveryDiscount.toString(),
           itemDiscount: itemDiscount.toString(),
           total: order.total,
-          estimatedDeliveryTime: order.orderType === 'pre-order' 
-            ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
-            : "30 - 45 minutes",
-          selectedRegion: body.selectedRegion,
+          estimatedDeliveryTime:
+            order.orderType === "pre-order"
+              ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
+              : "30 - 45 minutes",
+          deliveryMethod: order.deliveryMethod.toUpperCase(), // Add this line
+          selectedRegion:
+            order.deliveryMethod === "pickup"
+              ? "Pickup at vendor location"
+              : body.selectedRegion,
           orderType: order.orderType.toUpperCase(),
-          scheduledDelivery: order.orderType === 'pre-order' 
-            ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
-            : 'Not Applicable',
-          couponApplied: existingCart.coupon ? 
-            `Yes - ${existingCart.coupon.code} (${existingCart.coupon.mode} - ₦${existingCart.coupon.discount} off)` : 
-            'No coupon applied',
-          couponDetails: existingCart.coupon ? 
-            `${existingCart.coupon.code} (${existingCart.coupon.mode}) - ₦${existingCart.coupon.discount} off` : 
-            'No coupon applied'
+          scheduledDelivery:
+            order.orderType === "pre-order"
+              ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
+              : "Not Applicable",
+          couponApplied: order.coupon && order.coupon.code
+            ? `Yes - ${order.coupon.code} (${order.coupon.mode} - ₦${order.coupon.discount} off)`
+            : "No coupon applied",
+            couponDetails: order.coupon && order.coupon.code
+            ? `${order.coupon.code} - ₦${order.coupon.discount} off ${order.coupon.mode ? `(${order.coupon.mode})` : ''}`
+            : null
         },
       };
 
@@ -296,9 +328,9 @@ Total: ₦${item.price * item.quantity + (item.extras?.reduce((acc, e) => acc + 
 
     // Create vendors string from cart items
     const vendorNames = existingCart.cartItems
-      .map(item => item.vendor?.name)
+      .map((item) => item.vendor?.name)
       .filter(Boolean)
-      .join(', ');
+      .join(", ");
 
     // Send admin email with proper error handling
     try {
@@ -311,22 +343,23 @@ Total: ₦${item.price * item.quantity + (item.extras?.reduce((acc, e) => acc + 
           orderNumber: body.referenceId,
           itemsOrdered: formattedOrderItems,
           amount: totalAmount.toString(),
-          deliveryFee: order?.deliveryFee.toString(),
-          partnerFullName: vendorNames || 'Not assigned', // Fixed: Use vendor names
+          deliveryFee: order?.deliveryFee?.toString() || "0",
+          partnerFullName: vendorNames || "Not assigned",
           total: order.total,
-          customerAddress: `${user.address}, ${user.lga}, ${user.state}`,
+          customerAddress: `${user.address || ''}, ${user.lga || ''}, ${user.state || ''}`,
           customerPhone: user.phone,
-          orderTimestamp: moment(order.createdAt).format(
-            "MMMM D, YYYY, h:mm a"
-          ),
-          selectedRegion: body.selectedRegion,
-          orderType: order.orderType.toUpperCase(),
-          scheduledDelivery: order.orderType === 'pre-order' 
+          orderTimestamp: moment(order.createdAt).format("MMMM D, YYYY, h:mm a"),
+          deliveryMethod: order.deliveryMethod?.toUpperCase() || 'N/A',
+          selectedRegion: order.deliveryMethod === "pickup" 
+            ? "Pickup at vendor location" 
+            : (body.selectedRegion || 'N/A'),
+          orderType: order.orderType?.toUpperCase() || 'INSTANT',
+          scheduledDelivery: order.orderType === "pre-order" 
             ? `${order.scheduledDelivery.date} at ${order.scheduledDelivery.time}`
-            : 'Not Applicable',
-          couponDetails: order.coupon && order.coupon.code ? 
-            `₦${order.coupon.discount} off (${order.coupon.code}${order.coupon.mode ? ` - ${order.coupon.mode}` : ''})` : 
-            'No coupon applied'
+            : null,
+          couponDetails: order.coupon && order.coupon.code
+            ? `${order.coupon.code} - ₦${order.coupon.discount} off ${order.coupon.mode ? `(${order.coupon.mode})` : ''}`
+            : null,
         },
       });
       console.log("Admin email sent successfully to multiple recipients");
@@ -342,11 +375,11 @@ Total: ₦${item.price * item.quantity + (item.extras?.reduce((acc, e) => acc + 
         $set: {
           cartItems: [],
           total: 0,
-          orderType: 'instant',
+          orderType: "instant",
           scheduledDelivery: null,
           coupon: null,
-          deliveryInfo: { region: null, fee: null }
-        }
+          deliveryInfo: { region: null, fee: null },
+        },
       },
       { new: true }
     );
@@ -358,15 +391,14 @@ Total: ₦${item.price * item.quantity + (item.extras?.reduce((acc, e) => acc + 
     }
 
     return NextResponse.json(
-      { 
-        order, 
-        message: "Order placed successfully", 
+      {
+        order,
+        message: "Order placed successfully",
         success: true,
-        cartCleared: !!cartUpdateResult 
+        cartCleared: !!cartUpdateResult,
       },
       { status: 201 }
     );
-
   } catch (err) {
     // Handle and log any errors
     console.error("Error:", err);

@@ -6,14 +6,15 @@ import { SchDeliveryOpl } from "./component/SchDeliveryOpl";
 import { CheckoutButton } from "./component/CheckoutBtn";
 import { CartInfo } from "./component/CartInfo";
 import useCartStore from "@/store/useCart.store";
+import useOrder from "@/hooks/useOrder";
 import { nanoid } from "nanoid";
 import { Spinner } from "@nextui-org/react";
 import PaymentButton from "@/component/paymentButton/PayButton";
-import useOrder from "@/hooks/useOrder";
 import Loader from "@/component/ui/loader/Loader";
 import { FaTimes } from "react-icons/fa";
 import { DeliveryMethod } from './component/DeliveryMethod';
 import { CouponInput } from "./component/CouponInput";
+import { useRouter } from 'next/navigation';
 
 const StoresContainer = styled.div`
   width: 100%;
@@ -106,6 +107,7 @@ const OrderTypeButton = styled.button<{ isSelected: boolean }>`
 `;
 
 export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
+  const router = useRouter();
   // Add isRedirecting state
   const [isRedirecting, setIsRedirecting] = useState(false);
   const [infoPass, setInfoPass] = useState<string>("");
@@ -122,10 +124,11 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [deliveryMethod, setDeliveryMethod] = useState<'delivery' | 'pickup'>('delivery');
   const [orderType, setOrderType] = useState<'instant' | 'pre-order'>('instant');
-
-
   const { cartItems, getCart, coupon } = useCartStore();
+const { handleCartOrderSubmit } = useOrder();
+
   const referenceId = nanoid(8);
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // Add this state
 
   // Fetch cart data on mount
   useEffect(() => {
@@ -208,19 +211,14 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
 
   const onSuccess = async () => {
     try {
-      setIsRedirecting(true);  // Set redirecting state when payment starts
-      if (!selectedRegion && deliveryMethod === 'delivery') {
-        setLocationError("Please select a delivery location.");
-        return;
-      }
+      setIsRedirecting(true);
 
-      // Include coupon in the order data
       const orderSubmitData = {
         orderType,
         scheduledDelivery: orderType === 'pre-order' ? scheduledDelivery : null,
         deliveryMethod,
         infoPass,
-        couponInfo: coupon ? {
+        couponInfo: coupon && coupon.code ? {
           code: coupon.code,
           discount: coupon.discount,
           couponId: coupon.couponId,
@@ -228,25 +226,20 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
         } : null
       };
 
-      console.log('Submitting order with data:', {
-        referenceId,
-        finalTotal,
-        finalDeliveryFee,
-        selectedRegion,
-        ...orderSubmitData
-      });
-
-      await handleCartOrderSubmit(
+      const data = await handleCartOrderSubmit(
         referenceId, 
         finalTotal, 
         finalDeliveryFee, 
-        selectedRegion,
+        deliveryMethod === 'delivery' ? selectedRegion : 'Vendor Location',
         orderSubmitData
       );
+
+      // Let handleCartOrderSubmit handle the success flow, just redirect here
+      router.push(`/profile/orders/${data.order._id}?type=${data.order.type}`);
     } catch (error) {
       console.error('Payment error:', error);
     } finally {
-      setIsRedirecting(false);  // Reset redirecting state when done
+      setIsRedirecting(false);
     }
   };
 
@@ -292,8 +285,21 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
     }
   };
 
-  const isFormValid = deliveryMethod === 'pickup' || 
-    (deliveryMethod === 'delivery' && selectedRegion);
+  // Add validation for scheduled delivery
+  const isScheduledDeliveryValid = () => {
+    if (orderType !== 'pre-order') return true;
+    return (
+      scheduledDelivery.date !== "dd/mm/yyyy" && 
+      scheduledDelivery.time !== "8:00 AM" && 
+      scheduledDelivery.date && 
+      scheduledDelivery.time
+    );
+  };
+
+  // Update validation logic to include scheduled delivery check
+  const isFormValid = 
+    (deliveryMethod === 'pickup' || (deliveryMethod === 'delivery' && selectedRegion)) &&
+    (orderType === 'instant' || (orderType === 'pre-order' && isScheduledDeliveryValid()));
 
   if (isLoading || isRedirecting) {
     return (
@@ -370,7 +376,12 @@ export const CheckoutStore = ({ onClose }: { onClose: () => void }) => {
           !isFormValid || cartItems.length === 0 ? 'disabled' : ''
         }`}
         disabled={!isFormValid || cartItems.length === 0}
+        setShowSuccessModal={setShowSuccessModal} // Add this prop
       />
+      {/* Add success modal if needed */}
+      {showSuccessModal && (
+        <div>Payment Successful!</div>
+      )}
     </StoresContainer>
   );
 };
