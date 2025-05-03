@@ -28,7 +28,7 @@ const sendEmail = async ({ to, subject, template, replacements }: EmailPayload) 
 
     // Define email options
     const mailOptions = {
-      from: '"Diboruwa Home Services" <noreply@www.diboruwa.com>',  // Sender info
+      from: '"Workmate Team" <noreply@workmateteam.com>',  // Sender info
       to,
       subject,
       html: htmlContent,  // The processed HTML with dynamic data replaced

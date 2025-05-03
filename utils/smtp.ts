@@ -22,7 +22,7 @@ if (!passKey) {
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.zeptomail.com',
-  port: 465,
+  port: 587,
   secure: true, // true for SSL
   auth: {
     user: 'emailapikey',
