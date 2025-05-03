@@ -104,7 +104,7 @@ export async function POST(req: Request, res: Response) {
 
       await sendEmail({
         // to: "ibrahim.saliman.zainab@gmail.com",
-        to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
+        to: ["ibrahim.saliman.zainab@gmail.com", "adamsagula90@gmail.com"].join(", "),
         subject: `New Laundry Request from ${user.firstName} ${user.lastName}`,
         template: "adminLaundyQuote",
         replacements: {
