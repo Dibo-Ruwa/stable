@@ -335,7 +335,7 @@ Total: ₦${
     // Send admin email with proper error handling
     try {
       await sendEmail({
-        to: ["ibrahim.saliman.zainab@gmail.com", "Mickeyterian@gmail.com"].join(", "),
+        to: ["ibrahim.saliman.zainab@gmail.com", "adamsagula90@gmail.com"].join(", "),
         subject: "New Order Notification",
         template: "adminOrderNotify",
         replacements: {
