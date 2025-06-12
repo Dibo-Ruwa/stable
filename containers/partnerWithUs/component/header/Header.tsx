@@ -21,7 +21,7 @@ export default function Header() {
               Streamline Operations, Manage Logistics, and Delight Customers
               Across Laundry, Food Delivery, Groceries, Cleaning, and Moving Services
             </p>
-            <Link href="" className="partner_header-btn">Get Started
+            <Link href="https://admin.diboruwa.com/sign-in" className="partner_header-btn">Get Started
             <FaArrowRight className="get_started_icon" />
             </Link>
           </div>
