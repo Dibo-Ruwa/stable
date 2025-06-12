@@ -47,6 +47,7 @@ export default function RootLayout({
 
           <main className="main_container">{children}</main>
           <Analytics />
+          
           <SpeedInsights />
           <Footer />
           <GlobalStyles />
