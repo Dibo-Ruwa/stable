@@ -9,7 +9,7 @@ export const NavbarContainer = styled.section`
   position: fixed;
   left: 0;
   right: 0;
-  top: 50px; // Default TopNavbar height for desktop
+  top: 50px;
   z-index: 40;
   transition: all 200ms;
   border-bottom: 1px solid var(--primary-20);
