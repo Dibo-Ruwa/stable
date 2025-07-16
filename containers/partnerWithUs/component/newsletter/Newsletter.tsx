@@ -37,7 +37,7 @@ const Newsletter: React.FC = () => {
           <div className="newsletter-box">
             <input
               type="text"
-              placeholder="Chikeziekelvin24@gmail.com"
+              placeholder="yourname@gmail.com"
               required
               className="newsletter_input"
             />
