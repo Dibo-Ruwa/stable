@@ -46,7 +46,7 @@ export default function RootLayout({
           <TopNavbar />
           <Navbar />
           {authModal}
-
+          <br />
           <main className="main_container">{children}</main>
           <Analytics />
           
