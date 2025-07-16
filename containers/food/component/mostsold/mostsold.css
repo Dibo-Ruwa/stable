@@ -90,7 +90,7 @@ small.mostsold-card_ratingNum {
 small.mostsold-card_title {
   color: var(--Black-100, #2a2a2a);
   font-family: Poppins;
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -265,7 +265,7 @@ img.mostsold-sale_img {
   small.mostsold-card_title,
   small.mostsold-card_ratingNum,
   .mostsold-card_PrepTimer {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .mostsold-card_dot {

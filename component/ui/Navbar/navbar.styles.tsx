@@ -9,10 +9,15 @@ export const NavbarContainer = styled.section`
   position: fixed;
   left: 0;
   right: 0;
-  top: 0;
-  z-index: 50;
+  top: 50px; // Default TopNavbar height for desktop
+  z-index: 40;
   transition: all 200ms;
   border-bottom: 1px solid var(--primary-20);
+
+  @media screen and (max-width: 700px) {
+    top: 80px; // Match TopNavbar height for mobile
+    background: rgba(255, 255, 255, 0.97); // Increased opacity for mobile
+  }
 `;
 
 export const NavbarFrame = styled.div`
@@ -278,7 +283,7 @@ export const MobileMenu = styled(motion.ul)`
   right: 0;
   left: 0;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.97); // Increased opacity for mobile menu
   z-index: 50;
   width: 94%;
   height: 80vh;
