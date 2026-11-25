@@ -112,7 +112,7 @@ export const LaundryLocation: React.FC<CleaningLocationProps> = ({
       const response = await axios.get(
         `${
           process.env.NEXT_PUBLIC_ADMIN_URL ||
-          "https://diboruwa-admin-test.vercel.app"
+          "https://admin.diboruwa.com"
         }/api/locations`
       );
       const { cities } = response.data;

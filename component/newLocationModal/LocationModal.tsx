@@ -47,7 +47,7 @@ const LocationModal: React.FC<{
 
   const url =
     process.env.NEXT_PUBLIC_ADMIN_URL ||
-    "https://diboruwa-admin-test.vercel.app";
+    "https://admin.diboruwa.com";
 
   useEffect(() => {
     const fetchStatesAndRegions = async () => {
